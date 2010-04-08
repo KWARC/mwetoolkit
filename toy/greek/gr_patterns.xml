@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE patterns SYSTEM "mwttoolkit-patterns.dtd">
+<patterns>
+<pattern><w pos="AJ"/><w pos="N"/></pattern> <!-- φορητός υπολογιστής-->
+<pattern><w pos="N"/><w pos="AJ"/></pattern> <!-- ηλίου φαεινότερο, χρόνια πολλά-->
+<pattern><w pos="N"/><w pos="N"/></pattern> <!-- κράτος μέλος, υπουργείο εσωτερικών-->
+<pattern><w pos="N"/><w pos="DT"/><w pos="N"/></pattern> <!-- φαινόμενο του θερμοκηπίου-->
+<pattern><w pos="N"/><w pos="AJ"/><w pos="N"/></pattern> <!-- τεχνολογία υψηλής ευκρίνειας-->
+<pattern><w pos="N"/><w pos="P"/><w pos="N"/></pattern> <!-- φόνος εκ προμελέτης-->
+<pattern><w pos="V"/><w pos="N"/></pattern> <!-- βρέχει καρέκλες -->
+<pattern><w pos="V"/><w pos="DT"/><w pos="N"/></pattern> <!-- τρέχει η βρύση -->
+<pattern><w pos="V"/><w pos="P"/><w pos="N"/></pattern> <!-- θέτω σε κίνδυνο -->
+<pattern><w pos="P"/><w pos="N"/></pattern> <!-- επί τάπητος -->
+<pattern><w pos="P"/><w pos="AJ"/></pattern> <!-- εν ολίγοις -->
+<pattern><w pos="P"/><w pos="V"/></pattern> <!-- πέρα βρέχει -->
+<pattern><w pos="P"/><w pos="DT"/><w pos="AJ"/></pattern> <!-- με το καλό -->
+<pattern><w pos="P"/><w pos="N"/><w pos="N"/></pattern> <!-- κατά φαντασίαν ασθενής -->
+<pattern><w pos="P"/><w pos="AJ"/><w pos="N"/></pattern> <!-- εν πάση περιπτώσει -->
+<pattern><w pos="ADV"/><w pos="V"/></pattern> <!-- καλώς όρισες -->
+<!-- <pattern><w pos="ADV"/><w pos="CJ"/><w pos="ADV"/></pattern> καλώς ή κακώς -->
+<!-- <pattern><w pos="CJ"/><w pos="DT"/><w pos="N"/></pattern> και του χρόνου -->
+<!-- <pattern><w pos="P"/><w pos="N"/><w pos="CJ"/><w pos="P"/><w pos="N"/></pattern>  με νύχια και με δόντια -->
+</patterns>

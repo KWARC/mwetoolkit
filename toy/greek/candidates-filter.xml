@@ -1,0 +1,1779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
+<candidates>
+
+<meta>
+</meta>
+<cand candid="10">
+    <ngram><w lemma="επίσης" pos="ADV" /> <w lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="επίσης" lemma="επίσης" pos="ADV" /> <w surface="έχει" lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="επίσης" lemma="επίσης" pos="ADV" /> <w surface="έχω" lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="36">
+    <ngram><w lemma="θέση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="συμβούλιο" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="θέση" lemma="θέση" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Συμβουλίου" lemma="συμβούλιο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="θέση" lemma="θέση" pos="N" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="Συμβούλιο" lemma="συμβούλιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="37">
+    <ngram><w lemma="κοινωνικός" pos="AJ" /> <w lemma="οικονομία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="κοινωνική" lemma="κοινωνικός" pos="AJ" /> <w surface="οικονομία" lemma="οικονομία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="38">
+    <ngram><w lemma="οπτικός" pos="AJ" /> <w lemma="γωνία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="οπτική" lemma="οπτικός" pos="AJ" /> <w surface="γωνία" lemma="γωνία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="39">
+    <ngram><w lemma="προσβλέπω" pos="V" /> <w lemma="στου" pos="P" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Προσβλέπουμε" lemma="προσβλέπω" pos="V" /> <w surface="στην" lemma="στου" pos="P" /> <w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="44">
+    <ngram><w lemma="για" pos="P" /> <w lemma="πολύς" pos="AJ" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="περισσότερη" lemma="πολύς" pos="AJ" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="46">
+    <ngram><w lemma="κοινός" pos="AJ" /> <w lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="κοινή" lemma="κοινός" pos="AJ" /> <w surface="θέση" lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="55">
+    <ngram><w lemma="εφαρμογή" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εφαρμογής" lemma="εφαρμογή" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εφαρμογή" lemma="εφαρμογή" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="60">
+    <ngram><w lemma="συζήτηση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="έκθεση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="συζήτηση" lemma="συζήτηση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="έκθεσης" lemma="έκθεση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="63">
+    <ngram><w lemma="πολύς" pos="AJ" /> <w lemma="άνθρωπος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πολλoύς" lemma="πολύς" pos="AJ" /> <w surface="ανθρώπους" lemma="άνθρωπος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="πολλοί" lemma="πολύς" pos="AJ" /> <w surface="άνθρωποι" lemma="άνθρωπος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="66">
+    <ngram><w lemma="κάνω" pos="V" /> <w lemma="λόγος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="έκανε" lemma="κάνω" pos="V" /> <w surface="λόγο" lemma="λόγος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="κάνουμε" lemma="κάνω" pos="V" /> <w surface="λόγο" lemma="λόγος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="68">
+    <ngram><w lemma="παρουσιάζω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="παρουσιάσει" lemma="παρουσιάζω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="πρόγραμμα" lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="παρουσιάσουμε" lemma="παρουσιάζω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="πρόγραμμα" lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="80">
+    <ngram><w lemma="εφιστώ" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="επιστήσουμε" lemma="εφιστώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="προσοχή" lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="επιστήσω" lemma="εφιστώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="προσοχή" lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="εφιστώ" lemma="εφιστώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="προσοχή" lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="81">
+    <ngram><w lemma="μεταφορά" pos="N" /> <w lemma="επικίνδυνος" pos="AJ" /> <w lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="15" /></ngram>
+    <occurs>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="82">
+    <ngram><w lemma="σιδηροδρομικός" pos="AJ" /> <w lemma="σύγκρουση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σιδηροδρομική" lemma="σιδηροδρομικός" pos="AJ" /> <w surface="σύγκρουση" lemma="σύγκρουση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="84">
+    <ngram><w lemma="αιτιολόγηση" pos="N" /> <w lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="αιτιολογήσεις" lemma="αιτιολόγηση" pos="N" /> <w surface="ψήφου" lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="αιτιολόγηση" lemma="αιτιολόγηση" pos="N" /> <w surface="ψήφου" lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="86">
+    <ngram><w lemma="για" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="επόμενος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="τα" lemma="ο" pos="DT" /> <w surface="επόμενα" lemma="επόμενος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="επόμενη" lemma="επόμενος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="92">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="πολύς" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="πολλoύς" lemma="πολύς" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="πολλούς" lemma="πολύς" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="100">
+    <ngram><w lemma="ορισμένος" pos="AJ" /> <w lemma="χώρα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ορισμένες" lemma="ορισμένος" pos="AJ" /> <w surface="χώρες" lemma="χώρα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ορισμένων" lemma="ορισμένος" pos="AJ" /> <w surface="χωρών" lemma="χώρα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="109">
+    <ngram><w lemma="προηγούμενος" pos="AJ" /> <w lemma="μέρα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="προηγούμενη" lemma="προηγούμενος" pos="AJ" /> <w surface="μέρα" lemma="μέρα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="112">
+    <ngram><w lemma="εκ" pos="P" /> <w lemma="όνομα" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="εξ" lemma="εκ" pos="P" /> <w surface="ονόματος" lemma="όνομα" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="117">
+    <ngram><w lemma="κατά" pos="P" /> <w lemma="προτεραιότητα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="κατά" lemma="κατά" pos="P" /> <w surface="προτεραιότητα" lemma="προτεραιότητα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="119">
+    <ngram><w lemma="με" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="τις" lemma="ο" pos="DT" /> <w surface="οδικές" lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="159">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="μεγάλος" pos="AJ" /> <w lemma="βαθμός" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="μέγιστο" lemma="μεγάλος" pos="AJ" /> <w surface="βαθμό" lemma="βαθμός" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="161">
+    <ngram><w lemma="από" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="οπτικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="από" lemma="από" pos="P" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="οπτική" lemma="οπτικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="165">
+    <ngram><w lemma="για" pos="P" /> <w lemma="πολύς" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="περισσότερη" lemma="πολύς" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="166">
+    <ngram><w lemma="δεύτερος" pos="AJ" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="δεύτερο" lemma="δεύτερος" pos="AJ" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="170">
+    <ngram><w lemma="πρόταση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="πρόταση" lemma="πρόταση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="πρόταση" lemma="πρόταση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="171">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="παρελθόν" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Στο" lemma="στου" pos="P" /> <w surface="παρελθόν" lemma="παρελθόν" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="176">
+    <ngram><w lemma="μεγάλος" pos="AJ" /> <w lemma="βαθμός" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="μέγιστο" lemma="μεγάλος" pos="AJ" /> <w surface="βαθμό" lemma="βαθμός" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="178">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="δύο" pos="AJ" /> <w lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="δύο" lemma="δύο" pos="AJ" /> <w surface="περιπτώσεις" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Σε" lemma="σε" pos="P" /> <w surface="δύο" lemma="δύο" pos="AJ" /> <w surface="περιπτώσεις" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="180">
+    <ngram><w lemma="στρατηγικός" pos="AJ" /> <w lemma="στόχος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στρατηγικούς" lemma="στρατηγικός" pos="AJ" /> <w surface="στόχους" lemma="στόχος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="199">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="μεταφορές" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="247">
+    <ngram><w lemma="κοινοβουλευτικός" pos="AJ" /> <w lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="κοινοβουλευτικής" lemma="κοινοβουλευτικός" pos="AJ" /> <w surface="περιόδου" lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="κοινοβουλευτική" lemma="κοινοβουλευτικός" pos="AJ" /> <w surface="περίοδο" lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="262">
+    <ngram><w lemma="λόγω" pos="N" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="θέματος" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="274">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="ημερήσιος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="278">
+    <ngram><w lemma="οδικός" pos="AJ" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Οδική" lemma="οδικός" pos="AJ" /> <w surface="μεταφορά" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="οδικές" lemma="οδικός" pos="AJ" /> <w surface="μεταφορές" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    </occurs>
+</cand>
+<cand candid="296">
+    <ngram><w lemma="λόγω" pos="N" /> <w lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="οδηγία" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="303">
+    <ngram><w lemma="σύμβουλος" pos="N" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="11" /></ngram>
+    <occurs>
+    <ngram><w surface="σύμβουλος" lemma="σύμβουλος" pos="N" /> <w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σύμβουλοι" lemma="σύμβουλος" pos="N" /> <w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="συμβούλους" lemma="σύμβουλος" pos="N" /> <w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="συμβούλων" lemma="σύμβουλος" pos="N" /> <w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <ngram><w surface="Σύμβουλοι" lemma="σύμβουλος" pos="N" /> <w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="308">
+    <ngram><w lemma="ευρωπαϊκός" pos="AJ" /> <w lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Ευρωπαϊκό" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Κοινοβούλιο" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <ngram><w surface="Ευρωπαϊκού" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="319">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="κοινός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="κοινή" lemma="κοινός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="331">
+    <ngram><w lemma="εν" pos="P" /> <w lemma="συντομία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="συντομία" lemma="συντομία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="338">
+    <ngram><w lemma="αξιότιμος" pos="AJ" /> <w lemma="κυρία" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="αξιότιμη" lemma="αξιότιμος" pos="AJ" /> <w surface="κυρία" lemma="κυρία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Αξιότιμη" lemma="αξιότιμος" pos="AJ" /> <w surface="κυρία" lemma="κυρία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="351">
+    <ngram><w lemma="άσκοπος" pos="AJ" /> <w lemma="δαπάνη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="άσκοπες" lemma="άσκοπος" pos="AJ" /> <w surface="δαπάνες" lemma="δαπάνη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="354">
+    <ngram><w lemma="επόμενος" pos="AJ" /> <w lemma="πενταετία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="επόμενη" lemma="επόμενος" pos="AJ" /> <w surface="πενταετία" lemma="πενταετία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="357">
+    <ngram><w lemma="προφορικός" pos="AJ" /> <w lemma="ερώτηση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="προφορική" lemma="προφορικός" pos="AJ" /> <w surface="ερώτηση" lemma="ερώτηση" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="προφορικής" lemma="προφορικός" pos="AJ" /> <w surface="ερώτησης" lemma="ερώτηση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="366">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="πρόβλημα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στα" lemma="στου" pos="P" /> <w surface="προβλήματα" lemma="πρόβλημα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="370">
+    <ngram><w lemma="ασφάλεια" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="ασφάλειας" lemma="ασφάλεια" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="374">
+    <ngram><w lemma="θέλω" pos="V" /> <w lemma="καταρχάς" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ήθελα" lemma="θέλω" pos="V" /> <w surface="καταρχάς" lemma="καταρχάς" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="379">
+    <ngram><w lemma="επιτροπή" pos="N" /> <w lemma="τυποποίηση" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> <w surface="Τυποποίησης" lemma="τυποποίηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <ngram><w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <w surface="Τυποποίησης" lemma="τυποποίηση" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="383">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="στη" lemma="στου" pos="P" /> <w surface="συγκεκριμένη" lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="συγκεκριμένο" lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="387">
+    <ngram><w lemma="επιτροπή" pos="N" /> <w lemma="περιφερειακός" pos="AJ" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    <occurs>
+    <ngram><w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> <w surface="Περιφερειακής" lemma="περιφερειακός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <w surface="Περιφερειακής" lemma="περιφερειακός" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="388">
+    <ngram><w lemma="με" pos="P" /> <w lemma="αποτέλεσμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="αποτέλεσμα" lemma="αποτέλεσμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="400">
+    <ngram><w lemma="ποσότητα" pos="N" /> <w lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ποσοτήτων" lemma="ποσότητα" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ποσότητες" lemma="ποσότητα" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="409">
+    <ngram><w lemma="καλός" pos="AJ" /> <w lemma="λύση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="καλύτερη" lemma="καλός" pos="AJ" /> <w surface="λύση" lemma="λύση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="καλή" lemma="καλός" pos="AJ" /> <w surface="λύση" lemma="λύση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="416">
+    <ngram><w lemma="μέρος" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="μέρους" lemma="μέρος" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="427">
+    <ngram><w lemma="νομοθετικός" pos="AJ" /> <w lemma="ρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="νομοθετικές" lemma="νομοθετικός" pos="AJ" /> <w surface="ρυθμίσεις" lemma="ρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="νομοθετικών" lemma="νομοθετικός" pos="AJ" /> <w surface="ρυθμίσεων" lemma="ρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="428">
+    <ngram><w lemma="πολύς" pos="AJ" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="περισσότερη" lemma="πολύς" pos="AJ" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="432">
+    <ngram><w lemma="αξιότιμος" pos="AJ" /> <w lemma="κύριος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="αξιότιμοι" lemma="αξιότιμος" pos="AJ" /> <w surface="κύριοι" lemma="κύριος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Αξιότιμε" lemma="αξιότιμος" pos="AJ" /> <w surface="κύριε" lemma="κύριος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="442">
+    <ngram><w lemma="στοιχειώδης" pos="AJ" /> <w lemma="απαίτηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στοιχειώδεις" lemma="στοιχειώδης" pos="AJ" /> <w surface="απαιτήσεις" lemma="απαίτηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="443">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="κράτος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στα" lemma="στου" pos="P" /> <w surface="κράτη" lemma="κράτος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="444">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="μεγάλος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="μέγιστο" lemma="μεγάλος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="στη" lemma="στου" pos="P" /> <w surface="μέγιστη" lemma="μεγάλος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στον" lemma="στου" pos="P" /> <w surface="μέγιστο" lemma="μεγάλος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="476">
+    <ngram><w lemma="πλωτός" pos="AJ" /> <w lemma="οδούς" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="πλωτές" lemma="πλωτός" pos="AJ" /> <w surface="οδούς" lemma="οδούς" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="479">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="ισχύς" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="ισχύ" lemma="ισχύς" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="487">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="ευρωπαϊκός" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="Ευρωπαϊκό" lemma="ευρωπαϊκός" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="ευρωπαϊκή" lemma="ευρωπαϊκός" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="Ευρωπαϊκή" lemma="ευρωπαϊκός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="500">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="τομέας" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στους" lemma="στου" pos="P" /> <w surface="τομείς" lemma="τομέας" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στον" lemma="στου" pos="P" /> <w surface="τομέα" lemma="τομέας" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="502">
+    <ngram><w lemma="χώρα" pos="N" /> <w lemma="διέλευση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="χώρες" lemma="χώρα" pos="N" /> <w surface="διέλευσης" lemma="διέλευση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="χώρα" lemma="χώρα" pos="N" /> <w surface="διέλευσης" lemma="διέλευση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="508">
+    <ngram><w lemma="κυρία" pos="N" /> <w lemma="επίτροπος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="κυρία" lemma="κυρία" pos="N" /> <w surface="Επίτροπε" lemma="επίτροπος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="510">
+    <ngram><w lemma="μεταφορά" pos="N" /> <w lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="15" /></ngram>
+    <occurs>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    </occurs>
+</cand>
+<cand candid="512">
+    <ngram><w lemma="τροποποιώ" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τροποποιείται" lemma="τροποποιώ" pos="V" /> <w surface="η" lemma="ο" pos="DT" /> <w surface="οδηγία" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="τροποποιεί" lemma="τροποποιώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="οδηγία" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="516">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="πλαίσιο" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Στο" lemma="στου" pos="P" /> <w surface="πλαίσιο" lemma="πλαίσιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="πλαίσιο" lemma="πλαίσιο" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="517">
+    <ngram><w lemma="ασφάλεια" pos="N" /> <w lemma="στου" pos="P" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> <w surface="στις" lemma="στου" pos="P" /> <w surface="μεταφορές" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ασφαλείας" lemma="ασφάλεια" pos="N" /> <w surface="στις" lemma="στου" pos="P" /> <w surface="μεταφορές" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="524">
+    <ngram><w lemma="προσοχή" pos="N" /> <w lemma="στου" pos="P" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="προσοχή" lemma="προσοχή" pos="N" /> <w surface="στο" lemma="στου" pos="P" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="529">
+    <ngram><w lemma="τομέας" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="τομέα" lemma="τομέας" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="τομείς" lemma="τομέας" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="536">
+    <ngram><w lemma="πρόγραμμα" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="πρόγραμμα" lemma="πρόγραμμα" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="προγράμματος" lemma="πρόγραμμα" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="546">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="θέση" lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="556">
+    <ngram><w lemma="έχω" pos="V" /> <w lemma="δικαίωμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="έχει" lemma="έχω" pos="V" /> <w surface="δικαίωμα" lemma="δικαίωμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="558">
+    <ngram><w lemma="για" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="τις" lemma="ο" pos="DT" /> <w surface="οδικές" lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="560">
+    <ngram><w lemma="εν" pos="P" /> <w lemma="λόγω" pos="N" /> 
+<freq name="gr_toy" value="17" /></ngram>
+    <occurs>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> 
+<freq name="gr_toy" value="17" /></ngram>
+    </occurs>
+</cand>
+<cand candid="565">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="Πρόεδρο" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στον" lemma="στου" pos="P" /> <w surface="Πρόεδρο" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="571">
+    <ngram><w lemma="υπό" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="μηδέν" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="υπό" lemma="υπό" pos="P" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="μηδέν" lemma="μηδέν" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="578">
+    <ngram><w lemma="ελάχιστος" pos="AJ" /> <w lemma="προδιαγραφή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ελάχιστες" lemma="ελάχιστος" pos="AJ" /> <w surface="προδιαγραφές" lemma="προδιαγραφή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="582">
+    <ngram><w lemma="κοινωνικός" pos="AJ" /> <w lemma="υπόθεση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Κοινωνικών" lemma="κοινωνικός" pos="AJ" /> <w surface="Υποθέσεων" lemma="υπόθεση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="584">
+    <ngram><w lemma="εν" pos="P" /> <w lemma="λόγω" pos="N" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="θέματος" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="595">
+    <ngram><w lemma="κύριος" pos="N" /> <w lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="13" /></ngram>
+    <occurs>
+    <ngram><w surface="Kύριε" lemma="κύριος" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Κύριε" lemma="κύριος" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="9" /></ngram>
+    <ngram><w surface="κύριε" lemma="κύριος" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="606">
+    <ngram><w lemma="όπως" pos="ADV" /> <w lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="όπως" lemma="όπως" pos="ADV" /> <w surface="είχε" lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <ngram><w surface="όπως" lemma="όπως" pos="ADV" /> <w surface="έχει" lemma="έχω" pos="V" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="609">
+    <ngram><w lemma="απορρίπτω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="αίτηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="απορρίπτει" lemma="απορρίπτω" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="αίτηση" lemma="αίτηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="613">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="διάρκεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στη" lemma="στου" pos="P" /> <w surface="διάρκεια" lemma="διάρκεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="618">
+    <ngram><w lemma="διαρθρωτικός" pos="AJ" /> <w lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <occurs>
+    <ngram><w surface="διαρθρωτικά" lemma="διαρθρωτικός" pos="AJ" /> <w surface="ταμεία" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="διαρθρωτικών" lemma="διαρθρωτικός" pos="AJ" /> <w surface="ταμείων" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    </occurs>
+</cand>
+<cand candid="620">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="προηγούμενος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="προηγούμενη" lemma="προηγούμενος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στα" lemma="στου" pos="P" /> <w surface="προηγούμενα" lemma="προηγούμενος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="629">
+    <ngram><w lemma="ποσότητα" pos="N" /> <w lemma="επικίνδυνος" pos="AJ" /> <w lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ποσότητες" lemma="ποσότητα" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ποσοτήτων" lemma="ποσότητα" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="634">
+    <ngram><w lemma="διάσκεψη" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="Διάσκεψης" lemma="διάσκεψη" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="Προέδρων" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Διάσκεψη" lemma="διάσκεψη" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="Προέδρων" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="653">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="ελάχιστος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="ελάχιστο" lemma="ελάχιστος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="ελάχιστες" lemma="ελάχιστος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="659">
+    <ngram><w lemma="αίτηση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="ομάδα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="αιτήσεως" lemma="αίτηση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Ομάδας" lemma="ομάδα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="667">
+    <ngram><w lemma="προς" pos="P" /> <w lemma="συζήτηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="προς" lemma="προς" pos="P" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="675">
+    <ngram><w lemma="διοικητικός" pos="AJ" /> <w lemma="μεταρρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="διοικητικής" lemma="διοικητικός" pos="AJ" /> <w surface="μεταρρύθμισης" lemma="μεταρρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="διοικητική" lemma="διοικητικός" pos="AJ" /> <w surface="μεταρρύθμιση" lemma="μεταρρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="699">
+    <ngram><w lemma="δίνω" pos="V" /> <w lemma="απάντηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="δοθεί" lemma="δίνω" pos="V" /> <w surface="απαντήσεις" lemma="απάντηση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="δόθηκε" lemma="δίνω" pos="V" /> <w surface="απάντηση" lemma="απάντηση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="706">
+    <ngram><w lemma="κυρία" pos="N" /> <w lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="27" /></ngram>
+    <occurs>
+    <ngram><w surface="Kυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <ngram><w surface="Κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="18" /></ngram>
+    </occurs>
+</cand>
+<cand candid="708">
+    <ngram><w lemma="πλωτός" pos="AJ" /> <w lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="πλωτές" lemma="πλωτός" pos="AJ" /> <w surface="μεταφορές" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <ngram><w surface="πλωτών" lemma="πλωτός" pos="AJ" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="714">
+    <ngram><w lemma="χαμηλός" pos="AJ" /> <w lemma="θερμοκρασία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="χαμηλές" lemma="χαμηλός" pos="AJ" /> <w surface="θερμοκρασίες" lemma="θερμοκρασία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="718">
+    <ngram><w lemma="εκ" pos="P" /> <w lemma="μέρος" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="εκ" lemma="εκ" pos="P" /> <w surface="μέρους" lemma="μέρος" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="730">
+    <ngram><w lemma="εξετάζω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="ζήτημα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εξετάσουμε" lemma="εξετάζω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="ζήτημα" lemma="ζήτημα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εξετάζει" lemma="εξετάζω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="ζήτημα" lemma="ζήτημα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="735">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Σε" lemma="σε" pos="P" /> <w surface="περίπτωση" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="περίπτωση" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="737">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="πολίτης" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στους" lemma="στου" pos="P" /> <w surface="πολίτες" lemma="πολίτης" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="744">
+    <ngram><w lemma="θέμα" pos="N" /> <w lemma="διαδικασία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="θέματος" lemma="θέμα" pos="N" /> <w surface="διαδικασίας" lemma="διαδικασία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="747">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="κράτος" pos="AJ" /> <w lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στα" lemma="στου" pos="P" /> <w surface="κράτη" lemma="κράτος" pos="AJ" /> <w surface="μέλη" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="751">
+    <ngram><w lemma="διαδικασία" pos="N" /> <w lemma="επιτροπολογίας" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="διαδικασία" lemma="διαδικασία" pos="N" /> <w surface="επιτροπολογίας" lemma="επιτροπολογίας" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="761">
+    <ngram><w lemma="για" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="εξαίρετος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="εξαίρετη" lemma="εξαίρετος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="εξαίρετο" lemma="εξαίρετος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="775">
+    <ngram><w lemma="είμαι" pos="V" /> <w lemma="σε" pos="P" /> <w lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="είναι" lemma="είμαι" pos="V" /> <w surface="σε" lemma="σε" pos="P" /> <w surface="θέση" lemma="θέση" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="776">
+    <ngram><w lemma="ενιαίος" pos="AJ" /> <w lemma="αγορά" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ενιαίας" lemma="ενιαίος" pos="AJ" /> <w surface="αγοράς" lemma="αγορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="ενιαία" lemma="ενιαίος" pos="AJ" /> <w surface="αγορά" lemma="αγορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="780">
+    <ngram><w lemma="λεπτό" pos="N" /> <w lemma="σιγή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="λεπτού" lemma="λεπτό" pos="N" /> <w surface="σιγή" lemma="σιγή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="789">
+    <ngram><w lemma="παρόμοιος" pos="AJ" /> <w lemma="καταστροφή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="παρόμοιες" lemma="παρόμοιος" pos="AJ" /> <w surface="καταστροφές" lemma="καταστροφή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="791">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="όλος" pos="AJ" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="όλα" lemma="όλος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="όλους" lemma="όλος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="όλη" lemma="όλος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="όλες" lemma="όλος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="808">
+    <ngram><w lemma="εξέταση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="σύμβουλος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="εξέτασης" lemma="εξέταση" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="συμβούλων" lemma="σύμβουλος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="809">
+    <ngram><w lemma="περίοδος" pos="N" /> <w lemma="σύνοδος" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="περιόδου" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="περίοδο" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="820">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="δύο" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="δύο" lemma="δύο" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Σε" lemma="σε" pos="P" /> <w surface="δύο" lemma="δύο" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="838">
+    <ngram><w lemma="με" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="στρατηγικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="στρατηγικό" lemma="στρατηγικός" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="τους" lemma="ο" pos="DT" /> <w surface="στρατηγικούς" lemma="στρατηγικός" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="842">
+    <ngram><w lemma="όνομα" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ονόματος" lemma="όνομα" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="855">
+    <ngram><w lemma="όρος" pos="N" /> <w lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="όρων" lemma="όρος" pos="N" /> <w surface="εξέτασης" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="όρους" lemma="όρος" pos="N" /> <w surface="εξέτασής" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="όρους" lemma="όρος" pos="N" /> <w surface="εξέτασης" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="863">
+    <ngram><w lemma="σημασία" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σημασία" lemma="σημασία" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="ασφάλειας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="871">
+    <ngram><w lemma="προσέγγιση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="νομοθεσία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="προσέγγιση" lemma="προσέγγιση" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="νομοθεσιών" lemma="νομοθεσία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="878">
+    <ngram><w lemma="για" pos="P" /> <w lemma="παράδειγμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="παράδειγμα" lemma="παράδειγμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="884">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="οδικό" lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="οδικές" lemma="οδικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="887">
+    <ngram><w lemma="μεγάλος" pos="AJ" /> <w lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="μεγάλη" lemma="μεγάλος" pos="AJ" /> <w surface="προσοχή" lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεγαλύτερη" lemma="μεγάλος" pos="AJ" /> <w surface="προσοχή" lemma="προσοχή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="894">
+    <ngram><w lemma="εκ" pos="P" /> <w lemma="νέος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="εκ" lemma="εκ" pos="P" /> <w surface="νέου" lemma="νέος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="901">
+    <ngram><w lemma="πόρος" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πόρους" lemma="πόρος" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Ταμείου" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="πόρων" lemma="πόρος" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Ταμείου" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="912">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="συγκεκριμένες" lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="συγκεκριμένη" lemma="συγκεκριμένος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="917">
+    <ngram><w lemma="χρονικός" pos="AJ" /> <w lemma="διάστημα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="χρονικό" lemma="χρονικός" pos="AJ" /> <w surface="διάστημα" lemma="διάστημα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="929">
+    <ngram><w lemma="δύο" pos="AJ" /> <w lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="δύο" lemma="δύο" pos="AJ" /> <w surface="περιπτώσεις" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="934">
+    <ngram><w lemma="πρώτος" pos="AJ" /> <w lemma="έρωτας" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πρώτος" lemma="πρώτος" pos="AJ" /> <w surface="έρωτας" lemma="έρωτας" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="947">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="συνέχεια" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Στη" lemma="στου" pos="P" /> <w surface="συνέχεια" lemma="συνέχεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στη" lemma="στου" pos="P" /> <w surface="συνέχεια" lemma="συνέχεια" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="952">
+    <ngram><w lemma="αποσύρω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="αποσυρθεί" lemma="αποσύρω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="αποσυρόταν" lemma="αποσύρω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="957">
+    <ngram><w lemma="λαϊκός" pos="AJ" /> <w lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Λαϊκού" lemma="λαϊκός" pos="AJ" /> <w surface="Κόμματος" lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="963">
+    <ngram><w lemma="εναρμόνιση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="όρος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εναρμόνιση" lemma="εναρμόνιση" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="όρων" lemma="όρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εναρμόνισης" lemma="εναρμόνιση" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="όρων" lemma="όρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="977">
+    <ngram><w lemma="μεγάλος" pos="AJ" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="μεγαλύτερη" lemma="μεγάλος" pos="AJ" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="993">
+    <ngram><w lemma="επικίνδυνος" pos="AJ" /> <w lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="23" /></ngram>
+    <occurs>
+    <ngram><w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <ngram><w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="15" /></ngram>
+    <ngram><w surface="επικίνδυνα" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορεύματα" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="999">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="σώμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="Σώμα" lemma="σώμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1016">
+    <ngram><w lemma="ταμείο" pos="N" /> <w lemma="συνοχή" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Ταμείο" lemma="ταμείο" pos="N" /> <w surface="Συνοχής" lemma="συνοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Ταμείου" lemma="ταμείο" pos="N" /> <w surface="Συνοχής" lemma="συνοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1029">
+    <ngram><w lemma="αφορώ" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="αφορά" lemma="αφορώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="αφορούν" lemma="αφορώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1035">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="σχέση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="σχέση" lemma="σχέση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1037">
+    <ngram><w lemma="κράτος" pos="N" /> <w lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="κράτος" lemma="κράτος" pos="N" /> <w surface="μέλος" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="κράτη" lemma="κράτος" pos="N" /> <w surface="μέλη" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1048">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="ημερήσιος" pos="AJ" /> <w lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξη" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1064">
+    <ngram><w lemma="ημερήσιος" pos="AJ" /> <w lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="16" /></ngram>
+    <occurs>
+    <ngram><w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξη" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="13" /></ngram>
+    <ngram><w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξή" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ημερήσιας" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξης" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1071">
+    <ngram><w lemma="θεσμικός" pos="AJ" /> <w lemma="όργανο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="θεσμικού" lemma="θεσμικός" pos="AJ" /> <w surface="οργάνου" lemma="όργανο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="θεσμικών" lemma="θεσμικός" pos="AJ" /> <w surface="οργάνων" lemma="όργανο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1090">
+    <ngram><w lemma="επιτροπή" pos="N" /> <w lemma="απασχόληση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> <w surface="Απασχόλησης" lemma="απασχόληση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <w surface="Απασχόλησης" lemma="απασχόληση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1092">
+    <ngram><w lemma="βόρειος" pos="AJ" /> <w lemma="περιοχή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="βόρειες" lemma="βόρειος" pos="AJ" /> <w surface="περιοχές" lemma="περιοχή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="βόρειων" lemma="βόρειος" pos="AJ" /> <w surface="περιοχών" lemma="περιοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1100">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="πνεύμα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="πνεύμα" lemma="πνεύμα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1111">
+    <ngram><w lemma="εθνικός" pos="AJ" /> <w lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εθνικές" lemma="εθνικός" pos="AJ" /> <w surface="διατάξεις" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εθνικών" lemma="εθνικός" pos="AJ" /> <w surface="διατάξεων" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1113">
+    <ngram><w lemma="κράτος" pos="AJ" /> <w lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="10" /></ngram>
+    <occurs>
+    <ngram><w surface="κράτη" lemma="κράτος" pos="AJ" /> <w surface="μέλη" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    <ngram><w surface="κρατών" lemma="κράτος" pos="AJ" /> <w surface="μελών" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1121">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="βόρειος" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="βόρειο" lemma="βόρειος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="βόρειες" lemma="βόρειος" pos="AJ" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1128">
+    <ngram><w lemma="ξεχνάω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="κάρτα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ξεχάσει" lemma="ξεχνάω" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="κάρτα" lemma="κάρτα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="ξεχάσει" lemma="ξεχνάω" pos="V" /> <w surface="τις" lemma="ο" pos="DT" /> <w surface="κάρτες" lemma="κάρτα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1135">
+    <ngram><w lemma="τροποποίηση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="τροποποίηση" lemma="τροποποίηση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1140">
+    <ngram><w lemma="σχετικός" pos="AJ" /> <w lemma="σταθερότητα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σχετικής" lemma="σχετικός" pos="AJ" /> <w surface="σταθερότητας" lemma="σταθερότητα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1145">
+    <ngram><w lemma="απόφαση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="αποφάσεων" lemma="απόφαση" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="αποφάσεις" lemma="απόφαση" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1148">
+    <ngram><w lemma="ομάδα" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <occurs>
+    <ngram><w surface="Ομάδα" lemma="ομάδα" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κόμματος" lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    <ngram><w surface="Ομάδας" lemma="ομάδα" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κόμματος" lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1152">
+    <ngram><w lemma="αφορώ" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="τήρηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="αφορά" lemma="αφορώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="τήρηση" lemma="τήρηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1165">
+    <ngram><w lemma="σιδηροδρομικός" pos="AJ" /> <w lemma="αρτηρία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σιδηροδρομικών" lemma="σιδηροδρομικός" pos="AJ" /> <w surface="αρτηριών" lemma="αρτηρία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="σιδηροδρομικές" lemma="σιδηροδρομικός" pos="AJ" /> <w surface="αρτηρίες" lemma="αρτηρία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1169">
+    <ngram><w lemma="φυσικός" pos="AJ" /> <w lemma="καταστροφή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="φυσικών" lemma="φυσικός" pos="AJ" /> <w surface="καταστροφών" lemma="καταστροφή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="φυσική" lemma="φυσικός" pos="AJ" /> <w surface="καταστροφή" lemma="καταστροφή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1171">
+    <ngram><w lemma="οδικός" pos="AJ" /> <w lemma="αρτηρία" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="οδικές" lemma="οδικός" pos="AJ" /> <w surface="αρτηρίες" lemma="αρτηρία" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1173">
+    <ngram><w lemma="προβαίνω" pos="V" /> <w lemma="σε" pos="P" /> <w lemma="αιτιολόγηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="προβώ" lemma="προβαίνω" pos="V" /> <w surface="σε" lemma="σε" pos="P" /> <w surface="αιτιολόγηση" lemma="αιτιολόγηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1175">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="επιτροπή" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1178">
+    <ngram><w lemma="τροπολογία" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τροπολογίες" lemma="τροπολογία" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="τροπολογιών" lemma="τροπολογία" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1181">
+    <ngram><w lemma="θέμα" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="θέμα" lemma="θέμα" pos="N" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="θέμα" lemma="θέμα" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="ασφάλειας" lemma="ασφάλεια" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1187">
+    <ngram><w lemma="από" pos="P" /> <w lemma="ο" pos="DT" /> <w lemma="ημερήσιος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="από" lemma="από" pos="P" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1194">
+    <ngram><w lemma="τήρηση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="τήρηση" lemma="τήρηση" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="διατάξεων" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1195">
+    <ngram><w lemma="τηρώ" pos="V" /> <w lemma="ένας" pos="DT" /> <w lemma="λεπτό" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τηρεί" lemma="τηρώ" pos="V" /> <w surface="ενός" lemma="ένας" pos="DT" /> <w surface="λεπτού" lemma="λεπτό" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="τηρήσουμε" lemma="τηρώ" pos="V" /> <w surface="ενός" lemma="ένας" pos="DT" /> <w surface="λεπτού" lemma="λεπτό" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1205">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="αιτιολόγηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="αιτιολόγηση" lemma="αιτιολόγηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="αιτιολογήσεις" lemma="αιτιολόγηση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1220">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="περίπτωση" lemma="περίπτωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1224">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="συνοπτικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στα" lemma="στου" pos="P" /> <w surface="συνοπτικά" lemma="συνοπτικός" pos="AJ" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1243">
+    <ngram><w lemma="νομοθετικός" pos="AJ" /> <w lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="νομοθετικού" lemma="νομοθετικός" pos="AJ" /> <w surface="προγράμματος" lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="νομοθετικό" lemma="νομοθετικός" pos="AJ" /> <w surface="πρόγραμμα" lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1259">
+    <ngram><w lemma="ευρωπαϊκός" pos="AJ" /> <w lemma="ένωση" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Ευρωπαϊκή" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Ένωση" lemma="ένωση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Ευρωπαϊκής" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Ένωσης" lemma="ένωση" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1264">
+    <ngram><w lemma="τρεις" pos="AJ" /> <w lemma="μήνας" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τριών" lemma="τρεις" pos="AJ" /> <w surface="μηνών" lemma="μήνας" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="τρεις" lemma="τρεις" pos="AJ" /> <w surface="μήνες" lemma="μήνας" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1270">
+    <ngram><w lemma="λαμβάνω" pos="V" /> <w lemma="απόφαση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="λάβει" lemma="λαμβάνω" pos="V" /> <w surface="απόφαση" lemma="απόφαση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="λαμβάνουμε" lemma="λαμβάνω" pos="V" /> <w surface="αποφάσεις" lemma="απόφαση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1284">
+    <ngram><w lemma="προβλέπω" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="συζήτηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="προβλέπει" lemma="προβλέπω" pos="V" /> <w surface="τη" lemma="ο" pos="DT" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1289">
+    <ngram><w lemma="εν" pos="P" /> <w lemma="λόγω" pos="N" /> <w lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="οδηγία" lemma="οδηγία" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1295">
+    <ngram><w lemma="πλαίσιο" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πλαίσιο" lemma="πλαίσιο" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="προγράμματος" lemma="πρόγραμμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1302">
+    <ngram><w lemma="σε" pos="P" /> <w lemma="αιτιολόγηση" pos="N" /> <w lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="αιτιολόγηση" lemma="αιτιολόγηση" pos="N" /> <w surface="ψήφου" lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="αιτιολογήσεις" lemma="αιτιολόγηση" pos="N" /> <w surface="ψήφου" lemma="ψήφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1312">
+    <ngram><w lemma="πρώτος" pos="AJ" /> <w lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πρώτη" lemma="πρώτος" pos="AJ" /> <w surface="περίοδο" lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1317">
+    <ngram><w lemma="αγαπητός" pos="AJ" /> <w lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    <occurs>
+    <ngram><w surface="αγαπητοί" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφοι" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="Αγαπητοί" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφοι" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Αγαπητέ" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφε" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1318">
+    <ngram><w lemma="δήλωση" pos="N" /> <w lemma="ο" pos="DT" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="δηλώσεις" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="δήλωση" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="δήλωσης" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1321">
+    <ngram><w lemma="κατά" pos="P" /> <w lemma="βάση" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="Κατά" lemma="κατά" pos="P" /> <w surface="βάση" lemma="βάση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="κατά" lemma="κατά" pos="P" /> <w surface="βάση" lemma="βάση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1326">
+    <ngram><w lemma="ευρωπαϊκός" pos="AJ" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Ευρωπαϊκή" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <ngram><w surface="Ευρωπαϊκής" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1329">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="ομάδα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="Ομάδα" lemma="ομάδα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1334">
+    <ngram><w lemma="ψήφος" pos="N" /> <w lemma="εμπιστοσύνη" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ψήφο" lemma="ψήφος" pos="N" /> <w surface="εμπιστοσύνης" lemma="εμπιστοσύνη" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1335">
+    <ngram><w lemma="όσο" pos="ADV" /> <w lemma="αφορώ" pos="V" /> 
+<freq name="gr_toy" value="11" /></ngram>
+    <occurs>
+    <ngram><w surface="όσον" lemma="όσο" pos="ADV" /> <w surface="αφορά" lemma="αφορώ" pos="V" /> 
+<freq name="gr_toy" value="9" /></ngram>
+    <ngram><w surface="Όσον" lemma="όσο" pos="ADV" /> <w surface="αφορά" lemma="αφορώ" pos="V" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1346">
+    <ngram><w lemma="στου" pos="P" /> <w lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="στο" lemma="στου" pos="P" /> <w surface="θέμα" lemma="θέμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1352">
+    <ngram><w lemma="ευχαριστώ" pos="V" /> <w lemma="ο" pos="DT" /> <w lemma="εισηγητής" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ευχαριστήσουμε" lemma="ευχαριστώ" pos="V" /> <w surface="τον" lemma="ο" pos="DT" /> <w surface="εισηγητή" lemma="εισηγητής" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ευχαριστήσω" lemma="ευχαριστώ" pos="V" /> <w surface="τον" lemma="ο" pos="DT" /> <w surface="εισηγητή" lemma="εισηγητής" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1353">
+    <ngram><w lemma="οικονομικός" pos="AJ" /> <w lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="Οικονομικής" lemma="οικονομικός" pos="AJ" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1360">
+    <ngram><w lemma="έναρξη" pos="N" /> <w lemma="ισχύς" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="έναρξης" lemma="έναρξη" pos="N" /> <w surface="ισχύος" lemma="ισχύς" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="έναρξη" lemma="έναρξη" pos="N" /> <w surface="ισχύος" lemma="ισχύς" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1364">
+    <ngram><w lemma="πρώτος" pos="AJ" /> <w lemma="ανάγνωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="πρώτη" lemma="πρώτος" pos="AJ" /> <w surface="ανάγνωση" lemma="ανάγνωση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+</cand>
+</candidates>

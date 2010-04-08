@@ -1,0 +1,11 @@
+<!ELEMENT corpus (s)*>
+<!ELEMENT s (w)*>
+<!ATTLIST s
+    s_id CDATA #IMPLIED
+>
+<!ELEMENT w EMPTY>
+<!ATTLIST w
+    surface CDATA #REQUIRED
+    lemma CDATA #IMPLIED
+    pos CDATA #IMPLIED   
+> 

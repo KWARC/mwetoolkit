@@ -1,0 +1,31 @@
+>>>   MULTIWORD EXPRESSIONS TOOLKIT   <<<
+>>>    mwetoolkit version history     <<<
+
+VERSION 0.3:
+Released: ?, 2010
+Author: Carlos Ramisch
+
+Improvements over 0.2:
+    a) better handling of temporary files
+    b) write errors to stderr instead of stdout
+    c) sorting script
+    d) improve filtering script for cropping
+    e) wc, head and tail tools
+    f) suffix array indexing, can handle arbitrary ngrams and very large corpora
+    g) integration with Google API for web counts
+
+VERSION 0.2:
+Released: Dec 09, 2009
+Author: Carlos Ramisch
+
+Improvements over 0.1:
+    a) bug corrections concerning AM features
+    b) unicode partial support (for languages like Greek, Danish, etc)
+    c) yahoo cache naming conventions
+    d) filtering script for occurrence threshold
+
+VERSION 0.1:
+Released: Nov 9, 2009
+Author: Carlos Ramisch
+
+First version

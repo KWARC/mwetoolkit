@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
+<candidates>
+
+<meta>
+    <corpussize name="gr_toy" value="9294" />
+    <metafeat name="pos_pattern" type="{V#S#N#S,N#S#P#S#N#S,P#S#DT#S#AJ#S,P#S#N#S#N#S,P#S#AJ#S,P#S#N#S,N#S#N#S,V#S#DT#S#N#S,N#S#AJ#S#N#S,N#S#DT#S#N#S,V#S#P#S#N#S,AJ#S#N#S,N#S#AJ#S,ADV#S#V#S,P#S#AJ#S#N#S}" />
+    <metafeat name="n" type="integer" />
+    <metafeat name="mle_gr_toy" type="real" />
+    <metafeat name="pmi_gr_toy" type="real" />
+    <metafeat name="t_gr_toy" type="real" />
+    <metafeat name="dice_gr_toy" type="real" />
+</meta>
+<cand candid="0">
+    <ngram><w lemma="θεσμικός" pos="AJ" ><freq name="gr_toy" value="2" /></w> <w lemma="όργανο" pos="N" ><freq name="gr_toy" value="2" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="θεσμικού" lemma="θεσμικός" pos="AJ" /> <w surface="οργάνου" lemma="όργανο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="θεσμικών" lemma="θεσμικός" pos="AJ" /> <w surface="οργάνων" lemma="όργανο" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="25.364167859" />
+        <feat name="t_gr_toy" value="1.41390923408" />
+        <feat name="dice_gr_toy" value="1.0" />
+    </features>
+</cand>
+<cand candid="1">
+    <ngram><w lemma="επικίνδυνος" pos="AJ" ><freq name="gr_toy" value="26" /></w> <w lemma="εμπόρευμα" pos="N" ><freq name="gr_toy" value="25" /></w> 
+<freq name="gr_toy" value="23" /></ngram>
+    <occurs>
+    <ngram><w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="7" /></ngram>
+    <ngram><w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="15" /></ngram>
+    <ngram><w surface="επικίνδυνα" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορεύματα" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.00247471486981" />
+        <feat name="pmi_gr_toy" value="21.5434339072" />
+        <feat name="t_gr_toy" value="4.78124852685" />
+        <feat name="dice_gr_toy" value="0.901960784314" />
+    </features>
+</cand>
+<cand candid="2">
+    <ngram><w lemma="λεπτό" pos="N" ><freq name="gr_toy" value="4" /></w> <w lemma="σιγή" pos="N" ><freq name="gr_toy" value="3" /></w> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="λεπτού" lemma="λεπτό" pos="N" /> <w surface="σιγή" lemma="σιγή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000322788896062" />
+        <feat name="pmi_gr_toy" value="24.364167859" />
+        <feat name="t_gr_toy" value="1.73130535854" />
+        <feat name="dice_gr_toy" value="0.857142857143" />
+    </features>
+</cand>
+<cand candid="3">
+    <ngram><w lemma="οπτικός" pos="AJ" ><freq name="gr_toy" value="3" /></w> <w lemma="γωνία" pos="N" ><freq name="gr_toy" value="2" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="οπτική" lemma="οπτικός" pos="AJ" /> <w surface="γωνία" lemma="γωνία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="24.7792053583" />
+        <feat name="t_gr_toy" value="1.41375706994" />
+        <feat name="dice_gr_toy" value="0.8" />
+    </features>
+</cand>
+<cand candid="4">
+    <ngram><w lemma="διοικητικός" pos="AJ" ><freq name="gr_toy" value="2" /></w> <w lemma="μεταρρύθμιση" pos="N" ><freq name="gr_toy" value="3" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="διοικητικής" lemma="διοικητικός" pos="AJ" /> <w surface="μεταρρύθμισης" lemma="μεταρρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="διοικητική" lemma="διοικητικός" pos="AJ" /> <w surface="μεταρρύθμιση" lemma="μεταρρύθμιση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="24.7792053583" />
+        <feat name="t_gr_toy" value="1.41375706994" />
+        <feat name="dice_gr_toy" value="0.8" />
+    </features>
+</cand>
+<cand candid="5">
+    <ngram><w lemma="κράτος" pos="AJ" ><freq name="gr_toy" value="10" /></w> <w lemma="μέλος" pos="N" ><freq name="gr_toy" value="15" /></w> 
+<freq name="gr_toy" value="10" /></ngram>
+    <occurs>
+    <ngram><w surface="κράτη" lemma="κράτος" pos="AJ" /> <w surface="μέλη" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    <ngram><w surface="κρατών" lemma="κράτος" pos="AJ" /> <w surface="μελών" lemma="μέλος" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.00107596298687" />
+        <feat name="pmi_gr_toy" value="22.4572772634" />
+        <feat name="t_gr_toy" value="3.15717391959" />
+        <feat name="dice_gr_toy" value="0.8" />
+    </features>
+</cand>
+<cand candid="6">
+    <ngram><w lemma="εν" pos="P" ><freq name="gr_toy" value="27" /></w> <w lemma="λόγω" pos="N" ><freq name="gr_toy" value="17" /></w> 
+<freq name="gr_toy" value="17" /></ngram>
+    <occurs>
+    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> 
+<freq name="gr_toy" value="17" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="P#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.00182913707768" />
+        <feat name="pmi_gr_toy" value="21.6092803569" />
+        <feat name="t_gr_toy" value="4.1111275912" />
+        <feat name="dice_gr_toy" value="0.772727272727" />
+    </features>
+</cand>
+<cand candid="7">
+    <ngram><w lemma="προφορικός" pos="AJ" ><freq name="gr_toy" value="5" /></w> <w lemma="ερώτηση" pos="N" ><freq name="gr_toy" value="8" /></w> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="προφορική" lemma="προφορικός" pos="AJ" /> <w surface="ερώτηση" lemma="ερώτηση" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="προφορικής" lemma="προφορικός" pos="AJ" /> <w surface="ερώτησης" lemma="ερώτηση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000537981493437" />
+        <feat name="pmi_gr_toy" value="23.364167859" />
+        <feat name="t_gr_toy" value="2.2341432364" />
+        <feat name="dice_gr_toy" value="0.769230769231" />
+    </features>
+</cand>
+<cand candid="8">
+    <ngram><w lemma="διαρθρωτικός" pos="AJ" ><freq name="gr_toy" value="9" /></w> <w lemma="ταμείο" pos="N" ><freq name="gr_toy" value="12" /></w> 
+<freq name="gr_toy" value="8" /></ngram>
+    <occurs>
+    <ngram><w surface="διαρθρωτικά" lemma="διαρθρωτικός" pos="AJ" /> <w surface="ταμεία" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="διαρθρωτικών" lemma="διαρθρωτικός" pos="AJ" /> <w surface="ταμείων" lemma="ταμείο" pos="N" /> 
+<freq name="gr_toy" value="6" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000860770389499" />
+        <feat name="pmi_gr_toy" value="22.6092803569" />
+        <feat name="t_gr_toy" value="2.82431869283" />
+        <feat name="dice_gr_toy" value="0.761904761905" />
+    </features>
+</cand>
+<cand candid="9">
+    <ngram><w lemma="ημερήσιος" pos="AJ" ><freq name="gr_toy" value="16" /></w> <w lemma="διάταξη" pos="N" ><freq name="gr_toy" value="29" /></w> 
+<freq name="gr_toy" value="16" /></ngram>
+    <occurs>
+    <ngram><w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξη" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="13" /></ngram>
+    <ngram><w surface="ημερήσια" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξή" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="ημερήσιας" lemma="ημερήσιος" pos="AJ" /> <w surface="διάταξης" lemma="διάταξη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.001721540779" />
+        <feat name="pmi_gr_toy" value="21.5061868639" />
+        <feat name="t_gr_toy" value="3.98751882935" />
+        <feat name="dice_gr_toy" value="0.711111111111" />
+    </features>
+</cand>
+<cand candid="10">
+    <ngram><w lemma="χαμηλός" pos="AJ" ><freq name="gr_toy" value="3" /></w> <w lemma="θερμοκρασία" pos="N" ><freq name="gr_toy" value="3" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="χαμηλές" lemma="χαμηλός" pos="AJ" /> <w surface="θερμοκρασίες" lemma="θερμοκρασία" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="24.1942428576" />
+        <feat name="t_gr_toy" value="1.41352882372" />
+        <feat name="dice_gr_toy" value="0.666666666667" />
+    </features>
+</cand>
+<cand candid="11">
+    <ngram><w lemma="χρονικός" pos="AJ" ><freq name="gr_toy" value="4" /></w> <w lemma="διάστημα" pos="N" ><freq name="gr_toy" value="5" /></w> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="χρονικό" lemma="χρονικός" pos="AJ" /> <w surface="διάστημα" lemma="διάστημα" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000322788896062" />
+        <feat name="pmi_gr_toy" value="23.6272022649" />
+        <feat name="t_gr_toy" value="1.73080839253" />
+        <feat name="dice_gr_toy" value="0.666666666667" />
+    </features>
+</cand>
+<cand candid="12">
+    <ngram><w lemma="κυρία" pos="N" ><freq name="gr_toy" value="35" /></w> <w lemma="πρόεδρος" pos="N" ><freq name="gr_toy" value="55" /></w> 
+<freq name="gr_toy" value="27" /></ngram>
+    <occurs>
+    <ngram><w surface="Kυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <ngram><w surface="Κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> 
+<freq name="gr_toy" value="18" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.00290510006456" />
+        <feat name="pmi_gr_toy" value="20.2084126307" />
+        <feat name="t_gr_toy" value="5.15629160683" />
+        <feat name="dice_gr_toy" value="0.6" />
+    </features>
+</cand>
+<cand candid="13">
+    <ngram><w lemma="ενιαίος" pos="AJ" ><freq name="gr_toy" value="6" /></w> <w lemma="αγορά" pos="N" ><freq name="gr_toy" value="4" /></w> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ενιαίας" lemma="ενιαίος" pos="AJ" /> <w surface="αγοράς" lemma="αγορά" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="ενιαία" lemma="ενιαίος" pos="AJ" /> <w surface="αγορά" lemma="αγορά" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000322788896062" />
+        <feat name="pmi_gr_toy" value="23.364167859" />
+        <feat name="t_gr_toy" value="1.73055990952" />
+        <feat name="dice_gr_toy" value="0.6" />
+    </features>
+</cand>
+<cand candid="14">
+    <ngram><w lemma="άσκοπος" pos="AJ" ><freq name="gr_toy" value="2" /></w> <w lemma="δαπάνη" pos="N" ><freq name="gr_toy" value="5" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="άσκοπες" lemma="άσκοπος" pos="AJ" /> <w surface="δαπάνες" lemma="δαπάνη" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="24.0422397641" />
+        <feat name="t_gr_toy" value="1.41345274165" />
+        <feat name="dice_gr_toy" value="0.571428571429" />
+    </features>
+</cand>
+<cand candid="15">
+    <ngram><w lemma="κοινοβουλευτικός" pos="AJ" ><freq name="gr_toy" value="7" /></w> <w lemma="περίοδος" pos="N" ><freq name="gr_toy" value="11" /></w> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="κοινοβουλευτικής" lemma="κοινοβουλευτικός" pos="AJ" /> <w surface="περιόδου" lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="κοινοβουλευτική" lemma="κοινοβουλευτικός" pos="AJ" /> <w surface="περίοδο" lemma="περίοδος" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000537981493437" />
+        <feat name="pmi_gr_toy" value="22.4193094132" />
+        <feat name="t_gr_toy" value="2.23236285087" />
+        <feat name="dice_gr_toy" value="0.555555555556" />
+    </features>
+</cand>
+<cand candid="16">
+    <ngram><w lemma="πλωτός" pos="AJ" ><freq name="gr_toy" value="8" /></w> <w lemma="οδούς" pos="N" ><freq name="gr_toy" value="3" /></w> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="πλωτές" lemma="πλωτός" pos="AJ" /> <w surface="οδούς" lemma="οδούς" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000322788896062" />
+        <feat name="pmi_gr_toy" value="23.364167859" />
+        <feat name="t_gr_toy" value="1.73055990952" />
+        <feat name="dice_gr_toy" value="0.545454545455" />
+    </features>
+</cand>
+<cand candid="17">
+    <ngram><w lemma="ελάχιστος" pos="AJ" ><freq name="gr_toy" value="8" /></w> <w lemma="προδιαγραφή" pos="N" ><freq name="gr_toy" value="3" /></w> 
+<freq name="gr_toy" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ελάχιστες" lemma="ελάχιστος" pos="AJ" /> <w surface="προδιαγραφές" lemma="προδιαγραφή" pos="N" /> 
+<freq name="gr_toy" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000322788896062" />
+        <feat name="pmi_gr_toy" value="23.364167859" />
+        <feat name="t_gr_toy" value="1.73055990952" />
+        <feat name="dice_gr_toy" value="0.545454545455" />
+    </features>
+</cand>
+<cand candid="18">
+    <ngram><w lemma="όσο" pos="ADV" ><freq name="gr_toy" value="18" /></w> <w lemma="αφορώ" pos="V" ><freq name="gr_toy" value="25" /></w> 
+<freq name="gr_toy" value="11" /></ngram>
+    <occurs>
+    <ngram><w surface="όσον" lemma="όσο" pos="ADV" /> <w surface="αφορά" lemma="αφορώ" pos="V" /> 
+<freq name="gr_toy" value="9" /></ngram>
+    <ngram><w surface="Όσον" lemma="όσο" pos="ADV" /> <w surface="αφορά" lemma="αφορώ" pos="V" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="ADV#S#V#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.00118355928556" />
+        <feat name="pmi_gr_toy" value="21.0098182864" />
+        <feat name="t_gr_toy" value="3.30202611325" />
+        <feat name="dice_gr_toy" value="0.511627906977" />
+    </features>
+</cand>
+<cand candid="19">
+    <ngram><w lemma="λαϊκός" pos="AJ" ><freq name="gr_toy" value="4" /></w> <w lemma="κόμμα" pos="N" ><freq name="gr_toy" value="12" /></w> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Λαϊκού" lemma="λαϊκός" pos="AJ" /> <w surface="Κόμματος" lemma="κόμμα" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000430385194749" />
+        <feat name="pmi_gr_toy" value="22.7792053583" />
+        <feat name="t_gr_toy" value="1.99741768883" />
+        <feat name="dice_gr_toy" value="0.5" />
+    </features>
+</cand>
+<cand candid="20">
+    <ngram><w lemma="σχετικός" pos="AJ" ><freq name="gr_toy" value="6" /></w> <w lemma="σταθερότητα" pos="N" ><freq name="gr_toy" value="2" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="σχετικής" lemma="σχετικός" pos="AJ" /> <w surface="σταθερότητας" lemma="σταθερότητα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="23.7792053583" />
+        <feat name="t_gr_toy" value="1.4133005775" />
+        <feat name="dice_gr_toy" value="0.5" />
+    </features>
+</cand>
+<cand candid="21">
+    <ngram><w lemma="αγαπητός" pos="AJ" ><freq name="gr_toy" value="6" /></w> <w lemma="συνάδελφος" pos="N" ><freq name="gr_toy" value="18" /></w> 
+<freq name="gr_toy" value="6" /></ngram>
+    <occurs>
+    <ngram><w surface="αγαπητοί" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφοι" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="4" /></ngram>
+    <ngram><w surface="Αγαπητοί" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφοι" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="Αγαπητέ" lemma="αγαπητός" pos="AJ" /> <w surface="συνάδελφε" lemma="συνάδελφος" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000645577792124" />
+        <feat name="pmi_gr_toy" value="22.1942428576" />
+        <feat name="t_gr_toy" value="2.44474573424" />
+        <feat name="dice_gr_toy" value="0.5" />
+    </features>
+</cand>
+<cand candid="22">
+    <ngram><w lemma="περίοδος" pos="N" ><freq name="gr_toy" value="11" /></w> <w lemma="σύνοδος" pos="N" ><freq name="gr_toy" value="6" /></w> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="περιόδου" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="περίοδο" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000430385194749" />
+        <feat name="pmi_gr_toy" value="22.3197737397" />
+        <feat name="t_gr_toy" value="1.99644932214" />
+        <feat name="dice_gr_toy" value="0.470588235294" />
+    </features>
+</cand>
+<cand candid="23">
+    <ngram><w lemma="όρος" pos="N" ><freq name="gr_toy" value="8" /></w> <w lemma="εξέταση" pos="N" ><freq name="gr_toy" value="9" /></w> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="όρων" lemma="όρος" pos="N" /> <w surface="εξέτασης" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="όρους" lemma="όρος" pos="N" /> <w surface="εξέτασής" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="όρους" lemma="όρος" pos="N" /> <w surface="εξέτασης" lemma="εξέταση" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000430385194749" />
+        <feat name="pmi_gr_toy" value="22.1942428576" />
+        <feat name="t_gr_toy" value="1.99612653325" />
+        <feat name="dice_gr_toy" value="0.470588235294" />
+    </features>
+</cand>
+<cand candid="24">
+    <ngram><w lemma="μεταφορά" pos="N" ><freq name="gr_toy" value="48" /></w> <w lemma="επικίνδυνος" pos="AJ" ><freq name="gr_toy" value="26" /></w> <w lemma="εμπόρευμα" pos="N" ><freq name="gr_toy" value="25" /></w> 
+<freq name="gr_toy" value="15" /></ngram>
+    <occurs>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="8" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορά" lemma="μεταφορά" pos="N" /> <w surface="επικινδύνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="μεταφορές" lemma="μεταφορά" pos="N" /> <w surface="επικίνδυνων" lemma="επικίνδυνος" pos="AJ" /> <w surface="εμπορευμάτων" lemma="εμπόρευμα" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#AJ#S#N#S" />
+        <feat name="n" value="3" />
+        <feat name="mle_gr_toy" value="0.00161394448031" />
+        <feat name="pmi_gr_toy" value="41.705967905" />
+        <feat name="t_gr_toy" value="3.87289008444" />
+        <feat name="dice_gr_toy" value="0.454545454545" />
+    </features>
+</cand>
+<cand candid="25">
+    <ngram><w lemma="εκ" pos="P" ><freq name="gr_toy" value="16" /></w> <w lemma="όνομα" pos="N" ><freq name="gr_toy" value="6" /></w> 
+<freq name="gr_toy" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="εξ" lemma="εκ" pos="P" /> <w surface="ονόματος" lemma="όνομα" pos="N" /> 
+<freq name="gr_toy" value="5" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="P#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000537981493437" />
+        <feat name="pmi_gr_toy" value="22.1011334532" />
+        <feat name="t_gr_toy" value="2.23144859885" />
+        <feat name="dice_gr_toy" value="0.454545454545" />
+    </features>
+</cand>
+<cand candid="26">
+    <ngram><w lemma="στρατηγικός" pos="AJ" ><freq name="gr_toy" value="3" /></w> <w lemma="στόχος" pos="N" ><freq name="gr_toy" value="6" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στρατηγικούς" lemma="στρατηγικός" pos="AJ" /> <w surface="στόχους" lemma="στόχος" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="23.1942428576" />
+        <feat name="t_gr_toy" value="1.41284408507" />
+        <feat name="dice_gr_toy" value="0.444444444444" />
+    </features>
+</cand>
+<cand candid="27">
+    <ngram><w lemma="στοιχειώδης" pos="AJ" ><freq name="gr_toy" value="2" /></w> <w lemma="απαίτηση" pos="N" ><freq name="gr_toy" value="7" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="στοιχειώδεις" lemma="στοιχειώδης" pos="AJ" /> <w surface="απαιτήσεις" lemma="απαίτηση" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="23.556812937" />
+        <feat name="t_gr_toy" value="1.41314841336" />
+        <feat name="dice_gr_toy" value="0.444444444444" />
+    </features>
+</cand>
+<cand candid="28">
+    <ngram><w lemma="ταμείο" pos="N" ><freq name="gr_toy" value="12" /></w> <w lemma="συνοχή" pos="N" ><freq name="gr_toy" value="6" /></w> 
+<freq name="gr_toy" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="Ταμείο" lemma="ταμείο" pos="N" /> <w surface="Συνοχής" lemma="συνοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    <ngram><w surface="Ταμείου" lemma="ταμείο" pos="N" /> <w surface="Συνοχής" lemma="συνοχή" pos="N" /> 
+<freq name="gr_toy" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="N#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000430385194749" />
+        <feat name="pmi_gr_toy" value="22.1942428576" />
+        <feat name="t_gr_toy" value="1.99612653325" />
+        <feat name="dice_gr_toy" value="0.444444444444" />
+    </features>
+</cand>
+<cand candid="29">
+    <ngram><w lemma="τρεις" pos="AJ" ><freq name="gr_toy" value="2" /></w> <w lemma="μήνας" pos="N" ><freq name="gr_toy" value="7" /></w> 
+<freq name="gr_toy" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τριών" lemma="τρεις" pos="AJ" /> <w surface="μηνών" lemma="μήνας" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    <ngram><w surface="τρεις" lemma="τρεις" pos="AJ" /> <w surface="μήνες" lemma="μήνας" pos="N" /> 
+<freq name="gr_toy" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="pos_pattern" value="AJ#S#N#S" />
+        <feat name="n" value="2" />
+        <feat name="mle_gr_toy" value="0.000215192597375" />
+        <feat name="pmi_gr_toy" value="23.556812937" />
+        <feat name="t_gr_toy" value="1.41314841336" />
+        <feat name="dice_gr_toy" value="0.444444444444" />
+    </features>
+</cand>
+</candidates>
