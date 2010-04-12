@@ -1,0 +1,23 @@
+<!ELEMENT dictionary (entry*)>
+<!ELEMENT entry (ngram,features?)>
+<!ATTLIST entry
+    entryid CDATA #IMPLIED
+>
+<!ELEMENT ngram (w+,freq*)>
+<!ELEMENT w (freq)*>
+<!ATTLIST w
+    surface CDATA #IMPLIED
+    lemma CDATA #IMPLIED
+    pos CDATA #IMPLIED
+> 
+<!ELEMENT freq EMPTY>
+<!ATTLIST freq
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+>
+<!ELEMENT features (feat*)>
+<!ELEMENT feat EMPTY>
+<!ATTLIST feat
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+>

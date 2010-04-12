@@ -1,0 +1,8 @@
+<!ELEMENT patterns (pattern)*>
+<!ELEMENT pattern (w)*>
+<!ELEMENT w EMPTY>
+<!ATTLIST w
+    surface CDATA #IMPLIED
+    lemma CDATA #IMPLIED
+    pos CDATA #IMPLIED   
+> 
