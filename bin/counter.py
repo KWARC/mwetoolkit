@@ -18,16 +18,23 @@ import sys
 import getopt
 import shelve
 import xml.sax
+import pdb
+import array
+import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, \
-                                        INDEX_NAME_KEY
+                                        INDEX_NAME_KEY, SEPARATOR, \
+                                        MAX_MEM
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
 from xmlhandler.classes.corpus_size import CorpusSize
-from util import usage, read_options, treat_options_simplest
+#from xmlhandler.classes.corpus import Corpus
+#from xmlhandler.classes.suffix_array import SuffixArray
+from util import usage, read_options, treat_options_simplest, verbose, \
+                 set_verbose
     
 ################################################################################
 # GLOBALS    
@@ -55,15 +62,19 @@ OPTIONS may be:
      example, that "like" as a preposition and "like" as a verb will be counted 
      as the same entity. If you are using -y, this option will be ignored. 
      Default false.
+     
+-v OR --verbose
+    Print messages that explain what is happening.     
    
     The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
 You must chose either the -y option or the -i otpion, both are not allowed at 
 the same time. 
 """    
+corpus_file = array.array( 'L' )        
+ngrams_file = array.array( 'L' )
+vocab_file = {}
 get_freq_function = None
-cache_file = None
 freq_name = "?"
-ignore_pos = False
 web_freq = None
 the_corpus_size = -1
      
@@ -93,23 +104,59 @@ def treat_candidate( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.        
     """
     global get_freq_function, freq_name
-    candidate_string = ""
-    for word in candidate.base.word_list :
-        if word.surface == WILDCARD :
-            token = word.lemma
-        else :
-            token = word.surface
-        candidate_string = candidate_string + " " + token
-        freq_value = get_freq_function( token, word.pos )
-        word.add_frequency( Frequency( freq_name, freq_value ) )
-    if freq_name == "yahoo" or freq_name == "google" :
-        freq_value = get_freq_function( candidate_string.strip(), word.pos )
-        candidate.base.add_frequency( Frequency( freq_name, freq_value ) )
+    (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
+    for w in candidate.base.word_list :
+        c_surfaces.append( w.surface )
+        c_lemmas.append( w.lemma )
+        c_pos.append( w.pos )       
+        freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
+        w.add_frequency( Frequency( freq_name, freq_value ) )
+    # Global frequency
+    freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
+    candidate.base.add_frequency( Frequency( freq_name, freq_value ) )
     print candidate.to_xml().encode( 'utf-8' )
 
 ################################################################################
        
-def get_freq_index( token, pos ) :
+def compare_ngram_index( corpus, pos, ngram_ids ) :
+    """
+        returns 1 if ngram(pos1) >lex ngram(pos), -1 for ngram(pos1) <lex
+        ngram(pos) and 0 for matching ngrams
+    """   
+    pos1_cursor = pos
+    wordp1 = corpus[ pos1_cursor ]
+    pos2_cursor = 0 
+    wordp2 = ngram_ids[ pos2_cursor ] 
+    
+    while wordp1 == wordp2 and pos2_cursor < len( ngram_ids ) - 1:
+        # both are zero, we can stop because they are considered identical
+        if wordp1 == 0 :
+            break                
+        pos1_cursor += 1   
+        wordp1 = corpus[ pos1_cursor ]
+        pos2_cursor += 1   
+        wordp2 = ngram_ids[ pos2_cursor ]             
+    return wordp1 - wordp2      
+
+################################################################################
+
+def binary_search( ng_ids, sufarray, corpus, gt_fct ) :
+    """
+    """
+    i_low = 0
+    i_up = len( sufarray )
+    i_mid = ( i_up + i_low ) / 2
+    while i_up - i_low > 1 :                              
+        if gt_fct( compare_ngram_index( corpus, sufarray[i_mid], ng_ids ), 0 ) :
+            i_up = i_mid
+        else :
+            i_low = i_mid
+        i_mid = ( i_up + i_low ) / 2
+    return i_mid
+    
+################################################################################     
+       
+def get_freq_index( surfaces, lemmas, pos ) :
     """
         Gets the frequency (number of occurrences) of a token (word) in the
         index file. Calling this function assumes that you called the script
@@ -120,50 +167,78 @@ def get_freq_index( token, pos ) :
         
         @param pos A string corresponding to the Part Of Speech of a word.
     """
-    global ignore_pos
-    cache_entry = cache_file.get( token.encode( 'utf-8' ) , ({}, 0, None ) )
-    ( pos_dict, cache_freq, cache_time ) = cache_entry
-    if ignore_pos :
-        return cache_freq
-    else :
-        freq_pos = pos_dict.get( pos, 0 )
-        return freq_pos
+    global build_entry, ngrams_file, corpus_file, vocab_file
+    ng_ids = []
+    #pdb.set_trace()
+    for i in range( len( surfaces ) ) :
+        w = build_entry( surfaces[ i ], lemmas[i], pos[ i ] )
+        w_id = vocab_file.get( w, None )
+        if w_id :
+            ng_ids.append( w_id )
+        else :
+            return 0
+    i_last = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a > b )
+    i_first = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a >= b ) 
+    return i_last - i_first   
     
 ################################################################################
 
-def get_freq_web( token, pos ) : 
+def get_freq_web( surfaces, lemmas, pos ) : 
     """
         Gets the frequency (number of occurrences) of a token (word) in the
         Web through Yahoo's or Google's index. Calling this function assumes 
         that you called the script with the -y or -w option.
         
-        @param token A string corresponding to the surface form or lemma
-        of a word.
+        @param token A list corresponding to the surface forms or lemmas of a
+        word.
         
-        @param pos A string corresponding to the Part Of Speech of a word. This
+        @param pos A list corresponding to the Part Of Speeches of a word. This
         parameter is ignored since Web search engines dos no provide linguistic 
         information.
     """
     # POS is ignored
-    global web_freq
-    return web_freq.search_frequency( token )
+    global web_freq, build_entry
+    search_term = ""    
+    for i in range( len( surfaces ) ) :
+        search_term = search_term + build_entry( surfaces[ i ], lemmas[i], pos[ i ] ) + " "   
+    return web_freq.search_frequency( search_term.strip() )
 
-################################################################################  
+################################################################################
 
-def open_index( index_filename ) :
+def load_array_from_file( an_array, a_filename ) :
     """
-        Open the index file (a valid index created by the `index.py` script). 
-        The index is not loaded into main memory, only opened as a shelve 
-        object (something like a very simple embedded DB). Meta-information 
-        about the corpus size and name is retrieved.
-        
+    """
+    fd = open( a_filename )
+    isMore = True
+    while isMore :
+        try :    
+            an_array.fromfile( fd, MAX_MEM )
+        except EOFError :
+            isMore = False # Did not read MAX_MEM_ITEMS items? Not a problem...
+    fd.close()
+
+################################################################################
+
+def open_index( prefix ) :
+    """
+        Open the index files (valid index created by the `index3.py` script). 
+                
         @param index_filename The string name of the index file.
     """
-    global cache_file, freq_name, the_corpus_size
-    try :
-        cache_file = shelve.open( index_filename )
-        freq_name = cache_file[ INDEX_NAME_KEY ]
-        the_corpus_size = cache_file[ CORPUS_SIZE_KEY ]              
+    global vocab_file, ngrams_file, corpus_file, freq_name, the_corpus_size
+    try :      
+        verbose( "Loading index files... this may take some time." )
+        verbose( "Loading .vocab file" )
+        vocab_fd = shelve.open( prefix + ".vocab" )
+        vocab_file.update( vocab_fd )
+        vocab_fd.close()        
+        verbose( "Loading .corpus file" )
+        load_array_from_file( corpus_file, prefix + ".corpus" )
+        verbose( "Loading .ngrams file" )
+        load_array_from_file( ngrams_file, prefix + ".ngrams" )         
+        freq_name = re.sub( ".*/", "", prefix )
+        #pdb.set_trace()
+        the_corpus_size = vocab_file[ CORPUS_SIZE_KEY ]              
     except IOError :        
         print >> sys.stderr, "Error opening the index."
         print >> sys.stderr, "Try again with another index filename."
@@ -173,7 +248,7 @@ def open_index( index_filename ) :
         print >> sys.stderr, "Try again with another index filename."
         sys.exit( 2 )        
 
-################################################################################  
+################################################################################
 
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
@@ -185,8 +260,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global cache_file, get_freq_function, freq_name, ignore_pos, web_freq, \
+    global cache_file, get_freq_function, freq_name, build_entry, web_freq, \
            the_corpus_size
+    surface_flag = False
+    pos_flag = False
     mode = []
     for ( o, a ) in opts:
         if o in ( "-i", "--index" ) : 
@@ -196,47 +273,70 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ( "-y", "--yahoo" ) :
             web_freq = YahooFreq()          
             freq_name = "yahoo"
+            pos_flag = True 
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
             mode.append( "yahoo" )   
         elif o in ( "-w", "--google" ) :
             web_freq = GoogleFreq()          
             freq_name = "google"
+            pos_flag = True 
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
-            mode.append( "yahoo" )   
+            mode.append( "google" ) 
+        elif o in ("-s", "--surface" ) :
+            surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
-            ignore_pos = True        
-
+            pos_flag = True    
+        elif o in ("-v", "--verbose") :
+            set_verbose( True )
+            verbose( "Verbose mode on" ) 
+                 
+    if mode == [ "index" ] :       
+        if surface_flag and pos_flag :
+            build_entry = lambda s, l, p: (s + SEPARATOR + WILDCARD).encode('utf-8')
+        elif surface_flag :
+            build_entry = lambda s, l, p: (s + SEPARATOR + p).encode('utf-8')
+        elif pos_flag :
+            build_entry = lambda s, l, p: (l + SEPARATOR + WILDCARD).encode('utf-8')
+        else :      
+            build_entry = lambda s, l, p: (l + SEPARATOR + p).encode('utf-8')
+    else : # Web search, entries are single surface or lemma forms         
+        if surface_flag :
+            build_entry = lambda s, l, p: s.encode('utf-8')
+        else :
+            build_entry = lambda s, l, p: l.encode('utf-8')
+        
     if len(mode) != 1 :
-        print >> sys.stderr, "Exactly one option, -y or -i, must be provided"
+        print >> sys.stderr, "Exactly one option -y, -w or -i, must be provided"
         usage( usage_string )
         sys.exit( 2 )
                 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
-################################################################################   
+################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "ignore-pos" ]
-arg = read_options( "ywi:g", longopts, treat_options, 1, usage_string )  
+longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface" ]
+arg = read_options( "ywi:vgs", longopts, treat_options, 1, usage_string )  
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
+<!DOCTYPE candidates SYSTEM "dtd/mwttoolkit-candidates.dtd">
 <candidates>
 """ 
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
     parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
+    verbose( "Counting ngrams in candidates file" )
     parser.parse( input_file )
     input_file.close() 
     print "</candidates>"      
      
 except IOError, err :
     print >> sys.stderr, err
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-                         " please validate it against the DTD " + \
-                         "(mwttoolkit-candidates.dtd)"
+#except Exception, err :
+#    print >> sys.stderr, err
+#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+#                         " please validate it against the DTD " + \
+#                         "(mwttoolkit-candidates.dtd)"
