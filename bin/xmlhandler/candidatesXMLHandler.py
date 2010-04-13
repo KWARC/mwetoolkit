@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# candidatesDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This module provides the `CandidatesXMLHandler` class. This class is a SAX 
     parser for XML documents that are valid candidate lists according to 
@@ -25,7 +47,7 @@ from util import strip_xml
 class CandidatesXMLHandler( xml.sax.ContentHandler ) :
     """
         SAX parser for candidates file. The XML candidates file must be valid 
-        according to mwttoolkit-candidates.dtd. The class works by calling 
+        according to mwetoolkit-candidates.dtd. The class works by calling
         callback functions that are passed to the constructor when an entity is 
         read, so you should define and implement the correct callbacks and then
         parse the document.
@@ -75,14 +97,14 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         """
         if name == "cand" :  
             # Get the candidate ID or else create a new ID for it          
-            if "id" in attrs.keys() :
-                id_number = strip_xml( attrs[ "id" ] )
+            if "candid" in attrs.keys() :
+                id_number = strip_xml( attrs[ "candid" ] )
             else :
                 id_number = self.id_number_counter
                 self.id_number_counter = self.id_number_counter + 1
             # Instanciates an empty mwt candidate that will be treated
             # when the <cand> tag is closed
-            self.candidate = Candidate( None, id_number, [], [], [] )
+            self.candidate = Candidate( id_number, None, [], [], [] )
         elif name == "ngram" :
             # Instanciates a new ngram. We do not know which words it
             # contains, so for the moment we just keep it on the stack
@@ -105,7 +127,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
                 pos = WILDCARD
             self.word = Word( surface, lemma, pos, [] )
             # Add the word to the ngram that is on the stack
-            self.ngram.append_word( self.word )
+            self.ngram.append( self.word )
         elif name == "freq" :
             self.freq = Frequency( strip_xml( attrs[ "name" ] ), 
                                    int( strip_xml( attrs[ "value" ] ) ) )
@@ -163,11 +185,11 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         elif name == "ngram" :
             # The candidate already has a base form, so the ngram that I just 
             # read is an occurrence
-            if self.candidate.base :
+            if self.candidate.word_list :
                 self.candidate.add_occur( self.ngram )
             # This is the first ngram that I read, so it has to be the base form                
             else :
-                self.candidate.base = self.ngram
+                self.candidate.word_list = self.ngram.word_list
         elif name == "w" :  
             # Set word to none, otherwise I cannot make the difference between
             # the frequency of a word and the frequency of a whole ngram
@@ -175,9 +197,3 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         elif name == "meta" :
             # Finished reading the meta header, call callback        
             self.treat_meta( self.meta )  
-     
-################################################################################
-        
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()    
