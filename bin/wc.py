@@ -85,7 +85,7 @@ try :
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
     
-    handler = GenericXMLHandler( treat_entity=treat_ngram )
+    handler = GenericXMLHandler( treat_entity=treat_entity )
     
     parser.setContentHandler( handler )
     parser.parse( input_file )
