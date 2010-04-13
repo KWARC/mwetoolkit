@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This module provides the `Sentence` class. This class represents a sentence, 
     i.e. a sequence of words that convey a complete information, as they occur 
@@ -13,7 +35,7 @@ from ngram import Ngram
 class Sentence( Ngram ) :
     """
         A `Sentence` is a representation of a sequence of words as they appear 
-        in a given corpus (mwttoolkit-corpus.dtd). It is a subclass of `Ngram`,
+        in a given corpus (mwetoolkit-corpus.dtd). It is a subclass of `Ngram`,
         meaning that it is not more than a sequence of words, with the particu-
         larity that they are linguistic units that convey a complete 
         information and generally end with a punctuation sign. However, no test
@@ -33,7 +55,7 @@ class Sentence( Ngram ) :
             last token of the list. Inermediary punctuation signs such as commas
             and parentheses should also be considered as separate tokens, please
             pay attention to correctly tokenise your corpus before using 
-            mwttoolkit.
+            mwetoolkit.
             
             @param word_list A list of `Word`s in the same order as they occur
             in the sentence in the corpus.
@@ -72,7 +94,7 @@ class Sentence( Ngram ) :
             
             @return A string containing the XML element <s> with its 
             internal structure and attributes, according to 
-            mwttoolkit-corpus.dtd.
+            mwetoolkit-corpus.dtd.
         """
         result = "<s"
         if( self.s_id >= 0 ) :

@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
 """
 
@@ -13,7 +35,10 @@ from __common import LANG, YAHOO_APPID
 ################################################################################         
 
 class YahooTerms :
-    """       
+    """
+        Representation of an abstract gateway that allows you to access the
+        Yahoo terms service and look up for the terms identified in a text
+        fragment.
     """
 
 ################################################################################          
@@ -47,14 +72,7 @@ class YahooTerms :
         except Exception, err:
             print >> sys.stderr, "Got an error ->", err 
             print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"               
-            sys.exit( -1 )          
-           
-################################################################################                   
- 
-    def __del__( self ) :
-        """          
-        """
-        pass
+            sys.exit( -1 )
         
 ################################################################################                
             

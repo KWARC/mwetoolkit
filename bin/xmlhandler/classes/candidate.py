@@ -1,17 +1,39 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This module provides the Candidate class. This class is a representation of 
-    a MWT candidate, including base form, id, occurrences, features and the TP 
-    class (true/false MWT).
+    a MWE candidate, including base form, id, occurrences, features and the TP
+    class (true/false MWE).
 """
 
-from __common import UNKNOWN_FEAT_VALUE
+from entry import Entry
 
 ################################################################################
 
-class Candidate :
+class Candidate ( Entry ) :
     """
-        A MWT candidate is a sequence of words extracted from the corpus. The
+        A MWE candidate is a sequence of words extracted from the corpus. The
         sequence of words has a base form ngram (generally lemmas) and a list of
         occurrence ngrams. Features may me added to the candidate, such as 
         Association Measures. The candidate also might be evaluated as a True
@@ -21,9 +43,10 @@ class Candidate :
 
 ################################################################################
 
-    def __init__( self, base, id_number, occurs, features, tpclasses ) :
+    def __init__( self, id_number, base=[], features=[], \
+                 occurs=[], tpclasses=[] ) :
         """
-            Instanciates the Multiword Term candidate.
+            Instanciates the Multiword Expression candidate.
             
             @param base `Ngram` that represents the base form of the candidate.
             A base form is generally a non-inflected sequence of lemmas (unless
@@ -50,11 +73,10 @@ class Candidate :
            
            @return A new Multiword Term `Candidate` .
         """
-        self.base = base                  # Ngram
-        self.id_number = id_number        # int
+        super(Candidate,self).__init__(id_number,base,features)
         self.occurs = occurs              # Ngram list
-        self.features = features          # Feature list
         self.tpclasses = tpclasses        # TPClass list
+        self.freqs = []
         
 ################################################################################
 
@@ -71,7 +93,7 @@ class Candidate :
             result = result + " candid=\"" + str(self.id_number) + "\">\n"
 
         # Unicode support          
-        base_string = self.base.to_xml()
+        base_string = super( Entry, self ).to_xml()
         if isinstance( base_string, str ) :
             base_string = unicode( base_string, 'utf-8')
         result = result + "    " + base_string + "\n"        
@@ -106,17 +128,6 @@ class Candidate :
             repeated occurrence in the list.
         """
         self.occurs.append( occur )
-        
-################################################################################
-
-    def add_feat( self, feat ) :
-        """
-            Add a feature to the list of features of the candidate.
-            
-            @param feat A `Feature` of this candidate. No test is performed in 
-            order to verify whether this is a repeated feature in the list.        
-        """
-        self.features.append( feat )     
 
 ################################################################################
 
@@ -132,30 +143,3 @@ class Candidate :
             repeated TP class in the list.                
         """
         self.tpclasses.append( tpclass ) 
-        
-################################################################################
-
-    def get_feat_value( self, feat_name ) :
-        """
-            Returns the value of a `Feature` in the features list. The feature
-            is identified by the feature name provided as input to this 
-            function. If two features have the same name, only the first 
-            value found will be returned.
-            
-            @param feat_name A string that identifies the `Feature` of the 
-            candidate for which you would like to know the value.
-            
-            @return Value of the searched feature. If there is no feature with
-            this name, then it will return `UNKNOWN_FEAT_VALUE` (generally "?"
-            as in the WEKA's arff file format).
-        """
-        for feat in self.features :
-            if feat.name == feat_name :
-                return feat.value
-        return UNKNOWN_FEAT_VALUE                   
-
-################################################################################
-        
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()               

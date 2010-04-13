@@ -1,21 +1,39 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This module provides the `Ngram` class. This class represents an ngram, i.e.
     a sequence of words as they occur in the corpus. A ngram is any sequence of
     n words, not necessarily a linguistically motivated phrase.
 """
 
-import sys
-if __name__ == "__main__" :
-    import install
-
-import word
-from __common import SEPARATOR, WILDCARD, WORD_SEPARATOR
+from word import Word
 from frequency import Frequency
+from __common import SEPARATOR, WILDCARD, WORD_SEPARATOR
 
-################################################################################
+################################################################################        
 
-class Ngram :
+class Ngram (object):
     """
         A `Ngram` is a sequence of n adjacent words. For example, an ngram with 
         2 adjacent words is called bigram and has n=2. An ngram with 3 words is 
@@ -26,7 +44,7 @@ class Ngram :
 
 ################################################################################
 
-    def __init__( self, word_list, freqs ) :
+    def __init__( self, word_list=[], freqs=[] ) :
         """
             Instanciates the `Ngram` with the list of words that compose it and
             the list of frequencies associated to the ngram. 
@@ -50,7 +68,7 @@ class Ngram :
 
 ################################################################################
     
-    def append_word( self, word ) :
+    def append( self, word ) :
         """
             Append a `Word` to the end of the list of words of the ngram.
             
@@ -113,9 +131,9 @@ class Ngram :
         """
         words_string = the_string.split( WORD_SEPARATOR )
         for word_string in words_string :           
-            a_word = word.Word( WILDCARD, WILDCARD, WILDCARD, [] )
+            a_word = Word( WILDCARD, WILDCARD, WILDCARD, [] )
             a_word.from_string( word_string )
-            self.append_word( a_word )
+            self.append( a_word )
        
 ################################################################################
         
@@ -128,7 +146,7 @@ class Ngram :
             internal structure, according to mwttoolkit-candidates.dtd.
         """
         result = "<ngram>"
-        for word in self.word_list :
+        for word in self :
             result = result  + word.to_xml() + " "
         if self.freqs :
             result = result + "\n"        
@@ -182,35 +200,38 @@ class Ngram :
         
 ################################################################################    
     
-    def __len__( self ) :
+    def __iter__( self ) :
         """
-            Equivalent to get_n.
-            
-            @return The number of words contained in the ngram.
-        """ 
-        return self.get_n()
-        
-################################################################################
-        
-    def get_n( self ) :
+        """
+        return NgramIter( self )
+
+################################################################################            
+    
+    def __len__( self ) :
         """
             Returns the size of the ngram in number of words, i.e. the value of 
             n. An ngram with 2 words is called bigram and has n=2. An ngram with
             3 words is called trigram and has n=3.
             
             @return The number of words contained in the ngram.
-        """
-        return len( self.word_list )
+        """ 
+        return len( self.word_list )  
         
 ################################################################################
 
     def __getitem__( self, i ) :
         """
-            Equivalent to word_at.
+            Returns a `Word` corresponding to the index `i` in the ngram. If the
+            index i does not exist, will generate a `IndexError`.
             
-            @return The number of words contained in the ngram.
+            @param i The index i corresponding to the position of the searched
+            word. If i=2, for instance, will return the 3rd word (indices start
+            at zero) of the ngram.
+            
+            @return A `Word` at the i-th position of the ngram, or generates 
+            IndexError if the position i is larger than the ngram size.
         """ 
-        return self.word_at( i )
+        return self.word_list[ i ]
 
 ################################################################################
 
@@ -223,22 +244,6 @@ class Ngram :
             if an_ngram[ i ] != self[ i ] :
                 return False
         return True
-    
-################################################################################
-        
-    def word_at( self, i ) :
-        """
-            Returns a `Word` corresponding to the index `i` in the ngram. If the
-            index i does not exist, will generate a `IndexError`.
-            
-            @param i The index i corresponding to the position of the searched
-            word. If i=2, for instance, will return the 3rd word (indices start
-            at zero) of the ngram.
-            
-            @return A `Word` at the i-th position of the ngram, or generates 
-            IndexError if the position i is larger than the ngram size.
-        """
-        return self.word_list[ i ]
         
 ################################################################################
 
@@ -347,18 +352,7 @@ class Ngram :
             different (default).
             
             @return The number of times that `an_ngram` was found in the current
-            `Ngram`.
-            
-            
-            >>> from xmlhandler.classes.word import Word
-            >>> from xmlhandler.classes.sentence import Sentence
-            >>> from xmlhandler.classes.ngram import Ngram
-            >>> w1 = Word( "the", "the", "DT", [] )
-            >>> w_list = [ w1, w1, w1, w1 ]
-            >>> s1 = Sentence( w_list[:], 0 )
-            >>> n1 = Ngram( w_list[:2], [] )
-            >>> s1.count( n1 )
-            2
+            `Ngram`.            
         """
         i = 0
         result_count = 0
@@ -405,32 +399,6 @@ class Ngram :
             
             @return The position in the current `Ngram` where the first instance 
             of `an_ngram` was found.            
-            
-            >>> from xmlhandler.classes.word import Word
-            >>> from xmlhandler.classes.sentence import Sentence
-            >>> from xmlhandler.classes.ngram import Ngram
-            >>> the = Word( "the", "the", "DT", [] )
-            >>> man = Word( "man", "man", "N", [] )            
-            >>> be = Word( "is", "be", "V", [] )                        
-            >>> an = Word( "an", "a", "DT", [] )  
-            >>> idiot = Word( "idiot", "idiot", "A", [] )
-            >>> w_list = [ the, man, be, be, an, idiot ]
-            >>> s1 = Sentence( w_list[:], 0 )
-            >>> n1 = Ngram( [ the, man ], [] )
-            >>> s1.find( n1 )
-            0
-            >>> n2 = Ngram( [ man ], [] )
-            >>> s1.find( n2 )
-            1
-            >>> n3 = Ngram( [ idiot, the ], [] )
-            >>> s1.find( n3 )
-            -1
-            >>> n4 = Ngram( [ be, an, idiot ], [] )
-            >>> s1.find( n4, ignore_pos = True )
-            3
-            >>> n5 = Ngram( [ be, an ], [] )
-            >>> s1.find( n5 )
-            3
         """
         i = 0
         n = len( an_ngram )
@@ -454,9 +422,65 @@ class Ngram :
             return result_pos        
         return -1         
 
+################################################################################
 
-################################################################################   
+    def match( self, some_ngram ) :
+        """
+            A simple matching algorithm that returns true if ALL the words of
+            the current pattern match all the words of the given ngram. Since a 
+            pattern does generally contain `WILDCARD`s to express loose
+            constraints, the matching is done at the word level considering only
+            the parts that are defined, for example, POS tags for candidate
+            extraction or lemmas for automatic gold standard evaluation.
+            
+            @param some_ngram A `Ngram` against which we would like to compare
+            the current pattern. In general, the pattern contains the 
+            `WILDCARD`s while `some_ngram` has all the elements with a defined
+            value.
+            
+            @return Will return True if ALL the words of `some_ngram` match ALL
+            the words of the current pattern (i.e. they have the same number of
+            words and all of them match in the same order). Will return False if
+            the ngrams have different sizes or if ANY of the words of 
+            `some_ngram` does not match the corresponding word of the current 
+            pattern.
+        """
+        if( len( some_ngram ) == len( self ) ) :
+            for i in range( len( self ) ) :
+                if not self[ i ].match( some_ngram[ i ] ) :
+                    return False
+            return True
+        else :
+            return False
+
+################################################################################
+################################################################################
+
+class NgramIter() :
+    """
+    """
+
+    def __init__( self, ngram ) :
+        """
+        """
+        self.current = -1
+        self.ngram = ngram
+
+################################################################################
         
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()                
+    def __iter__( self ) :
+        """
+        """    
+        return self
+        
+################################################################################        
+        
+    def next( self ) :
+        """
+        """    
+        self.current += 1
+        if self.current >= len( self.ngram ) :
+            raise StopIteration
+        else :
+            return self.ngram[ self.current ]
+

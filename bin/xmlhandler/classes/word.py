@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This module provides the `Word` class. This class represents an orthographic
     word (as in mwttoolkit-corpus.dtd, mwttoolkit-patterns.dtd and 
@@ -196,6 +218,25 @@ class Word :
         return self.match( a_word )
 
 ################################################################################
+
+    def __len__( self ) :
+        """
+            Returns the number of characters in a word. Chooses upon available
+            information, in priority order surface > lemma > pos.
+
+            @return The number of characters in this word. Zero if this is an
+            empty word (or all fields are wildcards)
+        """
+        if self.surface != WILDCARD :
+            return len( self.surface )
+        elif self.lemma != WILDCARD :
+            return len( self.lemma )
+        elif self.pos != WILDCARD :
+            return len( self.pos )
+        else :
+            return 0
+
+################################################################################
         
     def match( self, w ) :
         """
@@ -231,8 +272,3 @@ class Word :
         else :
             return False
         
-################################################################################
-        
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()
