@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script extract Multiword Expression candidates from a raw corpus in 
     valid XML (mwetoolkit-corpus.dtd) and generates a candidate list in valid 
@@ -7,33 +29,34 @@
     shallow morphosyntactic patterns (e.g. I want to extract Verb + Preposition
     pairs); the -n option assumes that you do not care about the type of the
     candidates and that you are trying to extract all possible ngrams from the
-    corpus. Notice that in the -n option, ngrams are not extracted across
-    sentence borders, since these would certainly not be interesting MWE 
-    candidates.
+    corpus. The latter should only be used as a backoff strategy when you do not
+    know anything about the corpus or language: do not expect to obtain 
+    impressive results with it. Notice that in the -n option, ngrams are not
+    extracted across sentence borders, since these would certainly not be
+    interesting MWE candidates.
 
     For more information, call the script with no parameter and read the
     usage instructions.
 """
 
 import sys
-import getopt
 import re
 import shelve
 import xml.sax
 import os
 import tempfile
+import pdb
 
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.patternsXMLHandler import PatternsXMLHandler
+from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_PREFIX, \
-                                        TEMP_FOLDER, \
-                                        SEPARATOR
+                                        TEMP_FOLDER                                      
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
-from xmlhandler.classes.pattern import Pattern
+from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest
 
 ################################################################################
@@ -44,9 +67,10 @@ usage_string = """Usage:
 python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus.xml>
 
 -p <patterns.xml> OR --patterns <patterns.xml>
-    The patterns to extract, valid XML (mwetoolkit-patterns.dtd)
+    The patterns to extract, valid XML (mwetoolkit-dict.dtd)
+
 -n <min>:<max> OR --ngram <min>:<max>
-    The length of n-grams to extract. For instance, "-n 3:5" extracts ngrams 
+    The length of ngrams to extract. For instance, "-n 3:5" extracts ngrams 
     that have at least 3 words and at most 5 words. If you define only <min> or
     only <max>, the default is to consider that both have the same value, i.e. 
     if you call the program with the option "-n 3", you will extract only 
@@ -57,9 +81,10 @@ python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus.xml>
 OPTIONS may be:
 
 -g OR --ignore-pos
-     Ignores Part-Of-Speech when counting candidate occurences. This means, for 
+     Ignores parts of speech when counting candidate occurences. This means, for
      example, that "like" as a preposition and "like" as a verb will be counted 
      as the same entity. Default false.
+
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
 
@@ -78,8 +103,8 @@ shortest_pattern = sys.maxint
        
 def treat_sentence( sentence ) :
     """
-        For each sentence in the corpus, generates all the candidates that obbey
-        at least to one pattern in the patterns file (-p option) or all the
+        For each sentence in the corpus, generates all the candidates that match
+        at least one pattern in the patterns file (-p option) or all the
         ngrams that are in the valid range (-n option). The candidates are
         stored into a temporary file and will be further printed to a XML file.
         The temp file is used to avoid printing twice a repeated candidate and
@@ -101,8 +126,7 @@ def treat_sentence( sentence ) :
                 copy_ngram = Ngram( [], [] )
                 for w in ngram.word_list :
                     copy_w = Word( w.surface, w.lemma, w.pos, [] )
-                    copy_ngram.append_word( copy_w )
-                
+                    copy_ngram.append( copy_w )                
                 if ignore_pos :    
                     copy_ngram.set_all( pos=WILDCARD )
                 internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
@@ -115,30 +139,31 @@ def treat_sentence( sentence ) :
                 ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
                 freq_surface = surfaces_dict.get( internal_key, 0 )
                 surfaces_dict[ internal_key ] = freq_surface + 1
-                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
-                
+                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )                
          
 ################################################################################
 
-def treat_pattern( pattern ) :    
+def treat_pattern( entry ) :
     """
         For each pattern in the XML patterns list, stores it into main memory.
         We expect that the patterns file is small enough to fit comfortably
         into main memory. This function also updates the control variables that
         define the shortest and longest size of a pattern.
         
-        @param pattern A `Pattern` contained in the XML patterns list.
+        @param entry An `Entry` contained in the XML patterns list. This entry
+        should ideally contain some wildcards, otherwise the patterns will be
+        too generic to be interesting.
     """
     global patterns, longest_pattern, shortest_pattern
-    longest_pattern = max( longest_pattern, pattern.get_n() )
-    shortest_pattern = min( shortest_pattern, pattern.get_n() )
-    patterns.append( pattern )    
+    longest_pattern = max( longest_pattern, len(entry) )
+    shortest_pattern = min( shortest_pattern, len(entry) )
+    patterns.append( entry )
    
 ################################################################################
 
 def interpret_ngram( argument ) :
     """
-        Parses the option of the "-n" option. This option is of the form 
+        Parses the argument of the "-n" option. This option is of the form
         "<min>:<max>" and defines the length of n-grams to extract. For 
         instance, "3:5" extracts ngrams that have at least 3 words and at most 5 
         words. If you define only <min> or only <max>, the default is to 
@@ -176,7 +201,7 @@ def interpret_ngram( argument ) :
 
 def read_patterns_file( filename ) :
     """
-        Opens the patterns XML file and parses it using a `PatternsXMLHandler`.
+        Opens the patterns XML file and parses it using a `DictXMLHandler`.
 
         @param filename The string name of the patterns file.
     """        
@@ -184,14 +209,14 @@ def read_patterns_file( filename ) :
     try :      
         patterns_file = open( filename ) 
         parser = xml.sax.make_parser()
-        parser.setContentHandler( PatternsXMLHandler( treat_pattern ) )
+        parser.setContentHandler( DictXMLHandler( treat_pattern ) )
         try:
             parser.parse( patterns_file )
         except Exception :
             print >> sys.stderr, "You provided an invalid pattern file, "+ \
                                  "please validate it against the DTD " + \
-                                 "(mwetoolkit-patterns.dtd)"         
-            sys.exit( 2 )       
+                                 "(mwetoolkit-dict.dtd)"
+            sys.exit( 2 )
         patterns_file.close()
     except IOError, err:
         print >> sys.stderr, err
@@ -215,10 +240,11 @@ def create_patterns_file( ngram_range ) :
     if result :
         ( shortest_pattern, longest_pattern ) = result
         for i in range( shortest_pattern, longest_pattern + 1 ) :
-            a_pattern = Pattern( [], [] )
+            a_pattern = Entry( 0, [], [] )
             for j in range( i ) :
-                a_pattern.append_word( Word( WILDCARD, WILDCARD, WILDCARD, []) )
+                a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, []) )
             patterns.append( a_pattern )
+            #print a_pattern.to_xml()
     else :
         print >> sys.stderr, "The format of the argument must be <min>:<max>"
         print >> sys.stderr, "<min> must be at least 1 and <max> is at most 10"
@@ -232,7 +258,9 @@ def print_candidates( temp_file, corpus_name ) :
         Prints a XML file (mwetoolkit-candidates.dtd) from a temporary 
         candidates file generated by the treat_sentence callback function. 
         Repeated candidates are not printed several times: instead, each base 
-        form has a joint frequency of the candidate in the corpus.
+        form has a joint frequency of the candidate in the corpus. Since the
+        new version of the "count.py" script, this initial frequency is only
+        printed if you explicitely ask to do it through the -f option.
         
         @param temp_file Temporary file generated during the corpus parsing.
         
@@ -244,17 +272,15 @@ def print_candidates( temp_file, corpus_name ) :
         print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         print "<!DOCTYPE candidates SYSTEM \"dtd/mwetoolkit-candidates.dtd\">"
         print "<candidates>"
-        print "<meta>"
-        print "</meta>"        
+        print "<meta></meta>"
         id_number = 0        
         for base_string in temp_file.keys() :
             (surface_dict, total_freq) = temp_file[ base_string ]
-            base_form = Ngram( [], [] )
-            base_form.from_string( unicode( base_string, 'utf-8' ) )
+            cand = Candidate( id_number, [], [], [], [] )
+            cand.from_string( unicode( base_string, 'utf-8' ) )
             if print_cand_freq :
                freq = Frequency( corpus_name, total_freq )
-               base_form.add_frequency( freq )            
-            cand = Candidate( base_form, id_number, [], [], [] )
+               cand.add_frequency( freq )
             id_number = id_number + 1                        
             for occur_string in surface_dict.keys() :
                 occur_form = Ngram( [], [] )
@@ -308,8 +334,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "freq", "ignore-pos", "surface" ]
-arg = read_options( "p:n:fgs", longopts, treat_options, 1, usage_string )
+longopts = [ "patterns=", "ngram=", "freq", "ignore-pos", "surface", "verbose" ]
+arg = read_options( "p:n:fgsv", longopts, treat_options, 1, usage_string )
 
 try :    
     try :    
@@ -329,10 +355,8 @@ try :
     parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
     parser.parse( input_file )
     input_file.close() 
-        
     corpus_name = re.sub( "\.xml", "", arg[ 0 ] )
-    print_candidates( temp_file, corpus_name )   
-     
+    print_candidates( temp_file, corpus_name )
     try :
         temp_file.close()
         os.remove( temp_name )
@@ -340,8 +364,7 @@ try :
         print >> sys.stderr, err
         print >> sys.stderr, "Error closing temporary file. " + \
               "Please verify __common.py configuration"        
-        sys.exit( 2 )
-            
+        sys.exit( 2 )            
 except IOError, err :  
     print >> sys.stderr, err
     print >> sys.stderr, "Error reading corpus file. Please verify " + \
