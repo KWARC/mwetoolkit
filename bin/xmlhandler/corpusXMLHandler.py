@@ -24,7 +24,7 @@
 """
     This module provides the `CorpusXMLHandler` class. This class is a SAX 
     parser for XML documents that are valid corpora according to 
-    mwttoolkit-corpus.dtd.
+    mwetoolkit-corpus.dtd.
 """
 
 import xml.sax
@@ -39,7 +39,7 @@ from util import strip_xml
 class CorpusXMLHandler( xml.sax.ContentHandler ) :
     """
         SAX parser for corpus file. The XML corpus file must be valid according 
-        to mwttoolkit-corpus.dtd. The class works by calling a callback function 
+        to mwetoolkit-corpus.dtd. The class works by calling a callback function
         that is passed to the constructor when a sentence is read, so you should 
         define and implement the correct callback and then parse the document.
     """
