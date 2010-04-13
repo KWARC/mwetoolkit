@@ -24,7 +24,7 @@
 """
     This module provides the `CandidatesXMLHandler` class. This class is a SAX 
     parser for XML documents that are valid candidate lists according to 
-    mwttoolkit-candidates.dtd.
+    mwetoolkit-candidates.dtd.
 """
 
 import xml.sax
