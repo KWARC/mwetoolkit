@@ -29,7 +29,7 @@
 
 import xml.sax
 
-from classes.__common import WILDCARD
+from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
 from classes.meta import Meta
 from classes.corpus_size import CorpusSize
 from classes.meta_feat import MetaFeat
@@ -57,7 +57,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
     
     def __init__( self,
                   treat_meta=lambda x:None, 
-                  treat_candidate=lambda x:None ) : 
+                  treat_candidate=lambda x:None,
+                  gen_xml="" ) :
         """
             Creates a new candidate handler. The arguments are two callback 
             functions that will treat the XML information.
@@ -83,6 +84,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         self.freq = None   
         self.id_number_counter = 0
         self.meta = None
+        self.gen_xml = gen_xml
+        self.footer = ""
            
 ################################################################################
 
@@ -168,7 +171,9 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             self.meta.add_meta_feat( mf )  
         elif name == "metatpclass" :    
             mtp = MetaTPClass( attrs[ "name" ], attrs[ "type" ] )        
-            self.meta.add_meta_tpclass( mtp )  
+            self.meta.add_meta_tpclass( mtp )
+        elif name == "candidates" and self.gen_xml :
+            print XML_HEADER % { "root" : self.gen_xml }
 
 ################################################################################
 
@@ -196,4 +201,13 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             self.word = None        
         elif name == "meta" :
             # Finished reading the meta header, call callback        
-            self.treat_meta( self.meta )  
+            self.treat_meta( self.meta )
+        elif name == "candidates" and self.gen_xml :
+            # Must only be printed at the end of the main script. Some scripts
+            # only print the result after the XML was 100% read, and this
+            # makes it necessary a temporary buffer for the footer. Not really a
+            # perfect solution but it will do for now
+            self.footer = XML_FOOTER % { "root" : self.gen_xml }
+  
+
+################################################################################

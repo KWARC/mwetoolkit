@@ -29,7 +29,7 @@
 
 import xml.sax
 
-from classes.__common import WILDCARD
+from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
 from classes.word import Word
 from classes.sentence import Sentence
 from util import strip_xml
@@ -46,7 +46,7 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
 
 ######################################################################
     
-    def __init__( self, treat_sentence=lambda x:None ) :
+    def __init__( self, treat_sentence=lambda x:None, gen_xml="" ) :
         """
             Creates a new corpus handler. The argument is a callback function 
             that will treat the XML information.
@@ -60,7 +60,9 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
             parse the XML file.
         """
         self.treat_sentence = treat_sentence       
-        self.s_id = -1   
+        self.s_id = -1
+        self.gen_xml = gen_xml
+        self.footer = ""
             
 ################################################################################
 
@@ -89,6 +91,8 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
                 pos = WILDCARD
             # Add word to the sentence that is currently bein read
             self.sentence.append( Word( surface, lemma, pos, [] ) )
+        elif name == "corpus" and self.gen_xml :
+            print XML_HEADER % { "root" : self.gen_xml }
             
 
 ################################################################################
@@ -102,6 +106,13 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
         """       
         if name == "s" :
             # A complete sentence was read, call the callback function
-            self.treat_sentence( self.sentence )  
+            self.treat_sentence( self.sentence )
+        elif name == "corpus" and self.gen_xml :
+            # Must only be printed at the end of the main script. Some scripts
+            # only print the result after the XML was 100% read, and this
+            # makes it necessary a temporary buffer for the footer. Not really a
+            # perfect solution but it will do for now
+            self.footer = XML_FOOTER % { "root" : self.gen_xml }
+
      
- 
+ ################################################################################

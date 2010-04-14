@@ -32,7 +32,7 @@ import pdb
 
 from classes.word import Word
 from classes.entry import Entry
-from classes.__common import WILDCARD
+from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
 from util import strip_xml
 
 ################################################################################
@@ -48,7 +48,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
 
 ################################################################################
     
-    def __init__( self, treat_entry=lambda x:None ) :
+    def __init__( self, treat_entry=lambda x:None, gen_xml="" ) :
         """
             Creates a new dict file handler. The argument is a
             callback function that will treat the XML information.
@@ -64,6 +64,8 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
         self.treat_entry = treat_entry
         self.entry = None
         self.id_number_counter = 0
+        self.gen_xml = gen_xml
+        self.footer = ""
 
 ################################################################################
 
@@ -120,6 +122,8 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 feat_value = float( feat_value )
             f = Feature( feat_name, feat_value )
             self.candidate.add_feat( f )
+        elif name == "dict" and self.gen_xml :
+            print XML_HEADER % { "root" : self.gen_xml }
             
 ################################################################################
 
@@ -132,9 +136,12 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
         """      
         if name == "entry" :
             self.treat_entry( self.entry )
+        elif name == "dict" and self.gen_xml :
+                # Must only be printed at the end of the main script. Some scripts
+                # only print the result after the XML was 100% read, and this
+                # makes it necessary a temporary buffer for the footer. Not really a
+                # perfect solution but it will do for now
+                self.footer = XML_FOOTER % { "root" : self.gen_xml }
+
      
 ################################################################################
-
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()

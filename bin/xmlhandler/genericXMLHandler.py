@@ -53,7 +53,8 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
 
     def __init__( self,
                   treat_meta=lambda x:None,
-                  treat_entity=lambda x:None ) :
+                  treat_entity=lambda x:None,
+                  gen_xml=False ) :
         """
             Creates a new generic file handler. The argument is a
             callback function that will treat the XML information.
@@ -74,6 +75,8 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
         self.treat_entity = treat_entity
         self.entry = None
         self.handler = None
+        self.gen_xml = gen_xml
+        self.footer = ""
 
 ################################################################################
 
@@ -89,15 +92,21 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
 
             @param attrs Dictionary containing the attributes of this element.
         """
+        if self.gen_xml :
+            xml_type = name
+        else :
+            xml_type = ""
         if name == "dict" :
-            self.handler = DictXMLHandler( treat_entry=self.treat_entity )
+            self.handler = DictXMLHandler( treat_entry=self.treat_entity,
+                                           gen_xml=xml_type )
         elif name == "corpus" :
-            self.handler = CorpusXMLHandler( treat_sentence=self.treat_entity )
+            self.handler = CorpusXMLHandler( treat_sentence=self.treat_entity,
+                                             gen_xml=xml_type )
         elif name == "candidates" :
             self.handler = CandidatesXMLHandler( treat_candidate=self.treat_entity,
-                                                 treat_meta = self.treat_meta )
-        else :
-            self.handler.startElement(name, attrs)
+                                                 treat_meta = self.treat_meta,
+                                                 gen_xml=xml_type )        
+        self.handler.startElement(name, attrs)
 
 ################################################################################
 
@@ -109,3 +118,7 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             @param name The name of the closing element.
         """
         self.handler.endElement(name)
+        if self.handler.footer :
+            self.footer = self.handler.footer
+
+################################################################################
