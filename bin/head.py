@@ -118,20 +118,23 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "verbose", "number=" ]
 arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
 try :
-    print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">"
-    print "<corpus>"
     parser = xml.sax.make_parser()
-    parser.setContentHandler( GenericXMLHandler( treat_meta=treat_meta,
-                                                 treat_entity=treat_entity ) )
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_entity,
+                                 gen_xml=True )
+    parser.setContentHandler( handler )
     if len( arg ) == 0 :
         parser.parse( sys.stdin )
+        print handler.footer
     else :
         for a in arg :
             input_file = open( a )
             parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
             input_file.close()
-    print "</corpus>"
+            entity_counter = 0
+        print footer
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :

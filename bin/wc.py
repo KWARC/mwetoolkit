@@ -77,22 +77,40 @@ def treat_entity( entity ) :
         char_counter += len( word )
     entity_counter += 1
 
+################################################################################
+def print_counters( filename ) :
+        """
+            Prints the entity, word and character counters on stderr. The
+            filename is only used to print the stats. All counters are reset
+            after a call to this function.
+        """
+        global entity_counter, word_counter, char_counter
+        print >> sys.stderr, str(entity_counter) + " entities in "   + filename
+        print >> sys.stderr, str(word_counter)   + " words in "      + filename
+        print >> sys.stderr, str(char_counter)   + " characters in " + filename
+        entity_counter = 0
+        word_counter = 0
+        char_counter = 0
+
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "v", ["verbose"], treat_options_simplest, 1, usage_string )
+arg = read_options( "v", ["verbose"], treat_options_simplest, -1, usage_string )
 try :    
-    input_file = open( arg[ 0 ] )        
-    parser = xml.sax.make_parser()
-    
-    handler = GenericXMLHandler( treat_entity=treat_entity )
-    
+    parser = xml.sax.make_parser()    
+    handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )   
     parser.setContentHandler( handler )
-    parser.parse( input_file )
-    input_file.close()
-    print >> sys.stderr, str( entity_counter ) + " entities in "   + arg[ 0 ]
-    print >> sys.stderr, str( word_counter )   + " words in "      + arg[ 0 ]
-    print >> sys.stderr, str( char_counter )   + " characters in " + arg[ 0 ]    
+
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+        print_counters( "stdin" )
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            input_file.close()
+            print_counters( a )    
+    
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :
