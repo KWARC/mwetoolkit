@@ -119,7 +119,7 @@ longopts = [ "verbose", "number=" ]
 arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
 try :
     print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    print "<!DOCTYPE corpus SYSTEM \"dtd/mwttoolkit-corpus.dtd\">"
+    print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">"
     print "<corpus>"
     parser = xml.sax.make_parser()
     parser.setContentHandler( GenericXMLHandler( treat_meta=treat_meta,
