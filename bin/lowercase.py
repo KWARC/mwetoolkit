@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
    This script homogenises the case of a corpus. Two possible lowercasing 
    algorithms are proposed: simple and complex. The former lowercases 
@@ -67,7 +89,7 @@ def treat_sentence_simple( sentence ) :
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )            
 
-    for w in sentence.word_list :
+    for w in sentence :
         w.surface = w.surface.lower()
     print sentence.to_xml().encode( "utf-8" )
     sentence_counter += 1
@@ -85,8 +107,8 @@ def treat_sentence_complex( sentence ) :
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )            
     
-    for w_i in range(len(sentence.word_list)) :
-        w = sentence.word_list[ w_i ]
+    for w_i in range(len(sentence)) :
+        w = sentence[ w_i ]
         case_class = get_case_class( w.surface )          
         # Does nothing if it's aready lowercase or if it's not alphabetic
         if case_class != "lowercase" and case_class != "?" :
@@ -253,7 +275,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global algorithm
-    a_or_d = []
     for ( o, a ) in opts:
         if o in ("-a", "--algorithm"):
             algorithm = a.lower()
@@ -276,14 +297,15 @@ arg = read_options( "a:v", longopts, treat_options, 1, usage_string )
 try :    
     print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
     print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">"
-    print "<corpus>"         
+    print "<corpus>"
     
+    parser = xml.sax.make_parser()
     if algorithm == "complex" :
         verbose( "Pass 1: Reading vocabulary from corpus... please wait" )
         input_file = open( arg[ 0 ] )    
-        parser = xml.sax.make_parser()
         parser.setContentHandler( CorpusXMLHandler( build_vocab ) ) 
         parser.parse( input_file )
+        input_file.close()
     # Second pass
     verbose( "Pass 2: Lowercasing the words in the corpus" )
     input_file = open( arg[ 0 ] )    
@@ -292,7 +314,6 @@ try :
     elif algorithm == "simple" :    
         parser.setContentHandler( CorpusXMLHandler( treat_sentence_simple ) )      
     parser.parse( input_file )
-
     input_file.close() 
     print "</corpus>"    
 except IOError, err :  
