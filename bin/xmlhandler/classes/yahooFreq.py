@@ -27,22 +27,15 @@
     up for the number of Web pages that contain a certain word or ngram.
 """
 
-import sys
-import cPickle # Cache is pickled to/from a file
-from datetime import date
+import pdb
+import urllib
 
-from __common import YAHOO_CACHE_FILENAME, MAX_CACHE_DAYS, YAHOO_APPID, \
-                       LANG, YAHOO_WS_PATH
-
-# Appends the path to Yahoo WS service to the "import" path
-sys.path.append( YAHOO_WS_PATH )
-
-# Now that I know where I can find Yahoo's API, I can import it :-)
-from yahoo.search import factory
+from webFreq import WebFreq
+from __common import YAHOO_CACHE_FILENAME, YAHOO_APPID
 
 ################################################################################         
 
-class YahooFreq :
+class YahooFreq( WebFreq ):
     """
         The `YahooFreq` class is an abstraction that allows you to call Yahoo
         Web Service search to estimate the frequency of a certain search term
@@ -71,101 +64,28 @@ class YahooFreq :
             
             @return A new instance of the `YahooFreq` service abstraction.
         """
-        # self.search will be instanciated (if needed) to contain the access to
-        # yahoo web services.
-        self.search = None
         #### CACHE MECHANISM ####
-        if cache_filename :
-            self.CACHE_FILENAME = cache_filename
-        else :
-            self.CACHE_FILENAME = YAHOO_CACHE_FILENAME
-        self.MAX_DAYS = MAX_CACHE_DAYS 
-        self.today = date.today()
-        try :
-            cache_file = open( self.CACHE_FILENAME, "r" )
-            self.cache = cPickle.load( cache_file )
-            cache_file.close()
-        except IOError :            
-            cache_file = open( self.CACHE_FILENAME, "w" )
-            cache_file.close()
-            self.cache = {}
+        if not cache_filename :
+            cache_filename = YAHOO_CACHE_FILENAME
+        url = ('http://search.yahooapis.com/WebSearchService/V1/webSearch?' + \
+                    urllib.urlencode( { "results": "0", \
+                                        "appid": YAHOO_APPID, \
+                                        "query": "QUERYPLACEHOLDER", \
+                                        "output": "json",
+                                        "language" : "LANGPLACEHOLDER",
+                                        "type" : "phrase" } ) )
+        super( YahooFreq, self ).__init__( cache_filename=cache_filename,
+                                           url=url, 
+                                           post_data={},
+                                           treat_result=self.treat_result )
             
 ################################################################################           
 
-    def search_frequency( self, in_term ) : 
+    def treat_result( self, results ) :
         """
-            Searches for the number of Web pages in which a given `in_term`
-            occurs, according to Yahoo's search index. The search is case 
-            insensitive and language-dependent, please remind to define the
-            correct `LANG` parameter in the `config.py` file. If the frequency
-            of the `in_term` is still in cache and the cache entry is not
-            expired, no Web query is performed. Since each query can take up to
-            3 or 4 seconds, depending on your Internet connection, cache is
-            very important. Moreover, Yahoo limits its free Web Service to
-            5,000 queries per day per IP address, so a very big list of 
-            candidates could take a lot more time to be processed if no cache 
-            was available. Please remind to define the correct `MAX_CACHE_DAYS` 
-            parameter in the `config.py` file, according to the number of 
-            queries you would like to perform.
             
-            @param in_term The string corresponding to the searched word or
-            ngram. If a sequence of words is searched, they should be separated 
-            by spaces as in a Web search engine query. The query is also 
-            performed as an exact term query, i.e. with quote marks around the
-            terms. You can use the `WILDCARD` to replace a whole word, since
-            Yahoo provides wildcarded query support.
-            
-            @return An integer corresponding to an approximation of the number
-            of Web pages that contain the serached `in_term`. This frequency
-            approximation can estimate the number of times the term occurs if 
-            you consider the Web as a corpus.
-        """   
-        term = in_term.lower().strip()
-        # Look into the cache        
-        try :
-            ( freq, time ) = self.cache[ term ]
-            dayspassed = self.today - time
-            if dayspassed.days >= self.MAX_DAYS and self.MAX_DAYS >= 0 :                
-                raise KeyError # TTL expired, must search again :-(
-            else :
-                return freq # TTL not expired :-)
-        except KeyError :  
-        # Only instanciate self.search when needed. That way, it also works when
-        # everything is in cache and you have no Internet.
-            if not self.search :            
-                self.__start_search() 
-            search_term = term
-            if isinstance( search_term, unicode ) :
-                search_term = search_term.encode( 'utf-8' )
-            self.search.query = "\"" + search_term + "\""           
-            try:
-                results = self.search.parse_results()
-            except Exception, err:
-                print >> sys.stderr, "Got an error ->", err 
-                print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"               
-                sys.exit( -1 )                
-            self.cache[ term ] = ( results.total_results_available, self.today )
-            return results.total_results_available
-            
-################################################################################                             
-
-    def __start_search( self ) :
-        """
-            Internal function that starts the Yahoo Web Service class. This 
-            class is a part of the python API provided by Yahoo. This function
-            also sets initial parameters such as application ID and query 
-            language. The result is stored into an instance variable and can
-            be subsequently used to query Yahoo's index.
-        """
-        try :
-            self.search = factory.create_search( "Web", YAHOO_APPID )        
-        except ValueError:
-            print >> sys.stderr, "AppID can only contain a-zA-Z" + \
-                                 "0-9 _()[]*+-=,.:\@, 8-40 characters"
-            sys.exit( -1 )
-        self.search.language = LANG
-        self.search.results = 0
-        self.search.start = 1   
+        """ 
+        return int( results[ "ResultSet" ][ "totalResultsAvailable" ] )
 
 ################################################################################                   
     
@@ -180,23 +100,5 @@ class YahooFreq :
             pages in the World Wide Web.
         """
         return 50000000000 # AROUND 50 BILLION PAGES 29/10/2009
-             
-################################################################################                   
-        
-    def __del__( self ) :
-        """
-            Class destructor, flushes the cache content to a file before closing
-            the connection. Thus, the cache entries will be available the next 
-            time Yahoo is called and, if they are not expired, will avoid 
-            repeated queries.
-        """
-        # Flush cache content to file
-        cache_file = open( self.CACHE_FILENAME, "w" )
-        cPickle.dump( self.cache, cache_file )
-        cache_file.close()
-        
-################################################################################                
-            
-if __name__ == "__main__" :
-    import doctest
-    doctest.testmod()       
+
+################################################################################

@@ -30,7 +30,7 @@
 # file.
 import config
 
-LANG = config.LANG
+DEFAULT_LANG = config.LANG
 
 MAX_CACHE_DAYS = config.MAX_CACHE_DAYS
 
@@ -38,14 +38,10 @@ WILDCARD = config.WILDCARD
 
 YAHOO_APPID = config.YAHOO_APPID
 
-YAHOO_WS_PATH = config.YAHOO_WS_PATH
-
-MAX_MEM = config.MAX_MEM
-
 # Name of the cache file where mwetoolkit keeps recent Web queries to speed up
 # the process.
-YAHOO_CACHE_FILENAME = LANG + "_yahoo_cache.dat"
-GOOGLE_CACHE_FILENAME = LANG + "_google_cache.dat"
+YAHOO_CACHE_FILENAME = "yahoo_cache.dat"
+GOOGLE_CACHE_FILENAME = "google_cache.dat"
 
 # Should not be a token of the corpus neither a POS tag! The probability is 
 # minimal but it is nevertheless important to warn you about it!
