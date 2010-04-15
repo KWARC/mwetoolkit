@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry entryid="0">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="1">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="2">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="3">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="4">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="5">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="6">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="7">
+    <ngram><w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="8">
+    <ngram><w pos="A" /> <w pos="CC" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="9">
+    <ngram><w pos="A" /> <w pos="CC" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="10">
+    <ngram><w pos="A" /> <w pos="CC" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="11">
+    <ngram><w pos="A" /> <w pos="CC" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="12">
+    <ngram><w pos="A" /> <w pos="CC" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="13">
+    <ngram><w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="14">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="15">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="16">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="17">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="18">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="19">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="20">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="21">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="22">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="23">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="NUM" /> </ngram>
+</entry>
+<entry entryid="24">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="NUM" /> </ngram>
+</entry>
+<entry entryid="25">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="26">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="27">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="28">
+    <ngram><w pos="A" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="29">
+    <ngram><w pos="A" /> <w pos="NUM" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="30">
+    <ngram><w pos="A" /> <w pos="V" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="31">
+    <ngram><w pos="A" /> <w pos="V" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="32">
+    <ngram><w pos="FW" /> <w pos="FW" /> </ngram>
+</entry>
+<entry entryid="33">
+    <ngram><w pos="FW" /> <w pos="FW" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="34">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="35">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="36">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="37">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="38">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="39">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="40">
+    <ngram><w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="NUM" /> </ngram>
+</entry>
+<entry entryid="41">
+    <ngram><w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="42">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="43">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="44">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="45">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="46">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="A" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="47">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="48">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="49">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="50">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> <w pos="NUM" /> </ngram>
+</entry>
+<entry entryid="51">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="52">
+    <ngram><w pos="N" /> <w pos="N" /> <w pos="NUM" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="53">
+    <ngram><w pos="N" /> <w pos="NUM" /> </ngram>
+</entry>
+<entry entryid="54">
+    <ngram><w pos="N" /> <w pos="NUM" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="55">
+    <ngram><w pos="N" /> <w pos="NUM" /> <w pos="N" /> <w pos="N" /> <w pos="N" /> </ngram>
+</entry>
+<entry entryid="56">
+    <ngram><w pos="N" /> <w pos="NUM" /> <w pos="P" /> <w pos="NUM" /> </ngram>
+</entry>
+</dict>

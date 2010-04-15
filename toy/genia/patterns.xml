@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE corpus SYSTEM "mwttoolkit-patterns.dtd">
-<patterns>
-<pattern><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="CC"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="CC"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="NUM"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="NUM"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="V"/><w pos="N"/></pattern>
-<pattern><w pos="A"/><w pos="V"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="FW"/><w pos="FW"/></pattern>
-<pattern><w pos="FW"/><w pos="FW"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="A"/><w pos="N"/><w pos="NUM"/></pattern>
-<pattern><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="NUM"/></pattern>
-<pattern><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/><w pos="N"/></pattern>
-<pattern><w pos="N"/><w pos="NUM"/><w pos="P"/><w pos="NUM"/></pattern>
-</patterns>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="CC"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="CC"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="CC"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="NUM"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="NUM"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="V"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="A"/><w pos="V"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="FW"/><w pos="FW"/></ngram></entry>
+<entry><ngram><w pos="FW"/><w pos="FW"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="A"/><w pos="N"/><w pos="NUM"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/><w pos="A"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="N"/><w pos="N"/><w pos="NUM"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="NUM"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="NUM"/><w pos="N"/><w pos="N"/><w pos="N"/></ngram></entry>
+<entry><ngram><w pos="N"/><w pos="NUM"/><w pos="P"/><w pos="NUM"/></ngram></entry>
+</dict>

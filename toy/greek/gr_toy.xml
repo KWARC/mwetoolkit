@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE corpus SYSTEM "mwttoolkit-corpus.dtd">
+<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
 <corpus>
 <s s_id="0">
 <w surface="Επαvάληψη" lemma="Επαvάληψη" pos="N" /> 

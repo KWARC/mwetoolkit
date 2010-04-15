@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry entryid="1984">
+    <ngram><w surface="viral" /> <w surface="transcriptional" /> <w surface="transactivator" /> </ngram>
+</entry>
+<entry entryid="1985">
+    <ngram><w surface="virally" /> <w surface="transformed" /> <w surface="cell" /> </ngram>
+</entry>
+<entry entryid="1986">
+    <ngram><w surface="virus" /> <w surface="production" /> </ngram>
+</entry>
+<entry entryid="1987">
+    <ngram><w surface="virus" /> <w surface="transcription" /> </ngram>
+</entry>
+<entry entryid="1988">
+    <ngram><w surface="virus" /> <w surface="transformed" /> <w surface="cell" /> </ngram>
+</entry>
+<entry entryid="1989">
+    <ngram><w surface="vitamin" /> <w surface="d" /> <w surface="receptor" /> </ngram>
+</entry>
+<entry entryid="1990">
+    <ngram><w surface="vitamin" /> <w surface="d" /> <w surface="receptor" /> <w surface="gene" /> </ngram>
+</entry>
+<entry entryid="1991">
+    <ngram><w surface="vitamin" /> <w surface="d" /> <w surface="receptor" /> <w surface="messenger" /> <w surface="ribonucleic" /> <w surface="acid" /> </ngram>
+</entry>
+<entry entryid="1992">
+    <ngram><w surface="vitamin" /> <w surface="d3" /> </ngram>
+</entry>
+<entry entryid="1993">
+    <ngram><w surface="vitamin" /> <w surface="d3" /> <w surface="mediated" /> </ngram>
+</entry>
+<entry entryid="1994">
+    <ngram><w surface="vitamin" /> <w surface="d3" /> <w surface="mediated" /> <w surface="repression" /> </ngram>
+</entry>
+<entry entryid="1995">
+    <ngram><w surface="vitamin" /> <w surface="d3" /> <w surface="receptor" /> </ngram>
+</entry>
+<entry entryid="1996">
+    <ngram><w surface="vitamin" /> <w surface="e" /> </ngram>
+</entry>
+<entry entryid="1997">
+    <ngram><w surface="vitamin" /> <w surface="e" /> <w surface="therapy" /> </ngram>
+</entry>
+<entry entryid="1998">
+    <ngram><w surface="western" /> <w surface="blot" /> <w surface="analysis" /> </ngram>
+</entry>
+<entry entryid="1999">
+    <ngram><w surface="western" /> <w surface="blotting" /> </ngram>
+</entry>
+<entry entryid="2000">
+    <ngram><w surface="whole" /> <w surface="cell" /> <w surface="binding" /> <w surface="assay" /> </ngram>
+</entry>
+<entry entryid="2001">
+    <ngram><w surface="x" /> <w surface="linked" /> <w surface="severe" /> <w surface="combined" /> <w surface="immunodeficiency" /> </ngram>
+</entry>
+<entry entryid="2002">
+    <ngram><w surface="xscid" /> <w surface="like" /> <w surface="phenotype" /> </ngram>
+</entry>
+<entry entryid="2003">
+    <ngram><w surface="yeast" /> <w surface="transactivator" /> <w surface="gal4" /> </ngram>
+</entry>
+<entry entryid="2004">
+    <ngram><w surface="yt" /> <w surface="cell" /> <w surface="line" /> </ngram>
+</entry>
+<entry entryid="2005">
+    <ngram><w surface="zinc" /> <w surface="finger" /> </ngram>
+</entry>
+<entry entryid="2006">
+    <ngram><w surface="zinc" /> <w surface="finger" /> <w surface="protein" /> </ngram>
+</entry>
+<entry entryid="2007">
+    <ngram><w surface="zinc" /> <w surface="finger" /> <w surface="protein" /> <w surface="binding" /> <w surface="region" /> </ngram>
+</entry>
+<entry entryid="2008">
+    <ngram><w surface="zip" /> <w surface="site" /> </ngram>
+</entry>
+</dict>

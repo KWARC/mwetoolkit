@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE patterns SYSTEM "mwttoolkit-patterns.dtd">
-<patterns>
-<pattern><w pos="AJ"/><w pos="N"/></pattern> <!-- φορητός υπολογιστής-->
-<pattern><w pos="N"/><w pos="AJ"/></pattern> <!-- ηλίου φαεινότερο, χρόνια πολλά-->
-<pattern><w pos="N"/><w pos="N"/></pattern> <!-- κράτος μέλος, υπουργείο εσωτερικών-->
-<pattern><w pos="N"/><w pos="DT"/><w pos="N"/></pattern> <!-- φαινόμενο του θερμοκηπίου-->
-<pattern><w pos="N"/><w pos="AJ"/><w pos="N"/></pattern> <!-- τεχνολογία υψηλής ευκρίνειας-->
-<pattern><w pos="N"/><w pos="P"/><w pos="N"/></pattern> <!-- φόνος εκ προμελέτης-->
-<pattern><w pos="V"/><w pos="N"/></pattern> <!-- βρέχει καρέκλες -->
-<pattern><w pos="V"/><w pos="DT"/><w pos="N"/></pattern> <!-- τρέχει η βρύση -->
-<pattern><w pos="V"/><w pos="P"/><w pos="N"/></pattern> <!-- θέτω σε κίνδυνο -->
-<pattern><w pos="P"/><w pos="N"/></pattern> <!-- επί τάπητος -->
-<pattern><w pos="P"/><w pos="AJ"/></pattern> <!-- εν ολίγοις -->
-<pattern><w pos="P"/><w pos="V"/></pattern> <!-- πέρα βρέχει -->
-<pattern><w pos="P"/><w pos="DT"/><w pos="AJ"/></pattern> <!-- με το καλό -->
-<pattern><w pos="P"/><w pos="N"/><w pos="N"/></pattern> <!-- κατά φαντασίαν ασθενής -->
-<pattern><w pos="P"/><w pos="AJ"/><w pos="N"/></pattern> <!-- εν πάση περιπτώσει -->
-<pattern><w pos="ADV"/><w pos="V"/></pattern> <!-- καλώς όρισες -->
-<!-- <pattern><w pos="ADV"/><w pos="CJ"/><w pos="ADV"/></pattern> καλώς ή κακώς -->
-<!-- <pattern><w pos="CJ"/><w pos="DT"/><w pos="N"/></pattern> και του χρόνου -->
-<!-- <pattern><w pos="P"/><w pos="N"/><w pos="CJ"/><w pos="P"/><w pos="N"/></pattern>  με νύχια και με δόντια -->
-</patterns>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry><ngram><w pos="AJ"/><w pos="N"/></ngram></entry> <!-- φορητός υπολογιστής-->
+<entry><ngram><w pos="N"/><w pos="AJ"/></ngram></entry> <!-- ηλίου φαεινότερο, χρόνια πολλά-->
+<entry><ngram><w pos="N"/><w pos="N"/></ngram></entry> <!-- κράτος μέλος, υπουργείο εσωτερικών-->
+<entry><ngram><w pos="N"/><w pos="DT"/><w pos="N"/></ngram></entry> <!-- φαινόμενο του θερμοκηπίου-->
+<entry><ngram><w pos="N"/><w pos="AJ"/><w pos="N"/></ngram></entry> <!-- τεχνολογία υψηλής ευκρίνειας-->
+<entry><ngram><w pos="N"/><w pos="P"/><w pos="N"/></ngram></entry> <!-- φόνος εκ προμελέτης-->
+<entry><ngram><w pos="V"/><w pos="N"/></ngram></entry> <!-- βρέχει καρέκλες -->
+<entry><ngram><w pos="V"/><w pos="DT"/><w pos="N"/></ngram></entry> <!-- τρέχει η βρύση -->
+<entry><ngram><w pos="V"/><w pos="P"/><w pos="N"/></ngram></entry> <!-- θέτω σε κίνδυνο -->
+<entry><ngram><w pos="P"/><w pos="N"/></ngram></entry> <!-- επί τάπητος -->
+<entry><ngram><w pos="P"/><w pos="AJ"/></ngram></entry> <!-- εν ολίγοις -->
+<entry><ngram><w pos="P"/><w pos="V"/></ngram></entry> <!-- πέρα βρέχει -->
+<entry><ngram><w pos="P"/><w pos="DT"/><w pos="AJ"/></ngram></entry> <!-- με το καλό -->
+<entry><ngram><w pos="P"/><w pos="N"/><w pos="N"/></ngram></entry> <!-- κατά φαντασίαν ασθενής -->
+<entry><ngram><w pos="P"/><w pos="AJ"/><w pos="N"/></ngram></entry> <!-- εν πάση περιπτώσει -->
+<entry><ngram><w pos="ADV"/><w pos="V"/></ngram></entry> <!-- καλώς όρισες -->
+<!-- <entry><ngram><w pos="ADV"/><w pos="CJ"/><w pos="ADV"/></ngram></entry> καλώς ή κακώς -->
+<!-- <entry><ngram><w pos="CJ"/><w pos="DT"/><w pos="N"/></ngram></entry> και του χρόνου -->
+<!-- <entry><ngram><w pos="P"/><w pos="N"/><w pos="CJ"/><w pos="P"/><w pos="N"/></ngram></entry>  με νύχια και με δόντια -->
+</dict>
