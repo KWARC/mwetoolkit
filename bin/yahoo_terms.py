@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """   
 """
 
@@ -88,7 +110,7 @@ except IOError, err :
     print err
     print "Error reading corpus file. Please verify __common.py configuration"        
     sys.exit( 2 )      
-#except Exception, err :
-#    print err
-#    print "You probably provided an invalid corpus file, please " + \
-#          "validate it against the DTD (mwttoolkit-corpus.dtd)"
+except Exception, err :
+    print err
+    print "You probably provided an invalid corpus file, please " + \
+          "validate it against the DTD (mwttoolkit-corpus.dtd)"
