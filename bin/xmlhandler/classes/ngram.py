@@ -5,7 +5,7 @@
 #
 # Copyright 2010 Carlos Ramisch
 #
-# genericDTDHandler.py is part of mwetoolkit
+# ngram.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

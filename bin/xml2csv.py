@@ -5,7 +5,7 @@
 #
 # Copyright 2010 Carlos Ramisch
 #
-# genericDTDHandler.py is part of mwetoolkit
+# xml2csv.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 
 
 """
-    This script converts a candidates file in XML (mwttoolkit-candidates.dtd) 
+    This script converts a candidates file in XML (mwetoolkit-candidates.dtd)
     into a corresponding representation in the file format 
     
     For more information, call the script with no parameter and read the
@@ -46,7 +46,7 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
+    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """     
             
 ################################################################################     
@@ -114,4 +114,4 @@ except Exception, err :
     print >> sys.stderr, err
     print >> sys.stderr, "You probably provided an invalid candidates file," + \
                          " please validate it against the DTD " + \
-                         "(mwttoolkit-candidates.dtd)"
+                         "(dtd/mwetoolkit-candidates.dtd)"
