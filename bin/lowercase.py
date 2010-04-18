@@ -37,7 +37,7 @@ import sys
 import xml.sax
 
 import install
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
+from xmlhandler.genericXMLHandler import GenericXMLHandler
 from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################
@@ -45,7 +45,7 @@ from util import usage, read_options, treat_options_simplest, verbose
 
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <corpus.xml>
+python %(program)s [OPTIONS] <file.xml>
 
     OPTIONS may be:    
     
@@ -66,7 +66,7 @@ python %(program)s [OPTIONS] <corpus.xml>
     processing. Therefore, this algorithm operates on surface forms. Any lemma
     information will be ignored during lowercasing.
 
-    The <corpus.xml> file must be valid XML (mwetoolkit-corpus.dtd).
+    The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """
 algorithm = "simple"
 vocab = {}
@@ -75,6 +75,17 @@ sentence_counter = 0
 # at the beginning of a sentence is systematically lowercased.
 START_THRESHOLD=0.8
 
+################################################################################
+
+def treat_meta( meta ) :
+    """
+        Simply prints the meta header to the output without modifications.
+
+        @param meta The `Meta` header that is being read from the XML file.
+    """
+
+    print meta.to_xml().encode( 'utf-8' )
+    
 ################################################################################
 
 def treat_sentence_simple( sentence ) :
@@ -87,7 +98,7 @@ def treat_sentence_simple( sentence ) :
     global sentence_counter
     
     if sentence_counter % 100 == 0 :
-        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )            
+        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
 
     for w in sentence :
         w.surface = w.surface.lower()
@@ -99,13 +110,13 @@ def treat_sentence_simple( sentence ) :
 def treat_sentence_complex( sentence ) :
     """
         For each sentence in the corpus, lowercases its words based on the most
-    frequent form in the vocabulary.
+        frequent form in the vocabulary.
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """    
     global vocab, sentence_counter, START_THRESHOLD    
     if sentence_counter % 100 == 0 :
-        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )            
+        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
     
     for w_i in range(len(sentence)) :
         w = sentence[ w_i ]
@@ -146,10 +157,12 @@ def build_vocab( sentence ) :
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """
-    global vocab
-    for w_i in range(len(sentence.word_list)) :
-        key = sentence.word_list[ w_i ].surface        
-        low_key = sentence.word_list[ w_i ].surface.lower()
+    global vocab, sentence_counter
+    if sentence_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
+    for w_i in range(len(sentence)) :
+        key = sentence[ w_i ].surface        
+        low_key = sentence[ w_i ].surface.lower()
         forms = vocab.get( low_key, {} )
         form_entry = forms.get( key, [ 0, 0 ] )
         # a form entry has two counters, one for the occurrences and one for
@@ -161,6 +174,7 @@ def build_vocab( sentence ) :
             form_entry[ 1 ] = form_entry[ 1 ] + 1 
         forms[ key ] = form_entry
         vocab[ low_key ] = forms
+    sentence_counter += 1
     
 ################################################################################  
 
@@ -295,32 +309,34 @@ longopts = [ "algorithm=", "verbose" ]
 arg = read_options( "a:v", longopts, treat_options, 1, usage_string )
 
 try :    
-    print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">"
-    print "<corpus>"
-    
     parser = xml.sax.make_parser()
     if algorithm == "complex" :
-        verbose( "Pass 1: Reading vocabulary from corpus... please wait" )
-        input_file = open( arg[ 0 ] )    
-        parser.setContentHandler( CorpusXMLHandler( build_vocab ) ) 
+        verbose( "Pass 1: Reading vocabulary from file... please wait" )
+        input_file = open( arg[ 0 ] )
+        parser.setContentHandler( GenericXMLHandler( treat_entity=build_vocab ))
         parser.parse( input_file )
         input_file.close()
     # Second pass
-    verbose( "Pass 2: Lowercasing the words in the corpus" )
+    sentence_counter = 0
+    verbose( "Pass 2: Lowercasing the words in the XML file" )
     input_file = open( arg[ 0 ] )    
     if algorithm == "complex" :
-        parser.setContentHandler( CorpusXMLHandler( treat_sentence_complex ) ) 
+        handler = GenericXMLHandler( treat_meta=treat_meta,
+                                     treat_entity=treat_sentence_complex,
+                                     gen_XML=True )
     elif algorithm == "simple" :    
-        parser.setContentHandler( CorpusXMLHandler( treat_sentence_simple ) )      
+        handler = GenericXMLHandler( treat_meta=treat_meta,
+                                     treat_entity=treat_sentence_simple,
+                                     gen_XML=True )
+    parser.setContentHandler( handler )
     parser.parse( input_file )
+    print handler.footer
     input_file.close() 
-    print "</corpus>"    
+ 
 except IOError, err :  
-    print err
-    print "Error reading corpus file. Please verify __common.py configuration"        
-    sys.exit( 2 )      
+    print >> sys.stderr, err
 except Exception, err :
-    print err
-    print "You probably provided an invalid corpus file, please " + \
-          "validate it against the DTD (mwetoolkit-corpus.dtd)"
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid XML file," +\
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-*.dtd)"
