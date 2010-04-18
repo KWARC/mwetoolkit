@@ -30,7 +30,7 @@
 # file.
 import config
 
-DEFAULT_LANG = config.LANG
+DEFAULT_LANG = config.DEFAULT_LANG
 
 MAX_CACHE_DAYS = config.MAX_CACHE_DAYS
 
