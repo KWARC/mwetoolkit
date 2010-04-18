@@ -101,7 +101,8 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 pos = strip_xml( attrs[ "pos" ] )
             else :
                 pos = WILDCARD
-            self.entry.append( Word( surface, lemma, pos, [] ) )
+            self.word = Word( surface, lemma, pos, [] )
+            self.entry.append( self.word )
         elif name == "freq" :
             self.freq = Frequency( strip_xml( attrs[ "name" ] ),
                                    int( strip_xml( attrs[ "value" ] ) ) )
@@ -111,7 +112,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             if self.word :
                 self.word.add_frequency( self.freq )
             else :
-                self.ngram.add_frequency( self.freq )
+                self.entry.add_frequency( self.freq )
         elif name == "feat" :
             feat_name = strip_xml( attrs[ "name" ] )
             feat_value = strip_xml( attrs[ "value" ] )
@@ -121,7 +122,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             elif feat_type == "real" :
                 feat_value = float( feat_value )
             f = Feature( feat_name, feat_value )
-            self.candidate.add_feat( f )
+            self.entry.add_feat( f )
         elif name == "dict" and self.gen_xml :
             print XML_HEADER % { "root" : self.gen_xml }
             
@@ -136,6 +137,9 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
         """      
         if name == "entry" :
             self.treat_entry( self.entry )
+            self.entry = None
+        elif name == "w" :
+            self.word = None
         elif name == "dict" and self.gen_xml :
                 # Must only be printed at the end of the main script. Some scripts
                 # only print the result after the XML was 100% read, and this
