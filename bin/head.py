@@ -38,16 +38,16 @@ import xml.sax
 import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage:
 
-python %(program)s OPTIONS <file.xml>
+python %(program)s OPTIONS <files.xml>
 
-    OPTIONS may be:
+OPTIONS may be:
 
 -n OR --number
     Number of entities that you want to print out. Default value is 10.
@@ -55,7 +55,7 @@ python %(program)s OPTIONS <file.xml>
 -v OR --verbose
     Print messages that explain what is happening.
 
-    The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
 limit = 10
 entity_counter = 0
@@ -81,8 +81,10 @@ def treat_entity( entity ) :
         @param entity A subclass of `Ngram` that is being read from the XML.
     """
     global entity_counter, limit
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     if entity_counter < limit :
-        print entity.to_xml()
+        print entity.to_xml().encode('utf-8')
     entity_counter += 1
 
 ################################################################################

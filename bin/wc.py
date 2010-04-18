@@ -44,15 +44,15 @@ from util import read_options, treat_options_simplest, verbose
      
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <file.xml>
+python %(program)s OPTIONS <files.xml>
 
-    OPTIONS may be:
+OPTIONS may be:
 
 
 -v OR --verbose
     Print messages that explain what is happening.
 
-    The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """    
 char_counter = 0
 word_counter = 0
