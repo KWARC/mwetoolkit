@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script adds two new features for each candidate in the list. These two
     features correspond to the POS pattern and to the number of words in the
@@ -27,7 +49,7 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
+    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 """     
 all_patterns = {}
      
@@ -87,10 +109,6 @@ def treat_candidate( candidate ) :
 arg = read_options( "", [], treat_options_simplest, 1, usage_string ) 
 
 try :    
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
-<candidates>
-""" 
     # Done in 2 passes, one to define the type of the feature and another to
     # print the feature values for each candidate
     input_file = open( arg[ 0 ] )        
@@ -102,10 +120,13 @@ try :
     input_file.close()     
     input_file = open( sys.argv[ 1 ] )            
     # Second pass to print the metafeat header with all possible pattern values
-    parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates")
+    parser.setContentHandler( handler )
     parser.parse( input_file )
     input_file.close()    
-    print "</candidates>"      
+    print handler.footer
      
 except IOError, err :
     print >> sys.stderr, err
@@ -113,4 +134,4 @@ except Exception, err :
     print >> sys.stderr, err
     print >> sys.stderr, "You probably provided an invalid candidates file," + \
                          " please validate it against the DTD " + \
-                         "(mwttoolkit-candidates.dtd)"
+                         "(dtd/mwetoolkit-candidates.dtd)"

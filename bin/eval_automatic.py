@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script performs the automatic annotation of a candidate list according
     to a reference list (also called Gold Standard). The reference list should 
@@ -31,17 +53,21 @@ usage_string = """Usage:
 python %(program)s -r <reference.xml> OPTIONS <ccandidates.xml>
 
 -r <reference.xml> OR --reference <patterns.xml>
-    The reference list or gold standard, valid XML (mwttoolkit-patterns.dtd).
+    The reference list or gold standard, valid XML (dtd/mwetoolkit-patterns.dtd).
             
 OPTIONS may be:
+
+-v OR --verbose
+    Print messages that explain what is happening.
 
 -g OR --ignore-pos
      Ignores Part-Of-Speech when counting candidate occurences. This means, for
      example, that "like" as a preposition and "like" as a verb will be counted 
      as the same entity. Default false.
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). The 
-reference list or gold standard must be valid XML (mwttoolkit-patterns.dtd).
+    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+    The reference list or gold standard must be valid XML
+    (dtd/mwttoolkit-dict.dtd).
 """
 gs = []
 ignore_pos = False
@@ -106,11 +132,11 @@ def treat_reference( reference ) :
 def open_gs( gs_filename ) :
     """
         Reads the reference list from a file that is XML according to
-        mwttoolkit-patterns.dtd. The Gold Standard (GS) reference is stored in
+        mwetoolkit-dict.dtd. The Gold Standard (GS) reference is stored in
         the global variable gs.
         
         @param gs_filename The file name containing the Gold Standard reference
-        in valid XML (mwttoolkit-patterns.dtd).
+        in valid XML (dtd/mwetoolkit-dict.dtd).
     """
     global gs
     try :      
@@ -159,25 +185,24 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################    
 # MAIN SCRIPT
 
-longopts = ["reference=", "ignore-pos" ]
-arg = read_options( "r:g", longopts, treat_options, 1, usage_string )
+longopts = ["reference=", "ignore-pos", "verbose" ]
+arg = read_options( "r:gv", longopts, treat_options, 1, usage_string )
 
-try :         
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwttoolkit-candidates.dtd">
-<candidates>
-""" 
+try :             
     input_file = open( arg[ 0 ] )
     parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates")
+    parser.setContentHandler(handler)
     parser.parse( input_file )
     input_file.close()     
-    print "</candidates>"   
+    print handler.footer
                   
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(mwttoolkit-candidates.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"

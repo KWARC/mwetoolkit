@@ -323,11 +323,11 @@ try :
     if algorithm == "complex" :
         handler = GenericXMLHandler( treat_meta=treat_meta,
                                      treat_entity=treat_sentence_complex,
-                                     gen_XML=True )
+                                     gen_xml=True )
     elif algorithm == "simple" :    
         handler = GenericXMLHandler( treat_meta=treat_meta,
                                      treat_entity=treat_sentence_simple,
-                                     gen_XML=True )
+                                     gen_xml=True )
     parser.setContentHandler( handler )
     parser.parse( input_file )
     print handler.footer

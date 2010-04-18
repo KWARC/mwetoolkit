@@ -5,7 +5,7 @@
 #
 # Copyright 2010 Carlos Ramisch
 #
-# genericDTDHandler.py is part of mwetoolkit
+# config.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,16 +22,16 @@
 #
 ################################################################################
 """
-    Common configuration parameters and options for mwttoolkit.
+    Common configuration parameters and options for mwetoolkit.
 """
 
 
 """
     Two-letters language code of the working corpus. This information will not
-    be used by mwttoolkit, but it is important for searching the correct 
-    language pages in Yahoo's index.
+    be used by mwetoolkit, but it is important for searching the correct
+    language pages in Yahoo's and Google's indices.
 """
-LANG = "en"
+DEFAULT_LANG = "en"
 
 """
     Maximum number of days that a Web result might stay in the cache file. A 
@@ -53,19 +53,3 @@ WILDCARD = "*"
     more details)
 """
 YAHOO_APPID = "ngram001"
-
-"""
-    Path to the "yahoo" folder containing the python API for accessing Yahoo
-    search services.
-    TODO: remove this dependency
-"""
-YAHOO_WS_PATH = "/home/ceramisch/Work/tools/yahoo/lib/yws-2.01/Python/pYsearch-2.0/"
-
-"""
-    Maximum amount of RAM memory that the corpus index should use. If you have a
-    very powerful computer, consider augmenting this number in order to use all
-    its capacity, since it speeds up the work with very large corpora. However,
-    if your resources are limited and/or your corpus is small, leave this with
-    a reasonable value. The memory amount is expressed in Megabytes (MB).
-"""
-MAX_MEM = 1000 # ~1GB

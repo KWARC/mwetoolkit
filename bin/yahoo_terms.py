@@ -5,7 +5,7 @@
 #
 # Copyright 2010 Carlos Ramisch
 #
-# genericDTDHandler.py is part of mwetoolkit
+# yahoo_terms.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@ import xml.sax
 
 import install
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
+from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 from util import usage, read_options, treat_options_simplest
 from xmlhandler.classes.yahooTerms import YahooTerms
 from xmlhandler.classes.candidate import Candidate
@@ -43,7 +44,7 @@ usage_string = """Usage:
     
 python %(program)s <corpus.xml>
 
-    The <corpus.xml> file must be valid XML (mwttoolkit-corpus.dtd).
+    The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
 """
 sentences_buffer = []
 BUFFER_LIMIT = 10
@@ -92,20 +93,15 @@ def print_terms() :
 arg = read_options( "v", ["verbose"], treat_options_simplest, 1, usage_string )
 
 try :    
-    print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-    print "<!DOCTYPE candidates SYSTEM \"dtd/mwttoolkit-candidates.dtd\">"
-    print "<candidates>"
-    print "<meta>"
-    print "</meta>"     
+    print XML_HEADER % { "root" : "candidates" }
+    print "<meta></meta>"
     input_file = open( arg[ 0 ] )    
     parser = xml.sax.make_parser()
     parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
     parser.parse( input_file )
-    input_file.close() 
-    
+    input_file.close()
     print_terms()
-    
-    print "</candidates>"
+    print XML_FOOTER % { "root" : "candidates" }
 except IOError, err :  
     print err
     print "Error reading corpus file. Please verify __common.py configuration"        
@@ -113,4 +109,4 @@ except IOError, err :
 except Exception, err :
     print err
     print "You probably provided an invalid corpus file, please " + \
-          "validate it against the DTD (mwttoolkit-corpus.dtd)"
+          "validate it against the DTD (dtd/mwetoolkit-corpus.dtd)"

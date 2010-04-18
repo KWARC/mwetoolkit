@@ -51,7 +51,9 @@ from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_PREFIX, \
-                                        TEMP_FOLDER                                      
+                                        TEMP_FOLDER, \
+                                        XML_HEADER, \
+                                        XML_FOOTER
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
@@ -273,9 +275,7 @@ def print_candidates( temp_file, corpus_name ) :
     """
     global print_cand_freq
     try :
-        print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-        print "<!DOCTYPE candidates SYSTEM \"dtd/mwetoolkit-candidates.dtd\">"
-        print "<candidates>"
+        print XML_HEADER % { "root" : "candidates" }
         print "<meta></meta>"
         id_number = 0        
         for base_string in temp_file.keys() :
@@ -294,7 +294,7 @@ def print_candidates( temp_file, corpus_name ) :
                 occur_form.add_frequency( freq )
                 cand.add_occur( occur_form )                
             print cand.to_xml().encode( 'utf-8' )
-        print "</candidates>"
+        print XML_FOOTER % { "root" : "candidates" }
     except IOError, err :
         print >> sys.stderr, err
         print >> sys.stderr, "Error reading temporary file."
@@ -378,4 +378,4 @@ except Exception, err :
     print >> sys.stderr, err
     print >> sys.stderr, "You probably provided an invalid corpus file, " + \
                          "please validate it against the DTD " + \
-                         "(mwetoolkit-corpus.dtd)"
+                         "(dtd/mwetoolkit-corpus.dtd)"

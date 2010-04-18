@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script adds four new features for each candidate in the list and for
     each corpus with a known size. These features correspond to Association
@@ -8,6 +30,7 @@
         pmi: Pointwise Mutual Information
         t: Student's t test score
         dice: Dice's coeficient
+        ll: Log-likelihood (bigrams only)
     Each AM feature is subscribed by the name of the corpus from which it was
     calculated.
     
@@ -16,14 +39,14 @@
 """
 
 import sys
-import getopt
 import xml.sax
 import math
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
-from xmlhandler.util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, \
+                 verbose
      
 ################################################################################     
 # GLOBALS     
@@ -32,9 +55,11 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
-"""          
+    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+"""
+supported_measures = [ "mle", "t", "pmi", "dice", "ll" ]
 corpussize_dict = {}
+measures = supported_measures
      
 ################################################################################     
        
@@ -46,14 +71,12 @@ def treat_meta( meta ) :
         
         @param meta The `Meta` header that is being read from the XML file.       
     """
-    global corpussize_dict
+    global corpussize_dict, measures
     for corpus_size in meta.corpus_sizes :
         corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
     for corpus_size in meta.corpus_sizes :
-        meta.add_meta_feat( MetaFeat( "mle_" + corpus_size.name, "real" ) )
-        meta.add_meta_feat( MetaFeat( "pmi_" + corpus_size.name, "real" ) )
-        meta.add_meta_feat( MetaFeat( "t_" + corpus_size.name, "real" ) )
-        meta.add_meta_feat( MetaFeat( "dice_" + corpus_size.name, "real" ) )                        
+        for meas in measures :
+            meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
     print meta.to_xml().encode( 'utf-8' )
        
 ################################################################################     
@@ -70,10 +93,10 @@ def treat_candidate( candidate ) :
     joint_freq = {}
     singleword_freq = {}
     # Convert all these integers to floats...
-    for freq in candidate.base.freqs :
+    for freq in candidate.freqs :
         joint_freq[ freq.name ] = float(freq.value)
         singleword_freq[ freq.name ] = []
-    for word in candidate.base.word_list :
+    for word in candidate :
         for freq in word.freqs :
             singleword_freq[ freq.name ].append( float(freq.value) )
     
@@ -137,15 +160,57 @@ def calculate_ams( f, m_list, N, corpus_name ) :
     feats.append( Feature( "t_" + corpus_name, t ) )
     feats.append( Feature( "dice_" + corpus_name, dice ) )    
     return feats
-    
-################################################################################     
+
+################################################################################
+
+def interpret_measures( measures_string ) :
+    """
+    """
+    global supported_measures
+    measures_list = measures_string.split( ":" )
+    result = []
+    for meas_name in measures_list :
+        if meas_name in supported_measures :
+            result.append( meas_name )
+        else :
+            raise ValueError, "ERROR: measure is not supported: "+str(meas_name)
+    return result
+
+################################################################################
+
+def treat_options( opts, arg, n_arg, usage_string ) :
+    """
+        Callback function that handles the command line options of this script.
+
+        @param opts The options parsed by getopts. Ignored.
+
+        @param arg The argument list parsed by getopts.
+
+        @param n_arg The number of arguments expected for this script.
+    """
+    global measures, supported_measures
+    for ( o, a ) in opts:
+        if o in ( "-m", "--measures" ) :
+            try :
+                measures = []
+                measures = interpret_measures( a )
+            except ValueError, message :
+                print >> sys.stderr, message
+                print >> sys.stderr, "ERROR: argument must be list separated"+ \
+                                     "by \":\" and containing the names: "+\
+                                     str( supported_measures )
+                usage( usage_string )
+                sys.exit( 2 )
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, 1, usage_string )
+longopts = ["verbose", "measures="]
+arg = read_options( "vm:", longopts, treat_options, 1, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
 """ 
     input_file = open( arg[ 0 ] )        
@@ -161,4 +226,4 @@ except Exception, err :
     print >> sys.stderr, err
     print >> sys.stderr, "You probably provided an invalid candidates file," + \
                          " please validate it against the DTD " + \
-                         "(mwttoolkit-candidates.dtd)"
+                         "(dtd/mwetoolkit-candidates.dtd)"

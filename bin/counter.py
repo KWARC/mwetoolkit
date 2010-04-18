@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# genericDTDHandler.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script calculates individual word frequencies for a given candidate 
     list in a given corpus. The corpus may be a valid corpus word index 
@@ -23,18 +45,14 @@ import array
 import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, \
-                                        INDEX_NAME_KEY, SEPARATOR, \
-                                        MAX_MEM
+from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR                                        
 from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
 from xmlhandler.classes.corpus_size import CorpusSize
 #from xmlhandler.classes.corpus import Corpus
 #from xmlhandler.classes.suffix_array import SuffixArray
-from util import usage, read_options, treat_options_simplest, verbose, \
-                 set_verbose
+from util import usage, read_options, treat_options_simplest, verbose
     
 ################################################################################
 # GLOBALS    
@@ -66,7 +84,7 @@ OPTIONS may be:
 -v OR --verbose
     Print messages that explain what is happening.     
    
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
+    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 You must chose either the -y option or the -i otpion, both are not allowed at 
 the same time. 
 """    
@@ -77,6 +95,7 @@ get_freq_function = None
 freq_name = "?"
 web_freq = None
 the_corpus_size = -1
+entity_counter = 0
      
 ################################################################################
        
@@ -103,9 +122,11 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global get_freq_function, freq_name
+    global get_freq_function, freq_name, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
-    for w in candidate.base.word_list :
+    for w in candidate :
         c_surfaces.append( w.surface )
         c_lemmas.append( w.lemma )
         c_pos.append( w.pos )       
@@ -113,8 +134,9 @@ def treat_candidate( candidate ) :
         w.add_frequency( Frequency( freq_name, freq_value ) )
     # Global frequency
     freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-    candidate.base.add_frequency( Frequency( freq_name, freq_value ) )
+    candidate.add_frequency( Frequency( freq_name, freq_value ) )
     print candidate.to_xml().encode( 'utf-8' )
+    entity_counter += 1
 
 ################################################################################
        
@@ -208,6 +230,7 @@ def get_freq_web( surfaces, lemmas, pos ) :
 def load_array_from_file( an_array, a_filename ) :
     """
     """
+    MAX_MEM = 10000
     fd = open( a_filename )
     isMore = True
     while isMore :
@@ -287,10 +310,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-s", "--surface" ) :
             surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
-            pos_flag = True    
-        elif o in ("-v", "--verbose") :
-            set_verbose( True )
-            verbose( "Verbose mode on" ) 
+            pos_flag = True
                  
     if mode == [ "index" ] :       
         if surface_flag and pos_flag :
@@ -322,7 +342,7 @@ arg = read_options( "ywi:vgs", longopts, treat_options, 1, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwttoolkit-candidates.dtd">
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
 """ 
     input_file = open( arg[ 0 ] )        
@@ -332,11 +352,14 @@ try :
     parser.parse( input_file )
     input_file.close() 
     print "</candidates>"      
-     
+    
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(mwttoolkit-candidates.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
+finally :
+    if web_freq :
+        web_freq.flush_cache() # VERY IMPORTANT!

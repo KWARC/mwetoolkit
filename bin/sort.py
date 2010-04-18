@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# sort.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script sorts the candidate list according to the value of a feature (or
     the values of some features) that is/are called key feature(s). The key is
@@ -12,12 +34,10 @@
 """
 
 import sys
-import getopt
 import xml.sax
 import os
 import tempfile
 import shelve
-import bisect
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.util import read_options, treat_options_simplest, usage
@@ -37,13 +57,17 @@ python %(program)s [OPTIONS] -f <feat> <candidates.xml>
 
 OPTIONS may be:
 
+-v OR --verbose
+    Print messages that explain what is happening.
+
 -a OR --asc
     Sort in ascending order. By default, classification is descending.
+
 -d OR --desc
     Sort in descending order. By default, classification is descending, so that
     this flag can also be ommitted.
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd).    
+    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """          
 feat_list = []
 all_feats = []
@@ -180,8 +204,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc" ]
-arg = read_options( "f:ad", longopts, treat_options, 1, usage_string )
+longopts = [ "feat=", "asc", "desc", "verbose" ]
+arg = read_options( "f:adv", longopts, treat_options, 1, usage_string )
 
 try :    
     try :    
@@ -196,19 +220,17 @@ try :
         print >> sys.stderr, "Please verify __common.py configuration"
         sys.exit( 2 )
 
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "mwttoolkit-candidates.dtd">
-<candidates>
-"""   
+    
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler( \
-                             treat_candidate=treat_candidate,
-                             treat_meta=treat_meta)) 
+    handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
+                                    treat_meta=treat_meta,
+                                    gen_xml="candidates")
+    parser.setContentHandler( handler )
     parser.parse( input_file )
     input_file.close()     
     sort_and_print()
-    print "</candidates>"          
+    print handler.footer
     
     try :
         temp_file.close()
@@ -225,4 +247,4 @@ except Exception, err :
     print >> sys.stderr, err
     print >> sys.stderr, "You probably provided an invalid candidates file," + \
                          " please validate it against the DTD " + \
-                         "(mwttoolkit-candidates.dtd)"
+                         "(dtd/mwetoolkit-candidates.dtd)"
