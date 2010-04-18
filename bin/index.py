@@ -1,4 +1,26 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# index.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script creates an index file for a given corpus. 
 
@@ -7,20 +29,16 @@
 """
 
 import sys
-import getopt
 import shelve
-import bisect
 import re
 import xml.sax
 import array
 import pdb
 
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.classes.__common import INDEX_NAME_KEY, \
-                                        CORPUS_SIZE_KEY, \
+from xmlhandler.classes.__common import CORPUS_SIZE_KEY, \
                                         WILDCARD, SEPARATOR
-from util import usage, read_options, treat_options_simplest, set_verbose, \
-                 verbose
+from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################
 # GLOBALS
@@ -47,8 +65,8 @@ OPTIONS may be:
 -v OR --verbose
     Print messages that explain what is happening.
 
-    The <corpus.xml> file must be valid XML (mwttoolkit-corpus.dtd). The -i 
-<corpus.index> option is mandatory.
+    The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd). The -i
+<index> option is mandatory.
 """
 vocab_file = {}
 corpus_file = array.array( 'L' )
@@ -235,13 +253,12 @@ try :
     ngrams_file.tofile( fd )
     fd.close()     
       
-    verbose( "Index created for \"%(c)s\". Please do not erase the index files " % \
-             { "c" : corpus_name } )
-              
+    verbose( "Index created for \"%(c)s\". Please do not erase the index " + \
+             "files " % { "c" : corpus_name } )              
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," +\
-#                         " please validate it against the DTD " + \
-#                         "(mwttoolkit-candidates.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," +\
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
