@@ -1,25 +1,44 @@
 #!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010 Carlos Ramisch
+#
+# filter.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
 """
     This script filters the candidate list based:
         1) On the number of occurrences of the candidate. The threshold might
         be defined individually for each corpus. Candidates occurring less than
         the threshold are filtered out.
         2) On the order of the candidates. Only the top n candidates are kept in
-        the list. This operation is called "crop" the candidate list.
+        the list. This operation is called "crop" the candidate list. The script
+        "head.py" does exactly the same thing (duh!).
     
     For more information, call the script with no parameter and read the
     usage instructions.
 """
 
 import sys
-import getopt
 import xml.sax
-import math
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta_feat import MetaFeat
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, verbose
      
 ################################################################################     
 # GLOBALS     
@@ -47,12 +66,13 @@ OPTIONS may be:
     the resulting list contains more than <n> candidates, the remainder will be
     ignored. This means that only the first <n> candidates are kept in the list.
     
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
+    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
 thresh_source = None
 thresh_value = 0
 crop_limit = -1
 crop_count = 0
+entity_counter = 0
      
 ################################################################################
        
@@ -78,10 +98,12 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    global thresh_source, thresh_value, crop_limit, crop_count
-    print_it = True
-    
-    for freq in candidate.base.freqs :
+    global thresh_source, thresh_value, crop_limit, crop_count, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+
+    print_it = True    
+    for freq in candidate.freqs :
         if thresh_source :
             if ( thresh_source == freq.name or \
                  thresh_source == freq.name + ".xml" ) and \
@@ -97,6 +119,7 @@ def treat_candidate( candidate ) :
     if print_it :   
         print candidate.to_xml().encode( 'utf-8' )
         crop_count = crop_count + 1
+    entity_counter += 1
     
 ################################################################################
 
@@ -191,12 +214,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "threshold=", "crop=" ]
-arg = read_options( "t:c:", longopts, treat_options, 1, usage_string ) 
+longopts = [ "verbose", "threshold=", "crop=" ]
+arg = read_options( "vt:c:", longopts, treat_options, 1, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwttoolkit-candidates.dtd">
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
 """     
     input_file = open( arg[ 0 ] )        
