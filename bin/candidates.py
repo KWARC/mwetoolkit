@@ -57,7 +57,7 @@ from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################
 # GLOBALS
@@ -98,6 +98,7 @@ surface_instead_lemmas = False
 print_cand_freq = False
 longest_pattern = 0
 shortest_pattern = sys.maxint
+sentence_counter = 0
 
 ################################################################################
        
@@ -113,7 +114,9 @@ def treat_sentence( sentence ) :
         @param sentence A `Sentence` that is being read from the XML file.    
     """
     global patterns, temp_file, ignore_pos, surface_instead_lemmas, \
-           longest_pattern, shortest_pattern
+           longest_pattern, shortest_pattern, sentence_counter
+    if sentence_counter % 100 == 0 :
+        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
     for i in range( shortest_pattern, longest_pattern + 1 ) :    
         ngrams = sentence.get_ngrams( i )
         for ngram in ngrams :
@@ -139,7 +142,8 @@ def treat_sentence( sentence ) :
                 ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
                 freq_surface = surfaces_dict.get( internal_key, 0 )
                 surfaces_dict[ internal_key ] = freq_surface + 1
-                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )                
+                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
+    sentence_counter += 1
          
 ################################################################################
 
