@@ -195,6 +195,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             # This is the first ngram that I read, so it has to be the base form                
             else :
                 self.candidate.word_list = self.ngram.word_list
+                self.candidate.freqs = self.ngram.freqs
         elif name == "w" :  
             # Set word to none, otherwise I cannot make the difference between
             # the frequency of a word and the frequency of a whole ngram
