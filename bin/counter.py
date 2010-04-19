@@ -37,7 +37,6 @@
 """
 
 import sys
-import getopt
 import shelve
 import xml.sax
 import pdb
@@ -96,6 +95,8 @@ freq_name = "?"
 web_freq = None
 the_corpus_size = -1
 entity_counter = 0
+low_limit = -1
+up_limit = -1
      
 ################################################################################
        
@@ -122,19 +123,21 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global get_freq_function, freq_name, entity_counter
+    global get_freq_function, freq_name, entity_counter, low_limit, up_limit
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
-    for w in candidate :
-        c_surfaces.append( w.surface )
-        c_lemmas.append( w.lemma )
-        c_pos.append( w.pos )       
-        freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
-        w.add_frequency( Frequency( freq_name, freq_value ) )
-    # Global frequency
-    freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-    candidate.add_frequency( Frequency( freq_name, freq_value ) )
+    if ( entity_counter >= low_limit or low_limit < 0 ) and \
+       ( entity_counter <= up_limit or up_limit < 0 ) :
+        (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
+        for w in candidate :
+            c_surfaces.append( w.surface )
+            c_lemmas.append( w.lemma )
+            c_pos.append( w.pos )
+            freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
+            w.add_frequency( Frequency( freq_name, freq_value ) )
+        # Global frequency
+        freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
+        candidate.add_frequency( Frequency( freq_name, freq_value ) )
     print candidate.to_xml().encode( 'utf-8' )
     entity_counter += 1
 
@@ -284,7 +287,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global cache_file, get_freq_function, freq_name, build_entry, web_freq, \
-           the_corpus_size
+           the_corpus_size, low_limit, up_limit
     surface_flag = False
     pos_flag = False
     mode = []
@@ -311,6 +314,26 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
             pos_flag = True
+        elif o in ("-f", "--from", "-t", "--to" ) :
+            try :
+                limit = int(a)
+                if limit < 0 :
+                    raise ValueError, "Argument of " + o + " must be positive"
+                if o in ( "-f", "--from" ) :
+                    if up_limit == -1 or up_limit >= limit :
+                        low_limit = limit
+                    else :
+                        raise ValueError, "Argument of -f >= argument of -t"
+                else :
+                    if low_limit == -1 or low_limit <= limit :
+                        up_limit = limit
+                    else :
+                        raise ValueError, "Argument of -t <= argument of -t"
+            except ValueError, message :
+                print >> sys.stderr, message
+                print >> sys.stderr, "Argument of " + o + " must be integer"
+                usage( usage_string )
+                sys.exit( 2 )
                  
     if mode == [ "index" ] :       
         if surface_flag and pos_flag :
@@ -337,21 +360,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface" ]
-arg = read_options( "ywi:vgs", longopts, treat_options, 1, usage_string )  
+longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
+            "from=", "to=" ]
+arg = read_options( "ywi:vgsf:t:", longopts, treat_options, 1, usage_string )
 
 try :    
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
-<candidates>
-""" 
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates")
+    parser.setContentHandler(handler)
     verbose( "Counting ngrams in candidates file" )
     parser.parse( input_file )
     input_file.close() 
-    print "</candidates>"      
+    print handler.footer
     
 except IOError, err :
     print >> sys.stderr, err
