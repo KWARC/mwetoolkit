@@ -75,8 +75,8 @@ def combine_caches( cache1, cache2, cache_out ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose=" ]
-arg = read_options( "v:", longopts, treat_options_simplest, 3, usage_string )
+longopts = [ "verbose" ]
+arg = read_options( "v", longopts, treat_options_simplest, 3, usage_string )
 
 try :    
     verbose( "Opening files and checking consistency" )
