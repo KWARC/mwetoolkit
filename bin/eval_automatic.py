@@ -57,6 +57,10 @@ python %(program)s -r <reference.xml> OPTIONS <ccandidates.xml>
             
 OPTIONS may be:
 
+-c OR --case
+    Make matching of a candidate against a dictionary entry case-sensitive
+    (default is to ignore case in comparisons)
+
 -v OR --verbose
     Print messages that explain what is happening.
 
@@ -72,6 +76,7 @@ OPTIONS may be:
 gs = []
 ignore_pos = False
 gs_name = None
+ignore_case = True
 
 ################################################################################     
 
@@ -95,14 +100,14 @@ def treat_candidate( candidate ) :
         For each candidate, verifies whether it is contained in the reference
         list (in which case it is a *True* positive) or else, it is not in the
         reference list (in which case it is a *False* positive, i.e. a random
-        ngram that does not constitute a MWT).
+        ngram that does not constitute a MWE).
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global gs, ignore_pos, gs_name
+    global gs, ignore_pos, gs_name, ignore_case
     true_positive = False
     for gold_entry in gs :
-        if gold_entry.match( candidate.base ) :
+        if gold_entry.match( candidate, ignore_case ) :
             true_positive = True
             break # Stop at first positive match
     
@@ -167,14 +172,16 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.
     """
-    global gs, ignore_pos, gs_name
+    global gs, ignore_pos, gs_name, ignore_case
     for ( o, a ) in opts:
         if o in ("-r", "--reference"): 
             open_gs( a )     
             gs_name = re.sub( "\.xml", "", a ) 
         elif o in ("-g", "--ignore-pos"): 
             ignore_pos = True
-       
+        elif o in ("-c", "--case"):
+            ignore_case = False
+
     if not gs :
         print >> sys.stderr, "You MUST provide a non-empty reference list!"
         usage( usage_string )
@@ -185,8 +192,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################    
 # MAIN SCRIPT
 
-longopts = ["reference=", "ignore-pos", "verbose" ]
-arg = read_options( "r:gv", longopts, treat_options, 1, usage_string )
+longopts = ["reference=", "ignore-pos", "verbose", "case" ]
+arg = read_options( "r:gvc", longopts, treat_options, 1, usage_string )
 
 try :             
     input_file = open( arg[ 0 ] )
