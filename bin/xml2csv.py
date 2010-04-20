@@ -32,13 +32,12 @@
 """
 
 import sys
-import getopt
 import xml.sax
 import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest
-from xmlhandler.classes.__common import SEPARATOR, WILDCARD, WORD_SEPARATOR
+from util import read_options, treat_options_simplest
+from xmlhandler.classes.__common import WILDCARD
      
 ################################################################################     
 # GLOBALS     
@@ -75,18 +74,18 @@ def treat_candidate( candidate ) :
         string_cand += str( candidate.id_number )
     string_cand = string_cand.strip() + "\t"    
     
-    for w in candidate.base.word_list :
+    for w in candidate :
         if w.lemma != WILDCARD :            
             string_cand += w.lemma + " "
         else :
             string_cand += w.surface + " "
     string_cand = string_cand.strip() + "\t"
     
-    for w in candidate.base.word_list :
+    for w in candidate :
         string_cand += w.pos + " "
     string_cand = string_cand.strip() + "\t"
     
-    for freq in candidate.base.freqs :
+    for freq in candidate.freqs :
         string_cand += str( freq.value ) + "\t"
     string_cand = string_cand.strip()
                  
