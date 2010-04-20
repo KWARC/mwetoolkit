@@ -424,7 +424,7 @@ class Ngram (object):
 
 ################################################################################
 
-    def match( self, some_ngram ) :
+    def match( self, some_ngram, ignore_case=False ) :
         """
             A simple matching algorithm that returns true if ALL the words of
             the current pattern match all the words of the given ngram. Since a 
@@ -447,7 +447,7 @@ class Ngram (object):
         """
         if( len( some_ngram ) == len( self ) ) :
             for i in range( len( self ) ) :
-                if not self[ i ].match( some_ngram[ i ] ) :
+                if not self[ i ].match( some_ngram[ i ], ignore_case ) :
                     return False
             return True
         else :

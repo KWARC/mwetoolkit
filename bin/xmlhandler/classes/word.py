@@ -237,8 +237,31 @@ class Word :
             return 0
 
 ################################################################################
-        
-    def match( self, w ) :
+
+    def compare( s1, s2, ignore_case ) :
+        """
+            Compares two strings for equality conditioning the type of
+            comparison (case sensitive/insensitive) to boolean argument
+            `ignore_case`.
+
+            @param s1 A string to compare.
+
+            @param s2 Another string to compare.
+
+            @param ignore_case True if comparison should be case insensitive,
+            False if comparision should be case sensitive.
+
+            @return True if the strings are identical, False if they are
+            different.
+        """
+        if ignore_case :
+            return s1.lower() == s2.lower()
+        else :
+            return s1 == s2
+
+################################################################################
+
+    def match( self, w, ic=False ) :
         """
             A simple matching algorithm that returns true if the parts of the
             current word match the parts of the given word. The matching at the 
@@ -262,13 +285,11 @@ class Word :
             ANY of the three word parts does not match the correspondent part of 
             the given word `w`.
         """
-        if ((self.surface != WILDCARD and self.surface == w.surface) or \
+        return ((self.surface != WILDCARD and compare(self.surface,w.surface,ic)) or \
              self.surface == WILDCARD) and \
-           ((self.lemma != WILDCARD and self.lemma == w.lemma) or \
+             ((self.lemma != WILDCARD and compare(self.lemma, w.lemma, ic ) ) or \
              self.lemma == WILDCARD) and \
-           ((self.pos != WILDCARD and self.pos == w.pos) or \
-             self.pos == WILDCARD) :
-            return True
-        else :
-            return False
-        
+             ((self.pos != WILDCARD and compare( self.pos, w.pos, ic ) ) or \
+             self.pos == WILDCARD)
+            
+################################################################################
