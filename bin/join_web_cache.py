@@ -33,11 +33,10 @@
 """
 
 import sys
-import getopt
 import cPickle
 
-from util import read_options, treat_options_simplest, usage, verbose, \
-                 set_verbose
+from util import read_options, treat_options_simplest, usage, verbose
+                 
 #from classes.__common import TEMP_PREFIX, TEMP_FOLDER
      
 ################################################################################     
@@ -91,6 +90,9 @@ try :
     combine_caches( cache1, cache2, cache_out )
     verbose( "Writing new cache file..." )
     cPickle.dump( cache_out, cache_out_desc )
+    verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 0 ], "n" : len(cache1) } )
+    verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 1 ], "n" : len(cache2) } )
+    verbose( "Result has %(n)d entries" % { "n" : len(cache_out) } )
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :
