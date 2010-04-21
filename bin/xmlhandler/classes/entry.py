@@ -31,6 +31,7 @@
 import pdb
 
 from ngram import Ngram
+from __common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
 
