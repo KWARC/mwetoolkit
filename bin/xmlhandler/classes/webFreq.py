@@ -153,6 +153,7 @@ class WebFreq( object ) :
                 result_count = self.treat_result( results )
             except Exception, err:
                 print >> sys.stderr, "Got an error ->", err
+                print >> sys.stderr, "Stopped at search term: " + search_term
                 print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
                 sys.exit( -1 )
             self.cache[ lang + "___" + term ] = ( result_count, self.today )
