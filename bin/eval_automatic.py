@@ -35,12 +35,11 @@
 """
 
 import sys
-import getopt
 import re
 import xml.sax
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.patternsXMLHandler import PatternsXMLHandler
+from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.meta_tpclass import MetaTPClass
 from util import usage, read_options, treat_options_simplest
@@ -147,7 +146,7 @@ def open_gs( gs_filename ) :
     try :      
         reference_file = open( gs_filename )
         parser = xml.sax.make_parser()
-        parser.setContentHandler( PatternsXMLHandler( treat_reference ) )        
+        parser.setContentHandler( DictXMLHandler( treat_reference ) )
         parser.parse( reference_file )        
         reference_file.close()
     except IOError, err:

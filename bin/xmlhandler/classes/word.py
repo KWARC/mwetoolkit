@@ -238,7 +238,7 @@ class Word :
 
 ################################################################################
 
-    def compare( s1, s2, ignore_case ) :
+    def compare( self, s1, s2, ignore_case ) :
         """
             Compares two strings for equality conditioning the type of
             comparison (case sensitive/insensitive) to boolean argument
@@ -285,11 +285,11 @@ class Word :
             ANY of the three word parts does not match the correspondent part of 
             the given word `w`.
         """
-        return ((self.surface != WILDCARD and compare(self.surface,w.surface,ic)) or \
+        return ((self.surface != WILDCARD and self.compare( self.surface,w.surface,ic)) or \
              self.surface == WILDCARD) and \
-             ((self.lemma != WILDCARD and compare(self.lemma, w.lemma, ic ) ) or \
+             ((self.lemma != WILDCARD and self.compare( self.lemma, w.lemma, ic ) ) or \
              self.lemma == WILDCARD) and \
-             ((self.pos != WILDCARD and compare( self.pos, w.pos, ic ) ) or \
+             ((self.pos != WILDCARD and self.compare( self.pos, w.pos, ic ) ) or \
              self.pos == WILDCARD)
             
 ################################################################################
