@@ -142,4 +142,27 @@ class Candidate ( Entry ) :
             expert. No test is performed in order to verify whether this is a 
             repeated TP class in the list.                
         """
-        self.tpclasses.append( tpclass ) 
+        self.tpclasses.append( tpclass )
+
+################################################################################
+
+    def get_tpclass_value( self, tpclass_name ) :
+        """
+            Returns the value of a `TPClass` in the tpclasses list. The TP class
+            is identified by the class name provided as input to this
+            function. If two classes have the same name, only the first
+            value found will be returned.
+
+            @param tpclass_name A string that identifies the `TPClass` of the
+            candidate for which you would like to know the value.
+
+            @return Value of the searched tpclass. If there is no tpclass with
+            this name, then it will return `UNKNOWN_FEAT_VALUE` (generally "?"
+            as in the WEKA's arff file format).
+        """
+        for tpclass in self.tpclasses :
+            if tpclass.name == tpclass_name :
+                return tpclass.value
+        return UNKNOWN_FEAT_VALUE
+
+################################################################################
