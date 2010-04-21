@@ -42,7 +42,7 @@ from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.meta_tpclass import MetaTPClass
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################     
 # GLOBALS   
@@ -76,6 +76,7 @@ gs = []
 ignore_pos = False
 gs_name = None
 ignore_case = True
+entity_counter = 0
 
 ################################################################################     
 
@@ -103,7 +104,9 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global gs, ignore_pos, gs_name, ignore_case
+    global gs, ignore_pos, gs_name, ignore_case, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     true_positive = False
     for gold_entry in gs :
         if gold_entry.match( candidate, ignore_case ) :
@@ -115,6 +118,7 @@ def treat_candidate( candidate ) :
     else :
         candidate.add_tpclass( TPClass( gs_name, "False" ) )               
     print candidate.to_xml().encode( 'utf-8' )
+    entity_counter += 1
          
 ################################################################################     
 
