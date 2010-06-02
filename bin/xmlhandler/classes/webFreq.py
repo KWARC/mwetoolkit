@@ -33,6 +33,7 @@ from datetime import date
 import urllib2
 import urllib
 import simplejson
+import pdb
 
 from __common import MAX_CACHE_DAYS, DEFAULT_LANG
 
@@ -149,11 +150,14 @@ class WebFreq( object ) :
                 url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ) )                
                 request = urllib2.Request( url, None, self.post_data )
                 response = urllib2.urlopen( request )
-                results = simplejson.load( response )
+                response_string = response.read()
+                response_string = response_string.replace("\ud835dd1b","") # TODO: Debug. This is an ugly workarround
+                results = simplejson.loads( response_string )
                 result_count = self.treat_result( results )
-            except Exception, err:
+            except Exception, err:                
                 print >> sys.stderr, "Got an error ->", err
                 print >> sys.stderr, "Stopped at search term: " + search_term
+                print >> sys.stderr, request.get_full_url()
                 print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
                 sys.exit( -1 )
             self.cache[ lang + "___" + term ] = ( result_count, self.today )
