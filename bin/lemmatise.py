@@ -60,6 +60,7 @@ OPTIONS may be:
 """
 web_freq = GoogleFreq()
 lang = DEFAULT_LANG
+entity_counter = 0
 
 ################################################################################
 
@@ -144,11 +145,14 @@ def treat_entity( entity ) :
 
         @param entity A subclass of `Ngram` that is being read from the XML file
     """
-    global lang
+    global lang, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )    
     for w in entity :
         if lang == "en" :
             w.lemma = lemmatise_en( w )
     print entity.to_xml().encode( 'utf-8' )
+    entity_counter += 1
 
 ################################################################################
 
