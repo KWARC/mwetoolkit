@@ -275,7 +275,7 @@ def print_candidates( temp_file, corpus_name ) :
     """
     global print_cand_freq
     try :
-        print XML_HEADER % { "root" : "candidates" }
+        print XML_HEADER % { "root" : "candidates", "ns" : "" }
         print "<meta></meta>"
         id_number = 0        
         for base_string in temp_file.keys() :
