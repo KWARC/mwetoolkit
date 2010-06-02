@@ -27,10 +27,9 @@
 import sys
 import xml.sax
 
-import install
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
-from util import usage, read_options, treat_options_simplest
+from util import read_options, treat_options_simplest
 from xmlhandler.classes.yahooTerms import YahooTerms
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
@@ -93,7 +92,7 @@ def print_terms() :
 arg = read_options( "v", ["verbose"], treat_options_simplest, 1, usage_string )
 
 try :    
-    print XML_HEADER % { "root" : "candidates" }
+    print XML_HEADER % { "root" : "candidates", "ns" : "" }
     print "<meta></meta>"
     input_file = open( arg[ 0 ] )    
     parser = xml.sax.make_parser()
