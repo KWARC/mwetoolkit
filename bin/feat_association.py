@@ -54,7 +54,17 @@ from util import usage, read_options, treat_options_simplest, \
      
 usage_string = """Usage: 
     
-python %(program)s <candidates.xml>
+python %(program)s OPTIONS <candidates.xml>
+
+OPTIONS may be:
+
+-f <feat> OR --feat <feat>
+    The name of the features that will be calculated. If this option is not
+    defined, the script calculates all available measures. Feature names should
+    be separated by colon ":"
+
+-v OR --verbose
+    Print messages that explain what is happening.
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
@@ -92,22 +102,34 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.    
     """
-    global corpussize_dict
+    global corpussize_dict, main_freq
     joint_freq = {}
     singleword_freq = {}
+    backed_off = False
     # Convert all these integers to floats...
     for freq in candidate.freqs :
-        joint_freq[ freq.name ] = float(freq.value)
+        joint_freq[ freq.name ] = ( float(abs(freq.value)) )
         singleword_freq[ freq.name ] = []
+        if freq.value < 0 :
+            backed_off = True
     for word in candidate :
         for freq in word.freqs :
-            singleword_freq[ freq.name ].append( float(freq.value) )
+            singleword_freq[ freq.name ].append( abs( float(freq.value) ) )
+            if freq.value < 0 :
+                backed_off = True
     
     for corpus_name in joint_freq.keys() :
-        feats = calculate_ams( joint_freq[ corpus_name ], \
-                singleword_freq[ corpus_name ], \
-                corpussize_dict[ corpus_name ],
-                corpus_name )
+        if not backed_off and corpus_name == "backoff" :
+            N = corpussize_dict[ main_freq ]
+        else :
+            N = corpussize_dict[ corpus_name ]
+        try :
+            feats = calculate_ams( joint_freq[ corpus_name ], \
+                    singleword_freq[ corpus_name ], \
+                    N, corpus_name )
+        except Exception :
+            pdb.set_trace()
+
         for feat in feats :
             candidate.add_feat( feat )
     print candidate.to_xml().encode( 'utf-8' )
@@ -319,14 +341,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["verbose", "measures="]
-arg = read_options( "vm:", longopts, treat_options, 1, usage_string )
+arg = read_options( "vm:", longopts, treat_options, 2, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
-""" 
-    input_file = open( arg[ 0 ] )        
+"""
+    main_freq = arg[ 0 ] # TODO: FIXXXXX
+    input_file = open( arg[ 1 ] )
     parser = xml.sax.make_parser()
     parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
     parser.parse( input_file )
