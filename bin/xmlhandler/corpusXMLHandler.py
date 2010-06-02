@@ -92,7 +92,7 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
             # Add word to the sentence that is currently bein read
             self.sentence.append( Word( surface, lemma, pos, [] ) )
         elif name == "corpus" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml }
+            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
             
 
 ################################################################################

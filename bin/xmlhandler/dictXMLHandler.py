@@ -124,7 +124,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             f = Feature( feat_name, feat_value )
             self.entry.add_feat( f )
         elif name == "dict" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml }
+            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
             
 ################################################################################
 

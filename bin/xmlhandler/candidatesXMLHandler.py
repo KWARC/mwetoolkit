@@ -173,7 +173,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             mtp = MetaTPClass( attrs[ "name" ], attrs[ "type" ] )        
             self.meta.add_meta_tpclass( mtp )
         elif name == "candidates" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml }
+            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
 
 ################################################################################
 
