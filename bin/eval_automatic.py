@@ -77,6 +77,8 @@ ignore_pos = False
 gs_name = None
 ignore_case = True
 entity_counter = 0
+tp_counter = 0
+ref_counter = 0
 
 ################################################################################     
 
@@ -104,7 +106,7 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global gs, ignore_pos, gs_name, ignore_case, entity_counter
+    global gs, ignore_pos, gs_name, ignore_case, entity_counter, tp_counter
     if entity_counter % 100 == 0 :
         verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     true_positive = False
@@ -115,6 +117,7 @@ def treat_candidate( candidate ) :
     
     if true_positive :   
         candidate.add_tpclass( TPClass( gs_name, "True" ) )
+        tp_counter = tp_counter + 1
     else :
         candidate.add_tpclass( TPClass( gs_name, "False" ) )               
     print candidate.to_xml().encode( 'utf-8' )
@@ -130,10 +133,11 @@ def treat_reference( reference ) :
         
         @param reference A `Pattern` contained in the reference Gold Standard.
     """
-    global gs, ignore_pos
+    global gs, ignore_pos, ref_counter
     if ignore_pos :
         reference.reset_pos()     # reference has type Pattern
-    gs.append( reference )    
+    gs.append( reference )
+    ref_counter = ref_counter + 1
 
 ################################################################################     
 
@@ -208,6 +212,16 @@ try :
     parser.parse( input_file )
     input_file.close()     
     print handler.footer
+    precision = float( tp_counter ) / float( entity_counter )
+    recall = float( tp_counter ) / float( ref_counter )
+    fmeas =  ( 2 * precision * recall) / ( precision + recall )
+    verbose( "Nb. of true positives: %(tp)d" % {"tp" : tp_counter } )
+    verbose( "Nb. of candidates: %(cand)d" % {"cand" : entity_counter } )
+    verbose( "Nb. of references: %(refs)d" % {"refs" : ref_counter } )
+    verbose( "Precision: %(p)f" % {"p" : precision } )
+    verbose( "Recall: %(r)f" % {"r" : recall } )
+    verbose( "F-measure: %(f)f" % {"f" : fmeas } )
+
                   
 except IOError, err :
     print >> sys.stderr, err
