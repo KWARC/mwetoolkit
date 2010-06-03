@@ -111,7 +111,7 @@ class Ngram (object):
             ngram.
         """
         result = ""
-        for word in self.word_list :
+        for word in self :
             result = result  + word.to_string() + WORD_SEPARATOR
         return result[ 0 : len(result) - len(WORD_SEPARATOR) ]
   
@@ -186,7 +186,7 @@ class Ngram (object):
             depending on the input flags.
         """
         result = "<ngram>"
-        for word in self.word_list :
+        for word in self :
             result = result + word.to_xml_custom( print_surface=print_surface, 
                                                   print_lemma=print_lemma, 
                                                   print_pos=print_pos, 
@@ -261,7 +261,7 @@ class Ngram (object):
             should be similar to the separator, to avoid ambiguities.
         """
         result = ""
-        for word in self.word_list :
+        for word in self :
             result = result  + word.pos + SEPARATOR
         return result[ 0:len( result ) - len(SEPARATOR) ]        
         
@@ -286,7 +286,7 @@ class Ngram (object):
             this parameter is None, the POS tags of the words remain unchanged. 
             Defaults to None. 
         """
-        for word in self.word_list :
+        for word in self :
             if surface is not None :
                 word.surface = surface
             if lemma is not None :
@@ -356,23 +356,23 @@ class Ngram (object):
         """
         i = 0
         result_count = 0
-        n = an_ngram.get_n()
+        n = len( an_ngram )
 
-        for w in self.word_list :
+        for w in self :
             bef_pos = w.pos
             if ignore_pos :
                 w.pos = WILDCARD
             
             if i == n :
                 result_count = result_count + 1
-                if w.match( an_ngram.word_list[ 0 ] ) :
+                if w.match( an_ngram[ 0 ] ) :
                     i = 1
                 else :
                     i = 0
             
-            elif w.match( an_ngram.word_list[ i ] ) :
+            elif w.match( an_ngram[ i ] ) :
                 i = i + 1
-            elif w.match( an_ngram.word_list[ 0 ] ) :
+            elif w.match( an_ngram[ 0 ] ) :
                 i = 1
             else :
                 i = 0
@@ -403,16 +403,16 @@ class Ngram (object):
         i = 0
         n = len( an_ngram )
         result_pos = -n        
-        for w in self.word_list :
+        for w in self :
             bef_pos = w.pos
             if ignore_pos :
                 w.pos = WILDCARD
             
             if i == n :
                 return result_pos            
-            elif w.match( an_ngram.word_list[ i ] ) :
+            elif w.match( an_ngram[ i ] ) :
                 i = i + 1
-            elif w.match( an_ngram.word_list[ 0 ] ) :
+            elif w.match( an_ngram[ 0 ] ) :
                 i = 1
             else :
                 i = 0                
