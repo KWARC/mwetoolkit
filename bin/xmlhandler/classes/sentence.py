@@ -47,7 +47,7 @@ class Sentence( Ngram ) :
     
 ################################################################################
 
-    def __init__( self, word_list, s_id ) :
+    def __init__( self, word_list, id_number ) :
         """
             Instanciates a new sentence from a list of words. A sentence has a
             list of adjacent words and an integer unique identifier. If the 
@@ -60,13 +60,13 @@ class Sentence( Ngram ) :
             @param word_list A list of `Word`s in the same order as they occur
             in the sentence in the corpus.
             
-            @param s_id An integer identifier that uniquely describes the 
+            @param id_number An integer identifier that uniquely describes the
             current sentence.
             
             @return A new instance of a `Sentence`
         """
         self.word_list = word_list
-        self.s_id = s_id
+        self.id_number = id_number
         self.freqs = None
         
 ################################################################################
@@ -97,8 +97,8 @@ class Sentence( Ngram ) :
             mwetoolkit-corpus.dtd.
         """
         result = "<s"
-        if( self.s_id >= 0 ) :
-            result += " s_id=\"" + str( self.s_id ) + "\">"
+        if( self.id_number >= 0 ) :
+            result += " s_id=\"" + str( self.id_number ) + "\">"
         else :
             result += ">"
         for word in self.word_list :

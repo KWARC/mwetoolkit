@@ -90,7 +90,7 @@ def treat_sentence( sentence ) :
            vocab_ordered, corpus_file, build_entry
 
     if sentence_counter % 100 == 0 :
-        verbose( "Processing sentence %(id)d" % { "id":sentence.s_id } )
+        verbose( "Processing sentence %(id)d" % { "id":sentence.id_number } )
       
     for word in sentence.word_list :
         entry = build_entry( word.surface, word.lemma, word.pos )        
