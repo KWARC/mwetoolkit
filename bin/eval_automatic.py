@@ -43,6 +43,7 @@ from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.meta_tpclass import MetaTPClass
 from util import usage, read_options, treat_options_simplest, verbose
+from xmlhandler.classes.__common import WILDCARD
 
 ################################################################################     
 # GLOBALS   
@@ -135,7 +136,7 @@ def treat_reference( reference ) :
     """
     global gs, ignore_pos, ref_counter
     if ignore_pos :
-        reference.reset_pos()     # reference has type Pattern
+        reference.set_all( pos=WILDCARD )     # reference has type Pattern
     gs.append( reference )
     ref_counter = ref_counter + 1
 
