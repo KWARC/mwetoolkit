@@ -89,6 +89,11 @@ def treat_entity( entry ) :
             form = word.surface
         else :
             form = word.lemma
+        # Special symbols can break the ontology systems, better avoid them
+        form = form.replace( "&quot;", "QUOTSYMBOL" )
+        form = form.replace( "&amp;", "ANDSYMBOL" )
+        form = form.replace( "&gt;", "GTSYMBOL" )
+        form = form.replace( "&lt;", "LTSYMBOL" )
         owl_cand += form + "_"
     owl_cand = owl_cand[:len(owl_cand)-1] + "\"/>" # remove extra underline char
     
