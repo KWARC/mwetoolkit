@@ -40,7 +40,7 @@ import tempfile
 import shelve
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.util import read_options, treat_options_simplest, usage
+from util import read_options, treat_options_simplest
 from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
      
 ################################################################################     
