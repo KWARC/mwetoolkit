@@ -88,7 +88,7 @@ def treat_entity( entity ) :
     global conv_table
     for w in entity :
         w.pos = conv_table.get(  w.pos, w.pos )
-    print sentence.to_xml().encode( 'utf-8' )
+    print entity.to_xml().encode( 'utf-8' )
     
 ################################################################################  
 # MAIN SCRIPT
