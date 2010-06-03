@@ -251,10 +251,9 @@ try :
     
     fd = open( name + ".ngrams", "w" )
     ngrams_file.tofile( fd )
-    fd.close()     
-      
-    verbose( "Index created for \"%(c)s\". Please do not erase the index " + \
-             "files " % { "c" : corpus_name } )              
+    fd.close()         
+    verbose( "Index created for \"" + corpus_name + "\". Please do not " + \
+             "erase the index files " )
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :
