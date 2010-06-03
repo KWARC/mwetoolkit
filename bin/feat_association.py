@@ -363,7 +363,7 @@ try :
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
 """
-    input_file = open( arg[ o ] )
+    input_file = open( arg[ 0 ] )
     parser = xml.sax.make_parser()
     parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
     parser.parse( input_file )
