@@ -86,6 +86,7 @@ corpussize_dict = {}
 measures = supported_measures
 # TODO: Parametrable combine function
 heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
+entity_counter = 0
      
 ################################################################################     
        
@@ -115,7 +116,10 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.    
     """
-    global corpussize_dict, main_freq
+    global corpussize_dict, main_freq, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+
     joint_freq = {}
     singleword_freq = {}
     backed_off = False
@@ -146,6 +150,7 @@ def treat_candidate( candidate ) :
         for feat in feats :
             candidate.add_feat( feat )
     print candidate.to_xml().encode( 'utf-8' )
+    entity_counter = entity_counter + 1
 
 ################################################################################     
 
