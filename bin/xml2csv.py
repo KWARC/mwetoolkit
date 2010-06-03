@@ -56,6 +56,8 @@ def treat_meta( meta ) :
     string_cand = "id\tngram\tpos\t"
     for cs in meta.corpus_sizes :
         string_cand = string_cand + cs.name + "\t"  
+    for cs in meta.meta_tpclasses :
+        string_cand = string_cand + cs.name + "\t"        
     string_cand = string_cand.strip()        
         
     print string_cand.encode( 'utf-8' )       
@@ -87,6 +89,9 @@ def treat_candidate( candidate ) :
     
     for freq in candidate.freqs :
         string_cand += str( freq.value ) + "\t"
+    
+    for tpclass in candidate.tpclasses :
+        string_cand += str( tpclass.value ) + "\t"
     string_cand = string_cand.strip()
                  
     
