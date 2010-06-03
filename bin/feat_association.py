@@ -58,10 +58,23 @@ python %(program)s OPTIONS <candidates.xml>
 
 OPTIONS may be:
 
--f <feat> OR --feat <feat>
-    The name of the features that will be calculated. If this option is not
-    defined, the script calculates all available measures. Feature names should
-    be separated by colon ":"
+-m <meas> OR --measures <meas>
+    The name of the measures that will be calculated. If this option is not
+    defined, the script calculates all available measures. Measure names should
+    be separated by colon ":" and should be in the list of supported measures
+    below:
+
+    mle -- Maximum Likelihood Estimator
+    pmi -- Pointwise Mutual Information
+    t -- Student's t test score
+    dice -- Dice's coeficient
+    ll -- Log-likelihood (bigrams only)
+
+-o <name> OR --original <name>
+    The name of the frequency source from which the candidates were extracted
+    originally. This is only necessary if you are using backoff to combine the
+    counts. In this case, you MUST define the original count source and it must
+    be a valid name described through a <corpussize> element in the meta header.
 
 -v OR --verbose
     Print messages that explain what is happening.
@@ -323,7 +336,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global measures, supported_measures
+    global measures, supported_measures, main_freq
     for ( o, a ) in opts:
         if o in ( "-m", "--measures" ) :
             try :
@@ -336,20 +349,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      str( supported_measures )
                 usage( usage_string )
                 sys.exit( 2 )
+        elif o in ( "-o", "--original" ) :
+            main_freq = a
     treat_options_simplest( opts, arg, n_arg, usage_string )
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "measures="]
-arg = read_options( "vm:", longopts, treat_options, 2, usage_string )
+longopts = ["verbose", "measures=", "original="]
+arg = read_options( "vm:o:", longopts, treat_options, 1, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates>
 """
-    main_freq = arg[ 0 ] # TODO: FIXXXXX
-    input_file = open( arg[ 1 ] )
+    input_file = open( arg[ o ] )
     parser = xml.sax.make_parser()
     parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
     parser.parse( input_file )
