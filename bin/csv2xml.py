@@ -28,7 +28,247 @@ import string
 import re
 import sys
 
-sepChar = "	"
+SEPCHAR = "	"
+THRESHOLD = 10
+DEFAULT_CORPUS_SIZE = -1
+
+#these variables store all data that will be used
+frequencies = []
+words = []
+features = []
+tpclasses = []
+indexes = []
+corpora = []
+frequency_dict = []
+
+"""
+
+<candidates>
+	<meta>
+		<corpussize* name="" value="">
+		<metafeat* name="" type="">
+		<metatpclass* name="" type="{1,0}">
+	</meta>
+	<cand candid="">
+		<ngram>
+			<w+ surface="" lenma="" pos="">
+				<freq name="" value="">
+			</w>
+			<freq name="" value="">
+		</ngram>
+		<occurs></occurs>
+		<features>
+			<feat* name="" value="">
+		</features>
+		<tpclass name="" value="">
+	</cand>
+</candidates>
+
+all frequency data will be f.*_.*
+all metatp data will be will be tp_.*
+
+"""
+
+def isInt(x):
+	try:
+		intX = int(x)
+		return True
+	except ValueError:
+		return False
+	
+def isFloat(x):
+	try:
+		floatX = float(x)
+		return True
+	except ValueError:
+		return False
+
+
+
+def initialize( filename ):
+	
+	f = open( filename , "r" )
+
+
+	#get the file header, so we can start processing
+	line = f.readline ()
+	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
+
+	global frequencies
+	global words
+	global features
+	global tpclasses
+	global indexes
+	global corpora
+	global frequency_dict
+	
+	#header items are sorted by their groups (frequencies, words, feature, tpclasses)
+	#all data is stored in global variables, so we can use them afterwards
+	for item in header:
+		frequencies	=	frequencies	+	re.findall ( "f.*_.+" , item )
+		words		=	words		+	re.findall ( "w.*_.+" , item )
+		tpclasses	=	tpclasses +	re.findall ( "tp_.+" , item )
+	
+	#features are everything that do not enter any other category
+	removeList = frequencies + words + tpclasses
+	for x in header:
+		if x not in removeList:
+			features.append(x)
+			
+#	print frequencies
+#	print words
+#	print features
+#	print tpclasses
+
+	#dictionary that maps a header element to its index
+	indexes = dict(zip( header , range(len(header)) ))
+#	print indexes
+	
+	#list of all corpora available
+	corpora = set()
+	for frequency in frequencies:
+		corpus = frequency.split("_")
+		corpora.add(corpus[1])
+#	print corpora
+	
+	#dictionary that maps a corpus to its frequencies
+	frequency_dict = dict( zip ( corpora , [ [] , [] ] ) )
+	
+	for corpus in corpora:
+		#build the list of all frequencies of the corpus
+		for frequency in frequencies:
+			if corpus in frequency:
+				frequency_dict[corpus].append(frequency)
+		#sort the list of frequencies of this corpus
+		#frequencies are ordered by the numbers in their names
+		#if provided, the last frequency in the new list will be the whole ngram frequency 
+		newFrequencyList = range(len(frequency_dict[corpus]))
+		for frequency in frequency_dict[corpus]:
+			freqIndex = re.findall ( "f(.*)_.+" , frequency )
+			if freqIndex[0] == "":
+				newFrequencyList [ len( frequency_dict [ corpus ] ) - 1 ] = frequency
+			else:
+				newFrequencyList [ int ( freqIndex [ 0 ] ) - 1 ] = frequency
+		frequency_dict[corpus] = newFrequencyList
+		
+#	print frequency_dict
+
+
+
+
+
+
+def getMeta( filename ):
+#	all frequency data shall be f.*_.+ and f_.+ is the ngram total frequency
+#	features will be detected when they don't have prefixes
+#	metatp data shall be tp_.+ and everything after the underscore is the name
+#	the number of columns will be always the same for each line
+
+	global corpora
+
+
+	f = open( filename , "r" )
+
+	line = f.readline ()
+	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
+
+	#corpussize
+	print "<meta>"
+	for corpus in corpora:
+		print '<corpussize name="' + str ( corpus ) + '" value="' + str ( DEFAULT_CORPUS_SIZE ) + '"/>'
+		
+		
+	featType = dict ( [ ( feature , set() ) for feature in features ] )
+	lineCounter = 0
+	for row in f:
+		lineCounter = lineCounter + 1
+		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
+		if len ( line ) != len ( header ):
+			print "the number of columns in line " + str ( lineCounter ) + " and header is different"
+			exit ( 0 )
+		for feature in features:
+			#get feature value
+			feat = line [ indexes [ feature ] ]
+			if isInt ( feat ):
+				featType [ feature ] = "int"
+			elif isFloat ( feat ):
+				featType [ feature ] = "float"
+			else:
+				#while the threshold is not reached, the feature type is a list of elements
+				if featType [ feature ] != "string":
+					featType [ feature ].add ( feat )
+				#threshold reached, feature type is assigned to string
+				if len ( featType [ feature ] ) > THRESHOLD:
+					featType [ feature ] = "string"
+	for feature in featType:
+		if featType [ feature ] not in ["int","float","string"]:
+			featType [ feature ] = list ( featType [ feature ] )
+	
+	transTable = string.maketrans("[]", "{}")
+	for feature in features:
+		featType [ feature ] = string.translate ( str ( featType [ feature ] ) , transTable , "' " )
+		print '<metafeat name="' + str ( feature ) + '" type="' + str ( featType [ feature ] ) + '"/>'
+		
+	for tpclass in tpclasses:
+		tpclassName = tpclass.split ( "_" ) [ 1 ]
+		print '<metatpclass name="' + str ( tpclassName ) + '" type="' + str ( "{0,1}" ) + '"/>'
+	
+	
+	print "</meta>"
+
+
+def getCand( filename ):
+
+	f = open( filename , "r" )
+
+	#remove the file header, so we can start processing
+	line = f.readline ()
+	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
+
+	#initialize candidate id counter
+	candid = 0
+	
+	for row in f:
+		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
+		print '<cand candid="' + str(candid) + '"/>'
+		print "<ngram>"
+		wordCounter = 0
+		for word in words:
+			print '<w lemma="' + line[indexes[word]] + '">'
+			for corpus in corpora:
+				frequency = frequency_dict[corpus][wordCounter]
+				print '<freq name="' + corpus + '" value="' + line[indexes[frequency]] + '"/>'
+			print "</w>"
+			wordCounter = wordCounter + 1
+		for corpus in corpora:
+			frequency = frequency_dict [ corpus ] [ len ( frequency_dict [ corpus ] ) - 1 ]
+			if "f_" in frequency:
+				print '<freq name="' + corpus + '" value="' + line[indexes[frequency]] + '"/>'
+				
+		print "</ngram>"
+		print "<occurs>"
+		print "</occurs>"
+		if len ( features ) != 0:
+			print "<features>"
+			for feat in features:	
+				print '<feat name="' + feat + '" value="' + line [ indexes [ feat ] ] + '"/>'
+			print "</features>"
+			
+			
+		if len ( tpclasses ) != 0:
+			for tpclass in tpclasses:
+				tpclassName = tpclass.split ( "_" ) [ 1 ]
+				print '<tpclass name="' + tpclassName + '" value="' + line [ indexes [ tpclass ] ] + '"/>'
+		
+		
+		print "</cand>"
+		#increase candidate id counter
+		candid = candid + 1
+
+	f.close()
+
+
+
 
 #gets the arguments passed in the command line, returns a string list
 def getFileNames():
@@ -37,146 +277,20 @@ def getFileNames():
 	#retrieve the -s argument, the field separator character
 	argument = sys.argv.pop(0)
 	if argument == "-s":
-		sepChar = sys.argv.pop(0)
+		SEPCHAR = sys.argv.pop(0)
 		return sys.argv
 	else:
 		return [argument]
-
-
-#gets file contents. filename is the name of the file. returns a string
-def getFileContent(filename):
-	file = open(filename,'r+')
-	content = file.read()
-	file.close()
-	return content
-
-
-#creates a list of lines that were separated by line breaks in the text
-def contentSlicer(content):
-	lineList = string.split(content, "\n")
-	return lineList
-
-
-#splits a string on sepChar characters and create a list with those elements
-def lineSlicer(line):
-	elementList = string.split(line, sepChar)
-	return elementList
-
-
-#calculates content to be written in meta area from a list of lists
-def calculateMetafeats(lineList):
-	#get the first element from the P column to be used as reference
-	sample = lineList[1][1]
-	#the metafeat counter based on the sample
-	metafeatCounter = 1
-	#iterator
-	index = 2
-	#calculates number of metafeats
-	while lineList[index][1] == sample:
-		metafeatCounter = metafeatCounter + 1
-		index = index + 1
-	#builds the list that will fill the comments in the final xml file (<!-- x -->)
-	metafeatList = [lineList[i+1][2] for i in range(metafeatCounter)]
-	return metafeatList
-
-
-#from the properly sliced list, create a list for each n-gram [[lemma],[pos],[feats]]
-def calculateCands(metafeatList, sliceList):
-	#number of entries in the input file refering to the same n-gram
-	interval = len(metafeatList)
-	#number of entries in the input file
-	entries = len(sliceList)
-	#list of the n-grams and feats that will be returned
-	candList = []
-	for x in range (1,entries,interval):
-		lemma = [sliceList[x][0], sliceList[x][1]]
-		pos = [sliceList[0][0], sliceList[0][1]]
-		featList = []
-		for y in range(interval):
-			featList.append([metafeatList[y], sliceList[x+y][3]])
-		candList.append([lemma, pos, featList])
-	return candList
-
-
-#writes the header, same for all xml files created with this program
-def writeHeader(newXml):
-	newXml.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-	newXml.write("<!DOCTYPE candidates SYSTEM \"dtd/mwttoolkit-candidates.dtd\">\n")
-	
-
-#auxiliary procedure to write data to the final xml file
-def writeCandidates(metafeatList, candList, newXml):
-	newXml.write("<candidates>\n")
-	writeMeta(metafeatList, newXml)
-	writeCand(candList, newXml)
-	newXml.write("</candidates>\n")
-
-
-#translates the Sentence to a feat name
-def calculateFeatName(feat):
-		name = string.lower(feat)
-		name = string.replace(name, " ", "-")
-		name = string.replace(name, "*", "n")
-		name = re.sub("-\(.*\)", "_google", name)
-		return name
-
-
-#write data to the meta area
-def writeMeta(metafeatList, newXml):
-	newXml.write("<meta>\n")
-	for comment in metafeatList:
-		name = calculateFeatName(comment)
-		newXml.write("	<metafeat name=" + name + " type=\"integer\"/>	<!-- " + comment + "-->\n")
-	newXml.write("</meta>\n\n")
-
-
-#write data to the cand area
-def writeCand(candList, newXml):
-	for ngram in candList:
-		#retrieve information from candList
-		lemma = ngram[0]
-		pos = ngram[1]
-		featList = ngram[2]
-		#write data
-		newXml.write( "<cand>\n")
-		newXml.write( "<ngram>")
-		for x in range(len(lemma)):
-			newXml.write( "<w lemma=\"" + lemma[x] + "\" pos=\"" + pos[x] + "\"/>")
-		newXml.write( "</ngram>\n")
-		newXml.write( "<occurs></occurs>\n")
-		newXml.write( "<features>\n")
-		for x in range(len(featList)):
-			name = featList[x][0]
-			name = calculateFeatName(name)
-			value = featList[x][1]
-			value = string.replace(value, " \r", "")
-			value = string.replace(value, " \n", "")
-			value = string.replace(value, " ", "")
-			newXml.write( "	<feat name=" + name +" value=\"" + value + "\"/>\n")
-		newXml.write( "</features>\n")
-		newXml.write( "</cand>\n\n")
-
 
 
 #main program
 if __name__ == '__main__':
 	files = getFileNames()
 	for file in files:
-		lineList = contentSlicer(getFileContent(file))
-		sliceList = []
-		for x in lineList:
-			line = lineSlicer(x)
-			#create a new list of non-empty sliced lines 
-			if line != ['']:
-				sliceList.append(line)
-		metafeatList = calculateMetafeats(sliceList)
-		candList = calculateCands(metafeatList, sliceList)
-		newXml = open(file + ".xml",'w+')  
-		writeHeader(newXml)
-		writeCandidates(metafeatList, candList, newXml)
-		newXml.close() 
-	
-	
-	
-	
+		initialize(file)
+		print "<candidates>"
+		getMeta(file)
+		getCand(file)
+		print "</candidates>"
+
 	
