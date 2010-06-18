@@ -32,6 +32,11 @@ import pdb
 
 from classes.word import Word
 from classes.entry import Entry
+from classes.meta import Meta
+from classes.feature import Feature
+from classes.frequency import Frequency
+from classes.corpus_size import CorpusSize
+from classes.meta_feat import MetaFeat
 from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
 from util import strip_xml
 
@@ -48,7 +53,10 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
 
 ################################################################################
     
-    def __init__( self, treat_entry=lambda x:None, gen_xml="" ) :
+    def __init__( self,
+                  treat_meta=lambda x:None,
+                  treat_entry=lambda x:None,
+                  gen_xml="" ) :
         """
             Creates a new dict file handler. The argument is a
             callback function that will treat the XML information.
@@ -62,10 +70,12 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             parse the XML file.
         """
         self.treat_entry = treat_entry
+        self.treat_meta = treat_meta
         self.entry = None
         self.id_number_counter = 0
         self.gen_xml = gen_xml
         self.footer = ""
+        self.meta = None
 
 ################################################################################
 
@@ -123,6 +133,19 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 feat_value = float( feat_value )
             f = Feature( feat_name, feat_value )
             self.entry.add_feat( f )
+        # Meta section and elements, correspond to meta-info about the
+        # reference lists. Meta-info are important for generating
+        # features and converting to arff files, and must correspond
+        # to the info in the dictionary (e.g. meta-feature has the
+        # same name as actual feature)
+        elif name == "meta" :
+            self.meta = Meta( [], [], [] )
+        elif name == "corpussize" :
+            cs = CorpusSize( attrs[ "name" ], attrs[ "value" ] )
+            self.meta.add_corpus_size( cs )
+        elif name == "metafeat" :
+            mf = MetaFeat( attrs[ "name" ], attrs[ "type" ] )
+            self.meta.add_meta_feat( mf )
         elif name == "dict" and self.gen_xml :
             print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
             
@@ -140,6 +163,9 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             self.entry = None
         elif name == "w" :
             self.word = None
+        elif name == "meta" :
+            # Finished reading the meta header, call callback        
+            self.treat_meta( self.meta )
         elif name == "dict" and self.gen_xml :
                 # Must only be printed at the end of the main script. Some scripts
                 # only print the result after the XML was 100% read, and this
