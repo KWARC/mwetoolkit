@@ -1,14 +1,6 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-#script created by Victor Yoshiaki Miyai
-#contact: darkagma@gmail.com, vymiyai@inf.ufrgs.br
-
-#coded in 11/04/2010, dd/mm/yyyy
-#extended in 22/05/2010, dd/mm/yyyy
-
-
-
 ################################################################################
 #
 # Copyright 2010 Carlos Ramisch, Victor Yoshiaki Miyai
@@ -30,23 +22,16 @@
 #
 ################################################################################
 
-#to run this script, you must have Python in your machine
-#the input is a file that contains a list of candidates from the mwetoolkit
-#the output is the same name of the input file plus the extension .xml
-
-#usage:
-#in the terminal, type: 
-#"python google_to_xml.py [OPTION] [FILE]"
-#	OPTION:
-#		-s <separator character>
-#				sets the field separator character to one defined by the user.
-#				if not specified, the default is the tab character.
-#	FILE:
-#		<filename>
-#			the file to be processed.
-
+#script created by Victor Yoshiaki Miyai
+#contact: darkagma@gmail.com, vymiyai@inf.ufrgs.br
+#coded in 11/04/2010, dd/mm/yyyy
+#last update in 20/06/2010, dd/mm/yyyy
 #developed in Python 2.6.4
 
+"""
+	This script parses a plian text file and generates a .xml file, usable
+	by other scripts in mwetoolkit.
+"""
 
 import string
 import re
@@ -64,6 +49,9 @@ from xmlhandler.classes.frequency import Frequency
 from util import read_options
 from xmlhandler.classes.__common import *
 
+################################################################################
+#GLOBALS
+
 SEPCHAR = "	"
 THRESHOLD = 10
 DEFAULT_CORPUS_SIZE = -1
@@ -78,17 +66,38 @@ indexes 		= []
 corpora 		= []
 frequency_dict 	= []
 
-# NEED TO BE COMPLETED
+
+
 usage_string = """Usage: 
     
-python %(program)s <corpus.xml>
+python %(program)s [OPTIONS] [FILE]
 
-    The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
+OPTIONS:
+	-F <separator character>
+		Sets the field separator character to one defined by the 
+		user. If not specified, the default is the tab character.
+				
+	-s
+		Enables the option to assign the words in a ngram to the
+		surface	item. The default is to assign it to the lemma item.
+			
+FILE:
+	<filename>
+		The text file to be processed.
+			
 """
 
 ################################################################################
 
 def isInt(x):
+	"""
+		Tests if a value is of type "int". 
+	
+		@param x The value to be tested. x can be of any type.
+		
+		@return True, if x is of type "int", False otherwise
+	"""
+	
 	try:
 		intX = int(x)
 		return True
@@ -98,6 +107,14 @@ def isInt(x):
 ################################################################################
 
 def isFloat(x):
+	"""
+		Tests if a value is of type "float". 
+	
+		@param x The value to be tested. x can be of any type.
+		
+		@return True, if x is of type "float", False otherwise
+	"""
+	
 	try:
 		floatX = float(x)
 		return True
@@ -107,6 +124,25 @@ def isFloat(x):
 ################################################################################
 
 def setToString( input ):
+	"""
+		Converts a set to a string. Lists of types in this script are compliant
+		to Weka's ARFF format. To achieve this, some changes are needed. 
+		
+		Pythons's set:
+			set('x', 'y', 'z')
+		Converts to list:
+			['x', 'y', 'z']
+		Replaces square brackets to curly brackets.
+			{'x', 'y', 'z'}
+		Removes blank spaces and single quotes:
+			{x,y,z}
+
+	
+		@param input A set of strings.
+		
+		@return a string representation of a Weka's ARFF formatted list of 
+		elements.
+	"""
 	
 	translateTable = string.maketrans("[]", "{}")
 	
@@ -119,16 +155,29 @@ def setToString( input ):
 
 def initialize( filename ):
 	"""
-	to complete
+		Initializes all global variables to be used in the process of
+		transformation from text to xml.
+		
+		"frequencies" is a list that contains the frequency identifiers
+		in the input file's header (file's first line).
+		
+		"words" is a list of all word identifiers in the header.
+		
+		"features" is a list of all feature identifiers in the header.
+		
+		"tpclasses" is a list of all tpclass identifiers in the header.
+		
+		"indexes" is a dictionary that maps all header's identifiers to
+		their indexes (order of appearance) in the file.
+		
+		"corpora" is a list of all corpora's names.
+		
+		"frequency_dict" is a dictionary that maps a corpus' name in "corpora"
+		to a list of all related frequencies (i.e. 'bnc':['f1_bnc', 'f2_bnc']).
+		
+		@param filename String of a file's name to be processed.
 	"""
 	
-	f = open( filename , "r" )
-
-
-	#get the file header, so we can start processing
-	line = f.readline ()
-	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
-
 	global frequencies
 	global words
 	global features
@@ -137,32 +186,38 @@ def initialize( filename ):
 	global corpora
 	global frequency_dict
 	
-	#header items are sorted by their groups (frequencies, words, feature, tpclasses)
-	#all data is stored in global variables, so we can use them afterwards
+	f = open( filename , "r" )
+
+	# get the file header, so we can start processing
+	line = f.readline ()
+	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
+	
+	# header items are sorted by their identifiers (frequencies, words, feature, tpclasses)
+	# all data is stored in global variables, so we can use them afterwards
 	for item in header:
 		frequencies	=	frequencies	+	re.findall ( "f.*_.+" , item )
 		words		=	words		+	re.findall ( "w.*_.+" , item )
 		tpclasses	=	tpclasses +	re.findall ( "tp_.+" , item )
 	
-	#features are everything that do not enter any other category
+	# features are everything that do not enter any other category
 	removeList = frequencies + words + tpclasses
 	for x in header:
 		if x not in removeList:
 			features.append(x)
 
-
-	#dictionary that maps a header element to its index in the line
+	# creates a dictionary that maps a header element to its index in the line
 	indexes = dict(zip( header , range(len(header)) ))
 	
-	#list of all available corpora
+	# creates a list of all available corpora
 	corpora = set()
 	for frequency in frequencies:
 		corpus = frequency.split("_")
 		corpora.add(corpus[1])
 	
-	#dictionary that maps a corpus to its frequencies
+	# creates a dictionary that maps a corpus to its frequencies
 	frequency_dict = dict( zip ( corpora , [ [] for corpus in corpora  ] ) )
 	
+	# creates a dictionary that maps a corpus' name to it's related frequencies
 	for corpus in corpora:
 		#build the list of all frequencies of the corpus
 		for frequency in frequencies:
@@ -183,10 +238,13 @@ def initialize( filename ):
 ################################################################################
 
 def getMeta( filename ):
-#	all frequency data shall be f.*_.+ and f_.+ is the ngram total frequency
-#	features will be detected when they don't have prefixes
-#	metatp data shall be tp_.+ and everything after the underscore is the name
-#	the number of columns will be always the same for each line
+	"""
+		Generates the <meta> section of the .xml file. The process stops
+		if the input file do not have the same number of columns of data
+		for each line.
+		
+		@param filename String of a file's name to be processed.
+	"""
 
 	global corpora
 	global features
@@ -194,30 +252,25 @@ def getMeta( filename ):
 
 	f = open( filename , "r" )
 
+	# remove the header, so we can get to the data
 	line = f.readline ()
 	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
 
-	#create Meta to be printed in the end
+	# create a Meta object to be printed in the end
 	objectMeta = Meta ( [] , [] , [] )
 	
-	#add corpus size data to Meta
+	# add corpus size data to Meta
 	for corpus in corpora:
 		objectCorpusSize = CorpusSize ( str ( corpus ) , str ( DEFAULT_CORPUS_SIZE ) )
 		objectMeta.add_corpus_size( objectCorpusSize )
 
-
-
-	#corpussize
-#	print "<meta>"
-#	for corpus in corpora:
-#		print '<corpussize name="' + str ( corpus ) + '" value="' + str ( DEFAULT_CORPUS_SIZE ) + '"/>'
-		
-	#maps a feature (name) to it's proper type (int, float, string or list)
+	# maps a feature (name) to it's proper type (int, float, string or list)
 	featType	= dict ( [ ( feature , set() ) for feature in features ] )
 	
-	#maps a tpclass (name) to a set of types
+	# maps a tpclass (name) to a set of types
 	tpclassType	= dict ( [ ( tpclass , set() ) for tpclass in tpclasses ] )
 	
+	# get the features' and the tpclasses' types
 	lineCounter = 0
 	for row in f:
 		lineCounter = lineCounter + 1
@@ -233,46 +286,43 @@ def getMeta( filename ):
 			elif isFloat ( feat ):
 				featType [ feature ] = "float"
 			else:
-				#while the threshold is not reached, the feature type is a list of elements
+				# while the threshold is not reached, the feature type is a list of elements
 				if featType [ feature ] != "string":
 					featType [ feature ].add ( feat )
-				#threshold reached, feature type is assigned to string
+				# threshold reached, feature type is assigned to string
 				if len ( featType [ feature ] ) > THRESHOLD:
 					featType [ feature ] = "string"
-
 		#get tpclass types
 		for tpclass in tpclasses:
 			tpclassType [ tpclass ].add ( line [ indexes [ tpclass ] ] )
-	
-	#convert all sets to lists and sort them
-#	for feature in featType:
-#		if featType [ feature ] not in ["int","float","string"]:
-#			featType [ feature ] = list ( featType [ feature ] )
-#			featType [ feature ].sort ()
-	
-#	transTable = string.maketrans("[]", "{}")
+
+	# creates a metafeat object to be added to the meta object
 	for feature in features:
-#		featType [ feature ] = string.translate ( str ( featType [ feature ] ) , transTable , "' " )
 		if featType [ feature ] not in ["int","float","string"]:
 			featType [ feature ] = setToString ( featType [ feature ] )
 		objectMetaFeat = MetaFeat ( feature , featType [ feature ] )
 		objectMeta.add_meta_feat ( objectMetaFeat )
-#		print '<metafeat name="' + str ( feature ) + '" type="' + str ( featType [ feature ] ) + '"/>'
 
+	# creates a tpclass object to be added to the meta object
 	for tpclass in tpclassType:
 		tpclassName = tpclass.split ( "_" ) [ 1 ]
 		tpclassType [ tpclass ] = setToString ( tpclassType [ tpclass ] )
 		objectMetaTPClass = MetaTPClass ( tpclassName , tpclassType [ tpclass ] )
 		objectMeta.add_meta_feat ( objectMetaTPClass )
-		
-	print objectMeta.to_xml().encode( 'utf-8' )
-#		print '<metatpclass name="' + str ( tpclassName ) + '" type="' + str ( tpclassType [ tpclass ] ) + '"/>'
 
-#	print "</meta>"
+	# prints the meta object
+	print objectMeta.to_xml().encode( 'utf-8' )
+
 
 ################################################################################
 
 def getCand( filename ):
+	"""
+		Generates the cand section of the .xml file. Data is retrieved by
+		using the global variables initialized in initialize().
+		
+		@param filename String of a file's name to be processed.
+	"""
 
 	global corpora
 	global words
@@ -283,29 +333,29 @@ def getCand( filename ):
 
 	f = open( filename , "r" )
 
-	#remove the file header, so we can start processing
+	# remove the file header, so we can start processing
 	line = f.readline ()
 	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
 
-	#initialize candidate id counter
+	# initialize candidate id counter
 	candid = 0
 	
 	for row in f:
 		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
 
 		
-		#creates a new ngram
+		# creates a new ngram object
 		objectNgram = Ngram( [] , [] )
 		wordCounter = 0
 		for word in words:
 			if SURFACE_FLAG == 0:
-				#Option -s was not activated
+				# Option -s was not activated
 				objectWord = Word( "" , line [ indexes [ word ] ] , "" , [] )
 			else:
-				#Option -s was activated
+				# Option -s was activated
 				objectWord = Word( line [ indexes [ word ] ] , "" , "" , [] )
 			
-			#Set the word frequencies for each corpus
+			# Set the word frequencies for each corpus
 			for corpus in corpora:
 				frequency = frequency_dict[corpus][wordCounter]
 				objectFrequency = Frequency ( corpus , line [ indexes [ frequency ] ] )
@@ -314,7 +364,7 @@ def getCand( filename ):
 			objectNgram.append ( objectWord )
 			
 			
-		#ngram total frequency
+		# add frequency of the ngram's total frequency
 		for corpus in corpora:
 			ngramFreqPos = len ( frequency_dict [ corpus ] ) - 1
 			ngram_frequency = frequency_dict [ corpus ] [ ngramFreqPos ]
@@ -323,27 +373,27 @@ def getCand( filename ):
 				objectNgram.add_frequency ( objectFrequency )
 				
 
-		
-		#objectFeature is a list that contains other features. those features 
+		# objectFeature is a list of features. those features will be added
+		# to a candidate object in the next step
 		objectFeature = []
 		if len ( features ) != 0:
 			for feat in features:	
 				objectFeature.append ( Feature ( feat , line [ indexes [ feat ] ] ) )
 				
-		#creation of a new candidate
+		# creation of a new candidate
 		objectCand = Candidate( candid , objectNgram , objectFeature , [] , [] )	
 			
-			
+		# add tpclasses to the candidate object
 		if len ( tpclasses ) != 0:
 			for tpclass in tpclasses:
 				tpclassName = tpclass.split ( "_" ) [ 1 ]
 				objecttp = TPClass( tpclassName, line [ indexes [ tpclass ] ] )
 				objectCand.add_tpclass( objecttp )
 
-		#print final candidate 
+		#print candidate object. we can now start processing a new candidate
 		print objectCand.to_xml().encode( 'utf-8' )
 		
-		#increase candidate id counter
+		#increase candidate id counter to the next candidate object
 		candid = candid + 1
 
 	f.close()
@@ -352,14 +402,26 @@ def getCand( filename ):
 
 #gets the arguments passed in the command line, returns a string list
 def treat_options_csv2xml( opts, arg, n_arg, usage_string ):
+	"""
+		Callback function that handles the command line options of this script.
+        
+        @param opts The options parsed by getopts. Ignored.
+        
+        @param arg The argument list parsed by getopts.
+        
+        @param n_arg The number of arguments expected for this script.   
+	"""
 	
 	global SEPCHAR
 	global SURFACE_FLAG
 	
 	for ( o , a ) in opts:
 		if o == "-F":
+			# sets a new separator character to be used when spliting a line
 			SEPCHAR = a
 		elif o == "-s":
+			# sets the assignment of a word to the "surface" item.
+			# default is set to "lemma".
 			SURFACE_FLAG = 1
 		else:
 			print >> sys.stderr, "Option " + " is not a valid option"
@@ -367,8 +429,8 @@ def treat_options_csv2xml( opts, arg, n_arg, usage_string ):
 			sys.exit( 0 )
 
 ################################################################################
+# MAIN SCRIPT
 
-#main program
 if __name__ == '__main__':
 	
 	files = read_options( "F:s", [], treat_options_csv2xml, 2, usage_string )
