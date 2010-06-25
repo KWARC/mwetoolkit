@@ -126,6 +126,7 @@ def treat_sentence( sentence ) :
             for pattern in patterns :                
                 if pattern.match( ngram ) :                    
                     is_candidate = True
+                    break # Stop after first match
             if is_candidate : 
                 # Deep copy manually
                 copy_ngram = Ngram( [], [] )
@@ -215,7 +216,7 @@ def read_patterns_file( filename ) :
     try :      
         patterns_file = open( filename ) 
         parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_pattern ) )
+        parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
         try:
             parser.parse( patterns_file )
         except Exception :
