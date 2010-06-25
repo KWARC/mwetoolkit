@@ -39,13 +39,12 @@
 """
 
 import sys
-import getopt
 import xml.sax
 import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.util import usage, read_options, treat_options_simplest
-from xmlhandler.classes.__common import SEPARATOR, WILDCARD, WORD_SEPARATOR
+from util import read_options, treat_options_simplest
+from xmlhandler.classes.__common import SEPARATOR, WORD_SEPARATOR
      
 ################################################################################     
 # GLOBALS     
@@ -65,9 +64,9 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    pos = candidate.base.get_pos_pattern()
+    pos = candidate.get_pos_pattern()
     pos = pos.replace( SEPARATOR, " " )
-    print "candid=%(id)i pos=\"%(pos)s\"" % \
+    print "candid=%(id)s pos=\"%(pos)s\"" % \
           { "id": candidate.id_number, "pos": pos }
     for form in candidate.occurs :
         form.set_all( lemma="", pos="" )
