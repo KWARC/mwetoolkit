@@ -41,6 +41,7 @@ from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from xmlhandler.classes.sentence import Sentence
+from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.__common import WILDCARD
 from util import read_options, treat_options_simplest, verbose
 
@@ -86,9 +87,7 @@ def treat_meta( meta ) :
        
 def treat_entity( entity ) :
     """
-        For each entity in the corpus, puts it in a circular buffer. This is
-        necessary because we do not know the total number of lines, so we always
-        keep the last n lines in the global buffer.
+        
         
         @param entity A subclass of `Ngram` that is being read from the XM.
     """
@@ -96,7 +95,9 @@ def treat_entity( entity ) :
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     # TODO: improve the "copy" method
-    if isinstance( entity, Entry ) :
+    if isinstance( entity, Candidate ) :
+        copy_ngram = Candidate( 0, [], [], [], [] )
+    elif isinstance( entity, Entry ) :
         copy_ngram = Entry( 0, [], [] )
     elif isinstance( entity, Sentence ) :
         copy_ngram = Sentence( [], 0 )
@@ -111,8 +112,28 @@ def treat_entity( entity ) :
         copy_ngram.set_all( lemma=WILDCARD )
     else :
         copy_ngram.set_all( surface=WILDCARD )
+
     internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
     #pdb.set_trace()
+
+    if isinstance( entity, Candidate ) :
+        # TODO: Generalise this!
+        old_entry = entity_buffer.get( internal_key, None )
+        if old_entry :
+            #pdb.set_trace()
+            copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
+            copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
+            copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
+        else :
+            copy_ngram.occurs = entity.occurs
+            copy_ngram.features = entity.features
+            copy_ngram.tpclasses = entity.tpclasses
+    elif isinstance( entity, Entry ) :
+        pass
+    elif isinstance( entity, Sentence ) :
+        pass
+    #entity_buffer[ internal_key ] = old_entry
+
     entity_buffer[ internal_key ] = copy_ngram
     entity_counter += 1
     
