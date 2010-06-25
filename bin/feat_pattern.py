@@ -33,14 +33,12 @@
 """
 
 import sys
-import getopt
 import xml.sax
-import math
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
-from xmlhandler.util import usage, read_options, treat_options_simplest
+from util import read_options, treat_options_simplest
      
 ################################################################################     
 # GLOBALS     
@@ -84,7 +82,7 @@ def recover_all_patterns( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     global all_patterns
-    pattern = candidate.base.get_pos_pattern()
+    pattern = candidate.get_pos_pattern()
     all_patterns[ pattern ] = 1    
 
 ################################################################################
@@ -97,16 +95,16 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    pattern = candidate.base.get_pos_pattern()
-    n = candidate.base.get_n()
+    pattern = candidate.get_pos_pattern()
+    n = len( candidate )
     candidate.add_feat( Feature( "pos_pattern", pattern ) )
     candidate.add_feat( Feature( "n", n ) )    
     print candidate.to_xml().encode( 'utf-8' )
 
 ################################################################################
 # MAIN SCRIPT
-
-arg = read_options( "", [], treat_options_simplest, 1, usage_string ) 
+longopts = [ "verbose" ]
+arg = read_options( "v", longopts, treat_options_simplest, 1, usage_string )
 
 try :    
     # Done in 2 passes, one to define the type of the feature and another to
@@ -118,7 +116,7 @@ try :
     parser.setContentHandler( candHandler ) 
     parser.parse( input_file )
     input_file.close()     
-    input_file = open( sys.argv[ 1 ] )            
+    input_file = open( arg[ 0 ] )
     # Second pass to print the metafeat header with all possible pattern values
     handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                     treat_candidate=treat_candidate,
