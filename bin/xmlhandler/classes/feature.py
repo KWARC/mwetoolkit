@@ -28,7 +28,7 @@
 
 ################################################################################
 
-class Feature :
+class Feature(object) :
     """
         A MWT candidate feature is a pair name-value that describes a specific
         aspect of the candidate, such as a measure, a lingustic property, a 
@@ -55,6 +55,14 @@ class Feature :
         self.name = name
         self.value = value
         
+################################################################################
+
+    def __eq__( self, a_feat ) :
+        """
+            TODO: doc
+        """
+        return self.name == a_feat.name and self.value == a_feat.value
+
 ################################################################################
 
     def to_xml( self ) :
