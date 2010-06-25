@@ -2,7 +2,7 @@
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <candidates >
 <meta>
-    <metafeat name="Sentence" type="{"V_P_(with_OR_from_OR_for)","V_P_the_*_(with_OR_from_OR_for)","V_the_*_P_(with_OR_from_OR_for)","V_this_P_(with_OR_from_OR_for)"}" />
+    <metafeat name="Sentence" type="{&quot;V P (with OR from OR for)&quot;,&quot;V P the &lowast; (with OR from OR for)&quot;,&quot;V the &lowast; P (with OR from OR for)&quot;,&quot;V this P (with OR from OR for)&quot;}" />
     <metafeat name="Google" type="int" />
 </meta>
 <cand candid="0">
@@ -10,7 +10,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="888000 " />
     </features>
 </cand>
@@ -19,7 +19,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="161 " />
     </features>
 </cand>
@@ -28,7 +28,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="1070 " />
     </features>
 </cand>
@@ -37,7 +37,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="892000 " />
     </features>
 </cand>
@@ -46,7 +46,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="1310000 " />
     </features>
 </cand>
@@ -55,7 +55,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="755 " />
     </features>
 </cand>
@@ -64,7 +64,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="1520 " />
     </features>
 </cand>
@@ -73,7 +73,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="1300000 " />
     </features>
 </cand>
@@ -82,7 +82,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="7310000 " />
     </features>
 </cand>
@@ -91,7 +91,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="3930 " />
     </features>
 </cand>
@@ -100,7 +100,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="1920 " />
     </features>
 </cand>
@@ -109,7 +109,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="2440000 " />
     </features>
 </cand>
@@ -118,7 +118,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="6860000 " />
     </features>
 </cand>
@@ -127,7 +127,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="1180 " />
     </features>
 </cand>
@@ -136,7 +136,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="491 " />
     </features>
 </cand>
@@ -145,7 +145,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="2400000 " />
     </features>
 </cand>
@@ -154,7 +154,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="2130000 " />
     </features>
 </cand>
@@ -163,7 +163,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="1080 " />
     </features>
 </cand>
@@ -172,7 +172,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="3310 " />
     </features>
 </cand>
@@ -181,7 +181,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="2200000 " />
     </features>
 </cand>
@@ -190,7 +190,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="2230000 " />
     </features>
 </cand>
@@ -199,7 +199,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="665 " />
     </features>
 </cand>
@@ -208,7 +208,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="3850 " />
     </features>
 </cand>
@@ -217,7 +217,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="2220000 " />
     </features>
 </cand>
@@ -226,7 +226,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="23300 " />
     </features>
 </cand>
@@ -235,7 +235,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="15 " />
     </features>
 </cand>
@@ -244,7 +244,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="13 " />
     </features>
 </cand>
@@ -253,7 +253,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="27700 " />
     </features>
 </cand>
@@ -262,7 +262,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="36200 " />
     </features>
 </cand>
@@ -271,7 +271,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="12 " />
     </features>
 </cand>
@@ -280,7 +280,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="24 " />
     </features>
 </cand>
@@ -289,7 +289,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="36200 " />
     </features>
 </cand>
@@ -298,7 +298,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="79000 " />
     </features>
 </cand>
@@ -307,7 +307,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="16 " />
     </features>
 </cand>
@@ -316,7 +316,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="1 " />
     </features>
 </cand>
@@ -325,7 +325,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="74800 " />
     </features>
 </cand>
@@ -334,7 +334,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="76500 " />
     </features>
 </cand>
@@ -343,7 +343,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="1 " />
     </features>
 </cand>
@@ -352,7 +352,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="0 " />
     </features>
 </cand>
@@ -361,7 +361,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="72300 " />
     </features>
 </cand>
@@ -370,7 +370,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="56100 " />
     </features>
 </cand>
@@ -379,7 +379,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="7 " />
     </features>
 </cand>
@@ -388,7 +388,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="20 " />
     </features>
 </cand>
@@ -397,7 +397,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="55900 " />
     </features>
 </cand>
@@ -406,7 +406,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P (with OR from OR for)&quot;" />
         <feat name="Google" value="60300 " />
     </features>
 </cand>
@@ -415,7 +415,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V P the * (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V P the &lowast; (with OR from OR for)&quot;" />
         <feat name="Google" value="4 " />
     </features>
 </cand>
@@ -424,7 +424,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V the * P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V the &lowast; P (with OR from OR for)&quot;" />
         <feat name="Google" value="16 " />
     </features>
 </cand>
@@ -433,7 +433,7 @@
     <occurs>
     </occurs>
     <features>
-        <feat name="Sentence" value=""V this P (with OR from OR for)"" />
+        <feat name="Sentence" value="&quot;V this P (with OR from OR for)&quot;" />
         <feat name="Google" value="60100 " />
     </features>
 </cand>

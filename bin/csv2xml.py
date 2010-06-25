@@ -47,6 +47,7 @@ from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.frequency import Frequency
 from util import read_options
+from util import strip_xml
 from xmlhandler.classes.__common import *
 
 ################################################################################
@@ -127,7 +128,7 @@ def setToString( input ):
 	"""
 		Converts a set to a string. Lists of types in this script are compliant
 		to Weka's ARFF format. To achieve this, some changes are needed, from
-		set('x', 'y', 'z') to {x,y,z}
+		set('x', 'y', 'z') to {x, y, z}
 	
 		@param input A set of strings.
 		
@@ -137,10 +138,15 @@ def setToString( input ):
 	
 	translateTable = string.maketrans("[]", "{}")
 	
-	input = [ string.replace( item, " " , "_" ) for item in input ]
+	# creates a list of elements from the set
+	input = [ item for item in input ]
 	input.sort ()
-	input = string.translate ( str ( input ) , translateTable , "' " )
-	return input
+	last_element = input.pop()
+	return_string = "{"
+	for item in input:
+		return_string = return_string + str ( item ) + ","
+	return_string = return_string + str ( last_element ) + "}"
+	return return_string
 	
 ################################################################################
 
@@ -181,6 +187,8 @@ def initialize( filename ):
 
 	# get the file header, so we can start processing
 	line = f.readline ()
+	# escapes special characters
+	line = strip_xml( line ) 
 	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
 	
 	# header items are sorted by their identifiers (frequencies, words, feature, tpclasses)
@@ -197,13 +205,13 @@ def initialize( filename ):
 			features.append(x)
 
 	# creates a dictionary that maps a header element to its index in the line
-	indexes = dict(zip( header , range(len(header)) ))
+	indexes = dict ( zip ( header , range ( len ( header ) ) ) )
 	
 	# creates a list of all available corpora
 	corpora = set()
 	for frequency in frequencies:
-		corpus = frequency.split("_")
-		corpora.add(corpus[1])
+		corpus = frequency.split ( "_" )
+		corpora.add ( corpus [ 1 ] )
 	
 	# creates a dictionary that maps a corpus to its frequencies
 	frequency_dict = dict( zip ( corpora , [ [] for corpus in corpora  ] ) )
@@ -213,11 +221,11 @@ def initialize( filename ):
 		#build the list of all frequencies of the corpus
 		for frequency in frequencies:
 			if corpus in frequency:
-				frequency_dict[corpus].append(frequency)
+				frequency_dict [ corpus ] .append ( frequency )
 		#sort the list of frequencies of this corpus
 		#frequencies are ordered by the numbers in their names
 		#if provided, the last frequency in the new list will be the whole ngram frequency 
-		newFrequencyList = range(len(frequency_dict[corpus]))
+		newFrequencyList = range ( len ( frequency_dict [ corpus ] ) )
 		for frequency in frequency_dict[corpus]:
 			freqIndex = re.findall ( "f(.*)_.+" , frequency )
 			if freqIndex[0] == "":
@@ -243,8 +251,10 @@ def getMeta( filename ):
 
 	f = open( filename , "r" )
 
-	# remove the header, so we can get to the data
+	# get the file header, so we can start processing
 	line = f.readline ()
+	# escapes special characters
+	line = strip_xml( line ) 
 	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
 
 	# create a Meta object to be printed in the end
@@ -265,7 +275,11 @@ def getMeta( filename ):
 	lineCounter = 0
 	for row in f:
 		lineCounter = lineCounter + 1
-		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
+		
+		# escapes special characters
+		line = strip_xml( row ) 
+		line = string.split ( line.strip ( "\n" ) , SEPCHAR )
+		
 		if len ( line ) != len ( header ):
 			print >> sys.stderr, "the number of columns in line " + str ( lineCounter ) + " and header is different"
 			sys.exit( 1 )
@@ -324,16 +338,20 @@ def getCand( filename ):
 
 	f = open( filename , "r" )
 
-	# remove the file header, so we can start processing
+	# get the file header, so we can start processing
 	line = f.readline ()
+	# escapes special characters
+	line = strip_xml( line ) 
 	header = string.split ( line.strip ( "\n" ) , SEPCHAR )
 
 	# initialize candidate id counter
 	candid = 0
 	
 	for row in f:
-		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
-
+		# escapes special characters
+		line = strip_xml( row ) 
+		line = string.split ( line.strip ( "\n" ) , SEPCHAR )
+		
 		# creation of a new candidate
 		objectCand = Candidate( candid , [] , [] , [] , [] )
 		
@@ -434,5 +452,4 @@ if __name__ == '__main__':
 		getMeta(file)
 		getCand(file)
 		print XML_FOOTER % { "root":"candidates" }
-
 	
