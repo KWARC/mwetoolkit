@@ -25,7 +25,7 @@
 #script created by Victor Yoshiaki Miyai
 #contact: darkagma@gmail.com, vymiyai@inf.ufrgs.br
 #coded in 11/04/2010, dd/mm/yyyy
-#last update in 20/06/2010, dd/mm/yyyy
+#last update in 22/06/2010, dd/mm/yyyy
 #developed in Python 2.6.4
 
 """
@@ -126,17 +126,8 @@ def isFloat(x):
 def setToString( input ):
 	"""
 		Converts a set to a string. Lists of types in this script are compliant
-		to Weka's ARFF format. To achieve this, some changes are needed. 
-		
-		Pythons's set:
-			set('x', 'y', 'z')
-		Converts to list:
-			['x', 'y', 'z']
-		Replaces square brackets to curly brackets.
-			{'x', 'y', 'z'}
-		Removes blank spaces and single quotes:
-			{x,y,z}
-
+		to Weka's ARFF format. To achieve this, some changes are needed, from
+		set('x', 'y', 'z') to {x,y,z}
 	
 		@param input A set of strings.
 		
@@ -146,7 +137,7 @@ def setToString( input ):
 	
 	translateTable = string.maketrans("[]", "{}")
 	
-	input = list ( input )
+	input = [ string.replace( item, " " , "_" ) for item in input ]
 	input.sort ()
 	input = string.translate ( str ( input ) , translateTable , "' " )
 	return input
@@ -343,45 +334,48 @@ def getCand( filename ):
 	for row in f:
 		line = string.split ( row.strip ( "\n" ) , SEPCHAR )
 
+		# creation of a new candidate
+		objectCand = Candidate( candid , [] , [] , [] , [] )
 		
-		# creates a new ngram object
-		objectNgram = Ngram( [] , [] )
+		# creates a new ngram object. WILDCARD is assigned when there is
+		# nothing to be printed in that field
 		wordCounter = 0
 		for word in words:
 			if SURFACE_FLAG == 0:
 				# Option -s was not activated
-				objectWord = Word( "" , line [ indexes [ word ] ] , "" , [] )
+				objectWord = Word( WILDCARD , line [ indexes [ word ] ] , WILDCARD , [] )
 			else:
 				# Option -s was activated
-				objectWord = Word( line [ indexes [ word ] ] , "" , "" , [] )
+				objectWord = Word( line [ indexes [ word ] ] , WILDCARD , WILDCARD , [] )
 			
 			# Set the word frequencies for each corpus
 			for corpus in corpora:
 				frequency = frequency_dict[corpus][wordCounter]
 				objectFrequency = Frequency ( corpus , line [ indexes [ frequency ] ] )
 				objectWord.add_frequency ( objectFrequency )
+				
+			objectCand.append ( objectWord )
 			wordCounter = wordCounter + 1
-			objectNgram.append ( objectWord )
-			
-			
+		
+		
+		
 		# add frequency of the ngram's total frequency
 		for corpus in corpora:
 			ngramFreqPos = len ( frequency_dict [ corpus ] ) - 1
 			ngram_frequency = frequency_dict [ corpus ] [ ngramFreqPos ]
 			if "f_" in ngram_frequency:
 				objectFrequency = Frequency ( corpus , line [ indexes [ ngram_frequency ] ] )
-				objectNgram.add_frequency ( objectFrequency )
-				
+				objectCand.add_frequency ( objectFrequency )
+
 
 		# objectFeature is a list of features. those features will be added
 		# to a candidate object in the next step
-		objectFeature = []
 		if len ( features ) != 0:
 			for feat in features:	
-				objectFeature.append ( Feature ( feat , line [ indexes [ feat ] ] ) )
-				
-		# creation of a new candidate
-		objectCand = Candidate( candid , objectNgram , objectFeature , [] , [] )	
+				objectFeature = Feature ( feat , line [ indexes [ feat ] ] )
+				objectCand.add_feat ( objectFeature )
+			
+		
 			
 		# add tpclasses to the candidate object
 		if len ( tpclasses ) != 0:
@@ -390,17 +384,16 @@ def getCand( filename ):
 				objecttp = TPClass( tpclassName, line [ indexes [ tpclass ] ] )
 				objectCand.add_tpclass( objecttp )
 
-		#print candidate object. we can now start processing a new candidate
+		# print candidate object. we can now start processing a new candidate
 		print objectCand.to_xml().encode( 'utf-8' )
 		
-		#increase candidate id counter to the next candidate object
+		# increase candidate id counter to the next candidate object
 		candid = candid + 1
 
 	f.close()
 
 ################################################################################
 
-#gets the arguments passed in the command line, returns a string list
 def treat_options_csv2xml( opts, arg, n_arg, usage_string ):
 	"""
 		Callback function that handles the command line options of this script.
