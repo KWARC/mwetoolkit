@@ -155,7 +155,7 @@ def open_gs( gs_filename ) :
     try :      
         reference_file = open( gs_filename )
         parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_reference ) )
+        parser.setContentHandler( DictXMLHandler( treat_entry=treat_reference ) )
         parser.parse( reference_file )        
         reference_file.close()
     except IOError, err:
@@ -216,12 +216,12 @@ try :
     precision = float( tp_counter ) / float( entity_counter )
     recall = float( tp_counter ) / float( ref_counter )
     fmeas =  ( 2 * precision * recall) / ( precision + recall )
-    verbose( "Nb. of true positives: %(tp)d" % {"tp" : tp_counter } )
-    verbose( "Nb. of candidates: %(cand)d" % {"cand" : entity_counter } )
-    verbose( "Nb. of references: %(refs)d" % {"refs" : ref_counter } )
-    verbose( "Precision: %(p)f" % {"p" : precision } )
-    verbose( "Recall: %(r)f" % {"r" : recall } )
-    verbose( "F-measure: %(f)f" % {"f" : fmeas } )
+    print >> sys.stderr, "Nb. of true positives: %(tp)d" % {"tp" : tp_counter }
+    print >> sys.stderr, "Nb. of candidates: %(cand)d" % {"cand" : entity_counter }
+    print >> sys.stderr, "Nb. of references: %(refs)d" % {"refs" : ref_counter }
+    print >> sys.stderr, "Precision: %(p)f" % {"p" : precision }
+    print >> sys.stderr, "Recall: %(r)f" % {"r" : recall }
+    print >> sys.stderr, "F-measure: %(f)f" % {"f" : fmeas }
 
                   
 except IOError, err :
