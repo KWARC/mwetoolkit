@@ -38,6 +38,7 @@ import sys
 import xml.sax
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
+from xmlhandler.dictXMLHandler import DictXMLHandler
 from util import usage, read_options, treat_options_simplest, verbose
      
 ################################################################################     
@@ -48,6 +49,9 @@ usage_string = """Usage:
 python %(program)s [OPTIONS] <candidates.xml>
 
 OPTIONS may be:
+
+-p <patterns.xml> OR --patterns <patterns.xml>
+    The patterns to keep in the file, valid XML (mwetoolkit-dict.dtd)
 
 -t <source>:<value> OR --threshold <source>:<value>    
     Defines a frequency threshold below which the candidates are filtered out.
@@ -61,18 +65,25 @@ OPTIONS may be:
     a non-negative integer, but setting <value> to 0 is the same as not 
     filtering the candidates at all.
 
--c <n> OR --crop <n>
-    Defines the number of candidates that will be kept in the output list. If
-    the resulting list contains more than <n> candidates, the remainder will be
-    ignored. This means that only the first <n> candidates are kept in the list.
-    
+-e <name>:<value> OR --equals <name>:<value>
+    Defines an equality filter on the value of a feature. Only the candidates
+    where the feature <name> is equal to <value> will be kept in the list.
+
+-r OR --reverse
+    Reverses the filtering mechanism, in order to print out only those 
+    candidates that do NOT obbey the criteria.
+
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
+reverse = False
 thresh_source = None
 thresh_value = 0
-crop_limit = -1
-crop_count = 0
+equals_name = None
+equals_value = None
 entity_counter = 0
+patterns = []
+longest_pattern = 0
+shortest_pattern = sys.maxint
      
 ################################################################################
        
@@ -98,11 +109,19 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    global thresh_source, thresh_value, crop_limit, crop_count, entity_counter
+    global thresh_source
+    global thresh_value
+    global equals_name
+    global equals_value
+    global entity_counter
+    global reverse
+    global patterns
+
     if entity_counter % 100 == 0 :
         verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
 
-    print_it = True    
+    print_it = True
+    # Threshold test
     for freq in candidate.freqs :
         if thresh_source :
             if ( thresh_source == freq.name or \
@@ -112,13 +131,25 @@ def treat_candidate( candidate ) :
         else :
             if freq.value < thresh_value :
                 print_it = False
-                
-    if crop_limit > -1 and crop_count >= crop_limit :
+    # Equality test
+    if print_it and equals_name :
         print_it = False
-        
+        for feat in candidate.features :
+            if feat.name == equals_name and feat.value == equals_value :
+                print_it = True
+
+    if print_it and patterns :
+        print_it = False
+        for pattern in patterns :
+            if pattern.match( candidate ) :                    
+                print_it = True
+                break
+
+    if reverse :
+        print_it = not print_it
+
     if print_it :   
         print candidate.to_xml().encode( 'utf-8' )
-        crop_count = crop_count + 1
     entity_counter += 1
     
 ################################################################################
@@ -153,26 +184,64 @@ def interpret_threshold( a ) :
 
 ################################################################################
 
-def interpret_crop( a ) :
+def interpret_equals( a ) :
     """
-        Interprets the argument of the -c option, that describes a cropping 
-        limit, i.e. the number of top candidates to be considered.
+        Interprets the argument of the -e option, that describes an equality
+        filter.
         
-        @param a The string argument of the -t option
+        @param a The string argument of the -e option
         
-        @return An integer containing the crop limit, or `None` if it is invalid
+        @return A pair of strings with the name and the value of the filtering
+        criterium. None if the argument is invalid.
     """
-    try :
-        crop_limit = int( a )
-        if crop_limit >= 0 :
-            return crop_limit
-        else :
-            return None
-    except TypeError :
-        return None        
-    except ValueError : # No integer provided in second part
+    argument_parts = a.split( ":" )
+    if len(argument_parts) == 2 :
+        return ( argument_parts[ 0 ], argument_parts[ 1 ] )
+    else :
         return None
 
+################################################################################
+
+def treat_pattern( entry ) :
+    """
+        For each pattern in the XML patterns list, stores it into main memory.
+        We expect that the patterns file is small enough to fit comfortably
+        into main memory. This function also updates the control variables that
+        define the shortest and longest size of a pattern.
+
+        @param entry An `Entry` contained in the XML patterns list. This entry
+        should ideally contain some wildcards, otherwise the patterns will be
+        too generic to be interesting.
+    """
+    global patterns, longest_pattern, shortest_pattern
+    longest_pattern = max( longest_pattern, len(entry) )
+    shortest_pattern = min( shortest_pattern, len(entry) )
+    patterns.append( entry )
+
+################################################################################
+
+def read_patterns_file( filename ) :
+    """
+        Opens the patterns XML file and parses it using a `DictXMLHandler`.
+
+        @param filename The string name of the patterns file.
+    """
+    global patterns
+    try :
+        patterns_file = open( filename )
+        parser = xml.sax.make_parser()
+        parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
+        try:
+            parser.parse( patterns_file )
+        except Exception :
+            print >> sys.stderr, "You provided an invalid pattern file, "+ \
+                                 "please validate it against the DTD " + \
+                                 "(mwetoolkit-dict.dtd)"
+            sys.exit( 2 )
+        patterns_file.close()
+    except IOError, err:
+        print >> sys.stderr, err
+        sys.exit( 2 )
 
 ################################################################################
 
@@ -186,7 +255,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global thresh_source, thresh_value, crop_limit
+    global thresh_source
+    global thresh_value
+    global equals_name
+    global equals_value
+    global reverse
+    
     for ( o, a ) in opts:
         if o in ( "-t", "--threshold" ) : 
             threshold = interpret_threshold( a )
@@ -199,23 +273,31 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "and <value> must be a non-negative " + \
                                      "integer"
                 usage( usage_string )
-                sys.exit( 2 ) 
-        elif o in ( "-c", "--crop" ) :  
-            crop_limit = interpret_crop( a )
-            if crop_limit is None :
-                print >> sys.stderr, "The format of the -c argument must be" + \
-                                     " <n>"
-                print >> sys.stderr, "<n> must be a non-negative integer"
-                usage( usage_string )
-                sys.exit( 2 )            
-            
+                sys.exit( 2 )
+        elif o in ( "-e", "--equals" ) :
+            equals = interpret_equals( a )
+            if equals :
+                ( equals_name, equals_value ) = equals
+            else :
+                print >> sys.stderr, "The format of the -e argument must be" + \
+                                     " <name>:<value>"
+                print >> sys.stderr, "<name> must be a valid feat name " + \
+                                     "and <value> must be a non-empty " + \
+                                     "string"
+        elif o in ("-p", "--patterns") :
+            verbose( "Reading patterns file" )
+            read_patterns_file( a )
+        elif o in ("-r", "--reverse") :
+            reverse = True
+            verbose( "Option REVERSE active")
+
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "verbose", "threshold=", "crop=" ]
-arg = read_options( "vt:c:", longopts, treat_options, 1, usage_string )
+longopts = [ "verbose", "threshold=", "equals=", "patterns=", "reverse" ]
+arg = read_options( "vt:e:p:r", longopts, treat_options, 1, usage_string )
 
 try :    
     print """<?xml version="1.0" encoding="UTF-8"?>
