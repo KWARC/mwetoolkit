@@ -97,7 +97,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 self.id_number_counter = self.id_number_counter + 1
             # Instanciates an empty dict entry that will be treated
             # when the <entry> tag is closed
-            self.entry = Entry( id_number, [], [] )
+            self.entry = Entry( id_number, [], [], [] )
         elif name == "w" :
             if( "surface" in attrs.keys() ) :
                 surface = strip_xml( attrs[ "surface" ] )

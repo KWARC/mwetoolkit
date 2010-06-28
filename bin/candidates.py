@@ -130,7 +130,7 @@ def treat_sentence( sentence ) :
             if is_candidate : 
                 # Deep copy manually
                 copy_ngram = Ngram( [], [] )
-                for w in ngram.word_list :
+                for w in ngram :
                     copy_w = Word( w.surface, w.lemma, w.pos, [] )
                     copy_ngram.append( copy_w )                
                 if ignore_pos :    
@@ -247,7 +247,7 @@ def create_patterns_file( ngram_range ) :
     if result :
         ( shortest_pattern, longest_pattern ) = result
         for i in range( shortest_pattern, longest_pattern + 1 ) :
-            a_pattern = Entry( 0, [], [] )
+            a_pattern = Entry( 0, [], [], [] )
             for j in range( i ) :
                 a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, []) )
             patterns.append( a_pattern )

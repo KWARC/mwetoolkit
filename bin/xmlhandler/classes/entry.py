@@ -44,10 +44,10 @@ class Entry( Ngram ) :
         probably `WILDCARD`s to express undefined constraints. The `freqs` list
         of an `Entry` is generally not used.
     """
-    def __init__( self, id_number, base=[], features=[] ) :
+    def __init__( self, id_number, base=[], freqs=[], features=[] ) :
         """
         """
-        super( Entry, self ).__init__( base )
+        super( Entry, self ).__init__( base, freqs )
         self.id_number = id_number
         self.features = features
             

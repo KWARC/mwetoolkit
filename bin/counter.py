@@ -43,7 +43,7 @@ import pdb
 import array
 import re
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
+from xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR                                        
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.yahooFreq import YahooFreq
@@ -114,9 +114,9 @@ def treat_meta( meta ) :
        
 ################################################################################
        
-def treat_candidate( candidate ) :
+def treat_entity( entity ) :
     """
-        For each candidate, searches for the individual word frequencies of the
+        For each entity, searches for the individual word frequencies of the
         base ngram. The corresponding function, for a corpus index or for yahoo,
         will be called, depending on the -i or -y options. The frequencies are
         added as a child element of the word and then the candidate is printed.
@@ -129,7 +129,7 @@ def treat_candidate( candidate ) :
     if ( entity_counter >= low_limit or low_limit < 0 ) and \
        ( entity_counter <= up_limit or up_limit < 0 ) :
         (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
-        for w in candidate :
+        for w in entity :
             c_surfaces.append( w.surface )
             c_lemmas.append( w.lemma )
             c_pos.append( w.pos )
@@ -137,8 +137,8 @@ def treat_candidate( candidate ) :
             w.add_frequency( Frequency( freq_name, freq_value ) )
         # Global frequency
         freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-        candidate.add_frequency( Frequency( freq_name, freq_value ) )
-    print candidate.to_xml().encode( 'utf-8' )
+        entity.add_frequency( Frequency( freq_name, freq_value ) )
+    print entity.to_xml().encode( 'utf-8' )
     entity_counter += 1
 
 ################################################################################
@@ -367,9 +367,9 @@ arg = read_options( "ywi:vgsf:t:", longopts, treat_options, 1, usage_string )
 try :    
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                    treat_candidate=treat_candidate,
-                                    gen_xml="candidates")
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_entity,
+                                 gen_xml=True )
     parser.setContentHandler(handler)
     verbose( "Counting ngrams in candidates file" )
     parser.parse( input_file )

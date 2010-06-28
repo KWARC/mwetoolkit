@@ -36,6 +36,7 @@ import sys
 import xml.sax
 import pdb
 
+from xmlhandler.classes.frequency import Frequency
 from xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
@@ -98,7 +99,7 @@ def treat_entity( entity ) :
     if isinstance( entity, Candidate ) :
         copy_ngram = Candidate( 0, [], [], [], [] )
     elif isinstance( entity, Entry ) :
-        copy_ngram = Entry( 0, [], [] )
+        copy_ngram = Entry( 0, [], [], [] )
     elif isinstance( entity, Sentence ) :
         copy_ngram = Sentence( [], 0 )
     else :
@@ -124,10 +125,12 @@ def treat_entity( entity ) :
             copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
             copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
             copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
+            copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
         else :
             copy_ngram.occurs = entity.occurs
             copy_ngram.features = entity.features
             copy_ngram.tpclasses = entity.tpclasses
+            copy_ngram.freqs = entity.freqs
     elif isinstance( entity, Entry ) :
         pass
     elif isinstance( entity, Sentence ) :
@@ -149,6 +152,19 @@ def print_entities() :
     uniq_counter = 0
     for entity in entity_buffer.values() :
         entity.id_number = uniq_counter
+        if isinstance( entity, Candidate ) :
+            # WARNING: This is sort of specific for the VERBS 2010 paper. This
+            # whole script should actually be redefined and documented. But for
+            # the moment it's useful and I have no time to be a good programmer
+            # -Carlos
+            freq_sum = {}
+            for freq in entity.freqs :
+                freq_entry = freq_sum.get( freq.name, 0 )
+                freq_entry += int( freq.value )
+                freq_sum[ freq.name ] = freq_entry
+            entity.freqs = []
+            for ( name, value ) in freq_sum.items() :
+                entity.add_frequency( Frequency( name, value ) )
         print entity.to_xml().encode( 'utf-8' )
         uniq_counter += 1
     verbose( "%(n)d entities, %(u)d unique entities" % { "n":entity_counter, \
