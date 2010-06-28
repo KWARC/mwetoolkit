@@ -58,7 +58,7 @@ def treat_meta( meta ) :
         string_cand = string_cand + cs.name + "\t"  
     for cs in meta.meta_tpclasses :
         string_cand = string_cand + cs.name + "\t"        
-    string_cand = string_cand.strip()        
+    string_cand = string_cand + "occurs"
         
     print string_cand.encode( 'utf-8' )       
        
@@ -92,9 +92,16 @@ def treat_candidate( candidate ) :
     
     for tpclass in candidate.tpclasses :
         string_cand += str( tpclass.value ) + "\t"
-    string_cand = string_cand.strip()
-                 
-    
+
+    occur_dict = {}
+    for occur in candidate.occurs :
+        surfaces = []
+        for w in occur :
+            surfaces.append( w.surface )
+        occur_dict[ " ".join( surfaces ) ] = True
+        
+    string_cand += ", ".join( occur_dict.keys() )
+       
     print string_cand.encode( 'utf-8' )
 
 ################################################################################     
