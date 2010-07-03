@@ -35,7 +35,7 @@ import sys
 import xml.sax
 import re
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
+from xmlhandler.genericXMLHandler import GenericXMLHandler
 from util import read_options, treat_options_simplest
 from xmlhandler.classes.__common import WILDCARD
      
@@ -57,14 +57,16 @@ def treat_meta( meta ) :
     for cs in meta.corpus_sizes :
         string_cand = string_cand + cs.name + "\t"  
     for cs in meta.meta_tpclasses :
-        string_cand = string_cand + cs.name + "\t"        
+        string_cand = string_cand + cs.name + "\t"
+    for cs in meta.meta_feats :
+        string_cand = string_cand + cs.name + "\t"
     string_cand = string_cand + "occurs"
         
     print string_cand.encode( 'utf-8' )       
        
 ################################################################################     
        
-def treat_candidate( candidate ) :
+def treat_entity( entity ) :
     """
         For each `Candidate`, print the candidate ID, its POS pattern and the 
         list of occurrences one per line
@@ -72,36 +74,53 @@ def treat_candidate( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     string_cand = ""
-    if candidate.id_number >= 0 :
-        string_cand += str( candidate.id_number )
+    if entity.id_number >= 0 :
+        string_cand += str( entity.id_number )
     string_cand = string_cand.strip() + "\t"    
     
-    for w in candidate :
+    for w in entity :
         if w.lemma != WILDCARD :            
             string_cand += w.lemma + " "
         else :
             string_cand += w.surface + " "
     string_cand = string_cand.strip() + "\t"
     
-    for w in candidate :
+    for w in entity :
         string_cand += w.pos + " "
     string_cand = string_cand.strip() + "\t"
     
-    for freq in candidate.freqs :
+    for freq in entity.freqs :
         string_cand += str( freq.value ) + "\t"
-    
-    for tpclass in candidate.tpclasses :
-        string_cand += str( tpclass.value ) + "\t"
 
-    occur_dict = {}
-    for occur in candidate.occurs :
-        surfaces = []
-        for w in occur :
-            surfaces.append( w.surface )
-        occur_dict[ " ".join( surfaces ) ] = True
+    try :
+        for tpclass in entity.tpclasses :
+            string_cand += str( tpclass.value ) + "\t"
+    except AttributeError:
+        # This kind of entry probably doesnt have tpclass
+        string_cand = string_cand.strip()
+
+    try :
+        occur_dict = {}
+        for occur in entity.occurs :
+            surfaces = []
+            for w in occur :
+                surfaces.append( w.surface )
+            occur_dict[ " ".join( surfaces ) ] = True
+
+        string_cand += "; ".join( occur_dict.keys() ) + "\t"
+    except AttributeError:
+        # This kind of entry probably doesnt have occurs
+        string_cand = string_cand.strip() + "\t-\t"
+
+    try :
+        for feat in entity.features :
+            string_cand += str( feat.value ) + "\t"
+    except AttributeError:
+        # This kind of entry probably doesnt have tpclass
+        string_cand = string_cand.strip()
         
-    string_cand += ", ".join( occur_dict.keys() )
-       
+    string_cand = string_cand.strip()
+
     print string_cand.encode( 'utf-8' )
 
 ################################################################################     
@@ -113,9 +132,10 @@ try :
     relation_name = re.sub( "\.xml", "", arg[ 0 ] )
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
-    parser.setContentHandler( CandidatesXMLHandler( \
-                              treat_candidate=treat_candidate, \
-                              treat_meta=treat_meta ) ) 
+    parser.setContentHandler( GenericXMLHandler( \
+                              treat_entity=treat_entity, \
+                              treat_meta=treat_meta,
+                              gen_xml=False) )
     parser.parse( input_file )
     input_file.close() 
     
