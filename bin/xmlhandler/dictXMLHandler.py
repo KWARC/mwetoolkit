@@ -164,7 +164,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
         elif name == "w" :
             self.word = None
         elif name == "meta" :
-            # Finished reading the meta header, call callback        
+            # Finished reading the meta header, call callback 
             self.treat_meta( self.meta )
         elif name == "dict" and self.gen_xml :
                 # Must only be printed at the end of the main script. Some scripts

@@ -98,6 +98,7 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             xml_type = ""
         if name == "dict" :
             self.handler = DictXMLHandler( treat_entry=self.treat_entity,
+                                           treat_meta = self.treat_meta,
                                            gen_xml=xml_type )
         elif name == "corpus" :
             self.handler = CorpusXMLHandler( treat_sentence=self.treat_entity,
