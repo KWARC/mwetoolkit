@@ -77,6 +77,7 @@ class Candidate ( Entry ) :
         self.occurs = occurs              # Ngram list
         self.tpclasses = tpclasses        # TPClass list
         self.freqs = []
+        self.features = features
         
 ################################################################################
 
