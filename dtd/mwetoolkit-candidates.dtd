@@ -42,7 +42,7 @@ curly brackets, in the same style as WEKA's arff file format -->
     name CDATA #REQUIRED
     type CDATA #REQUIRED
 >
-<!ELEMENT cand (ngram,occurs+,features?,tpclass*)>
+<!ELEMENT cand (ngram,occurs?,features?,tpclass*)>
 <!ATTLIST cand
     candid CDATA #IMPLIED
 >
