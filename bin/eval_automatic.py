@@ -184,7 +184,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     for ( o, a ) in opts:
         if o in ("-r", "--reference"): 
             open_gs( a )     
-            gs_name = re.sub( "\.xml", "", a ) 
+            gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", a ) )
         elif o in ("-g", "--ignore-pos"): 
             ignore_pos = True
         elif o in ("-c", "--case"):
