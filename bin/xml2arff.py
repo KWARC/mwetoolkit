@@ -35,12 +35,11 @@
 """
 
 import sys
-import getopt
 import xml.sax
 import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest
      
 ################################################################################     
 # GLOBALS     
