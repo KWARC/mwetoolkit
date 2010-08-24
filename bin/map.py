@@ -169,7 +169,7 @@ def print_stats() :
         Sorts the tuple list `feat_to_order` and then retrieves the candidates
         from the temporary DB in order to print them out.
     """
-    global feat_to_order, ascending
+    global feat_to_order, ascending, feat_list
 
     #feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending) )
     # Now print sorted candidates. A candidate is retrieved from temp DB through
@@ -178,7 +178,7 @@ def print_stats() :
         print "----------------------------------------------------------------"
         print "Statistics for %(tp)s:" % { "tp" : tpclass }
         print "----------------------------------------------------------------"
-        for feat_name in feat_to_order[ tpclass ].keys() :
+        for feat_name in feat_list :
             feat_values = feat_to_order[ tpclass ][ feat_name ]
             feat_values.sort( key=lambda x: x[ 0 ], reverse=(not ascending) )
             ( map, variance, tps ) = calculate_map( feat_values )
