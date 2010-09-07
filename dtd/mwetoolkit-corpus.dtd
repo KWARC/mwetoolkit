@@ -29,5 +29,11 @@
 <!ATTLIST w
     surface CDATA #REQUIRED
     lemma CDATA #IMPLIED
-    pos CDATA #IMPLIED   
+    pos CDATA #IMPLIED
+    syn CDATA #IMPLIED 
 > 
+<!-- surface: Surface form of a word, like each word in the sentence "He went to the streets"
+     lemma: Lemmatised (original) form of a word, like each lemma in the sentence "he go to the street"
+     pos: Morphosyntactic category of a word, like each class name (N-Noun, V-Verb, etc.) in the sentence "PP V P DT N"
+     syn: Syntax information in any formalism you like, for instance the dependency information in the sentence (the part before the ":" is the relation, the part after the ">" is the index of the word that is the target of the relation) "He/subj:>2 went/main:>0 to/goa:>2 the/det:>5 streets/pcomp:>3"
+-->
