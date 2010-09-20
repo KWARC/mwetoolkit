@@ -41,6 +41,14 @@ from xmlhandler.genericXMLHandler import GenericXMLHandler
 from util import usage, read_options, treat_options_simplest, verbose
 
 ################################################################################
+
+class LimitReachedError ( Exception ) :
+    """
+        Means that I read the first n lines, now I can stop parsing the XML.
+    """
+
+
+################################################################################
 # GLOBALS
 
 usage_string = """Usage:
@@ -85,6 +93,8 @@ def treat_entity( entity ) :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     if entity_counter < limit :
         print entity.to_xml().encode('utf-8')
+    else :
+        raise LimitReachedError
     entity_counter += 1
 
 ################################################################################
@@ -126,12 +136,19 @@ try :
                                  gen_xml=True )
     parser.setContentHandler( handler )
     if len( arg ) == 0 :
-        parser.parse( sys.stdin )
+        try :
+            parser.parse( sys.stdin )
+        except LimitReachedError :
+            pass # Do nothing, of course, since this is not really an Error, but
+            # just a way to show the first n lines have been read
         print handler.footer
     else :
         for a in arg :
             input_file = open( a )
-            parser.parse( input_file )
+            try :
+                parser.parse( input_file )
+            except LimitReachedError :
+                pass # cf above
             footer = handler.footer
             handler.gen_xml = False
             input_file.close()
@@ -144,5 +161,8 @@ except Exception, err :
     print >> sys.stderr, "You probably provided an invalid XML file," +\
                          " please validate it against the DTD " + \
                          "(dtd/mwetoolkit-*.dtd)"
+
+################################################################################
+
 
 
