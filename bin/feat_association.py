@@ -76,6 +76,12 @@ OPTIONS may be:
     counts. In this case, you MUST define the original count source and it must
     be a valid name described through a <corpussize> element in the meta header.
 
+-u OR --unnorm-mle
+    Does nor normalize Maximum Likelihood Estimator. This means that instead of
+    the raw frequency divided by the size of the corpus, MLE will correspond to
+    the simple raw frequency of the n-gram. Both, normalized and unnormalized
+    MLE are rank-equivalent.
+
 -v OR --verbose
     Print messages that explain what is happening.
 
@@ -87,6 +93,7 @@ measures = supported_measures
 # TODO: Parametrable combine function
 heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
 entity_counter = 0
+not_normalize_mle=False
      
 ################################################################################     
        
@@ -265,13 +272,17 @@ def calculate_ams( o, m_list, N, corpus_name ) :
     """
     # N is never null!!!
     # m_list is never empty!!!
-    global measures, heuristic_combine
+    global measures, heuristic_combine, not_normalize_mle
     feats = []
     f_sum = 0
     n = len( m_list )
     e = expect( m_list, N )
     if "mle" in measures :
-        feats.append( Feature( "mle_" + corpus_name, o / N ) )
+        if not_normalize_mle :
+            mle = int( o )
+        else :
+            mle = o / N
+        feats.append( Feature( "mle_" + corpus_name, mle ) )
     if "pmi" in measures :
         if e != 0 and o != 0:
             pmi = math.log( o / e, 2 )
@@ -308,7 +319,7 @@ def calculate_ams( o, m_list, N, corpus_name ) :
                 ll_list .append( ll )
             ll_final = heuristic_combine( ll_list )
         else :
-            print >> sys.err, "WARNING: log-likelihood is only implemented "+\
+            print >> sys.stderr, "WARNING: log-likelihood is only implemented "+\
                               "for 2-grams. Defaults to 0.0 for n>2"
             ll_final = 0.0
         feats.append( Feature( "ll_" + corpus_name, ll_final ) )
@@ -341,7 +352,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global measures, supported_measures, main_freq
+    global measures, supported_measures, main_freq, not_normalize_mle
     for ( o, a ) in opts:
         if o in ( "-m", "--measures" ) :
             try :
@@ -356,29 +367,38 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 sys.exit( 2 )
         elif o in ( "-o", "--original" ) :
             main_freq = a
+        elif o in ( "-u", "--unnorm-mle" ) :
+            not_normalize_mle = True
     treat_options_simplest( opts, arg, n_arg, usage_string )
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "measures=", "original="]
-arg = read_options( "vm:o:", longopts, treat_options, 1, usage_string )
+longopts = ["verbose", "measures=", "original=", "unnorm-mle"]
+arg = read_options( "vm:o:u", longopts, treat_options, -1, usage_string )
 
-try :    
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
-<candidates>
-"""
-    input_file = open( arg[ 0 ] )
+try :
     parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
-    parser.parse( input_file )
-    input_file.close() 
-    print "</candidates>" 
-    
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates" )
+    parser.setContentHandler( handler )
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+        print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        print footer
+
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-candidates.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
