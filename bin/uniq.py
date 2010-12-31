@@ -35,6 +35,7 @@
 import sys
 import xml.sax
 import pdb
+import re
 
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.genericXMLHandler import GenericXMLHandler
@@ -43,7 +44,7 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.__common import WILDCARD
+from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
 from util import read_options, treat_options_simplest, verbose
 
 ################################################################################
@@ -65,13 +66,20 @@ OPTIONS may be:
 
 -v OR --verbose
     Print messages that explain what is happening.
+    
+-t OR --retokenise
+    Re-tokenises the words of the candidate by removing all the slashes and 
+    dashes. For example, "gel assay" and "gel-assay" will be uniqued into a 
+    single candidate.
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
 ignore_pos = False
 surface_instead_lemmas = False
+perform_retokenisation = False
 entity_counter = 0
 entity_buffer = {}
+target_characters = "/-" # Escape special characters in regex
 
 ################################################################################
 
@@ -85,6 +93,53 @@ def treat_meta( meta ) :
     print meta.to_xml().encode( 'utf-8' ) 
 
 ################################################################################
+
+def create_instance( entity ) :
+    """
+    """
+    if isinstance( entity, Candidate ) :
+        return Candidate( 0, [], [], [], [], [] )
+    elif isinstance( entity, Entry ) :
+        return Entry( 0, [], [], [] )
+    elif isinstance( entity, Sentence ) :
+        return Sentence( [], 0 )
+    else :
+        return Ngram( [], [] )
+################################################################################    
+
+def retokenise( ngram ) :
+    """
+    """
+    global target_characters
+    global surface_instead_lemmas
+    split_form = create_instance( ngram )
+    for w in ngram :
+        if surface_instead_lemmas :
+            splittable = w.surface
+        else :
+            splittable = w.lemma        
+        for c in list( target_characters ) :
+            splittable = splittable.replace( c, "-" )
+        for part in splittable.split( "-" ) :
+            part = part.strip()
+            # Little workarround for digits
+            if part.isdigit() :
+                pos = "NUM"
+            else :
+                pos = w.pos
+            #pdb.set_trace()
+            # Impossible to replace, one of the parts does never appear as
+            # an individual word.
+            if part != "" :
+                if surface_instead_lemmas :
+                    split_form.append( Word( part, WILDCARD, pos, WILDCARD, [] ) )
+                else :
+                    split_form.append( Word( WILDCARD, part, pos, WILDCARD, [] ) )
+    #pdb.set_trace()
+    return split_form
+            
+    
+################################################################################
        
 def treat_entity( entity ) :
     """
@@ -92,30 +147,31 @@ def treat_entity( entity ) :
         
         @param entity A subclass of `Ngram` that is being read from the XM.
     """
-    global entity_counter, entity_buffer, limit
+    global entity_counter, entity_buffer
+    global perform_retokenisation, ignore_pos, surface_instead_lemmas
+
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     # TODO: improve the "copy" method
-    if isinstance( entity, Candidate ) :
-        copy_ngram = Candidate( 0, [], [], [], [] )
-    elif isinstance( entity, Entry ) :
-        copy_ngram = Entry( 0, [], [], [] )
-    elif isinstance( entity, Sentence ) :
-        copy_ngram = Sentence( [], 0 )
-    else :
-        copy_ngram = Ngram( [], [] )
+    copy_ngram = create_instance( entity )
     for w in entity :
-        copy_w = Word( w.surface, w.lemma, w.pos, [] )
+        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )        
         copy_ngram.append( copy_w )
+        
+    if perform_retokenisation :
+        copy_ngram = retokenise( copy_ngram )
+        
     if ignore_pos :
         copy_ngram.set_all( pos=WILDCARD )
+        
     if surface_instead_lemmas :
-        copy_ngram.set_all( lemma=WILDCARD )
+        copy_ngram.set_all( lemma=WILDCARD )        
     else :
         copy_ngram.set_all( surface=WILDCARD )
-
+        
     internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
     #pdb.set_trace()
+    
 
     if isinstance( entity, Candidate ) :
         # TODO: Generalise this!
@@ -125,7 +181,12 @@ def treat_entity( entity ) :
             copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
             copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
             copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
-            copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
+            #copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
+            unify_freqs = {}
+            for f in list( set( old_entry.freqs ) | set( entity.freqs ) ) :
+                unify_freqs[ f.name ] = unify_freqs.get( f.name, 0 ) + f.value
+            for ( k, v ) in unify_freqs.items() :
+                copy_ngram.add_frequency( Frequency( k, v ) )
         else :
             copy_ngram.occurs = entity.occurs
             copy_ngram.features = entity.features
@@ -182,20 +243,22 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global ignore_pos, surface_instead_lemmas
+    global ignore_pos, surface_instead_lemmas, perform_retokenisation
     for ( o, a ) in opts:
         if o in ("-g", "--ignore-pos") :
             ignore_pos = True
         elif o in ("-s", "--surface") :
             surface_instead_lemmas = True
+        elif o in ("-t", "--retokenise") :
+            perform_retokenisation = True            
                              
     treat_options_simplest( opts, arg, n_arg, usage_string )
     
 ################################################################################    
 # MAIN SCRIPT
 
-longopts = [ "ignore-pos", "surface", "verbose" ]
-arg = read_options( "gsv", longopts, treat_options, -1, usage_string )
+longopts = [ "ignore-pos", "surface", "verbose", "retokenise" ]
+arg = read_options( "gsvt", longopts, treat_options, -1, usage_string )
 
 try :    
 
@@ -206,12 +269,14 @@ try :
     parser.setContentHandler( handler )
     if len( arg ) == 0 :        
         parser.parse( sys.stdin )
+        verbose( "Output the unified ngrams..." )        
         print_entities()
         print handler.footer
     else :
         for a in arg :
             input_file = open( a )            
             parser.parse( input_file )
+            verbose( "Output the unified ngrams..." )
             print_entities() 
             footer = handler.footer
             handler.gen_xml = False
@@ -220,10 +285,10 @@ try :
         print footer
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid XML file," +\
-#                         " please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-*.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid XML file," +\
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-*.dtd)"
 
 
