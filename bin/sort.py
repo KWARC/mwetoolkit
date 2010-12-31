@@ -40,7 +40,7 @@ import tempfile
 import shelve
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest
 from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
      
 ################################################################################     
@@ -205,7 +205,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "feat=", "asc", "desc", "verbose" ]
-arg = read_options( "f:adv", longopts, treat_options, 1, usage_string )
+arg = read_options( "f:adv", longopts, treat_options, -1, usage_string )
 
 try :    
     try :    
@@ -221,16 +221,25 @@ try :
         sys.exit( 2 )
 
     
-    input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
-                                    treat_meta=treat_meta,
-                                    gen_xml="candidates")
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates" )
     parser.setContentHandler( handler )
-    parser.parse( input_file )
-    input_file.close()     
-    sort_and_print()
-    print handler.footer
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+        sort_and_print()
+        print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        sort_and_print()
+        print footer
     
     try :
         temp_file.close()
