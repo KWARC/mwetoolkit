@@ -79,10 +79,23 @@ OPTIONS may be:
      example, that "like" as a preposition and "like" as a verb will be counted 
      as the same entity. If you are using -y, this option will be ignored. 
      Default false.
-     
+
+-s OR --surface
+    Counts surface forms instead of lemmas. Default false.
+
 -v OR --verbose
-    Print messages that explain what is happening.     
+    Print messages that explain what is happening.
+    
+-x OR --text
+    Instead of traditional candidates in XML, takes as input a textual list with 
+    one query per line. The output will have the query followed by the number of 
+    web occurrences. MUST be used with -y or -w option.
    
+-a OR --vars
+    Instead of counting the candidate, counts the variances in the <vars> 
+    element. If you also want to count the candidate lemma, you should call the
+    counter twice, first without this option then with this option.
+
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 You must chose either the -y option or the -i otpion, both are not allowed at 
 the same time. 
@@ -97,7 +110,9 @@ the_corpus_size = -1
 entity_counter = 0
 low_limit = -1
 up_limit = -1
-     
+text_input = False
+count_vars = False
+
 ################################################################################
        
 def treat_meta( meta ) :
@@ -113,7 +128,29 @@ def treat_meta( meta ) :
     print meta.to_xml()
        
 ################################################################################
-       
+
+def append_counters( ngram ):
+    """
+        Calls the frequency function for each word of the n-gram as well as for
+        the n-gram as a whole. The result is appended to the frequency list
+        of the `Ngram` given as input.
+        
+        @param ngram The `Ngram` that is being counted.
+    """
+    global get_freq_function, freq_name
+    ( c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
+    for w in ngram :
+        c_surfaces.append( w.surface )
+        c_lemmas.append( w.lemma )
+        c_pos.append( w.pos )
+        freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
+        w.add_frequency( Frequency( freq_name, freq_value ) )
+    # Global frequency
+    freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
+    ngram.add_frequency( Frequency( freq_name, freq_value ) )
+
+################################################################################
+
 def treat_entity( entity ) :
     """
         For each entity, searches for the individual word frequencies of the
@@ -123,21 +160,18 @@ def treat_entity( entity ) :
         
         @param candidate The `Candidate` that is being read from the XML file.        
     """
-    global get_freq_function, freq_name, entity_counter, low_limit, up_limit
+    global entity_counter
+    global low_limit, up_limit
+    global count_vars
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     if ( entity_counter >= low_limit or low_limit < 0 ) and \
        ( entity_counter <= up_limit or up_limit < 0 ) :
-        (c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
-        for w in entity :
-            c_surfaces.append( w.surface )
-            c_lemmas.append( w.lemma )
-            c_pos.append( w.pos )
-            freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
-            w.add_frequency( Frequency( freq_name, freq_value ) )
-        # Global frequency
-        freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-        entity.add_frequency( Frequency( freq_name, freq_value ) )
+        if count_vars :
+            for var in entity.vars :
+                append_counters( var )
+        else :
+            append_counters( entity )
     print entity.to_xml().encode( 'utf-8' )
     entity_counter += 1
 
@@ -276,6 +310,21 @@ def open_index( prefix ) :
 
 ################################################################################
 
+def treat_text( stream ):
+    """
+        Treats a text file by getting the frequency of the lines. Useful for 
+        quick web queries from a text file containing one query per line.
+        
+        @param stream File or stdin from which the lines (queries) are read.
+    """
+    global web_freq
+    for line in stream.readlines() :
+        query = line.strip()
+        count = str( web_freq.search_frequency( query ) )
+        print query.encode( "utf-8" ) + "\t" + count
+
+################################################################################
+
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
         Callback function that handles the command line options of this script.
@@ -286,8 +335,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global cache_file, get_freq_function, freq_name, build_entry, web_freq, \
-           the_corpus_size, low_limit, up_limit
+    global cache_file, get_freq_function, build_entry, web_freq
+    global the_corpus_size, freq_name
+    global low_limit, up_limit
+    global text_input, count_vars
     surface_flag = False
     pos_flag = False
     mode = []
@@ -334,7 +385,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 print >> sys.stderr, "Argument of " + o + " must be integer"
                 usage( usage_string )
                 sys.exit( 2 )
-                 
+        elif o in ("-x", "--text" ) : 
+            text_input = True
+        elif o in ("-a", "--vars" ) : 
+            count_vars = True
+
     if mode == [ "index" ] :       
         if surface_flag and pos_flag :
             build_entry = lambda s, l, p: (s + SEPARATOR + WILDCARD).encode('utf-8')
@@ -354,6 +409,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print >> sys.stderr, "Exactly one option -y, -w or -i, must be provided"
         usage( usage_string )
         sys.exit( 2 )
+    elif text_input and web_freq is None :
+        print >> sys.stderr, "-x option MUST be used with either -y or -w"
+        usage( usage_string )
+        sys.exit( 2 )
+        
                 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
@@ -361,21 +421,57 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
-            "from=", "to=" ]
-arg = read_options( "ywi:vgsf:t:", longopts, treat_options, 1, usage_string )
+            "from=", "to=", "text", "vars" ]
+arg = read_options( "ywi:vgsf:t:xa", longopts, treat_options, -1, usage_string )
 
-try :    
-    input_file = open( arg[ 0 ] )        
+try : 
     parser = xml.sax.make_parser()
     handler = GenericXMLHandler( treat_meta=treat_meta,
                                  treat_entity=treat_entity,
                                  gen_xml=True )
-    parser.setContentHandler(handler)
+    parser.setContentHandler( handler )
     verbose( "Counting ngrams in candidates file" )
-    parser.parse( input_file )
-    input_file.close() 
-    print handler.footer
-    
+    if len( arg ) == 0 :
+        if text_input :
+            treat_text( sys.stdin )
+        else :
+            parser.parse( sys.stdin )
+            print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )
+            if text_input :
+                treat_text( input_file )
+            else :
+                parser.parse( input_file )
+                footer = handler.footer
+                handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        if not text_input :
+            print footer     
+
+    if len( arg ) == 0 :
+        try :
+            parser.parse( sys.stdin )
+        except LimitReachedError :
+            pass # Do nothing, of course, since this is not really an Error, but
+            # just a way to show the first n lines have been read
+        print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )
+            try :
+                parser.parse( input_file )
+            except LimitReachedError :
+                pass # cf above
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        print footer
+
+
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :
