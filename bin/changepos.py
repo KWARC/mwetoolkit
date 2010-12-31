@@ -29,9 +29,8 @@ import sys
 import pdb
 import xml.sax
 
-import install
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose
 
 ################################################################################
 # GLOBALS
@@ -48,24 +47,23 @@ OPTIONS may be:
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
 """
 sentence_counter = 0
-conv_table = { "NNPS": "N", "NNP": "N", "NNS": "N", "NN": "N", "NPS": "N",
-               "NP": "N", "NN|NNS": "N", "JJ|NN": "N", "VBG|NN": "N",
-               "NN|DT": "N", "NN|CD": "N", "NNS|FW": "N", "JJR": "A",
-               "JJS": "A", "JJ": "A", "JJ|VBG": "A", "JJ|RB": "A",
-               "JJ|NNS": "A", "JJ|VBN": "A", "VBG|JJ": "A", "VBD": "V",
-               "VBG": "V", "VBN": "V", "VBP": "V", "VBZ": "V", "VVD": "V",
-               "VVG": "V", "VVN": "V", "VVP": "V", "VVZ": "V", "VHD": "V",
-               "VHG": "V", "VHN": "V", "VHP": "V", "VHZ": "V", "VV": "V",
-               "VB": "V", "VH": "V", "MD": "V", "VBP|VBZ": "V", "VBN|JJ": "V",
-               "VBD|VBN": "V", "RBR": "R", "RBS": "R", "WRB": "R", "RB": "R",
-               "IN": "P", "TO": "P", "RP": "P", "EX": "P", "IN|PRP$": "P",
-               "IN|CC": "P", "PDT": "DT", "WDT": "DT", "DT": "DT", "CT": "DT",
-               "XT": "DT", "PRP$": "PP", "PRP": "PP", "PP$": "PP", "PP": "PP",
-               "WP$": "PP", "WP": "PP", "POS": "PP", "CCS": "CC", "CC": "CC",
-               "FW": "FW", "SYM": "PCT", ".": "PCT", ",": "PCT", ":": "PCT",
-               "CD": "NUM", "\"": "PCT", "(": "PCT", ")": "PCT", "'": "PCT",
-               "?": "PCT", "-": "PCT", "/": "PCT", "LS": "PCT", "``": "PCT",
-               "''": "PCT", "SENT":"PCT", "UH":"UH", "$":"PCT" }
+# This table contains mainly exceptions that need special treatment
+conv_table = { "MD": "V",    # modal verb is a verb
+               "IN": "P",    # Preposition in is a preposition
+               "TO": "P",    # Preposition to is a preposition
+               "RP": "P",
+               "EX": "P",
+               "CT": "DT", 
+               "XT": "DT",
+               "CD": "NUM",
+               "POS": "PP",
+               "FW": "FW",   # Foreign word stays foreign word
+               "SYM": "PCT", # Special symbol is a punctuation sign
+               "LS": "PCT",  # List symbol is a punctuation sign
+               "``": "PCT",  # Quotes are a punctuation sign
+               "''": "PCT",  # Quotes are a punctuation sign
+               "SENT":"PCT", # Sentence delimiter is a punctuation sign
+               "UH":"UH",  } # Interjection stays interjectio
 
 ################################################################################
 
@@ -91,11 +89,29 @@ def treat_entity( entity ) :
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
     for w in entity :
-        try :
-            w.pos = conv_table[ w.pos ]
-        except Exception :
-            print >> sys.err, "WARNING: part of speech " + str( w.pos ) + \
-                              " not converted."
+        # The "split" part is to avoid that multiple POS like NNS|JJ are not 
+        # converted. We simply take the first POS, ignoring the second one
+        w.pos = w.pos.split("|")[0]
+        if w.pos.startswith( "N" ) or w.pos.startswith( "V" ) : # NOUNS / VERBS
+            w.pos = w.pos[ 0 ]
+        elif w.pos.startswith( "J" ) : # ADJECTIVES
+            w.pos = "A"
+        elif "RB" in w.pos : # ADVERBS
+            w.pos = "R"
+        elif "DT" in w.pos : # DETERMINERS
+            w.pos = "DT"
+        elif "CC" in w.pos : # CONJUNCTIONS
+            w.pos = "CC"
+        elif w.pos.startswith( "PRP" ) or w.pos.startswith( "PP" ) or w.pos.startswith( "WP" ) : # PRONOUNS
+            w.pos = "PP"
+        elif w.pos in "\"()':?-/$.," : # ADVERBS
+            w.pos = "PCT"
+        else :
+            try :
+                w.pos = conv_table[ w.pos ]
+            except Exception :
+                print >> sys.stderr, "WARNING: part of speech " + str( w.pos ) + \
+                                  " not converted."
     print entity.to_xml().encode( 'utf-8' )
     sentence_counter += 1
 
