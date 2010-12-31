@@ -40,7 +40,6 @@ from xmlhandler.classes.meta import Meta
 from xmlhandler.classes.corpus_size import CorpusSize
 from xmlhandler.classes.meta_tpclass import MetaTPClass
 from xmlhandler.classes.meta_feat import MetaFeat
-from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.tpclass import TPClass
@@ -353,7 +352,7 @@ def getCand( filename ):
 		line = string.split ( line.strip ( "\n" ) , SEPCHAR )
 		
 		# creation of a new candidate
-		objectCand = Candidate( candid , [] , [] , [] , [] )
+		objectCand = Candidate( candid , [] , [] , [] , [], [] )
 		
 		# creates a new ngram object. WILDCARD is assigned when there is
 		# nothing to be printed in that field
@@ -361,10 +360,10 @@ def getCand( filename ):
 		for word in words:
 			if SURFACE_FLAG == 0:
 				# Option -s was not activated
-				objectWord = Word( WILDCARD , line [ indexes [ word ] ] , WILDCARD , [] )
+				objectWord = Word( WILDCARD , line [ indexes [ word ] ] , WILDCARD , WILDCARD, [] )
 			else:
 				# Option -s was activated
-				objectWord = Word( line [ indexes [ word ] ] , WILDCARD , WILDCARD , [] )
+				objectWord = Word( line [ indexes [ word ] ] , WILDCARD , WILDCARD , WILDCARD, [] )
 			
 			# Set the word frequencies for each corpus
 			for corpus in corpora:
