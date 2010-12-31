@@ -131,7 +131,7 @@ def treat_sentence( sentence ) :
                 # Deep copy manually
                 copy_ngram = Ngram( [], [] )
                 for w in ngram :
-                    copy_w = Word( w.surface, w.lemma, w.pos, [] )
+                    copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
                     copy_ngram.append( copy_w )                
                 if ignore_pos :    
                     copy_ngram.set_all( pos=WILDCARD )
@@ -249,7 +249,7 @@ def create_patterns_file( ngram_range ) :
         for i in range( shortest_pattern, longest_pattern + 1 ) :
             a_pattern = Entry( 0, [], [], [] )
             for j in range( i ) :
-                a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, []) )
+                a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, WILDCARD, []) )
             patterns.append( a_pattern )
             #print a_pattern.to_xml()
     else :
@@ -281,7 +281,7 @@ def print_candidates( temp_file, corpus_name ) :
         id_number = 0        
         for base_string in temp_file.keys() :
             (surface_dict, total_freq) = temp_file[ base_string ]
-            cand = Candidate( id_number, [], [], [], [] )
+            cand = Candidate( id_number, [], [], [], [], [] )
             cand.from_string( unicode( base_string, 'utf-8' ) )
             if print_cand_freq :
                freq = Frequency( corpus_name, total_freq )
@@ -360,7 +360,7 @@ try :
     parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
     parser.parse( input_file )
     input_file.close() 
-    corpus_name = re.sub( "\.xml", "", arg[ 0 ] )
+    corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
     print_candidates( temp_file, corpus_name )
     try :
         temp_file.close()

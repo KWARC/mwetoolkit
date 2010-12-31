@@ -131,7 +131,7 @@ class Ngram (object):
         """
         words_string = the_string.split( WORD_SEPARATOR )
         for word_string in words_string :           
-            a_word = Word( WILDCARD, WILDCARD, WILDCARD, [] )
+            a_word = Word( WILDCARD, WILDCARD, WILDCARD, WILDCARD, [] )
             a_word.from_string( word_string )
             self.append( a_word )
        

@@ -89,8 +89,12 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
                 pos = strip_xml( attrs[ "pos" ] )
             else :
                 pos = WILDCARD
+            if( "syn" in attrs ) :
+                syn = strip_xml( attrs[ "syn" ] )
+            else :
+                syn = WILDCARD
             # Add word to the sentence that is currently bein read
-            self.sentence.append( Word( surface, lemma, pos, [] ) )
+            self.sentence.append( Word( surface, lemma, pos, syn, [] ) )
         elif name == "corpus" and self.gen_xml :
             print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
             

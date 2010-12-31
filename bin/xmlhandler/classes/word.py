@@ -41,7 +41,7 @@ class Word :
 
 ################################################################################
 
-    def __init__( self, surface, lemma, pos, freqs ) :
+    def __init__( self, surface, lemma, pos, syn, freqs ) :
         """
             Instanciates a new `Word`. A Word might be one of: a token in a 
             corpus, in which case it will probably have at least a defined 
@@ -81,7 +81,15 @@ class Word :
             distinguishes only top-level classes ("N", "A", "V") or a fine-
             grained classification, e.g. "NN" is a proper noun, "NNS" a proper
             noun in plural form, etc.
-            
+
+            @param syn A string corresponding to a syntax information of the
+            word. AS the jungle of syntactic formalisms is wild, we assume that
+            each word has a string that encodes the syntactic information. If
+            you use a dependency parser, for instance, you might encode the
+            syntax information as "rel:>index" where "rel" is the type of
+            syntactic relation (object, subject, det, etc.) and the "index" is
+            the index of the word on which this word depends. An example can be
+            found in the corpus DTD file.
             
             @param freqs A list of `Frequency`ies corresponding to counts of 
             occurrences of this word in a certain corpus. Please notice that
@@ -92,6 +100,7 @@ class Word :
         self.surface = surface
         self.lemma = lemma
         self.pos = pos
+        self.syn = syn
         self.freqs = freqs
 
 ################################################################################
@@ -157,6 +166,8 @@ class Word :
             result += "lemma=\"" + self.lemma + "\" "
         if( self.pos != WILDCARD ) :
             result += "pos=\"" + self.pos + "\" " 
+        if( self.syn != WILDCARD ) :
+            result += "syn=\"" + self.syn + "\" "
         if not self.freqs :       
             return result + "/>"
         else :

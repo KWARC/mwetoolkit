@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# !/usr/bin/python
 # -*- coding:UTF-8 -*-
 
 ################################################################################
@@ -44,7 +44,7 @@ class Candidate ( Entry ) :
 ################################################################################
 
     def __init__( self, id_number, base=[], features=[], \
-                 occurs=[], tpclasses=[] ) :
+                 occurs=[], tpclasses=[], vars=[] ) :
         """
             Instanciates the Multiword Expression candidate.
             
@@ -70,6 +70,12 @@ class Candidate ( Entry ) :
            judgements about it being or not a MWT. The class is probably boolean
            but multiclass values are allowed, as long as the concerned machine
            learning algorithm can deal with it.
+
+           @param vars The list of possible variations of a candidate. These
+           variations may be used to validade different syntactic configurations
+           in the Web or in a corpus. For more information, take a look at the
+           variation entropy measure suggested in the paper "Picking them up
+           and Figuring them out" that we published in CoNLL 2008.
            
            @return A new Multiword Term `Candidate` .
         """
@@ -78,6 +84,7 @@ class Candidate ( Entry ) :
         self.tpclasses = tpclasses        # TPClass list
         self.freqs = []
         self.features = features
+        self.vars = vars
         
 ################################################################################
 
@@ -99,15 +106,27 @@ class Candidate ( Entry ) :
             base_string = unicode( base_string, 'utf-8')
         result = result + "    " + base_string + "\n"        
 
-        result = result + "    <occurs>\n"             
+                     
         if self.occurs :
+            result = result + "    <occurs>\n"
             for occur in self.occurs :
                 # Unicode support
                 occur_string = occur.to_xml()
                 if isinstance( occur_string, str ) :
                     occur_string = unicode( occur_string, 'utf-8')
                 result = result + "    " + occur_string +"\n"
-        result = result + "    </occurs>\n"                
+            result = result + "    </occurs>\n"
+
+        if self.vars :
+            result = result + "    <vars>\n"
+            for var in self.vars :
+                # Unicode support
+                var_string = var.to_xml()
+                if isinstance( var_string, str ) :
+                    var_string = unicode( var_string, 'utf-8')
+                result = result + "    " + var_string +"\n"
+            result = result + "    </vars>\n"
+
         if self.features :
             result = result + "    <features>\n"
             for feat in self.features :
@@ -129,6 +148,18 @@ class Candidate ( Entry ) :
             repeated occurrence in the list.
         """
         self.occurs.append( occur )
+
+################################################################################
+
+    def add_var( self, var ) :
+        """
+            Add an occurrence to the list of occurrences of the candidate.
+
+            @param occur `Ngram` that corresponds to a variation of this
+            candidate. No test is performed in order to verify whether this is a
+            repeated variation in the list.
+        """
+        self.vars.append( var )
 
 ################################################################################
 

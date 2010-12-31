@@ -86,6 +86,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         self.meta = None
         self.gen_xml = gen_xml
         self.footer = ""
+        self.inoccurs = False
+        self.invars = False
            
 ################################################################################
 
@@ -107,11 +109,15 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
                 self.id_number_counter = self.id_number_counter + 1
             # Instanciates an empty mwt candidate that will be treated
             # when the <cand> tag is closed
-            self.candidate = Candidate( id_number, None, [], [], [] )
+            self.candidate = Candidate( id_number, None, [], [], [], [] )
         elif name == "ngram" :
             # Instanciates a new ngram. We do not know which words it
             # contains, so for the moment we just keep it on the stack
-            self.ngram = Ngram( [], [] )            
+            self.ngram = Ngram( [], [] )
+        elif name == "occurs" :
+            self.inoccurs = True
+        elif name == "vars" :
+            self.invars = True
         elif name == "w" :
             # Instanciates a word. Missing attribute values are 
             # assigned to a wildcard string, meaning "uninformed" for
@@ -128,7 +134,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
                 pos = strip_xml( attrs[ "pos" ] )
             else :
                 pos = WILDCARD
-            self.word = Word( surface, lemma, pos, [] )
+            self.word = Word( surface, lemma, pos, WILDCARD, [] )
             # Add the word to the ngram that is on the stack
             self.ngram.append( self.word )
         elif name == "freq" :
@@ -188,11 +194,10 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             # Finished reading the candidate, call callback
             self.treat_candidate( self.candidate ) 
         elif name == "ngram" :
-            # The candidate already has a base form, so the ngram that I just 
-            # read is an occurrence
-            if self.candidate.word_list :
+            if self.inoccurs :
                 self.candidate.add_occur( self.ngram )
-            # This is the first ngram that I read, so it has to be the base form                
+            elif self.invars :
+                self.candidate.add_var( self.ngram )
             else :
                 self.candidate.word_list = self.ngram.word_list
                 self.candidate.freqs = self.ngram.freqs
@@ -209,6 +214,10 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             # makes it necessary a temporary buffer for the footer. Not really a
             # perfect solution but it will do for now
             self.footer = XML_FOOTER % { "root" : self.gen_xml }
+        elif name == "occurs" :
+            self.inoccurs = False
+        elif name == "vars" :
+            self.invars = False
   
 
 ################################################################################

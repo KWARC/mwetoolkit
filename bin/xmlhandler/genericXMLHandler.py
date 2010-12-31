@@ -100,13 +100,16 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             self.handler = DictXMLHandler( treat_entry=self.treat_entity,
                                            treat_meta = self.treat_meta,
                                            gen_xml=xml_type )
+            self.footer = "</dict>"
         elif name == "corpus" :
             self.handler = CorpusXMLHandler( treat_sentence=self.treat_entity,
                                              gen_xml=xml_type )
+            self.footer = "</corpus>"
         elif name == "candidates" :
             self.handler = CandidatesXMLHandler( treat_candidate=self.treat_entity,
                                                  treat_meta = self.treat_meta,
-                                                 gen_xml=xml_type )        
+                                                 gen_xml=xml_type )
+            self.footer = "</candidates>"
         self.handler.startElement(name, attrs)
 
 ################################################################################
@@ -118,8 +121,6 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
 
             @param name The name of the closing element.
         """
-        self.handler.endElement(name)
-        if self.handler.footer :
-            self.footer = self.handler.footer
+        self.handler.endElement(name)        
 
 ################################################################################

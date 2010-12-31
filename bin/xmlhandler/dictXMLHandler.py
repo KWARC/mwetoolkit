@@ -111,7 +111,11 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 pos = strip_xml( attrs[ "pos" ] )
             else :
                 pos = WILDCARD
-            self.word = Word( surface, lemma, pos, [] )
+            if( "syn" in attrs.keys() ) :
+                syn = strip_xml( attrs[ "syn" ] )
+            else :
+                syn = WILDCARD
+            self.word = Word( surface, lemma, pos, syn, [] )
             self.entry.append( self.word )
         elif name == "freq" :
             self.freq = Frequency( strip_xml( attrs[ "name" ] ),
