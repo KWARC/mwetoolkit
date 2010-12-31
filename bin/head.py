@@ -21,7 +21,6 @@
 # along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
 # 
 ################################################################################
-#!/usr/bin/python
 """
     Prints the first N entities of a list. Works like the "head" command in
     the unix platform, only it takes a file in xml format as input.
