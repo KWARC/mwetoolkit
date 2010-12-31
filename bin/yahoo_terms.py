@@ -78,10 +78,10 @@ def print_terms() :
     for term in terms :
         words = []
         for word in term.split( " " ) :
-            words.append( Word( word, WILDCARD, WILDCARD, [] ) )
+            words.append( Word( word, WILDCARD, WILDCARD, WILDCARD, [] ) )
         if len( words ) > 1 :
             base_form = Ngram( words, [] )
-            c = Candidate( base_form, id_number, [], [], [] )
+            c = Candidate( base_form, id_number, [], [], [], [] )
             id_number += 1
             print c.to_xml().encode( "utf-8" )
     
