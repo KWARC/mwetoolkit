@@ -55,12 +55,12 @@ def treat_meta( meta ) :
     """
     string_cand = "id\tngram\tpos\t"
     for cs in meta.corpus_sizes :
-        string_cand = string_cand + cs.name + "\t"  
+        string_cand = string_cand + cs.name + "\t"
+    string_cand = string_cand + "occurs\t"
     for cs in meta.meta_tpclasses :
         string_cand = string_cand + cs.name + "\t"
     for cs in meta.meta_feats :
-        string_cand = string_cand + cs.name + "\t"
-    string_cand = string_cand + "occurs"
+        string_cand = string_cand + cs.name + "\t"  
         
     print string_cand.encode( 'utf-8' )       
        
@@ -126,18 +126,24 @@ def treat_entity( entity ) :
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, 1, usage_string ) 
+longopts = [ "verbose" ]
+arg = read_options( "v", longopts, treat_options_simplest, -1, usage_string )
 
-try :    
-    relation_name = re.sub( "\.xml", "", arg[ 0 ] )
-    input_file = open( arg[ 0 ] )        
+try :
     parser = xml.sax.make_parser()
-    parser.setContentHandler( GenericXMLHandler( \
-                              treat_entity=treat_entity, \
-                              treat_meta=treat_meta,
-                              gen_xml=False) )
-    parser.parse( input_file )
-    input_file.close() 
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_entity,
+                                 gen_xml=False )
+    parser.setContentHandler( handler )
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
     
 except IOError, err :
     print >> sys.stderr, err
