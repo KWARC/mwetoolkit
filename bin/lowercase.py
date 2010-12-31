@@ -35,6 +35,8 @@
 
 import sys
 import xml.sax
+import pdb
+import re
 
 import install
 from xmlhandler.genericXMLHandler import GenericXMLHandler
@@ -117,7 +119,7 @@ def treat_sentence_complex( sentence ) :
     global vocab, sentence_counter, START_THRESHOLD    
     if sentence_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
-    
+
     for w_i in range(len(sentence)) :
         w = sentence[ w_i ]
         case_class = get_case_class( w.surface )          
@@ -135,7 +137,8 @@ def treat_sentence_complex( sentence ) :
                     # Nothing, I just ignore it, it's a freaky weird creature!   
             elif case_class == "Firstupper" :
                 occurs = token_stats[ w.surface ]
-                if w_i == 0 and \
+                if ( w_i == 0 or \
+                   re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) ) and \
                    float(occurs[ 1 ]) / float(occurs[ 0 ]) >= START_THRESHOLD :
                     w.surface = w.surface.lower()
                 elif pref_form :
@@ -169,8 +172,9 @@ def build_vocab( sentence ) :
         # the number of times it occurred at the beginning of a sentence. 
         # Therefore, form_entry[0] >= form_entry[1]
         form_entry[ 0 ] = form_entry[ 0 ] + 1  
-        # This form occurrs at the first position of the sentence. Count it
-        if w_i == 0 :
+        # This form occurrs at the first position of the sentence or after a
+        # period (semicolon, colon, exclamation or question mark). Count it
+        if w_i == 0 or re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) :
             form_entry[ 1 ] = form_entry[ 1 ] + 1 
         forms[ key ] = form_entry
         vocab[ low_key ] = forms
@@ -225,9 +229,12 @@ def get_percents( token_stats ) :
         containing the corresponding percents, i.e. the proportion of a given
         occurrence wrt to all occurrences of that word. For instance:
         `token_stats` = { "The": 100, "the": 350, "THE": 50 } will return 
-        { "The": .2, "the": .7, "THE": .1 } meaninf that the word "the" occurrs
+        { "The": .2, "the": .7, "THE": .1 } meaning that the word "the" occurrs
         20% of the times in Firstupper configuration, 70% in lowercase and 10% 
         in UPPERCASE. The sum of all dictionary values in the result is 1.
+        
+        Forms occurring at the beginning of a sentence or after a period are
+        ignored, since they might have case modifications due to their position.
         
         @param token_stats A vocabulary entry that associates case 
         configurations to an integer number of occurrences.
@@ -241,11 +248,19 @@ def get_percents( token_stats ) :
     total_count = 0
     for a_form in token_stats.keys() :
         count = percents.get( a_form, 0 );
-        count = count + token_stats[ a_form ][ 0 ]
+        count_notstart = token_stats[ a_form ][ 0 ] - token_stats[ a_form ][ 1 ]
+        # Smoothing to avoid division by zero (occurs ONLY in first position)
+        # Add-one smoothing is simple and solves the problem
+        count_notstart += 1
+        count = count + count_notstart
         percents[ a_form ] = count
-        total_count = total_count + token_stats[ a_form ][ 0 ]
+        total_count = total_count + count_notstart
     for a_form in percents.keys() :
-        percents[ a_form ] = percents[ a_form ] / float(total_count)
+        if total_count != 0 :
+            percents[ a_form ] = percents[ a_form ] / float(total_count)
+        else :
+            print >> sys.stderr, "ERROR: Percents cannot be calculated for " \
+                                 "non-occurring words!"
     return percents
 
 ################################################################################
