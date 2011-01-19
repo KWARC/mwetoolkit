@@ -1,7 +1,8 @@
 #!/bin/bash
-mweconsole_version=(0.0.4 2010-01-13)
+mweconsole_version=(0.0.5 2010-01-19)
 
 ASSOC_MEASURES="mle:pmi:ll:t:dice"
+CONTRAST_MEASURES="csmwe:simplediff:simplecsmwe"
 
 _main() {
 	if [[ $- == *i* ]]; then
@@ -49,14 +50,16 @@ help() {
 	printf "  \e[1mreference <filename>\e[0m: Select a reference (gold standard) file.\n"
 	printf "  \e[1mwc [type]\e[0m: Show statistics about the selected file.\n"
 	printf "  \e[1mhead <n> [type]\e[0m: Keep first n entries in a file.\n"
+	printf "  \e[1mtail <n> [type]\e[0m: Keep last n entries in a file.\n"
 	printf "  \e[1mindex\e[0m: Index the corpus.\n"
 	printf "  \e[1mextract\e[0m: Extract candidates from the corpus.\n"
 	printf "  \e[1mcount <source>\e[0m: Count individual frequencies of candidate words in a corpus.\n"
 	printf "  \e[1mfilter <source> <cmp> <n>\e[0m: Filter candidates by their frequency in a corpus.\n"
-	printf "  \e[1massociation [feature...]\e[0m: Compute association measures for candidates.\n"
+	printf "  \e[1massociation [measure...]\e[0m: Compute association measures for candidates.\n"
 	printf "  \e[1msort [-a] <feature>\e[0m: Sort candidates by a feature.\n"
 	printf "  \e[1mfeatures\e[0m: Show all meta-features in a candidates file.\n"
 	printf "  \e[1mannotate\e[0m: Annotate candidates according to the reference.\n"
+	printf "  \e[1mcontrast [-a] <source> [measure...]\e[0m: Compute contrast measures for candidates.\n"
 	printf "  \e[1mmap\e[0m: Calculate Mean Average Precision for candidates.\n"
 	printf "\n"
 	printf "\e[1m<type>\e[0m is one of \e[1mcorpus\e[0m, \e[1mpatterns\e[0m or \e[1mcandidates\e[0m.\n"
@@ -287,9 +290,17 @@ _selectfile() {
 	}
 }	
 
-head() {
+_headtail() {
+	local operation="$1"; shift
+	local first_or_last
+	case "$operation" in
+		head) first_or_last="first" ;;
+		tail) first_or_last="last" ;;
+		*) printf "_headtail: Invalid operation \"$operation\"!\n"; return 1 ;;
+	esac
+
 	local type file num
-	local usage="Usage: head <number-of-entries> [corpus|pattern|candidates]\n"
+	local usage="Usage: $operation <number-of-entries> [corpus|pattern|candidates]\n"
 	if [[ $# -eq 0 || $# -ge 3 || $1 == *[^0-9]* ]]; then
 		printf "$usage"
 		return 1
@@ -299,13 +310,16 @@ head() {
 	_selectfile "$@" || return
 
 	mv "$file" "$TMPFILE"
-	python "$BIN/head.py" -n "$num" "$TMPFILE" >"$file" || {
+	python "$BIN/$operation.py" -n "$num" "$TMPFILE" >"$file" || {
 		printf "Error filtering file!\n"
 		mv "$TMPFILE" "$file"
 		return 1
 	}
-	printf "Kept only first $num entries of $type.\n"
+	printf "Kept only $first_or_last $num entries of $type.\n"
 }
+
+head() { _headtail head "$@"; }
+tail() { _headtail tail "$@"; }
 
 wc() {
 	local type file
@@ -469,6 +483,12 @@ association() {
 		return 1
 	}
 
+	_readfeatures
+	[[ ${#corpus_names[@]} -eq 0 ]] && {
+		printf "No corpus count present in the candidate file! Use \e[1mcount <source>\e[0m first.\n"
+		return 1
+	}
+
 	if [[ $# -eq 0 ]]; then
 		features="$ASSOC_MEASURES"
 	else
@@ -562,6 +582,35 @@ map() {
 		printf "You must annotate the file using \e[1mreference <filename>\e[0m\n"
 		printf "and then \e[1mannotate\e[0m before using \e[1mmap\e[0m.\n"
 	}
+}
+
+contrast() {
+	local usage="Usage: contrast [-a] <original-source> [<measure>...]\n"
+	usage+="\e[1m<measure>\e[0m is one of ${CONTRAST_MEASURES//:/, }. Multiple measures can be specified.\n"
+	usage+="If no measures are specified, all supported measures are computed.\n"
+
+	local IFS=":"
+	local opts=() original measure measures
+	[[ $1 == -a ]] && {
+		opts+=(-a)
+		shift
+	}
+
+	[[ $# -eq 0 ]] && {
+		printf "$usage"
+		return 1
+	}
+
+	original="$1"; shift
+	[[ $# -gt 0 ]] && opts+=(-m "$*")
+
+	python "$BIN/feat_contrast.py" -o "$original" "${opts[@]}" "$CANDIDATES" >"$TMPFILE" && [[ -s $TMPFILE ]] || {
+		printf "Error calculating contrast measures! You might have to use \e[1mcount\e[0m first.\n"
+		return 1
+	}
+
+	mv "$TMPFILE" "$CANDIDATES"
+	printf "Contrast measures calculated.\n"
 }
 
 _main "$@"
