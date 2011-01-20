@@ -143,7 +143,9 @@ def append_counters( ngram ):
         c_surfaces.append( w.surface )
         c_lemmas.append( w.lemma )
         c_pos.append( w.pos )
-        freq_value = get_freq_function( [ w.surface ], [ w.lemma ], [ w.pos ] )
+        freq_value = get_freq_function( [ w.surface.strip() ], 
+                                        [ w.lemma.strip() ], 
+                                        [ w.pos.strip() ] )
         w.add_frequency( Frequency( freq_name, freq_value ) )
     # Global frequency
     freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )

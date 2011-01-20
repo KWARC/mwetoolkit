@@ -71,7 +71,7 @@ class GoogleFreq( WebFreq ) :
                                           "q": "QUERYPLACEHOLDER",
                                           "lr": "LANGPLACEHOLDER",
                                           "hl": "LANGPLACEHOLDER" } ) )
-        post_data = {'Referer': 'www.inf.ufrgs.br/~ceramisch'}
+        post_data = {'Referer': 'sourceforge.net/projects/mwetoolkit'}
         if not cache_filename :
             cache_filename = GOOGLE_CACHE_FILENAME
         super( GoogleFreq, self ).__init__( cache_filename, url, post_data, self.treat_result )
@@ -81,12 +81,15 @@ class GoogleFreq( WebFreq ) :
     def treat_result( self, results ) :
         """
             
-        """    
-        if results[ "responseData" ][ "results" ] :
-            return int( results[ "responseData" ][ "cursor" ] \
-                                      [ "estimatedResultCount" ] )
+        """        
+        if results[ "responseData" ] :
+            if results[ "responseData" ][ "results" ] :
+                return int( results[ "responseData" ][ "cursor" ] \
+                                   [ "estimatedResultCount" ] )
+            else :
+                return 0
         else :
-            return 0
+            return None       
             
 ################################################################################                   
     

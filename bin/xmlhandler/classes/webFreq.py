@@ -33,6 +33,7 @@ from datetime import date
 import urllib2
 import urllib
 import simplejson
+import time
 import pdb
 
 from __common import MAX_CACHE_DAYS, DEFAULT_LANG
@@ -134,8 +135,8 @@ class WebFreq( object ) :
             lang = DEFAULT_LANG
         # Look into the cache
         try :
-            ( freq, time ) = self.cache[ lang + "___" + term ]
-            dayspassed = self.today - time
+            ( freq, time_searched ) = self.cache[ lang + "___" + term ]
+            dayspassed = self.today - time_searched
             if dayspassed.days >= self.MAX_DAYS and self.MAX_DAYS >= 0 :
                 raise KeyError # TTL expired, must search again :-(
             else :
@@ -146,15 +147,28 @@ class WebFreq( object ) :
                 search_term = search_term.encode( 'utf-8' )
             search_term = "\"" + search_term + "\""
             try:
-                url = self.url.replace( "LANGPLACEHOLDER",lang )
-                url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ) )                
-                request = urllib2.Request( url, None, self.post_data )
-                response = urllib2.urlopen( request )
-                response_string = response.read()
-                response_string = response_string.replace("\ud835dd1b","") # TODO: Debug. This is an ugly workarround
-                results = simplejson.loads( response_string )
-                result_count = self.treat_result( results )
-            except Exception, err:                
+                result_count = None
+                tries = 1
+                max_tries = 5
+                while result_count is None and tries <= max_tries:
+                    tries = tries + 1
+                    url = self.url.replace( "LANGPLACEHOLDER",lang )
+                    url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ) )                
+                    request = urllib2.Request( url, None, self.post_data )
+                    response = urllib2.urlopen( request )
+                    response_string = response.read()
+                    # This is an ugly workarround, but it's necessary because
+                    # sometimes yahoo returns weird unicode characters in the
+                    # results, and we're totally not interested in weird unicode
+                    response_string = response_string.replace("\\u","XXu") 
+                    results = simplejson.loads( response_string )
+                    result_count = self.treat_result( results )
+                    if result_count is None :
+                        time.sleep( 30 )
+                        print >> sys.stderr, "Will retry..."
+                if tries > max_tries :
+                    raise Exception, "Retry failed"
+            except Exception, err:      
                 print >> sys.stderr, "Got an error ->", err
                 print >> sys.stderr, "Stopped at search term: " + search_term
                 print >> sys.stderr, request.get_full_url()
