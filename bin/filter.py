@@ -37,7 +37,7 @@
 import sys
 import xml.sax
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
+from xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
 from util import usage, read_options, treat_options_simplest, verbose
      
@@ -98,7 +98,7 @@ def treat_meta( meta ) :
 
 ################################################################################
        
-def treat_candidate( candidate ) :
+def treat_entity( entity ) :
     """
         For each candidate, verifies whether its number of occurrences in a 
         given source corpus is superior or equal to the threshold. If no source
@@ -107,7 +107,7 @@ def treat_candidate( candidate ) :
         printed to stdout only if it occurrs thres_value times or more in the
         corpus names thresh_source.
         
-        @param candidate The `Candidate` that is being read from the XML file.
+        @param entity The `Ngram` that is being read from the XML file.
     """
     global thresh_source
     global thresh_value
@@ -118,11 +118,11 @@ def treat_candidate( candidate ) :
     global patterns
 
     if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
 
     print_it = True
     # Threshold test
-    for freq in candidate.freqs :
+    for freq in entity.freqs :
         if thresh_source :
             if ( thresh_source == freq.name or \
                  thresh_source == freq.name + ".xml" ) and \
@@ -134,14 +134,14 @@ def treat_candidate( candidate ) :
     # Equality test
     if print_it and equals_name :
         print_it = False
-        for feat in candidate.features :
+        for feat in entity.features :
             if feat.name == equals_name and feat.value == equals_value :
                 print_it = True
 
     if print_it and patterns :
         print_it = False
         for pattern in patterns :
-            if pattern.match( candidate ) :                    
+            if pattern.match( entity ) :                    
                 print_it = True
                 break
 
@@ -149,7 +149,7 @@ def treat_candidate( candidate ) :
         print_it = not print_it
 
     if print_it :   
-        print candidate.to_xml().encode( 'utf-8' )
+        print entity.to_xml().encode( 'utf-8' )
     entity_counter += 1
     
 ################################################################################
@@ -299,23 +299,29 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "verbose", "threshold=", "equals=", "patterns=", "reverse" ]
 arg = read_options( "vt:e:p:r", longopts, treat_options, 1, usage_string )
 
-try :    
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
-<candidates>
-"""     
-    input_file = open( arg[ 0 ] )        
+try :   
     parser = xml.sax.make_parser()
-    candHandler = CandidatesXMLHandler( treat_meta, treat_candidate )
-    parser.setContentHandler( candHandler ) 
-    parser.parse( input_file )
-    input_file.close()         
-    print "</candidates>"      
-
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_entity,
+                                 gen_xml=True )
+    parser.setContentHandler( handler )
+    if len( arg ) == 0 :        
+        parser.parse( sys.stdin )
+        print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )            
+            parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        print footer
 except IOError, err :
     print >> sys.stderr, err
 except Exception, err :
     print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+    print >> sys.stderr, "You probably provided an invalid XML file," +\
                          " please validate it against the DTD " + \
-                         "(dtd/mwetoolkit-candidates.dtd)"
+                         "(dtd/mwetoolkit-*.dtd)"
+
