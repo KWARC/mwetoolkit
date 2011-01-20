@@ -44,7 +44,7 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
+from xmlhandler.classes.__common import WILDCARD
 from util import read_options, treat_options_simplest, verbose
 
 ################################################################################
@@ -226,6 +226,10 @@ def print_entities() :
             entity.freqs = []
             for ( name, value ) in freq_sum.items() :
                 entity.add_frequency( Frequency( name, value ) )
+        elif isinstance( entity, Entry ) :
+            pass
+        elif isinstance( entity, Sentence ) :
+            pass          
         print entity.to_xml().encode( 'utf-8' )
         uniq_counter += 1
     verbose( "%(n)d entities, %(u)d unique entities" % { "n":entity_counter, \
@@ -260,8 +264,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "ignore-pos", "surface", "verbose", "retokenise" ]
 arg = read_options( "gsvt", longopts, treat_options, -1, usage_string )
 
-try :    
-
+try :   
     parser = xml.sax.make_parser()
     handler = GenericXMLHandler( treat_meta=treat_meta,
                                  treat_entity=treat_entity,
