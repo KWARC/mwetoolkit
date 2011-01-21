@@ -101,6 +101,23 @@ class WebFreq( object ) :
 
 ################################################################################
 
+    def send_query( self, lang, search_term ):
+        """
+        """
+        url = self.url.replace( "LANGPLACEHOLDER",lang )
+        url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ))
+        request = urllib2.Request( url, None, self.post_data )
+        response = urllib2.urlopen( request )
+        response_string = response.read()
+        # This is an ugly workarround, but it's necessary because
+        # sometimes yahoo returns weird unicode characters in the
+        # results, and we're totally not interested in weird unicode
+        response_string = response_string.replace("\\u","XXu")
+        results = simplejson.loads( response_string )
+        return self.treat_result( results )
+
+################################################################################
+
     def search_frequency( self, in_term, lang=None ) :
         """
             Searches for the number of Web pages in which a given `in_term`
@@ -146,34 +163,27 @@ class WebFreq( object ) :
             if isinstance( search_term, unicode ) :
                 search_term = search_term.encode( 'utf-8' )
             search_term = "\"" + search_term + "\""
-            try:
-                result_count = None
-                tries = 1
-                max_tries = 5
-                while result_count is None and tries <= max_tries:
+            tries = 0
+            max_tries = 5
+            result_count = None
+            while result_count is None :
+                try:
                     tries = tries + 1
-                    url = self.url.replace( "LANGPLACEHOLDER",lang )
-                    url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ) )                
-                    request = urllib2.Request( url, None, self.post_data )
-                    response = urllib2.urlopen( request )
-                    response_string = response.read()
-                    # This is an ugly workarround, but it's necessary because
-                    # sometimes yahoo returns weird unicode characters in the
-                    # results, and we're totally not interested in weird unicode
-                    response_string = response_string.replace("\\u","XXu") 
-                    results = simplejson.loads( response_string )
-                    result_count = self.treat_result( results )
+                    result_count = self.send_query( lang, search_term )
                     if result_count is None :
+                        raise Exception, "Result was None"
+                except Exception, err:
+                    print >> sys.stderr, "Got an error ->", err
+                    if tries < max_tries :
+                        print >> sys.stderr, "Will retry in 30s..."
                         time.sleep( 30 )
-                        print >> sys.stderr, "Will retry..."
-                if tries > max_tries :
-                    raise Exception, "Retry failed"
-            except Exception, err:      
-                print >> sys.stderr, "Got an error ->", err
-                print >> sys.stderr, "Stopped at search term: " + search_term
-                print >> sys.stderr, request.get_full_url()
-                print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
-                sys.exit( -1 )
+                        #result_count = None
+                    else :
+                        print >> sys.stderr, "Stopped at search term: " + search_term
+                        print >> sys.stderr, request.get_full_url()
+                        print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
+                        sys.exit( -1 )
+            
             self.cache[ lang + "___" + term ] = ( result_count, self.today )
             return result_count
 
