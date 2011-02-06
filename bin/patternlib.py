@@ -8,7 +8,6 @@ WORD_ATTRIBUTES = ["surface", "lemma", "pos", "syn"]
 
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
 WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", WORD_ATTRIBUTES))
-# TODO: Python's lambda syntax is horrible...
 
 def parse_patterns_file(path):
 	patterns = []
@@ -142,14 +141,3 @@ def match_pattern(pattern, words):
 
 		else:
 			return
-
-
-t=parse_patterns_file("/tmp/foo.xml")
-
-ws = [Word("a", "ae", "N", "", []),
-      Word("a", "ae", "Adj", "", []),
-      Word("foos", "foo", "T", "", []),
-      Word("a", "ae", "V", "", []),
-      Word("ae", "quux", "N", "", [])]
-
-m =  match_pattern(t[0], ws)
