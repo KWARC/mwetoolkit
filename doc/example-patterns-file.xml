@@ -1,0 +1,30 @@
+<patterns>
+	<!-- Simple pattern. -->
+	<pat><w pos="A"/><w pos="N"/></pat>
+
+	<!-- Pattern with repetition. -->
+	<pat>
+		<pat repeat="*"><w pos="A"/></pat>
+		<w pos="N"/>
+	</pat>
+
+	<!-- Pattern with backreference. -->
+	<pat>
+		<pat ref="theverb"><w pos="V"/></pat>
+		<w lemma="and"/>
+		<backref ref="theverb"/>
+	</pat>
+
+	<!-- Pattern with alternatives. -->
+	<pat>
+		<either>
+			<pat>
+				<w pos="N"/>
+			</pat>
+			<pat>
+				<w pos="PP"/>
+			</pat>
+		</either>
+	</pat>
+
+</patterns>

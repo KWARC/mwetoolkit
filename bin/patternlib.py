@@ -87,7 +87,6 @@ def parse_pattern(node):
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
 	parse(node)
-	print >>sys.stderr, "Read:", state.pattern
 	return re.compile(state.pattern)
 
 
