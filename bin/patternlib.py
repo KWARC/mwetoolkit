@@ -1,9 +1,14 @@
+"""
+	patternlib.py - Functions for manipulating complex ngram patterns.
+"""
+
 from xml.dom import minidom
 from xmlhandler.classes.word import Word
 import re
+import sys
 
-ATTRIBUTE_SEPARATOR=":"
-WORD_SEPARATOR="#"
+ATTRIBUTE_SEPARATOR="\35"   # ASCII level 2 separator
+WORD_SEPARATOR="\34"        # ASCII level 1 separator
 WORD_ATTRIBUTES = ["surface", "lemma", "pos", "syn"]
 
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
@@ -29,53 +34,51 @@ def parse_pattern(node):
 	# TODO: Eliminate duplication.
 
 	state = State()
-	state.last_ref_num = 0
-	state.ref_to_num = {}
 	state.pattern = WORD_SEPARATOR
 
 	def parse(node):
 		if node.nodeName == "pat":
 			ref = node.getAttribute("ref")
-			star = node.getAttribute("star")
+			repeat = node.getAttribute("repeat")
 			if ref:
-				state.last_ref_num += 1
-				state.ref_to_num += {ref: state.last_ref_num}
-				state.pattern += "("
+				state.pattern += "(?P<%s>" % ref
+			elif repeat:
+				state.pattern += "(?:"
 
 			for subnode in node.childNodes:
 				if isinstance(subnode, minidom.Element):
 					parse(subnode)
 
-			if ref:
+			if ref or repeat:
 				state.pattern += ")"
-			if star:
-				state.pattern += "*"
+			if repeat:
+				state.pattern += repeat
 
 		elif node.nodeName == "either":
 			ref = node.getAttribute("ref")
-			star = node.getAttribute("star")
-			state.last_ref_num += 1
-			state.pattern += "("
+			repeat = node.getAttribute("repeat")
 			if ref:
-				state.ref_to_num += {ref: state.last_ref_num}
+				state.pattern += "(?P<%s" % ref
+			else:
+				state.pattern += "(?:"
 
-			first = True
+			first_pattern = True
 			for subnode in node.childNodes:
 				if isinstance(subnode, minidom.Element):
-					if first:
-						first = False
+					if first_pattern:
+						first_pattern = False
 					else:
 						state.pattern += "|"
 
 					parse(subnode)
 
 			state.pattern += ")"
-			if star:
-				state.pattern += "*"
+			if repeat:
+				state.pattern += repeat
 
 		elif node.nodeName == "backref":
 			ref = node.getAttribute("ref")
-			state.pattern += ("\\" + state.ref_to_num[ref])
+			state.pattern += "(?P=%s)" % ref
 
 		elif node.nodeName == "w":
 			attrs = {}
@@ -84,33 +87,9 @@ def parse_pattern(node):
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
 	parse(node)
-	# print "Read:", state.pattern
+	print >>sys.stderr, "Read:", state.pattern
 	return re.compile(state.pattern)
 
-
-def match_pattern_single(pattern, words):
-	wordstring = WORD_SEPARATOR
-	positions = []
-	for word in words:
-		positions.append(len(wordstring))
-		attrs = {}
-		for attr in WORD_ATTRIBUTES:
-			attrs[attr] = getattr(word, attr)
-		wordstring += WORD_FORMAT % attrs + WORD_SEPARATOR
-
-	result = pattern.search(wordstring)
-	if result:
-		start = result.start()
-		end = result.end()
-		ngram = []
-		for i in xrange(len(words)):	
-			if positions[i] > start and positions[i] < end:
-				ngram.append(words[i])
-
-		return ngram  ## TODO: return multiple matches
-
-	else:
-		return None
 
 def match_pattern(pattern, words):
 	# Returns an iterator over all matches of the pattern in the word list.
