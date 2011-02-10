@@ -92,8 +92,6 @@ def parse_pattern(node):
 
 def match_pattern(pattern, words):
 	# Returns an iterator over all matches of the pattern in the word list.
-	# TODO: Overlapping matches with the *same* start are not caught.
-	# E.g.: matching N+ on N N.
 
 	wordstring = WORD_SEPARATOR
 	positions = []
@@ -104,18 +102,30 @@ def match_pattern(pattern, words):
 			attrs[attr] = getattr(word, attr)
 		wordstring += WORD_FORMAT % attrs + WORD_SEPARATOR
 
-	current_position = 0
-	while True:
-		result = pattern.search(wordstring, current_position)
-		if result:
-			start = result.start()
-			end = result.end()
-			current_position = start + 1
-			ngram = []
-			for i in xrange(len(words)):	
-				if positions[i] >= start and positions[i] < end:
-					ngram.append(words[i])
-			yield ngram
+	current_start = 0
+	limit = len(wordstring)
+	match_found = True
 
-		else:
-			return
+	while match_found:
+		match_found = False
+		current_end = limit
+		start = None
+
+		while True:
+			result = pattern.search(wordstring, current_start, current_end)
+			if result:
+				match_found = True
+				if start is None:
+					start = result.start()     # Find least start with a match
+				end = result.end()
+				current_end = end - 1
+				ngram = []
+				for i in xrange(len(words)):	
+					if positions[i] >= start and positions[i] < end:
+						ngram.append(words[i])
+				yield ngram
+
+			else:
+				if start is not None:
+					current_start = start + 1
+				break
