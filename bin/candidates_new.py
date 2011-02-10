@@ -61,7 +61,7 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, verbose
 
-from patternlib import parse_patterns_file, match_pattern
+from patternlib import parse_patterns_file, match_pattern, build_generic_pattern
 
 ################################################################################
 # GLOBALS
@@ -223,12 +223,7 @@ def create_patterns_file( ngram_range ) :
     result = interpret_ngram( ngram_range )
     if result :
         ( shortest_pattern, longest_pattern ) = result
-        for i in range( shortest_pattern, longest_pattern + 1 ) :
-            a_pattern = Entry( 0, [], [], [] )
-            for j in range( i ) :
-                a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, WILDCARD, []) )
-            patterns.append( a_pattern )
-            #print a_pattern.to_xml()
+        patterns.append(build_generic_pattern(shortest_pattern, longest_pattern))
     else :
         print >> sys.stderr, "The format of the argument must be <min>:<max>"
         print >> sys.stderr, "<min> must be at least 1 and <max> is at most 10"

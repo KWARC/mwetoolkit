@@ -121,12 +121,27 @@ def match_pattern(pattern, words):
 			else:
 				break
 
+
+def build_generic_pattern(min, max):
+	# Returns a pattern matching any ngram of size min~max.
+
+	pattern = WORD_SEPARATOR + "(?:[^%s]*" % WORD_SEPARATOR + \
+	          WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
+
+	return re.compile(pattern)
+
+
 def patternlib_test():
 	# For debugging.
+
+	def show(lls):
+		for ls in lls:
+			print ' '.join(map(lambda x: x.surface, ls))
+
 	p = parse_patterns_file("/tmp/a.xml")  # pattern: N+
 	ws = [Word("the", "the", "Det", "x", []),
 	      Word("foos", "foo", "N", "x", []),
 	      Word("bars", "bar", "N", "x", []),
 	      Word("quuxes", "quux", "N", "x", [])]
-	print map(lambda ls: map(lambda x: x.surface, ls), match_pattern(p[0], ws))
-	#[['foos', 'bars', 'quuxes'], ['foos', 'bars'], ['foos'], ['bars', 'quuxes'], ['bars'], ['quuxes']]
+	show(match_pattern(p[0], ws))
+	show(match_pattern(build_generic_pattern(2,3), ws))
