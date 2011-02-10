@@ -83,7 +83,7 @@ def parse_pattern(node):
 		elif node.nodeName == "w":
 			attrs = {}
 			for attr in WORD_ATTRIBUTES:
-				attrs[attr] = node.getAttribute(attr) or ATTRIBUTE_WILDCARD
+				attrs[attr] = re.escape(node.getAttribute(attr)) or ATTRIBUTE_WILDCARD
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
 	parse(node)
