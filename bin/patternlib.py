@@ -102,21 +102,14 @@ def match_pattern(pattern, words):
 			attrs[attr] = getattr(word, attr)
 		wordstring += WORD_FORMAT % attrs + WORD_SEPARATOR
 
-	current_start = 0
 	limit = len(wordstring)
-	match_found = True
 
-	while match_found:
-		match_found = False
+	for current_start in positions:
 		current_end = limit
-		start = None
-
 		while True:
-			result = pattern.search(wordstring, current_start, current_end)
+			result = pattern.match(wordstring, current_start - 1, current_end)
 			if result:
-				match_found = True
-				if start is None:
-					start = result.start()     # Find least start with a match
+				start = result.start()
 				end = result.end()
 				current_end = end - 1
 				ngram = []
@@ -126,6 +119,14 @@ def match_pattern(pattern, words):
 				yield ngram
 
 			else:
-				if start is not None:
-					current_start = start + 1
 				break
+
+def patternlib_test():
+	# For debugging.
+	p = parse_patterns_file("/tmp/a.xml")  # pattern: N+
+	ws = [Word("the", "the", "Det", "x", []),
+	      Word("foos", "foo", "N", "x", []),
+	      Word("bars", "bar", "N", "x", []),
+	      Word("quuxes", "quux", "N", "x", [])]
+	print map(lambda ls: map(lambda x: x.surface, ls), match_pattern(p[0], ws))
+	#[['foos', 'bars', 'quuxes'], ['foos', 'bars'], ['foos'], ['bars', 'quuxes'], ['bars'], ['quuxes']]
