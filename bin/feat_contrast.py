@@ -64,6 +64,7 @@ OPTIONS may be:
     below:
 
     csmwe -- Original measure proposed by Bonin et al. 2010
+    simplecsmwe -- Simplified rank-equivalent version of the previous
     simplediff -- Simply divides the original frequency by contrastive frequency
     ...
 
