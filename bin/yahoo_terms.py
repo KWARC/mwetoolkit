@@ -26,6 +26,7 @@
 
 import sys
 import xml.sax
+import pdb
 
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
@@ -63,9 +64,9 @@ def treat_sentence( sentence ) :
     global sentences_buffer, domain, BUFFER_LIMIT, yahooTerms, terms
     
     sentences_buffer.append( sentence.to_surface() )
-    if len( sentences_buffer ) > BUFFER_LIMIT :     
+    if len( sentences_buffer ) > BUFFER_LIMIT :
         sent_terms = yahooTerms.search_terms(" ".join(sentences_buffer),domain)   
-        terms = terms | set(sent_terms)        
+        terms = terms | set( sent_terms )        
         sentences_buffer = []
     
 ################################################################################
@@ -74,38 +75,53 @@ def print_terms() :
     """
     """
     global terms
+    global sentences_buffer, domain, yahooTerms
+    
+    if len( sentences_buffer ) > 0 :
+        #pdb.set_trace()
+        sent_terms = yahooTerms.search_terms(" ".join(sentences_buffer),domain)   
+        terms = terms | set( sent_terms )        
+        sentences_buffer = []
+    
     id_number = 0
+
     for term in terms :
-        words = []
+        c = Candidate( id_number, [], [], [], [], [] )    
         for word in term.split( " " ) :
-            words.append( Word( word, WILDCARD, WILDCARD, WILDCARD, [] ) )
-        if len( words ) > 1 :
-            base_form = Ngram( words, [] )
-            c = Candidate( base_form, id_number, [], [], [], [] )
-            id_number += 1
+            c.append( Word( WILDCARD, word, WILDCARD, WILDCARD, [] ) )
+        if len( c ) > 1 :
+            id_number = id_number + 1
             print c.to_xml().encode( "utf-8" )
     
 ################################################################################
 # MAIN SCRIPT
 
+arg = read_options( "v", ["verbose"], treat_options_simplest, -1, usage_string )
 
-arg = read_options( "v", ["verbose"], treat_options_simplest, 1, usage_string )
-
-try :    
-    print XML_HEADER % { "root" : "candidates", "ns" : "" }
-    print "<meta></meta>"
-    input_file = open( arg[ 0 ] )    
+try :
     parser = xml.sax.make_parser()
-    parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
-    parser.parse( input_file )
-    input_file.close()
-    print_terms()
-    print XML_FOOTER % { "root" : "candidates" }
-except IOError, err :  
-    print err
-    print "Error reading corpus file. Please verify __common.py configuration"        
-    sys.exit( 2 )      
+    handler = CorpusXMLHandler( treat_sentence )
+    parser.setContentHandler( handler )
+    print XML_HEADER % { "root" : "candidates", "ns" : "" }
+    print "<meta></meta>"    
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+        print_terms()
+        print XML_FOOTER % { "root" : "candidates" }
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        print_terms()
+        print XML_FOOTER % { "root" : "candidates" }
+except IOError, err :
+    print >> sys.stderr, err
 except Exception, err :
-    print err
-    print "You probably provided an invalid corpus file, please " + \
-          "validate it against the DTD (dtd/mwetoolkit-corpus.dtd)"
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid XML file," +\
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-*.dtd)"
