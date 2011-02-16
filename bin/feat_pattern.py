@@ -34,11 +34,12 @@
 
 import sys
 import xml.sax
+import pdb
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
-from util import read_options, treat_options_simplest
+from util import read_options, treat_options_simplest, verbose
      
 ################################################################################     
 # GLOBALS     
@@ -69,7 +70,9 @@ def treat_meta( meta ) :
     pattern_feat_values = pattern_feat_values[0:len(pattern_feat_values) - 1] 
     pattern_feat_values = pattern_feat_values + "}"    
     meta.add_meta_feat( MetaFeat( "pos_pattern", pattern_feat_values ) ) 
-    meta.add_meta_feat( MetaFeat( "n", "integer" ) ) 
+    meta.add_meta_feat( MetaFeat( "n", "integer" ) )
+    meta.add_meta_feat( MetaFeat( "capitalized", "{UPPERCASE,Firstupper,lowercase,MiXeD}" ) )    
+    meta.add_meta_feat( MetaFeat( "hyphen", "{True,False}" ) )        
     print meta.to_xml()
        
 ################################################################################
@@ -96,9 +99,20 @@ def treat_candidate( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     pattern = candidate.get_pos_pattern()
-    n = len( candidate )
     candidate.add_feat( Feature( "pos_pattern", pattern ) )
-    candidate.add_feat( Feature( "n", n ) )    
+    candidate.add_feat( Feature( "n", len( candidate ) ) )
+    case_classes = {}
+    #pdb.set_trace()
+    has_hyphen = False
+    for w in candidate :
+        case_class = w.get_case_class()
+        count_class = case_classes.get( case_class, 0 )
+        case_classes[ case_class ] = count_class + 1
+        has_hyphen = has_hyphen or "-" in w.lemma
+    argmax_case_class = max( zip( case_classes.values(), 
+                                  case_classes.keys() ) )[ 1 ]
+    candidate.add_feat( Feature( "capitalized", argmax_case_class ) )        
+    candidate.add_feat( Feature( "hyphen", str( has_hyphen ) ) )
     print candidate.to_xml().encode( 'utf-8' )
 
 ################################################################################
@@ -109,6 +123,7 @@ arg = read_options( "v", longopts, treat_options_simplest, 1, usage_string )
 try :    
     # Done in 2 passes, one to define the type of the feature and another to
     # print the feature values for each candidate
+    verbose( "1st pass : recover all POS patterns fot meta feature" )
     input_file = open( arg[ 0 ] )        
     parser = xml.sax.make_parser()
     # Will ignore meta information and simply recover all the possible patterns
@@ -118,6 +133,7 @@ try :
     input_file.close()     
     input_file = open( arg[ 0 ] )
     # Second pass to print the metafeat header with all possible pattern values
+    verbose( "2nd pass : add the features" )
     handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                     treat_candidate=treat_candidate,
                                     gen_xml="candidates")
