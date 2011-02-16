@@ -304,3 +304,45 @@ class Word :
              self.pos == WILDCARD)
             
 ################################################################################
+
+    def get_case_class( self ) :
+        """
+            For a given word (surface form), assigns a class that can be:        
+            * lowercase - All characters are lowercase
+            * UPPERCASE - All characters are uppercase
+            * Firstupper - All characters are lowercase except for the first
+            * MiXeD - This token contains mixed lowercase and uppercase characters
+            * ? - This token contains non-alphabetic characters
+            
+            @return A string that describes the case class according to the list 
+            above.
+        """
+        if self.surface != WILDCARD :
+            token_list = list( self.surface )
+        else :
+            token_list = list( self.lemma )
+        case_class = "?"
+        for letter_i in range( len( token_list ) ) :
+            letter = token_list[ letter_i ]
+            if letter.isupper() :
+                if letter_i > 0 :
+                    if case_class == "lowercase" or case_class == "Firstupper" :
+                        case_class = "MiXeD"
+                    elif case_class == "?" :
+                        case_class = "UPPERCASE"    
+                else :
+                    case_class = "UPPERCASE"                
+            elif letter.islower() :
+                if letter_i > 0 :                
+                    if case_class == "UPPERCASE" :
+                        if letter_i == 1 :
+                            case_class = "Firstupper"
+                        else :
+                            case_class = "MiXeD"
+                    elif case_class == "?" :
+                        case_class = "lowercase"
+                else :
+                    case_class = "lowercase"
+        return case_class    
+    
+################################################################################      
