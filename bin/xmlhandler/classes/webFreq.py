@@ -180,7 +180,7 @@ class WebFreq( object ) :
                         #result_count = None
                     else :
                         print >> sys.stderr, "Stopped at search term: " + search_term
-                        print >> sys.stderr, request.get_full_url()
+                        #print >> sys.stderr, request.get_full_url()
                         print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
                         sys.exit( -1 )
             
