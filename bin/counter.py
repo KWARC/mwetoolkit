@@ -44,7 +44,7 @@ import array
 import re
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR                                        
+from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DEFAULT_LANG                                       
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
@@ -112,6 +112,7 @@ low_limit = -1
 up_limit = -1
 text_input = False
 count_vars = False
+language = DEFAULT_LANG
 
 ################################################################################
        
@@ -258,11 +259,11 @@ def get_freq_web( surfaces, lemmas, pos ) :
         information.
     """
     # POS is ignored
-    global web_freq, build_entry
+    global web_freq, build_entry, language
     search_term = ""    
     for i in range( len( surfaces ) ) :
         search_term = search_term + build_entry( surfaces[ i ], lemmas[i], pos[ i ] ) + " "   
-    return web_freq.search_frequency( search_term.strip() )
+    return web_freq.search_frequency( search_term.strip(), language )
 
 ################################################################################
 
@@ -322,8 +323,9 @@ def treat_text( stream ):
     global web_freq
     for line in stream.readlines() :
         query = line.strip()
+        #pdb.set_trace()
         count = str( web_freq.search_frequency( query ) )
-        print query.encode( "utf-8" ) + "\t" + count
+        print query + "\t" + count
 
 ################################################################################
 
@@ -341,6 +343,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global the_corpus_size, freq_name
     global low_limit, up_limit
     global text_input, count_vars
+    global language
     surface_flag = False
     pos_flag = False
     mode = []
@@ -391,6 +394,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             text_input = True
         elif o in ("-a", "--vars" ) : 
             count_vars = True
+        elif o in ("-l", "--lang" ) : 
+            language = a
 
     if mode == [ "index" ] :       
         if surface_flag and pos_flag :
@@ -423,8 +428,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
-            "from=", "to=", "text", "vars" ]
-arg = read_options( "ywi:vgsf:t:xa", longopts, treat_options, -1, usage_string )
+            "from=", "to=", "text", "vars", "lang=" ]
+arg = read_options( "ywi:vgsf:t:xal:", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()
