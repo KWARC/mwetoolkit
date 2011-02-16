@@ -22,7 +22,13 @@
 # 
 ################################################################################
 """
-    TODO: Insert a description of your module here.
+    Calculates Mean Average Precision (MAP) for a list of candidates containing
+    numerical features. MAP is the average of precisions taken at each recall
+    point (i.e. each TP) in a rank of candidates. Please see the implementation
+    below for more details. This script is strongly inspired from Stefan Evert's
+    script, released for the MWE 2008 shared task. You might find useful to 
+    consult his publications to find a more detailed explanation on what MAP
+    measures.
 """
 
 import sys
@@ -30,7 +36,7 @@ import pdb
 import xml.sax
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import read_options, treat_options_simplest, usage
+from util import read_options, treat_options_simplest, usage, verbose
 from xmlhandler.classes.__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
@@ -54,6 +60,10 @@ OPTIONS may be:
 -d OR --desc
     Sort in descending order. By default, classification is descending, so that
     this flag can also be ommitted.
+    
+-p OR --precs
+    Print the precisions at each recall level, for each feature. This is useful
+    to generate precision/recall curves. Default false.
 
 -v OR --verbose
     Print messages that explain what is happening.
@@ -67,7 +77,8 @@ all_feats = []
 feat_list_ok = False
 feat_to_order = {}
 ascending = False
-
+print_precs = False
+entity_counter = 0
 
 ################################################################################
 
@@ -111,7 +122,9 @@ def treat_candidate( candidate ) :
 
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    global feat_list, all_feats, feat_list_ok, feat_to_order
+    global feat_list, all_feats, feat_list_ok, feat_to_order, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     # First, verifies if all the features defined as sorting keys are real
     # features, by matching them against the meta-features of the header. This
     # is only performed once, before the first candidate is processed
@@ -134,21 +147,36 @@ def treat_candidate( candidate ) :
                tp_value != UNKNOWN_FEAT_VALUE :
                 tuple = ( float( feat_value ), tp_value == "True" )
                 feat_to_order[ tp_class.name ][ feat_name ].append( tuple )
-    
+    entity_counter = entity_counter + 1
 ################################################################################
 
 def calculate_map( values ):
     """
+        Calculates Mean Average Precision for a list of feature values. We 
+        suppose that the input list is already sorted.
+        
+        @param values A list containing tuples in the form (value,TPclass), 
+        where value is a float number corresponding to a feature value and
+        TPclass is a boolean indicating whether the candidate is a TP. The list
+        must be sorted in ascending or descending order.
+        
+        @return A tuple containing 0) Mean Average Precision, 1) Variance, 2)
+        Total number of TPs in the list and 3) a list with all the precisions at
+        each TP.
     """
     tp_counter = 0.0
     cumul_precision = 0.0
+    precs = []
     for ( index, ( value, tpclass ) ) in enumerate( values ) :
         if tpclass :
             tp_counter += 1.0
             # rank = index+1, index = 0..n, rank = 1..n+1
             precision = 100.0 * (tp_counter / (index + 1))
-            cumul_precision += precision            
-    map = cumul_precision / tp_counter
+            #verbose "Precision at %(c)d : %(p)f" % { "c" : tpcounter, 
+            #                                         "p" : precision }
+            precs.append( precision )
+            cumul_precision += precision          
+    mapr = cumul_precision / tp_counter
     
     tp_counter = 0.0
     cumul_squared_error = 0.0
@@ -157,10 +185,10 @@ def calculate_map( values ):
             tp_counter += 1.0            
             # rank = index+1, index = 0..n, rank = 1..n+1
             precision = 100.0 * (tp_counter / (index + 1))
-            cumul_squared_error += ( precision - map ) * ( precision - map )
+            cumul_squared_error += ( precision - mapr ) * ( precision - mapr )
     variance = cumul_squared_error / ( tp_counter - 1 )
 
-    return map, variance, tp_counter
+    return mapr, variance, tp_counter, precs
 
 ################################################################################
 
@@ -169,24 +197,28 @@ def print_stats() :
         Sorts the tuple list `feat_to_order` and then retrieves the candidates
         from the temporary DB in order to print them out.
     """
-    global feat_to_order, ascending, feat_list
-
+    global feat_to_order, ascending, feat_list, print_precs
     #feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending) )
     # Now print sorted candidates. A candidate is retrieved from temp DB through
     # its ID
     for tpclass in feat_to_order.keys() :
+        precisions = []
         print "----------------------------------------------------------------"
         print "Statistics for %(tp)s:" % { "tp" : tpclass }
         print "----------------------------------------------------------------"
         for feat_name in feat_list :
             feat_values = feat_to_order[ tpclass ][ feat_name ]
             feat_values.sort( key=lambda x: x[ 0 ], reverse=(not ascending) )
-            ( map, variance, tps ) = calculate_map( feat_values )
+            ( mapr, variance, tps, precs ) = calculate_map( feat_values )
             print "Feature: %(m)s" % { "m" : feat_name }
-            print "MAP      : %(m).4f" % { "m": map }
+            print "MAP      : %(m).4f" % { "m": mapr }
             print "# of TPs : %(m).0f" % { "m": tps }
             print "Variance : %(m).4f" % { "m": variance }
             print ""
+            precisions.append( precs )
+        if print_precs :
+            for line in zip( *precisions ) :
+                print "\t".join( map( str, line ) )
 
 ################################################################################
 
@@ -215,7 +247,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global feat_list, ascending
+    global feat_list, ascending, print_precs
     a_or_d = []
     for ( o, a ) in opts:
         if o in ("-f", "--feat"):
@@ -226,6 +258,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-d", "--desc") :
             ascending = False
             a_or_d.append( "d" )
+        elif o in ("-p", "--precs") :
+            print_precs = True
 
     if len( a_or_d ) > 1 :
         print >> sys.stderr, "WARNING: you should provide only one option, " + \
@@ -241,8 +275,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc", "verbose" ]
-arg = read_options( "f:adv", longopts, treat_options, 1, usage_string )
+longopts = [ "feat=", "asc", "desc", "verbose", "precs" ]
+arg = read_options( "f:advp", longopts, treat_options, 1, usage_string )
 
 try :
     input_file = open( arg[ 0 ] )
@@ -251,8 +285,10 @@ try :
                                     treat_meta=treat_meta,
                                     gen_xml=False )
     parser.setContentHandler( handler )
+    verbose( "Reading feature values" )
     parser.parse( input_file )
     input_file.close()
+    verbose( "Calculating MAP for each feature" )
     print_stats()    
 
 except IOError, err :
