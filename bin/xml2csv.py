@@ -43,10 +43,16 @@ from xmlhandler.classes.__common import WILDCARD
 # GLOBALS     
 usage_string = """Usage: 
     
-python %(program)s <candidates.xml>
+python %(program)s OPTIONS <file.xml>
 
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-"""     
+OPTIONS may be:
+
+-s OR --surface
+    Counts surface forms instead of lemmas. Default false.
+
+    The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+"""   
+surface_instead_lemmas = False  
             
 ################################################################################     
 
@@ -73,13 +79,14 @@ def treat_entity( entity ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
+    global surface_instead_lemmas
     string_cand = ""
     if entity.id_number >= 0 :
         string_cand += str( entity.id_number )
     string_cand = string_cand.strip() + "\t"    
     
     for w in entity :
-        if w.lemma != WILDCARD :            
+        if w.lemma != WILDCARD and not surface_instead_lemmas :            
             string_cand += w.lemma + " "
         else :
             string_cand += w.surface + " "
@@ -89,8 +96,15 @@ def treat_entity( entity ) :
         string_cand += w.pos + " "
     string_cand = string_cand.strip() + "\t"
     
-    for freq in entity.freqs :
-        string_cand += str( freq.value ) + "\t"
+    try :
+        for freq in entity.freqs :
+            string_cand += str( freq.value ) + "\t"
+    except TypeError:
+        # This kind of entry probably doesnt have tpclass
+        string_cand = string_cand.strip()
+    except AttributeError :
+        # This kind of entry probably doesnt have tpclass
+        string_cand = string_cand.strip()
 
     try :
         for tpclass in entity.tpclasses :
@@ -124,10 +138,30 @@ def treat_entity( entity ) :
     print string_cand.encode( 'utf-8' )
 
 ################################################################################     
+
+def treat_options( opts, arg, n_arg, usage_string ) :
+    """
+        Callback function that handles the command line options of this script.
+        
+        @param opts The options parsed by getopts. Ignored.
+        
+        @param arg The argument list parsed by getopts.
+        
+        @param n_arg The number of arguments expected for this script.    
+    """
+    global surface_instead_lemmas
+    mode = []
+    for ( o, a ) in opts:        
+        if o in ("-s", "--surface") : 
+            surface_instead_lemmas = True     
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+
+
+################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose" ]
-arg = read_options( "v", longopts, treat_options_simplest, -1, usage_string )
+longopts = [ "verbose", "surface" ]
+arg = read_options( "vs", longopts, treat_options, -1, usage_string )
 
 try :
     parser = xml.sax.make_parser()
