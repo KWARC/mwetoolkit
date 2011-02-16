@@ -122,7 +122,7 @@ def treat_sentence_complex( sentence ) :
 
     for w_i in range(len(sentence)) :
         w = sentence[ w_i ]
-        case_class = get_case_class( w.surface )          
+        case_class = w.get_case_class()
         # Does nothing if it's aready lowercase or if it's not alphabetic
         if case_class != "lowercase" and case_class != "?" :
             low_key = w.surface.lower()            
@@ -180,47 +180,6 @@ def build_vocab( sentence ) :
         vocab[ low_key ] = forms
     sentence_counter += 1
     
-################################################################################  
-
-def get_case_class( token ) :
-    """
-        For a given token, assigns a class that can be:        
-        * lowercase - All characters are lowercase
-        * UPPERCASE - All characters are uppercase
-        * Firstupper - All characters are lowercase except for the first
-        * MiXeD - This token contains mixed lowercase and uppercase characters
-        * ? - This token contains non-alphabetic characters
-        
-        @param A string that corresponds to a raw token of the corpus.
-        
-        @return A string that describes the case class according to the list 
-        above.
-    """
-    token_list = list( token )
-    case_class = "?"
-    for letter_i in range( len( token_list ) ) :
-        letter = token_list[ letter_i ]
-        if letter.isupper() :
-            if letter_i > 0 :
-                if case_class == "lowercase" or case_class == "Firstupper" :
-                    case_class = "MiXeD"
-                elif case_class == "?" :
-                    case_class = "UPPERCASE"    
-            else :
-                case_class = "UPPERCASE"                
-        elif letter.islower() :
-            if letter_i > 0 :                
-                if case_class == "UPPERCASE" :
-                    if letter_i == 1 :
-                        case_class = "Firstupper"
-                    else :
-                        case_class = "MiXeD"
-                elif case_class == "?" :
-                    case_class = "lowercase"
-            else :
-                case_class = "lowercase"
-    return case_class        
-
 ################################################################################
 
 def get_percents( token_stats ) :
