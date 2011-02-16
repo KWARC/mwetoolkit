@@ -30,7 +30,7 @@ import urllib2
 import urllib
 import simplejson
 
-from __common import LANG, YAHOO_APPID
+from __common import DEFAULT_LANG, YAHOO_APPID
 
 ################################################################################         
 
@@ -53,7 +53,7 @@ class YahooTerms :
     def search_terms( self, in_text, query ) : 
         """            
         """   
-        if LANG != "en" :
+        if DEFAULT_LANG != "en" :
             print >> sys.err, "WARNING: Yahoo terms only works for English"        
         input_text = in_text.strip()
         if isinstance( input_text, unicode ) :
