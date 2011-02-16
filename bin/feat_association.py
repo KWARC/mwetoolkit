@@ -356,7 +356,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     for ( o, a ) in opts:
         if o in ( "-m", "--measures" ) :
             try :
-                measures = []
                 measures = interpret_measures( a )
             except ValueError, message :
                 print >> sys.stderr, message
