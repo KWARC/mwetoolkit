@@ -360,7 +360,7 @@ try :
     #input_file = open( arg[ 0 ] )    
     index = Index()
     index.set_basepath(arg[0])
-    index.load_all()
+    index.load_main()
 
     for sentence in index.iterate_sentences():
         treat_sentence(sentence)

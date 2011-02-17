@@ -7,6 +7,9 @@ from xmlhandler.classes.word import Word
 
 NGRAM_LIMIT=16
 
+# TODO: Unify this with patternlib and the rest of the toolkit.
+ATTRIBUTE_SEPARATOR="\35"
+
 def make_array(initializer=None):
 	if initializer is None:
 		return array.array('L')
@@ -32,19 +35,22 @@ def save_array_to_file(array, path):
 	file.close()
 
 def load_symbols_from_file(symbols, path):
-	file = shelve.open(path)
-	sym = {}
-	sym.update(file)
-	symbols.symbol_to_number = sym['symbol_to_number']
-	symbols.number_to_symbol = sym['number_to_symbol']
+	file = open(path, "r")
+	id = 0
+	symbols.number_to_symbol = []
+	symbols.symbol_to_number = {}
+	for line in file:
+		sym = line.rstrip('\n')
+		symbols.symbol_to_number[sym] = id
+		symbols.number_to_symbol.append(sym)
+		id += 1
+
 	file.close()
 
 def save_symbols_to_file(symbols, path):
-	sym = {"symbol_to_number": symbols.symbol_to_number,
-	       "number_to_symbol": symbols.number_to_symbol}
-	file = shelve.open(path)
-	file.clear()
-	file.update(sym)
+	file = open(path, "w")
+	for sym in symbols.number_to_symbol:
+		file.write(sym + '\n')
 	file.close()
 
 
@@ -77,6 +83,18 @@ def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1, ngram2_exhau
 		return ngram2_exhausted
 	else:
 		return int(ngram1[pos1] - ngram2[pos2])
+
+def fuse_suffix_arrays(array1, array2):
+	# Returns a new SuffixArray fusing the 'corpus' data of each input array.
+	# This is used to generate indices for combined attributes (e.g., lemma+pos).
+
+	fused_array = SuffixArray()
+	for i in xrange(len(array1.corpus)):
+		sym1 = array1.symbols.number_to_symbol[array1.corpus[i]]
+		sym2 = array2.symbols.number_to_symbol[array2.corpus[i]]
+		fused_array.append_word(sym1 + ATTRIBUTE_SEPARATOR + sym2)
+
+	return fused_array
 
 
 class SymbolTable():
@@ -177,27 +195,60 @@ class Index():
 	# Attribute order must be the same as the parameters of 'Word'
 	WORD_ATTRIBUTES = ['surface', 'lemma', 'pos', 'syn']
 
-	def __init__(self):
+	def __init__(self, basepath=None):
 		self.arrays = {}
-		for attr in Index.WORD_ATTRIBUTES:
-			self.arrays[attr] = SuffixArray()  ## Always initialize?
+		if basepath is not None:
+			self.set_basepath(basepath)
 
-	#def load(self, attribute, basepath):
-	#	array = self.arrays[attribute] = SuffixArray()
-	#	array.set_basepath(basepath)
-	#	array.load()
+	def fresh_arrays(self):
+		for attr in Index.WORD_ATTRIBUTES:
+			self.arrays[attr] = SuffixArray()
 
 	def set_basepath(self, path):
-		for attr in Index.WORD_ATTRIBUTES:
+		self.basepath = path
+		for attr in self.arrays.keys():
 			self.arrays[attr].set_basepath(path + "." + attr)
 
-	def load_all(self):
-		for array in self.arrays.values():
-			array.load()
+	def load(self, attribute):
+		if self.arrays.has_key(attribute):
+			return self.arrays[attribute]
 
-	def save_all(self):
-		for array in self.arrays.values():
-			array.save()
+		array = SuffixArray()
+		path = self.basepath + "." + attribute
+		array.set_basepath(path)
+		try:
+			array.load()
+		except IOError, err:
+			# If attribute is composed, fuse the corresponding suffix arrays.
+			if '+' in attribute:
+				attr1, attr2 = attribute.rsplit('+', 1)
+				array = fuse_suffix_arrays(self.load(attr1), self.load(attr2))
+
+				array.set_basepath(path)
+				array.build_suffix_array()
+				array.save()
+
+			else:
+				raise err
+
+		self.arrays[attribute] = array
+		return array
+
+	def save(self, attribute):
+		array = self.arrays[attribute]
+		array.set_basepath(self.basepath)
+		array.save()
+
+
+	# Load/save main (non-composed) attributes.
+	def load_main(self):
+		for attr in Index.WORD_ATTRIBUTES:
+			self.load(attr)
+
+	def save_main(self):
+		for attr in Index.WORD_ATTRIBUTES:
+			self.save(attr)
+
 
 	def append_sentence(self, sentence):
 		# Adds a sentence (presumably extracted from a XML file) to the index.
@@ -209,7 +260,7 @@ class Index():
 			self.arrays[attr].append_word('')  # '' (symbol 0)  means end-of-sentence
 
 	def build_suffix_arrays(self):
-		for attr in Index.WORD_ATTRIBUTES:
+		for attr in self.arrays.keys():
 			print "Building suffix array for %s..." % attr
 			self.arrays[attr].build_suffix_array()
 
@@ -259,12 +310,15 @@ def index_from_corpus(path):
 	#file = open(path)
 	parser = xml.sax.make_parser()
 	index = Index()
+	index.fresh_arrays()
 	parser.setContentHandler(CorpusXMLHandler(index.append_sentence))
 	parser.parse(path)
 	index.build_suffix_arrays()
 	return index
 
 #h = index_from_corpus("../toy/genia/corpus.xml")
-
 #h.set_basepath("/tmp/foo")
-#h.save_all()
+#h.save_main()
+
+#t = fuse_suffix_arrays(h.arrays["surface"], h.arrays["pos"])
+
