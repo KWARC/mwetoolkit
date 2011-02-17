@@ -4,6 +4,7 @@ import xml.sax
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word
+from util import verbose
 
 NGRAM_LIMIT=16
 
@@ -197,6 +198,7 @@ class Index():
 
 	def __init__(self, basepath=None):
 		self.arrays = {}
+		self.metadata = { "corpus_size": 0 }
 		if basepath is not None:
 			self.set_basepath(basepath)
 
@@ -206,13 +208,13 @@ class Index():
 
 	def set_basepath(self, path):
 		self.basepath = path
-		for attr in self.arrays.keys():
-			self.arrays[attr].set_basepath(path + "." + attr)
+		self.metadata_path = path + ".info"
 
 	def load(self, attribute):
 		if self.arrays.has_key(attribute):
 			return self.arrays[attribute]
 
+		verbose("Loading corpus files for attribute \"%s\"." % attribute)
 		array = SuffixArray()
 		path = self.basepath + "." + attribute
 		array.set_basepath(path)
@@ -236,16 +238,40 @@ class Index():
 
 	def save(self, attribute):
 		array = self.arrays[attribute]
-		array.set_basepath(self.basepath)
+		array.set_basepath(self.basepath + "." + attribute)
 		array.save()
 
+	def load_metadata(self):
+		metafile = open(self.metadata_path)
+		for line in metafile:
+			key, type, value = line.rstrip('\n').split(" ", 2)
+			if type == "int":
+				value = int(value)
+			self.metadata[key] = value
 
-	# Load/save main (non-composed) attributes.
+		metafile.close()
+	
+	def save_metadata(self):
+		metafile = open(self.metadata_path, "w")
+		for key, value in self.metadata.items():
+			if isinstance(value, int):
+				type = "int"
+			else:
+				type = "string"
+
+			metafile.write("%s %s %s\n" % (key, type, value))
+
+		metafile.close()
+
+
+	# Load/save main (non-composite) attributes and metadata
 	def load_main(self):
+		self.load_metadata()
 		for attr in Index.WORD_ATTRIBUTES:
 			self.load(attr)
 
 	def save_main(self):
+		self.save_metadata()
 		for attr in Index.WORD_ATTRIBUTES:
 			self.save(attr)
 
@@ -258,6 +284,8 @@ class Index():
 				value = getattr(word, attr)
 				self.arrays[attr].append_word(value)
 			self.arrays[attr].append_word('')  # '' (symbol 0)  means end-of-sentence
+
+		self.metadata["corpus_size"] += len(sentence.word_list)
 
 	def build_suffix_arrays(self):
 		for attr in self.arrays.keys():
