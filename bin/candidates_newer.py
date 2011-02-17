@@ -61,7 +61,8 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, verbose
 
-from indexlib import *
+from patternlib import parse_patterns_file, match_pattern, build_generic_pattern
+from indexlib import Index
 
 ################################################################################
 # GLOBALS
@@ -104,6 +105,17 @@ longest_pattern = 0
 shortest_pattern = sys.maxint
 sentence_counter = 0
 
+
+def copy_word(w):
+	return Word(w.surface, w.lemma, w.pos, w.syn, [])
+
+def copy_word_list(ws):
+	return map(copy_word, ws)
+
+def copy_ngram(ngram):
+	return Ngram(copy_word_list(ngram.word_list), [])
+
+
 ################################################################################
        
 def treat_sentence( sentence ) :
@@ -121,53 +133,29 @@ def treat_sentence( sentence ) :
            longest_pattern, shortest_pattern, sentence_counter
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
-    for i in range( shortest_pattern, longest_pattern + 1 ) :    
-        ngrams = sentence.get_ngrams( i )
-        for ngram in ngrams :
-            is_candidate = False
-            for pattern in patterns :                
-                if pattern.match( ngram ) :                    
-                    is_candidate = True
-                    break # Stop after first match
-            if is_candidate : 
-                # Deep copy manually
-                copy_ngram = Ngram( [], [] )
-                for w in ngram :
-                    copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
-                    copy_ngram.append( copy_w )                
-                if ignore_pos :    
-                    copy_ngram.set_all( pos=WILDCARD )
-                internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
 
-                if( surface_instead_lemmas ) :
-                    copy_ngram.set_all( lemma=WILDCARD )
-                else :
-                    copy_ngram.set_all( surface=WILDCARD )                    
-                key = unicode( copy_ngram.to_string() ).encode('utf-8')
-                ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
-                freq_surface = surfaces_dict.get( internal_key, 0 )
-                surfaces_dict[ internal_key ] = freq_surface + 1
-                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
+    words = sentence.word_list
+
+    for pattern in patterns:
+        for match in match_pattern(pattern, words):
+            match_ngram = Ngram(copy_word_list(match), [])
+
+            if ignore_pos :    
+                match_ngram.set_all( pos=WILDCARD )
+            internal_key = unicode( match_ngram.to_string() ).encode('utf-8')
+
+            if( surface_instead_lemmas ) :
+                match_ngram.set_all( lemma=WILDCARD )
+            else :
+                match_ngram.set_all( surface=WILDCARD )                    
+            key = unicode( match_ngram.to_string() ).encode('utf-8')
+            ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
+            freq_surface = surfaces_dict.get( internal_key, 0 )
+            surfaces_dict[ internal_key ] = freq_surface + 1
+            temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
+
     sentence_counter += 1
          
-################################################################################
-
-def treat_pattern( entry ) :
-    """
-        For each pattern in the XML patterns list, stores it into main memory.
-        We expect that the patterns file is small enough to fit comfortably
-        into main memory. This function also updates the control variables that
-        define the shortest and longest size of a pattern.
-        
-        @param entry An `Entry` contained in the XML patterns list. This entry
-        should ideally contain some wildcards, otherwise the patterns will be
-        too generic to be interesting.
-    """
-    global patterns, longest_pattern, shortest_pattern
-    longest_pattern = max( longest_pattern, len(entry) )
-    shortest_pattern = min( shortest_pattern, len(entry) )
-    patterns.append( entry )
-   
 ################################################################################
 
 def interpret_ngram( argument ) :
@@ -209,24 +197,10 @@ def interpret_ngram( argument ) :
 ################################################################################  
 
 def read_patterns_file( filename ) :
-    """
-        Opens the patterns XML file and parses it using a `DictXMLHandler`.
-
-        @param filename The string name of the patterns file.
-    """        
     global patterns
-    try :      
-        patterns_file = open( filename ) 
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
-        try:
-            parser.parse( patterns_file )
-        except Exception :
-            print >> sys.stderr, "You provided an invalid pattern file, "+ \
-                                 "please validate it against the DTD " + \
-                                 "(mwetoolkit-dict.dtd)"
-            sys.exit( 2 )
-        patterns_file.close()
+
+    try:
+        patterns = parse_patterns_file(filename)
     except IOError, err:
         print >> sys.stderr, err
         sys.exit( 2 )
@@ -243,17 +217,14 @@ def create_patterns_file( ngram_range ) :
         
         @param ngram_range String argument of the -n option, has the form 
         "<min>:<max>"        
+
+        FIXMEFIXMEFIXME
     """        
     global patterns, usage_string, shortest_pattern, longest_pattern
     result = interpret_ngram( ngram_range )
     if result :
         ( shortest_pattern, longest_pattern ) = result
-        for i in range( shortest_pattern, longest_pattern + 1 ) :
-            a_pattern = Entry( 0, [], [], [] )
-            for j in range( i ) :
-                a_pattern.append( Word( WILDCARD, WILDCARD, WILDCARD, WILDCARD, []) )
-            patterns.append( a_pattern )
-            #print a_pattern.to_xml()
+        patterns.append(build_generic_pattern(shortest_pattern, longest_pattern))
     else :
         print >> sys.stderr, "The format of the argument must be <min>:<max>"
         print >> sys.stderr, "<min> must be at least 1 and <max> is at most 10"
@@ -358,17 +329,15 @@ try :
         sys.exit( 2 )
         
     #input_file = open( arg[ 0 ] )    
-    index = Index()
-    index.set_basepath(arg[0])
-    index.load_main()
-
-    for sentence in index.iterate_sentences():
-        treat_sentence(sentence)
-
     #parser = xml.sax.make_parser()
     #parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
     #parser.parse( input_file )
     #input_file.close() 
+
+    index = Index(arg[0])
+    index.load_main()
+    for sentence in index.iterate_sentences():
+        treat_sentence(sentence)
 
     corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
     print_candidates( temp_file, corpus_name )
@@ -385,8 +354,8 @@ except IOError, err :
     print >> sys.stderr, "Error reading corpus file. Please verify " + \
                          "__common.py configuration"        
     sys.exit( 2 )      
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid corpus file, " + \
-                         "please validate it against the DTD " + \
-                         "(dtd/mwetoolkit-corpus.dtd)"
+#except Exception, err :
+#    print >> sys.stderr, err
+#    print >> sys.stderr, "You probably provided an invalid corpus file, " + \
+#                         "please validate it against the DTD " + \
+#                         "(dtd/mwetoolkit-corpus.dtd)"
