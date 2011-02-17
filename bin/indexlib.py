@@ -1,3 +1,4 @@
+import sys
 import array
 import shelve
 import xml.sax
@@ -350,3 +351,18 @@ def index_from_corpus(path):
 
 #t = fuse_suffix_arrays(h.arrays["surface"], h.arrays["pos"])
 
+def standalone_main(argv):
+	if len(argv) != 3:
+		print >>sys.stderr, "Usage: python indexlib.py <basepath> <corpus>"
+		return 1
+
+	basepath = argv[1]
+	corpus = argv[2]
+
+	index = index_from_corpus(corpus)
+	index.set_basepath(basepath)
+	index.save_main()
+	print >>sys.stderr, "Done."
+
+if __name__ == "__main__":
+	standalone_main(sys.argv)
