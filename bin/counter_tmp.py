@@ -302,6 +302,7 @@ def open_index( prefix ) :
     try :      
         verbose( "Loading index files... this may take some time." )
         index = Index(prefix)
+        index.load_metadata()
         freq_name = re.sub( ".*/", "", prefix )
         #pdb.set_trace()
         the_corpus_size = index.metadata["corpus_size"]

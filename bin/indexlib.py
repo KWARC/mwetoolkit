@@ -169,6 +169,11 @@ class SuffixArray():
 
 	def binary_search_ngram(self, ngram, min, max, cmp):
 		# Find the least suffix that satisfies suffix `cmp` ngram.
+
+		# 'max' must be one more than the last, for the case no suffix
+		# satisfies the comparison.
+		max += 1
+
 		while min < max:
 			mid = (min+max)/2
 			if cmp(compare_ngrams(self.corpus, self.suffix[mid], ngram, 0, ngram2_exhausted=0), 0):
