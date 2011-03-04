@@ -10,9 +10,9 @@
 
 	<!-- Pattern with backreference. -->
 	<pat>
-		<pat ref="theverb"><w pos="V"/></pat>
+		<pat id="theverb"><w pos="V"/></pat>
 		<w lemma="and"/>
-		<backref ref="theverb"/>
+		<backpat id="theverb"/>
 	</pat>
 
 	<!-- Pattern with alternatives. -->
@@ -25,6 +25,15 @@
 				<w pos="PP"/>
 			</pat>
 		</either>
+	</pat>
+
+	<!-- Pattern with backreference to individual word attributes. -->
+	<pat>
+		<w pos="N" id="w1"/>
+		<pat repeat="+">
+			<w/>
+		</pat>
+		<backw lemma="w1"/>
 	</pat>
 
 </patterns>

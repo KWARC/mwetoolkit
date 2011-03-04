@@ -1,0 +1,34 @@
+<!ELEMENT patterns (pat*)>
+
+<!ELEMENT pat (pat*,backpat*,w*,backw*,either*)>
+<!ATTLIST pat
+	id CDATA #IMPLIED
+	repeat CDATA #IMPLIED
+>
+
+<!ELEMENT backpat EMPTY>
+<!ATTLIST backpat
+	id CDATA #REQUIRED
+>
+
+<!ELEMENT w EMPTY>
+<!ATTLIST w
+    surface CDATA #IMPLIED
+    lemma CDATA #IMPLIED
+    pos CDATA #IMPLIED
+    syn CDATA #IMPLIED
+    id CDATA #IMPLIED
+>
+
+<!ATTLIST backw
+    surface CDATA #IMPLIED
+    lemma CDATA #IMPLIED
+    pos CDATA #IMPLIED
+    syn CDATA #IMPLIED
+>
+
+<!ELEMENT either (pat*)>
+<!ATTLIST either
+	id CDATA #IMPLIED
+	repeat CDATA #IMPLIED
+>
