@@ -160,19 +160,27 @@ class SuffixArray():
 			max = len(self.suffix) - 1
 
 		first = self.binary_search_ngram(ngram, min, max, (lambda a,b: a >= b))
-		last  = self.binary_search_ngram(ngram, min, max, (lambda a,b: a > b)) - 1
+		last  = self.binary_search_ngram(ngram, min, max, (lambda a,b: a > b))
+
+		if first is None:
+			return None
+		if last is None:
+			last = max
+		else:
+			last -= 1
 
 		if first <= last:
 			return (first, last)
 		else:
 			return None
 
-	def binary_search_ngram(self, ngram, min, max, cmp):
+	def binary_search_ngram(self, ngram, first, last, cmp):
 		# Find the least suffix that satisfies suffix `cmp` ngram.
 
-		# 'max' must be one more than the last, for the case no suffix
+		# 'max' must be one more than 'last', for the case no suffix
 		# satisfies the comparison.
-		max += 1
+		max = last + 1
+		min = first
 
 		while min < max:
 			mid = (min+max)/2
@@ -182,7 +190,10 @@ class SuffixArray():
 				mid += 1
 				min = mid      # If 'mid' does not satisfy, what we want *must be after* mid.
 
-		return mid
+		if mid > last:
+			return None
+		else:
+			return mid
 
 
 	# For debugging.
