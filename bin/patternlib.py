@@ -38,10 +38,10 @@ def parse_pattern(node):
 
 	def parse(node):
 		if node.nodeName == "pat":
-			ref = node.getAttribute("ref")
+			id = node.getAttribute("id")
 			repeat = node.getAttribute("repeat")
-			if ref:
-				state.pattern += "(?P<%s>" % ref
+			if id:
+				state.pattern += "(?P<%s>" % id
 			elif repeat:
 				state.pattern += "(?:"
 
@@ -49,16 +49,16 @@ def parse_pattern(node):
 				if isinstance(subnode, minidom.Element):
 					parse(subnode)
 
-			if ref or repeat:
+			if id or repeat:
 				state.pattern += ")"
 			if repeat:
 				state.pattern += repeat
 
 		elif node.nodeName == "either":
-			ref = node.getAttribute("ref")
+			id = node.getAttribute("id")
 			repeat = node.getAttribute("repeat")
-			if ref:
-				state.pattern += "(?P<%s" % ref
+			if id:
+				state.pattern += "(?P<%s>" % id
 			else:
 				state.pattern += "(?:"
 
@@ -76,15 +76,31 @@ def parse_pattern(node):
 			if repeat:
 				state.pattern += repeat
 
-		elif node.nodeName == "backref":
-			ref = node.getAttribute("ref")
-			state.pattern += "(?P=%s)" % ref
+		elif node.nodeName == "backpat":
+			id = node.getAttribute("id")
+			state.pattern += "(?P=%s)" % id
 
 		elif node.nodeName == "w":
 			attrs = {}
+			id = node.getAttribute("id")
 			for attr in WORD_ATTRIBUTES:
 				attrs[attr] = re.escape(node.getAttribute(attr)) or ATTRIBUTE_WILDCARD
+				if id:
+					attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
+
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
+
+		elif node.nodeName == "backw":
+			attrs = {}
+			for attr in WORD_ATTRIBUTES:
+				id = node.getAttribute(attr)
+				if id:
+					attrs[attr] = "(?P=%s_%s)" % (id, attr)
+				else:
+					attrs[attr] = ATTRIBUTE_WILDCARD
+
+			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
+
 
 	parse(node)
 	return re.compile(state.pattern)
@@ -141,7 +157,8 @@ def patternlib_test():
 	p = parse_patterns_file("/tmp/a.xml")  # pattern: N+
 	ws = [Word("the", "the", "Det", "x", []),
 	      Word("foos", "foo", "N", "x", []),
-	      Word("bars", "bar", "N", "x", []),
-	      Word("quuxes", "quux", "N", "x", [])]
+	      Word("bars", "bar", "V", "x", []),
+	      Word("quuxes", "quux", "N", "x", []),
+	      Word("foose", "foo", "N", "x", [])]
 	show(match_pattern(p[0], ws))
-	show(match_pattern(build_generic_pattern(2,3), ws))
+	#show(match_pattern(build_generic_pattern(2,3), ws))
