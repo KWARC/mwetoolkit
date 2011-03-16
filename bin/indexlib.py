@@ -14,9 +14,9 @@ ATTRIBUTE_SEPARATOR="\35"
 
 def make_array(initializer=None):
 	if initializer is None:
-		return array.array('L')
+		return array.array('i')
 	else:
-		return array.array('L', initializer)
+		return array.array('i', initializer)
 
 
 # Taken from counter.py
