@@ -112,8 +112,11 @@ class WebFreq( object ) :
         # This is an ugly workarround, but it's necessary because
         # sometimes yahoo returns weird unicode characters in the
         # results, and we're totally not interested in weird unicode
-        response_string = response_string.replace("\\u","XXu")
-        results = simplejson.loads( response_string )
+        try :
+            response_string = response_string.replace("\\u","XXu")
+            results = simplejson.loads( response_string )
+        except Exception :
+            pdb.set_trace()
         return self.treat_result( results )
 
 ################################################################################
