@@ -112,11 +112,13 @@ class WebFreq( object ) :
         # This is an ugly workarround, but it's necessary because
         # sometimes yahoo returns weird unicode characters in the
         # results, and we're totally not interested in weird unicode
-        try :
-            response_string = response_string.replace("\\u","XXu")
-            results = simplejson.loads( response_string )
-        except Exception :
-            pdb.set_trace()
+        # CORRECTING: This workarround works with yahoo but it doesn't with 
+        # google. What do I do? Probably, comment the line whenever I have a
+        # problem and uncomment it back if it's already commented out. But 
+        # before I surrender to this ugly solution, I'll try with this 
+        # "encoding" parameter. Let's hope this never bugs again!
+        #response_string = response_string.replace("\\","XX")
+        results = simplejson.loads( response_string, encoding="UTF-8" )
         return self.treat_result( results )
 
 ################################################################################
