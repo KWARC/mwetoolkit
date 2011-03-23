@@ -346,3 +346,23 @@ class Word :
         return case_class    
     
 ################################################################################      
+
+    def get_freq_value( self, freq_name ) :
+        """
+            Returns the value of a `Frequency` in the frequencies list. The 
+            frequency is identified by the frequency name provided as input to 
+            this function. If two frequencies have the same name, only the first 
+            value found will be returned.
+            
+            @param freq_name A string that identifies the `Frequency` of the 
+            candidate for which you would like to know the value.
+            
+            @return Value of the searched frequency. If there is no frequency 
+            with this name, then it will return 0.
+        """
+        for freq in self.freqs :
+            if freq.name == freq_name :
+                return freq.value
+        return 0     
+        
+################################################################################
