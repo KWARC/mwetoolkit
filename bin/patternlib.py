@@ -84,7 +84,8 @@ def parse_pattern(node):
 			attrs = {}
 			id = node.getAttribute("id")
 			for attr in WORD_ATTRIBUTES:
-				attrs[attr] = re.escape(node.getAttribute(attr)) or ATTRIBUTE_WILDCARD
+				val = re.escape(node.getAttribute(attr)).replace("\\*", ATTRIBUTE_WILDCARD)
+				attrs[attr] = val or ATTRIBUTE_WILDCARD
 				if id:
 					attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
 

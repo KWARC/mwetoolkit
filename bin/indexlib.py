@@ -37,12 +37,12 @@ def save_array_to_file(array, path):
 	file.close()
 
 def load_symbols_from_file(symbols, path):
-	file = open(path, "r")
+	file = open(path, "rb")
 	id = 0
 	symbols.number_to_symbol = []
 	symbols.symbol_to_number = {}
 	for line in file:
-		sym = line.rstrip('\n')
+		sym = line.rstrip('\n').decode("utf-8")
 		symbols.symbol_to_number[sym] = id
 		symbols.number_to_symbol.append(sym)
 		id += 1
@@ -50,9 +50,9 @@ def load_symbols_from_file(symbols, path):
 	file.close()
 
 def save_symbols_to_file(symbols, path):
-	file = open(path, "w")
+	file = open(path, "wb")
 	for sym in symbols.number_to_symbol:
-		file.write(sym + '\n')
+		file.write(sym.encode("utf-8") + '\n')
 	file.close()
 
 
