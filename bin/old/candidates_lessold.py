@@ -61,15 +61,14 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, verbose
 
-from libs.patternlib import parse_patterns_file, match_pattern, build_generic_pattern
-from libs.indexlib import Index
+from patternlib import parse_patterns_file, match_pattern, build_generic_pattern
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage: 
     
-python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
+python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus.xml>
 
 -p <patterns.xml> OR --patterns <patterns.xml>
     The patterns to extract, valid XML (mwetoolkit-dict.dtd)
@@ -85,9 +84,6 @@ python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
     
 OPTIONS may be:
 
--i OR --index
-     Read the corpus from an index instead of an XML file. Default false.
-
 -g OR --ignore-pos
      Ignores parts of speech when counting candidate occurences. This means, for
      example, that "like" as a preposition and "like" as a verb will be counted 
@@ -96,31 +92,27 @@ OPTIONS may be:
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
 
-    By default, <corpus> must be a valid XML file (mwetoolkit-corpus.dtd). If
-the -i option is specified, <corpus> must be the basepath for an index generated
-by index.py.
-
-    You must choose either the -p option or the -n option, both are not allowed
-at the same time.
+    The <corpus.xml> file must be valid XML (mwetoolkit-corpus.dtd). You must 
+choose either the -p option or the -n otpion, both are not allowed at the same 
+time. 
 """
 patterns = []
 ignore_pos = False
 surface_instead_lemmas = False
 print_cand_freq = False
-corpus_from_index = False
 longest_pattern = 0
 shortest_pattern = sys.maxint
 sentence_counter = 0
 
 
 def copy_word(w):
-    return Word(w.surface, w.lemma, w.pos, w.syn, [])
+	return Word(w.surface, w.lemma, w.pos, w.syn, [])
 
 def copy_word_list(ws):
-    return map(copy_word, ws)
+	return map(copy_word, ws)
 
 def copy_ngram(ngram):
-    return Ngram(copy_word_list(ngram.word_list), [])
+	return Ngram(copy_word_list(ngram.word_list), [])
 
 
 ################################################################################
@@ -294,7 +286,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq, corpus_from_index
+    global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq
     mode = []
     for ( o, a ) in opts:
         if o in ("-p", "--patterns") : 
@@ -309,8 +301,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             surface_instead_lemmas = True
         elif o in ("-f", "--freq") : 
             print_cand_freq = True
-        elif o in ("-i", "--index") :
-            corpus_from_index = True
 
     if len(mode) != 1 :
         print >> sys.stderr, "Exactly one option, -p or -n, must be provided"
@@ -321,8 +311,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "verbose" ]
-arg = read_options( "p:n:ifgsv", longopts, treat_options, 1, usage_string )
+longopts = [ "patterns=", "ngram=", "freq", "ignore-pos", "surface", "verbose" ]
+arg = read_options( "p:n:fgsv", longopts, treat_options, 1, usage_string )
 
 try :    
     try :    
@@ -336,20 +326,12 @@ try :
         print >> sys.stderr, "Error opening temporary file."
         print >> sys.stderr, "Please verify __common.py configuration"
         sys.exit( 2 )
-
-
-    if corpus_from_index:
-        index = Index(arg[0])
-        index.load_main()
-        for sentence in index.iterate_sentences():
-            treat_sentence(sentence)
-    else:
-        input_file = open( arg[ 0 ] )    
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
-        parser.parse( input_file )
-        input_file.close()
-
+        
+    input_file = open( arg[ 0 ] )    
+    parser = xml.sax.make_parser()
+    parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
+    parser.parse( input_file )
+    input_file.close() 
     corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
     print_candidates( temp_file, corpus_name )
     try :

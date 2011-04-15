@@ -52,9 +52,7 @@ from xmlhandler.classes.corpus_size import CorpusSize
 #from xmlhandler.classes.corpus import Corpus
 #from xmlhandler.classes.suffix_array import SuffixArray
 from util import usage, read_options, treat_options_simplest, verbose
-
-from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
-
+    
 ################################################################################
 # GLOBALS    
     
@@ -102,10 +100,9 @@ OPTIONS may be:
 You must chose either the -y option or the -i otpion, both are not allowed at 
 the same time. 
 """    
-
-index = None         # Index()
-suffix_array = None  # SuffixArray()
-
+corpus_file = array.array( 'L' )        
+ngrams_file = array.array( 'L' )
+vocab_file = {}
 get_freq_function = None
 freq_name = "?"
 web_freq = None
@@ -232,25 +229,19 @@ def get_freq_index( surfaces, lemmas, pos ) :
         
         @param pos A string corresponding to the Part Of Speech of a word.
     """
-    global build_entry, suffix_array
-    ngram_ids = []
+    global build_entry, ngrams_file, corpus_file, vocab_file
+    ng_ids = []
     #pdb.set_trace()
     for i in range( len( surfaces ) ) :
-        word = build_entry( surfaces[i], lemmas[i], pos[i] )
-        wordid = suffix_array.symbols.symbol_to_number.get(word, None)
-        if wordid:
-            ngram_ids.append( wordid )
-        else:
+        w = build_entry( surfaces[ i ], lemmas[i], pos[ i ] )
+        w_id = vocab_file.get( w, None )
+        if w_id :
+            ng_ids.append( w_id )
+        else :
             return 0
-
-    #i_last = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a > b )
-    #i_first = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a >= b ) 
-    indexrange = suffix_array.find_ngram_range(ngram_ids)
-    if indexrange is not None:
-        first, last = indexrange
-        return last - first + 1
-    else:
-        return 0
+    i_last = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a > b )
+    i_first = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a >= b ) 
+    return i_last - i_first   
     
 ################################################################################
 
@@ -297,15 +288,20 @@ def open_index( prefix ) :
                 
         @param index_filename The string name of the index file.
     """
-    global freq_name, the_corpus_size
-    global index, suffix_array
+    global vocab_file, ngrams_file, corpus_file, freq_name, the_corpus_size
     try :      
         verbose( "Loading index files... this may take some time." )
-        index = Index(prefix)
-        index.load_metadata()
+        verbose( "Loading .vocab file" )
+        vocab_fd = shelve.open( prefix + ".vocab" )
+        vocab_file.update( vocab_fd )
+        vocab_fd.close()        
+        verbose( "Loading .corpus file" )
+        load_array_from_file( corpus_file, prefix + ".corpus" )
+        verbose( "Loading .ngrams file" )
+        load_array_from_file( ngrams_file, prefix + ".ngrams" )         
         freq_name = re.sub( ".*/", "", prefix )
         #pdb.set_trace()
-        the_corpus_size = index.metadata["corpus_size"]
+        the_corpus_size = vocab_file[ CORPUS_SIZE_KEY ]              
     except IOError :        
         print >> sys.stderr, "Error opening the index."
         print >> sys.stderr, "Try again with another index filename."
@@ -348,9 +344,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global low_limit, up_limit
     global text_input, count_vars
     global language
-    global suffix_array
     surface_flag = False
-    ignorepos_flag = False
+    pos_flag = False
     mode = []
     for ( o, a ) in opts:
         if o in ( "-i", "--index" ) : 
@@ -360,21 +355,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ( "-y", "--yahoo" ) :
             web_freq = YahooFreq()          
             freq_name = "yahoo"
-            ignorepos_flag = True 
+            pos_flag = True 
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
             mode.append( "yahoo" )   
         elif o in ( "-w", "--google" ) :
             web_freq = GoogleFreq()          
             freq_name = "google"
-            ignorepos_flag = True 
+            pos_flag = True 
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
             mode.append( "google" ) 
         elif o in ("-s", "--surface" ) :
             surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
-            ignorepos_flag = True
+            pos_flag = True
         elif o in ("-f", "--from", "-t", "--to" ) :
             try :
                 limit = int(a)
@@ -403,22 +398,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             language = a
 
     if mode == [ "index" ] :       
-        if surface_flag and ignorepos_flag :
-            #build_entry = lambda s, l, p: (s + SEPARATOR + WILDCARD).encode('utf-8')
-            build_entry = lambda s, l, p: (s).encode('utf-8')
-            suffix_array = index.load("surface")
+        if surface_flag and pos_flag :
+            build_entry = lambda s, l, p: (s + SEPARATOR + WILDCARD).encode('utf-8')
         elif surface_flag :
-            #build_entry = lambda s, l, p: (s + SEPARATOR + p).encode('utf-8')
-            build_entry = lambda s, l, p: (s + ATTRIBUTE_SEPARATOR + p).encode('utf-8')
-            suffix_array = index.load("surface+pos")
-        elif ignorepos_flag :
-            #build_entry = lambda s, l, p: (l + SEPARATOR + WILDCARD).encode('utf-8')
-            build_entry = lambda s, l, p: (l).encode('utf-8')
-            suffix_array = index.load("lemma")
+            build_entry = lambda s, l, p: (s + SEPARATOR + p).encode('utf-8')
+        elif pos_flag :
+            build_entry = lambda s, l, p: (l + SEPARATOR + WILDCARD).encode('utf-8')
         else :      
-            build_entry = lambda s, l, p: (l + ATTRIBUTE_SEPARATOR + p).encode('utf-8')
-            suffix_array = index.load("lemma+pos")
-
+            build_entry = lambda s, l, p: (l + SEPARATOR + p).encode('utf-8')
     else : # Web search, entries are single surface or lemma forms         
         if surface_flag :
             build_entry = lambda s, l, p: s.encode('utf-8')

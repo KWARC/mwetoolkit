@@ -1,11 +1,16 @@
 import sys
 import array
 import shelve
+import codecs
 import xml.sax
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word
 from util import verbose
+
+import gc
+gc.set_debug(gc.DEBUG_LEAK)
+
 
 NGRAM_LIMIT=16
 
@@ -14,9 +19,9 @@ ATTRIBUTE_SEPARATOR="\35"
 
 def make_array(initializer=None):
 	if initializer is None:
-		return array.array('i')
+		return array.array('L')
 	else:
-		return array.array('i', initializer)
+		return array.array('L', initializer)
 
 
 # Taken from counter.py
@@ -37,12 +42,12 @@ def save_array_to_file(array, path):
 	file.close()
 
 def load_symbols_from_file(symbols, path):
-	file = open(path, "rb")
+	file = codecs.open(path, "r", "utf-8")
 	id = 0
 	symbols.number_to_symbol = []
 	symbols.symbol_to_number = {}
 	for line in file:
-		sym = line.rstrip('\n').decode("utf-8")
+		sym = line.rstrip('\n')
 		symbols.symbol_to_number[sym] = id
 		symbols.number_to_symbol.append(sym)
 		id += 1
@@ -50,9 +55,9 @@ def load_symbols_from_file(symbols, path):
 	file.close()
 
 def save_symbols_to_file(symbols, path):
-	file = open(path, "wb")
+	file = codecs.open(path, "w", "utf-8")
 	for sym in symbols.number_to_symbol:
-		file.write(sym.encode("utf-8") + '\n')
+		file.write(sym + '\n')
 	file.close()
 
 
@@ -99,7 +104,7 @@ def fuse_suffix_arrays(array1, array2):
 	return fused_array
 
 
-class SymbolTable():
+class SymbolTable:
 	def __init__(self):
 		self.symbol_to_number = {'': 0}
 		self.number_to_symbol = ['']
@@ -115,7 +120,7 @@ class SymbolTable():
 		return self.symbol_to_number[symbol]
 
 
-class SuffixArray():
+class SuffixArray:
 	def __init__(self):
 		self.corpus = make_array()    # List of word numbers
 		self.suffix = make_array()    # List of word positions
@@ -209,7 +214,7 @@ class SuffixArray():
 			print ""
 
 
-class Index():
+class Index:
 	# Attribute order must be the same as the parameters of 'Word'
 	WORD_ATTRIBUTES = ['surface', 'lemma', 'pos', 'syn']
 
@@ -304,10 +309,14 @@ class Index():
 
 		self.metadata["corpus_size"] += len(sentence.word_list)
 
-	def build_suffix_arrays(self):
+	def build_suffix_arrays(self, save=False, free_after=False):
 		for attr in self.arrays.keys():
 			print "Building suffix array for %s..." % attr
 			self.arrays[attr].build_suffix_array()
+			if save:
+				self.save(attr)
+			if free_after:
+				del self.arrays[attr]
 
 	def iterate_sentences(self):
 		# Returns an iterator over all sentences in the corpus.
@@ -351,14 +360,16 @@ class Index():
 #h.build_suffix_array()
 
 # For more testing.
-def index_from_corpus(path):
-	#file = open(path)
+def index_from_corpus(basepath, corpus_file):
+	#file = open(corpus_file)
 	parser = xml.sax.make_parser()
 	index = Index()
+	index.set_basepath(basepath)
 	index.fresh_arrays()
 	parser.setContentHandler(CorpusXMLHandler(index.append_sentence))
-	parser.parse(path)
-	index.build_suffix_arrays()
+	parser.parse(corpus_file)
+	index.save_metadata()
+	index.build_suffix_arrays(save=True, free_after=True)
 	return index
 
 #h = index_from_corpus("../toy/genia/corpus.xml")
@@ -368,16 +379,18 @@ def index_from_corpus(path):
 #t = fuse_suffix_arrays(h.arrays["surface"], h.arrays["pos"])
 
 def standalone_main(argv):
-	if len(argv) != 3:
-		print >>sys.stderr, "Usage: python indexlib.py <basepath> <corpus>"
+	if len(argv) < 3:
+		print >>sys.stderr, "Usage: python indexlib.py <basepath> <corpus> [<attr>:<attr>:...]"
 		return 1
 
 	basepath = argv[1]
 	corpus = argv[2]
 
-	index = index_from_corpus(corpus)
-	index.set_basepath(basepath)
-	index.save_main()
+	# Gambiarra -- FIXME FIXME FIXME
+	if len(argv) > 3:
+		Index.WORD_ATTRIBUTES = argv[3].split(":")
+
+	index = index_from_corpus(basepath, corpus)
 	print >>sys.stderr, "Done."
 
 if __name__ == "__main__":
