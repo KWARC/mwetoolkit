@@ -3,13 +3,10 @@
 """
 
 from xml.dom import minidom
-from xmlhandler.classes.word import Word
+from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
+from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
-
-ATTRIBUTE_SEPARATOR="\35"   # ASCII level 2 separator
-WORD_SEPARATOR="\34"        # ASCII level 1 separator
-WORD_ATTRIBUTES = ["surface", "lemma", "pos", "syn"]
 
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
 WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", WORD_ATTRIBUTES))

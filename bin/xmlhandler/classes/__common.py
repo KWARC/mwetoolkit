@@ -43,13 +43,15 @@ YAHOO_APPID = config.YAHOO_APPID
 YAHOO_CACHE_FILENAME = "yahoo_cache.dat"
 GOOGLE_CACHE_FILENAME = "google_cache.dat"
 
-# Should not be a token of the corpus neither a POS tag! The probability is 
-# minimal but it is nevertheless important to warn you about it!
-SEPARATOR = "#S#"
 
-# Should not be a token of the corpus neither a POS tag! The probability is 
-# minimal but it is nevertheless important to warn you about it!
-WORD_SEPARATOR = "#WS#"
+# Characters internally used as attribute and word separators.
+# Must not appear in the corpus, neither as a word, nor as a POS tag!
+# The probability is minimal but it is nevertheless important to warn you
+# about it!
+# Each separator must be a single character.
+ATTRIBUTE_SEPARATOR = "\35"  # ASCII level 2 separator
+WORD_SEPARATOR = "\34"       # ASCII level 1 separator
+SEPARATOR = ATTRIBUTE_SEPARATOR
 
 # A temporary file
 TEMP_PREFIX = "mwetk_"

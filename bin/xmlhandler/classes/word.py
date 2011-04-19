@@ -29,6 +29,12 @@
 
 from __common import WILDCARD, SEPARATOR
 
+
+# List of valid word attributes. Must appear in the same order as the
+# arguments for the Word class constructor.
+WORD_ATTRIBUTES = ["surface", "lemma", "pos", "syn"]
+
+
 ################################################################################
 
 class Word :

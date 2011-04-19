@@ -4,13 +4,11 @@ import shelve
 import xml.sax
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.word import Word
+from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
+from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
 from util import verbose
 
 NGRAM_LIMIT=16
-
-# TODO: Unify this with patternlib and the rest of the toolkit.
-ATTRIBUTE_SEPARATOR="\35"
 
 def copy_list(ls):
 	return map(lambda x: x, ls)
@@ -213,9 +211,6 @@ class SuffixArray():
 
 
 class Index():
-	# Attribute order must be the same as the parameters of 'Word'
-	WORD_ATTRIBUTES = ['surface', 'lemma', 'pos', 'syn']
-
 	def __init__(self, basepath=None, used_word_attributes=None):
 		self.arrays = {}
 		self.metadata = { "corpus_size": 0 }
@@ -224,7 +219,7 @@ class Index():
 		if used_word_attributes is not None:
 			self.used_word_attributes = used_word_attributes
 		else:
-			self.used_word_attributes = copy_list(Index.WORD_ATTRIBUTES)
+			self.used_word_attributes = copy_list(WORD_ATTRIBUTES)
 
 		if basepath is not None:
 			self.set_basepath(basepath)
