@@ -25,7 +25,8 @@ from util import usage, read_options, treat_options_simplest, verbose
 def xml2txt(corpus, outfile, attributes):
 	def print_sentence(sentence):
 		for word in sentence.word_list:
-			print >>outfile, ATTRIBUTE_SEPARATOR.join(map(lambda attr: getattr(word, attr), attributes))
+			vals = [getattr(word, attr) for attr in attributes]
+			print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
 		print >>outfile, ""
 
 	parser = xml.sax.make_parser()
