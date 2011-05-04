@@ -198,12 +198,20 @@ class SuffixArray():
 
 
 	# For debugging.
-	def dump_suffixes(self, limit=10):
-		for pos in self.suffix:
+	def dump_suffixes(self, limit=10, start=0, max=None):
+		if max is None:
+			max = len(self.suffix)
+
+		#for pos in self.suffix:
+		for suf in xrange(start, max):
+			pos = self.suffix[suf]
 			print "%4d:" % pos,
 			for i in range(pos, pos+limit):
 				if i < len(self.corpus):
-					print self.symbols.number_to_symbol[self.corpus[i]],
+					sym = self.symbols.number_to_symbol[self.corpus[i]]
+					if sym == "":
+						sym = "#"
+					print sym,
 				else:
 					print "*",
 

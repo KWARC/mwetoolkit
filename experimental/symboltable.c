@@ -16,8 +16,10 @@ typedef struct symboltable_t {
 	
 
 symboltable_t *make_symboltable() {
+	symbolnumber_t intern_symbol(symboltable_t *table, symbolname_t key);
+
 	symboltable_t *new = alloc(1, symboltable_t);
-	symbolname_t *empty_symbol = alloc(1, char);
+	symbolname_t empty_symbol = alloc(1, char);
 	empty_symbol[0] = '\0';
 	new->numentries = 0;
 	new->allocated_entries = 0;

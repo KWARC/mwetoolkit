@@ -20,6 +20,7 @@ suffixarray_t* make_suffixarray() {
 	new->symboltable = make_symboltable();
 	new->allocated = 0;
 	new->used = 0;
+	return new;
 }
 
 void free_suffixarray(suffixarray_t *suf) {
