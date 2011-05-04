@@ -50,13 +50,14 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 inline int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
 	int limit = suf->used;
 	symbolnumber_t *corpus = suf->corpus;
+	int first = 1;
 
 	while (pos1<limit && pos2<limit) {
 		if (corpus[pos1] != corpus[pos2])
 			return corpus[pos1] - corpus[pos2];
-		if (corpus[pos1]==0 && corpus[pos2]==0)
+		if (!first && corpus[pos1]==0 && corpus[pos2]==0)
 			return 0;  // Don't care about order after end-of-sentence.
-		pos1++, pos2++;
+		pos1++, pos2++, first=0;
 	}
 
 	if (pos1>=limit)
