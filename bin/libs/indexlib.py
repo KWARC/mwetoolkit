@@ -126,7 +126,6 @@ def fuse_suffix_arrays(array1, array2):
 		Returns a new `SuffixArray` fusing the `corpus` data of each input array.
 		This is used to generate indices for combined attributes (e.g., lemma+pos).
 	"""
-
 	fused_array = SuffixArray()
 	for i in xrange(len(array1.corpus)):
 		sym1 = array1.symbols.number_to_symbol[array1.corpus[i]]
@@ -344,6 +343,8 @@ class Index():
 			# If attribute is composed, fuse the corresponding suffix arrays.
 			if '+' in attribute:
 				attr1, attr2 = attribute.rsplit('+', 1)
+
+				verbose("Fusing suffix arrays for %s and %s..." % (attr1, attr2))
 				array = fuse_suffix_arrays(self.load(attr1), self.load(attr2))
 
 				array.set_basepath(path)
