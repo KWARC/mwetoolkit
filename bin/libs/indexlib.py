@@ -22,22 +22,32 @@ def make_array(initializer=None):
 
 # Taken from counter.py
 def load_array_from_file( an_array, a_filename ) :
-    MAX_MEM = 10000
-    fd = open( a_filename )
-    isMore = True
-    while isMore :
-        try :    
-            an_array.fromfile( fd, MAX_MEM )
-        except EOFError :
-            isMore = False # Did not read MAX_MEM_ITEMS items? Not a problem...
-    fd.close()
+	"""
+		Fills an existing array with the contents of a file.
+	"""
+	MAX_MEM = 10000
+	fd = open( a_filename )
+	isMore = True
+	while isMore :
+		try :	
+			an_array.fromfile( fd, MAX_MEM )
+		except EOFError :
+			isMore = False # Did not read MAX_MEM_ITEMS items? Not a problem...
+	fd.close()
 
 def save_array_to_file(array, path):
+	"""
+		Dumps an array to a file.
+	"""
 	file = open(path, "w")
 	array.tofile(file)
 	file.close()
 
 def load_symbols_from_file(symbols, path):
+	"""
+		Fills an existing symbol table with the contents of a file.
+	"""
+
 	file = open(path, "rb")
 	id = 0
 	symbols.number_to_symbol = []
@@ -51,6 +61,9 @@ def load_symbols_from_file(symbols, path):
 	file.close()
 
 def save_symbols_to_file(symbols, path):
+	"""
+		Dumps a symbol table to a file.
+	"""
 	file = open(path, "wb")
 	for sym in symbols.number_to_symbol:
 		file.write(sym.encode("utf-8") + '\n')
@@ -70,6 +83,27 @@ def save_symbols_to_file(symbols, path):
 #		return int(corpus[pos1] - corpus[pos2])
 
 def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1, ngram2_exhausted=1, limit=NGRAM_LIMIT):
+	"""
+		Compares the ngram at position `pos1` in the word list `ngram1` with
+		the ngram at position `pos2` in the word list `ngram2`. Returns an
+		integer less than, equal or greater than 0 if the first ngram is less
+		than, equal or greater than the second, respectively. At most the first 
+		`limit` words will be compared.
+
+		@param ngram1 A list or array of numbers, each representing a word.
+		Likewise for `ngram2`.
+
+		@param pos1 Position where the first ngram begins in `ngram1`.
+		Likewise for `pos2`.
+
+		@param ngram1_exhausted Value returned if the first ngram ends before
+		the second and the ngrams have been equal so far. The default is `-1`,
+		which means that an ngram `[1, 2]` will be considered lesser than
+		`[1, 2, 3]`. Likewise for `ngram2_exhausted`.
+
+		@param limit Compare at most `limit` words. Defaults to `NGRAM_LIMIT`.
+	"""
+
 	max1 = len(ngram1)
 	max2 = len(ngram2)
 	i = 0
@@ -88,8 +122,10 @@ def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1, ngram2_exhau
 		return int(ngram1[pos1] - ngram2[pos2])
 
 def fuse_suffix_arrays(array1, array2):
-	# Returns a new SuffixArray fusing the 'corpus' data of each input array.
-	# This is used to generate indices for combined attributes (e.g., lemma+pos).
+	"""
+		Returns a new `SuffixArray` fusing the `corpus` data of each input array.
+		This is used to generate indices for combined attributes (e.g., lemma+pos).
+	"""
 
 	fused_array = SuffixArray()
 	for i in xrange(len(array1.corpus)):
@@ -101,12 +137,19 @@ def fuse_suffix_arrays(array1, array2):
 
 
 class SymbolTable():
+	"""
+		Handles the conversion between word strings and numbers.
+	"""
+
 	def __init__(self):
 		self.symbol_to_number = {'': 0}
 		self.number_to_symbol = ['']
 		self.last_number = 0
 
 	def intern(self, symbol):
+		"""
+			Adds the string `symbol` to the symbol table.
+		"""
 		if not self.symbol_to_number.has_key(symbol):
 			self.last_number += 1
 			self.symbol_to_number[symbol] = self.last_number
@@ -117,28 +160,46 @@ class SymbolTable():
 
 
 class SuffixArray():
+	"""
+		Class containing the corpus and suffix arrays and the symbol table
+		for one attribute of a corpus.
+	"""
+
 	def __init__(self):
 		self.corpus = make_array()    # List of word numbers
 		self.suffix = make_array()    # List of word positions
 		self.symbols = SymbolTable()  # word<->number conversion table
 
 	def set_basepath(self, basepath):
+		"""
+			Sets the base path for the suffix array files.
+		"""
 		self.basepath = basepath
 		self.corpus_path = basepath + ".corpus"
 		self.suffix_path = basepath + ".suffix"
 		self.symbols_path = basepath + ".symbols"
 
 	def load(self):
+		"""
+			Loads the suffix array from the files at `self.basepath`.
+		"""
 		load_array_from_file(self.corpus, self.corpus_path)
 		load_array_from_file(self.suffix, self.suffix_path)
 		load_symbols_from_file(self.symbols, self.symbols_path)
 
 	def save(self):
+		"""
+			Saves the suffix array to the files at `self.basepath`.
+		"""
 		save_array_to_file(self.corpus, self.corpus_path)
 		save_array_to_file(self.suffix, self.suffix_path)
 		save_symbols_to_file(self.symbols, self.symbols_path)
 
 	def append_word(self, word):
+		"""
+			Adds a new word to the end of the corpus array, putting it in the
+			symbol table if necessary.
+		"""
 		self.corpus.append(self.symbols.intern(word))
 
 	# For debugging.
@@ -147,15 +208,21 @@ class SuffixArray():
 			self.append_word(w)
 
 	def build_suffix_array(self):
+		"""
+			Builds the sorted suffix array from the corpus array.
+		"""
 		tmpseq = range(0, len(self.corpus))
-		tmpsuf = sorted(tmpseq, cmp=(lambda a,b: compare_ngrams(self.corpus, a, self.corpus, b)))
-		self.suffix = make_array(tmpsuf)
+		tmpseq.sort(cmp=(lambda a,b: compare_ngrams(self.corpus, a, self.corpus, b)))
+		self.suffix = make_array(tmpseq)
 
 
 	def find_ngram_range(self, ngram, min=0, max=None):
-		# Returns a tuple (min, max) of matching ngram positions in suffix array
+		"""
+			Returns a tuple `(first, last)` of matching ngram positions in
+			the suffix array, or `None` if there is no match.
+		"""
 		# TODO: We will need a more "incremental" approach for searching for
-		# patterns that use multple word attributes.
+		# patterns that use multple word attributes. (Can't be done!)
 		
 		if max is None:
 			max = len(self.suffix) - 1
@@ -176,7 +243,10 @@ class SuffixArray():
 			return None
 
 	def binary_search_ngram(self, ngram, first, last, cmp):
-		# Find the least suffix that satisfies suffix `cmp` ngram.
+		"""
+			Find the least suffix that satisfies `suffix <cmp> ngram`, or
+			`None` if there is none.
+		"""
 
 		# 'max' must be one more than 'last', for the case no suffix
 		# satisfies the comparison.
@@ -199,6 +269,9 @@ class SuffixArray():
 
 	# For debugging.
 	def dump_suffixes(self, limit=10, start=0, max=None):
+		"""
+			Prints the suffix array to standard output (for debugging).
+		"""
 		if max is None:
 			max = len(self.suffix)
 
@@ -219,6 +292,10 @@ class SuffixArray():
 
 
 class Index():
+	"""
+		This class holds the `SuffixArray`s for all attributes of a corpus,
+		plus metadata which is common for all attributes.
+	"""
 	def __init__(self, basepath=None, used_word_attributes=None):
 		self.arrays = {}
 		self.metadata = { "corpus_size": 0 }
@@ -233,14 +310,27 @@ class Index():
 			self.set_basepath(basepath)
 
 	def fresh_arrays(self):
+		"""
+			Creates empty suffix arrays for each used attribute in the index.
+		"""
 		for attr in self.used_word_attributes:
 			self.arrays[attr] = SuffixArray()
 
 	def set_basepath(self, path):
+		"""
+			Sets the base path for the index files.
+		"""
 		self.basepath = path
 		self.metadata_path = path + ".info"
 
 	def load(self, attribute):
+		"""
+			Load an attribute from the corresponding index files.
+			If the attribute is of the form `a1+a2` and the corresponding
+			file does not exist, creates a new suffix array fusing the 
+			arrays for attributes `a1` and `a2`.
+		"""
+
 		if self.arrays.has_key(attribute):
 			return self.arrays[attribute]
 
@@ -267,11 +357,17 @@ class Index():
 		return array
 
 	def save(self, attribute):
+		"""
+			Saves the suffix array for `attribute` to the corresponding files.
+		"""
 		array = self.arrays[attribute]
 		array.set_basepath(self.basepath + "." + attribute)
 		array.save()
 
 	def load_metadata(self):
+		"""
+			Loads the index metadata from the corresponding file.
+		"""
 		metafile = open(self.metadata_path)
 		for line in metafile:
 			key, type, value = line.rstrip('\n').split(" ", 2)
@@ -282,6 +378,9 @@ class Index():
 		metafile.close()
 	
 	def save_metadata(self):
+		"""
+			Saves the index metadata to the corresponding file.
+		"""
 		metafile = open(self.metadata_path, "w")
 		for key, value in self.metadata.items():
 			if isinstance(value, int):
@@ -307,7 +406,9 @@ class Index():
 
 
 	def append_sentence(self, sentence):
-		# Adds a sentence (presumably extracted from a XML file) to the index.
+		"""
+			Adds a `Sentence` (presumably extracted from a XML file) to the index.
+		"""
 
 		for attr in self.used_word_attributes:
 			for word in sentence.word_list:
@@ -321,12 +422,17 @@ class Index():
 			verbose("Processing sentence %d" % self.sentence_count)
 
 	def build_suffix_arrays(self):
+		"""
+			Build suffix arrays for all attributes in the index.
+		"""
 		for attr in self.arrays.keys():
 			verbose("Building suffix array for %s..." % attr)
 			self.arrays[attr].build_suffix_array()
 
 	def iterate_sentences(self):
-		# Returns an iterator over all sentences in the corpus.
+		"""
+			Returns an iterator over all sentences in the corpus.
+		"""
 
 		id = 1
 		guide = self.used_word_attributes[0]        # guide?
@@ -360,6 +466,9 @@ class Index():
 
 
 def index_from_corpus(corpus, basepath=None, attrs=None):
+	"""
+		Generates an `Index` from a corpus file.
+	"""
 	parser = xml.sax.make_parser()
 	index = Index(basepath, attrs)
 	index.fresh_arrays()
@@ -371,6 +480,7 @@ def index_from_corpus(corpus, basepath=None, attrs=None):
 
 #t = fuse_suffix_arrays(h.arrays["surface"], h.arrays["pos"])
 
+# For debugging.
 def standalone_main(argv):
 	if len(argv) != 3:
 		print >>sys.stderr, "Usage: python indexlib.py <basepath> <corpus>"

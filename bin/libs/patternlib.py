@@ -12,6 +12,13 @@ ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
 WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", WORD_ATTRIBUTES))
 
 def parse_patterns_file(path):
+	"""
+		Generates a list of precompiled regular expressions, one for each
+		pattern in `file`.
+
+		@param `file` The path for a patterns XML file (mwetoolkit-patterns.dtd).
+	"""
+
 	patterns = []
 	doc = minidom.parse(path)
 	
@@ -28,7 +35,12 @@ class State:
 	pass
 
 def parse_pattern(node):
-	# TODO: Eliminate duplication.
+	"""
+		Generates a precompiled regular expression from a pattern description.
+
+		@param node An `xml.dom.Element` from the patterns file representing
+		a single pattern.
+	"""
 
 	state = State()
 	state.pattern = WORD_SEPARATOR
@@ -108,7 +120,9 @@ def parse_pattern(node):
 
 
 def match_pattern(pattern, words):
-	# Returns an iterator over all matches of the pattern in the word list.
+	"""
+		Returns an iterator over all matches of the pattern in the word list.
+	"""
 
 	wordstring = WORD_SEPARATOR
 	positions = []
@@ -140,7 +154,9 @@ def match_pattern(pattern, words):
 
 
 def build_generic_pattern(min, max):
-	# Returns a pattern matching any ngram of size min~max.
+	"""
+		Returns a pattern matching any ngram of size min~max.
+	"""
 
 	pattern = WORD_SEPARATOR + "(?:[^%s]*" % WORD_SEPARATOR + \
 	          WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
