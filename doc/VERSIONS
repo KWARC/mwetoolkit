@@ -2,17 +2,20 @@
 >>>    mwetoolkit version history     <<<
 
 VERSION 0.3:
-Released: ?, 2010
+Released: Aug 27, 2010
 Author: Carlos Ramisch
 
 Improvements over 0.2:
     a) better handling of temporary files
     b) write errors to stderr instead of stdout
-    c) sorting script
+    c) sorting script, map script
     d) improve filtering script for cropping
     e) wc, head and tail tools
     f) suffix array indexing, can handle arbitrary ngrams and very large corpora
     g) integration with Google API for web counts
+    h) tons of bug correction
+    i) some documentation added
+    j) changed some dtds like the dict dtd and parts of the candidates dtd
 
 VERSION 0.2:
 Released: Dec 09, 2009

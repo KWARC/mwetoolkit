@@ -1,11 +1,13 @@
 >>> MULTIWORD TERM TOOLKIT <<<
 
 Version 0.3
-Released: Jan 09, 2010
+Released: Aug 27, 2010
 Author: Carlos Ramisch
-Contact: Carlos.Ramisch@imag.fr
+Contact: carlosramisch@gmail.com
 
-The goal of the MWT Toolkit is to perform automatic Multiword Term extraction
+CAUTION: DOCUMENTATION IS NOT UP TO DATE WITH THE LAST VERSION OF THE TOOLKIT
+
+The goal of the MWE Toolkit is to perform automatic Multiword Term extraction
 from domain-specific documents. Please read this documentation before you start
 the work.
 
