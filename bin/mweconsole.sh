@@ -69,6 +69,16 @@ help() {
 	printf "\n"
 }
 
+_load_metadata() {
+	[[ -f "$PROJMETADATA" ]] && . "$PROJMETADATA"
+}
+
+_save_metadata() {
+	for var in CORPUS_SRC PATTERNS_SRC REFERENCE_SRC CORPUS_INDEXED; do
+		printf "%s=%q\n" "$var" "${!var}"
+	done >"$PROJMETADATA"
+}
+
 create-project() {
 	local usage="Usage: create-project [directory [-n]]\n"
 
@@ -140,10 +150,12 @@ open-project() {
 	REFERENCE="$PROJDIR/reference.xml"
 	TMPFILE="$PROJDIR/tmpfile"
 	INDEXBASE="$PROJDIR/index/corpus"
+	PROJMETADATA="$PROJDIR/mweconsole.rc"
 
 	CORPUS_INDEXED=
 	LAST_TOUCHED=
 
+	_load_metadata
 	_readfeatures
 	return 0
 }
@@ -241,6 +253,7 @@ _loadfile() {
 		}
 
 		setvar "$srcvar" "$1"
+		_save_metadata
 		return 0
 	else
 		printf "Usage: corpus [filename]\n"
@@ -250,16 +263,18 @@ _loadfile() {
 
 corpus() {
 	LAST_TOUCHED="corpus"
-	_loadfile CORPUS_SRC "$CORPUS" "corpus" "corpus" "corpus" "$@" || return
 	CORPUS_INDEXED=
+	_loadfile CORPUS_SRC "$CORPUS" "corpus" "corpus" "corpus" "$@" || return
 	printf "Corpus file \"%s\" selected. Use \e[1mindex\e[0m to index it.\n" "$CORPUS_SRC"
 }
 
 pattern() {
 	LAST_TOUCHED="pattern"
-	_loadfile PATTERNS_SRC "$PATTERNS" "pattern file" "dict" "pattern" "$@" || return
+	_loadfile PATTERNS_SRC "$PATTERNS" "pattern file" "patterns" "pattern" "$@" || return
 	printf "Pattern file \"%s\" selected.\n" "$PATTERNS_SRC"
 }
+
+patterns() { pattern "$@"; }
 
 candidates() {
 	LAST_TOUCHED="candidates"
@@ -334,9 +349,13 @@ index() {
 		return 1
 	}
 	printf "Corpus file indexed. Now you can use \e[1mextract\e[0m to extract candidates.\n"
+	CORPUS_INDEXED=yes
+	_save_metadata
 }
 
 extract() {
+	local opts=()
+
 	[[ $CORPUS ]] || {
 		printf "No corpus file selected! Use \e[1mcorpus <filename>\e[0m to select one.\n"
 		return 1
@@ -349,7 +368,14 @@ extract() {
 	# Change working directory so that the pathname does not appear in corpus name.
 	(
 		cd "$(dirname "$CORPUS")" || return 1
-		python "$BIN/candidates.py" -v -p "$PATTERNS" "${CORPUS##*/}" >"$CANDIDATES" || {
+		if [[ $CORPUS_INDEXED ]]; then
+			opts+=(-i "$INDEXBASE")
+		else
+			printf "Corpus not indexed; extracting directly from XML instead.\n"
+			printf "You can use \e[1mindex\e[0m to index it.\n"
+			opts+=("${CORPUS##*/}")
+		fi
+		python "$BIN/candidates.py" -v -p "$PATTERNS" "${opts[@]}" >"$CANDIDATES" || {
 			printf "Error extracting candidates!\n"
 			return 1
 		}

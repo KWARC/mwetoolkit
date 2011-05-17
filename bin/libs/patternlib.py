@@ -99,6 +99,9 @@ def parse_pattern(node):
 
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
+		else:
+			raise Exception, "Invalid node name '%s'" % node.nodeName
+
 
 	parse(node)
 	return re.compile(state.pattern)
