@@ -37,8 +37,8 @@ usage_string = """Usage:
 python %(program)s OPTIONS -i <index> <corpus.xml>
 
 -i <index> OR --index <index>
-    Name of the output index files <index>.vocab, <index>.corpus and 
-    <index>.ngrams    
+    Base name for the output index files. This is used as a prefix for all index
+    files generated, such as <index>.lemma.corpus, <index>.lemma.suffix, etc.
     
 OPTIONS may be:    
 

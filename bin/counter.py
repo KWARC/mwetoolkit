@@ -62,9 +62,10 @@ usage_string = """Usage:
     
 python %(program)s [-y | -i <corpus.index>] OPTIONS <candidates.xml>
 
--i <corpus.index> OR --index <corpus.index>
-    Name of the index file that that was created by "index.py" from a corpus
-    file. The <corpus.index> file contains the frequencies of individual words.
+-i <index> OR --index <index>
+    Base name for the index files, as created by "index.py -i <index>".
+    These files are used to calculate the frequencies of individual words
+    in the corpus.
 
 -y OR --yahoo
     Search for frequencies in the Web using Yahoo Web Search as approximator for
@@ -99,7 +100,7 @@ OPTIONS may be:
     counter twice, first without this option then with this option.
 
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
-You must chose either the -y option or the -i otpion, both are not allowed at 
+You must chose either the -y option or the -i option, both are not allowed at 
 the same time. 
 """    
 

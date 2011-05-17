@@ -72,7 +72,7 @@ usage_string = """Usage:
 python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
 
 -p <patterns.xml> OR --patterns <patterns.xml>
-    The patterns to extract, valid XML (mwetoolkit-dict.dtd)
+    The patterns to extract, valid XML (mwetoolkit-patterns.dtd)
 
 -n <min>:<max> OR --ngram <min>:<max>
     The length of ngrams to extract. For instance, "-n 3:5" extracts ngrams 

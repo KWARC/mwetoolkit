@@ -1,5 +1,5 @@
 #!/bin/bash
-mweconsole_version=(0.0.5 2010-01-19)
+mweconsole_version=(0.0.6 2011-05-16)
 
 ASSOC_MEASURES="mle:pmi:ll:t:dice"
 CONTRAST_MEASURES="csmwe:simplediff:simplecsmwe"
