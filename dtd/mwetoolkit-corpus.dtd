@@ -1,7 +1,7 @@
 <!--
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2011 Carlos Ramisch, Vitor de Araujo
 #
 # mwetoolkit-corpus.dtd is part of mwetoolkit
 #
@@ -31,9 +31,12 @@
     lemma CDATA #IMPLIED
     pos CDATA #IMPLIED
     syn CDATA #IMPLIED 
+    dep CDATA #IMPLIED     
 > 
 <!-- surface: Surface form of a word, like each word in the sentence "He went to the streets"
      lemma: Lemmatised (original) form of a word, like each lemma in the sentence "he go to the street"
      pos: Morphosyntactic category of a word, like each class name (N-Noun, V-Verb, etc.) in the sentence "PP V P DT N"
-     syn: Syntax information in any formalism you like, for instance the dependency information in the sentence (the part before the ":" is the relation, the part after the ">" is the index of the word that is the target of the relation) "He/subj:>2 went/main:>0 to/goa:>2 the/det:>5 streets/pcomp:>3"
+     == The following two attributes may be empty "" or have multiple values, in which case they will be separated by ";"
+     syn: Syntax information in any formalism you like, for instance the dependency relation in the sentence "subj - - det to_pcomp"
+     dep: Index of the word in the sentence on which this word depends with the "syn" relation, like in "2 - - 5 3". The index starts at 1.
 -->
