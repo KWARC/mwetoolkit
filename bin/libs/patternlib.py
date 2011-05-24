@@ -9,7 +9,7 @@ import re
 import sys
 
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
-WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", WORD_ATTRIBUTES))
+WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", ["wordnum"] + WORD_ATTRIBUTES))
 
 def parse_patterns_file(path):
 	"""
@@ -90,18 +90,37 @@ def parse_pattern(node):
 			state.pattern += "(?P=%s)" % id
 
 		elif node.nodeName == "w":
-			attrs = {}
+			attrs = { "wordnum": ATTRIBUTE_WILDCARD }
 			id = node.getAttribute("id")
 			for attr in WORD_ATTRIBUTES:
-				val = re.escape(node.getAttribute(attr)).replace("\\*", ATTRIBUTE_WILDCARD)
-				attrs[attr] = val or ATTRIBUTE_WILDCARD
-				if id:
+				val = node.getAttribute(attr)
+				if val.startswith("back:"):
+					(refid, refattr) = val.split(":")[1].split(".")
+					val = "(?P=%s_%s)" % (refid, refattr)
+
+				elif val:
+					val = re.escape(val).replace("\\*", ATTRIBUTE_WILDCARD)
+
+				else:
+					val = ATTRIBUTE_WILDCARD
+
+				attrs[attr] = val
+
+			
+			if id:
+				for attr in attrs:
 					attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
+
+			syndep = node.getAttribute("syndep")
+			if syndep:
+				(deptype, depref) = syndep.split(":")
+				attrs["syn"] = (ATTRIBUTE_WILDCARD +
+				               ";%s:(?=<%s_wordnum>);" % (deptype, depref) +
+				               ATTRIBUTE_WILDCARD)
 
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
 		elif node.nodeName == "backw":
-			attrs = {}
 			for attr in WORD_ATTRIBUTES:
 				id = node.getAttribute(attr)
 				if id:
@@ -126,12 +145,15 @@ def match_pattern(pattern, words):
 
 	wordstring = WORD_SEPARATOR
 	positions = []
+	wordnum = 1
 	for word in words:
 		positions.append(len(wordstring))
-		attrs = {}
+		attrs = { "wordnum": wordnum }
 		for attr in WORD_ATTRIBUTES:
 			attrs[attr] = getattr(word, attr)
+		attrs["syn"] = ";" + attrs["syn"] + ";"
 		wordstring += WORD_FORMAT % attrs + WORD_SEPARATOR
+		wordnum += 1
 
 	limit = len(wordstring)
 
@@ -176,6 +198,7 @@ def patternlib_test():
 	      Word("foos", "foo", "N", "x", []),
 	      Word("bars", "bar", "V", "x", []),
 	      Word("quuxes", "quux", "N", "x", []),
-	      Word("foose", "foo", "N", "x", [])]
+	      Word("foose", "foo", "N", "x", []),
+	      Word("etiam", "etiam", "N", "x", [])]
 	show(match_pattern(p[0], ws))
 	#show(match_pattern(build_generic_pattern(2,3), ws))

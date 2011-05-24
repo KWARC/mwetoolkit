@@ -30,8 +30,10 @@
 	<!-- Pattern with backreference to individual word attributes. -->
 	<pat>
 		<w pos="N" id="w1"/>
-		<pat repeat="+"><w/></pat>
-		<w lemma="back:w1.lemma"/>
+		<pat repeat="+">
+			<w/>
+		</pat>
+		<backw lemma="w1"/>
 	</pat>
 
 </patterns>

@@ -17,15 +17,18 @@
     lemma CDATA #IMPLIED
     pos CDATA #IMPLIED
     syn CDATA #IMPLIED
+    syndep CDATA #IMPLIED
     id CDATA #IMPLIED
 >
 
-<!ATTLIST backw
-    surface CDATA #IMPLIED
-    lemma CDATA #IMPLIED
-    pos CDATA #IMPLIED
-    syn CDATA #IMPLIED
->
+<!--
+  <!ATTLIST backw
+      surface CDATA #IMPLIED
+      lemma CDATA #IMPLIED
+      pos CDATA #IMPLIED
+      syn CDATA #IMPLIED
+  >
+-->
 
 <!ELEMENT either (pat*)>
 <!ATTLIST either
