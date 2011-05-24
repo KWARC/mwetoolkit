@@ -19,11 +19,15 @@ def to_xml( s_id, list_of_w ) :
     for w in list_of_w[ : len(list_of_w) - 1 ] :
         (l, t, s, d) = w
         (su,p) = t.rsplit( "/", 1 )
+
+        syndep = ';'.join([syn+":"+dep for (syn,dep) in zip(s,d)])
+
         output = output + "<w surface=\"" + clean( su ) + \
                           "\" lemma=\"" + clean( l ) + \
                           "\" pos=\"" + clean( p ) + \
-                          "\" syn=\"" + clean( ";".join( s ) ) + \
-                          "\" dep=\"" + clean( ";".join( d ) ) + "\"/>"
+                          "\" syn=\"" + clean(syndep) + "\"/>"
+                         #"\" syn=\"" + clean( ";".join( s ) ) + \
+                         #"\" dep=\"" + clean( ";".join( d ) ) + "\"/>"
     output = output + "</s>"
     return output
        
