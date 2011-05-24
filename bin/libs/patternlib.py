@@ -115,7 +115,7 @@ def parse_pattern(node):
 			if syndep:
 				(deptype, depref) = syndep.split(":")
 				attrs["syn"] = (ATTRIBUTE_WILDCARD +
-				               ";%s:(?=<%s_wordnum>);" % (deptype, depref) +
+				               ";%s:(?P=%s_wordnum);" % (deptype, depref) +
 				               ATTRIBUTE_WILDCARD)
 
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
@@ -135,6 +135,7 @@ def parse_pattern(node):
 
 
 	parse(node)
+	print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
 	return re.compile(state.pattern)
 
 
