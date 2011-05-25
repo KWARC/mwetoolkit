@@ -60,7 +60,7 @@ from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
     
 usage_string = """Usage: 
     
-python %(program)s [-y | -i <corpus.index>] OPTIONS <candidates.xml>
+python %(program)s [-y | -w | -i <corpus.index>] OPTIONS <candidates.xml>
 
 -i <index> OR --index <index>
     Base name for the index files, as created by "index.py -i <index>".
@@ -99,8 +99,11 @@ OPTIONS may be:
     element. If you also want to count the candidate lemma, you should call the
     counter twice, first without this option then with this option.
 
+-J OR --no-joint
+   Don't count joint ngram frequencies; count only individual word frequencies.
+    
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
-You must chose either the -y option or the -i option, both are not allowed at 
+You must choose exactly one of -y, -w or -i. More than one is not allowed at
 the same time. 
 """    
 
@@ -116,6 +119,7 @@ low_limit = -1
 up_limit = -1
 text_input = False
 count_vars = False
+count_joint_frequency = True
 language = DEFAULT_LANG
 
 ################################################################################
@@ -153,8 +157,9 @@ def append_counters( ngram ):
                                         [ w.pos.strip() ] )
         w.add_frequency( Frequency( freq_name, freq_value ) )
     # Global frequency
-    freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-    ngram.add_frequency( Frequency( freq_name, freq_value ) )
+    if count_joint_frequency:
+        freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
+        ngram.add_frequency( Frequency( freq_name, freq_value ) )
 
 ################################################################################
 
@@ -275,20 +280,6 @@ def get_freq_web( surfaces, lemmas, pos ) :
         search_term = search_term + build_entry( surfaces[ i ], lemmas[i], pos[ i ] ) + " "   
     return web_freq.search_frequency( search_term.strip(), language )
 
-################################################################################
-
-def load_array_from_file( an_array, a_filename ) :
-    """
-    """
-    MAX_MEM = 10000
-    fd = open( a_filename )
-    isMore = True
-    while isMore :
-        try :    
-            an_array.fromfile( fd, MAX_MEM )
-        except EOFError :
-            isMore = False # Did not read MAX_MEM_ITEMS items? Not a problem...
-    fd.close()
 
 ################################################################################
 
@@ -350,6 +341,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global text_input, count_vars
     global language
     global suffix_array
+    global count_joint_frequency
     surface_flag = False
     ignorepos_flag = False
     mode = []
@@ -402,6 +394,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             count_vars = True
         elif o in ("-l", "--lang" ) : 
             language = a
+        elif o in ("-J", "--no-joint") :
+        	count_joint_frequency = False
 
     if mode == [ "index" ] :       
         if surface_flag and ignorepos_flag :
@@ -442,8 +436,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
-            "from=", "to=", "text", "vars", "lang=" ]
-arg = read_options( "ywi:vgsf:t:xal:", longopts, treat_options, -1, usage_string )
+            "from=", "to=", "text", "vars", "lang=", "no-joint" ]
+arg = read_options( "ywi:vgsf:t:xal:J", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()
