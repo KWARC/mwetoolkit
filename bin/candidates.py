@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010 Carlos Ramisch, Vitor De Araujo
 #
 # candidates.py is part of mwetoolkit
 #
@@ -87,6 +87,12 @@ OPTIONS may be:
 
 -i OR --index
      Read the corpus from an index instead of an XML file. Default false.
+     
+-f OR --freq     
+    Output the count of the candidate. This counter will merge the candidates if
+    more than one pattern matches it, considering it as a single entry. The 
+    counts of individual words in the candidate are NOT output by this option,
+    you must use counter.py for this. Default false.
 
 -g OR --ignore-pos
      Ignores parts of speech when counting candidate occurences. This means, for
@@ -103,7 +109,7 @@ by index.py.
     You must choose either the -p option or the -n option, both are not allowed
 at the same time.
 """
-patterns = []
+patterns = []-
 ignore_pos = False
 surface_instead_lemmas = False
 print_cand_freq = False
