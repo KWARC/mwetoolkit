@@ -21,7 +21,7 @@ dotest() {
 	printf "\e[1m%d. %s\e[0m\n" "$testnum" "$name"
 	printf "\e[1;33m%s\e[0m\n" "$run"
 
-	if eval "$run" && eval "$test"; then
+	if eval time "$run" && eval "$test"; then
 		printf "\e[1;32mOK\e[0m\n"
 	else
 		printf "\e[1;31mFAILED!\e[0m\n"

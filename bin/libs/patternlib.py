@@ -44,15 +44,20 @@ def parse_pattern(node):
 
 	state = State()
 	state.pattern = WORD_SEPARATOR
+	state.ignore_id = 0
 
 	def parse(node):
 		if node.nodeName == "pat":
 			id = node.getAttribute("id")
 			repeat = node.getAttribute("repeat")
+			ignore = node.getAttribute("ignore")
 			if id:
 				state.pattern += "(?P<%s>" % id
 			elif repeat:
 				state.pattern += "(?:"
+			elif ignore:
+				state.pattern += "(?P<ignore_%d>)" % state.ignore_id
+				state.ignore_id += 1
 
 			for subnode in node.childNodes:
 				if isinstance(subnode, minidom.Element):
@@ -162,14 +167,22 @@ def match_pattern(pattern, words):
 		current_end = limit
 		while True:
 			result = pattern.match(wordstring, current_start - 1, current_end)
+
 			if result:
+				# Beware: [x for x ...] exposes the variable x to the surrounding environment.
+				ignore_ids = [id for id in result.groupdict().keys() if id.startswith("ignore_")]
+				ignore_spans = [result.span(id) for id in ignore_ids]
+
 				start = result.start()
 				end = result.end()
 				current_end = end - 1
 				ngram = []
 				for i in xrange(len(words)):	
 					if positions[i] >= start and positions[i] < end:
-						ngram.append(words[i])
+						while ignore_spans and ignore_spans[0][1] < positions[i]:
+							ignore_spans = ignore_spans[1:] # Inefficient?
+						if not (ignore_spans and start >= ignore_spans[0][0]):
+							ngram.append(words[i])
 				yield ngram
 
 			else:

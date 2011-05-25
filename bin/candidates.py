@@ -109,7 +109,7 @@ by index.py.
     You must choose either the -p option or the -n option, both are not allowed
 at the same time.
 """
-patterns = []-
+patterns = []
 ignore_pos = False
 surface_instead_lemmas = False
 print_cand_freq = False
