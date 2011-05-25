@@ -1,7 +1,7 @@
 <patterns>
 	<pat>
 		<w pos="VBD" id="v1" />
-		<pat repeat="*"><w/></pat>
+		<pat repeat="*" ignore="true"><w/></pat>
 		<w syndep="dobj:v1" />
 	</pat>
 </patterns>

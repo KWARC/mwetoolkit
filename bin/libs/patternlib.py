@@ -51,13 +51,15 @@ def parse_pattern(node):
 			id = node.getAttribute("id")
 			repeat = node.getAttribute("repeat")
 			ignore = node.getAttribute("ignore")
+
+			if ignore:
+				state.pattern += "(?P<ignore_%d>" % state.ignore_id
+				state.ignore_id += 1
+
 			if id:
 				state.pattern += "(?P<%s>" % id
 			elif repeat:
 				state.pattern += "(?:"
-			elif ignore:
-				state.pattern += "(?P<ignore_%d>)" % state.ignore_id
-				state.ignore_id += 1
 
 			for subnode in node.childNodes:
 				if isinstance(subnode, minidom.Element):
@@ -67,6 +69,9 @@ def parse_pattern(node):
 				state.pattern += ")"
 			if repeat:
 				state.pattern += repeat
+
+			if ignore:
+				state.pattern += ")"
 
 		elif node.nodeName == "either":
 			id = node.getAttribute("id")
