@@ -1,7 +1,15 @@
 <patterns>
+<!--
 	<pat>
 		<w pos="VBD" id="v1" />
 		<pat repeat="*" ignore="true"><w/></pat>
 		<w syndep="dobj:v1" />
+	</pat>
+-->
+
+	<pat>
+		<w syndep="nsubj:v1" />
+		<pat repeat="*"><w/></pat>
+		<w id="v1" />
 	</pat>
 </patterns>

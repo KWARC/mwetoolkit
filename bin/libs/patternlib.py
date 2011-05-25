@@ -44,7 +44,9 @@ def parse_pattern(node):
 
 	state = State()
 	state.pattern = WORD_SEPARATOR
-	state.ignore_id = 0
+	state.temp_id = 0
+	state.defined_ids = []
+	state.forepattern_ids = {}	
 
 	def parse(node):
 		if node.nodeName == "pat":
@@ -53,8 +55,8 @@ def parse_pattern(node):
 			ignore = node.getAttribute("ignore")
 
 			if ignore:
-				state.pattern += "(?P<ignore_%d>" % state.ignore_id
-				state.ignore_id += 1
+				state.pattern += "(?P<ignore_%d>" % state.temp_id
+				state.temp_id += 1
 
 			if id:
 				state.pattern += "(?P<%s>" % id
@@ -118,19 +120,36 @@ def parse_pattern(node):
 
 			
 			if id:
+				if id in state.forepattern_ids:
+					attrs["wordnum"] = "(?P=%s)" % state.forepattern_ids[id]
 				for attr in attrs:
 					attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
+				if id in state.defined_ids:
+					raise Exception, "Id '%s' defined twice" % id
+				state.defined_ids.append(id)
 
 			syndep = node.getAttribute("syndep")
 			if syndep:
 				(deptype, depref) = syndep.split(":")
-				attrs["syn"] = (ATTRIBUTE_WILDCARD +
-				               ";%s:(?P=%s_wordnum);" % (deptype, depref) +
-				               ATTRIBUTE_WILDCARD)
+				if depref in state.defined_ids:
+					# Backreference.
+					attrs["syn"] = (ATTRIBUTE_WILDCARD +
+					               ";%s:(?P=%s_wordnum);" % (deptype, depref) +
+					               ATTRIBUTE_WILDCARD)
+				else:
+					# Fore-reference.
+					foredep = "foredep_%d" % state.temp_id
+					state.temp_id += 1
+					state.forepattern_ids[depref] = foredep
+
+					attrs["syn"] = (ATTRIBUTE_WILDCARD +
+					                ";%s:(?P<%s>[0-9]*);" % (deptype, foredep) +
+					                ATTRIBUTE_WILDCARD)
 
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
 		elif node.nodeName == "backw":
+			# Obsolete. Use "back:id.attribute" syntax instead.
 			for attr in WORD_ATTRIBUTES:
 				id = node.getAttribute(attr)
 				if id:
@@ -145,7 +164,7 @@ def parse_pattern(node):
 
 
 	parse(node)
-	# print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
+	print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
 	return re.compile(state.pattern)
 
 
