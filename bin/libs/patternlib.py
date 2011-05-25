@@ -145,7 +145,7 @@ def parse_pattern(node):
 
 
 	parse(node)
-	print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
+	# print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
 	return re.compile(state.pattern)
 
 
@@ -182,11 +182,12 @@ def match_pattern(pattern, words):
 				end = result.end()
 				current_end = end - 1
 				ngram = []
-				for i in xrange(len(words)):	
+				for i in xrange(len(words)):
 					if positions[i] >= start and positions[i] < end:
-						while ignore_spans and ignore_spans[0][1] < positions[i]:
+						while ignore_spans and ignore_spans[0][1] <= positions[i]:
+							# If the ignore-end is before this point, we don't need it anymore.
 							ignore_spans = ignore_spans[1:] # Inefficient?
-						if not (ignore_spans and start >= ignore_spans[0][0]):
+						if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
 							ngram.append(words[i])
 				yield ngram
 
