@@ -164,7 +164,6 @@ def parse_pattern(node):
 
 
 	parse(node)
-	print >>sys.stderr, state.pattern.replace("\x1c", "#").replace("\x1d", "|")
 	return re.compile(state.pattern)
 
 

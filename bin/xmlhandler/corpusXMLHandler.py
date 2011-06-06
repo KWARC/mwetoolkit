@@ -76,20 +76,20 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
             @param attrs Dictionary containing the attributes of this element.
         """      
         if name == "s" :
-            if( "s_id" in attrs ) :
+            if( "s_id" in attrs.keys() ) :
                 self.s_id = int( strip_xml( attrs[ "s_id" ] ) )
             self.sentence = Sentence( [], self.s_id )
         elif name == "w" :
             surface = strip_xml( attrs[ "surface" ] ) # Mandatory in the corpus
-            if( "lemma" in attrs ) :
+            if( "lemma" in attrs.keys() ) :
                 lemma = strip_xml( attrs[ "lemma" ] )
             else :
                 lemma = WILDCARD
-            if( "pos" in attrs ) :
+            if( "pos" in attrs.keys() ) :
                 pos = strip_xml( attrs[ "pos" ] )
             else :
                 pos = WILDCARD
-            if( "syn" in attrs ) :
+            if( "syn" in attrs.keys() ) :
                 syn = strip_xml( attrs[ "syn" ] )
             else :
                 syn = WILDCARD
