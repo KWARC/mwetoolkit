@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
+import sys
+
 ################################################################################
 #
 # Copyright 2010 Carlos Ramisch
@@ -44,7 +46,7 @@ class Ngram (object):
 
 ################################################################################
 
-    def __init__( self, word_list=[], freqs=[] ) :
+    def __init__( self, word_list=[], freqs=[], sources=[] ) :
         """
             Instanciates the `Ngram` with the list of words that compose it and
             the list of frequencies associated to the ngram. 
@@ -60,11 +62,15 @@ class Ngram (object):
             the frequencies correspond to occurrences of ALL the words of the
             ngram in a corpus. Individual word frequencies are attached to the
             corresponding `Word` object in the `word_list`. 
+
+            @param sources A list of the ids of the sentences where the
+            ngram occurs.
             
             @return A new instance of a `Ngram`.
         """
         self.word_list = word_list
         self.freqs = freqs
+        self.sources = [x for x in sources]
 
 ################################################################################
     
@@ -95,6 +101,9 @@ class Ngram (object):
             repeated frequency in the list.
         """
         self.freqs.append( freq )
+
+    def add_sources(self, sources):
+        self.sources.extend(sources)
 
 ################################################################################
     
@@ -152,7 +161,11 @@ class Ngram (object):
             result = result + "\n"        
             for freq in self.freqs :
                 result = result + freq.to_xml()
-        result = result + "</ngram>"    
+        if len(self.sources) > 0:
+            #print >>sys.stderr, "-- %d sources" % len(self.sources)
+            sources_string = ','.join(map(str, self.sources))
+            result += '<sources ids="%s"/>\n' % sources_string
+        result = result + "</ngram>"
         return result.strip()
         
 ################################################################################
