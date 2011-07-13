@@ -147,6 +147,10 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
                 self.word.add_frequency( self.freq )            
             else :
                 self.ngram.add_frequency( self.freq )
+
+        elif name == "sources":
+            self.ngram.add_sources(map(int, attrs["ids"].split(',')))
+
         elif name == "feat" :
             feat_name = strip_xml( attrs[ "name" ] )
             feat_value = strip_xml( attrs[ "value" ] )
