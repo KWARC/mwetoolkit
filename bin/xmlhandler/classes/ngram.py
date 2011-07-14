@@ -163,7 +163,7 @@ class Ngram (object):
                 result = result + freq.to_xml()
         if len(self.sources) > 0:
             #print >>sys.stderr, "-- %d sources" % len(self.sources)
-            sources_string = ','.join(map(str, self.sources))
+            sources_string = ';'.join(map(str, self.sources))
             result += '<sources ids="%s"/>\n' % sources_string
         result = result + "</ngram>"
         return result.strip()

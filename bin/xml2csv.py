@@ -62,7 +62,7 @@ def treat_meta( meta ) :
     string_cand = "id\tngram\tpos\t"
     for cs in meta.corpus_sizes :
         string_cand = string_cand + cs.name + "\t"
-    string_cand = string_cand + "occurs\t"
+    string_cand = string_cand + "occurs\tsources\t"
     for cs in meta.meta_tpclasses :
         string_cand = string_cand + cs.name + "\t"
     for cs in meta.meta_feats :
@@ -115,13 +115,17 @@ def treat_entity( entity ) :
 
     try :
         occur_dict = {}
+        sources = []
         for occur in entity.occurs :
             surfaces = []
+            sources.extend(occur.sources)
             for w in occur :
                 surfaces.append( w.surface )
             occur_dict[ " ".join( surfaces ) ] = True
 
         string_cand += "; ".join( occur_dict.keys() ) + "\t"
+        string_cand += ";".join(sources) + "\t"
+
     except AttributeError:
         # This kind of entry probably doesnt have occurs
         string_cand = string_cand.strip() + "\t-\t"

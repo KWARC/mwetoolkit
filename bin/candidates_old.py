@@ -102,9 +102,6 @@ OPTIONS may be:
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
 
--S OR --source
-    Output a <source> tag with the IDs of the sentences where each ngram occurs.
-
     By default, <corpus> must be a valid XML file (mwetoolkit-corpus.dtd). If
 the -i option is specified, <corpus> must be the basepath for an index generated
 by index.py.
@@ -120,7 +117,6 @@ corpus_from_index = False
 longest_pattern = 0
 shortest_pattern = sys.maxint
 sentence_counter = 0
-print_source = False
 
 
 def copy_word(w):
@@ -167,8 +163,8 @@ def treat_sentence( sentence ) :
                 match_ngram.set_all( surface=WILDCARD )                    
             key = unicode( match_ngram.to_string() ).encode('utf-8')
             ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
-            freq_surface = surfaces_dict.setdefault( internal_key, [] )
-            surfaces_dict[ internal_key ].append(sentence.id_number)
+            freq_surface = surfaces_dict.get( internal_key, 0 )
+            surfaces_dict[ internal_key ] = freq_surface + 1
             temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
 
     sentence_counter += 1
@@ -264,8 +260,7 @@ def print_candidates( temp_file, corpus_name ) :
         @param corpus_name The name of the corpus from which we generate the
         candidates.
     """
-    global print_cand_freq, print_source
-    verbose("Outputting candidates file...")
+    global print_cand_freq
     try :
         print XML_HEADER % { "root" : "candidates", "ns" : "" }
         print "<meta></meta>"
@@ -280,14 +275,11 @@ def print_candidates( temp_file, corpus_name ) :
             id_number = id_number + 1                        
             for occur_string in surface_dict.keys() :
                 occur_form = Ngram( [], [] )
-                occur_form.from_string( occur_string )
-                sources = surface_dict[occur_string]
-                freq_value = len(sources)
+                occur_form.from_string( occur_string )                 
+                freq_value = surface_dict[ occur_string ]
                 freq = Frequency( corpus_name, freq_value )
                 occur_form.add_frequency( freq )
-                if print_source:
-                    occur_form.add_sources(sources)
-                cand.add_occur( occur_form )
+                cand.add_occur( occur_form )                
             print cand.to_xml().encode( 'utf-8' )
         print XML_FOOTER % { "root" : "candidates" }
     except IOError, err :
@@ -308,7 +300,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq, corpus_from_index, print_source
+    global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq, corpus_from_index
     mode = []
     for ( o, a ) in opts:
         if o in ("-p", "--patterns") : 
@@ -321,8 +313,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             ignore_pos = True
         elif o in ("-s", "--surface") : 
             surface_instead_lemmas = True
-        elif o in ("-S", "--source") :
-            print_source = True
         elif o in ("-f", "--freq") : 
             print_cand_freq = True
         elif o in ("-i", "--index") :
@@ -337,8 +327,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "verbose", "source" ]
-arg = read_options( "p:n:ifgsvS", longopts, treat_options, 1, usage_string )
+longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "verbose" ]
+arg = read_options( "p:n:ifgsv", longopts, treat_options, 1, usage_string )
 
 try :    
     try :    

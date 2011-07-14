@@ -200,6 +200,7 @@ def match_pattern(pattern, words):
 				end = result.end()
 				current_end = end - 1
 				ngram = []
+				wordnums = []
 				for i in xrange(len(words)):
 					if positions[i] >= start and positions[i] < end:
 						while ignore_spans and ignore_spans[0][1] <= positions[i]:
@@ -207,7 +208,8 @@ def match_pattern(pattern, words):
 							ignore_spans = ignore_spans[1:] # Inefficient?
 						if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
 							ngram.append(words[i])
-				yield ngram
+							wordnums.append(i+1)
+				yield (ngram, wordnums)
 
 			else:
 				break
