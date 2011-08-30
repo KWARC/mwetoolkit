@@ -76,6 +76,7 @@ class GoogleFreqUniv( WebFreq ) :
                         urllib.urlencode({"rsz": "small",
                                           "q": "QUERYPLACEHOLDER",
                                           "lr": "LANGPLACEHOLDER",
+                                          "start" : "0",
                                           "clid": google_id } ) )
         post_data = {'Referer': 'sourceforge.net/projects/mwetoolkit'}
         if not cache_filename :
