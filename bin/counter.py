@@ -481,12 +481,12 @@ try :
 except IOError, err :
     print >> sys.stderr, err
     sys.exit(1)
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-candidates.dtd)"
-#    sys.exit(1)
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
+    sys.exit(1)
 finally :
     if web_freq :
         web_freq.flush_cache() # VERY IMPORTANT!
