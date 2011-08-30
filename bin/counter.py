@@ -48,6 +48,7 @@ from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DE
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
+from xmlhandler.classes.googleFreqUniv import GoogleFreqUniv
 from xmlhandler.classes.corpus_size import CorpusSize
 #from xmlhandler.classes.corpus import Corpus
 #from xmlhandler.classes.suffix_array import SuffixArray
@@ -60,7 +61,7 @@ from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
     
 usage_string = """Usage: 
     
-python %(program)s [-y | -w | -i <corpus.index>] OPTIONS <candidates.xml>
+python %(program)s [-y | -w | -u <id> | -i <corpus.index>] OPTIONS <candidates.xml>
 
 -i <index> OR --index <index>
     Base name for the index files, as created by "index.py -i <index>".
@@ -73,7 +74,11 @@ python %(program)s [-y | -w | -i <corpus.index>] OPTIONS <candidates.xml>
     
 -w OR --google
     Search for frequencies in the Web using Google Web Search as approximator 
-    for Web document frequencies.   
+    for Web document frequencies.
+    
+-u <id> OR --univ <id>
+    Same as -w (Google frequencies) but uses Google University Research program
+    URL and ID. The ID    
     
 OPTIONS may be:
 
@@ -100,7 +105,7 @@ OPTIONS may be:
     counter twice, first without this option then with this option.
 
 -J OR --no-joint
-   Don't count joint ngram frequencies; count only individual word frequencies.
+   Do not count joint ngram frequencies; count only individual word frequencies.
     
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 You must choose exactly one of -y, -w or -i. More than one is not allowed at
@@ -364,6 +369,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
             mode.append( "google" ) 
+        elif o in ( "-u", "--univ" ) :
+            web_freq = GoogleFreqUniv( a )          
+            freq_name = "google"
+            ignorepos_flag = True 
+            the_corpus_size = web_freq.corpus_size()         
+            get_freq_function = get_freq_web
+            mode.append( "google" )             
         elif o in ("-s", "--surface" ) :
             surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
@@ -436,8 +448,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
-            "from=", "to=", "text", "vars", "lang=", "no-joint" ]
-arg = read_options( "ywi:vgsf:t:xal:J", longopts, treat_options, -1, usage_string )
+            "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=" ]
+arg = read_options( "ywi:vgsf:t:xal:Ju:", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()
@@ -469,12 +481,12 @@ try :
 except IOError, err :
     print >> sys.stderr, err
     sys.exit(1)
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-                         " please validate it against the DTD " + \
-                         "(dtd/mwetoolkit-candidates.dtd)"
-    sys.exit(1)
+#except Exception, err :
+#    print >> sys.stderr, err
+#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+#                         " please validate it against the DTD " + \
+#                         "(dtd/mwetoolkit-candidates.dtd)"
+#    sys.exit(1)
 finally :
     if web_freq :
         web_freq.flush_cache() # VERY IMPORTANT!
