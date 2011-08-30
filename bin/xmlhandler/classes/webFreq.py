@@ -169,7 +169,7 @@ class WebFreq( object ) :
                 search_term = search_term.encode( 'utf-8' )
             search_term = "\"" + search_term + "\""
             tries = 0
-            max_tries = 5
+            max_tries = 1
             result_count = None
             while result_count is None :
                 try:
@@ -178,7 +178,7 @@ class WebFreq( object ) :
                     if result_count is None :
                         raise Exception, "Result was None"
                 except Exception, err:
-                    print >> sys.stderr, "Got an error ->", err
+                    print >> sys.stderr, "Got an error ->", err                   
                     if tries < max_tries :
                         print >> sys.stderr, "Will retry in 30s..."
                         time.sleep( 30 )
@@ -186,6 +186,9 @@ class WebFreq( object ) :
                     else :
                         print >> sys.stderr, "Stopped at search term: " + search_term
                         #print >> sys.stderr, request.get_full_url()
+                        if err.code == 403 : #Forbidden
+                            print >> sys.stderr, "Probably your ID for the Google university research program is not correct or is associated to another IP address"
+                            print >> sys.stderr, "Check \"http://research.google.com/university/search/\" for further information"
                         print >> sys.stderr, "PLEASE VERIFY YOUR INTERNET CONNECTION"
                         sys.exit( -1 )
             

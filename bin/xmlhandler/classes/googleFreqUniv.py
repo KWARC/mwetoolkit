@@ -35,7 +35,7 @@ from webFreq import WebFreq
 
 ################################################################################         
 
-class GoogleFreq( WebFreq ) :
+class GoogleFreqUniv( WebFreq ) :
     """
         The `GoogleFreq` class is an abstraction that allows you to call Google
         Web Service search to estimate the frequency of a certain search term
@@ -80,7 +80,7 @@ class GoogleFreq( WebFreq ) :
         post_data = {'Referer': 'sourceforge.net/projects/mwetoolkit'}
         if not cache_filename :
             cache_filename = GOOGLE_CACHE_FILENAME
-        super( GoogleFreq, self ).__init__( cache_filename, url, post_data, self.treat_result )
+        super( GoogleFreqUniv, self ).__init__( cache_filename, url, post_data, self.treat_result )
             
 ################################################################################           
 
