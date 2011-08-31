@@ -114,9 +114,10 @@ class GoogleFreqUniv( WebFreq ) :
             
         """
         dom_results = parseString( results )
+        pdb.set_trace()      
         res = dom_results.getElementsByTagName( 'RES' )[ 0 ]    
         total = self.__get_text( res.getElementsByTagName( 'M' )[ 0 ] )
-        pdb.set_trace()      
+
             
 ################################################################################                   
     
