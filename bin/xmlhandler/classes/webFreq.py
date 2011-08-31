@@ -161,7 +161,7 @@ class WebFreq( object ) :
                 search_term = search_term.encode( 'utf-8' )
             search_term = "\"" + search_term + "\""
             tries = 0
-            max_tries = 1
+            max_tries = 5
             result_count = None
             while result_count is None :
                 try:
