@@ -30,7 +30,6 @@
 import pdb
 import urllib
 import xml.dom.minidom
-import xml.dom
 
 from __common import GOOGLE_CACHE_FILENAME
 from webFreq import WebFreq
