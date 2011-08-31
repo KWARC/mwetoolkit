@@ -29,7 +29,8 @@
 
 import pdb
 import urllib
-from xml.dom.minidom import parseString
+import xml.dom.minidom
+import xml.dom
 
 from __common import GOOGLE_CACHE_FILENAME
 from webFreq import WebFreq
@@ -113,7 +114,7 @@ class GoogleFreqUniv( WebFreq ) :
         """
             
         """
-        dom_results = parseString( results )
+        dom_results = xml.dom.minidom.parseString( results )
         res_elements = dom_results.getElementsByTagName( 'RES' )
         if len( res_elements ) == 0 :
             return 0
