@@ -1,6 +1,24 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+# THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API, APRIL 2011
+
 ################################################################################
 #
 # Copyright 2010 Carlos Ramisch
@@ -25,10 +43,13 @@
     This module provides the `YahooFreq` class. This class represents an 
     abstract gateway that allows you to access the Yahoo search index and look 
     up for the number of Web pages that contain a certain word or ngram.
+    
+    THIS MODULE IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE SEARCH API
 """
 
 import pdb
 import urllib
+import simplejson
 
 from webFreq import WebFreq
 from __common import YAHOO_CACHE_FILENAME, YAHOO_APPID
@@ -81,10 +102,20 @@ class YahooFreq( WebFreq ):
             
 ################################################################################           
 
-    def treat_result( self, results ) :
+    def treat_result( self, response_string ) :
         """
             
         """ 
+        # This is an ugly workarround, but it's necessary because
+        # sometimes yahoo returns weird unicode characters in the
+        # results, and we're totally not interested in weird unicode
+        # CORRECTING: This workarround works with yahoo but it doesn't with 
+        # google. What do I do? Probably, comment the line whenever I have a
+        # problem and uncomment it back if it's already commented out. But 
+        # before I surrender to this ugly solution, I'll try with this 
+        # "encoding" parameter. Let's hope this never bugs again!
+        #response_string = response_string.replace("\\","XX")
+        results = simplejson.loads( response_string, encoding="UTF-8" )           
         return int( results[ "ResultSet" ][ "totalResultsAvailable" ] )
 
 ################################################################################                   
