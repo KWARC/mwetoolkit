@@ -91,7 +91,7 @@ class GoogleFreqUniv( WebFreq ) :
             
 ################################################################################           
 
-    def __gettext( self, node ):
+    def gettext( self, node ):
       """
         Extract the contents of a xml.dom.Nodelist as a string.
         
@@ -114,9 +114,13 @@ class GoogleFreqUniv( WebFreq ) :
             
         """
         dom_results = parseString( results )
-        pdb.set_trace()      
-        res = dom_results.getElementsByTagName( 'RES' )[ 0 ]    
-        total = self.__gettext( res.getElementsByTagName( 'M' )[ 0 ] )
+        res_elements = dom_results.getElementsByTagName( 'RES' )
+        if len( res_elements ) == 0 :
+            return 0
+        else :
+            res_first = res_elements[ 0 ]
+        pdb.set_trace()                  
+        total = self.gettext( res_first.getElementsByTagName( 'M' )[ 0 ] )
 
             
 ################################################################################                   
