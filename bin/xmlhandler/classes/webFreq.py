@@ -32,7 +32,6 @@ import cPickle # Cache is pickled to/from a file
 from datetime import date
 import urllib2
 import urllib
-import simplejson
 import time
 import pdb
 
@@ -49,7 +48,9 @@ class WebFreq( object ) :
         Information Retrieval term). After instanciated, you should call the
         `search_frequency` function to obtain these estimators for a given
         term. This class should not be used directly, but through the subclasses
-        `YahooFreq` and `GoogleFreq`.
+        `YahooFreq`, `GoogleFreq` and `GoogleFreqUniv`.
+        
+        N.B.: Yahoo is not supported anymore, after August 2011.
     """
 
 ################################################################################
@@ -62,6 +63,7 @@ class WebFreq( object ) :
             automatically manage repeated queries. The additional parameters
             will be used to chose a search engine (currently, Google and Yahoo
             are supported)
+            N.B.: Yahoo is not supported anymore, after August 2011.
 
             @param cache_file The string corresonding to the name of the cache
             file in/from which you would like to store/retrieve recent queries.
@@ -109,17 +111,7 @@ class WebFreq( object ) :
         request = urllib2.Request( url, None, self.post_data )
         response = urllib2.urlopen( request )
         response_string = response.read()
-        # This is an ugly workarround, but it's necessary because
-        # sometimes yahoo returns weird unicode characters in the
-        # results, and we're totally not interested in weird unicode
-        # CORRECTING: This workarround works with yahoo but it doesn't with 
-        # google. What do I do? Probably, comment the line whenever I have a
-        # problem and uncomment it back if it's already commented out. But 
-        # before I surrender to this ugly solution, I'll try with this 
-        # "encoding" parameter. Let's hope this never bugs again!
-        #response_string = response_string.replace("\\","XX")
-        results = simplejson.loads( response_string, encoding="UTF-8" )
-        return self.treat_result( results )
+        return self.treat_result( response_string )
 
 ################################################################################
 
@@ -141,7 +133,7 @@ class WebFreq( object ) :
             by spaces as in a Web search engine query. The query is also
             performed as an exact term query, i.e. with quote marks around the
             terms. You can use the `WILDCARD` to replace a whole word, since
-            Yahoo provides wildcarded query support.
+            search engines provides wildcarded query support.
 
             @param lang Two-letter code of the language of the web pages the
             search engine should consider. Making language-independent queries
