@@ -91,7 +91,7 @@ class GoogleFreqUniv( WebFreq ) :
             
 ################################################################################           
 
-    def __get_text( node ):
+    def __get_text( self, node ):
       """
         Extract the contents of a xml.dom.Nodelist as a string.
         
