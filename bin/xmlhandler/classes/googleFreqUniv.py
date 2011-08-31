@@ -22,13 +22,14 @@
 #
 ################################################################################
 """
-    This module provides the `YahooFreq` class. This class represents an 
-    abstract gateway that allows you to access the Yahoo search index and look 
+    This module provides the `GoogleFreqUniv` class. This class represents an 
+    abstract gateway that allows you to access the Google search index and look 
     up for the number of Web pages that contain a certain word or ngram.
 """
 
 import pdb
 import urllib
+from xml.dom.minidom import parseString
 
 from __common import GOOGLE_CACHE_FILENAME
 from webFreq import WebFreq
@@ -37,13 +38,18 @@ from webFreq import WebFreq
 
 class GoogleFreqUniv( WebFreq ) :
     """
-        The `GoogleFreq` class is an abstraction that allows you to call Google
-        Web Service search to estimate the frequency of a certain search term
-        in the Web, in terms of pages that contain that term (a term not in the
-        sense of Terminology, but in the sense of word or ngram, i.e. an 
+        The `GoogleFreqUniv` class is an abstraction that allows you to call 
+        Google Web Service search to estimate the frequency of a certain search 
+        term in the Web, in terms of pages that contain that term (a term not in 
+        the sense of Terminology, but in the sense of word or ngram, i.e. an 
         Information Retrieval term). After instanciated, you should call the
         `search_frequency` function to obtain these estimators for a given
-        term.
+        term. 
+        
+        This class only works with a valid registered Google Research University
+        Program ID and when the script is called from the computer whose IP 
+        address is assigned to the ID. If you do not have this ID, use regular
+        Google search class `GoogleFreq` bounded by a daily usage quota.
     """
 
 ################################################################################          
@@ -85,18 +91,32 @@ class GoogleFreqUniv( WebFreq ) :
             
 ################################################################################           
 
+    def __get_text( node ):
+      """
+        Extract the contents of a xml.dom.Nodelist as a string.
+        
+        @param node An xml.dom.Node instance
+
+        @return A string containing the contents of all node.TEXT_NODE instances
+        
+        N.B. This function is a copy of Google's example code.
+      """
+      text = []
+      for child in node.childNodes:
+        if child.nodeType == xml.dom.Node.TEXT_NODE:
+          text.append( child.data )
+      return ''.join( text )
+
+################################################################################           
+
     def treat_result( self, results ) :
         """
             
-        """        
-        if results[ "responseData" ] :
-            if results[ "responseData" ][ "results" ] :
-                return int( results[ "responseData" ][ "cursor" ] \
-                                   [ "estimatedResultCount" ] )
-            else :
-                return 0
-        else :
-            return None       
+        """
+        dom_results = parseString( results )
+        res = dom_results.getElementsByTagName( 'RES' )[ 0 ]    
+        total = self.__get_text( res.getElementsByTagName( 'M' )[ 0 ] )
+        pdb.set_trace()      
             
 ################################################################################                   
     
