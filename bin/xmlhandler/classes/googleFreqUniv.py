@@ -118,10 +118,9 @@ class GoogleFreqUniv( WebFreq ) :
         if len( res_elements ) == 0 :
             return 0
         else :
-            res_first = res_elements[ 0 ]
-        pdb.set_trace()                  
+            res_first = res_elements[ 0 ]        
         total = self.gettext( res_first.getElementsByTagName( 'M' )[ 0 ] )
-
+        return int( total )
             
 ################################################################################                   
     
