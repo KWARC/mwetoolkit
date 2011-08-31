@@ -22,13 +22,14 @@
 #
 ################################################################################
 """
-    This module provides the `YahooFreq` class. This class represents an 
-    abstract gateway that allows you to access the Yahoo search index and look 
+    This module provides the `GoogleFreq` class. This class represents an 
+    abstract gateway that allows you to access the Google search index and look 
     up for the number of Web pages that contain a certain word or ngram.
 """
 
 import pdb
 import urllib
+import simplejson
 
 from __common import GOOGLE_CACHE_FILENAME
 from webFreq import WebFreq
@@ -78,10 +79,11 @@ class GoogleFreq( WebFreq ) :
             
 ################################################################################           
 
-    def treat_result( self, results ) :
+    def treat_result( self, response_string ) :
         """
             
-        """        
+        """                
+        results = simplejson.loads( response_string, encoding="UTF-8" )        
         if results[ "responseData" ] :
             if results[ "responseData" ][ "results" ] :
                 return int( results[ "responseData" ][ "cursor" ] \
