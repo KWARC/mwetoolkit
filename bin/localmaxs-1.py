@@ -10,16 +10,15 @@ from xmlhandler.classes.__common import WILDCARD, \
 def make_temp_file():
 	return tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX, dir=TEMP_FOLDER)
 
-def python_hates_the_world(sentence_id, position, key, glue):
-	print sentence_id, position, key, glue
+def print_args(*args):
+	print args
 
-def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, dumpfun=python_hates_the_world):
+def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_limit=None, dumpfun=print_args):
 	sufarray = index.arrays[array_name]
 	sentence_id = 0
 	pos = 0
-	corpus_length = len(sufarray.corpus)
+	corpus_length = corpus_length_limit or len(sufarray.corpus)
 	corpus_size = index.metadata['corpus_size']  # corpus_size does not count sentence separators.
-	result_gluevals = {}
 
 	while pos < corpus_length:
 		if sentence_id%10 == 0:
@@ -57,7 +56,6 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, dumpfun=python
 		sentence_id+=1
 		pos += sentence_length + 1
 
-	return result_gluevals
 
 def scp_glue(gluevals, sufarray, corpus_size, key):
 	main_prob = ngram_prob(sufarray, corpus_size, key)
@@ -99,7 +97,7 @@ def main(args):
 
 	for key in candidates:
 		words = map(lambda i: index.arrays['lemma'].symbols.number_to_symbol[i], key)
-		print ' '.join(words), candidates[key][0][2]
+		print ' '.join(words).encode('utf-8'), candidates[key][0][2]
 
 
 main(sys.argv[1:])
