@@ -87,12 +87,19 @@ def ngram_prob(sufarray, corpus_size, key):
 
 
 def main(args):
-	tempfile = make_temp_file()
+	temp_file = open("/tmp/outout", "w")
+	candidates = {}
+
 	def dump(sentence_id, position, key, glue):
-		print >>tempfile, "%s|%s|%s|%s" % (sentence_id, ' '.join(map(str, position)), ' '.join(map(str, key)), glue)
+		candidates.setdefault(key, []).append((sentence_id, position, glue))
 
 	index = Index(args[0])
 	index.load_main()
 	extract(index, 'lemma', scp_glue, dumpfun=dump)
+
+	for key in candidates:
+		words = map(lambda i: index.arrays['lemma'].symbols.number_to_symbol[i], key)
+		print ' '.join(words), candidates[key][0][2]
+
 
 main(sys.argv[1:])
