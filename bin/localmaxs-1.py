@@ -7,9 +7,6 @@ from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_FOLDER, \
                                         XML_HEADER, \
                                         XML_FOOTER
-def make_temp_file():
-	return tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX, dir=TEMP_FOLDER)
-
 def print_args(*args):
 	print args
 
@@ -85,7 +82,6 @@ def ngram_prob(sufarray, corpus_size, key):
 
 
 def main(args):
-	temp_file = open("/tmp/outout", "w")
 	candidates = {}
 
 	def dump(sentence_id, position, key, glue):
@@ -97,7 +93,8 @@ def main(args):
 
 	for key in candidates:
 		words = map(lambda i: index.arrays['lemma'].symbols.number_to_symbol[i], key)
-		print ' '.join(words).encode('utf-8'), candidates[key][0][2]
+		if len(candidates[key]) >= 2: # Might make things better?
+			print ' '.join(words).encode('utf-8'), candidates[key][0][2]
 
 
 main(sys.argv[1:])
