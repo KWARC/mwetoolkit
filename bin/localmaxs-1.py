@@ -2,11 +2,22 @@ import sys
 import tempfile
 from libs.indexlib import Index
 
+
+from xmlhandler.classes.frequency import Frequency
+from xmlhandler.classes.candidate import Candidate
+from xmlhandler.classes.ngram import Ngram
+from xmlhandler.classes.word import Word
+from xmlhandler.classes.entry import Entry
+from util import usage, read_options, treat_options_simplest, verbose
+
 from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_PREFIX, \
                                         TEMP_FOLDER, \
                                         XML_HEADER, \
                                         XML_FOOTER
+def make_temp_file():
+	return tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX, dir=TEMP_FOLDER)
+
 def print_args(*args):
 	print args
 
@@ -27,6 +38,7 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_
 
 		gluevals = {}
 		positions = {}
+		absolute_positions = {}
 		select = {}
 
 		for ngram_size in range(1, max_ngram+1):
@@ -37,6 +49,7 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_
 				gluevals[key] = glue
 				select[key] = True
 				positions[key] = range(i, i+ngram_size)
+				absolute_positions[key] = range(i+pos, i+pos+ngram_size)
 
 				if ngram_size >= 2:
 					for subkey in [key[0:-1], key[1:]]:
@@ -48,7 +61,7 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_
 		# Save results.
 		for key in select:
 			if len(key) > 1 and len(key) < max_ngram and select[key]:
-				dumpfun(sentence_id, positions[key], key, gluevals[key])
+				dumpfun(sentence_id, positions[key], absolute_positions[key], key, gluevals[key])
 
 		sentence_id+=1
 		pos += sentence_length + 1
@@ -82,19 +95,56 @@ def ngram_prob(sufarray, corpus_size, key):
 
 
 def main(args):
+	temp_file = open("/tmp/outout", "w")
 	candidates = {}
+	base_attr = 'lemma'
 
-	def dump(sentence_id, position, key, glue):
-		candidates.setdefault(key, []).append((sentence_id, position, glue))
+	def dump(sentence_id, positions, absolute_positions, key, glue):
+		(surfaces_dict, total_freq) = candidates.get(key, ({}, 0))
+		surface_key = tuple([index.arrays['surface'].corpus[j] for j in absolute_positions])
+		surfaces_dict.setdefault(surface_key, []).append(str(sentence_id) + ":" + ",".join(map(str, positions)))
+		candidates[key] = (surfaces_dict, total_freq + 1)
 
 	index = Index(args[0])
 	index.load_main()
-	extract(index, 'lemma', scp_glue, dumpfun=dump)
+	extract(index, base_attr, scp_glue, dumpfun=dump, corpus_length_limit=2000)
+
+
+	verbose("Outputting candidates file...")
+	print XML_HEADER % { "root": "candidates", "ns": "" }
+	print "<meta></meta>"
+	id_number = 0
 
 	for key in candidates:
-		words = map(lambda i: index.arrays['lemma'].symbols.number_to_symbol[i], key)
-		if len(candidates[key]) >= 2: # Might make things better?
-			print ' '.join(words).encode('utf-8'), candidates[key][0][2]
+		(surfaces_dict, total_freq) = candidates[key]
+		if total_freq >= 2:
+			cand = Candidate(id_number, [], [], [], [], [])
+			for j in key:
+				w = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
+				setattr(w, base_attr, index.arrays[base_attr].symbols.number_to_symbol[j])
+				cand.append(w)
+			freq = Frequency('corpus', total_freq)
+			cand.add_frequency(freq)
+
+			for surface_key in surfaces_dict:
+				occur_form = Ngram([], [])
+				for j in surface_key:
+					w = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
+					w.surface = index.arrays['surface'].symbols.number_to_symbol[j]
+					occur_form.append(w)
+				sources = surfaces_dict[surface_key]
+				freq_value = len(sources)
+				freq = Frequency('corpus', freq_value)
+				occur_form.add_frequency(freq)
+				occur_form.add_sources(sources)
+				cand.add_occur(occur_form)
+
+			print cand.to_xml().encode('utf-8')
+
+	print XML_FOOTER % { "root": "candidates" }
+
+	#words = map(lambda i: index.arrays['lemma'].symbols.number_to_symbol[i], key)
+	#print ' '.join(words).encode('utf-8'), candidates[key][0][2]
 
 
 main(sys.argv[1:])
