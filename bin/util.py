@@ -125,3 +125,40 @@ def strip_xml( the_string ) :
     return cleanContent
         
 ################################################################################
+
+def interpret_ngram( argument ) :
+    """
+        Parses the argument of the "-n" option. This option is of the form
+        "<min>:<max>" and defines the length of n-grams to extract. For 
+        instance, "3:5" extracts ngrams that have at least 3 words and at most 5 
+        words. If you define only <min> or only <max>, the default is to 
+        consider that both have the same value. The value of <min> is at least 
+        1, <max> is at most 10. Generates an exception if the syntax is 
+        incorrect, generates a None value if the arguments are incoherent 
+        (e.g. <max> < <min>)
+        
+        @param argument String argument of the -n option, has the form 
+        "<min>:<max>"
+        
+        @return A tuple (<min>,<max>) with the two integer limits, or None if
+        the argument is incoherent.
+    """
+    try:
+        if ":" in argument :
+            [ n_min, n_max ] = argument.split( ":" )
+            n_min = int(n_min)
+            n_max = int(n_max)
+        else :
+            n_min = int(argument)
+            n_max = int(argument)
+        if n_min <= n_max and n_min >= 1 and n_max <= 10:                
+            return ( n_min, n_max )
+        else :                
+            return None
+    except IndexError :
+        return None
+    except TypeError :
+        return None
+    except ValueError :
+        return None
+
