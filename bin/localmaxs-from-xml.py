@@ -32,6 +32,9 @@ from xmlhandler.classes.__common import WILDCARD, \
                                         XML_HEADER, \
                                         XML_FOOTER
 from xmlhandler.classes.feature import Feature
+from xmlhandler.classes.meta import Meta
+from xmlhandler.classes.meta_feat import MetaFeat
+from xmlhandler.classes.corpus_size import CorpusSize
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
@@ -137,7 +140,11 @@ def main():
 
     verbose("Outputting candidates file...")
     print XML_HEADER % { "root": "candidates", "ns": "" }
-    print "<meta></meta>"
+    
+
+    meta = Meta([CorpusSize("corpus", corpus_size)],
+                [MetaFeat("glue", "real")], [])
+    print meta.to_xml().encode('utf-8')
 
     id = 0
 

@@ -5,6 +5,9 @@ from libs.indexlib import Index
 
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.feature import Feature
+from xmlhandler.classes.meta import Meta
+from xmlhandler.classes.meta_feat import MetaFeat
+from xmlhandler.classes.corpus_size import CorpusSize
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
@@ -201,7 +204,11 @@ def main():
 
     verbose("Outputting candidates file...")
     print XML_HEADER % { "root": "candidates", "ns": "" }
-    print "<meta></meta>"
+
+    meta = Meta([CorpusSize("corpus", index.metadata["corpus_size"])],
+                [MetaFeat("glue", "real")], [])
+    print meta.to_xml().encode('utf-8')
+
     id_number = 0
 
     for key in candidates:
