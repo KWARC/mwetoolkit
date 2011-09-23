@@ -31,6 +31,7 @@ from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_FOLDER, \
                                         XML_HEADER, \
                                         XML_FOOTER
+from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
@@ -157,6 +158,7 @@ def dump_ngram(ngram, id):
         cand.append(word)
     freq = Frequency('corpus', ngram_counts[ngram])
     cand.add_frequency(freq)
+    cand.add_feat(Feature('glue', glue(ngram)))
 
     print cand.to_xml().encode('utf-8')
 

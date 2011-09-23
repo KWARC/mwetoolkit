@@ -4,6 +4,7 @@ from libs.indexlib import Index
 
 
 from xmlhandler.classes.frequency import Frequency
+from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
@@ -214,6 +215,8 @@ def main():
                 cand.append(w)
             freq = Frequency('corpus', total_freq)
             cand.add_frequency(freq)
+            cand.add_feat(Feature("glue", glue))
+
 
             # Add surface forms.
             for surface_key in surfaces_dict:
@@ -230,7 +233,7 @@ def main():
                 cand.add_occur(occur_form)
 
             print cand.to_xml().encode('utf-8')
-            print "<!-- glue: %s -->" % glue
+            id_number += 1
 
     print XML_FOOTER % { "root": "candidates" }
 
