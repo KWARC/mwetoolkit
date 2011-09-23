@@ -102,7 +102,7 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_
         absolute_positions = {}
         select = {}
 
-        for ngram_size in range(1, max_ngram+1):
+        for ngram_size in range(1, max_ngram+2):  # ngram_size in [1 .. max_ngram+1]
             for i in range(sentence_length - ngram_size + 1):
                 words_pos = range(pos+i, pos+i+ ngram_size)
                 key = tuple([sufarray.corpus[j] for j in words_pos])
@@ -116,12 +116,12 @@ def extract(index, array_name, gluefun, min_ngram=2, max_ngram=8, corpus_length_
                     for subkey in [key[0:-1], key[1:]]:
                         if glue < gluevals[subkey]:
                             select[key] = False
-                        else:
+                        elif glue > gluevals[subkey]:
                             select[subkey] = False
 
         # Save results.
         for key in select:
-            if len(key) > 1 and len(key) < max_ngram and select[key]:
+            if len(key) > 1 and len(key) <= max_ngram and select[key]:
                 dumpfun(sentence_id, positions[key], absolute_positions[key], key, gluevals[key])
 
         sentence_id+=1
