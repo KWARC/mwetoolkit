@@ -43,6 +43,9 @@ OPTIONS may be:
 -G <glue> OR --glue <glue>
     Use <glue> as the glue measure. Currently only 'scp' is supported.
 
+-f <freq> OR --freq <freq>
+    Output only candidates with a frequency of at least <freq>. Default 2.
+
 -v OR --verbose
     Print messages that explain what is happening.
 
@@ -139,6 +142,8 @@ def scp_glue(gluevals, sufarray, corpus_size, key):
     for i in range(1, len(key)):
         avp += (ngram_prob(sufarray, corpus_size, key[0:i]) *
                 ngram_prob(sufarray, corpus_size, key[i:]))
+    avp = avp / (len(key)-1)
+
     if avp > 0:
         return square_main_prob / avp
     else:
@@ -169,6 +174,7 @@ index_basepath = None
 gluefun = scp_glue
 min_ngram = 2
 max_ngram = 8
+min_frequency = 2
 
 def main():
     candidates = {}
@@ -179,14 +185,16 @@ def main():
         base_attr = 'lemma'
 
     def dump(sentence_id, positions, absolute_positions, key, glue):
-        (surfaces_dict, total_freq) = candidates.get(key, ({}, 0))
+        (surfaces_dict, total_freq, _) = candidates.get(key, ({}, 0, -1))
         surface_key = tuple([index.arrays['surface'].corpus[j] for j in absolute_positions])
         surfaces_dict.setdefault(surface_key, []).append(
             str(sentence_id) + ":" + ",".join(map(str, positions)))
-        candidates[key] = (surfaces_dict, total_freq + 1)
+        candidates[key] = (surfaces_dict, total_freq + 1, glue)
 
     index = Index(index_basepath)
-    index.load_main()
+    index.load_metadata()
+    index.load(base_attr)
+    index.load('surface')
     extract(index, base_attr, gluefun, dumpfun=dump, min_ngram=min_ngram,
             max_ngram=max_ngram, corpus_length_limit=corpus_length_limit)
 
@@ -196,8 +204,8 @@ def main():
     id_number = 0
 
     for key in candidates:
-        (surfaces_dict, total_freq) = candidates[key]
-        if total_freq >= 2:
+        (surfaces_dict, total_freq, glue) = candidates[key]
+        if total_freq >= min_frequency:
             # Make <cand> entry (usually lemma-based)
             cand = Candidate(id_number, [], [], [], [], [])
             for j in key:
@@ -222,6 +230,7 @@ def main():
                 cand.add_occur(occur_form)
 
             print cand.to_xml().encode('utf-8')
+            print "<!-- glue: %s -->" % glue
 
     print XML_FOOTER % { "root": "candidates" }
 
@@ -239,7 +248,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global surface_instead_lemmas, print_source, corpus_length_limit, gluefun, min_ngram, max_ngram
+    global surface_instead_lemmas, print_source, corpus_length_limit, gluefun
+    global min_ngram, max_ngram, min_frequency
+
     mode = []
     for ( o, a ) in opts:
         if o in ("-s", "--surface") : 
@@ -248,6 +259,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             print_source = True
         elif o in ("-l", "--limit") :
             corpus_length_limit = int(a)
+        elif o in ("-f", "--freq") :
+            min_frequency = int(a)
         elif o in ("-n", "--ngram") :
             (min_ngram, max_ngram) = interpret_ngram(a)
         elif o in ("-G", "--glue"):
@@ -259,8 +272,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
-longopts = ["surface", "source", "verbose", "limit=", "glue=", "ngram="]
-arg = read_options("sSvl:G:n", longopts, treat_options, 1, usage_string)
+longopts = ["surface", "source", "verbose", "limit=", "glue=", "ngram=", "freq="]
+arg = read_options("sSvl:G:n:f:", longopts, treat_options, 1, usage_string)
 index_basepath = arg[0]
 
 main()
