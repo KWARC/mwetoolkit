@@ -103,6 +103,11 @@ OPTIONS may be:
     element. If you also want to count the candidate lemma, you should call the
     counter twice, first without this option then with this option.
 
+-l OR --lang
+    Language filter for web corpora (Google, Google UR). Use the 2-letter 
+    language codes of the search engine. E.g. lang_pt for Portuguese, lang_en
+    for English in Google UR.
+
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
     
