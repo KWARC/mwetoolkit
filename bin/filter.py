@@ -297,7 +297,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "verbose", "threshold=", "equals=", "patterns=", "reverse" ]
-arg = read_options( "vt:e:p:r", longopts, treat_options, 1, usage_string )
+arg = read_options( "vt:e:p:r", longopts, treat_options, -1, usage_string )
 
 try :   
     parser = xml.sax.make_parser()
