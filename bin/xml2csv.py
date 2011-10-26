@@ -48,11 +48,16 @@ python %(program)s OPTIONS <file.xml>
 OPTIONS may be:
 
 -s OR --surface
-    Counts surface forms instead of lemmas. Default false.
+    Outputs surface forms instead of lemmas. Default false.
+    
+-p OR --lemmapos
+    Outputs the corpus in lemma/pos format. Replaces slashes by "@SLASH@". 
+    Default false.
 
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """   
 surface_instead_lemmas = False  
+lemmapos = False
             
 ################################################################################     
 
@@ -80,20 +85,24 @@ def treat_entity( entity ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     global surface_instead_lemmas
+    global lemmapos
     string_cand = ""
     if entity.id_number >= 0 :
         string_cand += str( entity.id_number )
     string_cand = string_cand.strip() + "\t"    
     
     for w in entity :
-        if w.lemma != WILDCARD and not surface_instead_lemmas :            
+        if lemmapos :
+            string_cand += w.lemma.replace( "/", "@SLASH@" ) + "/" + w.pos + " "
+        elif w.lemma != WILDCARD and not surface_instead_lemmas :            
             string_cand += w.lemma + " "
         else :
             string_cand += w.surface + " "
     string_cand = string_cand.strip() + "\t"
     
-    for w in entity :
-        string_cand += w.pos + " "
+    if not lemmapos :
+        for w in entity :
+            string_cand += w.pos + " "
     string_cand = string_cand.strip() + "\t"
     
     try :
@@ -154,18 +163,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global surface_instead_lemmas
+    global lemmapos
     mode = []
     for ( o, a ) in opts:        
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True     
+        if o in ("-p", "--lemmapos") : 
+            lemmapos = True                 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose", "surface" ]
-arg = read_options( "vs", longopts, treat_options, -1, usage_string )
+longopts = [ "verbose", "surface", "lemmapos" ]
+arg = read_options( "vsp", longopts, treat_options, -1, usage_string )
 
 try :
     parser = xml.sax.make_parser()
