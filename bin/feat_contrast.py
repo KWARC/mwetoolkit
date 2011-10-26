@@ -98,12 +98,15 @@ def add_metafeatures( meta ) :
         
         @param meta The `Meta` header that is being read from the XML file.       
     """
-    global corpussize_dict, measures
+    global corpussize_dict
+    global measures
+    global main_freq_name
     for corpus_size in meta.corpus_sizes :
         corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
     for corpus_size in meta.corpus_sizes :
-        for meas in measures :
-            meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
+        if corpus_size.name != main_freq_name :
+            for meas in measures :
+                meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
     print meta.to_xml().encode( 'utf-8' )
 
 ################################################################################     
