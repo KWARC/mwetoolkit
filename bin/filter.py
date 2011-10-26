@@ -36,9 +36,11 @@
 
 import sys
 import xml.sax
+import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
+from libs.patternlib import parse_patterns_file, match_pattern
 from util import usage, read_options, treat_options_simplest, verbose
      
 ################################################################################     
@@ -140,9 +142,12 @@ def treat_entity( entity ) :
 
     if print_it and patterns :
         print_it = False
+        words = entity.word_list
         for pattern in patterns :
-            if pattern.match( entity ) :                    
+            for dummy in match_pattern(pattern, words) :
                 print_it = True
+                break
+            if print_it :
                 break
 
     if reverse :
@@ -222,26 +227,33 @@ def treat_pattern( entry ) :
 
 def read_patterns_file( filename ) :
     """
-        Opens the patterns XML file and parses it using a `DictXMLHandler`.
+        NEW:
+        Opens the patterns XML file and parses it using patternlib.
 
         @param filename The string name of the patterns file.
     """
     global patterns
-    try :
-        patterns_file = open( filename )
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
-        try:
-            parser.parse( patterns_file )
-        except Exception :
-            print >> sys.stderr, "You provided an invalid pattern file, "+ \
-                                 "please validate it against the DTD " + \
-                                 "(mwetoolkit-dict.dtd)"
-            sys.exit( 2 )
-        patterns_file.close()
+
+    try:
+        patterns = parse_patterns_file(filename)
     except IOError, err:
         print >> sys.stderr, err
         sys.exit( 2 )
+    #try :
+    #    patterns_file = open( filename )
+    #    parser = xml.sax.make_parser()
+    #    parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
+    #    try:
+    #        parser.parse( patterns_file )
+    #    except Exception :
+    #        print >> sys.stderr, "You provided an invalid pattern file, "+ \
+    #                             "please validate it against the DTD " + \
+    #                             "(mwetoolkit-dict.dtd)"
+    #        sys.exit( 2 )
+    #    patterns_file.close()
+    #except IOError, err:
+    #    print >> sys.stderr, err
+    #    sys.exit( 2 )
 
 ################################################################################
 
