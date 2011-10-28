@@ -179,7 +179,8 @@ def treat_entity( entity ) :
         if old_entry :
             #pdb.set_trace()
             copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
-            copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
+            #copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
+            copy_ngram.features = uniq_features(old_entry.features, entity.features)
             copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
             #copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
             unify_freqs = {}
@@ -201,6 +202,41 @@ def treat_entity( entity ) :
     entity_buffer[ internal_key ] = copy_ngram
     entity_counter += 1
     
+################################################################################    
+
+
+def position(item, list, key=lambda x: x):
+    """
+        Returns the index of an element in a list, or None if the element
+        is not found.
+    """
+    for i in xrange(len(list)):
+        if item == key(list[i]):
+            return i
+
+    return None
+
+
+def uniq_features(*featlists):
+    """
+        Merges the lists of Features passed in as arguments. If the same
+        feature appears multiple times in the lists, keep only the one
+        with highest value.
+    """
+    result = []
+    for featlist in featlists:
+        for feature in featlist:
+            oldpos = position(feature.name, result, key=lambda x: x.name)
+            if oldpos is not None:
+                if result[oldpos].value < feature.value:
+                    result[oldpos] = feature
+            else:
+                result.append(feature)
+
+    return result
+                
+        
+
 ################################################################################    
 
 def print_entities() :

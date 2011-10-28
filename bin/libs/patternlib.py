@@ -53,6 +53,14 @@ def parse_pattern(node):
 			id = node.getAttribute("id")
 			repeat = node.getAttribute("repeat")
 			ignore = node.getAttribute("ignore")
+			anchor_start = node.getAttribute("anchor_start")
+			anchor_end = node.getAttribute("anchor_end")
+
+			if anchor_start:
+				if state.pattern == WORD_SEPARATOR:
+					state.pattern = "^" + WORD_SEPARATOR
+				else:
+					raise Exception, "Pattern anchoring is currently only supported in non-nested <pat> elements."
 
 			if ignore:
 				state.pattern += "(?P<ignore_%d>" % state.temp_id
@@ -74,6 +82,9 @@ def parse_pattern(node):
 
 			if ignore:
 				state.pattern += ")"
+
+			if anchor_end:
+				state.pattern += "$"
 
 		elif node.nodeName == "either":
 			id = node.getAttribute("id")
