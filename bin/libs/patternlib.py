@@ -4,6 +4,7 @@
 
 from xml.dom import minidom
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
+from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
@@ -11,7 +12,7 @@ import sys
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
 WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", ["wordnum"] + WORD_ATTRIBUTES))
 
-def parse_patterns_file(path):
+def parse_patterns_file(path, anchored=False):
 	"""
 		Generates a list of precompiled regular expressions, one for each
 		pattern in `file`.
@@ -27,6 +28,10 @@ def parse_patterns_file(path):
 			# Found root element.
 			for node in root.childNodes:
 				if isinstance(node, minidom.Element):
+					if anchored:
+						node.setAttribute("anchor_start", "true")
+						node.setAttribute("anchor_end", "true")
+
 					patterns.append(parse_pattern(node))
 
 	return patterns
@@ -178,6 +183,16 @@ def parse_pattern(node):
 	return re.compile(state.pattern)
 
 
+def copy_word(w):
+	return Word(w.surface, w.lemma, w.pos, w.syn, [])
+
+def copy_word_list(ws):
+	return map(copy_word, ws)
+
+def copy_ngram(ngram):
+	return Ngram(copy_word_list(ngram.word_list), [])
+
+
 def match_pattern(pattern, words):
 	"""
 		Returns an iterator over all matches of the pattern in the word list.
@@ -220,7 +235,7 @@ def match_pattern(pattern, words):
 						if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
 							ngram.append(words[i])
 							wordnums.append(i+1)
-				yield (ngram, wordnums)
+				yield (Ngram(copy_word_list(ngram), []), wordnums)
 
 			else:
 				break

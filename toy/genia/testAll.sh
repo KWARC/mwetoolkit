@@ -29,6 +29,10 @@ dotest() {
 	fi
 }
 
+diff-sorted() {
+	diff <(sort "$1") <(sort "$2")
+}
+
 main() {
 	cd "$DIR"
 	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
@@ -53,19 +57,19 @@ main() {
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -s -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
-		'run candidates.py -v -p "$DIR/patterns.xml" "$DIR/corpus.xml" >candidates-from-corpus.xml' \
+		'run candidates.py -s -v -p "$DIR/patterns.xml" "$DIR/corpus.xml" >candidates-from-corpus.xml' \
 		true
 
 	dotest "Comparison of candidate extraction outputs" \
-		'diff candidates-from-index.xml candidates-from-corpus.xml' \
+		'diff-sorted candidates-from-index.xml candidates-from-corpus.xml' \
 		true
 
 	dotest "Individual word frequency counting" \
-		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
+		'run counter.py -s -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
 		true
 
 	dotest "Association measures" \

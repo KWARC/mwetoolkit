@@ -125,14 +125,6 @@ sentence_counter = 0
 print_source = False
 
 
-def copy_word(w):
-    return Word(w.surface, w.lemma, w.pos, w.syn, [])
-
-def copy_word_list(ws):
-    return map(copy_word, ws)
-
-def copy_ngram(ngram):
-    return Ngram(copy_word_list(ngram.word_list), [])
 
 
 ################################################################################
@@ -156,8 +148,8 @@ def treat_sentence( sentence ) :
     words = sentence.word_list
 
     for pattern in patterns:
-        for (ngram, wordnums) in match_pattern(pattern, words):
-            match_ngram = Ngram(copy_word_list(ngram), [])
+        for (match_ngram, wordnums) in match_pattern(pattern, words):
+            #match_ngram = Ngram(copy_word_list(ngram), [])
 
             if ignore_pos :    
                 match_ngram.set_all( pos=WILDCARD )
@@ -170,7 +162,9 @@ def treat_sentence( sentence ) :
             key = unicode( match_ngram.to_string() ).encode('utf-8')
             ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
             freq_surface = surfaces_dict.setdefault( internal_key, [] )
-            # Append the id of the source sentence.
+
+            # Append the id of the source sentence. The number of items in
+            # surfaces_dict[form] is the number of occurrences of that form.
             surfaces_dict[ internal_key ].append(str(sentence.id_number) + ":" + ",".join(map(str, wordnums)))
             temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
 

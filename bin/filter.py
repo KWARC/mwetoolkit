@@ -123,6 +123,8 @@ def treat_entity( entity ) :
         verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
 
     print_it = True
+    ngram_to_print = entity
+
     # Threshold test
     for freq in entity.freqs :
         if thresh_source :
@@ -140,13 +142,17 @@ def treat_entity( entity ) :
             if feat.name == equals_name and feat.value == equals_value :
                 print_it = True
 
+
+    # NOTE: Different patterns may match the same ngram, with different
+    # results, when the 'ignore' pattern attribute is involved. Currently,
+    # we are only printing the first such match.
     if print_it and patterns :
         print_it = False
         words = entity.word_list
         for pattern in patterns :
-            for dummy in match_pattern(pattern, words) :
+            for (match_ngram, wordnums) in match_pattern(pattern, words) :
                 print_it = True
-                break
+                ngram_to_print = match_ngram
             if print_it :
                 break
 
@@ -154,7 +160,7 @@ def treat_entity( entity ) :
         print_it = not print_it
 
     if print_it :   
-        print entity.to_xml().encode( 'utf-8' )
+        print ngram_to_print.to_xml().encode( 'utf-8' )
     entity_counter += 1
     
 ################################################################################
@@ -235,7 +241,7 @@ def read_patterns_file( filename ) :
     global patterns
 
     try:
-        patterns = parse_patterns_file(filename)
+        patterns = parse_patterns_file(filename, anchored=True)
     except IOError, err:
         print >> sys.stderr, err
         sys.exit( 2 )
