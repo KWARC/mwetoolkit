@@ -66,9 +66,14 @@ OPTIONS may be:
     Print messages that explain what is happening.
 
 -g OR --ignore-pos
-     Ignores Part-Of-Speech when counting candidate occurences. This means, for
-     example, that "like" as a preposition and "like" as a verb will be counted
-     as the same entity. Default false.
+    Ignores Part-Of-Speech when counting candidate occurences. This means, for
+    example, that "like" as a preposition and "like" as a verb will be counted
+    as the same entity. Default false.
+
+-L OR --lemma-or-surface
+    Match lemma and surface of candidates each against both lemma and surface
+    of references. If either of the four comparisons is successful, the match
+    is successful. Wildcards in references are not considered.
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
     The reference list or gold standard must be valid XML
@@ -76,7 +81,9 @@ OPTIONS may be:
 """
 #gs = []
 pre_gs = {}
+fuzzy_pre_gs = {}
 ignore_pos = False
+lemma_or_surface = False
 gs_name = None
 ignore_case = True
 entity_counter = 0
@@ -109,7 +116,9 @@ def treat_candidate( candidate ) :
 
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    global ignore_pos, gs_name, ignore_case, entity_counter, tp_counter, pre_gs
+    global ignore_pos, gs_name, ignore_case, entity_counter, tp_counter, pre_gs, \
+           lemma_or_surface, fuzzy_pre_gs
+
     if entity_counter % 100 == 0 :
         verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     true_positive = False
@@ -120,8 +129,12 @@ def treat_candidate( candidate ) :
         pre_gs_key = pre_gs_key.lower()
     entries_to_check = pre_gs.get( pre_gs_key, [] )
 
+    if lemma_or_surface:
+        entries_to_check += fuzzy_pre_gs.get('\t'.join([w.lemma for w in candidate]), [])
+        entries_to_check += fuzzy_pre_gs.get('\t'.join([w.surface for w in candidate]), [])
+
     for gold_entry in entries_to_check :
-        if gold_entry.match( candidate, ignore_case ) :
+        if gold_entry.match( candidate, ignore_case=ignore_case, lemma_or_surface=lemma_or_surface ) :
             true_positive = True
             break # Stop at first positive match
 
@@ -143,7 +156,7 @@ def treat_reference( reference ) :
 
         @param reference A `Pattern` contained in the reference Gold Standard.
     """
-    global ignore_pos, ref_counter, ignore_case, pre_gs
+    global ignore_pos, ref_counter, ignore_case, pre_gs, lemma_or_surface, fuzzy_pre_gs
     if ignore_pos :
         reference.set_all( pos=WILDCARD )     # reference has type Pattern
     pre_gs_key = reference.to_string()
@@ -153,6 +166,10 @@ def treat_reference( reference ) :
     pre_gs_entry = pre_gs.get( pre_gs_key, [] )
     pre_gs_entry.append( reference )
     pre_gs[ pre_gs_key ] = pre_gs_entry
+
+    if lemma_or_surface:
+        fuzzy_pre_gs.setdefault('\t'.join([w.lemma for w in reference]), []).append(reference)
+        fuzzy_pre_gs.setdefault('\t'.join([w.surface for w in reference]), []).append(reference)
 
     #gs.append( reference )
     ref_counter = ref_counter + 1
@@ -196,7 +213,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global pre_gs, ignore_pos, gs_name, ignore_case
+    global pre_gs, ignore_pos, gs_name, ignore_case, lemma_or_surface
     for ( o, a ) in opts:
         if o in ("-r", "--reference"):
             open_gs( a )
@@ -205,6 +222,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             ignore_pos = True
         elif o in ("-c", "--case"):
             ignore_case = False
+        elif o in ("-L", "--lemma-or-surface"):
+            lemma_or_surface = True
 
     if not pre_gs :
         print >> sys.stderr, "You MUST provide a non-empty reference list!"
@@ -216,8 +235,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["reference=", "ignore-pos", "verbose", "case" ]
-arg = read_options( "r:gvc", longopts, treat_options, -1, usage_string )
+longopts = ["reference=", "ignore-pos", "verbose", "case", "lemma-or-surface"]
+arg = read_options( "r:gvcL", longopts, treat_options, -1, usage_string )
 
 try :   
     parser = xml.sax.make_parser()

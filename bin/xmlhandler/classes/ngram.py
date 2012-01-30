@@ -437,7 +437,7 @@ class Ngram (object):
 
 ################################################################################
 
-    def match( self, some_ngram, ignore_case=False ) :
+    def match( self, some_ngram, ignore_case=False, lemma_or_surface=False ) :
         """
             A simple matching algorithm that returns true if ALL the words of
             the current pattern match all the words of the given ngram. Since a 
@@ -450,7 +450,7 @@ class Ngram (object):
             the current pattern. In general, the pattern contains the 
             `WILDCARD`s while `some_ngram` has all the elements with a defined
             value.
-            
+
             @return Will return True if ALL the words of `some_ngram` match ALL
             the words of the current pattern (i.e. they have the same number of
             words and all of them match in the same order). Will return False if
@@ -460,7 +460,7 @@ class Ngram (object):
         """
         if( len( some_ngram ) == len( self ) ) :
             for i in range( len( self ) ) :
-                if not self[ i ].match( some_ngram[ i ], ignore_case ) :
+                if not self[ i ].match( some_ngram[ i ], ignore_case=ignore_case, lemma_or_surface=lemma_or_surface ) :
                     return False
             return True
         else :

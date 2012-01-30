@@ -29,6 +29,7 @@
 
 from __common import WILDCARD, SEPARATOR
 
+import sys
 
 # List of valid word attributes. Must appear in the same order as the
 # arguments for the Word class constructor.
@@ -278,7 +279,7 @@ class Word :
 
 ################################################################################
 
-    def match( self, w, ic=False ) :
+    def match( self, w, ignore_case=False, lemma_or_surface=False ) :
         """
             A simple matching algorithm that returns true if the parts of the
             current word match the parts of the given word. The matching at the 
@@ -302,12 +303,28 @@ class Word :
             ANY of the three word parts does not match the correspondent part of 
             the given word `w`.
         """
-        return ((self.surface != WILDCARD and self.compare( self.surface,w.surface,ic)) or \
-             self.surface == WILDCARD) and \
-             ((self.lemma != WILDCARD and self.compare( self.lemma, w.lemma, ic ) ) or \
-             self.lemma == WILDCARD) and \
-             ((self.pos != WILDCARD and self.compare( self.pos, w.pos, ic ) ) or \
-             self.pos == WILDCARD)
+
+        if self.pos!=WILDCARD and not self.compare(self.pos, w.pos, ignore_case):
+            return False
+
+        if lemma_or_surface:
+            return ((self.compare(self.lemma, w.lemma, ignore_case)
+                 or (self.compare(self.lemma, w.surface, ignore_case))
+                 or (self.compare(self.surface, w.lemma, ignore_case))
+                 or (self.compare(self.surface, w.surface, ignore_case))))
+                  
+        else:
+            return ((self.surface==WILDCARD or self.compare(self.surface, w.surface, ignore_case))
+                  and (self.lemma==WILDCARD or self.compare(self.lemma, w.lemma, ignore_case)))
+
+
+        #return ((self.surface != WILDCARD and self.compare( self.surface,w.surface,ignore_case)) or \
+        #     self.surface == WILDCARD) and \
+        #     ((self.lemma != WILDCARD and self.compare( self.lemma, w.lemma, ignore_case ) ) or \
+        #     self.lemma == WILDCARD) and \
+        #     ((self.pos != WILDCARD and self.compare( self.pos, w.pos, ignore_case ) ) or \
+        #     self.pos == WILDCARD)
+
             
 ################################################################################
 
