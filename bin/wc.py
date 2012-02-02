@@ -26,7 +26,7 @@
     of words, etc. Output is written on stderr.
 
     This script is DTD independent, that is, it might be called on a corpus
-    file, on a list of candidates or on a dictionary.
+    file, on a list of candidates or on a dictionary!
     
     For more information, call the script with no parameter and read the
     usage instructions.
