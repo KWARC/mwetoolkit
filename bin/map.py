@@ -177,9 +177,9 @@ def calculate_map( values ):
             precs.append( precision )
             cumul_precision += precision
     if tp_counter != 0.0 :
-	    mapr = cumul_precision / tp_counter
-	else :
-		mapr = 0.0
+        mapr = cumul_precision / tp_counter
+    else :
+        mapr = 0.0
     
     tp_counter = 0.0
     cumul_squared_error = 0.0
@@ -190,9 +190,9 @@ def calculate_map( values ):
             precision = 100.0 * (tp_counter / (index + 1))
             cumul_squared_error += ( precision - mapr ) * ( precision - mapr )
     if tp_counter >= 1.0 :
-	    variance = cumul_squared_error / ( tp_counter - 1.0 )
-	else :
-		variance = 0.0
+        variance = cumul_squared_error / ( tp_counter - 1.0 )
+    else :
+        variance = 0.0
 
     return mapr, variance, tp_counter, precs
 
@@ -299,10 +299,10 @@ try :
 
 except IOError, err :
     print >> sys.stderr, err
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-                         " please validate it against the DTD " + \
-                         "(dtd/mwetoolkit-candidates.dtd)"
+#except Exception, err :
+#    print >> sys.stderr, err
+#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+#                         " please validate it against the DTD " + \
+#                         "(dtd/mwetoolkit-candidates.dtd)"
 
 ################################################################################
