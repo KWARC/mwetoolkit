@@ -189,7 +189,7 @@ def calculate_map( values ):
             # rank = index+1, index = 0..n, rank = 1..n+1
             precision = 100.0 * (tp_counter / (index + 1))
             cumul_squared_error += ( precision - mapr ) * ( precision - mapr )
-    if tp_counter >= 1.0 :
+    if tp_counter > 1.0 :
         variance = cumul_squared_error / ( tp_counter - 1.0 )
     else :
         variance = 0.0
