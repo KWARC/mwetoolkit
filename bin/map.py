@@ -175,8 +175,11 @@ def calculate_map( values ):
             #verbose "Precision at %(c)d : %(p)f" % { "c" : tpcounter, 
             #                                         "p" : precision }
             precs.append( precision )
-            cumul_precision += precision          
-    mapr = cumul_precision / tp_counter
+            cumul_precision += precision
+    if tp_counter != 0.0 :
+	    mapr = cumul_precision / tp_counter
+	else :
+		mapr = 0.0
     
     tp_counter = 0.0
     cumul_squared_error = 0.0
@@ -186,7 +189,10 @@ def calculate_map( values ):
             # rank = index+1, index = 0..n, rank = 1..n+1
             precision = 100.0 * (tp_counter / (index + 1))
             cumul_squared_error += ( precision - mapr ) * ( precision - mapr )
-    variance = cumul_squared_error / ( tp_counter - 1 )
+    if tp_counter >= 1.0 :
+	    variance = cumul_squared_error / ( tp_counter - 1.0 )
+	else :
+		variance = 0.0
 
     return mapr, variance, tp_counter, precs
 
