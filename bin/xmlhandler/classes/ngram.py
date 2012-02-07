@@ -158,7 +158,7 @@ class Ngram (object):
         for word in self :
             result = result  + word.to_xml() + " "
         if self.freqs :
-            result = result + "\n"        
+            result = result #+ "\n"        
             for freq in self.freqs :
                 result = result + freq.to_xml()
         if len(self.sources) > 0:
