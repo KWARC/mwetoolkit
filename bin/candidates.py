@@ -330,7 +330,11 @@ try :
     print_candidates( temp_file, corpus_name )
     try :
         temp_file.close()
-        os.remove( temp_fh.name )
+        try :
+            os.remove( temp_fh.name )
+        except IOError :
+            os.remove( temp_fh.name + ".db" ) # Some dbms used by shelve add the
+            # .db suffix to the file
     except IOError, err :
         print >> sys.stderr, err
         print >> sys.stderr, "Error closing temporary file. " + \
