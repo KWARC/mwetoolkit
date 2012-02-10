@@ -77,7 +77,7 @@ main() {
 		true
 
 	dotest "Association measures" \
-		'run feat_association.py -v -m "mle:pmi:ll:t:dice" candidates-counted.xml >candidates-featureful.xml' \
+		'run feat_association.py -v -m "mle:pmi:t:dice" candidates-counted.xml >candidates-featureful.xml' \
 		true
 
 }
