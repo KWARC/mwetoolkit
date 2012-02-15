@@ -22,7 +22,9 @@
 # 
 ################################################################################
 """
-   Simplifies the POS tags of the words from Penn Treebank format to simple tags
+   Simplifies the POS tags of the words from various kinds of formats to simple tags
+
+
 """
 
 import sys
@@ -53,6 +55,12 @@ OPTIONS may be:
     simple slash "/". CAREFUL: This special character must be escaped in the 
     corpus!
 
+-p OR --palavras
+    Convert from Palavras tags instead of Penn Tree Bank tags.
+
+-G or --genia
+    Convert from Genia tags instead of Penn Tree Bank tags.
+
 -v OR --verbose
     Print friendly messages that explain what is happening.
 
@@ -60,7 +68,7 @@ OPTIONS may be:
 """
 sentence_counter = 0
 # This table contains mainly exceptions that need special treatment
-conv_table = { "MD": "V",    # modal verb is a verb
+ptb_table = { "MD": "V",    # modal verb is a verb
                "IN": "P",    # Preposition in is a preposition
                "TO": "P",    # Preposition to is a preposition
                "RP": "P",
@@ -78,7 +86,7 @@ conv_table = { "MD": "V",    # modal verb is a verb
                "UH":"UH",  } # Interjection stays interjectio
 text_input = False
 field_sep = "/"
-palavras = False
+simplify = None
 
 ################################################################################
 
@@ -110,21 +118,21 @@ def treat_entity( entity ) :
 
 ################################################################################
 
-def simplify( pos ) :
-    """
-        Receives as input a complex POS tag and returns a simplified version.
-        
-        @param pos A string representing the POS tag in some format
-        
-        @return A string representing the simplified POS tag
-    """
-    global palavras
-    if palavras :
-        return simplify_palavras( pos )
-    else :
-        return simplify_ptb( pos )   
-
-################################################################################
+palavras_table = { "DET" : "DT",
+                   "ADV" : "R",
+                   "PRP" : "P",
+                   "ADJ" : "A",
+                   "PERS" : "PP",
+                   "KC" : "CC",
+                   "KS" : "CC",
+                   "1P>" : "PP",
+                   "SPEC" : "PP",
+                   "3S>" : "DT",
+                   "2S>" : "DT",
+                   "1S>" : "DT",
+                   "IN" : "P",
+                   "EC" : "FW",
+                   "PROP" : "N" }
 
 def simplify_palavras( pos ) :
     """
@@ -135,24 +143,12 @@ def simplify_palavras( pos ) :
         
         @return A string representing the simplified POS tag
     """
-    palavras_table = { "DET" : "DT",
-                       "ADV" : "R",
-                       "PRP" : "P",
-                       "ADJ" : "A",
-                       "PERS" : "PP",
-                       "KC" : "CC",
-                       "KS" : "CC",
-                       "1P>" : "PP",
-                       "SPEC" : "PP",
-                       "3S>" : "DT",
-                       "2S>" : "DT",
-                       "1S>" : "DT",
-                       "IN" : "P",
-                       "EC" : "FW",
-                       "PROP" : "N" }
     # The "split" part is to avoid that multiple POS like NNS|JJ are not 
     # converted. We simply take the first POS, ignoring the second one.
     # This is useful when processing the GENIA corpus
+
+    global palavras_table
+
     newpos = pos.split("|")[0]    
     if pos == "N" or pos == "V" or pos == "PCT" or pos == "NUM" :
         newpos = pos
@@ -177,7 +173,7 @@ def simplify_ptb( pos ) :
         
         @return A string representing the simplified POS tag
     """
-    global conv_table
+    global ptb_table
     # The "split" part is to avoid that multiple POS like NNS|JJ are not 
     # converted. We simply take the first POS, ignoring the second one.
     # This is useful when processing the GENIA corpus
@@ -198,11 +194,35 @@ def simplify_ptb( pos ) :
         newpos = "PCT"
     else :
         try :
-            newpos = conv_table[ newpos ]
+            newpos = ptb_table[ newpos ]
         except Exception :
             print >> sys.stderr, "WARNING: part of speech " + str( newpos ) + \
                               " not converted."
     return newpos    
+
+################################################################################
+
+genia_table = { "NNPS": "N", "NNP": "N", "NNS": "N", "NN": "N", "NPS": "N", 
+                "NP": "N", "NN|NNS": "N", "JJ|NN": "N", "VBG|NN": "N", 
+                "NN|DT": "N", "NN|CD": "N", "NNS|FW": "N", "JJR": "A", 
+                "JJS": "A", "JJ": "A", "JJ|VBG": "A", "JJ|RB": "A",
+                "JJ|NNS": "A", "JJ|VBN": "A", "VBG|JJ": "A", "VBD": "V", 
+                "VBG": "V", "VBN": "V", "VBP": "V", "VBZ": "V", "VVD": "V", 
+                "VVG": "V", "VVN": "V", "VVP": "V", "VVZ": "V", "VHD": "V", 
+                "VHG": "V", "VHN": "V", "VHP": "V", "VHZ": "V", "VV": "V", 
+                "VB": "V", "VH": "V", "MD": "V", "VBP|VBZ": "V", "VBN|JJ": "V", 
+                "VBD|VBN": "V", "RBR": "R", "RBS": "R", "WRB": "R", "RB": "R", 
+                "IN": "P", "TO": "P", "RP": "P", "EX": "P", "IN|PRP$": "P", 
+                "IN|CC": "P", "PDT": "DT", "WDT": "DT", "DT": "DT", "CT": "DT", 
+                "XT": "DT", "PRP$": "PP", "PRP": "PP", "PP$": "PP", "PP": "PP", 
+                "WP$": "PP", "WP": "PP", "POS": "PP", "CCS": "CC", "CC": "CC", 
+                "FW": "FW", "SYM": "PCT", ".": "PCT", ",": "PCT", ":": "PCT", 
+                "CD": "NUM", "\"": "PCT", "(": "PCT", ")": "PCT", "'": "PCT", 
+                "?": "PCT", "-": "PCT", "/": "PCT", "LS": "PCT", "``": "PCT", 
+                "''": "PCT" }
+
+def simplify_genia(pos):
+    return genia_table.get(pos, pos)
 
 ################################################################################
 
@@ -244,12 +264,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global text_input
     global field_sep
-    global palavras
+    global simplify
+
+    simplify = simplify_ptb
+
     for ( o, a ) in opts:
         if o in ("-x", "--text" ) : 
             text_input = True
         elif o in ("-p", "--palavras" ) : 
-            palavras = True
+            simplify = simplify_palavras
+        elif o in ("-G", "--genia"):
+            simplify = simplify_genia
         elif o in ("-F", "--fs" ) : 
             field_sep = a               
     treat_options_simplest( opts, arg, n_arg, usage_string )
@@ -257,8 +282,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "text", "fs=", "palavras" ]
-arg = read_options( "vxF:p", longopts, treat_options, -1, usage_string )
+longopts = ["verbose", "text", "fs=", "palavras", "genia" ]
+arg = read_options( "vxF:pg", longopts, treat_options, -1, usage_string )
 try :
     parser = xml.sax.make_parser()
     handler = GenericXMLHandler( treat_meta=treat_meta,
