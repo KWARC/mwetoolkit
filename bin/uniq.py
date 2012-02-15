@@ -79,7 +79,7 @@ surface_instead_lemmas = False
 perform_retokenisation = False
 entity_counter = 0
 entity_buffer = {}
-split_characters = "/-" # Escape special characters in regex
+split_characters = "/-"
 
 ################################################################################
 
@@ -96,6 +96,7 @@ def treat_meta( meta ) :
 
 def create_instance( entity ) :
     """
+        Create an empty instance of the same type as 'entity'.
     """
     if isinstance( entity, Candidate ) :
         return Candidate( 0, [], [], [], [], [] )
@@ -124,7 +125,7 @@ def retokenise( ngram ) :
             splittable = splittable.replace( c, "-" )
         for part in splittable.split( "-" ) :
             part = part.strip()
-            # Little workarround for digits
+            # Little workaround for digits
             if part.isdigit() :
                 pos = "NUM"
             else :
