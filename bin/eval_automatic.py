@@ -44,7 +44,7 @@ from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.meta_tpclass import MetaTPClass
 from util import usage, read_options, treat_options_simplest, verbose
-from xmlhandler.classes.__common import WILDCARD
+from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
 
 ################################################################################
 # GLOBALS
@@ -130,8 +130,8 @@ def treat_candidate( candidate ) :
     entries_to_check = pre_gs.get( pre_gs_key, [] )
 
     if lemma_or_surface:
-        entries_to_check += fuzzy_pre_gs.get('\t'.join([w.lemma for w in candidate]), [])
-        entries_to_check += fuzzy_pre_gs.get('\t'.join([w.surface for w in candidate]), [])
+        entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.lemma for w in candidate]), [])
+        entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.surface for w in candidate]), [])
 
     for gold_entry in entries_to_check :
         if gold_entry.match( candidate, ignore_case=ignore_case, lemma_or_surface=lemma_or_surface ) :
@@ -168,8 +168,8 @@ def treat_reference( reference ) :
     pre_gs[ pre_gs_key ] = pre_gs_entry
 
     if lemma_or_surface:
-        fuzzy_pre_gs.setdefault('\t'.join([w.lemma for w in reference]), []).append(reference)
-        fuzzy_pre_gs.setdefault('\t'.join([w.surface for w in reference]), []).append(reference)
+        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join([w.lemma for w in reference]), []).append(reference)
+        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join([w.surface for w in reference]), []).append(reference)
 
     #gs.append( reference )
     ref_counter = ref_counter + 1
