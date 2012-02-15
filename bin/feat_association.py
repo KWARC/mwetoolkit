@@ -22,7 +22,7 @@
 #
 ################################################################################
 """
-    This script adds four new features for each candidate in the list and for
+    This script adds five new features for each candidate in the list and for
     each corpus with a known size. These features correspond to Association
     Measures (AMs) based on the frequency of the ngram compared to the frequency
     of the individual words. The AMs are:
@@ -31,7 +31,7 @@
         t: Student's t test score
         dice: Dice's coeficient
         ll: Log-likelihood (bigrams only)
-    Each AM feature is subscribed by the name of the corpus from which it was
+    Each AM feature is suffixed by the name of the corpus from which it was
     calculated.
     
     For more information, call the script with no parameter and read the
@@ -94,6 +94,7 @@ measures = supported_measures
 heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
 entity_counter = 0
 not_normalize_mle=False
+warn_ll_bigram_only = True
      
 ################################################################################     
        
@@ -272,7 +273,7 @@ def calculate_ams( o, m_list, N, corpus_name ) :
     """
     # N is never null!!!
     # m_list is never empty!!!
-    global measures, heuristic_combine, not_normalize_mle
+    global measures, heuristic_combine, not_normalize_mle, warn_ll_bigram_only
     feats = []
     f_sum = 0
     n = len( m_list )
@@ -319,8 +320,10 @@ def calculate_ams( o, m_list, N, corpus_name ) :
                 ll_list .append( ll )
             ll_final = heuristic_combine( ll_list )
         else :
-            print >> sys.stderr, "WARNING: log-likelihood is only implemented "+\
-                              "for 2-grams. Defaults to 0.0 for n>2"
+            if warn_ll_bigram_only:
+                warn_ll_bigram_only = False
+                print >> sys.stderr, "WARNING: log-likelihood is only implemented "+\
+                                     "for 2-grams. Defaults to 0.0 for n>2"
             ll_final = 0.0
         feats.append( Feature( "ll_" + corpus_name, ll_final ) )
     return feats
