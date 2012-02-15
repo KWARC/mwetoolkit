@@ -79,7 +79,7 @@ surface_instead_lemmas = False
 perform_retokenisation = False
 entity_counter = 0
 entity_buffer = {}
-target_characters = "/-" # Escape special characters in regex
+split_characters = "/-" # Escape special characters in regex
 
 ################################################################################
 
@@ -109,8 +109,10 @@ def create_instance( entity ) :
 
 def retokenise( ngram ) :
     """
+        Retokenises an ngram, splitting words containing some kinds of
+        separators into individual words.
     """
-    global target_characters
+    global split_characters
     global surface_instead_lemmas
     split_form = create_instance( ngram )
     for w in ngram :
@@ -118,7 +120,7 @@ def retokenise( ngram ) :
             splittable = w.surface
         else :
             splittable = w.lemma        
-        for c in list( target_characters ) :
+        for c in list( split_characters ) :
             splittable = splittable.replace( c, "-" )
         for part in splittable.split( "-" ) :
             part = part.strip()
@@ -143,8 +145,10 @@ def retokenise( ngram ) :
        
 def treat_entity( entity ) :
     """
-        
-        
+        Add each entity to the entity buffer, after pre-processing it. This
+        buffer is used to keep track of repeated items, so that only a copy
+        of an item is saved.
+
         @param entity A subclass of `Ngram` that is being read from the XM.
     """
     global entity_counter, entity_buffer
@@ -155,7 +159,7 @@ def treat_entity( entity ) :
     # TODO: improve the "copy" method
     copy_ngram = create_instance( entity )
     for w in entity :
-        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )        
+        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
         copy_ngram.append( copy_w )
         
     if perform_retokenisation :
