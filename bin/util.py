@@ -130,10 +130,10 @@ def interpret_ngram( argument ) :
     """
         Parses the argument of the "-n" option. This option is of the form
         "<min>:<max>" and defines the length of n-grams to extract. For 
-        instance, "3:5" extracts ngrams that have at least 3 words and at most 5 
+        instance, "3:5" extracts ngrams that have at least 3 words and at most 5
         words. If you define only <min> or only <max>, the default is to 
-        consider that both have the same value. The value of <min> is at least 
-        1, <max> is at most 10. Generates an exception if the syntax is 
+        consider that both have the same value. The value of <min> must be at
+        least 1. Generates an exception if the syntax is 
         incorrect, generates a None value if the arguments are incoherent 
         (e.g. <max> < <min>)
         
@@ -151,10 +151,17 @@ def interpret_ngram( argument ) :
         else :
             n_min = int(argument)
             n_max = int(argument)
-        if n_min <= n_max and n_min >= 1 and n_max <= 10:                
-            return ( n_min, n_max )
+
+        if n_min <= n_max:
+            if n_min >= 1:
+                return ( n_min, n_max )
+            else:
+                print >>sys.stderr, "Error parsing argument for -n: <min> must be at least 1"
+                return None
         else :                
-            return None
+           print >>sys.stderr, "Error parsing argument for -n: <min> is greater than <max>"
+           return None
+
     except IndexError :
         return None
     except TypeError :

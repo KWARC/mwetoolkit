@@ -82,8 +82,7 @@ python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
     only <max>, the default is to consider that both have the same value, i.e. 
     if you call the program with the option "-n 3", you will extract only 
     trigrams while if you call it with the options "-n 3:5" you will extract 
-    3-grams, 4-grams and 5-grams. The value of <min> is at least 1, <max> is at
-    most 10.
+    3-grams, 4-grams and 5-grams. The value of <min> must be at least 1.
     
 OPTIONS may be:
 
@@ -192,10 +191,7 @@ def create_patterns_file( ngram_range ) :
         may seem a weird way to extract ngrams, but it allows a single 
         transparent candidate extraction function, treat_sentence.
         
-        @param ngram_range String argument of the -n option, has the form 
-        "<min>:<max>"        
-
-        FIXMEFIXMEFIXME
+        @param ngram_range String argument of the -n option.
     """        
     global patterns, usage_string, shortest_pattern, longest_pattern
     result = interpret_ngram( ngram_range )
@@ -203,8 +199,7 @@ def create_patterns_file( ngram_range ) :
         ( shortest_pattern, longest_pattern ) = result
         patterns.append(build_generic_pattern(shortest_pattern, longest_pattern))
     else :
-        print >> sys.stderr, "The format of the argument must be <min>:<max>"
-        print >> sys.stderr, "<min> must be at least 1 and <max> is at most 10"
+        print >> sys.stderr, "Invalid argument for -n."
         usage( usage_string )
         sys.exit( 2 )  
 
