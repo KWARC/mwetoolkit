@@ -25,7 +25,8 @@
 
 """
     This script converts a candidates file in XML (mwetoolkit-candidates.dtd)
-    into a corresponding representation in the file format 
+    into the UCS data set format. Since UCS works only with pairs (2-grams),
+    all ngrams with sizes other than 2 are discarded.
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -66,6 +67,7 @@ freq_source = 0
 
 def treat_meta( meta ) :
     """
+    	Print the header for the UCS dataset file.
     """
     global xml_meta
     string_cand = "id\tl1\tl2\tf\tf1\tf2\tN"
@@ -86,8 +88,7 @@ def treat_meta( meta ) :
        
 def treat_entity( entity ) :
     """
-        For each `Candidate`, print the candidate ID, its POS pattern and the 
-        list of occurrences one per line
+        Print each `Candidate` as a UCS data set entry line.
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
