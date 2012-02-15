@@ -39,10 +39,9 @@ import xml.sax
 import pdb
 import array
 import re
-import subprocess
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DEFAULT_LANG
+from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DEFAULT_LANG                                       
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
@@ -59,7 +58,7 @@ from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
     
 usage_string = """Usage: 
     
-python %(program)s [-w | -u <id> | -t <dir> | -i <corpus.index>] OPTIONS <candidates.xml>
+python %(program)s [-w | -u <id> | -i <corpus.index>] OPTIONS <candidates.xml>
 
 -i <index> OR --index <index>
     Base name for the index files, as created by "index.py -i <index>".
@@ -79,11 +78,6 @@ python %(program)s [-w | -u <id> | -t <dir> | -i <corpus.index>] OPTIONS <candid
     Same as -w (Google frequencies) but uses Google University Research program
     URL and ID. The ID must be registered with a static IP address at:
     http://research.google.com/university/search/
-
--T <dir> OR --web1t <dir>
-    Use Google's Web 1T 5-gram corpus. <dir> is the a directory containing the
-    union of the contents of the data/ directories of each corpus CD as
-    distributed by Google.
     
 OPTIONS may be:
 
@@ -108,6 +102,11 @@ OPTIONS may be:
     Instead of counting the candidate, counts the variances in the <vars> 
     element. If you also want to count the candidate lemma, you should call the
     counter twice, first without this option then with this option.
+
+-l OR --lang
+    Language filter for web corpora (Google, Google UR). Use the 2-letter 
+    language codes of the search engine. E.g. lang_pt for Portuguese, lang_en
+    for English in Google UR.
 
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
@@ -253,7 +252,7 @@ def get_freq_index( surfaces, lemmas, pos ) :
     ngram_ids = []
     #pdb.set_trace()
     for i in range( len( surfaces ) ) :
-        word = build_entry( surfaces[i], lemmas[i], pos[i] )
+        word = build_entry( surfaces[i], lemmas[i], pos[i] ).decode('utf-8') #### FIXME
         wordid = suffix_array.symbols.symbol_to_number.get(word, None)
         if wordid:
             ngram_ids.append( wordid )
@@ -290,77 +289,6 @@ def get_freq_web( surfaces, lemmas, pos ) :
     for i in range( len( surfaces ) ) :
         search_term = search_term + build_entry( surfaces[ i ], lemmas[i], pos[ i ] ) + " "   
     return web_freq.search_frequency( search_term.strip(), language )
-
-
-################################################################################
-
-def read_file(path):
-    fh = open(path)
-    txt = fh.read()
-    fh.close()
-    return txt
-
-def get_freq_web1t(surfaces, lemmas, pos) :
-    """
-        Gets the frequency (number of occurrences) of an ngram in Google's
-        Web 1T 5-gram Corpus.
-    """
-
-    global build_entry, web1t_data_path
-
-    length = len(surfaces)
-
-    if length > 5:
-        print >>sys.stderr, "WARNING: Cannot count the frequency of an n-gram, n>5!"
-        return 0
-
-    search_term = ' '.join(map(build_entry, surfaces, lemmas, pos))
-
-    # Find the file in which to look for the ngram.
-    if length == 1:
-        filename = web1t_data_path + "/1gms/vocab.gz"
-    else:
-        indexfile = web1t_data_path + "/%dgms/%dgm.idx" % (length, length)
-        filenames = [x.split("\t") for x in read_file(indexfile).split("\n")]
-        filename = None
-        for (name, first) in filenames:
-            # Assumes byte-value-based ordering!
-            if first > search_term:
-                break
-            else:
-                filename = name
-
-        if filename is None:
-            return 0
-        filename = "%s/%dgms/%s" % (web1t_data_path, length, filename)
-
-    print >>sys.stderr, "WEB1T: Opening %s, looking for %s" % (filename, search_term)
-
-
-    # This has been absurdly slow in Python.
-    #file = gzip.open(filename, "rb")
-    #
-    #search_term += "\t"
-    #freq = 0
-    #
-    #for line in file:
-    #    if line.startswith(search_term):
-    #        freq = int(line.split("\t")[1])
-    #        break
-    #
-    #print >>sys.stderr, "buenito: %d" % freq
-    #
-    #file.close()
-
-    file = subprocess.Popen(["zgrep", "--", "^" + re.escape(search_term) + "\t", filename], stdout=subprocess.PIPE).stdout
-    line = file.read()
-    file.close()
-    if line:
-        freq = int(line.split("\t")[1])
-    else:
-        freq = 0
-    print >>sys.stderr, "freq =", freq
-    return freq
 
 
 ################################################################################
@@ -424,7 +352,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global language
     global suffix_array
     global count_joint_frequency
-    global web1t_data_path
     surface_flag = False
     ignorepos_flag = False
     mode = []
@@ -457,13 +384,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             the_corpus_size = web_freq.corpus_size()         
             get_freq_function = get_freq_web
             mode.append( "google" )             
-        elif o in ("-T", "--web1t") :
-            ignorepos_flag = True
-            freq_name = "web1t"
-            web1t_data_path = a
-            the_corpus_size = int(read_file(web1t_data_path + "/1gms/total"))
-            get_freq_function = get_freq_web1t
-            mode.append("web1t")
         elif o in ("-s", "--surface" ) :
             surface_flag = True
         elif o in ("-g", "--ignore-pos"): 
@@ -495,7 +415,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-l", "--lang" ) : 
             language = a
         elif o in ("-J", "--no-joint") :
-            count_joint_frequency = False
+        	count_joint_frequency = False
 
     if mode == [ "index" ] :       
         if surface_flag and ignorepos_flag :
@@ -536,8 +456,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
-            "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=", "web1t=" ]
-arg = read_options( "ywi:vgsf:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
+            "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=" ]
+arg = read_options( "ywi:vgsf:t:xal:Ju:", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()
@@ -566,15 +486,15 @@ try :
         if not text_input :
             print footer   
             
-#except IOError, err :
-#    print >> sys.stderr, err
-#    sys.exit(1)
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-candidates.dtd)"
-#    sys.exit(1)
+except IOError, err :
+    print >> sys.stderr, err
+    sys.exit(1)
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
+    sys.exit(1)
 finally :
     if web_freq :
         web_freq.flush_cache() # VERY IMPORTANT!
