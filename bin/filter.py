@@ -23,12 +23,15 @@
 ################################################################################
 """
     This script filters the candidate list based:
+
         1) On the number of occurrences of the candidate. The threshold might
         be defined individually for each corpus. Candidates occurring less than
         the threshold are filtered out.
-        2) On the order of the candidates. Only the top n candidates are kept in
-        the list. This operation is called "crop" the candidate list. The script
-        "head.py" does exactly the same thing (duh!).
+
+        2) On whether they match one of a set of patterns. The patterns are
+        in the same format as used by candidates.py, except that they are
+        'anchored' by default (i.e., they must match the whole n-gram, not just
+        part of it).
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -54,6 +57,8 @@ OPTIONS may be:
 
 -p <patterns.xml> OR --patterns <patterns.xml>
     The patterns to keep in the file, valid XML (mwetoolkit-dict.dtd)
+    Note that unlike candidates.py, this scripts treats patterns as 'anchored',
+    i.e., they must match the whole ngram, not just a part of it.
 
 -t <source>:<value> OR --threshold <source>:<value>    
     Defines a frequency threshold below which the candidates are filtered out.
@@ -153,6 +158,7 @@ def treat_entity( entity ) :
             for (match_ngram, wordnums) in match_pattern(pattern, words) :
                 print_it = True
                 ngram_to_print = match_ngram
+                break
             if print_it :
                 break
 
@@ -213,24 +219,6 @@ def interpret_equals( a ) :
 
 ################################################################################
 
-def treat_pattern( entry ) :
-    """
-        For each pattern in the XML patterns list, stores it into main memory.
-        We expect that the patterns file is small enough to fit comfortably
-        into main memory. This function also updates the control variables that
-        define the shortest and longest size of a pattern.
-
-        @param entry An `Entry` contained in the XML patterns list. This entry
-        should ideally contain some wildcards, otherwise the patterns will be
-        too generic to be interesting.
-    """
-    global patterns, longest_pattern, shortest_pattern
-    longest_pattern = max( longest_pattern, len(entry) )
-    shortest_pattern = min( shortest_pattern, len(entry) )
-    patterns.append( entry )
-
-################################################################################
-
 def read_patterns_file( filename ) :
     """
         NEW:
@@ -245,21 +233,6 @@ def read_patterns_file( filename ) :
     except IOError, err:
         print >> sys.stderr, err
         sys.exit( 2 )
-    #try :
-    #    patterns_file = open( filename )
-    #    parser = xml.sax.make_parser()
-    #    parser.setContentHandler( DictXMLHandler( treat_entry=treat_pattern ) )
-    #    try:
-    #        parser.parse( patterns_file )
-    #    except Exception :
-    #        print >> sys.stderr, "You provided an invalid pattern file, "+ \
-    #                             "please validate it against the DTD " + \
-    #                             "(mwetoolkit-dict.dtd)"
-    #        sys.exit( 2 )
-    #    patterns_file.close()
-    #except IOError, err:
-    #    print >> sys.stderr, err
-    #    sys.exit( 2 )
 
 ################################################################################
 

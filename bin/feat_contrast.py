@@ -66,7 +66,6 @@ OPTIONS may be:
     csmwe -- Original measure proposed by Bonin et al. 2010
     simplecsmwe -- Simplified rank-equivalent version of the previous
     simplediff -- Simply divides the original frequency by contrastive frequency
-    ...
 
 -a OR --all
     Join all contrastive corpora and consider it as a single corpus. The default
@@ -219,6 +218,7 @@ def calculate_indiv( n_main, n_cont, main_freq,
 
 def interpret_measures( measures_string ) :
     """
+        Parse the argument to the --measures option.
     """
     global supported_measures
     measures_list = measures_string.split( ":" )
