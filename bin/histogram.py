@@ -48,7 +48,7 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
-    The <candidates.xml> file must be valid XML (mwttoolkit-candidates.dtd). 
+    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd). 
 """
 hist = {}
 #ignore_pos = False

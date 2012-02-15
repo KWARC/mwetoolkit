@@ -24,7 +24,7 @@
 
 """
     This package provides a set of XML handlers that convert the XML entities
-    into Object Oriented representations that are used by mwttoolkit's scripts. 
+    into Object Oriented representations that are used by mwetoolkit's scripts. 
     The classes provided in this package correspond to the DTDs that define
     mwetoolkit's intermediary XML formats:
     

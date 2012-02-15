@@ -23,8 +23,8 @@
 ################################################################################
 """
     This module provides the `Word` class. This class represents an orthographic
-    word (as in mwttoolkit-corpus.dtd, mwttoolkit-patterns.dtd and 
-    mwttoolkit-candidates.dtd) defined by a surface form, a lemma and a POS tag.
+    word (as in mwetoolkit-corpus.dtd, mwetoolkit-patterns.dtd and 
+    mwetoolkit-candidates.dtd) defined by a surface form, a lemma and a POS tag.
 """
 
 from __common import WILDCARD, SEPARATOR
@@ -52,12 +52,12 @@ class Word :
         """
             Instanciates a new `Word`. A Word might be one of: a token in a 
             corpus, in which case it will probably have at least a defined 
-            surface form (mwttoolkit-corpus.dtd); a part of a pattern, in which
+            surface form (mwetoolkit-corpus.dtd); a part of a pattern, in which
             case it will probably contain some `WILDCARD`s; a part of a 
             reference or gold standard entry, in which case it will have at 
-            least a defined lemma (mwttoolkit-patterns.dtd); a part of an n-gram
+            least a defined lemma (mwetoolkit-patterns.dtd); a part of an n-gram
             in a candidates list, in which case most of the parts should be
-            defined (mwttoolkit-candidates.dtd). Besides the surface form, the
+            defined (mwetoolkit-candidates.dtd). Besides the surface form, the
             lemma and the Part Of Speech tag, a word also contains a list of
             `Frequency`ies, each one corresponding to its number of occurrences 
             in a given corpus.
@@ -83,7 +83,7 @@ class Word :
             @param pos A string corresponding to a Part Of Speech tag of the 
             word. A POS tag is a morphosyntactic class like "Noun", "Adjective"
             or "Verb". You should use a POS tagger system to tag your corpus
-            before you use mwttoolkit. The tag set, i.e. the set of valid POS
+            before you use mwetoolkit. The tag set, i.e. the set of valid POS
             tags, is your choice. You can use a very simple set that 
             distinguishes only top-level classes ("N", "A", "V") or a fine-
             grained classification, e.g. "NN" is a proper noun, "NNS" a proper
@@ -162,8 +162,8 @@ class Word :
             including internal variables.
             
             @return A string containing the XML element <w> with its 
-            internal structure, according to mwttoolkit-candidates.dtd, 
-            mwttoolkit-patterns.dtd and mwttoolkit-corpus.dtd. Attributes that
+            internal structure, according to mwetoolkit-candidates.dtd, 
+            mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd. Attributes that
             do not have a defined value (i.e. are `WILDCARD`) are not printed.
         """
         result = "<w "
@@ -209,8 +209,8 @@ class Word :
             frequencies will not be printed. Default True.
             
             @return A string containing the XML element <w> with its attributes
-            and internal structure, according to mwttoolkit-candidates.dtd, 
-            mwttoolkit-patterns.dtd and mwttoolkit-corpus.dtd and 
+            and internal structure, according to mwetoolkit-candidates.dtd, 
+            mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd and 
             depending on the input flags.
         """
         result = "<w "

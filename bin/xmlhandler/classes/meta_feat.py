@@ -50,7 +50,7 @@ class MetaFeat( Feature ) :
             including internal variables.
             
             @return A string containing the XML element <metafeat> with its 
-            attributes, according to mwttoolkit-candidates.dtd.
+            attributes, according to mwetoolkit-candidates.dtd.
         """
         return "<metafeat name=\"" + self.name + \
                "\" type=\"" + str(self.value) + "\" />"

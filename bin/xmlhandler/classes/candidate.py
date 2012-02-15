@@ -67,7 +67,7 @@ class Candidate ( Entry ) :
            
            @param tpclasses List of `TPClass`es that represent an evaluation of
            the candidate. It can correspond, for example, to a list of human
-           judgements about it being or not a MWT. The class is probably boolean
+           judgements about it being or not a MWE. The class is probably boolean
            but multiclass values are allowed, as long as the concerned machine
            learning algorithm can deal with it.
 
@@ -94,7 +94,7 @@ class Candidate ( Entry ) :
             including internal variables.
             
             @return A string containing the XML element <cand> with its internal
-            structure, according to mwttoolkit-candidates.dtd.
+            structure, according to mwetoolkit-candidates.dtd.
         """
         result = "<cand"
         if self.id_number >= 0 :
@@ -170,7 +170,7 @@ class Candidate ( Entry ) :
             
             @param tpclass A `TPClass` corresponding to an evaluation or 
             judgment of this candidate concerning its appartenance to a 
-            reference list (gold standard) or its MWT status according to an 
+            reference list (gold standard) or its MWE status according to an 
             expert. No test is performed in order to verify whether this is a 
             repeated TP class in the list.                
         """

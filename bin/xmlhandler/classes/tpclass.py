@@ -55,7 +55,7 @@ class TPClass( Feature ) :
             including internal variables.
             
             @return A string containing the XML element <tpclass> with its 
-            attributes, according to mwttoolkit-candidates.dtd.
+            attributes, according to mwetoolkit-candidates.dtd.
         """
         return "<tpclass name=\"" + self.name + \
                "\" value=\"" + str(self.value) + "\" />"

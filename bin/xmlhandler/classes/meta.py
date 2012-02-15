@@ -108,7 +108,7 @@ class Meta :
             including internal variables.
             
             @return A string containing the XML element <meta> with its internal
-            structure, according to mwttoolkit-candidates.dtd.
+            structure, according to mwetoolkit-candidates.dtd.
         """
         result = "<meta>\n"
         for corpus_size in self.corpus_sizes :

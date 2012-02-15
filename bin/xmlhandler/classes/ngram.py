@@ -152,7 +152,7 @@ class Ngram (object):
             including internal variables.
             
             @return A string containing the XML element <ngram> with its 
-            internal structure, according to mwttoolkit-candidates.dtd.
+            internal structure, according to mwetoolkit-candidates.dtd.
         """
         result = "<ngram>"
         for word in self :
@@ -195,7 +195,7 @@ class Ngram (object):
             printed. Default True.
             
             @return A string containing the XML element <ngram> with its 
-            internal structure, according to mwttoolkit-candidates.dtd and 
+            internal structure, according to mwetoolkit-candidates.dtd and 
             depending on the input flags.
         """
         result = "<ngram>"

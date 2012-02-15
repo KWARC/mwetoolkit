@@ -48,7 +48,7 @@ class Frequency( Feature ) :
             including internal variables.
             
             @return A string containing the XML element <freq> with its 
-            attributes, according to mwttoolkit-candidates.dtd.
+            attributes, according to mwetoolkit-candidates.dtd.
         """
         return "<freq name=\"" + self.name + \
                "\" value=\"" + str(self.value) + "\" />"

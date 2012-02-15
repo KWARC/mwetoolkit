@@ -30,7 +30,7 @@
 
 class Feature(object) :
     """
-        A MWT candidate feature is a pair name-value that describes a specific
+        A MWE candidate feature is a pair name-value that describes a specific
         aspect of the candidate, such as a measure, a lingustic property, a 
        count, etc.
     """
@@ -71,7 +71,7 @@ class Feature(object) :
             including internal variables.
             
             @return A string containing the XML element <feat> with its
-            attributes, according to mwttoolkit-candidates.dtd.
+            attributes, according to mwetoolkit-candidates.dtd.
         """
         return "<feat name=\"" + self.name + "\" value=\"" + \
                str(self.value) + "\" />"

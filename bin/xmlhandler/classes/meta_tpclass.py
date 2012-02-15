@@ -56,7 +56,7 @@ class MetaTPClass( Feature ) :
             including internal variables.
             
             @return A string containing the XML element <metatpclass> with its 
-            attributes, according to mwttoolkit-candidates.dtd.
+            attributes, according to mwetoolkit-candidates.dtd.
         """
         return "<metatpclass name=\"" + self.name + \
                "\" type=\"" + str(self.value) + "\" />"

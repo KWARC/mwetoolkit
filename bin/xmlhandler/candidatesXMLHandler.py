@@ -107,7 +107,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             else :
                 id_number = self.id_number_counter
                 self.id_number_counter = self.id_number_counter + 1
-            # Instanciates an empty mwt candidate that will be treated
+            # Instanciates an empty mwe candidate that will be treated
             # when the <cand> tag is closed
             self.candidate = Candidate( id_number, None, [], [], [], [] )
         elif name == "ngram" :

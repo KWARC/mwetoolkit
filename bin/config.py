@@ -43,7 +43,7 @@ DEFAULT_LANG = "en"
 MAX_CACHE_DAYS = -1
 
 """
-    Wildcard for MWT patterns. Please chose a token that is not in the corpus as 
+    Wildcard for MWE patterns. Please chose a token that is not in the corpus as 
     a token.
 """
 WILDCARD = "*"

@@ -28,7 +28,7 @@
     The annotation defines a True Positive class for each candidate, which is
     True if the candidate occurs in the reference and False if the candidate is
     not in the reference (thus the candidate is probably a random word
-    combination and not a MWT).
+    combination and not a MWE).
 
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -77,7 +77,7 @@ OPTIONS may be:
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
     The reference list or gold standard must be valid XML
-    (dtd/mwttoolkit-dict.dtd).
+    (dtd/mwetoolkit-dict.dtd).
 """
 #gs = []
 pre_gs = {}
@@ -198,7 +198,7 @@ def open_gs( gs_filename ) :
         print >> sys.stderr,  err
         print >> sys.stderr, "You probably provided an invalid reference " + \
                              "file, please validate it against the DTD " + \
-                             "(mwttoolkit-patterns.dtd)"
+                             "(mwetoolkit-patterns.dtd)"
         sys.exit( 2 )
 
 ################################################################################
