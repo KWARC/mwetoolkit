@@ -157,7 +157,7 @@ def treat_entity( entity ) :
         for pattern in patterns :
             for (match_ngram, wordnums) in match_pattern(pattern, words) :
                 print_it = True
-                ngram_to_print = match_ngram
+                ngram_to_print.word_list = match_ngram.word_list
                 break
             if print_it :
                 break
