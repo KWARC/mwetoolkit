@@ -12,7 +12,7 @@ for file; do
 		/^union [^[:space:]].*{/,/^[[:space:]]*};/p
 		/^typedef .*;/p
 		/^#define .*\\$/,/[^\]$/p
-		/^#define .*\\$/!{/^[[:space:]]*#/p}
+		/^#define .*\\$/!{/^[[:space:]]*#[[:alnum:]]/p}
 		/^typedef\|^struct\|^union/!s/^\([A-Za-z][^{]*\)=.*/extern \1;/p
 		/^typedef\|^struct\|^union/!s/^\([A-Za-z][^{]*[^ {]\)[[:space:]]*{$/\1;/gp
 		/^typedef\|^struct\|^union/!{

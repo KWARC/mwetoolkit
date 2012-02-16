@@ -31,6 +31,7 @@ import sys
 ################################################################################
 
 verbose_on = False
+debug_mode = False
 
 ################################################################################
 
@@ -48,6 +49,12 @@ def verbose( message ) :
     global verbose_on
     if verbose_on :
         print >> sys.stderr, message
+
+################################################################################
+
+def set_debug_mode(value):
+    global debug_mode
+    debug_mode = value
 
 ################################################################################
 
@@ -74,7 +81,9 @@ def treat_options_simplest( opts, arg, n_arg, usage_string ) :
     for ( o, a ) in opts:      
         if o in ("-v", "--verbose") :
             set_verbose( True )
-            verbose( "Verbose mode on" )            
+            verbose( "Verbose mode on" )
+        if o in ("-D", "--debug"):
+            set_debug_mode(True)
     
     if n_arg >= 0 and len( arg ) != n_arg :
         print >> sys.stderr, "You must provide %(n)s arguments to this script" \
@@ -169,3 +178,17 @@ def interpret_ngram( argument ) :
     except ValueError :
         return None
 
+def default_exception_handler(type, value, trace):
+    """
+       The default exception handler. This replaces Python's standard behaviour
+       of printing a stack trace and exiting. We print a stack trace only if
+       'debug_mode' is on.
+    """
+
+    global debug_mode
+    print >> sys.stderr, "%s:" % type.__name__, value
+    print >> sys.stderr, "You probably provided an invalid corpus file, " + \
+                         "please validate it against the DTD."
+    print >> sys.stderr, "For more information, run with --debug."
+
+sys.excepthook = default_exception_handler
