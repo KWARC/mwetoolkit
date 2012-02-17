@@ -215,7 +215,7 @@ def get_freq_index( surfaces, lemmas, pos ) :
     ngram_ids = []
     #pdb.set_trace()
     for i in range( len( surfaces ) ) :
-        word = build_entry( surfaces[i], lemmas[i], pos[i] )
+        word = build_entry( surfaces[i], lemmas[i], pos[i] ).decode('utf-8') ### FIXME
         wordid = suffix_array.symbols.symbol_to_number.get(word, None)
         if wordid:
             ngram_ids.append( wordid )
