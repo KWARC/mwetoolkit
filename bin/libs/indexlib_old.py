@@ -1,29 +1,7 @@
-"""
-	index.py - Routines for index manipulation.
-"""
-
-# In release 0.5, we add the ability to use either the C indexer or the
-# original (more well tested) Python indexer. We face the doubt of how to
-# implement that:
-#
-#  1. Subclassing: we implement a class for interfacing with the C indexer
-#  as as subclass of the current one (or make both the current one and the
-#  C one subclasses of a new generic/abstract Index class).
-#
-#  2. Lots of if/elses. (Not so many of them, actually.)
-#
-# Approach 1 would work fine for normal index generation (as done by index.py):
-# index.py instantiates the right class, then creates the indices. However, for
-# dynamic index building (attribute fusion), we have already instantiated 
-# mrkrrhgrghgrgrh, rethink all of this.
-
 import sys
-import os
 import array
 import shelve
 import xml.sax
-import tempfile
-import subprocess
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
@@ -31,18 +9,6 @@ from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
 from util import verbose
 
 NGRAM_LIMIT=16
-
-### Check whether the C indexer is available (TODO: Add .exe on Windows!)
-
-use_c_indexer = False
-C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/../c-indexer"
-
-if os.path.isfile(C_INDEXER_PROGRAM):
-	use_c_indexer = True
-else:
-	print >>sys.stderr, "WARNING: C indexer not found; using (slower) Python indexer instead."
-
-
 
 def copy_list(ls):
 	return map(lambda x: x, ls)
@@ -327,50 +293,16 @@ class SuffixArray():
 
 			print ""
 
-class CSuffixArray(SuffixArray):
-	"""
-		This class implements an interface to the C indexer. Appended words
-		go to a temporary text file, and build_suffix_array invoked the C
-		indexer upon that file. After array construction, one must call
-		array.load() to load the array into 'python-space'.
-	"""
-
-	def __init__(self):
-		SuffixArray.__init__(self)
-		self.basepath = None
-
-		(fd, path) = tempfile.mkstemp()
-		self.wordlist_file = os.fdopen(fd, 'w+')
-		self.wordlist_path = path
-
-	def append_word(self, word):
-		self.wordlist_file.write(word + '\n')
-
-	def build_suffix_array(self):
-		if self.basepath is None:
-			print >>sys.stderr, "Base path not specified for suffix array to be built with C indexer"
-			sys.exit(2)
-
-		self.wordlist_file.seek(0)
-		verbose("Using C indexer to build suffix array %s" % self.basepath)
-		subprocess.call([C_INDEXER_PROGRAM, self.basepath], stdin=self.wordlist_file)
-		verbose("Whew!")
-
-	def save(self):
-		self.wordlist_file.close()
-		os.remove(self.wordlist_path)
-
 
 class Index():
 	"""
 		This class holds the `SuffixArray`s for all attributes of a corpus,
 		plus metadata which is common for all attributes.
 	"""
-	def __init__(self, basepath=None, used_word_attributes=None, c_indexer=True):
+	def __init__(self, basepath=None, used_word_attributes=None):
 		self.arrays = {}
 		self.metadata = { "corpus_size": 0 }
 		self.sentence_count = 0
-		self.c_indexer = c_indexer
 
 		if used_word_attributes is not None:
 			self.used_word_attributes = used_word_attributes
@@ -385,10 +317,7 @@ class Index():
 			Creates empty suffix arrays for each used attribute in the index.
 		"""
 		for attr in self.used_word_attributes:
-			if use_c_indexer:
-				self.arrays[attr] = CSuffixArray()
-			else:
-				self.arrays[attr] = SuffixArray()
+			self.arrays[attr] = SuffixArray()
 
 	def set_basepath(self, path):
 		"""
@@ -503,7 +432,6 @@ class Index():
 		"""
 		for attr in self.arrays.keys():
 			verbose("Building suffix array for %s..." % attr)
-			self.arrays[attr].set_basepath(self.basepath + "." + attr)  ## REFACTOR FIXME
 			self.arrays[attr].build_suffix_array()
 
 	def iterate_sentences(self):
@@ -566,12 +494,10 @@ def standalone_main(argv):
 	basepath = argv[1]
 	corpus = argv[2]
 
-	index = index_from_corpus(corpus, basepath)
+	index = index_from_corpus(corpus)
+	index.set_basepath(basepath)
 	index.save_main()
 	print >>sys.stderr, "Done."
-
-
-
 
 if __name__ == "__main__":
 	standalone_main(sys.argv)
