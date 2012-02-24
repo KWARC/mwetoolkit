@@ -309,8 +309,3 @@ try :
  
 except IOError, err :  
     print >> sys.stderr, err
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid XML file," +\
-                         " please validate it against the DTD " + \
-                         "(dtd/mwetoolkit-*.dtd)"

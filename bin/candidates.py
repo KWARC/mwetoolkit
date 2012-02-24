@@ -340,8 +340,3 @@ except IOError, err :
     print >> sys.stderr, "Error reading corpus file. Please verify " + \
                          "__common.py configuration"        
     sys.exit( 2 )      
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid corpus file, " + \
-#                         "please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-corpus.dtd)"

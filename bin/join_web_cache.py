@@ -95,7 +95,3 @@ try :
     verbose( "Result has %(n)d entries" % { "n" : len(cache_out) } )
 except IOError, err :
     print >> sys.stderr, err
-except Exception, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "You probably provided an invalid cache file," + \
-                         " please use only counter.py formatted files."

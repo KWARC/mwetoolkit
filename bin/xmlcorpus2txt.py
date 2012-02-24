@@ -70,7 +70,3 @@ arg = read_options("a:", longopts, treat_options, 1, usage_string)
 
 try:
 	xml2txt(arg[0], sys.stdout, attributes)
-
-except Exception, err:
-	print >>sys.stderr, err
-	sys.exit(3)
