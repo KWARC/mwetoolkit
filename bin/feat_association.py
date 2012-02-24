@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
 #
 # feat_association.py is part of mwetoolkit
 #
@@ -77,7 +77,7 @@ OPTIONS may be:
     be a valid name described through a <corpussize> element in the meta header.
 
 -u OR --unnorm-mle
-    Does nor normalize Maximum Likelihood Estimator. This means that instead of
+    Does not normalize Maximum Likelihood Estimator. This means that instead of
     the raw frequency divided by the size of the corpus, MLE will correspond to
     the simple raw frequency of the n-gram. Both, normalized and unnormalized
     MLE are rank-equivalent.
@@ -133,13 +133,14 @@ def treat_candidate( candidate ) :
     backed_off = False
     # Convert all these integers to floats...
     for freq in candidate.freqs :
-        joint_freq[ freq.name ] = ( float(abs(freq.value)) )
+        joint_freq[ freq.name ] = ( float(abs( freq.value ) ) )
         singleword_freq[ freq.name ] = []
         if freq.value < 0 :
             backed_off = True
     for word in candidate :
         for freq in word.freqs :
             singleword_freq[ freq.name ].append( abs( float(freq.value) ) )
+            # Little trick: negative counts indicate backed-off counts
             if freq.value < 0 :
                 backed_off = True
     
@@ -243,6 +244,27 @@ def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
 
 def expect( m_list, N ):
     """
+    	Returns the expected joint frequency of the n-gram by multiplying the
+    	individual frequencies of each word divided by N, and then scaling it
+    	back to N. That is, given c(w_1), c(w_2), ..., c(w_n) counts of words
+    	w_1 to w_n, and the size of the corpus N, we calculate the expected
+    	count E(w_1, ..., w_n) as:
+    	
+    	                     w_1   w_2         w_n         w_1 x w_2 x ... x w_n
+    	E(w_1, ..., w_n) = ( --- x --- x ... x --- ) x N = ---------------------
+    	                      N     N           N                 N^(n-1)
+    	                      
+    	Actually, N is adjusted to correspond to the number of n-grams and not
+    	of tokens in the corpus, i.e. N - n + 1 instead of N. For large values 
+    	of N, this is neglectable.
+    	
+    	@param m_list List of the individual word counts. The list has n float
+    	elements, the same size of the n-gram.
+    	
+    	@param N Number of total tokens in the frequency source.
+    	
+    	@return A single float value that corresponds to E(w_1, ..., w_n) as
+    	calculated in the formula above.
     """
     result = 1.0
     for i in range(len(m_list)) :
@@ -257,7 +279,7 @@ def calculate_ams( o, m_list, N, corpus_name ) :
         a corpus size and a corpus name, generates a list of `Features`, each
         containing the value of an Association Measure.
         
-        @param f The float value corresponding to the number of occurrences of 
+        @param o The float value corresponding to the number of occurrences of 
         the ngram.
         
         @param m_list A list of float values corresponding to the number of 
@@ -322,8 +344,8 @@ def calculate_ams( o, m_list, N, corpus_name ) :
         else :
             if warn_ll_bigram_only:
                 warn_ll_bigram_only = False
-                print >> sys.stderr, "WARNING: log-likelihood is only implemented "+\
-                                     "for 2-grams. Defaults to 0.0 for n>2"
+                print >> sys.stderr, "WARNING: log-likelihood is only implem" +\
+                					 "ented for 2grams. Defaults to 0.0 for n>2"
             ll_final = 0.0
         feats.append( Feature( "ll_" + corpus_name, ll_final ) )
     return feats
@@ -332,6 +354,15 @@ def calculate_ams( o, m_list, N, corpus_name ) :
 
 def interpret_measures( measures_string ) :
     """
+    	Parses the names of the AMs from the command line. It verifies that the
+    	names of the AMs are valid names of available measures that can be
+    	calculated by the script.
+    	
+    	@param measures_string A string containing the names of the AMs the user
+    	wants to calculate separated by ":" colon.
+    	
+    	@return A list os strings containing the names of the AMs we need to 
+    	calculate.
     """
     global supported_measures
     measures_list = measures_string.split( ":" )

@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
 #
 # combine_freqs.py is part of mwetoolkit
 #
@@ -22,7 +22,11 @@
 #
 ################################################################################
 """
-    This script TODO: ADD DESCRIPTION
+    This script combines several frequency sources. For instance, if each n-gram
+    was counted in three different frequency sources (corpora or web), it is 
+    possible to combine them in a single frequency with a given combination
+    heuristic. Three combination heuristics are implemented: uniform, inverse 
+    and backoff.
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -45,17 +49,27 @@ from util import usage, read_options, treat_options_simplest, \
      
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <main_freq> <candidates.xml>
-
-<main_freq> is the name of the main frequency source, used in back-off
-combination to guess when it is necessary to back-off and when we use the
-original main_freq frequency. Should be a valid name of a frequency with a meta
-header for the corpus size.
+python %(program)s OPTIONS <candidates.xml>
 
 OPTIONS may be:
 
--c OR --combination
-    TODO: describe
+-c <comb> OR --combination <comb>
+    The name of the frequency combination heuristics that will be calculated. If 
+    the option is not defined, the script calculates all available combinations.
+    Combination names should be separated by colon ":" and should be in the list 
+    of supported combination heuristics below:
+
+    uniform -- Same uniform weight 1/n for all n frequency sources
+    inverse -- Weight inversely proportional to the corpus size of the freq. 
+    source
+    backoff -- If main_freq is below automatically calculated threshold, use the
+    web frequencies. A web freq. contains "google" or "yahoo" in its name.
+
+-o <name> OR --original <name>
+    The name of the frequency source from which the candidates were extracted
+    originally. This is only necessary if you are using backoff to combine the
+    counts. In this case, you MUST define the original count source and it must
+    be a valid name described through a <corpussize> element in the meta header.
 
 -v OR --verbose
     Print messages that explain what is happening.
@@ -65,14 +79,21 @@ OPTIONS may be:
 supported_combination = [ "uniform", "inverse", "backoff" ]
 corpussize_dict = {}
 combination = supported_combination
-# TODO: Parametrable combine function
-# heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
-backed_off = False
+entity_counter = 0
 
 ################################################################################
 
 def backoff_threshold( corpus_size ):
     """
+        Based on the corpus size, calculates automatically a threshold below
+        which the original frequency will be discarded and the mean of web 
+        frequencies will be used instead.
+        
+        @param corpus_size Integer with the size (nb. of word tokens) of 
+        original frequency source
+        
+        @return A threshold value below which the original count is replaced by
+        backed-off count.
     """
     return math.log( float( corpus_size ) / 100000.0, 2 )
 
@@ -85,6 +106,11 @@ def web_freqs( freqs ) :
         totally hard-coded because there's no information in the freq element
         that tells whether the count comes from a corpus or from the Web (this
         should be easy to modify in the DTD and in the count script, though)
+        
+        @param freqs A list of the names of all frequency sources in the file
+        
+        @return A list containing a subset of the input list, corresponding to
+        the names of web frequencies.
     """
     result = {}
     for (name, freq) in freqs.items() :
@@ -96,11 +122,27 @@ def web_freqs( freqs ) :
 
 def combine( method, freqs ):
     """
+        Generates a unique count using a given combination heuristic and a list
+        of original counts.
+        
+        @param method A string with the name of the combination heuristic to 
+        use. This name may be one of the following: "uniform", "inverse", 
+        "backoff". All other values will be ignored.
+        
+        @param freqs A list of integers containing the original word counts. The
+        list contains as many elements as there are frequency sources in the
+        candidates list.
+        
+        @return A tuple cotaining (combined_count, backed_off). The former is a
+        float containing the combined count using a given method, the latter is
+        a boolean flag that indicates that the combined count was backed off.
     """
-    global corpussize_dict, backed_off, main_freq
+    global corpussize_dict
+    global main_freq
     # Weight of each corpus is its size
     if method =="uniform" :
-        return float( sum( freqs.values() ) ) / len( freqs.values() )
+        avg_count = float( sum( freqs.values() ) ) / len( freqs.values() )
+        return ( avg_count, False )
     # Corpora have all the same weight, frequencies are 0..1
     elif method == "inverse" :
         result = 0.0
@@ -108,7 +150,7 @@ def combine( method, freqs ):
         for ( name, freq ) in freqs.items() :
             weight = ( ( total_size - corpussize_dict[ name ] ) / total_size )
             result += weight * freq
-        return result
+        return ( result, False )
     elif method == "backoff" :
         for (name, freq ) in freqs.items() :
             if name == main_freq :
@@ -121,19 +163,19 @@ def combine( method, freqs ):
                     # measures script knows that this is a back-off, since the
                     # value of N is different for "backed off" and "did not back
                     # off".
-                    return - ( sum(w_freqs.values()) / len(w_freqs.values() ) )
+                    avg_web = - ( sum(w_freqs.values()) / len(w_freqs.values()))
+                    return ( avg_web, backed_off )
                 else :
                     backed_off = False
-                    return freq
-
+                    return ( freq, backed_off )
 
 ################################################################################     
        
 def treat_meta( meta ) :
     """
-        Adds new meta-features corresponding to the AM features that we add to
-        each candidate. The meta-features define the type of the features, which
-        is a real number for each of the 4 AMs in each corpus.
+        Adds new meta-features corresponding to the new frequency sources that
+        are being added to the corpus. The new corpus sizes are calculated based
+        on the combination heuristics.
         
         @param meta The `Meta` header that is being read from the XML file.       
     """
@@ -142,27 +184,42 @@ def treat_meta( meta ) :
         corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
     for comb in combination :        
         if comb == "backoff" :
-            meta.add_corpus_size( CorpusSize( comb, int( combine( "uniform", web_freqs( corpussize_dict ) ) ) ) )
+            w_freqs = web_freqs( corpussize_dict )
+            combined = int( combine( "uniform", w_freqs )[ 0 ] )
+            meta.add_corpus_size( CorpusSize( comb, combined ) )
         else :
-            meta.add_corpus_size( CorpusSize( comb, int( combine( comb, corpussize_dict ) ) ) )
+            combined = int( combine( comb, corpussize_dict )[ 0 ] )
+            meta.add_corpus_size( CorpusSize( comb, combined ) )
     print meta.to_xml().encode( 'utf-8' )
        
 ################################################################################     
        
 def treat_candidate( candidate ) :
     """
-        
+        For each candidate in the file, add the combined frequencies both for 
+        the whole n-gram and for the individual words. The resulting candidate
+        contains both the original counts from the original frequency sources
+        and the new combined counts calculated based on the original counts.
         
         @param candidate The `Candidate` that is being read from the XML file.    
     """
-    global corpussize_dict, combination, backed_off, main_freq
+    global corpussize_dict
+    global combination
+    global main_freq
+    global entity_counter
     joint_freq = {}    
+    backed_off = False    
+    if entity_counter % 100 == 0 :
+        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     # Convert all these integers to floats...
     for freq in candidate.freqs :
-        joint_freq[ freq.name ] = float(freq.value)
+        joint_freq[ freq.name ] = float( freq.value )
 
     for comb in combination :
-        candidate.add_frequency(Frequency(comb,int(combine(comb,joint_freq))))
+        (combined, bo) = combine( comb,joint_freq )
+        if bo :
+            backed_off = True
+        candidate.add_frequency( Frequency( comb, int( combined ) ) )
 
     for word in candidate :
         singleword_freq = {}
@@ -173,7 +230,8 @@ def treat_candidate( candidate ) :
             # off.
             if comb == "backoff" and backed_off :
                 singleword_freq[ main_freq ] = 0.0 # Forces to backoff
-            word.add_frequency(Frequency(comb,int(combine(comb,singleword_freq))))
+                combined = int( combine( comb, singleword_freq )[ 0 ] )
+            word.add_frequency(Frequency(comb,combined))
     
     print candidate.to_xml().encode( 'utf-8' )
 
@@ -181,6 +239,16 @@ def treat_candidate( candidate ) :
 
 def interpret_combinations( combination_string ) :
     """
+        Parses the names of the combination heuristics from the command line. 
+        It verifies that the names of the combination heuristics are valid names 
+        of available combinations that can be calculated by the script.
+        
+        @param combination_string A string containing the names of the 
+        combination heuristics the user    wants to calculate separated by ":"
+        colon.
+        
+        @return A list os strings containing the names of the combinaiton 
+        heuristics we need to calculate.    
     """
     global supported_combination
     combination_list = combination_string.split( ":" )
@@ -205,9 +273,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global combination, supported_combination
+    global combination
+    global supported_combination
+    global main_freq
     for ( o, a ) in opts:
-        if o in ( "-m", "--measures" ) :
+        if o in ( "-c", "--combination" ) :
             try :
                 combination = []
                 combination = interpret_combination( a )
@@ -218,30 +288,39 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      str( supported_combination )
                 usage( usage_string )
                 sys.exit( 2 )
+        elif o in ( "-o", "--original" ) :
+            main_freq = a
     treat_options_simplest( opts, arg, n_arg, usage_string )
+    
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "combination="]
-arg = read_options( "vc:", longopts, treat_options, 2, usage_string )
+longopts = [ "verbose", "combination=", "original=" ]
+arg = read_options( "vc:o:", longopts, treat_options, -1, usage_string )
 
-try :    
-    print """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
-<candidates>
-"""
-    main_freq = arg[ 0 ]
-    input_file = open( arg[ 1 ] )
+try :
     parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler(treat_meta, treat_candidate)) 
-    parser.parse( input_file )
-    input_file.close() 
-    print "</candidates>" 
-    
+    handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                    treat_candidate=treat_candidate,
+                                    gen_xml="candidates" )
+    parser.setContentHandler( handler )
+    if len( arg ) == 0 :
+        parser.parse( sys.stdin )
+        print handler.footer
+    else :
+        for a in arg :
+            input_file = open( a )
+            parser.parse( input_file )
+            footer = handler.footer
+            handler.gen_xml = False
+            input_file.close()
+            entity_counter = 0
+        print footer
+
 except IOError, err :
     print >> sys.stderr, err
-#except Exception, err :
-#    print >> sys.stderr, err
-#    print >> sys.stderr, "You probably provided an invalid candidates file," + \
-#                         " please validate it against the DTD " + \
-#                         "(dtd/mwetoolkit-candidates.dtd)"
+except Exception, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "You probably provided an invalid candidates file," + \
+                         " please validate it against the DTD " + \
+                         "(dtd/mwetoolkit-candidates.dtd)"
