@@ -343,7 +343,7 @@ class CSuffixArray(SuffixArray):
 		self.wordlist_path = path
 
 	def append_word(self, word):
-		self.wordlist_file.write(word + '\n')
+		self.wordlist_file.write(word.encode('utf-8') + '\n')
 
 	def build_suffix_array(self):
 		if self.basepath is None:
