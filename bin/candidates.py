@@ -265,10 +265,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq, corpus_from_index, print_source
     mode = []
+    patterns_file = None
     for ( o, a ) in opts:
         if o in ("-p", "--patterns") : 
-            read_patterns_file( a )
             mode.append( "patterns" )
+            patterns_file = a
         elif o in ( "-n", "--ngram" ) :
             create_patterns_file( a )
             mode.append( "ngram" )
@@ -289,6 +290,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         sys.exit( 2 )
         
     treat_options_simplest( opts, arg, n_arg, usage_string )
+
+    if "patterns" in mode:
+        try:
+            read_patterns_file( patterns_file )
+        except Exception:
+            print >>sys.stderr, "Error loading patterns file!"
+            raise
+        
 ################################################################################  
 # MAIN SCRIPT
 

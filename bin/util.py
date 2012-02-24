@@ -84,7 +84,7 @@ def treat_options_simplest( opts, arg, n_arg, usage_string ) :
         if o in ("-v", "--verbose") :
             set_verbose( True )
             verbose( "Verbose mode on" )
-        if o in ("-D", "--debug"):
+        elif o in ("-D", "--debug"):
             set_debug_mode(True)
     
     if n_arg >= 0 and len( arg ) != n_arg :
