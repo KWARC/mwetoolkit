@@ -27,6 +27,7 @@
 
 import getopt
 import sys
+import traceback
 
 ################################################################################
 
@@ -55,6 +56,7 @@ def verbose( message ) :
 def set_debug_mode(value):
     global debug_mode
     debug_mode = value
+    print >>sys.stderr, "Debug mode on"
 
 ################################################################################
 
@@ -109,6 +111,15 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
         arguments and an integer that expresses the expected number of arguments
         of this script.
     """
+
+    for opt in ['v', 'D']:
+        if opt not in shortopts:
+            shortopts += opt
+
+    for opt in ['verbose', 'debug']:
+        if opt not in longopts:
+            longopts += [opt]
+
     try:
         opts, arg = getopt.getopt( sys.argv[ 1: ], shortopts, longopts )
     except getopt.GetoptError, err:
@@ -189,6 +200,10 @@ def default_exception_handler(type, value, trace):
     print >> sys.stderr, "%s:" % type.__name__, value
     print >> sys.stderr, "You probably provided an invalid corpus file, " + \
                          "please validate it against the DTD."
-    print >> sys.stderr, "For more information, run with --debug."
+
+    if debug_mode:
+        traceback.print_exception(type, value, trace)
+    else:
+        print >> sys.stderr, "For more information, run with --debug."
 
 sys.excepthook = default_exception_handler
