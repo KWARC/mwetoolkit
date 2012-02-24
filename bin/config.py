@@ -25,6 +25,8 @@
     Common configuration parameters and options for mwetoolkit.
 """
 
+import os
+
 
 """
     Two-letters language code of the working corpus. This information will not
@@ -53,3 +55,9 @@ WILDCARD = "*"
     more details)
 """
 YAHOO_APPID = "ngram001"
+
+
+"""
+	Path to the C indexer program.
+"""
+C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/c-indexer"

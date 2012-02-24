@@ -31,6 +31,7 @@ from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
 from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
+from config import C_INDEXER_PROGRAM
 from util import verbose
 
 NGRAM_LIMIT=16
@@ -113,18 +114,6 @@ def read_attribute_from_index(attr, path):
 		yield symbols.number_to_symbol[wordnum]
 
 	corpus_file.close()
-
-#def compare_indices(corpus, max, pos1, pos2):
-#	while pos1<max and pos2<max and corpus[pos1] == corpus[pos2]:
-#		pos1 += 1
-#		pos2 += 1
-#
-#	if pos1>=max:
-#		return -1
-#	elif pos2>=max:
-#		return 1
-#	else:
-#		return int(corpus[pos1] - corpus[pos2])
 
 def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1, ngram2_exhausted=1, limit=NGRAM_LIMIT):
 	"""
@@ -376,11 +365,50 @@ class Index():
 		This class holds the `SuffixArray`s for all attributes of a corpus,
 		plus metadata which is common for all attributes.
 	"""
-	def __init__(self, basepath=None, used_word_attributes=None, c_indexer=True):
+
+	make_suffix_array = None
+	c_indexer_program = None
+
+	def use_c_indexer(wants_to_use):
+		"""
+			Class method that sets the appropriate indexer to use (C or Python).
+
+			@param `wants_to_use` Whether we want to use the C indexer.
+			Possible values are True, False and None (we don't care about it).
+			If value is None, and use_c_indexer has never been called before,
+			it defaults to True; otherwise it does not touch the current state.
+
+		"""
+
+		if wants_to_use is None and Index.make_suffix_array is None:
+			wants_to_use = True
+
+		can_use = True
+		# Find whether the C indexer exists.
+		if wants_to_use:
+			if os.path.isfile(C_INDEXER_PROGRAM):
+				Index.c_indexer_program = C_INDEXER_PROGRAM
+			elif os.path.isfile(C_INDEXER_PROGRAM + ".exe"):
+				Index.c_indexer_program = C_INDEXER_PROGRAM + ".exe"
+			else:
+				can_use = False
+
+		if can_use and wants_to_use:
+			Index.make_suffix_array = CSuffixArray
+		else:
+			if wants_to_use:
+				print >>sys.stderr, "WARNING: C indexer not found; using (slower) Python indexer instead."
+			Index.make_suffix_array = SuffixArray
+
+	use_c_indexer = staticmethod(use_c_indexer)
+
+
+	def __init__(self, basepath=None, used_word_attributes=None, use_c_indexer=None):
 		self.arrays = {}
 		self.metadata = { "corpus_size": 0 }
 		self.sentence_count = 0
-		self.c_indexer = c_indexer
+		
+		Index.use_c_indexer(use_c_indexer)
 
 		if used_word_attributes is not None:
 			self.used_word_attributes = used_word_attributes
@@ -395,7 +423,7 @@ class Index():
 			Creates empty suffix arrays for each used attribute in the index.
 		"""
 		for attr in self.used_word_attributes:
-			self.arrays[attr] = make_suffix_array()
+			self.arrays[attr] = Index.make_suffix_array()
 
 	def set_basepath(self, path):
 		"""
@@ -431,30 +459,19 @@ class Index():
 		array.set_basepath(path)
 		array.load()
 
-
-		#except IOError, err:
-		#	# If attribute is composed, fuse the corresponding suffix arrays.
-		#	if '+' in attribute:
-		#		attr1, attr2 = attribute.rsplit('+', 1)
-
-		#		verbose("Fusing suffix arrays for %s and %s..." % (attr1, attr2))
-		#		array = fuse_suffix_arrays(self.load(attr1), self.load(attr2))
-
-		#		array.set_basepath(path)
-		#		array.build_suffix_array()
-		#		array.save()
-
-		#	else:
-		#		raise err
-
 		self.arrays[attribute] = array
 		return array
 
 	def make_fused_array(self, attrs):
+		"""
+			Make an array combining the attributes `attrs`. This array must be
+			loaded after creation.
+		"""
+
 		verbose("Making fused array for " + '+'.join(attrs) + "...")
 		generators = [read_attribute_from_index(attr, self.basepath) for attr in attrs]
 
-		sufarray = make_suffix_array()
+		sufarray = Index.make_suffix_array()
 		sufarray.set_basepath(self.basepath + "." + '+'.join(attrs))
 		while True:
 			try:
@@ -583,21 +600,6 @@ class Index():
 			for word in sentence.word_list:
 				print word.surface,
 			print ""
-
-
-### Check whether the C indexer is available (TODO: Add .exe on Windows!)
-
-use_c_indexer = False
-make_suffix_array = SuffixArray
-C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/../c-indexer"
-
-if os.path.isfile(C_INDEXER_PROGRAM):
-	use_c_indexer = True
-	make_suffix_array = CSuffixArray
-else:
-	print >>sys.stderr, "WARNING: C indexer not found; using (slower) Python indexer instead."
-
-
 
 
 def index_from_corpus(corpus, basepath=None, attrs=None):

@@ -30,7 +30,7 @@
 
 import sys
 from util import usage, read_options, treat_options_simplest, verbose
-from libs.indexlib import index_from_corpus
+from libs.indexlib import index_from_corpus, Index
 
 usage_string = """Usage: 
     
@@ -45,6 +45,9 @@ OPTIONS may be:
 -a <attrs> OR --attributes <attrs>
     Generate indices only for the specified attributes. <attrs> is a
     colon-separated list of attributes (e.g. lemma:pos).
+
+-o OR --old
+    Use the old (slower) Python indexer, even when the C indexer is available.
 
 %(common_options)s
 
@@ -63,6 +66,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global used_attributes, name, build_entry
+
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+
     used_attributes = None
     name = None
     for ( o, a ) in opts:
@@ -75,19 +81,19 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 sys.exit( 2 )
         elif o in ("-a", "--attributes"): 
             used_attributes = a.split(":")
+        elif o in ("-o", "--old"):
+            Index.use_c_indexer(False)
             
     if name is None:     
         print >> sys.stderr, "ERROR: You must provide a filename for the index."
         print >> sys.stderr, "Option -i is mandatory."
         usage( usage_string )
         sys.exit( 2 )   
-                             
-    treat_options_simplest( opts, arg, n_arg, usage_string )    
-
+                            
 
 # MAIN SCRIPT
 
-longopts = ["index=", "attributes=" ]
-arg = read_options( "i:a:", longopts, treat_options, 1, usage_string )
+longopts = ["index=", "attributes=", "old" ]
+arg = read_options( "i:a:o", longopts, treat_options, 1, usage_string )
 
 index_from_corpus(arg[0], name, used_attributes)    

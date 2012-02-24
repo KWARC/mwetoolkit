@@ -399,6 +399,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     surface_flag = False
     ignorepos_flag = False
     mode = []
+
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+
     for ( o, a ) in opts:
         if o in ( "-i", "--index" ) : 
             open_index( a )
@@ -470,15 +473,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
     if mode == [ "index" ] :       
         if surface_flag and ignorepos_flag :
-            #build_entry = lambda s, l, p: (s + SEPARATOR + WILDCARD).encode('utf-8')
             build_entry = lambda s, l, p: (s).encode('utf-8')
             suffix_array = index.load("surface")
         elif surface_flag :
-            #build_entry = lambda s, l, p: (s + SEPARATOR + p).encode('utf-8')
             build_entry = lambda s, l, p: (s + ATTRIBUTE_SEPARATOR + p).encode('utf-8')
             suffix_array = index.load("surface+pos")
         elif ignorepos_flag :
-            #build_entry = lambda s, l, p: (l + SEPARATOR + WILDCARD).encode('utf-8')
             build_entry = lambda s, l, p: (l).encode('utf-8')
             suffix_array = index.load("lemma")
         else :      
@@ -501,7 +501,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         sys.exit( 2 )
         
                 
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################
 # MAIN SCRIPT
