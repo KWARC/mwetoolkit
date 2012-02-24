@@ -115,6 +115,9 @@ OPTIONS may be:
 
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
+
+-o OR --old
+    Use the old (slower) Python indexer, even when the C indexer is available.
     
 %(common_options)s
 
@@ -470,6 +473,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             language = a
         elif o in ("-J", "--no-joint") :
             count_joint_frequency = False
+        elif o in ("-o", "--old"):
+            Index.use_c_indexer(False)
 
     if mode == [ "index" ] :       
         if surface_flag and ignorepos_flag :
@@ -505,9 +510,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "ignore-pos", "surface",\
+longopts = ["yahoo", "google", "index=", "ignore-pos", "surface", "old", \
             "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=", "web1t=" ]
-arg = read_options( "ywi:gsf:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
+arg = read_options( "ywi:gsof:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()
