@@ -75,14 +75,23 @@ class GoogleFreq( WebFreq ) :
         post_data = {'Referer': 'sourceforge.net/projects/mwetoolkit'}
         if not cache_filename :
             cache_filename = GOOGLE_CACHE_FILENAME
-        super( GoogleFreq, self ).__init__( cache_filename, url, post_data, self.treat_result )
+        super( GoogleFreq, self ).__init__( cache_filename, url, post_data, \
+                                            self.treat_result )
             
 ################################################################################           
 
     def treat_result( self, response_string ) :
         """
+            Parses the json string returned by google API and returns only the
+            integer corresponding to the total number of documents returned by
+            that query.
             
-        """                
+            @param response_string Json string containing the whole result set 
+            of the query
+            
+            @return An integer corresponding to the number of total estimated
+            results of the query
+        """             
         results = simplejson.loads( response_string, encoding="UTF-8" )        
         if results[ "responseData" ] :
             if results[ "responseData" ][ "results" ] :
@@ -99,13 +108,13 @@ class GoogleFreq( WebFreq ) :
         """
             Returns the approximate size of the World Wide Web in number of 
             pages. This estimation considers data available from 
-            www.worldwidewebsize.com. It was of ~14 billion pages at Jan. 20, 
-            2010
+            www.worldwidewebsize.com. It was of ~52 billion pages at Feb. 24, 
+            2012
             
             @return An integer corresponding to an estimation of the number of
             pages in the World Wide Web.
         """
-        return 14000000000 # AROUND 14 BILLION PAGES 20/Jan/2010
+        return 52000000000 # AROUND 52 BILLION PAGES 24/Feb/2012
              
 ################################################################################
  

@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
 #
 # webFreq.py is part of mwetoolkit
 #
@@ -105,6 +105,17 @@ class WebFreq( object ) :
 
     def send_query( self, lang, search_term ):
         """
+            Sends the query to the search engine by replacing the placeholders
+            in the template url and creating a new request through urllib2.
+            
+            @param lang The language code of the search
+            
+            @param search_term The search term corresponding to the query. The
+            search term must be quoted if you want an exact search. The search
+            term should not be escaped, this is done inside this function.
+            
+            @return The integer corresponding to the frequency of the query term
+            in the web according to that search engine
         """
         url = self.url.replace( "LANGPLACEHOLDER",lang )
         url = url.replace( "QUERYPLACEHOLDER", urllib.quote_plus( search_term ))

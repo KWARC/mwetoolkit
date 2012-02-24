@@ -3,9 +3,9 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
 #
-# googleFreq.py is part of mwetoolkit
+# googleFreqUniv.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -87,7 +87,8 @@ class GoogleFreqUniv( WebFreq ) :
         post_data = {'Referer': 'sourceforge.net/projects/mwetoolkit'}
         if not cache_filename :
             cache_filename = GOOGLE_CACHE_FILENAME
-        super( GoogleFreqUniv, self ).__init__( cache_filename, url, post_data, self.treat_result )
+        super( GoogleFreqUniv, self ).__init__( cache_filename, url, post_data,\
+                                                self.treat_result )
             
 ################################################################################           
 
@@ -111,7 +112,15 @@ class GoogleFreqUniv( WebFreq ) :
 
     def treat_result( self, results ) :
         """
+            Parses the small XML file returned by google API and returns only
+            the integer corresponding to the total number of documents returned
+            by that query.
             
+            @param results XML string containing the whole result set of the 
+            query
+            
+            @return An integer corresponding to the number of total estimated
+            results of the query
         """
         dom_results = xml.dom.minidom.parseString( results )
         res_elements = dom_results.getElementsByTagName( 'RES' )
@@ -123,20 +132,21 @@ class GoogleFreqUniv( WebFreq ) :
         return int( total )
             
 ################################################################################                   
-    
+     
     def corpus_size( self ) :
         """
             Returns the approximate size of the World Wide Web in number of 
             pages. This estimation considers data available from 
-            www.worldwidewebsize.com. It was of ~14 billion pages at Jan. 20, 
-            2010
+            www.worldwidewebsize.com. It was of ~52 billion pages at Feb. 24, 
+            2012
             
             @return An integer corresponding to an estimation of the number of
             pages in the World Wide Web.
         """
-        return 14000000000 # AROUND 14 BILLION PAGES 20/Jan/2010
+        return 52000000000 # AROUND 52 BILLION PAGES 24/Feb/2012
              
 ################################################################################
+ 
  
 
 
