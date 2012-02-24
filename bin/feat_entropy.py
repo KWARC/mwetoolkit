@@ -34,6 +34,7 @@ import sys
 import xml.sax
 import pdb
 import math
+import operator
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
@@ -108,15 +109,25 @@ def probs_weighted( varfreqs, weights ) :
     """
     probabilities = []
     sum_vf = 0.0
-    for vfi in range(len(varfreqs)) :
-        if weights[ vfi ] == 0 :
-            pdb.set_trace()
-        sum_vf = sum_vf + ( varfreqs[ vfi ] / float( weights[ vfi ] ) )
+    #pdb.set_trace()
+    for vfi in range(len(varfreqs)) : 
+        if weights[ vfi ] != 0 :        
+            sum_vf = sum_vf + ( varfreqs[ vfi ] / float( reduce( operator.mul, weights[ vfi ] ) ) )
     if sum_vf != 0 :       
         for vfi in range(len(varfreqs)) :
-            probabilities.append( ( varfreqs[ vfi ] / float( weights[ vfi ] ) ) / sum_vf )
+            probabilities.append( ( varfreqs[ vfi ] / float( reduce( operator.mul, weights[ vfi ] ) ) ) / sum_vf )
     return probabilities
        
+################################################################################
+
+def append_list_dict( dictionary, key, value ) :
+    """
+        Appends a value to the list in position key of the dictionary d
+    """
+    a_list = dictionary.get( key, [] )
+    a_list.append( value )
+    dictionary[ key ] = a_list        
+
 ################################################################################
 
 def treat_candidate( candidate ) :
@@ -130,22 +141,42 @@ def treat_candidate( candidate ) :
     pattern = candidate.get_pos_pattern()
     #pdb.set_trace()
     freq_table = {}
-    weight_table = {}
+    verb_table = {} # verb fixed, compl varies
+    compl_table = {} # compl fixed, verb varies
     #pdb.set_trace()
-    f_det = candidate[ 1 ].get_freq_value( "bnc" ) + candidate[ 2 ].get_freq_value( "bnc" )
+    # Workaround to count both determiners
+    f_a = candidate[ 1 ].get_freq_value( "bnc" ) + 1
+    f_the = candidate[ 2 ].get_freq_value( "bnc" ) + 1
+    f_det = f_a + f_the
+    verb = candidate[ 0 ].lemma
+    compl = candidate[ 3 ].lemma
     for variation in candidate.vars :
     	for freq in variation.freqs :
-            f_list = freq_table.get( freq.name, [] )
-            w_list = weight_table.get( freq.name, [] )
-            f_list.append( freq.value )
-            w_list.append( int(variation[ 0 ].get_freq_value("bnc")) * f_det * int(variation[2].get_freq_value("bnc")) )
-            freq_table[ freq.name ] = f_list
-            weight_table[ freq.name ] = w_list
-    for source in freq_table.keys() :
-        ent = entropy( probs_from_varfreqs( freq_table[ source ] ) )
-        ent_w = entropy( probs_weighted( freq_table[ source ], weight_table[ source ] ) )
-	candidate.add_feat( Feature( "entropy_" + source, str( ent ) ) )
-	candidate.add_feat( Feature( "entropy_w_" + source, str( ent_w ) ) )
+            var_verb = variation[ 0 ].lemma            
+    	    freq_verb = variation[ 0 ].get_freq_value("bnc") + 1
+    	    var_compl = variation[ 2 ].lemma
+    	    freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
+    	    f_entry = (freq.value, freq_verb, f_det, freq_compl )
+    	    append_list_dict( freq_table, freq.name, f_entry ) 
+    	    if verb == "turn" :
+	            pdb.set_trace()
+    	    if verb == var_verb :
+    	        append_list_dict( verb_table, freq.name, f_entry )
+    	    if compl == var_compl :
+    	        append_list_dict( compl_table, freq.name, f_entry )	       	    
+
+    verb_table[ "google" ].sort( key=operator.itemgetter(3), reverse=True )
+    verb_table["google"] = verb_table["google"][ 0:5 ]
+    compl_table[ "google" ].sort( key=operator.itemgetter(1), reverse=True )
+    compl_table["google"] = compl_table["google"][ 0:5 ]
+    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0), freq_table["google"] ) ) )
+    ent_w = entropy( probs_weighted( map( operator.itemgetter(0), freq_table["google"] ), map( operator.itemgetter(1,2,3), freq_table["google"] ) ) )
+    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0), compl_table["google"] ), map( operator.itemgetter(1,2,3), compl_table["google"] ) ) )
+    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0), verb_table["google"] ), map( operator.itemgetter(1,2,3), verb_table["google"] ) ) )    
+    candidate.add_feat( Feature( "entropy_google", str( ent ) ) )
+    candidate.add_feat( Feature( "entropy_w_google", str( ent_w ) ) )
+    candidate.add_feat( Feature( "entropy_w_verb_google", str( ent_w_verb ) ) )    
+    candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl ) ) )    
     print candidate.to_xml().encode( 'utf-8' )
 
 ################################################################################
@@ -158,7 +189,7 @@ try :
     parser = xml.sax.make_parser()
     handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                     treat_candidate=treat_candidate,
-                                    gen_xml=True)
+                                    gen_xml="candidates")
     parser.setContentHandler( handler )
     parser.parse( input_file )
     input_file.close()    
