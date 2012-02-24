@@ -208,47 +208,43 @@ longopts = [ "feat=", "asc", "desc", "verbose" ]
 arg = read_options( "f:adv", longopts, treat_options, -1, usage_string )
 
 try :    
-    try :    
-        temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
-                                               dir=TEMP_FOLDER )
-        temp_name = temp_fh.name
-        temp_fh.close()
-        temp_file = shelve.open( temp_name, 'n' )
-    except IOError, err :
-        print >> sys.stderr, err
-        print >> sys.stderr, "Error opening temporary file."
-        print >> sys.stderr, "Please verify __common.py configuration"
-        sys.exit( 2 )
-
-    
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                    treat_candidate=treat_candidate,
-                                    gen_xml="candidates" )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :
-        parser.parse( sys.stdin )
-        sort_and_print()
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        sort_and_print()
-        print footer
-    
-    try :
-        temp_file.close()
-        os.remove( temp_name )
-    except IOError, err :
-        print >> sys.stderr, err
-        print >> sys.stderr, "Error closing temporary file. " + \
-              "Please verify __common.py configuration"        
-        sys.exit( 2 )
-        
+    temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
+                                           dir=TEMP_FOLDER )
+    temp_name = temp_fh.name
+    temp_fh.close()
+    temp_file = shelve.open( temp_name, 'n' )
 except IOError, err :
     print >> sys.stderr, err
+    print >> sys.stderr, "Error opening temporary file."
+    print >> sys.stderr, "Please verify __common.py configuration"
+    sys.exit( 2 )
+
+
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                treat_candidate=treat_candidate,
+                                gen_xml="candidates" )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :
+    parser.parse( sys.stdin )
+    sort_and_print()
+    print handler.footer
+else :
+    for a in arg :
+        input_file = open( a )
+        parser.parse( input_file )
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        entity_counter = 0
+    sort_and_print()
+    print footer
+
+try :
+    temp_file.close()
+    os.remove( temp_name )
+except IOError, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "Error closing temporary file. " + \
+          "Please verify __common.py configuration"        
+    sys.exit( 2 )

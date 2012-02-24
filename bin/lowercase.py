@@ -282,30 +282,26 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "algorithm=", "verbose" ]
 arg = read_options( "a:v", longopts, treat_options, 1, usage_string )
 
-try :    
-    parser = xml.sax.make_parser()
-    if algorithm == "complex" :
-        verbose( "Pass 1: Reading vocabulary from file... please wait" )
-        input_file = open( arg[ 0 ] )
-        parser.setContentHandler( GenericXMLHandler( treat_entity=build_vocab ))
-        parser.parse( input_file )
-        input_file.close()
-    # Second pass
-    sentence_counter = 0
-    verbose( "Pass 2: Lowercasing the words in the XML file" )
-    input_file = open( arg[ 0 ] )    
-    if algorithm == "complex" :
-        handler = GenericXMLHandler( treat_meta=treat_meta,
-                                     treat_entity=treat_sentence_complex,
-                                     gen_xml=True )
-    elif algorithm == "simple" :    
-        handler = GenericXMLHandler( treat_meta=treat_meta,
-                                     treat_entity=treat_sentence_simple,
-                                     gen_xml=True )
-    parser.setContentHandler( handler )
+parser = xml.sax.make_parser()
+if algorithm == "complex" :
+    verbose( "Pass 1: Reading vocabulary from file... please wait" )
+    input_file = open( arg[ 0 ] )
+    parser.setContentHandler( GenericXMLHandler( treat_entity=build_vocab ))
     parser.parse( input_file )
-    print handler.footer
-    input_file.close() 
- 
-except IOError, err :  
-    print >> sys.stderr, err
+    input_file.close()
+# Second pass
+sentence_counter = 0
+verbose( "Pass 2: Lowercasing the words in the XML file" )
+input_file = open( arg[ 0 ] )    
+if algorithm == "complex" :
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_sentence_complex,
+                                 gen_xml=True )
+elif algorithm == "simple" :    
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=treat_sentence_simple,
+                                 gen_xml=True )
+parser.setContentHandler( handler )
+parser.parse( input_file )
+print handler.footer
+input_file.close() 

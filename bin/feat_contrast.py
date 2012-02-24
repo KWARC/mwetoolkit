@@ -272,33 +272,29 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["verbose", "measures=", "original=", "all"]
 arg = read_options( "vm:o:a", longopts, treat_options, 1, usage_string )
 
-try :
-    parser = xml.sax.make_parser()
-    
-    totalcalculator = CandidatesXMLHandler( treat_meta=initialise_totals,
-                                            treat_candidate=calculate_totals,
-                                            gen_xml=False )
-          
-    handler = CandidatesXMLHandler( treat_meta=add_metafeatures,
-                                    treat_candidate=calculate_measures,
-                                    gen_xml="candidates" )
+parser = xml.sax.make_parser()
 
-    for a in arg :
-        verbose( "Pass 1 for " + a )
-        parser.setContentHandler( totalcalculator )    
-        input_file = open( a )
-        # First calculate Nc for each contrastive corpus        
-        parser.parse( input_file )
-        input_file.close()
-        verbose( "Pass 2 for " + a )
-        parser.setContentHandler( handler )            
-        input_file = open( a )
-        parser.parse( input_file )        
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()        
-        entity_counter = 0
-    print footer
+totalcalculator = CandidatesXMLHandler( treat_meta=initialise_totals,
+                                        treat_candidate=calculate_totals,
+                                        gen_xml=False )
+      
+handler = CandidatesXMLHandler( treat_meta=add_metafeatures,
+                                treat_candidate=calculate_measures,
+                                gen_xml="candidates" )
 
-except IOError, err :
-    print >> sys.stderr, err
+for a in arg :
+    verbose( "Pass 1 for " + a )
+    parser.setContentHandler( totalcalculator )    
+    input_file = open( a )
+    # First calculate Nc for each contrastive corpus        
+    parser.parse( input_file )
+    input_file.close()
+    verbose( "Pass 2 for " + a )
+    parser.setContentHandler( handler )            
+    input_file = open( a )
+    parser.parse( input_file )        
+    footer = handler.footer
+    handler.gen_xml = False
+    input_file.close()        
+    entity_counter = 0
+print footer

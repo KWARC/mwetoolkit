@@ -148,15 +148,13 @@ def transform_format( in_file ) :
 
 longopts = ["verbose", "original-split"]
 arg = read_options( "vo", longopts, treat_options, -1, usage_string )
-try :    
-    print XML_HEADER % { "root": "corpus", "ns": "" }
-    if len( arg ) == 0 :
-        transform_format( sys.stdin )        
-    else :
-        for a in arg :
-            input_file = open( a )
-            transform_format( input_file )
-            input_file.close()                
-    print XML_FOOTER % { "root": "corpus" }
-except IOError, err :
-    print >> sys.stderr, err
+
+print XML_HEADER % { "root": "corpus", "ns": "" }
+if len( arg ) == 0 :
+    transform_format( sys.stdin )        
+else :
+    for a in arg :
+        input_file = open( a )
+        transform_format( input_file )
+        input_file.close()                
+print XML_FOOTER % { "root": "corpus" }

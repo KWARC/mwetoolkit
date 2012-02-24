@@ -207,8 +207,6 @@ try :
             input_file.close()
             entity_counter = 0
         print footer
-except IOError, err :
-    print >> sys.stderr, err
 finally :
     if web_freq :
         web_freq.flush_cache()

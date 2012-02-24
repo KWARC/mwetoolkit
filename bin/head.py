@@ -128,35 +128,28 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = [ "verbose", "number=" ]
 arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
-try :
-    parser = xml.sax.make_parser()
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=treat_entity,
-                                 gen_xml=True )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :
+
+parser = xml.sax.make_parser()
+handler = GenericXMLHandler( treat_meta=treat_meta,
+                             treat_entity=treat_entity,
+                             gen_xml=True )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :
+    try :
+        parser.parse( sys.stdin )
+    except LimitReachedError :
+        pass # Do nothing, of course, since this is not really an Error, but
+        # just a way to show the first n lines have been read
+    print handler.footer
+else :
+    for a in arg :
+        input_file = open( a )
         try :
-            parser.parse( sys.stdin )
+            parser.parse( input_file )
         except LimitReachedError :
-            pass # Do nothing, of course, since this is not really an Error, but
-            # just a way to show the first n lines have been read
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )
-            try :
-                parser.parse( input_file )
-            except LimitReachedError :
-                pass # cf above
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        print footer
-except IOError, err :
-    print >> sys.stderr, err
-
-################################################################################
-
-
-
+            pass # cf above
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        entity_counter = 0
+    print footer

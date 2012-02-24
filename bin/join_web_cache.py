@@ -78,20 +78,17 @@ def combine_caches( cache1, cache2, cache_out ) :
 longopts = [ "verbose" ]
 arg = read_options( "v", longopts, treat_options_simplest, 3, usage_string )
 
-try :    
-    verbose( "Opening files and checking consistency" )
-    cache1_desc = open( arg[ 0 ], "r" )
-    cache2_desc = open( arg[ 1 ], "r" )
-    cache_out_desc = open( arg[ 2 ], "w" )
-    cache1 = cPickle.load( cache1_desc )
-    cache2 = cPickle.load( cache2_desc )
-    cache_out = {}
-    verbose( "Combining cache files..." )
-    combine_caches( cache1, cache2, cache_out )
-    verbose( "Writing new cache file..." )
-    cPickle.dump( cache_out, cache_out_desc )
-    verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 0 ], "n" : len(cache1) } )
-    verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 1 ], "n" : len(cache2) } )
-    verbose( "Result has %(n)d entries" % { "n" : len(cache_out) } )
-except IOError, err :
-    print >> sys.stderr, err
+verbose( "Opening files and checking consistency" )
+cache1_desc = open( arg[ 0 ], "r" )
+cache2_desc = open( arg[ 1 ], "r" )
+cache_out_desc = open( arg[ 2 ], "w" )
+cache1 = cPickle.load( cache1_desc )
+cache2 = cPickle.load( cache2_desc )
+cache_out = {}
+verbose( "Combining cache files..." )
+combine_caches( cache1, cache2, cache_out )
+verbose( "Writing new cache file..." )
+cPickle.dump( cache_out, cache_out_desc )
+verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 0 ], "n" : len(cache1) } )
+verbose( "%(c)s had %(n)d entries" % { "c" : arg[ 1 ], "n" : len(cache2) } )
+verbose( "Result has %(n)d entries" % { "n" : len(cache_out) } )

@@ -305,47 +305,41 @@ longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "v
 arg = read_options( "p:n:ifgsvS", longopts, treat_options, 1, usage_string )
 
 try :    
-    try :    
-        temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
-                                               dir=TEMP_FOLDER )
-        temp_name = temp_fh.name
-        temp_fh.close()
-        temp_file = shelve.open( temp_name, 'n' )
-    except IOError, err :
-        print >> sys.stderr, err
-        print >> sys.stderr, "Error opening temporary file."
-        print >> sys.stderr, "Please verify __common.py configuration"
-        sys.exit( 2 )
-
-
-    if corpus_from_index:
-        index = Index(arg[0])
-        index.load_main()
-        for sentence in index.iterate_sentences():
-            treat_sentence(sentence)
-    else:
-        input_file = open( arg[ 0 ] )    
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
-        parser.parse( input_file )
-        input_file.close()
-
-    corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
-    print_candidates( temp_file, corpus_name )
-    try :
-        temp_file.close()
-        try :
-            os.remove( temp_fh.name )
-        except OSError :
-            os.remove( temp_fh.name + ".db" ) # Some dbms used by shelve add the
-            # .db suffix to the file
-    except IOError, err :
-        print >> sys.stderr, err
-        print >> sys.stderr, "Error closing temporary file. " + \
-              "Please verify __common.py configuration"        
-        sys.exit( 2 )            
-except IOError, err :  
+    temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
+                                           dir=TEMP_FOLDER )
+    temp_name = temp_fh.name
+    temp_fh.close()
+    temp_file = shelve.open( temp_name, 'n' )
+except IOError, err :
     print >> sys.stderr, err
-    print >> sys.stderr, "Error reading corpus file. Please verify " + \
-                         "__common.py configuration"        
-    sys.exit( 2 )      
+    print >> sys.stderr, "Error opening temporary file."
+    print >> sys.stderr, "Please verify __common.py configuration"
+    sys.exit( 2 )
+
+
+if corpus_from_index:
+    index = Index(arg[0])
+    index.load_main()
+    for sentence in index.iterate_sentences():
+        treat_sentence(sentence)
+else:
+    input_file = open( arg[ 0 ] )    
+    parser = xml.sax.make_parser()
+    parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
+    parser.parse( input_file )
+    input_file.close()
+
+corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
+print_candidates( temp_file, corpus_name )
+try :
+    temp_file.close()
+    try :
+        os.remove( temp_fh.name )
+    except OSError :
+        os.remove( temp_fh.name + ".db" ) # Some dbms used by shelve add the
+        # .db suffix to the file
+except IOError, err :
+    print >> sys.stderr, err
+    print >> sys.stderr, "Error closing temporary file. " + \
+          "Please verify __common.py configuration"        
+    sys.exit( 2 )            

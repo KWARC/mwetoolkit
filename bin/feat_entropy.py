@@ -184,16 +184,12 @@ def treat_candidate( candidate ) :
 longopts = [ "verbose" ]
 arg = read_options( "v", longopts, treat_options_simplest, 1, usage_string )
 
-try :    
-    input_file = open( arg[ 0 ] )        
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                    treat_candidate=treat_candidate,
-                                    gen_xml="candidates")
-    parser.setContentHandler( handler )
-    parser.parse( input_file )
-    input_file.close()    
-    print handler.footer
-     
-except IOError, err :
-    print >> sys.stderr, err
+input_file = open( arg[ 0 ] )        
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                treat_candidate=treat_candidate,
+                                gen_xml="candidates")
+parser.setContentHandler( handler )
+parser.parse( input_file )
+input_file.close()    
+print handler.footer

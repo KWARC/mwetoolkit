@@ -96,20 +96,17 @@ def print_counters( filename ) :
 # MAIN SCRIPT
 
 arg = read_options( "v", ["verbose"], treat_options_simplest, -1, usage_string )
-try :    
-    parser = xml.sax.make_parser()    
-    handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )   
-    parser.setContentHandler( handler )
 
-    if len( arg ) == 0 :
-        parser.parse( sys.stdin )
-        print_counters( "stdin" )
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            input_file.close()
-            print_counters( a )    
-    
-except IOError, err :
-    print >> sys.stderr, err
+parser = xml.sax.make_parser()    
+handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )   
+parser.setContentHandler( handler )
+
+if len( arg ) == 0 :
+    parser.parse( sys.stdin )
+    print_counters( "stdin" )
+else :
+    for a in arg :
+        input_file = open( a )
+        parser.parse( input_file )
+        input_file.close()
+        print_counters( a )    

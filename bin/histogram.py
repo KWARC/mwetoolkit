@@ -127,23 +127,19 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "verbose", "number=" ]
 arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
 
-try :
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
-                                    gen_xml=False )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :        
-        parser.parse( sys.stdin )
-        print_histogram()        
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            print_histogram()            
-            input_file.close()
-            hist = {}
-            entity_counter = 0
-            total  = 0
-except IOError, err :
-    print >> sys.stderr, err
-
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
+                                gen_xml=False )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :        
+    parser.parse( sys.stdin )
+    print_histogram()        
+else :
+    for a in arg :
+        input_file = open( a )
+        parser.parse( input_file )
+        print_histogram()            
+        input_file.close()
+        hist = {}
+        entity_counter = 0
+        total  = 0

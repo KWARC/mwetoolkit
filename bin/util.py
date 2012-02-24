@@ -198,8 +198,10 @@ def default_exception_handler(type, value, trace):
 
     global debug_mode
     print >> sys.stderr, "%s:" % type.__name__, value
-    print >> sys.stderr, "You probably provided an invalid XML file, " + \
-                         "please validate it against the DTD."
+
+    if type != IOError:
+        print >> sys.stderr, "You probably provided an invalid XML file, " + \
+                             "please validate it against the DTD."
 
     if debug_mode:
         traceback.print_exception(type, value, trace)

@@ -106,13 +106,9 @@ def treat_candidate( candidate ) :
 
 arg = read_options( "", [], treat_options_simplest, 1, usage_string ) 
 
-try :    
-    relation_name = re.sub( "\.xml", "", arg[ 0 ] )
-    input_file = open( arg[ 0 ] )        
-    parser = xml.sax.make_parser()
-    parser.setContentHandler(CandidatesXMLHandler( treat_meta, treat_candidate)) 
-    parser.parse( input_file )
-    input_file.close() 
-    
-except IOError, err :
-    print >> sys.stderr, err
+relation_name = re.sub( "\.xml", "", arg[ 0 ] )
+input_file = open( arg[ 0 ] )        
+parser = xml.sax.make_parser()
+parser.setContentHandler(CandidatesXMLHandler( treat_meta, treat_candidate)) 
+parser.parse( input_file )
+input_file.close() 

@@ -290,23 +290,20 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "verbose", "threshold=", "equals=", "patterns=", "reverse" ]
 arg = read_options( "vt:e:p:r", longopts, treat_options, -1, usage_string )
 
-try :   
-    parser = xml.sax.make_parser()
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=treat_entity,
-                                 gen_xml=True )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :        
-        parser.parse( sys.stdin )
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )            
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        print footer
-except IOError, err :
-    print >> sys.stderr, err
+parser = xml.sax.make_parser()
+handler = GenericXMLHandler( treat_meta=treat_meta,
+                             treat_entity=treat_entity,
+                             gen_xml=True )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :        
+    parser.parse( sys.stdin )
+    print handler.footer
+else :
+    for a in arg :
+        input_file = open( a )            
+        parser.parse( input_file )
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        entity_counter = 0
+    print footer

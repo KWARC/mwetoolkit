@@ -284,20 +284,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "feat=", "asc", "desc", "verbose", "precs" ]
 arg = read_options( "f:advp", longopts, treat_options, 1, usage_string )
 
-try :
-    input_file = open( arg[ 0 ] )
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
-                                    treat_meta=treat_meta,
-                                    gen_xml=False )
-    parser.setContentHandler( handler )
-    verbose( "Reading feature values" )
-    parser.parse( input_file )
-    input_file.close()
-    verbose( "Calculating MAP for each feature" )
-    print_stats()    
-
-except IOError, err :
-    print >> sys.stderr, err
-
-################################################################################
+input_file = open( arg[ 0 ] )
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
+                                treat_meta=treat_meta,
+                                gen_xml=False )
+parser.setContentHandler( handler )
+verbose( "Reading feature values" )
+parser.parse( input_file )
+input_file.close()
+verbose( "Calculating MAP for each feature" )
+print_stats()    

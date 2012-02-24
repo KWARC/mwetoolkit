@@ -298,24 +298,20 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "verbose", "combination=", "original=" ]
 arg = read_options( "vc:o:", longopts, treat_options, -1, usage_string )
 
-try :
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                    treat_candidate=treat_candidate,
-                                    gen_xml="candidates" )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :
-        parser.parse( sys.stdin )
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        print footer
-
-except IOError, err :
-    print >> sys.stderr, err
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                treat_candidate=treat_candidate,
+                                gen_xml="candidates" )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :
+    parser.parse( sys.stdin )
+    print handler.footer
+else :
+    for a in arg :
+        input_file = open( a )
+        parser.parse( input_file )
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        entity_counter = 0
+    print footer

@@ -238,37 +238,33 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["reference=", "ignore-pos", "verbose", "case", "lemma-or-surface"]
 arg = read_options( "r:gvcL", longopts, treat_options, -1, usage_string )
 
-try :   
-    parser = xml.sax.make_parser()
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                 treat_candidate=treat_candidate,
-                                 gen_xml="candidates" )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :        
-        parser.parse( sys.stdin )
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )            
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            #entity_counter = 0
-        print footer
-            
-    precision = float( tp_counter ) / float( entity_counter )
-    recall = float( tp_counter ) / float( ref_counter )
-    if precision + recall > 0 :
-        fmeas =  ( 2 * precision * recall) / ( precision + recall )
-    else :
-        fmeas = 0.0
-    print >> sys.stderr, "Nb. of true positives: %(tp)d" % {"tp" : tp_counter }
-    print >> sys.stderr, "Nb. of candidates: %(cand)d" % {"cand" : entity_counter }
-    print >> sys.stderr, "Nb. of references: %(refs)d" % {"refs" : ref_counter }
-    print >> sys.stderr, "Precision: %(p)f" % {"p" : precision }
-    print >> sys.stderr, "Recall: %(r)f" % {"r" : recall }
-    print >> sys.stderr, "F-measure: %(f)f" % {"f" : fmeas }
-
-except IOError, err :
-    print >> sys.stderr, err
+parser = xml.sax.make_parser()
+handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                             treat_candidate=treat_candidate,
+                             gen_xml="candidates" )
+parser.setContentHandler( handler )
+if len( arg ) == 0 :        
+    parser.parse( sys.stdin )
+    print handler.footer
+else :
+    for a in arg :
+        input_file = open( a )            
+        parser.parse( input_file )
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        #entity_counter = 0
+    print footer
+        
+precision = float( tp_counter ) / float( entity_counter )
+recall = float( tp_counter ) / float( ref_counter )
+if precision + recall > 0 :
+    fmeas =  ( 2 * precision * recall) / ( precision + recall )
+else :
+    fmeas = 0.0
+print >> sys.stderr, "Nb. of true positives: %(tp)d" % {"tp" : tp_counter }
+print >> sys.stderr, "Nb. of candidates: %(cand)d" % {"cand" : entity_counter }
+print >> sys.stderr, "Nb. of references: %(refs)d" % {"refs" : ref_counter }
+print >> sys.stderr, "Precision: %(p)f" % {"p" : precision }
+print >> sys.stderr, "Recall: %(r)f" % {"r" : recall }
+print >> sys.stderr, "F-measure: %(f)f" % {"f" : fmeas }
