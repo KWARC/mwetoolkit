@@ -159,8 +159,8 @@ def transform_format( in_file ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "original-split"]
-arg = read_options( "o", longopts, treat_options, -1, usage_string )
+longopts = [ "original-split", "sentence="]
+arg = read_options( "os:", longopts, treat_options, -1, usage_string )
 
 print XML_HEADER % { "root": "corpus", "ns": "" }
 if len( arg ) == 0 :
