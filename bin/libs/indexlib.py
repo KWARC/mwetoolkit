@@ -24,6 +24,9 @@ import shelve
 import xml.sax
 import tempfile
 import subprocess
+import struct
+import gc
+
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
@@ -31,18 +34,6 @@ from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
 from util import verbose
 
 NGRAM_LIMIT=16
-
-### Check whether the C indexer is available (TODO: Add .exe on Windows!)
-
-use_c_indexer = False
-C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/../c-indexer"
-
-if os.path.isfile(C_INDEXER_PROGRAM):
-	use_c_indexer = True
-else:
-	print >>sys.stderr, "WARNING: C indexer not found; using (slower) Python indexer instead."
-
-
 
 def copy_list(ls):
 	return map(lambda x: x, ls)
@@ -103,6 +94,25 @@ def save_symbols_to_file(symbols, path):
 		file.write(sym.encode("utf-8") + '\n')
 	file.close()
 
+def read_attribute_from_index(attr, path):
+	"""
+		Returns an iterator that yields the value of the attribute `attr`
+		for every word in an index's corpus array. This allows one to recover
+		the corpus from the index, and is used for attribute fusion.
+	"""
+
+	corpus_file = open(path + "." + attr + ".corpus", "rb")
+	symbols = SymbolTable()
+	load_symbols_from_file(symbols, path + "." + attr + ".symbols")
+
+	while True:
+		wordcode = corpus_file.read(4)  ## Assuming 32-bit int! (right in x86 and x86-64)
+		if wordcode == "":
+			return
+		wordnum = struct.unpack('i', wordcode)[0]
+		yield symbols.number_to_symbol[wordnum]
+
+	corpus_file.close()
 
 #def compare_indices(corpus, max, pos1, pos2):
 #	while pos1<max and pos2<max and corpus[pos1] == corpus[pos2]:
@@ -385,10 +395,7 @@ class Index():
 			Creates empty suffix arrays for each used attribute in the index.
 		"""
 		for attr in self.used_word_attributes:
-			if use_c_indexer:
-				self.arrays[attr] = CSuffixArray()
-			else:
-				self.arrays[attr] = SuffixArray()
+			self.arrays[attr] = make_suffix_array()
 
 	def set_basepath(self, path):
 		"""
@@ -396,6 +403,9 @@ class Index():
 		"""
 		self.basepath = path
 		self.metadata_path = path + ".info"
+
+	def array_file_exists(self, attr):
+		return os.path.isfile(self.basepath + "." + attr + ".corpus")
 
 	def load(self, attribute):
 		"""
@@ -408,29 +418,62 @@ class Index():
 		if self.arrays.has_key(attribute):
 			return self.arrays[attribute]
 
+		if not self.array_file_exists(attribute):
+			if '+' in attribute:
+				self.make_fused_array(attribute.split('+'))
+			else:
+				print >>sys.stderr, "Cannot load attribute %s; index files not present." % attribute
+				sys.exit(2)
+
 		verbose("Loading corpus files for attribute \"%s\"." % attribute)
 		array = SuffixArray()
 		path = self.basepath + "." + attribute
 		array.set_basepath(path)
-		try:
-			array.load()
-		except IOError, err:
-			# If attribute is composed, fuse the corresponding suffix arrays.
-			if '+' in attribute:
-				attr1, attr2 = attribute.rsplit('+', 1)
+		array.load()
 
-				verbose("Fusing suffix arrays for %s and %s..." % (attr1, attr2))
-				array = fuse_suffix_arrays(self.load(attr1), self.load(attr2))
 
-				array.set_basepath(path)
-				array.build_suffix_array()
-				array.save()
+		#except IOError, err:
+		#	# If attribute is composed, fuse the corresponding suffix arrays.
+		#	if '+' in attribute:
+		#		attr1, attr2 = attribute.rsplit('+', 1)
 
-			else:
-				raise err
+		#		verbose("Fusing suffix arrays for %s and %s..." % (attr1, attr2))
+		#		array = fuse_suffix_arrays(self.load(attr1), self.load(attr2))
+
+		#		array.set_basepath(path)
+		#		array.build_suffix_array()
+		#		array.save()
+
+		#	else:
+		#		raise err
 
 		self.arrays[attribute] = array
 		return array
+
+	def make_fused_array(self, attrs):
+		verbose("Making fused array for " + '+'.join(attrs) + "...")
+		generators = [read_attribute_from_index(attr, self.basepath) for attr in attrs]
+
+		sufarray = make_suffix_array()
+		sufarray.set_basepath(self.basepath + "." + '+'.join(attrs))
+		while True:
+			try:
+				next_words = [g.next() for g in generators]
+				if g == "":
+					sufarray.append_word("")
+				else:
+					sufarray.append_word(ATTRIBUTE_SEPARATOR.join(next_words))
+
+			except StopIteration:
+				break
+
+		sufarray.build_suffix_array()
+		sufarray.save()
+
+		# Is this any good? (May be with the old indexer; must test)
+		sufarray = None
+		print >>sys.stderr, gc.collect(), "objects collected by gc.collect()"
+
 
 	def save(self, attribute):
 		"""
@@ -542,6 +585,21 @@ class Index():
 			print ""
 
 
+### Check whether the C indexer is available (TODO: Add .exe on Windows!)
+
+use_c_indexer = False
+make_suffix_array = SuffixArray
+C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/../c-indexer"
+
+if os.path.isfile(C_INDEXER_PROGRAM):
+	use_c_indexer = True
+	make_suffix_array = CSuffixArray
+else:
+	print >>sys.stderr, "WARNING: C indexer not found; using (slower) Python indexer instead."
+
+
+
+
 def index_from_corpus(corpus, basepath=None, attrs=None):
 	"""
 		Generates an `Index` from a corpus file.
@@ -569,8 +627,6 @@ def standalone_main(argv):
 	index = index_from_corpus(corpus, basepath)
 	index.save_main()
 	print >>sys.stderr, "Done."
-
-
 
 
 if __name__ == "__main__":
