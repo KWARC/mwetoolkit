@@ -55,6 +55,8 @@ OPTIONS may be:
     Outputs the corpus in lemma/pos format. Replaces slashes by "@SLASH@". 
     Default false.
 
+%(common_options)s
+
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """   
 surface_instead_lemmas = False  

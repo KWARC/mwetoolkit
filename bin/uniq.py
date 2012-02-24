@@ -64,13 +64,12 @@ OPTIONS may be:
 -s OR --surface
     Consider surface forms instead of lemmas. Default false.
 
--v OR --verbose
-    Print messages that explain what is happening.
-    
 -t OR --retokenise
     Re-tokenises the words of the candidate by removing all the slashes and 
     dashes. For example, "gel assay" and "gel-assay" will be uniqued into a 
     single candidate.
+
+%(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
@@ -302,8 +301,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################    
 # MAIN SCRIPT
 
-longopts = [ "ignore-pos", "surface", "verbose", "retokenise" ]
-arg = read_options( "gsvt", longopts, treat_options, -1, usage_string )
+longopts = [ "ignore-pos", "surface", "retokenise" ]
+arg = read_options( "gst", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,

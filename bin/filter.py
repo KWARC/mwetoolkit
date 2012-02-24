@@ -80,6 +80,8 @@ OPTIONS may be:
     Reverses the filtering mechanism, in order to print out only those 
     candidates that do NOT obbey the criteria.
 
+%(common_options)s
+
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
 reverse = False
@@ -287,8 +289,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "verbose", "threshold=", "equals=", "patterns=", "reverse" ]
-arg = read_options( "vt:e:p:r", longopts, treat_options, -1, usage_string )
+longopts = [ "threshold=", "equals=", "patterns=", "reverse" ]
+arg = read_options( "t:e:p:r", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,

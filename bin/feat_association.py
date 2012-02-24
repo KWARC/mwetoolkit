@@ -82,8 +82,7 @@ OPTIONS may be:
     the simple raw frequency of the n-gram. Both, normalized and unnormalized
     MLE are rank-equivalent.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
@@ -406,8 +405,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "measures=", "original=", "unnorm-mle"]
-arg = read_options( "vm:o:u", longopts, treat_options, -1, usage_string )
+longopts = ["measures=", "original=", "unnorm-mle"]
+arg = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,

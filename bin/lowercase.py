@@ -61,8 +61,7 @@ python %(program)s [OPTIONS] <file.xml>
     of a sentence. Some fuzzy thresholds are hardcoded and were fixed based on
     empirical observation of the Genia corpus.
 
--v OR --verbose
-    Print friendly messages that explain what is happening.
+%(common_options)s
 
     IMPORTANT: you are supposed to perform lowercasing before any linguistic
     processing. Therefore, this algorithm operates on surface forms. Any lemma

@@ -48,6 +48,8 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
+%(common_options)s
+
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd). 
 """
 hist = {}
@@ -124,8 +126,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################         
 # MAIN SCRIPT
 
-longopts = [ "verbose", "number=" ]
-arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
+longopts = [ "number=" ]
+arg = read_options( "n:", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_candidate=treat_candidate,

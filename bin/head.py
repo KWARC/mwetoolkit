@@ -59,8 +59,7 @@ OPTIONS may be:
 -n OR --number
     Number of entities that you want to print out. Default value is 10.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
@@ -126,8 +125,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "verbose", "number=" ]
-arg = read_options( "vn:", longopts, treat_options, -1, usage_string )
+longopts = [ "number=" ]
+arg = read_options( "n:", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,

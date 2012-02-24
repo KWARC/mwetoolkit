@@ -34,6 +34,13 @@ import traceback
 verbose_on = False
 debug_mode = False
 
+common_options_usage_string = """\
+-v OR --verbose
+    Print messages that explain what is happening.
+
+-D or --debug
+    Print debug information when an error occurs."""
+
 ################################################################################
 
 def set_verbose( value ) :
@@ -66,7 +73,8 @@ def usage( usage_string ) :
         that uses this function should provide a variable containing the
         usage string.
     """
-    print >> sys.stderr, usage_string % {"program": sys.argv[ 0 ]}
+    print >> sys.stderr, usage_string % {"program": sys.argv[ 0 ],
+                                         "common_options": common_options_usage_string }
     
 ################################################################################
 

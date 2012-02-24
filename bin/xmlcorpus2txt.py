@@ -43,6 +43,8 @@ python %(program)s -a <attributes> <corpus.xml>
 -a <attributes> OR --attributes <attributes>
     A colon-separated list of attributes to output.
 
+%(common_options)s
+
 <corpus.xml> must be a valid XML file (mwetoolkit-corpus.dtd).
 """
 

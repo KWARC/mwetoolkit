@@ -45,9 +45,6 @@ python %(program)s [OPTIONS] <files.xml>
 
 OPTIONS may be:
 
--v OR --verbose
-    Print messages that explain what is happening.
-
 -w OR --google
     Search for frequencies in the Web using Google Web Search as approximator
     for Web document frequencies (DEFAULT).
@@ -55,6 +52,8 @@ OPTIONS may be:
 -y OR --yahoo
     Search for frequencies in the Web using Yahoo Web Search as approximator for
     Web document frequencies.
+
+%(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
@@ -186,8 +185,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "verbose", "google", "yahoo" ]
-arg = read_options( "vwy", longopts, treat_options, -1, usage_string )
+longopts = [ "google", "yahoo" ]
+arg = read_options( "wy", longopts, treat_options, -1, usage_string )
 
 try :
     parser = xml.sax.make_parser()

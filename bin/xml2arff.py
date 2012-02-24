@@ -47,6 +47,8 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
+%(common_options)s
+
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """     
 all_feats = []         

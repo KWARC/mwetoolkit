@@ -96,9 +96,6 @@ OPTIONS may be:
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
 
--v OR --verbose
-    Print messages that explain what is happening.
-    
 -x OR --text
     Instead of traditional candidates in XML, takes as input a textual list with 
     one query per line. The output will have the query followed by the number of 
@@ -119,6 +116,8 @@ OPTIONS may be:
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
     
+%(common_options)s
+
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 You must choose exactly one of -u, -w or -i. More than one is not allowed at
 the same time. 
@@ -507,9 +506,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "verbose", "ignore-pos", "surface",\
+longopts = ["yahoo", "google", "index=", "ignore-pos", "surface",\
             "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=", "web1t=" ]
-arg = read_options( "ywi:vgsf:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
+arg = read_options( "ywi:gsf:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
 
 try : 
     parser = xml.sax.make_parser()

@@ -80,6 +80,8 @@ OPTIONS:
 	-s
 		Enables the option to assign the words in a ngram to the
 		surface	item. The default is to assign it to the lemma item.
+
+%(common_options)s
 			
 FILE:
 	<filename>

@@ -62,9 +62,6 @@ OPTIONS may be:
     Make matching of a candidate against a dictionary entry case-sensitive
     (default is to ignore case in comparisons)
 
--v OR --verbose
-    Print messages that explain what is happening.
-
 -g OR --ignore-pos
     Ignores Part-Of-Speech when counting candidate occurences. This means, for
     example, that "like" as a preposition and "like" as a verb will be counted
@@ -74,6 +71,8 @@ OPTIONS may be:
     Match lemma and surface of candidates each against both lemma and surface
     of references. If either of the four comparisons is successful, the match
     is successful. Wildcards in references are not considered.
+
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
     The reference list or gold standard must be valid XML
@@ -235,8 +234,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["reference=", "ignore-pos", "verbose", "case", "lemma-or-surface"]
-arg = read_options( "r:gvcL", longopts, treat_options, -1, usage_string )
+longopts = ["reference=", "ignore-pos", "case", "lemma-or-surface"]
+arg = read_options( "r:gcL", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,

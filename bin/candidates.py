@@ -106,6 +106,8 @@ OPTIONS may be:
 -S OR --source
     Output a <source> tag with the IDs of the sentences where each ngram occurs.
 
+%(common_options)s
+
     By default, <corpus> must be a valid XML file (mwetoolkit-corpus.dtd). If
 the -i option is specified, <corpus> must be the basepath for an index generated
 by index.py.
@@ -301,8 +303,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "verbose", "source" ]
-arg = read_options( "p:n:ifgsvS", longopts, treat_options, 1, usage_string )
+longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "source" ]
+arg = read_options( "p:n:ifgsS", longopts, treat_options, 1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 

@@ -57,8 +57,7 @@ OPTIONS may be:
 	This otpion is particularly useful when dealing with parellel corpora in 
 	which the sentence alignment cannot be messed up by the tagger.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """    
@@ -146,8 +145,8 @@ def transform_format( in_file ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = ["verbose", "original-split"]
-arg = read_options( "vo", longopts, treat_options, -1, usage_string )
+longopts = [ "original-split"]
+arg = read_options( "o", longopts, treat_options, -1, usage_string )
 
 print XML_HEADER % { "root": "corpus", "ns": "" }
 if len( arg ) == 0 :

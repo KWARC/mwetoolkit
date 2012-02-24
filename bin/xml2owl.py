@@ -48,12 +48,11 @@ python %(program)s [OPTIONS] <file.xml>
 
     OPTIONS may be:    
     
--v OR --verbose
-    Print friendly messages that explain what is happening.
-
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
-    
+
+%(common_options)s
+
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """     
 surface_instead_lemmas = False
@@ -121,8 +120,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose", "surface" ]
-arg = read_options( "vs", longopts, treat_options, -1, usage_string ) 
+longopts = [ "surface" ]
+arg = read_options( "s", longopts, treat_options, -1, usage_string ) 
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_entity=treat_entity,

@@ -65,8 +65,7 @@ OPTIONS may be:
     Print the precisions at each recall level, for each feature. This is useful
     to generate precision/recall curves. Default false.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
     Additionally, each candidate must contain at least one boolean tpclass using
@@ -281,8 +280,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc", "verbose", "precs" ]
-arg = read_options( "f:advp", longopts, treat_options, 1, usage_string )
+longopts = [ "feat=", "asc", "desc", "precs" ]
+arg = read_options( "f:adp", longopts, treat_options, 1, usage_string )
 
 input_file = open( arg[ 0 ] )
 parser = xml.sax.make_parser()

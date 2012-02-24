@@ -48,6 +48,8 @@ usage_string = """Usage:
     
 python %(program)s <candidates.xml>
 
+%(common_options)s
+
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 """     
 all_patterns = {}
@@ -117,8 +119,8 @@ def treat_candidate( candidate ) :
 
 ################################################################################
 # MAIN SCRIPT
-longopts = [ "verbose" ]
-arg = read_options( "v", longopts, treat_options_simplest, 1, usage_string )
+longopts = []
+arg = read_options( "", longopts, treat_options_simplest, 1, usage_string )
 
 try :    
     # Done in 2 passes, one to define the type of the feature and another to

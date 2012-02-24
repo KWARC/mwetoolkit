@@ -72,8 +72,7 @@ OPTIONS may be:
     behaviour of this script is to calculate one contrastive score per
     contrastive corpora.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
@@ -269,8 +268,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "measures=", "original=", "all"]
-arg = read_options( "vm:o:a", longopts, treat_options, 1, usage_string )
+longopts = ["measures=", "original=", "all"]
+arg = read_options( "m:o:a", longopts, treat_options, 1, usage_string )
 
 parser = xml.sax.make_parser()
 

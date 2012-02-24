@@ -44,6 +44,8 @@ usage_string = """Usage:
     
 python %(program)s <corpus.xml>
 
+%(common_options)s
+
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
 """
 sentences_buffer = []
@@ -96,27 +98,24 @@ def print_terms() :
 ################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "v", ["verbose"], treat_options_simplest, -1, usage_string )
+arg = read_options( "", [], treat_options_simplest, -1, usage_string )
 
-try :
-    parser = xml.sax.make_parser()
-    handler = CorpusXMLHandler( treat_sentence )
-    parser.setContentHandler( handler )
-    print XML_HEADER % { "root" : "candidates", "ns" : "" }
-    print "<meta></meta>"    
-    if len( arg ) == 0 :
-        parser.parse( sys.stdin )
-        print_terms()
-        print XML_FOOTER % { "root" : "candidates" }
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        print_terms()
-        print XML_FOOTER % { "root" : "candidates" }
-except IOError, err :
-    print >> sys.stderr, err
+parser = xml.sax.make_parser()
+handler = CorpusXMLHandler( treat_sentence )
+parser.setContentHandler( handler )
+print XML_HEADER % { "root" : "candidates", "ns" : "" }
+print "<meta></meta>"    
+if len( arg ) == 0 :
+    parser.parse( sys.stdin )
+    print_terms()
+    print XML_FOOTER % { "root" : "candidates" }
+else :
+    for a in arg :
+        input_file = open( a )
+        parser.parse( input_file )
+        footer = handler.footer
+        handler.gen_xml = False
+        input_file.close()
+        entity_counter = 0
+    print_terms()
+    print XML_FOOTER % { "root" : "candidates" }

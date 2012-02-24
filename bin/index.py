@@ -46,8 +46,7 @@ OPTIONS may be:
     Generate indices only for the specified attributes. <attrs> is a
     colon-separated list of attributes (e.g. lemma:pos).
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd). The -i
 <index> option is mandatory.
@@ -88,7 +87,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 # MAIN SCRIPT
 
-longopts = ["index=", "attributes=", "verbose"]
-arg = read_options( "i:a:v", longopts, treat_options, 1, usage_string )
+longopts = ["index=", "attributes=" ]
+arg = read_options( "i:a:", longopts, treat_options, 1, usage_string )
 
 index_from_corpus(arg[0], name, used_attributes)    

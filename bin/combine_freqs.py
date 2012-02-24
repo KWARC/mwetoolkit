@@ -71,8 +71,7 @@ OPTIONS may be:
     counts. In this case, you MUST define the original count source and it must
     be a valid name described through a <corpussize> element in the meta header.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
@@ -296,7 +295,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "verbose", "combination=", "original=" ]
-arg = read_options( "vc:o:", longopts, treat_options, -1, usage_string )
+arg = read_options( "c:o:", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,

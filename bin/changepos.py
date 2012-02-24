@@ -61,8 +61,7 @@ OPTIONS may be:
 -G or --genia
     Convert from Genia tags instead of Penn Tree Bank tags.
 
--v OR --verbose
-    Print friendly messages that explain what is happening.
+%(common_options)s
 
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
 """
@@ -282,8 +281,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["verbose", "text", "fs=", "palavras", "genia" ]
-arg = read_options( "vxF:pg", longopts, treat_options, -1, usage_string )
+longopts = ["text", "fs=", "palavras", "genia" ]
+arg = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,

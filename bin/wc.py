@@ -48,9 +48,7 @@ python %(program)s OPTIONS <files.xml>
 
 OPTIONS may be:
 
-
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """    

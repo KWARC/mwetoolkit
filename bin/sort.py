@@ -57,15 +57,14 @@ python %(program)s [OPTIONS] -f <feat> <candidates.xml>
 
 OPTIONS may be:
 
--v OR --verbose
-    Print messages that explain what is happening.
-
 -a OR --asc
     Sort in ascending order. By default, classification is descending.
 
 -d OR --desc
     Sort in descending order. By default, classification is descending, so that
     this flag can also be ommitted.
+
+%(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """          
@@ -204,8 +203,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc", "verbose" ]
-arg = read_options( "f:adv", longopts, treat_options, -1, usage_string )
+longopts = [ "feat=", "asc", "desc" ]
+arg = read_options( "f:ad", longopts, treat_options, -1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
