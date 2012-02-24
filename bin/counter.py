@@ -224,7 +224,7 @@ def get_freq_index( surfaces, lemmas, pos ) :
     ngram_ids = []
     #pdb.set_trace()
     for i in range( len( surfaces ) ) :
-        word = build_entry( surfaces[i], lemmas[i], pos[i] ).decode('utf-8') ### FIXME
+        word = build_entry( surfaces[i], lemmas[i], pos[i] )
         wordid = suffix_array.symbols.symbol_to_number.get(word, None)
         if wordid:
             ngram_ids.append( wordid )
@@ -478,23 +478,23 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
     if mode == [ "index" ] :       
         if surface_flag and ignorepos_flag :
-            build_entry = lambda s, l, p: (s).encode('utf-8')
+            build_entry = lambda surface, lemma, pos: surface
             suffix_array = index.load("surface")
         elif surface_flag :
-            build_entry = lambda s, l, p: (s + ATTRIBUTE_SEPARATOR + p).encode('utf-8')
+            build_entry = lambda surface, lemma, pos: surface + ATTRIBUTE_SEPARATOR + pos
             suffix_array = index.load("surface+pos")
         elif ignorepos_flag :
-            build_entry = lambda s, l, p: (l).encode('utf-8')
+            build_entry = lambda surface, lemma, pos: lemma
             suffix_array = index.load("lemma")
         else :      
-            build_entry = lambda s, l, p: (l + ATTRIBUTE_SEPARATOR + p).encode('utf-8')
+            build_entry = lambda surface, lemma, pos: lemma + ATTRIBUTE_SEPARATOR + pos
             suffix_array = index.load("lemma+pos")
 
     else : # Web search, entries are single surface or lemma forms         
         if surface_flag :
-            build_entry = lambda s, l, p: s.encode('utf-8')
+            build_entry = lambda surface, lemma, pos: surface
         else :
-            build_entry = lambda s, l, p: l.encode('utf-8')
+            build_entry = lambda surface, lemma, pos: lemma
         
     if len(mode) != 1 :
         print >> sys.stderr, "Exactly one option -u, -w or -i, must be provided"
