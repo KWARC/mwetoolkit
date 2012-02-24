@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
 #
 # counter.py is part of mwetoolkit
 #
@@ -59,7 +59,7 @@ from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
     
 usage_string = """Usage: 
     
-python %(program)s [-w | -u <id> | -t <dir> | -i <corpus.index>] OPTIONS <candidates.xml>
+python %(program)s [-w | -u <id> | -T <dir> | -i <corpus.index>] OPTIONS <candidates.xml>
 
 -i <index> OR --index <index>
     Base name for the index files, as created by "index.py -i <index>".
@@ -108,6 +108,13 @@ OPTIONS may be:
     Instead of counting the candidate, counts the variances in the <vars> 
     element. If you also want to count the candidate lemma, you should call the
     counter twice, first without this option then with this option.
+
+-l <lang> OR --lang <lang>
+    Two-letter language code of the language of the candidates. This is only 
+    used for the web-as-corpus counters -w and -u. The language codes depend
+    on the search engine, please take a look at the Google documentation:    
+    http://code.google.com/apis/customsearch/docs/ref_languages.html    
+    ** YAHOO IS DEPRECATED AS THEY SHUT DOWN THEIR FREE SEARCH API **    
 
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
@@ -261,6 +268,8 @@ def read_file(path):
     txt = fh.read()
     fh.close()
     return txt
+
+################################################################################
 
 def get_freq_web1t(surfaces, lemmas, pos) :
     """
