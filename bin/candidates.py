@@ -147,9 +147,16 @@ def treat_sentence( sentence ) :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
 
     words = sentence.word_list
+    already_matched = {}
 
     for pattern in patterns:
         for (match_ngram, wordnums) in match_pattern(pattern, words):
+            wordnums_string = ",".join(map(str, wordnums))
+            if wordnums_string in already_matched:
+                continue
+            else:
+                already_matched[wordnums_string] = True
+
             #match_ngram = Ngram(copy_word_list(ngram), [])
 
             if ignore_pos :    
@@ -166,7 +173,7 @@ def treat_sentence( sentence ) :
 
             # Append the id of the source sentence. The number of items in
             # surfaces_dict[form] is the number of occurrences of that form.
-            surfaces_dict[ internal_key ].append(str(sentence.id_number) + ":" + ",".join(map(str, wordnums)))
+            surfaces_dict[ internal_key ].append(str(sentence.id_number) + ":" + wordnums_string)
             temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
 
     sentence_counter += 1
