@@ -45,6 +45,7 @@ common_options_usage_string = """\
 
 def set_verbose( value ) :
     """
+        Sets whether to show verbose messages.
     """
     global verbose_on
     verbose_on = value
@@ -53,6 +54,7 @@ def set_verbose( value ) :
 
 def verbose( message ) :
     """
+        Prints a message if in verbose mode.
     """
     global verbose_on
     if verbose_on :
@@ -61,9 +63,13 @@ def verbose( message ) :
 ################################################################################
 
 def set_debug_mode(value):
+    """
+        Sets whether to dump a stack trace when an unhandled exception occurs.
+    """
     global debug_mode
     debug_mode = value
-    print >>sys.stderr, "Debug mode on"
+    if debug_mode:
+        print >>sys.stderr, "Debug mode on"
 
 ################################################################################
 
