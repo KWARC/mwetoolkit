@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch, Victor Yoshiaki Miyai
+# Copyright 2010-2012 Carlos Ramisch, Victor Yoshiaki Miyai
 #
 # csv2xml.py is part of mwetoolkit
 #

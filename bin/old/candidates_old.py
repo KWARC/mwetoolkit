@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
 # candidates.py is part of mwetoolkit
 #

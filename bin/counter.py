@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor de Araujo
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
 # counter.py is part of mwetoolkit
 #

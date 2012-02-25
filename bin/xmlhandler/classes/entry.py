@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010 Carlos Ramisch
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
 # entry.py is part of mwetoolkit
 #
