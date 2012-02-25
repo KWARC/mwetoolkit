@@ -44,7 +44,7 @@ OPTIONS may be:
 
 -a <attrs> OR --attributes <attrs>
     Generate indices only for the specified attributes. <attrs> is a
-    colon-separated list of attributes (e.g. lemma:pos).
+    colon-separated list of attributes (e.g. lemma:pos:lemma+pos).
 
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
@@ -69,7 +69,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
     treat_options_simplest( opts, arg, n_arg, usage_string )    
 
-    used_attributes = None
+    used_attributes = ["lemma", "pos", "surface", "syn"]
     name = None
     for ( o, a ) in opts:
         if o in ("-i", "--index") :
@@ -96,4 +96,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["index=", "attributes=", "old" ]
 arg = read_options( "i:a:o", longopts, treat_options, 1, usage_string )
 
-index_from_corpus(arg[0], name, used_attributes)    
+simple_attrs = [a for a in used_attributes if '+' not in a]
+composite_attrs = [a for a in used_attributes if '+' in a]
+
+index = index_from_corpus(arg[0], name, simple_attrs)
+
+for attr in composite_attrs:
+	index.make_fused_array(attr.split('+'))
