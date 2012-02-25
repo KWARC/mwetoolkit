@@ -22,6 +22,21 @@
 #
 ################################################################################
 
+"""
+    This script extract Multiword Expression candidates from a raw corpus in 
+    valid XML (mwetoolkit-corpus.dtd) and generates a candidate list in valid 
+    XML (mwetoolkit-candidates.dtd), using the LocalMaxs algorithm
+    (http://www.di.ubi.pt/~ddg/publications/epia1999.pdf).
+
+    This version supports the --shelve option to use disk storage instead of
+    an in-memory data structure to keep the candidates, thus allowing
+    extraction from corpora too large for the data to fit in memory.
+
+    For more information, call the script with no parameter and read the
+    usage instructions.
+"""
+
+
 import sys
 import os
 import xml.sax
@@ -94,14 +109,26 @@ corpus_size = 0
 sentence_count = 0
 
 def key(ngram):
+    """
+        Returns a string key for the given list of words (strings).
+        (Shelves can only be indexed by strings and integers.)
+    """
     return WORD_SEPARATOR.join(ngram)
 
 def unkey(str):
+    """
+        Returns a list of words for the given key.
+    """
     return str.split(WORD_SEPARATOR)
 
 def treat_sentence(sentence):
+    """
+        Count all ngrams being considered in the sentence.
+    """
     global corpus_size, sentence_count
 
+    # 'shelve' does not speak Unicode; we must convert Unicode strings back to
+    # plain bytestrings to use them as keys.
     words = [getattr(w, base_attr).encode('utf-8') for w in sentence.word_list]
 
     sentence_count += 1
@@ -120,6 +147,10 @@ def treat_sentence(sentence):
 
 
 def localmaxs():
+    """
+        The LocalMaxs algorithm. Check whether each of the extracted ngrams
+        is a local maximum in terms of glue value.
+    """
     for ngram_key in ngram_counts:
         ngram = unkey(ngram_key)
         if len(ngram) >= min_ngram and len(ngram) <= max_ngram + 1:
@@ -139,6 +170,9 @@ def localmaxs():
 
 
 def main():
+    """
+        Main function.
+    """
     global corpus_size_f
     global use_shelve, ngram_counts, selected_candidates
 
@@ -189,6 +223,9 @@ def main():
 
 
 def dump_ngram(ngram_key, id):
+    """
+        Print an ngram as XML.
+    """
     ngram = unkey(ngram_key)
     cand = Candidate(id, [], [], [], [], [])
     for value in ngram:
@@ -202,9 +239,15 @@ def dump_ngram(ngram_key, id):
     print cand.to_xml().encode('utf-8')
 
 def prob(ngram):
+    """
+        Returns the frequency of the ngram in the corpus.
+    """
     return ngram_counts[key(ngram)] / corpus_size_f
 
 def scp_glue(ngram):
+    """
+        Computes the Symmetrical Conditional Probability of the ngram.
+    """
     square_prob = prob(ngram) ** 2
     if len(ngram) == 1:
         return square_prob
@@ -257,11 +300,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             use_shelve = True
 
 def make_shelve():
+    """
+        Makes a temporary shelve. Returns the shelve and its pathname.
+    """
     path = tempfile.mktemp()
     shlv = shelve.open(path, 'n', writeback=True)
     return (shlv, path)
 
 def destroy_shelve(shlv, path):
+    """
+        Destoys a shelve and removes its file.
+    """
     shlv.clear()
     shlv.close()
     try:

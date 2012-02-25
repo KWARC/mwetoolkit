@@ -22,6 +22,16 @@
 #
 ################################################################################
 
+"""
+    This script extract Multiword Expression candidates from a raw corpus in 
+    valid XML (mwetoolkit-corpus.dtd) and generates a candidate list in valid 
+    XML (mwetoolkit-candidates.dtd), using the LocalMaxs algorithm
+    (http://www.di.ubi.pt/~ddg/publications/epia1999.pdf).
+
+    For more information, call the script with no parameter and read the
+    usage instructions.
+"""
+
 import sys
 import xml.sax
 
@@ -73,8 +83,7 @@ OPTIONS may be:
 -f <freq> OR --freq <freq>
     Output only candidates with a frequency of at least <freq>. Default 2.
 
--v OR --verbose
-    Print messages that explain what is happening.
+%(common_options)s
 
     By default, <corpus> must be a valid XML file (mwetoolkit-corpus.dtd). If
 the -i option is specified, <corpus> must be the basepath for an index generated
@@ -89,6 +98,9 @@ candidates = set()
 corpus_size = 0
 
 def treat_sentence(sentence):
+    """
+        Count all ngrams being considered in the sentence.
+    """
     global corpus_size
 
     words = tuple([getattr(w, base_attr) for w in sentence.word_list])
@@ -104,6 +116,10 @@ def treat_sentence(sentence):
 
 
 def localmaxs():
+    """
+        The LocalMaxs algorithm. Check whether each of the extracted ngrams
+        is a local maximum in terms of glue value.
+    """
     for ngram in ngram_counts:
         if len(ngram) >= min_ngram and len(ngram) <= max_ngram + 1:
             left = ngram[:-1]
@@ -119,6 +135,9 @@ def localmaxs():
 
 
 def main():
+    """
+        Main function.
+    """
     global corpus_size_f
 
     if corpus_from_index:
@@ -158,6 +177,9 @@ def main():
 
 
 def dump_ngram(ngram, id):
+    """
+        Print an ngram as XML.
+    """
     cand = Candidate(id, [], [], [], [], [])
     for value in ngram:
         word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
@@ -170,9 +192,15 @@ def dump_ngram(ngram, id):
     print cand.to_xml().encode('utf-8')
 
 def prob(ngram):
+    """
+        Returns the frequency of the ngram in the corpus.
+    """
     return ngram_counts[ngram] / corpus_size_f
 
 def scp_glue(ngram):
+    """
+        Computes the Symmetrical Conditional Probability of the ngram.
+    """
     square_prob = prob(ngram) ** 2
     if len(ngram) == 1:
         return square_prob
@@ -220,8 +248,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 sys.exit(1)
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
-
-
 
 corpus_from_index = False
 base_attr = 'lemma'
