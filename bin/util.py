@@ -205,6 +205,11 @@ def default_exception_handler(type, value, trace):
     """
 
     global debug_mode
+
+    if type == KeyboardInterrupt:
+        print >>sys.stderr, "\nInterrupted!"
+        sys.exit(130)  # 128 + SIGINT; Unix standard
+
     print >> sys.stderr, "%s:" % type.__name__, value
 
     if type != IOError:
