@@ -52,8 +52,12 @@ OPTIONS may be:
     Outputs surface forms instead of lemmas. Default false.
     
 -p OR --lemmapos
-    Outputs the corpus in lemma/pos format. Replaces slashes by "@SLASH@". 
+    Outputs the corpus in lemma/pos format. Replaces slashes with "@SLASH@". 
     Default false.
+
+-f <name> OR --freq-source <name>
+    Uses the frequencies from the frequency source <name>. By default,
+    the first frequency source found in each entity is used.
 
 %(common_options)s
 
@@ -63,15 +67,29 @@ surface_instead_lemmas = False
 lemmapos = False
 
 xml_meta = None
-freq_source = 0
+freq_source = None
+corpus_size_string = None
             
+def freq_value(items):
+    """
+        Given a list of items with a `name`    and a `value` attribute, return
+        the item whose name is the same as that of `freq_source`.
+    """
+    for item in items:
+        if freq_source is None or item.name == freq_source:
+            return item.value
+
+    print >>sys.stderr, "WARNING: frequency source '%s' not found!" % freq_source
+    return 0
+
+
 ################################################################################     
 
 def treat_meta( meta ) :
     """
-    	Print the header for the UCS dataset file.
+        Print the header for the UCS dataset file, and save the corpus size.
     """
-    global xml_meta
+    global xml_meta, corpus_size_string
     string_cand = "id\tl1\tl2\tf\tf1\tf2\tN"
 
     #for cs in meta.corpus_sizes :
@@ -83,6 +101,7 @@ def treat_meta( meta ) :
     #for cs in meta.meta_feats :
     #    string_cand = string_cand + cs.name + "\t"  
     xml_meta = meta
+    corpus_size_string = str(freq_value(xml_meta.corpus_sizes))
         
     print string_cand.encode( 'utf-8' )       
        
@@ -113,11 +132,11 @@ def treat_entity( entity ) :
         else :
             string_cand += w.surface + "\t"
 
-    string_cand += "%f\t" % entity.freqs[freq_source].value
+    string_cand += "%f\t" % freq_value(entity.freqs)
 
     try:
         for w in entity:
-            string_cand += "%f\t" % w.freqs[freq_source].value
+            string_cand += "%f\t" % freq_value(w.freqs)
     except:
         string_cand += "0\t"
         print >>sys.stderr, "WARNING: Word frequency information missing for entity %d" % entity.id_number
@@ -146,7 +165,7 @@ def treat_entity( entity ) :
     #    # This kind of entry probably doesnt have tpclass
     #    string_cand = string_cand.strip()
 
-    string_cand += str(xml_meta.corpus_sizes[freq_source].value)
+    string_cand += corpus_size_string
         
     #string_cand = string_cand.strip()
 
@@ -165,21 +184,24 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global surface_instead_lemmas
-    global lemmapos
+    global lemmapos, freq_source
     mode = []
     for ( o, a ) in opts:        
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True     
         if o in ("-p", "--lemmapos") : 
-            lemmapos = True                 
+            lemmapos = True
+        if o in ("-f", "--freq-source"):
+            freq_source = a
+
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose", "surface", "lemmapos" ]
-arg = read_options( "vsp", longopts, treat_options, -1, usage_string )
+longopts = [ "surface", "lemmapos", "freq-source" ]
+arg = read_options( "spf:", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,
