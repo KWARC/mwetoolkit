@@ -353,7 +353,6 @@ class CSuffixArray(SuffixArray):
 		self.wordlist_file.seek(0)
 		verbose("Using C indexer to build suffix array %s" % self.basepath)
 		subprocess.call([C_INDEXER_PROGRAM, self.basepath], stdin=self.wordlist_file)
-		verbose("Whew!")
 
 	def save(self):
 		self.wordlist_file.close()

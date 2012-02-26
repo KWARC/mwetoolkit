@@ -1,23 +1,56 @@
 #!/bin/bash
-mweconsole_version=(0.0.6 2011-05-16)
+
+################################################################################
+#
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+#
+# candidates.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
+mweconsole_version=(0.0.7 2012-02-25)
 
 ASSOC_MEASURES="mle:pmi:ll:t:dice"
 CONTRAST_MEASURES="csmwe:simplediff:simplecsmwe"
 
 _main() {
+	for arg; do
+		case "$arg" in
+			-y) export assume_yes=1 ;;
+			*) echo "Unknown option $arg" >&2; exit 1 ;;
+		esac
+	done
+
 	if [[ $- == *i* ]]; then
 		_start
 	else
-		"$BASH" --rcfile "$0"
+		"$BASH" --rcfile "$0" -i
 	fi
 }
 
 _confirm() {
-	printf "$1 (y/n) " "${@:2}"
-	local reply
-	read -n 1 reply
-	echo
-	[[ $reply == [yY] ]]
+	if [[ $assume_yes ]]; then
+		return 0
+	else
+		printf "$1 (y/n) " "${@:2}"
+		local reply
+		read -n 1 reply
+		echo
+		[[ $reply == [yY] ]]
+	fi
 }
 
 setvar() {
@@ -128,6 +161,8 @@ open-project() {
 		return
 	}
 
+	PROJDIR="$(readlink -e "$dir")"
+
 	[[ $2 == -n ]] || {
 		cd "$dir" || {
 			printf "Error entering project directory!\n"
@@ -135,7 +170,6 @@ open-project() {
 		}
 	}
 
-	PROJDIR="$(readlink -e "$dir")"
 	[[ -e "$PROJDIR/dtd" ]] || ln -s "$MWETOOLKITDIR/dtd" "$PROJDIR/dtd" || return 1
 	[[ -d "$PROJDIR/index" ]] || mkdir "$PROJDIR/index" || return 1
 	
@@ -375,7 +409,7 @@ extract() {
 			printf "You can use \e[1mindex\e[0m to index it.\n"
 			opts+=("${CORPUS##*/}")
 		fi
-		python "$BIN/candidates.py" -v -p "$PATTERNS" "${opts[@]}" >"$CANDIDATES" || {
+		python "$BIN/candidates.py" -v -p "$PATTERNS" "$@" "${opts[@]}" >"$CANDIDATES" || {
 			printf "Error extracting candidates!\n"
 			return 1
 		}
