@@ -2,12 +2,12 @@
 set -e           # Exit on errors...
 exec </dev/null  # Don't hang if a script tries to read from stdin.
 
-testgread=`which greadlink` || true  # Adaptation for MAC OS, because readlink for
-if [ -z $testgread ]; then           # MAC OS does not accept the -f opt
-	DIR="$(readlink -f "$(dirname "$0")")"
-else
-	DIR="$(greadlink -f "$(dirname "$0")")"
+# Use GNU readlink on Mac OS.
+if which greadlink >/dev/null 2>&1; then
+	readlink() { greadlink "$@"; }
 fi
+
+DIR="$(readlink -f "$(dirname "$0")")"
 
 TOOLKITDIR="$DIR/../.."
 OUTDIR="$DIR/output"
@@ -133,6 +133,10 @@ main() {
 
 	dotest "Removal of duplicated candidates ignoring POS" \
 		'run uniq.py candidates-featureful.xml >candidates-uniq-nopos.xml' \
+		true
+
+	dotest "Filtering out candidates occurring less than twice" \
+		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
 		true
 }
 
