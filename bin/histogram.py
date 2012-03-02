@@ -46,15 +46,19 @@ from util import usage, read_options, treat_options_simplest, verbose
 
 usage_string = """Usage: 
     
-python %(program)s <candidates.xml>
+python %(program)s OPTIONS <candidates.xml>
+
+OPTIONS may be:    
+
+-n <limit> OR --number <limit>
+    Limits the histogram to the first <limit> most frequent lines. This avoids
+    printing out the long tail. It must be a positive integer.
 
 %(common_options)s
 
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd). 
 """
 hist = {}
-#ignore_pos = False
-#surface_instead_lemmas = False
 entity_counter = 0
 limit = None
 
@@ -62,12 +66,16 @@ limit = None
 
 def treat_candidate( candidate ) :
     """
+        Treats each `Candidate`, adding it to the proper histogram bin.
+        
+        @param candidate The current candidate being read from the xml file
     """
     global hist
     global entity_counter
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )    
     for f in candidate.freqs :
+        # Build one histogram per frequency source
         one_freq_hist = hist.get( f.name, {} )
         one_freq_hist[ f.value ] = one_freq_hist.get( f.value, 0 ) + 1
         hist[ f.name ] = one_freq_hist
@@ -76,6 +84,10 @@ def treat_candidate( candidate ) :
 ################################################################################         
        
 def print_histogram() :
+    """
+        Prints to standard output the histogram calculated based on the 
+        candidates file and stored in the global variable hist.
+    """
     global hist
     global limit
     for fname in hist.keys() :
@@ -109,6 +121,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.
     """
     global limit
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     for ( o, a ) in opts:
         if o in ("-n", "--number") :
             try :
@@ -120,8 +135,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "integer value as argument of -n option."
                 usage( usage_string )
                 sys.exit( 2 )
-
-    treat_options_simplest( opts, arg, n_arg, usage_string )  
        
 ################################################################################         
 # MAIN SCRIPT
