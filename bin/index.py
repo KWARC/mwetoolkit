@@ -99,7 +99,12 @@ arg = read_options( "i:a:o", longopts, treat_options, 1, usage_string )
 simple_attrs = [a for a in used_attributes if '+' not in a]
 composite_attrs = [a for a in used_attributes if '+' in a]
 
+for attrs in [attr.split('+') for attr in composite_attrs]:
+    for attr in attrs:
+        if attr not in simple_attrs:
+            simple_attrs.append(attr)
+
 index = index_from_corpus(arg[0], name, simple_attrs)
 
 for attr in composite_attrs:
-	index.make_fused_array(attr.split('+'))
+    index.make_fused_array(attr.split('+'))
