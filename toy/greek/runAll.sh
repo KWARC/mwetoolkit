@@ -37,8 +37,6 @@ echo "1) Generate the initial list of candidates using the POS patterns"
 
 #${python} ${path_mwttoolkit}/index.py -i corpus.index ${the_corpus}
 
-
-
 #echo "4) Count individual word frequencies"
 
 #${python} ${path_mwttoolkit}/counter.py -i corpus.index candidates-filter.xml > candidates-filter-fCorpus.xml

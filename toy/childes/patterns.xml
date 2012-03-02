@@ -1,0 +1,11 @@
+<patterns>
+<pat>
+	<pat repeat="+">
+		<either>
+			<pat><w pos="N*"/></pat>
+			<pat><w pos="J*"/></pat>
+		</either>
+	</pat>
+	<w pos="N*"/>
+</pat>
+</patterns>
