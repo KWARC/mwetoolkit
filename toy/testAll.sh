@@ -10,9 +10,9 @@ DIR="$(readlink -f "$(dirname "$0")")"
 
 cd "$DIR"
 for dir in */; do
-	[[ -f $dir/runAll.sh ]] || continue
+	[[ -f $dir/testAll.sh ]] || continue
 	cd "$dir"
-	./runAll.sh
+	./testAll.sh
 	cd ..
 done
 
