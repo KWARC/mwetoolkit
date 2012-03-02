@@ -138,6 +138,16 @@ main() {
 	dotest "Filtering out candidates occurring less than twice" \
 		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
 		true
+
+	dotest "Comparison against reference output" \
+		compare-to-reference \
+		true
+}
+
+compare-to-reference() {
+	cd "$DIR"
+	tar -xvf reference-output.tar.bz2
+	diff -qr reference-output output
 }
 
 main "$@"
