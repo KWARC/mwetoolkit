@@ -44,7 +44,7 @@ from util import read_options, treat_options_simplest, usage, verbose
      
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <cache1.dat> <cache2.dat> <cache_out.dat>
+python %(program)s OPTIONS <cache1.dat> <cache2.dat> <cache_out.dat>
 
 OPTIONS may be:
 
@@ -58,6 +58,10 @@ OPTIONS may be:
 
 def combine_caches( cache1, cache2, cache_out ) :
     """
+        Given two web caches, generates a third one which is the union of the
+        first two. If a key is contained in both caches, then the value of the
+        most recent one is kept and the oldest is discarded. If they are both
+        from the same date, the value from cache1 is kept.
     """    
     # First, copy all entries from cache1 to cache_out
     for k1 in cache1.keys() :
