@@ -145,9 +145,22 @@ main() {
 }
 
 compare-to-reference() {
-	cd "$DIR"
-	tar -xvf reference-output.tar.bz2
-	diff -qr reference-output output
+	tar -C .. -xvf reference-output.tar.bz2
+	for file in *; do
+		ref="../reference-output/$file"
+		printf "  Comparing %s... " "$file"
+		if [[ $file == *uniq* ]]; then
+			cmp -s <(sort "$file") <(sort "$ref")
+		else
+			cmp -s "$file" "$ref"
+		fi
+		if [[ $? -eq 0 ]]; then
+			echo "OK"
+		else
+			echo "FAILED!"
+			return 1
+		fi
+	done
 }
 
 main "$@"
