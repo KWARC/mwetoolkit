@@ -72,9 +72,10 @@ help() {
 	printf "\n"
 
 	printf "Project commands:\n"
-	printf "  \e[1mcreate-project [dirname [-n]]\e[0m: Creates a new project.\n"
+	printf "  \e[1mcreate-project [<dirname> [-n]]\e[0m: Creates a new project.\n"
 	printf "  \e[1mopen-project <dirname> [-n]\e[0m: Opens a project.\n"
-	printf "  \e[1msave-project <dirname> [-n]\e[0m: Saves current project under a new directory.\n"
+	printf "  \e[1msave-project <dirname> [-n]\e[0m: Saves current project under a new directory.\n\n"
+	printf "  \e[1m-n\e[0m option: do not enter into the project folder"
 	printf "\n"
 
 	printf "File commands:\n"
@@ -113,7 +114,7 @@ _save_metadata() {
 }
 
 create-project() {
-	local usage="Usage: create-project [directory [-n]]\n"
+	local usage="Usage: create-project [<directory> [-n]]\n  \e[1m-n\e[0m option: do not enter into the project folder\n"
 
 	local dir opts=()
 	[[ $# -eq 2 && $2 == -n ]] && {
@@ -147,7 +148,7 @@ create-project() {
 
 
 open-project() {
-	local usage="Usage: open-project <directory> [-n]\n"
+	local usage="Usage: open-project <directory> [-n]\n  \e[1m-n\e[0m option: do not enter into the project folder\n"
 
 	[[ $# -eq 1 || ( $# -eq 2 && $2 == -n ) ]] || {
 		printf "$usage"
@@ -195,7 +196,7 @@ open-project() {
 }
 
 save-project() {
-	local usage="Usage: save-project <directory> [-n]\n"
+	local usage="Usage: save-project <directory> [-n]\n  \e[1m-n\e[0m option: do not enter into the project folder\n"
 
 	[[ $# -eq 1 || ( $# -eq 2 && $2 == -n ) ]] || {
 		printf "$usage"
