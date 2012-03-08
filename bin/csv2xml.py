@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Victor Yoshiaki Miyai
+# Copyright 2010-2012 Carlos Ramisch, Victor Yoshiaki Miyai, Vitor De Araujo
 #
 # csv2xml.py is part of mwetoolkit
 #
@@ -29,7 +29,7 @@
 #developed in Python 2.6.4
 
 """
-	This script parses a plian text file and generates a .xml file, usable
+	This script parses a plain text file and generates a .xml file, usable
 	by other scripts in mwetoolkit.
 """
 
@@ -65,7 +65,6 @@ tpclasses 		= []
 indexes 		= []
 corpora 		= []
 frequency_dict 	= []
-
 
 
 usage_string = """Usage: 
