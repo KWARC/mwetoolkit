@@ -40,11 +40,14 @@ OK for small corpora.
     2) SCRIPTS and PROGRAMS
 
 The "bin" folder contains a set of Python scripts that automatise part of the
-MWE extraction process. Call each script with parameter -h and you will have
+MWE extraction process. Call each script with option -h and you will have
 a complete list of arguments and options to use.
 
 Alternatively, for simple MWE extraction tasks you can call bin/mweconsole.sh, 
 which contains a friendlier command-line interface to the scripts.
+
+The "src" folder cotains source code in C. Please do not bother about it unless
+you are a mwetoolkit developer.
 
 Please refer to the website for tutorials, quick start and more documentation.
 
