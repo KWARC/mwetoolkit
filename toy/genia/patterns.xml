@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-patterns.dtd">
+<patterns>
+<!-- Any sequence of 1 or more nouns and adjectives followed by a noun -->
+<pat>
+  <pat repeat="+">
+    <either>
+      <pat><w pos="A"/></pat>
+      <pat><w pos="N"/></pat>      
+    </either>
+  </pat>
+  <w pos="N"/>
+</pat>
+</patterns>

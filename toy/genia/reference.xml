@@ -1,0 +1,2013 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry><ngram><w lemma="&quot;" /><w lemma="giant" /><w lemma="&quot;" /><w lemma="platelet" /></ngram></entry>
+<entry><ngram><w lemma="&quot;" /><w lemma="n" /><w lemma="end" /><w lemma="rule" /><w lemma="&quot;" /><w lemma="ligase" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="dihydroxyvitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="dihydroxyvitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="dependent" /><w lemma="modulation" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="mediated" /><w lemma="repression" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="1.5" /><w lemma="g" /><w lemma="metyrapone" /></ngram></entry>
+<entry><ngram><w lemma="10" /><w lemma="microm" /><w lemma="kn" /><w lemma="62" /></ngram></entry>
+<entry><ngram><w lemma="105" /><w lemma="kda" /></ngram></entry>
+<entry><ngram><w lemma="p130" /><w lemma="kd" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="141" /><w lemma="bp" /><w lemma="further" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="15" /><w lemma="lipoxygenase" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="15" /><w lemma="lox" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="2,738" /><w lemma="nucleotide" /></ngram></entry>
+<entry><ngram><w lemma="2.3" /><w lemma="kb" /><w lemma="lcr" /></ngram></entry>
+<entry><ngram><w lemma="200" /><w lemma="bp" /><w lemma="enhancer" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="24" /><w lemma="hydroxylase" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="24,25" /><w lemma="dihydroxyvitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="25" /><w lemma="hydroxyvitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="25" /><w lemma="oh" /><w lemma="d3" /><w lemma="transport" /></ngram></entry>
+<entry><ngram><w lemma="253" /><w lemma="nucleotide" /></ngram></entry>
+<entry><ngram><w lemma="28" /><w lemma="bp" /><w lemma="core" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="3" /><w lemma="4" /><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="3'" /><w lemma="portion" /></ngram></entry>
+<entry><ngram><w lemma="30" /><w lemma="base" /><w lemma="pair" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="32" /><w lemma="34" /><w lemma="kda" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="320" /><w lemma="kda" /><w lemma="species" /></ngram></entry>
+<entry><ngram><w lemma="327" /><w lemma="aa" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="32p" /><w lemma="labeled" /><w lemma="ht" /><w lemma="2" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="33" /><w lemma="kda" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="380" /><w lemma="bp" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="4" /><w lemma="12" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="4" /><w lemma="5" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="40" /><w lemma="bp" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="47" /><w lemma="to" /><w lemma="40" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="5" /><w lemma="12" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="deletion" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="end" /><w lemma="of" /><w lemma="human" /><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="flanking" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="flanking" /><w lemma="genomic" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="flanking" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="flanking" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="5'" /><w lemma="portion" /></ngram></entry>
+<entry><ngram><w lemma="50" /><w lemma="kda" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="503" /><w lemma="amino" /><w lemma="acid" /><w lemma="long" /><w lemma="acidic" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="560" /><w lemma="bp" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="60" /><w lemma="kda" /><w lemma="precursor" /></ngram></entry>
+<entry><ngram><w lemma="69" /><w lemma="bp" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="93" /><w lemma="and" /><w lemma="150" /><w lemma="nucleotide" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="97" /><w lemma="kda" /><w lemma="ca" /><w lemma="2+" /><w lemma="atpase" /></ngram></entry>
+<entry><ngram><w lemma="97" /><w lemma="kda" /><w lemma="ca" /><w lemma="2+" /><w lemma="atpase" /><w lemma="target" /></ngram></entry>
+<entry><ngram><w lemma="absorptive" /><w lemma="hypercalciuria" /></ngram></entry>
+<entry><ngram><w lemma="absorptive" /><w lemma="hypercalciuric" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="acth" /><w lemma="stimulation" /><w lemma="test" /></ngram></entry>
+<entry><ngram><w lemma="actin" /><w lemma="filament" /></ngram></entry>
+<entry><ngram><w lemma="actinomycin" /><w lemma="d" /></ngram></entry>
+<entry><ngram><w lemma="actinomycin" /><w lemma="d" /><w lemma="pulse" /><w lemma="experiment" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="endothelial" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="ht" /><w lemma="2" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="il" /><w lemma="2" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="normal" /><w lemma="human" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="activated" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="activation" /><w lemma="antigen" /></ngram></entry>
+<entry><ngram><w lemma="activation" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="activator" /><w lemma="protein" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="activator" /><w lemma="protein" /><w lemma="2" /><w lemma="binding" /><w lemma="consensus" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="acute" /><w lemma="ccl4" /><w lemma="induced" /><w lemma="hepatic" /><w lemma="injury" /></ngram></entry>
+<entry><ngram><w lemma="acute" /><w lemma="fulminant" /><w lemma="hepatitis" /></ngram></entry>
+<entry><ngram><w lemma="acute" /><w lemma="hepatic" /><w lemma="injury" /></ngram></entry>
+<entry><ngram><w lemma="acute" /><w lemma="myocardial" /><w lemma="infarction" /></ngram></entry>
+<entry><ngram><w lemma="adaptive" /><w lemma="change" /></ngram></entry>
+<entry><ngram><w lemma="adenovirus" /><w lemma="e1b" /><w lemma="19" /><w lemma="kda" /></ngram></entry>
+<entry><ngram><w lemma="adenovirus" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="adherent" /><w lemma="human" /><w lemma="igg" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="mouse" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="red" /><w lemma="blood" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="adult" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="agonistic" /><w lemma="anti" /><w lemma="cd30" /><w lemma="monoclonal" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="aids" /><w lemma="associated" /><w lemma="disorder" /></ngram></entry>
+<entry><ngram><w lemma="airway" /><w lemma="epithelial" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="alkaline" /><w lemma="phosphatase" /></ngram></entry>
+<entry><ngram><w lemma="alpha" /><w lemma="tocopherol" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="alternating" /><w lemma="rcgcrygcgy" /><w lemma="consensus" /></ngram></entry>
+<entry><ngram><w lemma="alternative" /><w lemma="splicing" /></ngram></entry>
+<entry><ngram><w lemma="altruistic" /><w lemma="suicide" /></ngram></entry>
+<entry><ngram><w lemma="amino" /><w lemma="acid" /><w lemma="279" /></ngram></entry>
+<entry><ngram><w lemma="amino" /><w lemma="acid" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="amino" /><w lemma="terminal" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="aminothiol" /><w lemma="compound" /></ngram></entry>
+<entry><ngram><w lemma="aml" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="androgen" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="androgen" /><w lemma="receptor" /><w lemma="behavior" /></ngram></entry>
+<entry><ngram><w lemma="animal" /><w lemma="and" /><w lemma="human" /><w lemma="population" /></ngram></entry>
+<entry><ngram><w lemma="animal" /><w lemma="model" /></ngram></entry>
+<entry><ngram><w lemma="animal" /><w lemma="study" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="apoptotic" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="c" /><w lemma="ebp" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="c" /><w lemma="ebp" /><w lemma="beta" /><w lemma="ab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd2" /><w lemma="mediated" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd28" /><w lemma="moab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd28" /><w lemma="moab" /><w lemma="costimulation" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd3" /><w lemma="ab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd3" /><w lemma="induced" /><w lemma="interleukin" /><w lemma="2" /><w lemma="secretion" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd3" /><w lemma="treated" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cd4" /><w lemma="mab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="cr3" /><w lemma="ab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="fc" /><w lemma="gamma" /><w lemma="r" /><w lemma="mab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="il" /><w lemma="1" /><w lemma="beta" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="immunoglobulin" /><w lemma="m" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="inflammatory" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="inflammatory" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="inflammatory" /><w lemma="and" /><w lemma="immunosuppressive" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="onco" /><w lemma="genic" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="ro" /><w lemma="ssa" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="ro" /><w lemma="ssa" /><w lemma="autoantibody" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="ro" /><w lemma="ssa" /><w lemma="positive" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="ro" /><w lemma="ssa" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="stat" /><w lemma="ab" /></ngram></entry>
+<entry><ngram><w lemma="anti" /><w lemma="tnf" /><w lemma="alpha" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="antiandrogen" /><w lemma="drug" /></ngram></entry>
+<entry><ngram><w lemma="antigen" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="antigen" /><w lemma="recognition" /></ngram></entry>
+<entry><ngram><w lemma="antiinflammatory" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="antiinflammatory" /><w lemma="property" /></ngram></entry>
+<entry><ngram><w lemma="antioncogenic" /><w lemma="transcription" /><w lemma="factor" /><w lemma="interferon" /><w lemma="regulatory" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="antioxidant" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="antiparallel" /><w lemma="mode" /></ngram></entry>
+<entry><ngram><w lemma="antiphosphotyrosine" /><w lemma="immunoblotting" /></ngram></entry>
+<entry><ngram><w lemma="antitumor" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="cat" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="like" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="1" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="2" /><w lemma="like" /><w lemma="nuclear" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="ap" /><w lemma="2" /><w lemma="like" /><w lemma="nuclear" /><w lemma="factor" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="apoptotic" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="aromatic" /><w lemma="residue" /></ngram></entry>
+<entry><ngram><w lemma="artery" /><w lemma="wall" /></ngram></entry>
+<entry><ngram><w lemma="arthritis" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="asymptomatic" /><w lemma="carrier" /></ngram></entry>
+<entry><ngram><w lemma="asymptomatic" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="at" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="atherosclerotic" /><w lemma="event" /></ngram></entry>
+<entry><ngram><w lemma="atherosclerotic" /><w lemma="plaque" /></ngram></entry>
+<entry><ngram><w lemma="atl" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="atl" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="attendant" /><w lemma="symptom" /></ngram></entry>
+<entry><ngram><w lemma="autoimmune" /><w lemma="disease" /></ngram></entry>
+<entry><ngram><w lemma="autostimulatory" /><w lemma="loop" /></ngram></entry>
+<entry><ngram><w lemma="auxiliary" /><w lemma="receptor" /><w lemma="cd28" /></ngram></entry>
+<entry><ngram><w lemma="avian" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="avian" /><w lemma="erythroblast" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="and" /><w lemma="monocyte" /><w lemma="macrophage" /><w lemma="differentiation" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="development" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="development" /><w lemma="and" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="enhancer" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="restricted" /><w lemma="cofactor" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="signaling" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="activator" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="coactivator" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="cofactor" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="specific" /><w lemma="transcriptional" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="cell" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="lymphoblastoid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="b" /><w lemma="lymphocyte" /><w lemma="cell" /><w lemma="cycle" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="b4" /><w lemma="2" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="bacterial" /><w lemma="flagellum" /></ngram></entry>
+<entry><ngram><w lemma="bacterial" /><w lemma="ligand" /></ngram></entry>
+<entry><ngram><w lemma="bacterial" /><w lemma="lipopolysaccharide" /></ngram></entry>
+<entry><ngram><w lemma="balb" /><w lemma="c3t3" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="basal" /><w lemma="and" /><w lemma="phorbol" /><w lemma="12" /><w lemma="myristate" /><w lemma="13" /><w lemma="acetate" /><w lemma="inducible" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="basal" /><w lemma="brain" /></ngram></entry>
+<entry><ngram><w lemma="basal" /><w lemma="lesion" /></ngram></entry>
+<entry><ngram><w lemma="basal" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="basic" /><w lemma="hlh" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="bcl" /><w lemma="2" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="bcl" /><w lemma="2" /><w lemma="family" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="bcl6" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="beta" /><w lemma="1" /><w lemma="triiodothyronine" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="beta" /><w lemma="1" /><w lemma="triiodothyronine" /><w lemma="receptor" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="binding" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="binding" /><w lemma="site" /><w lemma="selection" /></ngram></entry>
+<entry><ngram><w lemma="biochemical" /><w lemma="and" /><w lemma="cell" /><w lemma="biological" /><w lemma="property" /></ngram></entry>
+<entry><ngram><w lemma="biological" /><w lemma="phenomenon" /></ngram></entry>
+<entry><ngram><w lemma="bipartite" /><w lemma="nuclear" /><w lemma="localization" /><w lemma="signal" /></ngram></entry>
+<entry><ngram><w lemma="bk" /><w lemma="virus" /><w lemma="plasmid" /><w lemma="expression" /><w lemma="vector" /></ngram></entry>
+<entry><ngram><w lemma="bk" /><w lemma="virus" /><w lemma="vector" /></ngram></entry>
+<entry><ngram><w lemma="blocking" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="blood" /><w lemma="estrogen" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="blood" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="blood" /><w lemma="monocyte" /><w lemma="number" /></ngram></entry>
+<entry><ngram><w lemma="blr2" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="blr2" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="blr2" /><w lemma="specific" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="bone" /><w lemma="density" /></ngram></entry>
+<entry><ngram><w lemma="bone" /><w lemma="marrow" /></ngram></entry>
+<entry><ngram><w lemma="bone" /><w lemma="marrow" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="brain" /><w lemma="ischemia" /></ngram></entry>
+<entry><ngram><w lemma="breast" /><w lemma="cancer" /><w lemma="control" /></ngram></entry>
+<entry><ngram><w lemma="breast" /><w lemma="cancer" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="breast" /><w lemma="cancer" /><w lemma="population" /></ngram></entry>
+<entry><ngram><w lemma="bsm" /><w lemma="i" /></ngram></entry>
+<entry><ngram><w lemma="burkitt" /><w lemma="'s" /><w lemma="lymphoma" /><w lemma="receptor" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="bzlf" /><w lemma="1" /><w lemma="dependent" /><w lemma="mechanism" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="beta" /><w lemma="2" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="family" /><w lemma="member" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="medial" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="proximal" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="ebp" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="fos" /><w lemma="," /><w lemma="c" /><w lemma="myc" /><w lemma="," /><w lemma="p53" /><w lemma="and" /><w lemma="the" /><w lemma="hybrid" /><w lemma="bcr" /><w lemma="abl" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="fos" /><w lemma="transcript" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="fos" /><w lemma="transcript" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="jun" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="jun" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="jun" /><w lemma="mrna" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="jun" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="myb" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="myb" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="myb" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="myc" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="myc" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="rel" /><w lemma="p65" /><w lemma="heterodimer" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminal" /><w lemma="acidic" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminal" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminal" /><w lemma="hmg" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminal" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminal" /><w lemma="residue" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="terminus" /></ngram></entry>
+<entry><ngram><w lemma="c" /><w lemma="type" /><w lemma="animal" /><w lemma="lectin" /><w lemma="superfamily" /></ngram></entry>
+<entry><ngram><w lemma="c." /><w lemma="sub" /><w lemma="." /></ngram></entry>
+<entry><ngram><w lemma="c." /><w lemma="sub." /></ngram></entry>
+<entry><ngram><w lemma="c2h2" /><w lemma="zinc" /><w lemma="finger" /></ngram></entry>
+<entry><ngram><w lemma="c2h2" /><w lemma="zinc" /><w lemma="finger" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="c3" /><w lemma="fragment" /></ngram></entry>
+<entry><ngram><w lemma="c3" /><w lemma="receptor" /><w lemma="mediated" /></ngram></entry>
+<entry><ngram><w lemma="c3" /><w lemma="receptor" /><w lemma="mediated" /><w lemma="nuclear" /><w lemma="translocation" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="and" /><w lemma="pkc" /><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="mechanism" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="phosphatase" /></ngram></entry>
+<entry><ngram><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="signal" /><w lemma="transduction" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="ca2+" /><w lemma="calcineurin" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="ca2+" /><w lemma="ionophore" /></ngram></entry>
+<entry><ngram><w lemma="ca2+" /><w lemma="transport" /></ngram></entry>
+<entry><ngram><w lemma="caat" /><w lemma="consensus" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="caat" /><w lemma="enhancer" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="caenorhabditis" /><w lemma="elegans" /></ngram></entry>
+<entry><ngram><w lemma="caenorhabditis" /><w lemma="elegans" /><w lemma="cell" /><w lemma="death" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="calcineurin" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="calcitriol" /><w lemma="action" /></ngram></entry>
+<entry><ngram><w lemma="calcium" /><w lemma="calmodulin" /><w lemma="dependent" /><w lemma="protein" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="calcium" /><w lemma="channel" /><w lemma="blocker" /></ngram></entry>
+<entry><ngram><w lemma="calcium" /><w lemma="dependent" /><w lemma="manner" /></ngram></entry>
+<entry><ngram><w lemma="cam" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="cam" /><w lemma="kinase" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="cam" /><w lemma="kinase" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="casein" /><w lemma="kinase" /><w lemma="ii" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="cat" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cat" /><w lemma="reporter" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cat" /><w lemma="reporter" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="catalytic" /><w lemma="subunit" /></ngram></entry>
+<entry><ngram><w lemma="causal" /><w lemma="relationship" /></ngram></entry>
+<entry><ngram><w lemma="ccaat" /><w lemma="enhancer" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="ccaat" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="cd16" /><w lemma="(" /><w lemma="fc" /><w lemma="gamma" /><w lemma="riiia" /><w lemma=")" /><w lemma="induced" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cd16" /><w lemma="induced" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="cd16" /><w lemma="ligand" /></ngram></entry>
+<entry><ngram><w lemma="cd16" /><w lemma="ligand" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="cd28" /><w lemma="engagement" /></ngram></entry>
+<entry><ngram><w lemma="cd3+" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cd30" /><w lemma="engagement" /></ngram></entry>
+<entry><ngram><w lemma="cd30" /><w lemma="ligation" /></ngram></entry>
+<entry><ngram><w lemma="cd30" /><w lemma="mediated" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="cd30+" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cd34" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cd34" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="cd4" /><w lemma="molecule" /></ngram></entry>
+<entry><ngram><w lemma="cd4" /><w lemma="negative" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="cd4" /><w lemma="positive" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cd4" /><w lemma="positive" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="cd4+" /><w lemma="macrophage" /></ngram></entry>
+<entry><ngram><w lemma="cd4+" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cd4+" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="cd69" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cd69" /><w lemma="promoter" /><w lemma="based" /><w lemma="reporter" /><w lemma="gene" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="cdna" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="cdna" /><w lemma="expression" /><w lemma="library" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="biological" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="culture" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="cycle" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="cycle" /><w lemma="activation" /><w lemma="program" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="cycle" /><w lemma="associated" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="cycle" /><w lemma="entry" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="death" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="free" /><w lemma="processing" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="free" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="growth" /><w lemma="regulator" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="line" /><w lemma="of" /><w lemma="t" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="mediated" /><w lemma="immune" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="membrane" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="nuclei" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="surface" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="surface" /><w lemma="molecule" /></ngram></entry>
+<entry><ngram><w lemma="cell" /><w lemma="type" /><w lemma="specific" /><w lemma="trans" /><w lemma="acting" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="25" /><w lemma="hydroxyvitamin" /><w lemma="d3" /><w lemma="trafficking" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="25" /><w lemma="oh" /><w lemma="d3" /><w lemma="uptake" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="and" /><w lemma="viral" /><w lemma="anti" /><w lemma="apoptotic" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="growth" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="protein" /><w lemma="tyrosine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="survival" /><w lemma="promoting" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="cellular" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="cem" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cem" /><w lemma="icr" /><w lemma="27" /><w lemma="leukemic" /><w lemma="lymphoblast" /></ngram></entry>
+<entry><ngram><w lemma="cerebral" /><w lemma="cortex" /></ngram></entry>
+<entry><ngram><w lemma="chemokine" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="chemotactic" /><w lemma="migration" /><w lemma="rate" /></ngram></entry>
+<entry><ngram><w lemma="chicken" /><w lemma="c" /><w lemma="ebp" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="chicken" /><w lemma="erythrocyte" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="chicken" /><w lemma="homolog" /></ngram></entry>
+<entry><ngram><w lemma="chimeric" /><w lemma="gal4" /><w lemma="hsf3" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyl" /><w lemma="transferase" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyl" /><w lemma="transferase" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyl" /><w lemma="transferase" /><w lemma="reporter" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyl" /><w lemma="transferase" /><w lemma="reporter" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyltransferase" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyltransferase" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="chloramphenicol" /><w lemma="acetyltransferase" /><w lemma="reporter" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="chromatin" /><w lemma="assembled" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="chromatin" /><w lemma="dependent" /><w lemma="process" /></ngram></entry>
+<entry><ngram><w lemma="chromatin" /><w lemma="integrated" /><w lemma="yeast" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="chromatin" /><w lemma="structure" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="chromosomal" /><w lemma="breakpoint" /></ngram></entry>
+<entry><ngram><w lemma="chromosomal" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="chromosomal" /><w lemma="translocation" /></ngram></entry>
+<entry><ngram><w lemma="chromosome" /><w lemma="14" /></ngram></entry>
+<entry><ngram><w lemma="chromosome" /><w lemma="translocation" /></ngram></entry>
+<entry><ngram><w lemma="chronic" /><w lemma="hiv" /><w lemma="1" /><w lemma="replication" /></ngram></entry>
+<entry><ngram><w lemma="chronic" /><w lemma="inflammatory" /><w lemma="reaction" /></ngram></entry>
+<entry><ngram><w lemma="chronic" /><w lemma="phase" /><w lemma="cml" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="circadian" /><w lemma="pacemaker" /></ngram></entry>
+<entry><ngram><w lemma="circadian" /><w lemma="rhythm" /></ngram></entry>
+<entry><ngram><w lemma="circulating" /><w lemma="immune" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="circulating" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="cis" /><w lemma="acting" /><w lemma="dna" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="cis" /><w lemma="acting" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="cis" /><w lemma="acting" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="cis" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="cle0" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="clinical" /><w lemma="evaluation" /></ngram></entry>
+<entry><ngram><w lemma="clinical" /><w lemma="significance" /></ngram></entry>
+<entry><ngram><w lemma="clonal" /><w lemma="expansion" /></ngram></entry>
+<entry><ngram><w lemma="coagulation" /><w lemma="protease" /></ngram></entry>
+<entry><ngram><w lemma="coagulation" /><w lemma="protease" /><w lemma="cascade" /></ngram></entry>
+<entry><ngram><w lemma="commitment" /><w lemma="period" /></ngram></entry>
+<entry><ngram><w lemma="competition" /><w lemma="experiment" /></ngram></entry>
+<entry><ngram><w lemma="competitive" /><w lemma="reverse" /><w lemma="transcription" /><w lemma="polymerase" /><w lemma="chain" /><w lemma="reaction" /></ngram></entry>
+<entry><ngram><w lemma="complement" /><w lemma="opsonized" /><w lemma="particle" /></ngram></entry>
+<entry><ngram><w lemma="complement" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="complex" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="complex" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="complex" /><w lemma="3" /></ngram></entry>
+<entry><ngram><w lemma="complex" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="con" /><w lemma="a" /></ngram></entry>
+<entry><ngram><w lemma="conjunctival" /><w lemma="biopsy" /></ngram></entry>
+<entry><ngram><w lemma="consensus" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="consensus" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="conserved" /><w lemma="cis" /><w lemma="acting" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="and" /><w lemma="ifn" /><w lemma="inducible" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="and" /><w lemma="inducible" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="sp1" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="constitutive" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="constitutively" /><w lemma="expressed" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="control" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="control" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="control" /><w lemma="culture" /></ngram></entry>
+<entry><ngram><w lemma="control" /><w lemma="subject" /></ngram></entry>
+<entry><ngram><w lemma="cooh" /><w lemma="terminal" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="cooh" /><w lemma="terminal" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="coping" /><w lemma="strategy" /></ngram></entry>
+<entry><ngram><w lemma="cortisol" /><w lemma="depletion" /></ngram></entry>
+<entry><ngram><w lemma="costimulatory" /><w lemma="signal" /></ngram></entry>
+<entry><ngram><w lemma="crippled" /><w lemma="hiv" /><w lemma="1" /><w lemma="ltr" /></ngram></entry>
+<entry><ngram><w lemma="cross" /><w lemma="over" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="cruciform" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="csa" /><w lemma="sensitive" /><w lemma="and" /><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="mechanism" /></ngram></entry>
+<entry><ngram><w lemma="csa" /><w lemma="sensitive" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="csa" /><w lemma="sensitive" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="culture" /><w lemma="medium" /></ngram></entry>
+<entry><ngram><w lemma="cultured" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cultured" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="cupric" /><w lemma="ion" /></ngram></entry>
+<entry><ngram><w lemma="cushing" /><w lemma="'s" /><w lemma="syndrome" /></ngram></entry>
+<entry><ngram><w lemma="cyclic" /><w lemma="amp" /></ngram></entry>
+<entry><ngram><w lemma="cyclic" /><w lemma="amp" /><w lemma="dependent" /></ngram></entry>
+<entry><ngram><w lemma="cyclic" /><w lemma="amp" /><w lemma="dependent" /><w lemma="protein" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="cyclin" /><w lemma="d2" /></ngram></entry>
+<entry><ngram><w lemma="cyclin" /><w lemma="e" /></ngram></entry>
+<entry><ngram><w lemma="cycloheximide" /><w lemma="resistant" /></ngram></entry>
+<entry><ngram><w lemma="cyclooxygenase" /><w lemma="5" /><w lemma="lipoxygenase" /><w lemma="anti" /><w lemma="inflammatory" /><w lemma="compound" /></ngram></entry>
+<entry><ngram><w lemma="cyclosporin" /><w lemma="a" /></ngram></entry>
+<entry><ngram><w lemma="cyclosporin" /><w lemma="a" /><w lemma="sensitive" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="cyclosporin" /><w lemma="a" /><w lemma="treated" /><w lemma="human" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="cyclosporine" /><w lemma="a" /></ngram></entry>
+<entry><ngram><w lemma="cysteamine" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="modulating" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="modulating" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="receptor" /><w lemma="gamma" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="receptor" /><w lemma="gamma" /><w lemma="chain" /><w lemma="(" /><w lemma="gamma" /><w lemma="c" /><w lemma=")" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="cytokine" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="cytolytic" /><w lemma="resistance" /></ngram></entry>
+<entry><ngram><w lemma="cytoplasmic" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="cytoplasmic" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="cytosolic" /><w lemma="and" /><w lemma="nuclear" /><w lemma="compartment" /></ngram></entry>
+<entry><ngram><w lemma="cytotoxic" /><w lemma="cytokine" /></ngram></entry>
+<entry><ngram><w lemma="cytotoxic" /><w lemma="cytokine" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="de" /><w lemma="novo" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="death" /><w lemma="inducing" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="death" /><w lemma="promoting" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="death" /><w lemma="promoting" /><w lemma="member" /></ngram></entry>
+<entry><ngram><w lemma="dendritic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="deoxycholate" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="dhea" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="dhea" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="dhea" /><w lemma="sulfate" /></ngram></entry>
+<entry><ngram><w lemma="differential" /><w lemma="activation" /><w lemma="property" /></ngram></entry>
+<entry><ngram><w lemma="differential" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="differential" /><w lemma="lymphokine" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="differentiated" /><w lemma="," /><w lemma="plasma" /><w lemma="cell" /><w lemma="like" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="differentiated" /><w lemma="plasma" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="differentiation" /><w lemma="marker" /></ngram></entry>
+<entry><ngram><w lemma="diffuse" /><w lemma="lymphoma" /></ngram></entry>
+<entry><ngram><w lemma="dihydroxyvitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="direct" /><w lemma="repeat" /><w lemma="palindrome" /></ngram></entry>
+<entry><ngram><w lemma="distal" /><w lemma="element" /><w lemma="upstream" /></ngram></entry>
+<entry><ngram><w lemma="distal" /><w lemma="part" /></ngram></entry>
+<entry><ngram><w lemma="diurnal" /><w lemma="change" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="dimerization" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="experiment" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="heterodimer" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="specificity" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="binding" /><w lemma="trimer" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="consensus" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="cotransfection" /><w lemma="experiment" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="damage" /><w lemma="induced" /><w lemma="apoptosis" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="sequence" /><w lemma="analysis" /></ngram></entry>
+<entry><ngram><w lemma="dna" /><w lemma="transfection" /></ngram></entry>
+<entry><ngram><w lemma="dnasel" /><w lemma="hypersensitive" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="dose" /><w lemma="dependent" /><w lemma="manner" /></ngram></entry>
+<entry><ngram><w lemma="dose" /><w lemma="dependent" /><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="downregulated" /><w lemma="pu.1" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="drosophila" /><w lemma="embryo" /></ngram></entry>
+<entry><ngram><w lemma="drosophila" /><w lemma="runt" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="e" /><w lemma="box" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="e" /><w lemma="selectin" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="e" /><w lemma="selectin" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="e1a" /><w lemma="expressing" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="e1a" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="e1a" /><w lemma="oncoprotein" /></ngram></entry>
+<entry><ngram><w lemma="e1b" /><w lemma="19" /><w lemma="kda" /></ngram></entry>
+<entry><ngram><w lemma="e3" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="e7" /><w lemma="oncoprotein" /></ngram></entry>
+<entry><ngram><w lemma="e7" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="early" /><w lemma="b" /><w lemma="lymphopoiesis" /></ngram></entry>
+<entry><ngram><w lemma="early" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="early" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="early" /><w lemma="precursor" /></ngram></entry>
+<entry><ngram><w lemma="early" /><w lemma="stage" /><w lemma="breast" /><w lemma="cancer" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="antigen" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="genome" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="genome" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="lytic" /><w lemma="cycle" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="mediated" /><w lemma="immortalization" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="particle" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="positive" /><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="positive" /><w lemma="b" /><w lemma="lymphoid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="status" /></ngram></entry>
+<entry><ngram><w lemma="ebv" /><w lemma="transformed" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="effector" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="effector" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="electrophoretic" /><w lemma="mobility" /></ngram></entry>
+<entry><ngram><w lemma="electrophoretic" /><w lemma="mobility" /><w lemma="shift" /></ngram></entry>
+<entry><ngram><w lemma="electrophoretic" /><w lemma="mobility" /><w lemma="shift" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="embryo" /><w lemma="fibroblast" /></ngram></entry>
+<entry><ngram><w lemma="endocrine" /><w lemma="change" /></ngram></entry>
+<entry><ngram><w lemma="endogenous" /><w lemma="c" /><w lemma="ebp" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="endogenous" /><w lemma="c" /><w lemma="myb" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="endogenous" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="endogenous" /><w lemma="glucocorticoid" /></ngram></entry>
+<entry><ngram><w lemma="endothelial" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="enhanced" /><w lemma="granulopoiesis" /></ngram></entry>
+<entry><ngram><w lemma="enhancer" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="enhancer" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="enhancer" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="enhancer" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="enzymatic" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="enzymatic" /><w lemma="footprinting" /><w lemma="procedure" /></ngram></entry>
+<entry><ngram><w lemma="eosinophil" /><w lemma="cationic" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="eosinophil" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="eosinophilic" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="epithelial" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="bhrf1" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="negative" /><w lemma="bl" /><w lemma="41" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="nuclear" /><w lemma="antigen" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="positive" /><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="epstein" /><w lemma="barr" /><w lemma="virus" /><w lemma="transformed" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="equimolar" /><w lemma="heterodimerization" /></ngram></entry>
+<entry><ngram><w lemma="er" /><w lemma="positive" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="er" /><w lemma="status" /></ngram></entry>
+<entry><ngram><w lemma="er" /><w lemma="tumor" /></ngram></entry>
+<entry><ngram><w lemma="erected" /><w lemma="wing" /><w lemma="gene" /><w lemma="product" /></ngram></entry>
+<entry><ngram><w lemma="erythroblast" /><w lemma="cell" /><w lemma="line" /><w lemma="hd6" /></ngram></entry>
+<entry><ngram><w lemma="erythroid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="erythroid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="erythroid" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="erythroid" /><w lemma="factor" /><w lemma="gata" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="estrogen" /><w lemma="mediated" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="estrogen" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="estrogen" /><w lemma="receptor" /><w lemma="concentration" /></ngram></entry>
+<entry><ngram><w lemma="estrogen" /><w lemma="receptor" /><w lemma="status" /></ngram></entry>
+<entry><ngram><w lemma="estrogen" /><w lemma="replacement" /><w lemma="therapy" /></ngram></entry>
+<entry><ngram><w lemma="et" /><w lemma="binding" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="et" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="et" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="ets" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="ets" /><w lemma="like" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="ets" /><w lemma="like" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="ets1" /><w lemma="specific" /></ngram></entry>
+<entry><ngram><w lemma="ets1" /><w lemma="transactivation" /></ngram></entry>
+<entry><ngram><w lemma="euthyroid" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="euthyroid" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="exon" /><w lemma="intron" /><w lemma="structure" /></ngram></entry>
+<entry><ngram><w lemma="extracellular" /><w lemma="signal" /></ngram></entry>
+<entry><ngram><w lemma="extracellular" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="f" /><w lemma="ab'" /><w lemma="2" /><w lemma="fragment" /></ngram></entry>
+<entry><ngram><w lemma="fatty" /><w lemma="streak" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="r" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="r" /><w lemma="cross" /><w lemma="linking" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="ri" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="rii" /></ngram></entry>
+<entry><ngram><w lemma="fc" /><w lemma="gamma" /><w lemma="riiia" /></ngram></entry>
+<entry><ngram><w lemma="ferriman" /><w lemma="gallwey" /><w lemma="score" /></ngram></entry>
+<entry><ngram><w lemma="ferrous" /><w lemma="or" /><w lemma="ferric" /><w lemma="chloride" /></ngram></entry>
+<entry><ngram><w lemma="fetal" /><w lemma="hemoglobin" /></ngram></entry>
+<entry><ngram><w lemma="fetal" /><w lemma="hemoglobin" /><w lemma="in" /><w lemma="sickle" /><w lemma="cell" /><w lemma="anemia" /></ngram></entry>
+<entry><ngram><w lemma="fetal" /><w lemma="murine" /><w lemma="thymus" /></ngram></entry>
+<entry><ngram><w lemma="fluorescence" /><w lemma="in" /><w lemma="situ" /><w lemma="hybridization" /></ngram></entry>
+<entry><ngram><w lemma="follicular" /><w lemma="and" /><w lemma="luteal" /><w lemma="phase" /></ngram></entry>
+<entry><ngram><w lemma="follicular" /><w lemma="phase" /></ngram></entry>
+<entry><ngram><w lemma="frame" /><w lemma="shift" /></ngram></entry>
+<entry><ngram><w lemma="free" /><w lemma="radical" /><w lemma="production" /><w lemma="oxidative" /><w lemma="stress" /></ngram></entry>
+<entry><ngram><w lemma="full" /><w lemma="length" /><w lemma="bob.1" /><w lemma="obf.1" /></ngram></entry>
+<entry><ngram><w lemma="functional" /><w lemma="characterization" /></ngram></entry>
+<entry><ngram><w lemma="functional" /><w lemma="receptor" /><w lemma="number" /></ngram></entry>
+<entry><ngram><w lemma="g" /><w lemma="protein" /><w lemma="coupled" /><w lemma="chemokine" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="g0" /><w lemma="to" /><w lemma="g1" /><w lemma="phase" /><w lemma="transition" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="dna" /><w lemma="binding" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="dna" /><w lemma="binding" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="dna" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="fusion" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="gal4" /><w lemma="substituted" /><w lemma="hiv" /><w lemma="1" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="c" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="c" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="globin" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="interferon" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="interferon" /><w lemma="induced" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="interferon" /><w lemma="induced" /><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="gamma" /><w lemma="interferon" /><w lemma="mediated" /></ngram></entry>
+<entry><ngram><w lemma="gata" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="gata" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="gel" /><w lemma="retardation" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="gene" /><w lemma="regulatory" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="gene" /><w lemma="structure" /></ngram></entry>
+<entry><ngram><w lemma="gene" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="genetic" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="genomic" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="genotypic" /><w lemma="marker" /></ngram></entry>
+<entry><ngram><w lemma="ggaa" /><w lemma="to" /><w lemma="ggat" /></ngram></entry>
+<entry><ngram><w lemma="globin" /><w lemma="cis" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="globin" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="glucocorticoid" /><w lemma="mediated" /><w lemma="induction" /></ngram></entry>
+<entry><ngram><w lemma="glucocorticoid" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="glucocorticoid" /><w lemma="receptor" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="glucocorticoid" /><w lemma="replacement" /></ngram></entry>
+<entry><ngram><w lemma="glutamine" /><w lemma="synthetase" /></ngram></entry>
+<entry><ngram><w lemma="glutamine" /><w lemma="synthetase" /><w lemma="induction" /></ngram></entry>
+<entry><ngram><w lemma="glycosylated" /><w lemma="member" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="receptor" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="gm" /><w lemma="csf" /><w lemma="transcription" /><w lemma="initiation" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="gnrh" /><w lemma="stimulated" /><w lemma="gonadotropin" /></ngram></entry>
+<entry><ngram><w lemma="gonadotropin" /><w lemma="releasing" /><w lemma="hormone" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="160" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="160" /><w lemma="induced" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="160" /><w lemma="induced" /><w lemma="nuclear" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="ib" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="ib" /><w lemma="alpha" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="ib" /><w lemma="alpha" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="gp" /><w lemma="ib" /><w lemma="ix" /><w lemma="v" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="gp160" /><w lemma="induced" /><w lemma="ap" /><w lemma="1" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /><w lemma="gene" /><w lemma="regulatory" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="gre" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="growth" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="growth" /><w lemma="factor" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="growth" /><w lemma="hormone" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="growth" /><w lemma="promoting" /><w lemma="effect" /></ngram></entry>
+<entry><ngram><w lemma="growth" /><w lemma="related" /><w lemma="metabolism" /></ngram></entry>
+<entry><ngram><w lemma="gtp" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="gtp" /><w lemma="binding" /><w lemma="protein" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="gtp" /><w lemma="gdp" /><w lemma="state" /></ngram></entry>
+<entry><ngram><w lemma="gut" /><w lemma="hyperabsorption" /></ngram></entry>
+<entry><ngram><w lemma="haematopoietic" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="hd6" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="healthy" /><w lemma="blood" /><w lemma="donor" /></ngram></entry>
+<entry><ngram><w lemma="healthy" /><w lemma="control" /></ngram></entry>
+<entry><ngram><w lemma="healthy" /><w lemma="men" /></ngram></entry>
+<entry><ngram><w lemma="healthy" /><w lemma="women" /></ngram></entry>
+<entry><ngram><w lemma="heart" /><w lemma="failure" /></ngram></entry>
+<entry><ngram><w lemma="heat" /><w lemma="shock" /></ngram></entry>
+<entry><ngram><w lemma="heat" /><w lemma="shock" /><w lemma="element" /><w lemma="containing" /><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="heat" /><w lemma="shock" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="heat" /><w lemma="shock" /><w lemma="transcription" /><w lemma="factor" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="hela" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="helice" /><w lemma="i" /><w lemma="and" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="helix" /><w lemma="iii" /></ngram></entry>
+<entry><ngram><w lemma="helix" /><w lemma="loop" /><w lemma="helix" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="hematologic" /><w lemma="neoplasm" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="cell" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="progenitor" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="hematopoietic" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="hepatoma" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="heptamer" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="heterogeneous" /><w lemma="clinical" /><w lemma="manifestation" /></ngram></entry>
+<entry><ngram><w lemma="heterologous" /><w lemma="dc" /><w lemma="t" /><w lemma="cell" /><w lemma="syncytia" /></ngram></entry>
+<entry><ngram><w lemma="heterologous" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="heterologous" /><w lemma="syncytia" /></ngram></entry>
+<entry><ngram><w lemma="hhv" /><w lemma="6" /><w lemma="infected" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hhv" /><w lemma="6" /><w lemma="variant" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="high" /><w lemma="affinity" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="high" /><w lemma="affinity" /><w lemma="dehydroepiandrosterone" /></ngram></entry>
+<entry><ngram><w lemma="high" /><w lemma="density" /><w lemma="lipoprotein" /></ngram></entry>
+<entry><ngram><w lemma="higher" /><w lemma="affinity" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="hirsute" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="hirsute" /><w lemma="women" /></ngram></entry>
+<entry><ngram><w lemma="histone" /><w lemma="h5" /></ngram></entry>
+<entry><ngram><w lemma="histone" /><w lemma="h5" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="envelope" /><w lemma="glycoprotein" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="gene" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="induced" /><w lemma="cell" /><w lemma="fusion" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="infected" /><w lemma="individual" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="infected" /><w lemma="myeloid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="long" /><w lemma="terminal" /><w lemma="repeat" /><w lemma="driven" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="long" /><w lemma="terminal" /><w lemma="repeat" /><w lemma="driven" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="ltr" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="ltr" /><w lemma="driven" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="replication" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="tat" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="tat" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="1" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="2" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="2" /><w lemma="ltr" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="infected" /><w lemma="human" /><w lemma="monocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="infected" /><w lemma="monocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="infected" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="long" /><w lemma="terminal" /><w lemma="repeat" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="replication" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="rna" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="rna" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="hiv" /><w lemma="seronegative" /><w lemma="donor" /></ngram></entry>
+<entry><ngram><w lemma="hla" /><w lemma="class" /><w lemma="ii" /><w lemma="antigen" /></ngram></entry>
+<entry><ngram><w lemma="hla" /><w lemma="class" /><w lemma="ii" /><w lemma="molecule" /></ngram></entry>
+<entry><ngram><w lemma="hlh" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="hmg" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="hmg" /><w lemma="box" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="hmg" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="hodgkin" /><w lemma="'s" /><w lemma="disease" /><w lemma="derived" /></ngram></entry>
+<entry><ngram><w lemma="hodgkin" /><w lemma="'s" /><w lemma="disease" /><w lemma="derived" /><w lemma="," /><w lemma="t" /><w lemma="cell" /><w lemma="like" /><w lemma="," /><w lemma="cd30+" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="homodimerizing" /><w lemma="cytokine" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="hormonal" /><w lemma="parameter" /></ngram></entry>
+<entry><ngram><w lemma="hormone" /><w lemma="binding" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="host" /><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="host" /><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="host" /><w lemma="nk" /><w lemma="cell" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="hpfh" /><w lemma="phenotype" /></ngram></entry>
+<entry><ngram><w lemma="hpfh" /><w lemma="syndrome" /></ngram></entry>
+<entry><ngram><w lemma="hpv" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="hpv" /><w lemma="type" /><w lemma="16" /></ngram></entry>
+<entry><ngram><w lemma="hsf3" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="ht" /><w lemma="2" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="htlv" /><w lemma="1" /><w lemma="infected" /><w lemma="human" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="htlv" /><w lemma="1" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="htlv" /><w lemma="1" /><w lemma="transformed" /><w lemma="human" /><w lemma="lymphoid" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="htlv" /><w lemma="1" /><w lemma="transformed" /><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="htr" /><w lemma="beta" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="htr" /><w lemma="beta" /><w lemma="1" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="htr" /><w lemma="beta" /><w lemma="1" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="hu" /><w lemma="treated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="activation" /><w lemma="antigen" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="ada" /><w lemma="lcr" /><w lemma="directed" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="ada" /><w lemma="lcr" /><w lemma="directed" /><w lemma="transgene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="adenosine" /><w lemma="deaminase" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="adenosine" /><w lemma="deaminase" /><w lemma="gene" /><w lemma="first" /><w lemma="intron" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="adenovirus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="and" /><w lemma="mouse" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="antigen" /><w lemma="specific" /><w lemma="cd4+" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="b" /><w lemma="cell" /><w lemma="development" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="b" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="b" /><w lemma="cell" /><w lemma="lymphoma" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="b" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="bcl6" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="bcl6" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="c" /><w lemma="type" /><w lemma="lectin" /><w lemma="leukocyte" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="chromosome" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="ciita" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="disease" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="endothelial" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="erythroleukemia" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="estrogen" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="fibroblastic" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="fibroblastic" /><w lemma="or" /><w lemma="keratinocyte" /><w lemma="derived" /><w lemma="human" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="gamma" /><w lemma="globin" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="genomic" /><w lemma="dna" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="gm" /><w lemma="csf" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="gm" /><w lemma="csf" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="herpesvirus" /><w lemma="6" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="herpesvirus" /><w lemma="6" /><w lemma="variant" /><w lemma="a" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il" /><w lemma="2r" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il" /><w lemma="4" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il" /><w lemma="4" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il" /><w lemma="4" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il4" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il4" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il4" /><w lemma="promoter" /><w lemma="mediated" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il4" /><w lemma="promoter" /><w lemma="mediated" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="il4" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immune" /><w lemma="deficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immune" /><w lemma="deficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /><w lemma="tat" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="1" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="1" /><w lemma="induced" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="1" /><w lemma="induced" /><w lemma="," /><w lemma="dendritic" /><w lemma="cell" /><w lemma="t" /><w lemma="cell" /><w lemma="syncytia" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="entry" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /><w lemma="long" /><w lemma="terminal" /><w lemma="repeat" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /><w lemma="replication" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="immunodeficiency" /><w lemma="virus" /><w lemma="type" /><w lemma="2" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="inflammatory" /><w lemma="disease" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="interleukin" /><w lemma="2" /><w lemma="gene" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="interleukin" /><w lemma="3" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="interleukin" /><w lemma="6" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="jurkat" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="k562" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="leukemia" /><w lemma="lymphoma" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="leukocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="monocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="monocytic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="mononuclear" /><w lemma="phagocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="multiple" /><w lemma="myeloma" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="naive" /><w lemma="neonatal" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="nk" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="nrf" /><w lemma="1" /><w lemma="alpha" /><w lemma="pal" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="papillomavirus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="papillomavirus" /><w lemma="or" /><w lemma="adenovirus" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="mononuclear" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="peripheral" /><w lemma="leukocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="peripheral" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="retrovirus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="rhabdomyosarcoma" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /><w lemma="virus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /><w lemma="tax" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /><w lemma="virus" /><w lemma="type" /><w lemma="i" /><w lemma="(" /><w lemma="atl" /><w lemma="1k" /><w lemma="," /><w lemma="mt" /><w lemma="2" /><w lemma="," /><w lemma="s" /><w lemma="lb1" /><w lemma=")" /><w lemma="and" /><w lemma="type" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="lymphotropic" /><w lemma="virus" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="lymphotropic" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="lymphotropic" /><w lemma="virus" /><w lemma="type" /><w lemma="1" /><w lemma="tax" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="gamma" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="gamma" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="helper" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="t" /><w lemma="lymphoid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="tcf" /><w lemma="1" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="tcf" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="tf" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="human" /><w lemma="tissue" /><w lemma="sample" /></ngram></entry>
+<entry><ngram><w lemma="humoral" /><w lemma="immunity" /></ngram></entry>
+<entry><ngram><w lemma="hybrid" /><w lemma="bcr" /><w lemma="abl" /></ngram></entry>
+<entry><ngram><w lemma="hybridization" /><w lemma="accessibility" /></ngram></entry>
+<entry><ngram><w lemma="hybridization" /><w lemma="pattern" /></ngram></entry>
+<entry><ngram><w lemma="hybridization" /><w lemma="signal" /></ngram></entry>
+<entry><ngram><w lemma="hyperthyro" /><w lemma="id" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="hypothalamic" /><w lemma="pituitary" /><w lemma="adrenal" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="hypothyroid" /><w lemma="relative" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="associated" /><w lemma="protein" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="deficient" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="deficient" /><w lemma="mice" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="embryonic" /><w lemma="fibroblast" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="mice" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="beta" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="ibr" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="ibr" /><w lemma="f" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="icr27" /><w lemma="lymphoblast" /></ngram></entry>
+<entry><ngram><w lemma="id2" /><w lemma="and" /><w lemma="id3" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="id2" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="id2" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="id3" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="id3" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="activated" /><w lemma="nk" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="alpha" /><w lemma="responsiveness" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="alpha" /><w lemma="therapy" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="gamma" /><w lemma="activated" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="gamma" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="induced" /><w lemma="nk" /><w lemma="cell" /><w lemma="killing" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="inducible" /></ngram></entry>
+<entry><ngram><w lemma="ifn" /><w lemma="stimulated" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="igh" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="igh" /><w lemma="enhancer" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="ikb" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="ikb" /><w lemma="alpha" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="ikb" /><w lemma="alpha" /><w lemma="phosphorylation" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="12" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="driven" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="heterodimerization" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="signal" /><w lemma="transduction" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="mrna" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="promoter" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="promoter" /><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="receptor" /><w lemma="beta" /><w lemma="and" /><w lemma="gamma" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="receptor" /><w lemma="beta" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="receptor" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="receptor" /><w lemma="signal" /><w lemma="transduction" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="repression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2" /><w lemma="secretion" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2r" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2r" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2r" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="2r" /><w lemma="gamma" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="3" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="3" /><w lemma="promoter" /><w lemma="linked" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="3" /><w lemma="promoter" /><w lemma="linked" /><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="6" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="6" /><w lemma="neutralizing" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="6" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="il" /><w lemma="7" /><w lemma="induced" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="il2" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il2r" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="il2r" /><w lemma="gamma" /></ngram></entry>
+<entry><ngram><w lemma="il4" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="il4" /><w lemma="transcription" /><w lemma="initiation" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="immature" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="immediate" /><w lemma="early" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="immortal" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="immortalized" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="cell" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="response" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="immune" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="immunoblot" /><w lemma="analysis" /></ngram></entry>
+<entry><ngram><w lemma="immunodeficiency" /><w lemma="syndrome" /></ngram></entry>
+<entry><ngram><w lemma="immunoelectron" /><w lemma="microscopy" /></ngram></entry>
+<entry><ngram><w lemma="immunofluorescence" /><w lemma="colocalization" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="heavy" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="heavy" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="heavy" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="heavy" /><w lemma="chain" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="heavy" /><w lemma="chain" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="kappa" /><w lemma="light" /><w lemma="chain" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="m" /></ngram></entry>
+<entry><ngram><w lemma="immunoglobulin" /><w lemma="secretion" /></ngram></entry>
+<entry><ngram><w lemma="immunological" /><w lemma="variable" /><w lemma="involved" /></ngram></entry>
+<entry><ngram><w lemma="immunoregulatory" /><w lemma="effect" /></ngram></entry>
+<entry><ngram><w lemma="immunoregulatory" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="immunosuppressive" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="in" /><w lemma="vitro" /><w lemma="activated" /><w lemma="normal" /><w lemma="human" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="in" /><w lemma="vitro" /><w lemma="expression" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="in" /><w lemma="vitro" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="inactive" /><w lemma="cytoplasmic" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="independent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="index" /><w lemma="absorptive" /><w lemma="hypercalciuric" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="inducer" /><w lemma="mediated" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="inducible" /><w lemma="early" /><w lemma="growth" /><w lemma="response" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="inducible" /><w lemma="egr" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="inducible" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="inert" /><w lemma="monomer" /></ngram></entry>
+<entry><ngram><w lemma="infectable" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="infected" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="infected" /><w lemma="individual" /></ngram></entry>
+<entry><ngram><w lemma="infected" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="inflamed" /><w lemma="joint" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="complication" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="cytokine" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="infiltrate" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="synovial" /><w lemma="fluid" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="synovial" /><w lemma="microenvironment" /></ngram></entry>
+<entry><ngram><w lemma="inflammatory" /><w lemma="synovitis" /></ngram></entry>
+<entry><ngram><w lemma="inhibitor" /><w lemma="of" /><w lemma="dna" /><w lemma="binding" /><w lemma="and" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="inhibitory" /><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="inhibitory" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="inhibitory" /><w lemma="protein" /><w lemma="i" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="initiation" /><w lemma="binding" /><w lemma="repressor" /></ngram></entry>
+<entry><ngram><w lemma="interferon" /><w lemma="activated" /><w lemma="nk" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="interferon" /><w lemma="gamma" /></ngram></entry>
+<entry><ngram><w lemma="interferon" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="interferon" /><w lemma="regulatory" /><w lemma="factor" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="interferon" /><w lemma="treated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="1" /><w lemma="beta" /><w lemma="converting" /><w lemma="enzyme" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="1" /><w lemma="beta" /><w lemma="converting" /><w lemma="enzyme" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="1" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="1" /><w lemma="receptor" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="," /><w lemma="gamma" /><w lemma="interferon" /><w lemma="," /><w lemma="and" /><w lemma="granulocyte" /><w lemma="macrophage" /><w lemma="colony" /><w lemma="stimulating" /><w lemma="factor" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="nonresponsive" /><w lemma="state" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="receptor" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="receptor" /><w lemma="gamma" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="2" /><w lemma="secretion" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="3" /></ngram></entry>
+<entry><ngram><w lemma="interleukin" /><w lemma="4" /></ngram></entry>
+<entry><ngram><w lemma="interphase" /><w lemma="nuclei" /></ngram></entry>
+<entry><ngram><w lemma="intestinal" /><w lemma="calcium" /><w lemma="absorption" /></ngram></entry>
+<entry><ngram><w lemma="intestinal" /><w lemma="hyperabsorption" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="biochemical" /><w lemma="event" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="ca2+" /><w lemma="concentration" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="free" /><w lemma="calcium" /><w lemma="concentration" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="free" /><w lemma="calcium" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="killing" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="signalling" /><w lemma="agent" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="store" /></ngram></entry>
+<entry><ngram><w lemma="intracellular" /><w lemma="trafficking" /></ngram></entry>
+<entry><ngram><w lemma="intranuclear" /><w lemma="environment" /></ngram></entry>
+<entry><ngram><w lemma="intrauterine" /><w lemma="contraception" /></ngram></entry>
+<entry><ngram><w lemma="intravenous" /><w lemma="injection" /></ngram></entry>
+<entry><ngram><w lemma="inverted" /><w lemma="duplication" /></ngram></entry>
+<entry><ngram><w lemma="ionomycin" /><w lemma="cyclosporin" /><w lemma="a" /><w lemma="responsive" /></ngram></entry>
+<entry><ngram><w lemma="ionomycin" /><w lemma="cyclosporin" /><w lemma="a" /><w lemma="responsive" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="ionomycin" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="irf" /><w lemma="1" /><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="iron" /><w lemma="salt" /></ngram></entry>
+<entry><ngram><w lemma="isolated" /><w lemma="ets" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="isolated" /><w lemma="nuclei" /></ngram></entry>
+<entry><ngram><w lemma="isotype" /><w lemma="matched" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="1" /><w lemma="and" /><w lemma="3" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="3" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="kinase" /><w lemma="specific" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="stat" /><w lemma="(" /><w lemma="signal" /><w lemma="transducer" /><w lemma="and" /><w lemma="activator" /><w lemma="of" /><w lemma="transcription" /><w lemma=")" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="stat" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="stat1" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="jak" /><w lemma="tyrosine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="jh2" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="jh4" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="messenger" /><w lemma="rna" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="jak3" /><w lemma="stat" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="janus" /><w lemma="family" /><w lemma="tyrosine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="janus" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="janus" /><w lemma="protein" /><w lemma="tyrosine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="janus" /><w lemma="protein" /><w lemma="tyrosine" /><w lemma="kinase" /><w lemma="3" /></ngram></entry>
+<entry><ngram><w lemma="jnk" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="jpx9" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="jun" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="t" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="jurkat" /><w lemma="tat" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="k562" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="kappa" /><w lemma="b" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="keratinocyte" /><w lemma="derived" /><w lemma="human" /></ngram></entry>
+<entry><ngram><w lemma="key" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="kruppel" /><w lemma="like" /><w lemma="zinc" /><w lemma="finger" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="l" /><w lemma="selectin" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="l" /><w lemma="selectin" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="l" /><w lemma="selectin" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="l." /><w lemma="donovani" /></ngram></entry>
+<entry><ngram><w lemma="l540" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="large" /><w lemma="cell" /><w lemma="component" /></ngram></entry>
+<entry><ngram><w lemma="large" /><w lemma="clonal" /><w lemma="t" /><w lemma="cell" /><w lemma="population" /></ngram></entry>
+<entry><ngram><w lemma="latent" /><w lemma="ebv" /><w lemma="genome" /></ngram></entry>
+<entry><ngram><w lemma="latent" /><w lemma="infection" /></ngram></entry>
+<entry><ngram><w lemma="latent" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="lcr" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="lef" /><w lemma="1" /><w lemma="and" /><w lemma="ets" /><w lemma="1" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="lef" /><w lemma="1" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="lef" /><w lemma="1" /><w lemma="hmg" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="leishmania" /><w lemma="donovani" /></ngram></entry>
+<entry><ngram><w lemma="leishmania" /><w lemma="infected" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="leukemic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="leukemic" /><w lemma="cell" /><w lemma="infiltration" /></ngram></entry>
+<entry><ngram><w lemma="leukemic" /><w lemma="t" /><w lemma="lymphoblast" /></ngram></entry>
+<entry><ngram><w lemma="leukocyte" /><w lemma="adhesion" /></ngram></entry>
+<entry><ngram><w lemma="leukocyte" /><w lemma="adhesion" /><w lemma="molecule" /></ngram></entry>
+<entry><ngram><w lemma="leukocyte" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="leukocyte" /><w lemma="signal" /><w lemma="transduction" /></ngram></entry>
+<entry><ngram><w lemma="ligand" /><w lemma="induced" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="ligand" /><w lemma="induced" /><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="ligand" /><w lemma="inducible" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="ligand" /><w lemma="inducible" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="lipid" /><w lemma="oxidation" /></ngram></entry>
+<entry><ngram><w lemma="lipopolysaccharide" /><w lemma="dependent" /><w lemma="cell" /><w lemma="free" /><w lemma="activation" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="lipopolysaccharide" /><w lemma="induced" /><w lemma="transcriptional" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="liver" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="liver" /><w lemma="injury" /></ngram></entry>
+<entry><ngram><w lemma="loci" /><w lemma="occur" /></ngram></entry>
+<entry><ngram><w lemma="locus" /><w lemma="control" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="long" /><w lemma="term" /><w lemma="clinical" /><w lemma="effect" /></ngram></entry>
+<entry><ngram><w lemma="long" /><w lemma="terminal" /><w lemma="repeat" /></ngram></entry>
+<entry><ngram><w lemma="loop" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="low" /><w lemma="density" /><w lemma="lipoprotein" /></ngram></entry>
+<entry><ngram><w lemma="lower" /><w lemma="affinity" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="lox" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="lp" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="lps" /><w lemma="induced" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="lps" /><w lemma="induced" /><w lemma="proteolytic" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="lps" /><w lemma="stimulated" /><w lemma="human" /><w lemma="monocytic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="ltr" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="luciferase" /><w lemma="reporter" /><w lemma="plasmid" /></ngram></entry>
+<entry><ngram><w lemma="lupus" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="lymph" /><w lemma="node" /></ngram></entry>
+<entry><ngram><w lemma="lymphatic" /><w lemma="organ" /></ngram></entry>
+<entry><ngram><w lemma="lymphoblast" /><w lemma="cell" /><w lemma="line" /><w lemma="msb" /></ngram></entry>
+<entry><ngram><w lemma="lymphoblastoid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="lymphocyte" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="lymphocyte" /><w lemma="metaphase" /></ngram></entry>
+<entry><ngram><w lemma="lymphocyte" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="lymphocyte" /><w lemma="transcriptional" /><w lemma="activator" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="development" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="enhancer" /><w lemma="binding" /><w lemma="factor" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="malignancy" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="specific" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="specific" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="lymphoid" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="lymphokine" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="lysis" /><w lemma="mechanism" /></ngram></entry>
+<entry><ngram><w lemma="macrophage" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="mad3" /><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="major" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="major" /><w lemma="phorbol" /><w lemma="ester" /><w lemma="responsive" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="major" /><w lemma="regulatory" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="mammalian" /><w lemma="homologue" /></ngram></entry>
+<entry><ngram><w lemma="mammary" /><w lemma="gland" /><w lemma="factor" /><w lemma="stat5" /></ngram></entry>
+<entry><ngram><w lemma="map" /><w lemma="kinase" /><w lemma="related" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="mar" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="mar" /><w lemma="bp1" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="mar" /><w lemma="bp1" /><w lemma="enhancer" /><w lemma="interaction" /></ngram></entry>
+<entry><ngram><w lemma="matrix" /><w lemma="attachment" /><w lemma="region" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="mature" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="mature" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mature" /><w lemma="p50" /><w lemma="subunit" /></ngram></entry>
+<entry><ngram><w lemma="maximal" /><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="vdr" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="mbcl6" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="mean" /><w lemma="dissociation" /><w lemma="constant" /></ngram></entry>
+<entry><ngram><w lemma="megakaryocytic" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="membrane" /><w lemma="proximal" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="membrane" /><w lemma="vesicle" /></ngram></entry>
+<entry><ngram><w lemma="memory" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="menstrual" /><w lemma="cycle" /></ngram></entry>
+<entry><ngram><w lemma="met" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="mgf" /><w lemma="stat5" /><w lemma="like" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="mhc" /><w lemma="class" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="mhc" /><w lemma="class" /><w lemma="ii" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="mhc" /><w lemma="class" /><w lemma="ii" /><w lemma="molecule" /></ngram></entry>
+<entry><ngram><w lemma="mhc" /><w lemma="class" /><w lemma="ii" /><w lemma="transactivator" /></ngram></entry>
+<entry><ngram><w lemma="microtubular" /><w lemma="assembly" /></ngram></entry>
+<entry><ngram><w lemma="microtubule" /><w lemma="disruption" /></ngram></entry>
+<entry><ngram><w lemma="minimal" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="minimal" /><w lemma="lox" /><w lemma="promoter" /><w lemma="fragment" /></ngram></entry>
+<entry><ngram><w lemma="minor" /><w lemma="groove" /></ngram></entry>
+<entry><ngram><w lemma="mitogen" /><w lemma="activated" /><w lemma="mature" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="mitogen" /><w lemma="activated" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="mitogen" /><w lemma="and" /><w lemma="anti" /><w lemma="cd3" /><w lemma="treated" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="mitogen" /><w lemma="stimulated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mitogenic" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="mitogenic" /><w lemma="anti" /><w lemma="cd2" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="mobility" /><w lemma="shift" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="mol" /><w lemma="wt" /></ngram></entry>
+<entry><ngram><w lemma="molecular" /><w lemma="mass" /></ngram></entry>
+<entry><ngram><w lemma="molecular" /><w lemma="structure" /></ngram></entry>
+<entry><ngram><w lemma="molecular" /><w lemma="weight" /></ngram></entry>
+<entry><ngram><w lemma="monoclonal" /><w lemma="anti" /><w lemma="cr1" /></ngram></entry>
+<entry><ngram><w lemma="monoclonal" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="synthesis" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="and" /><w lemma="lymphocyte" /><w lemma="count" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="chemotaxis" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="macrophage" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="mitochondrial" /><w lemma="1" /><w lemma="alpha" /><w lemma="hydroxylase" /></ngram></entry>
+<entry><ngram><w lemma="monocyte" /><w lemma="number" /></ngram></entry>
+<entry><ngram><w lemma="monocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="monocytic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="monocytic" /><w lemma="cell" /><w lemma="line" /><w lemma="u937" /></ngram></entry>
+<entry><ngram><w lemma="monocytic" /><w lemma="thp" /><w lemma="1" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mononuclear" /><w lemma="blood" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mononuclear" /><w lemma="cell" /><w lemma="priming" /><w lemma="culture" /></ngram></entry>
+<entry><ngram><w lemma="mononuclear" /><w lemma="leukocyte" /></ngram></entry>
+<entry><ngram><w lemma="mononuclear" /><w lemma="phagocyte" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="70z" /><w lemma="3" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="ada" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="and" /><w lemma="human" /><w lemma="bob.1" /><w lemma="obf.1" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="fibroblast" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="fibroblastic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="osteocalcin" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="p" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="th2" /><w lemma="clone" /></ngram></entry>
+<entry><ngram><w lemma="mouse" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="mrna" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="mrna" /><w lemma="expression" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="ms" /><w lemma="like" /><w lemma="disease" /></ngram></entry>
+<entry><ngram><w lemma="multicomponent" /><w lemma="cytokine" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="multimerized" /><w lemma="copy" /></ngram></entry>
+<entry><ngram><w lemma="multiple" /><w lemma="dna" /><w lemma="protein" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="multiple" /><w lemma="hematopoietic" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="multiple" /><w lemma="myeloma" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="multiple" /><w lemma="sclerosis" /></ngram></entry>
+<entry><ngram><w lemma="multipotent" /><w lemma="progenitor" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="multiprotein" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="multisubunit" /><w lemma="adhesion" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="ba" /><w lemma="f3" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="bcl6" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="bcl6" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="embryogenesis" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="homolog" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="nfatp" /></ngram></entry>
+<entry><ngram><w lemma="murine" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="muscle" /><w lemma="cdna" /><w lemma="library" /></ngram></entry>
+<entry><ngram><w lemma="mutant" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="myb" /><w lemma="et" /><w lemma="oncoprotein" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="and" /><w lemma="b" /><w lemma="cell" /><w lemma="extracts" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="cell" /><w lemma="derived" /><w lemma="cytokine" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="pu.1" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="myeloid" /><w lemma="zinc" /><w lemma="finger" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="myelomonocytic" /><w lemma="and" /><w lemma="eosinophilic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="myelomonocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="myf3" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="mzf" /><w lemma="1" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="mzf" /><w lemma="1" /><w lemma="expression" /><w lemma="vector" /></ngram></entry>
+<entry><ngram><w lemma="mzf" /><w lemma="1" /><w lemma="modification" /></ngram></entry>
+<entry><ngram><w lemma="mzf" /><w lemma="1" /><w lemma="transcriptional" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="and" /><w lemma="c" /><w lemma="terminal" /><w lemma="residue" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="and" /><w lemma="c" /><w lemma="terminal" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="terminal" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="terminal" /><w lemma="half" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="terminal" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="n" /><w lemma="terminus" /></ngram></entry>
+<entry><ngram><w lemma="nadph" /><w lemma="oxidase" /></ngram></entry>
+<entry><ngram><w lemma="naive" /><w lemma="'" /><w lemma="neonatal" /><w lemma="t" /><w lemma="cell" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="native" /><w lemma="envelope" /><w lemma="glycoprotein" /></ngram></entry>
+<entry><ngram><w lemma="natural" /><w lemma="killer" /><w lemma="activity" /><w lemma="variance" /></ngram></entry>
+<entry><ngram><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="natural" /><w lemma="killer" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="natural" /><w lemma="killer" /><w lemma="minus" /><w lemma="t" /><w lemma="cell" /><w lemma="subtractive" /><w lemma="library" /></ngram></entry>
+<entry><ngram><w lemma="nb2" /><w lemma="and" /><w lemma="c196" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="neonatal" /><w lemma="lethality" /></ngram></entry>
+<entry><ngram><w lemma="neonatal" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="neonatal" /><w lemma="t" /><w lemma="cell" /><w lemma="il" /><w lemma="2" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="neonatal" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="neutralizing" /><w lemma="anti" /><w lemma="il" /><w lemma="6" /><w lemma="ab" /></ngram></entry>
+<entry><ngram><w lemma="neutrophil" /><w lemma="adhesion" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="at" /><w lemma="1" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="at" /><w lemma="dependent" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="atp" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="il6" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="il6" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activating" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activating" /><w lemma="cytokine" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="and" /><w lemma="il" /><w lemma="2" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="binding" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="dependent" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="dependent" /><w lemma="cytokine" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="dna" /><w lemma="binding" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="elevation" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="i" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="i" /><w lemma="kappa" /><w lemma="b" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="induction" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="p65" /><w lemma="homodimer" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="protein" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="rel" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="transcription" /><w lemma="factor" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="m" /><w lemma="dependent" /><w lemma="promoter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="m" /><w lemma="estrogen" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="m" /><w lemma="estrogen" /><w lemma="receptor" /><w lemma="expressing" /><w lemma="progenitor" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="munr" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="munr" /><w lemma="enhancer" /><w lemma="repressor" /></ngram></entry>
+<entry><ngram><w lemma="nf" /><w lemma="munr" /><w lemma="repressor" /></ngram></entry>
+<entry><ngram><w lemma="nfat" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nfat" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="nfat" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nfat" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nfat" /><w lemma="like" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nfatc" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="nfatc" /><w lemma="mrna" /><w lemma="accumulation" /></ngram></entry>
+<entry><ngram><w lemma="nfatc" /><w lemma="specific" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="and" /><w lemma="nfatc" /><w lemma="specific" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="ap" /><w lemma="1" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="ap" /><w lemma="1" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="ap" /><w lemma="1" /><w lemma="complex" /><w lemma="formation" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="ap" /><w lemma="1" /><w lemma="complex" /><w lemma="formation" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="ap" /><w lemma="1" /><w lemma="dna" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="dephosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="migration" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="polyclonal" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="nfatp" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nfkb" /><w lemma="like" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="nh2" /><w lemma="and" /><w lemma="cooh" /><w lemma="terminal" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="nh2" /><w lemma="terminal" /><w lemma="126" /><w lemma="amino" /><w lemma="acid" /></ngram></entry>
+<entry><ngram><w lemma="nih" /><w lemma="3t3" /></ngram></entry>
+<entry><ngram><w lemma="nip" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nip" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="nip" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="cell" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="cell" /><w lemma="lysis" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="cell" /><w lemma="nfat" /></ngram></entry>
+<entry><ngram><w lemma="nk" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="nmr" /><w lemma="analysis" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="cytokine" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="dna" /><w lemma="binding" /><w lemma="dimer" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="erythroid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="erythroid" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="proliferative" /><w lemma="state" /></ngram></entry>
+<entry><ngram><w lemma="non" /><w lemma="viral" /><w lemma="oncogene" /><w lemma="expressing" /></ngram></entry>
+<entry><ngram><w lemma="nonatopic" /><w lemma="control" /><w lemma="subject" /></ngram></entry>
+<entry><ngram><w lemma="nonhematopoietic" /><w lemma="and" /><w lemma="hematopoietic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="nonhematopoietic" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="nonhematopoietic" /><w lemma="lineage" /></ngram></entry>
+<entry><ngram><w lemma="nonlymphoid" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="nonmyeloid" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="nonmyeloid" /><w lemma="cell" /><w lemma="type" /></ngram></entry>
+<entry><ngram><w lemma="nonopsonic" /><w lemma="phagocytosis" /></ngram></entry>
+<entry><ngram><w lemma="nonpilus" /><w lemma="adhesin" /></ngram></entry>
+<entry><ngram><w lemma="nonsense" /><w lemma="mutation" /></ngram></entry>
+<entry><ngram><w lemma="nonsteroidal" /><w lemma="anti" /><w lemma="inflammatory" /><w lemma="drug" /></ngram></entry>
+<entry><ngram><w lemma="nonstimulated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="and" /><w lemma="neoplastic" /><w lemma="t" /><w lemma="lineage" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="human" /><w lemma="subject" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="individual" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="liver" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="mice" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="phagocyte" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="platelet" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="population" /></ngram></entry>
+<entry><ngram><w lemma="normal" /><w lemma="thyroid" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="northern" /><w lemma="(" /><w lemma="rna" /><w lemma=")" /><w lemma="blot" /></ngram></entry>
+<entry><ngram><w lemma="northern" /><w lemma="blot" /><w lemma="analysis" /></ngram></entry>
+<entry><ngram><w lemma="northern" /><w lemma="hybridization" /></ngram></entry>
+<entry><ngram><w lemma="novel" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="novel" /><w lemma="human" /><w lemma="uterine" /><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="and" /><w lemma="cytoplasmic" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="calcium" /><w lemma="calmodulin" /><w lemma="dependent" /><w lemma="protein" /><w lemma="kinase" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="cam" /><w lemma="kinase" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="dna" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="il6" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /><w lemma="(" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma=")" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /><w lemma="(" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma=")" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="kappa" /><w lemma="b" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="mu" /><w lemma="negative" /><w lemma="regulator" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="mu" /><w lemma="negative" /><w lemma="regulator" /><w lemma="enhancer" /><w lemma="repressor" /><w lemma="overlap" /><w lemma="nuclear" /><w lemma="matrix" /><w lemma="attachment" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="of" /><w lemma="activated" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="factor" /><w lemma="of" /><w lemma="activated" /><w lemma="t" /><w lemma="cell" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="fraction" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="hormone" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="inhibitory" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="inhibitory" /><w lemma="protein" /><w lemma="repressor" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="localization" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="matrix" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="matrix" /><w lemma="attachment" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="matrix" /><w lemma="attachment" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="matrix" /><w lemma="preparation" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="receptor" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="stat" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="structure" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="targeting" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="targeting" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="tcf" /><w lemma="1" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="nuclear" /><w lemma="translocation" /></ngram></entry>
+<entry><ngram><w lemma="nucleosomal" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="nucleosome" /><w lemma="assembled" /><w lemma="dna" /></ngram></entry>
+<entry><ngram><w lemma="nucleosome" /><w lemma="assembly" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="nucleotide" /><w lemma="271" /><w lemma="and" /><w lemma="250" /></ngram></entry>
+<entry><ngram><w lemma="nucleotide" /><w lemma="insertion" /></ngram></entry>
+<entry><ngram><w lemma="nucleotide" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="oct" /><w lemma="dna" /><w lemma="interaction" /></ngram></entry>
+<entry><ngram><w lemma="oct" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="oct1" /><w lemma="and" /><w lemma="nf" /><w lemma="at" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="oct2" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="octamer" /><w lemma="dependent" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="octamer" /><w lemma="dependent" /><w lemma="enhancer" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="octamer" /><w lemma="dependent" /><w lemma="enhancer" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="octamer" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="operative" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="optimal" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="oral" /><w lemma="administration" /></ngram></entry>
+<entry><ngram><w lemma="organ" /><w lemma="infiltration" /></ngram></entry>
+<entry><ngram><w lemma="organ" /><w lemma="infitration" /></ngram></entry>
+<entry><ngram><w lemma="ostensible" /><w lemma="immune" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="osteoblast" /><w lemma="nuclear" /><w lemma="extract" /></ngram></entry>
+<entry><ngram><w lemma="osteoblast" /><w lemma="nuclear" /><w lemma="extract" /><w lemma="dna" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="osteoblast" /><w lemma="specific" /><w lemma="cis" /><w lemma="acting" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="osteoblast" /><w lemma="specific" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="osteocalcin" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="osteocalcin" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="overt" /><w lemma="hypo" /><w lemma="or" /><w lemma="hyperthyroidism" /></ngram></entry>
+<entry><ngram><w lemma="overt" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="oxidative" /><w lemma="signalling" /></ngram></entry>
+<entry><ngram><w lemma="oxidative" /><w lemma="signalling" /><w lemma="process" /></ngram></entry>
+<entry><ngram><w lemma="oxidative" /><w lemma="stress" /></ngram></entry>
+<entry><ngram><w lemma="p" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="p." /><w lemma="aeruginosa" /></ngram></entry>
+<entry><ngram><w lemma="p105" /><w lemma="precursor" /></ngram></entry>
+<entry><ngram><w lemma="p24" /><w lemma="ag" /></ngram></entry>
+<entry><ngram><w lemma="p3hr1" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="p50" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b1" /></ngram></entry>
+<entry><ngram><w lemma="p50" /><w lemma="p65" /></ngram></entry>
+<entry><ngram><w lemma="p50" /><w lemma="p65" /><w lemma="heterodimer" /></ngram></entry>
+<entry><ngram><w lemma="p50" /><w lemma="subunit" /></ngram></entry>
+<entry><ngram><w lemma="p53" /><w lemma="conjugating" /><w lemma="ligase" /></ngram></entry>
+<entry><ngram><w lemma="p53" /><w lemma="independent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="p53" /><w lemma="transcript" /></ngram></entry>
+<entry><ngram><w lemma="p65" /><w lemma="rela" /></ngram></entry>
+<entry><ngram><w lemma="paired" /><w lemma="box" /><w lemma="containing" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="pan" /><w lemma="t" /><w lemma="lineage" /><w lemma="marker" /></ngram></entry>
+<entry><ngram><w lemma="parental" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="partially" /><w lemma="purified" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="pathological" /><w lemma="model" /></ngram></entry>
+<entry><ngram><w lemma="pathophysiological" /><w lemma="relevance" /></ngram></entry>
+<entry><ngram><w lemma="patient" /><w lemma="population" /></ngram></entry>
+<entry><ngram><w lemma="patient" /><w lemma="sample" /></ngram></entry>
+<entry><ngram><w lemma="pax" /><w lemma="gene" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="pbmc" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="pebp2" /><w lemma="alpha" /><w lemma="aml" /><w lemma="1" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="pebp2" /><w lemma="alpha" /><w lemma="aml" /><w lemma="1" /><w lemma="related" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="pebp2" /><w lemma="alpha" /><w lemma="aml" /><w lemma="1" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="pebp2" /><w lemma="alpha" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="b" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="blood" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="blood" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="blood" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="blood" /><w lemma="mononuclear" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="blood" /><w lemma="sample" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="circulation" /></ngram></entry>
+<entry><ngram><w lemma="peripheral" /><w lemma="lymphoid" /><w lemma="tissue" /></ngram></entry>
+<entry><ngram><w lemma="peroxidase" /><w lemma="antiperoxidase" /><w lemma="technique" /></ngram></entry>
+<entry><ngram><w lemma="pha" /><w lemma="induced" /><w lemma="t" /><w lemma="cell" /><w lemma="mitogenesis" /></ngram></entry>
+<entry><ngram><w lemma="phagocyte" /><w lemma="nadph" /><w lemma="oxidase" /></ngram></entry>
+<entry><ngram><w lemma="phagocyte" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="phagocyte" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="phenotypic" /><w lemma="abnormality" /></ngram></entry>
+<entry><ngram><w lemma="philadelphia" /><w lemma="chromosome" /><w lemma="positive" /><w lemma="chronic" /><w lemma="myelogenous" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="12" /><w lemma="myristate" /><w lemma="13" /><w lemma="acetate" /><w lemma="differentiated" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="12" /><w lemma="myristate" /><w lemma="13" /><w lemma="acetate" /><w lemma="differentiated" /><w lemma="u" /><w lemma="937" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="12" /><w lemma="myristate" /><w lemma="13" /><w lemma="acetate" /><w lemma="inducible" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="ester" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="ester" /><w lemma="responsive" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="ester" /><w lemma="stimulated" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="ester" /><w lemma="stimulated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="ester" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="phorbol" /><w lemma="myristate" /><w lemma="acetate" /></ngram></entry>
+<entry><ngram><w lemma="phosphorylation" /><w lemma="event" /></ngram></entry>
+<entry><ngram><w lemma="phosphorylation" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="phosphorylation" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="phosphotyrosine" /><w lemma="immunoprecipitation" /></ngram></entry>
+<entry><ngram><w lemma="physiological" /><w lemma="effect" /></ngram></entry>
+<entry><ngram><w lemma="physiologically" /><w lemma="relevant" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="," /><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="and" /><w lemma="ca" /><w lemma="2+" /><w lemma="dependent" /><w lemma="signal" /><w lemma="transduction" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="dependent" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="independent" /><w lemma="stimulus" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="induced" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="pkc" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="pl" /><w lemma="im" /><w lemma="430" /><w lemma="monoclonal" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="plasma" /><w lemma="cortisol" /></ngram></entry>
+<entry><ngram><w lemma="plasma" /><w lemma="factor" /><w lemma="vii" /><w lemma="viia" /></ngram></entry>
+<entry><ngram><w lemma="plasmacytoma" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="ca" /><w lemma="2+" /><w lemma="atpase" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="glycoprotein" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="glycoprotein" /><w lemma="ib" /><w lemma="alpha" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="morphogenesis" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="progenitor" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="platelet" /><w lemma="thromboxane" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="pma" /><w lemma="induced" /><w lemma="ikb" /><w lemma="alpha" /><w lemma="phosphorylation" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="pma" /><w lemma="ionomycin" /><w lemma="dependent" /><w lemma="manner" /></ngram></entry>
+<entry><ngram><w lemma="pma" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="polyclonal" /><w lemma="antibody" /></ngram></entry>
+<entry><ngram><w lemma="polyclonal" /><w lemma="antiserum" /></ngram></entry>
+<entry><ngram><w lemma="polymerized" /><w lemma="core" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="polymorphonuclear" /><w lemma="leukocyte" /></ngram></entry>
+<entry><ngram><w lemma="positive" /><w lemma="and" /><w lemma="negative" /><w lemma="cis" /><w lemma="acting" /><w lemma="dna" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="positive" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="positive" /><w lemma="negative" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="positive" /><w lemma="regulatory" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="positive" /><w lemma="regulatory" /><w lemma="element" /><w lemma="i" /></ngram></entry>
+<entry><ngram><w lemma="postinduction" /><w lemma="repression" /></ngram></entry>
+<entry><ngram><w lemma="postmenopausal" /><w lemma="female" /></ngram></entry>
+<entry><ngram><w lemma="postmenopausal" /><w lemma="women" /></ngram></entry>
+<entry><ngram><w lemma="potent" /><w lemma="activator" /></ngram></entry>
+<entry><ngram><w lemma="pou" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="pre" /><w lemma="and" /><w lemma="postmenopausal" /><w lemma="women" /></ngram></entry>
+<entry><ngram><w lemma="pre" /><w lemma="i" /><w lemma="thymidine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="preleukemic" /><w lemma="clonal" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="preleukemic" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="premature" /><w lemma="termination" /></ngram></entry>
+<entry><ngram><w lemma="previously" /><w lemma="identified" /><w lemma="human" /><w lemma="placental" /><w lemma="cdna" /></ngram></entry>
+<entry><ngram><w lemma="primary" /><w lemma="t" /><w lemma="cell" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="primary" /><w lemma="tcr" /><w lemma="mediated" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="prl" /><w lemma="and" /><w lemma="il" /><w lemma="2" /><w lemma="induced" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="prl" /><w lemma="induced" /><w lemma="dna" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="pro" /><w lemma="b" /><w lemma="," /><w lemma="pre" /><w lemma="b" /><w lemma="," /><w lemma="and" /><w lemma="mature" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="progenitor" /><w lemma="specific" /><w lemma="surface" /><w lemma="marker" /></ngram></entry>
+<entry><ngram><w lemma="progesterone" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="proliferative" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="proline" /><w lemma="content" /></ngram></entry>
+<entry><ngram><w lemma="promonocytic" /><w lemma="cell" /><w lemma="line" /><w lemma="u937" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="chloramphenicol" /><w lemma="acetyltransferase" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="proximal" /><w lemma="position" /></ngram></entry>
+<entry><ngram><w lemma="promoter" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="promoterless" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="promyelocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="proteasome" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="proteasome" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="and" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /><w lemma="--" /><w lemma="responsive" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /><w lemma="dependent" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /><w lemma="dependent" /><w lemma="signal" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="kinase" /><w lemma="c" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="product" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="protein" /><w lemma="interaction" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="synthesis" /><w lemma="independent" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="synthesis" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="protein" /><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="proximal" /><w lemma="and" /><w lemma="remote" /><w lemma="position" /></ngram></entry>
+<entry><ngram><w lemma="proximal" /><w lemma="promoter" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="pseudomonas" /><w lemma="aeruginosa" /></ngram></entry>
+<entry><ngram><w lemma="pu" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="pu" /><w lemma="box" /><w lemma="dependent" /></ngram></entry>
+<entry><ngram><w lemma="pu" /><w lemma="box" /><w lemma="dependent" /><w lemma="transactivation" /></ngram></entry>
+<entry><ngram><w lemma="pu" /><w lemma="sf" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="pu.1" /><w lemma="dna" /><w lemma="binding" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="pu.1" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="pu.1" /><w lemma="mrna" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="pu.1" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="purified" /><w lemma="human" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="purified" /><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="purified" /><w lemma="viral" /><w lemma="material" /></ngram></entry>
+<entry><ngram><w lemma="putative" /><w lemma="new" /><w lemma="retrovirus" /></ngram></entry>
+<entry><ngram><w lemma="putative" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="putative" /><w lemma="transcriptional" /><w lemma="regulator" /></ngram></entry>
+<entry><ngram><w lemma="pwm" /><w lemma="generated" /><w lemma="b" /><w lemma="cell" /><w lemma="mitogenesis" /></ngram></entry>
+<entry><ngram><w lemma="pwm" /><w lemma="generated" /><w lemma="b" /><w lemma="cell" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="pwm" /><w lemma="induced" /><w lemma="b" /><w lemma="cell" /><w lemma="mitogenesis" /></ngram></entry>
+<entry><ngram><w lemma="quantitative" /><w lemma="competitive" /><w lemma="reverse" /><w lemma="transcription" /><w lemma="pcr" /></ngram></entry>
+<entry><ngram><w lemma="quiescent" /><w lemma="and" /><w lemma="stimulated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="quiescent" /><w lemma="b" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="ra" /><w lemma="superfamily" /></ngram></entry>
+<entry><ngram><w lemma="rabbit" /><w lemma="15" /><w lemma="lipoxygenase" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="rac" /><w lemma="gtp" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="radiation" /><w lemma="induced" /><w lemma="apoptosis" /></ngram></entry>
+<entry><ngram><w lemma="radical" /><w lemma="scavenger" /></ngram></entry>
+<entry><ngram><w lemma="raji" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="rap1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="rap1" /><w lemma="protein" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="rap1" /><w lemma="protein" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="rapid" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="rapid" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="ras" /><w lemma="related" /><w lemma="gtp" /><w lemma="binding" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="rat" /><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="reactive" /><w lemma="oxygen" /><w lemma="intermediate" /></ngram></entry>
+<entry><ngram><w lemma="reactive" /><w lemma="oxygen" /><w lemma="intermediate" /><w lemma="formation" /></ngram></entry>
+<entry><ngram><w lemma="reactive" /><w lemma="oxygen" /><w lemma="intermediate" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="reactive" /><w lemma="oxygen" /><w lemma="species" /></ngram></entry>
+<entry><ngram><w lemma="receptor" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="receptor" /><w lemma="ebi1" /></ngram></entry>
+<entry><ngram><w lemma="receptor" /><w lemma="number" /></ngram></entry>
+<entry><ngram><w lemma="receptor" /><w lemma="partner" /></ngram></entry>
+<entry><ngram><w lemma="receptor" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="recombinant" /><w lemma="b4" /><w lemma="2" /></ngram></entry>
+<entry><ngram><w lemma="recombinant" /><w lemma="lef" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="recombinant" /><w lemma="mzf" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="recombinant" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="regression" /><w lemma="model" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="high" /><w lemma="mobility" /><w lemma="group" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="regulatory" /><w lemma="switch" /></ngram></entry>
+<entry><ngram><w lemma="rel" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="rel" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="rela" /><w lemma="overexpressing" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="rela" /><w lemma="overexpression" /></ngram></entry>
+<entry><ngram><w lemma="relevant" /><w lemma="dna" /><w lemma="binding" /><w lemma="species" /></ngram></entry>
+<entry><ngram><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="reporter" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="reporter" /><w lemma="gene" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="reporter" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="repressor" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="repressor" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="responder" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="resting" /><w lemma="pbl" /></ngram></entry>
+<entry><ngram><w lemma="restriction" /><w lemma="fragment" /><w lemma="length" /><w lemma="polymorphism" /></ngram></entry>
+<entry><ngram><w lemma="retinoblastoma" /><w lemma="control" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="retinoic" /><w lemma="acid" /></ngram></entry>
+<entry><ngram><w lemma="retrovirus" /><w lemma="like" /><w lemma="particle" /></ngram></entry>
+<entry><ngram><w lemma="reverse" /><w lemma="transcriptase" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="reverse" /><w lemma="transcription" /><w lemma="pcr" /></ngram></entry>
+<entry><ngram><w lemma="reverse" /><w lemma="transcription" /><w lemma="pcr" /></ngram></entry>
+<entry><ngram><w lemma="rflp" /><w lemma="pair" /></ngram></entry>
+<entry><ngram><w lemma="rheumatoid" /><w lemma="arthritis" /></ngram></entry>
+<entry><ngram><w lemma="rifn" /><w lemma="alpha" /><w lemma="2c" /></ngram></entry>
+<entry><ngram><w lemma="rnase" /><w lemma="treatment" /></ngram></entry>
+<entry><ngram><w lemma="rpon" /><w lemma="mutant" /></ngram></entry>
+<entry><ngram><w lemma="rpon" /><w lemma="sigma" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="sds" /><w lemma="polyacrylamide" /><w lemma="gel" /><w lemma="electrophoresis" /></ngram></entry>
+<entry><ngram><w lemma="se" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="second" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="secondary" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="selectin" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="sequence" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="sequence" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="sequence" /><w lemma="specific" /><w lemma="hmg" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="sequence" /><w lemma="specific" /><w lemma="hmg" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="serine" /><w lemma="threonine" /><w lemma="phosphatase" /></ngram></entry>
+<entry><ngram><w lemma="serum" /><w lemma="androgen" /></ngram></entry>
+<entry><ngram><w lemma="serum" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="serum" /><w lemma="transaminase" /></ngram></entry>
+<entry><ngram><w lemma="seven" /><w lemma="transmembrane" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="severe" /><w lemma="and" /><w lemma="symptomatic" /><w lemma="vkc" /></ngram></entry>
+<entry><ngram><w lemma="severe" /><w lemma="heart" /><w lemma="failure" /></ngram></entry>
+<entry><ngram><w lemma="sex" /><w lemma="difference" /></ngram></entry>
+<entry><ngram><w lemma="sex" /><w lemma="related" /><w lemma="influence" /></ngram></entry>
+<entry><ngram><w lemma="sexual" /><w lemma="hormone" /></ngram></entry>
+<entry><ngram><w lemma="sexually" /><w lemma="active" /><w lemma="women" /></ngram></entry>
+<entry><ngram><w lemma="sf" /><w lemma="suppression" /></ngram></entry>
+<entry><ngram><w lemma="sh3" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="short" /><w lemma="term" /><w lemma="cellular" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="dependent" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="dependent" /><w lemma="nf" /><w lemma="kappa" /><w lemma="b" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="induced" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="induced" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transducer" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transducer" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transducer" /><w lemma="and" /><w lemma="activation" /><w lemma="of" /><w lemma="transcription" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transducer" /><w lemma="and" /><w lemma="activator" /><w lemma="of" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transducer" /><w lemma="and" /><w lemma="activator" /><w lemma="of" /><w lemma="transcription" /><w lemma="transcription" /><w lemma="factor" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transduction" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transduction" /><w lemma="mechanism" /></ngram></entry>
+<entry><ngram><w lemma="signal" /><w lemma="transmitting" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="significant" /><w lemma="il" /><w lemma="2" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="simian" /><w lemma="virus" /><w lemma="40" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="single" /><w lemma="c" /><w lemma="myb" /><w lemma="binding" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="single" /><w lemma="hmg" /><w lemma="box" /></ngram></entry>
+<entry><ngram><w lemma="site" /><w lemma="directed" /><w lemma="mutagenesis" /></ngram></entry>
+<entry><ngram><w lemma="site" /><w lemma="directed" /><w lemma="mutation" /></ngram></entry>
+<entry><ngram><w lemma="situ" /><w lemma="hybridization" /></ngram></entry>
+<entry><ngram><w lemma="situ" /><w lemma="hybridization" /><w lemma="pattern" /></ngram></entry>
+<entry><ngram><w lemma="situ" /><w lemma="hybridization" /><w lemma="technique" /></ngram></entry>
+<entry><ngram><w lemma="skin" /><w lemma="defect" /></ngram></entry>
+<entry><ngram><w lemma="social" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="social" /><w lemma="support" /></ngram></entry>
+<entry><ngram><w lemma="social" /><w lemma="support" /><w lemma="variable" /></ngram></entry>
+<entry><ngram><w lemma="specific" /><w lemma="dna" /><w lemma="protein" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="specific" /><w lemma="dna" /><w lemma="sequence" /></ngram></entry>
+<entry><ngram><w lemma="specific" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="spi" /><w lemma="1" /><w lemma="oncogene" /></ngram></entry>
+<entry><ngram><w lemma="spleen" /><w lemma="focus" /><w lemma="forming" /><w lemma="virus" /><w lemma="induced" /><w lemma="murine" /><w lemma="erythroleukemia" /></ngram></entry>
+<entry><ngram><w lemma="spxx" /><w lemma="motif" /></ngram></entry>
+<entry><ngram><w lemma="src" /><w lemma="homology" /><w lemma="2" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="sry" /><w lemma="related" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="stage" /><w lemma="i" /><w lemma="and" /><w lemma="ii" /><w lemma="breast" /><w lemma="cancer" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="staphylococcal" /><w lemma="enterotoxin" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="(" /><w lemma="signal" /><w lemma="transducer" /><w lemma="and" /><w lemma="activator" /><w lemma="of" /><w lemma="transcription" /><w lemma=")" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="5" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="5" /><w lemma="isoform" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="5" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="family" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="related" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="specific" /><w lemma="antisera" /></ngram></entry>
+<entry><ngram><w lemma="stat" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="stat1" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="stat1" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="stat1" /><w lemma="and" /><w lemma="stat3" /><w lemma="transcriptional" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="stat1" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="stat5" /><w lemma="recruitment" /></ngram></entry>
+<entry><ngram><w lemma="statistical" /><w lemma="significance" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="hormone" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="hormone" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="mediated" /><w lemma="cell" /><w lemma="death" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="mediated" /><w lemma="lysis" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="steroid" /><w lemma="receptor" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="sterol" /><w lemma="vdr" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="stimulated" /><w lemma="il" /><w lemma="2" /><w lemma="secreting" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="stimulated" /><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="stimulatory" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="stone" /><w lemma="forming" /><w lemma="condition" /></ngram></entry>
+<entry><ngram><w lemma="subendothelial" /><w lemma="space" /></ngram></entry>
+<entry><ngram><w lemma="subsequent" /><w lemma="degradation" /></ngram></entry>
+<entry><ngram><w lemma="supershift" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="suprachiasmatic" /><w lemma="nuclei" /></ngram></entry>
+<entry><ngram><w lemma="surface" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="survival" /><w lemma="promoting" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="syncytium" /><w lemma="formation" /></ngram></entry>
+<entry><ngram><w lemma="synergistic" /><w lemma="induction" /></ngram></entry>
+<entry><ngram><w lemma="synthetic" /><w lemma="peptide" /></ngram></entry>
+<entry><ngram><w lemma="synthetic" /><w lemma="peptide" /><w lemma="substrate" /></ngram></entry>
+<entry><ngram><w lemma="systemic" /><w lemma="lupus" /><w lemma="erythematosus" /></ngram></entry>
+<entry><ngram><w lemma="systemic" /><w lemma="lupus" /><w lemma="erythematosus" /><w lemma="patient" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="14;14" /><w lemma="translocation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="acute" /><w lemma="and" /><w lemma="chronic" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="activation" /><w lemma="response" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="activator" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="clonal" /><w lemma="expansion" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="costimulation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="development" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="differentiation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="leukemia" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="malignancy" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="nfatc" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="nuclear" /><w lemma="extract" /><w lemma="dna" /><w lemma="complex" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="(" /><w lemma="tcr" /><w lemma="alpha" /><w lemma=")" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="and" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /><w lemma="beta" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="specific" /><w lemma="fashion" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="specific" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="specific" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="cell" /><w lemma="unresponsiveness" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="helper" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="helper" /><w lemma="cell" /><w lemma="cytokine" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="helper" /><w lemma="cell" /><w lemma="subset" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="helper" /><w lemma="type" /><w lemma="1" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="lineage" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="lymphoblast" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="lymphocyte" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="lymphocyte" /><w lemma="proliferation" /></ngram></entry>
+<entry><ngram><w lemma="t" /><w lemma="lymphotropic" /><w lemma="virus" /></ngram></entry>
+<entry><ngram><w lemma="t47d" /><w lemma="mammary" /><w lemma="tumor" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="tandem" /><w lemma="repeat" /></ngram></entry>
+<entry><ngram><w lemma="target" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="target" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="targeted" /><w lemma="gene" /><w lemma="inactivation" /></ngram></entry>
+<entry><ngram><w lemma="tarsal" /><w lemma="and" /><w lemma="bulbar" /><w lemma="conjunctiva" /></ngram></entry>
+<entry><ngram><w lemma="tarsal" /><w lemma="and" /><w lemma="bulbar" /><w lemma="conjunctival" /><w lemma="biopsy" /></ngram></entry>
+<entry><ngram><w lemma="tat" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="tata" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="tax" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="tax" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="tax" /><w lemma="transgenic" /><w lemma="mouse" /><w lemma="model" /></ngram></entry>
+<entry><ngram><w lemma="tcf" /><w lemma="1" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="tcf" /><w lemma="1" /><w lemma="knock" /><w lemma="out" /><w lemma="mice" /></ngram></entry>
+<entry><ngram><w lemma="tcf" /><w lemma="1" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="tcf" /><w lemma="1" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="tcl1" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="tcl1" /><w lemma="genomic" /><w lemma="locus" /></ngram></entry>
+<entry><ngram><w lemma="tcl1" /><w lemma="locus" /></ngram></entry>
+<entry><ngram><w lemma="tcl1" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="tcl1" /><w lemma="oncogene" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="alpha" /><w lemma="beta" /><w lemma="loci" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="beta" /><w lemma="locus" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="constant" /><w lemma="region" /><w lemma="c" /><w lemma="beta" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="locus" /></ngram></entry>
+<entry><ngram><w lemma="tcr" /><w lemma="mediated" /><w lemma="binding" /></ngram></entry>
+<entry><ngram><w lemma="tcrg" /><w lemma="enhancer" /></ngram></entry>
+<entry><ngram><w lemma="tcrg" /><w lemma="mrna" /></ngram></entry>
+<entry><ngram><w lemma="tcrg" /><w lemma="mrna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="terminally" /><w lemma="differentiated" /><w lemma="b" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="tf" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="tf" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="tf" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="tf" /><w lemma="gene" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="tf" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="th" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="th1" /><w lemma="clone" /><w lemma="29" /></ngram></entry>
+<entry><ngram><w lemma="th2" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="the" /><w lemma="hybrid" /><w lemma="bcr" /><w lemma="abl" /></ngram></entry>
+<entry><ngram><w lemma="thp" /><w lemma="1" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="thp" /><w lemma="1" /><w lemma="monocytic" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="thromboxane" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="gene" /><w lemma="promoter" /><w lemma="chloramphenicol" /><w lemma="acetyltransferase" /><w lemma="chimera" /><w lemma="plasmid" /></ngram></entry>
+<entry><ngram><w lemma="thromboxane" /><w lemma="receptor" /><w lemma="promoter" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="thy" /><w lemma="tax" /><w lemma="transgenic" /><w lemma="mice" /></ngram></entry>
+<entry><ngram><w lemma="thymic" /><w lemma="locus" /><w lemma="control" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="thymidine" /><w lemma="kinase" /></ngram></entry>
+<entry><ngram><w lemma="thymidine" /><w lemma="kinase" /><w lemma="promoter" /></ngram></entry>
+<entry><ngram><w lemma="thymocyte" /><w lemma="specific" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="thymocyte" /><w lemma="specific" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="thyroid" /><w lemma="gland" /></ngram></entry>
+<entry><ngram><w lemma="thyroid" /><w lemma="hormone" /></ngram></entry>
+<entry><ngram><w lemma="thyroid" /><w lemma="hormone" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="thyroid" /><w lemma="hormone" /><w lemma="receptor" /><w lemma="alpha" /><w lemma="and" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="thyroid" /><w lemma="state" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="factor" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="specific" /><w lemma="down" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="specific" /><w lemma="fashion" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="specific" /><w lemma="manner" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="specific" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="tissue" /><w lemma="specific" /><w lemma="regulatory" /><w lemma="dna" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="tnf" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="tnf" /><w lemma="alpha" /><w lemma="dependent" /><w lemma="induction" /></ngram></entry>
+<entry><ngram><w lemma="tnf" /><w lemma="alpha" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="total" /><w lemma="1,25" /><w lemma="oh" /><w lemma="2d3" /><w lemma="uptake" /></ngram></entry>
+<entry><ngram><w lemma="total" /><w lemma="rna" /></ngram></entry>
+<entry><ngram><w lemma="tr" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="trans" /><w lemma="acting" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="trans" /><w lemma="activation" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="trans" /><w lemma="activation" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="trans" /><w lemma="dominant" /><w lemma="negative" /><w lemma="inhibitor" /></ngram></entry>
+<entry><ngram><w lemma="transactivated" /><w lemma="reporter" /><w lemma="construct" /></ngram></entry>
+<entry><ngram><w lemma="transactivating" /><w lemma="capacity" /></ngram></entry>
+<entry><ngram><w lemma="transactivation" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="transactivation" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="efficiency" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="factor" /><w lemma="," /><w lemma="activated" /><w lemma="protein" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="factor" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="factor" /><w lemma="stat1" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="initiation" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="regulatory" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="signaling" /><w lemma="pathway" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="specific" /><w lemma="difference" /></ngram></entry>
+<entry><ngram><w lemma="transcription" /><w lemma="start" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="'" /><w lemma="silencer" /><w lemma="'" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="activation" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="activation" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="activator" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="activator" /><w lemma="precursor" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="activity" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="and" /><w lemma="post" /><w lemma="transcription" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="control" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="regulation" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="regulatory" /><w lemma="function" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="repression" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="response" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="silencer" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="start" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="transcriptional" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="transfected" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="transformed" /><w lemma="erythroid" /><w lemma="precursor" /></ngram></entry>
+<entry><ngram><w lemma="transformed" /><w lemma="fibroblast" /><w lemma="b" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="transgenic" /><w lemma="mouse" /><w lemma="model" /></ngram></entry>
+<entry><ngram><w lemma="transgenic" /><w lemma="thymocyte" /></ngram></entry>
+<entry><ngram><w lemma="transient" /><w lemma="cotransfection" /></ngram></entry>
+<entry><ngram><w lemma="transient" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="transient" /><w lemma="stimulation" /></ngram></entry>
+<entry><ngram><w lemma="transient" /><w lemma="transfection" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="transiently" /><w lemma="cotransfected" /><w lemma="human" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="transiently" /><w lemma="overexpressed" /><w lemma="hsf3" /></ngram></entry>
+<entry><ngram><w lemma="translation" /><w lemma="initiation" /><w lemma="codon" /></ngram></entry>
+<entry><ngram><w lemma="transmission" /><w lemma="electron" /><w lemma="microscopy" /></ngram></entry>
+<entry><ngram><w lemma="truncation" /><w lemma="mutant" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="control" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="er" /><w lemma="concentration" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="growth" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /><w lemma="messenger" /><w lemma="rna" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /><w lemma="messenger" /><w lemma="rna" /><w lemma="level" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /><w lemma="responsive" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="necrosis" /><w lemma="factor" /><w lemma="alpha" /><w lemma="responsive" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="tumor" /><w lemma="site" /></ngram></entry>
+<entry><ngram><w lemma="tumour" /><w lemma="suppressor" /><w lemma="p53" /></ngram></entry>
+<entry><ngram><w lemma="two" /><w lemma="dimensional" /><w lemma="phosphopeptide" /><w lemma="map" /></ngram></entry>
+<entry><ngram><w lemma="two" /><w lemma="heat" /><w lemma="shock" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="type" /><w lemma="1" /><w lemma="and" /><w lemma="2" /><w lemma="t" /><w lemma="helper" /><w lemma="cell" /><w lemma="cytokine" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="type" /><w lemma="i" /><w lemma="(" /><w lemma="atl" /><w lemma="1k" /><w lemma="," /><w lemma="mt" /><w lemma="2" /><w lemma="," /><w lemma="s" /><w lemma="lb1" /><w lemma=")" /></ngram></entry>
+<entry><ngram><w lemma="type" /><w lemma="ii" /></ngram></entry>
+<entry><ngram><w lemma="tyrosine" /><w lemma="phosphorylation" /></ngram></entry>
+<entry><ngram><w lemma="u" /><w lemma="937" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="u937" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="ubiquitin" /><w lemma="carrier" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="ubiquitin" /><w lemma="proteasome" /><w lemma="system" /></ngram></entry>
+<entry><ngram><w lemma="ubiquitin" /><w lemma="protein" /><w lemma="ligase" /></ngram></entry>
+<entry><ngram><w lemma="ubiquitous" /><w lemma="polypeptide" /></ngram></entry>
+<entry><ngram><w lemma="uninfected" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="uninfected" /><w lemma="peripheral" /><w lemma="blood" /><w lemma="monocyte" /></ngram></entry>
+<entry><ngram><w lemma="unstimulated" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="unstimulated" /><w lemma="nk" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="upstream" /><w lemma="promoter" /><w lemma="element" /></ngram></entry>
+<entry><ngram><w lemma="upstream" /><w lemma="stimulatory" /><w lemma="factor" /></ngram></entry>
+<entry><ngram><w lemma="v" /><w lemma="beta" /></ngram></entry>
+<entry><ngram><w lemma="variable" /><w lemma="region" /><w lemma="beta" /><w lemma="chain" /></ngram></entry>
+<entry><ngram><w lemma="variable" /><w lemma="region" /><w lemma="beta" /><w lemma="chain" /><w lemma="of" /><w lemma="(" /><w lemma="v" /><w lemma="beta" /><w lemma=")" /><w lemma="t" /><w lemma="cell" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="variant" /><w lemma="a" /></ngram></entry>
+<entry><ngram><w lemma="variant" /><w lemma="b" /></ngram></entry>
+<entry><ngram><w lemma="vascular" /><w lemma="cell" /><w lemma="adhesion" /><w lemma="molecule" /><w lemma="1" /></ngram></entry>
+<entry><ngram><w lemma="vascular" /><w lemma="cell" /><w lemma="adhesion" /><w lemma="molecule" /><w lemma="1" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="vascular" /><w lemma="endothelium" /></ngram></entry>
+<entry><ngram><w lemma="vascular" /><w lemma="injury" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="allele" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="dna" /><w lemma="binding" /><w lemma="domain" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="dna" /><w lemma="binding" /><w lemma="mutant" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="genotype" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="messenger" /><w lemma="rna" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="overexpression" /><w lemma="vector" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="retinoid" /><w lemma="x" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="vdr" /><w lemma="retinoid" /><w lemma="x" /><w lemma="receptor" /><w lemma="heterodimer" /></ngram></entry>
+<entry><ngram><w lemma="vernal" /><w lemma="keratoconjunctivitis" /></ngram></entry>
+<entry><ngram><w lemma="viable" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="and" /><w lemma="cellular" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="encoded" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="gene" /><w lemma="expression" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="pathogenesis" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="replication" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="survival" /><w lemma="promoting" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="viral" /><w lemma="transcriptional" /><w lemma="transactivator" /></ngram></entry>
+<entry><ngram><w lemma="virally" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="virus" /><w lemma="production" /></ngram></entry>
+<entry><ngram><w lemma="virus" /><w lemma="transcription" /></ngram></entry>
+<entry><ngram><w lemma="virus" /><w lemma="transformed" /><w lemma="cell" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d" /><w lemma="receptor" /><w lemma="gene" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d" /><w lemma="receptor" /><w lemma="messenger" /><w lemma="ribonucleic" /><w lemma="acid" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d3" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d3" /><w lemma="mediated" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d3" /><w lemma="mediated" /><w lemma="repression" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="d3" /><w lemma="receptor" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="e" /></ngram></entry>
+<entry><ngram><w lemma="vitamin" /><w lemma="e" /><w lemma="therapy" /></ngram></entry>
+<entry><ngram><w lemma="western" /><w lemma="blot" /><w lemma="analysis" /></ngram></entry>
+<entry><ngram><w lemma="western" /><w lemma="blotting" /></ngram></entry>
+<entry><ngram><w lemma="whole" /><w lemma="cell" /><w lemma="binding" /><w lemma="assay" /></ngram></entry>
+<entry><ngram><w lemma="x" /><w lemma="linked" /><w lemma="severe" /><w lemma="combined" /><w lemma="immunodeficiency" /></ngram></entry>
+<entry><ngram><w lemma="xscid" /><w lemma="like" /><w lemma="phenotype" /></ngram></entry>
+<entry><ngram><w lemma="yeast" /><w lemma="transactivator" /><w lemma="gal4" /></ngram></entry>
+<entry><ngram><w lemma="yt" /><w lemma="cell" /><w lemma="line" /></ngram></entry>
+<entry><ngram><w lemma="zinc" /><w lemma="finger" /></ngram></entry>
+<entry><ngram><w lemma="zinc" /><w lemma="finger" /><w lemma="protein" /></ngram></entry>
+<entry><ngram><w lemma="zinc" /><w lemma="finger" /><w lemma="protein" /><w lemma="binding" /><w lemma="region" /></ngram></entry>
+<entry><ngram><w lemma="zip" /><w lemma="site" /></ngram></entry>
+</dict>
