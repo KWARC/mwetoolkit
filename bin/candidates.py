@@ -327,16 +327,21 @@ except IOError, err :
 
 
 if corpus_from_index:
-    index = Index(arg[0])
+    index = Index( arg[0] )
     index.load_main()
     for sentence in index.iterate_sentences():
         treat_sentence(sentence)
-else:
+elif len(arg) > 0 :
     input_file = open( arg[ 0 ] )    
     parser = xml.sax.make_parser()
     parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
     parser.parse( input_file )
     input_file.close()
+else :
+    print >> sys.stderr, "Error! You must specify a XML corpus or -i index"
+    usage( usage_string )
+    sys.exit( 2 )
+    
 
 corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
 print_candidates( temp_file, corpus_name )
