@@ -99,7 +99,7 @@ main() {
 
 	for format in csv arff evita owl ucs; do
 		dotest "Conversion from XML to $format" \
-			"run xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format" 2>>warnings-$format.txt \
+			'run xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt' \
 			true
 	done
 
@@ -145,8 +145,8 @@ main() {
 }
 
 compare-to-reference() {
-	tar -C .. -xvf reference-output.tar.bz2
-	for file in *; do
+	tar -C .. -xvf ../reference-output.tar.bz2
+	for file in *.*; do
 		ref="../reference-output/$file"
 		printf "  Comparing %s... " "$file"
 		if [[ $file == *uniq* ]]; then
