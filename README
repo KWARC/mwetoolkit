@@ -1,17 +1,54 @@
 >>>   MULTIWORD EXPRESSIONS TOOLKIT   <<<
 >>>    mwetoolkit readme file         <<<
 
-Version 0.4
-Released: May 17, 2011
+Version 0.5
+Released: Mar 08, 2012
 Author: Carlos Ramisch, Vitor de Araujo
-Contact: carlosramisch@gmail.com
+Contact: mwetoolkit@gmail.com
 Website: mwetoolkit.sf.net 
 Project: sf.net/projects/mwetoolkit
 
 The goal of the mwetoolkit is to perform automatic Multiword Expression 
 extraction. Please read this documentation before you start the work.
 
-    1) DOCUMENT TYPE DEFINITIONS
+    1) INSTALLING
+    
+(Please refer to the website for up-to-date installation documentation.)
+    
+To install the mwetoolkit, just download it from the SVN repository using the 
+following command:
+
+svn co https://mwetoolkit.svn.sourceforge.net/svnroot/mwetoolkit mwetoolkit
+
+The toolkit is also availaible as a stable release at:
+
+https://sourceforge.net/projects/mwetoolkit/files/latest/download
+
+However, as the code evolves fast, we recommend you to use the SVN version 
+instead.
+
+Once you have downloaded (and unzipped, in the case of a release) the toolkit, 
+navigate to the main folder and run the command
+
+make
+
+for compiling the C libraries used by the toolkit. If you do not run this 
+command, the toolkit will still work but it will use a Python version (much 
+slower and possibly obsolete!) of the indexing and counting scripts. This may be 
+OK for small corpora.
+
+    2) SCRIPTS and PROGRAMS
+
+The "bin" folder contains a set of Python scripts that automatise part of the
+MWE extraction process. Call each script with parameter -h and you will have
+a complete list of arguments and options to use.
+
+Alternatively, for simple MWE extraction tasks you can call bin/mweconsole.sh, 
+which contains a friendlier command-line interface to the scripts.
+
+Please refer to the website for tutorials, quick start and more documentation.
+
+    3) DOCUMENT TYPE DEFINITIONS
 
 You will find three different DTD files that describe the format of the three
 inputs of the MWT toolkit scripts:
@@ -19,15 +56,21 @@ inputs of the MWT toolkit scripts:
 * mwttoolkit-corpus.dtd
 * mwttoolkit-dict.dtd
 * mwttoolkit-candidates.dtd
+* mwetoolkit-patterns.dtd
 
-    2) EXAMPLES
+You should add a link to the folder containing the DTD specifications to every
+folder containing XML files used by the mwetoolkit (working-dir). Therefore, 
+please use the following command:
+
+cd working-dir
+ln -s mwetoolkit-dir/dtd
+
+    4) EXAMPLES
 
 The "toy" folder contains a set of files for performing a toy experiment.
-You could try to run the whole pipeline by calling "bash testAll.sh" The specific
+You can try to run the whole pipeline by calling "./testAll.sh" The specific
 documentation about the examples is in a dedicated README file.
 
-    3) SCRIPTS
+    5) REGRESSION TESTS
+    
 
-The "bin" folder contains a set of useful scripts that automatise part of the
-MWT extraction process. Call each script with no parameter and you will have
-a complete list of arguments and options to use.

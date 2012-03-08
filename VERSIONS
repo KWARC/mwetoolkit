@@ -1,5 +1,21 @@
 >>>   MULTIWORD EXPRESSIONS TOOLKIT   <<<
+>>>     http://mwetoolkit.sf.net      <<<
+>>>       mwetoolkit@gmail.com        <<<
+>>>                                   <<<
 >>>    mwetoolkit version history     <<<
+
+
+VERSION 0.5:
+Released: March 08, 2012
+Author: Carlos Ramisch, Vitor de Araujo
+
+Improvements over 0.4:
+    a) Regression test suite on several corpora
+    b) LocalMaxs implementation for candidate extraction
+    c) More conversion scripts (including treetagger2xml)
+    d) Fully functional syntactic extraction
+    e) Improved indexation and counting programs
+    f) Up-to-date documentation and help
 
 VERSION 0.4:
 Released: May 17, 2011
