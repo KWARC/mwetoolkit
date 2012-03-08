@@ -39,7 +39,10 @@ common_options_usage_string = """\
     Print messages that explain what is happening.
 
 -D or --debug
-    Print debug information when an error occurs."""
+    Print debug information when an error occurs.
+    
+-h or --help
+    Print usage information about parameters and options"""
 
 ################################################################################
 
@@ -100,6 +103,9 @@ def treat_options_simplest( opts, arg, n_arg, usage_string ) :
             verbose( "Verbose mode on" )
         elif o in ("-D", "--debug"):
             set_debug_mode(True)
+        elif o in ("-h", "--help") :
+            usage( usage_string )
+            sys.exit( 0 )
     
     if n_arg >= 0 and len( arg ) != n_arg :
         print >> sys.stderr, "You must provide %(n)s arguments to this script" \
@@ -126,11 +132,11 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
         of this script.
     """
 
-    for opt in ['v', 'D']:
+    for opt in ['v', 'D', 'h']:
         if opt not in shortopts:
             shortopts += opt
 
-    for opt in ['verbose', 'debug']:
+    for opt in ['verbose', 'debug', 'help']:
         if opt not in longopts:
             longopts += [opt]
 
