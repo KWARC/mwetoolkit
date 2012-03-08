@@ -311,7 +311,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "source" ]
-arg = read_options( "p:n:ifgsS", longopts, treat_options, 1, usage_string )
+arg = read_options( "p:n:ifgsS", longopts, treat_options, -1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
