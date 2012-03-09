@@ -132,7 +132,7 @@ main() {
 		true
 
 	dotest "Removal of duplicated candidates ignoring POS" \
-		'run uniq.py candidates-featureful.xml >candidates-uniq-nopos.xml' \
+		'run uniq.py -g candidates-featureful.xml >candidates-uniq-nopos.xml' \
 		true
 
 	dotest "Filtering out candidates occurring less than twice" \
