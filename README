@@ -2,7 +2,7 @@
 >>>    mwetoolkit readme file         <<<
 
 Version 0.5
-Released: Mar 08, 2012
+Released: Mar 09, 2012
 Author: Carlos Ramisch, Vitor de Araujo
 Contact: mwetoolkit@gmail.com
 Website: mwetoolkit.sf.net 
@@ -76,4 +76,13 @@ documentation about the examples is in a dedicated README file.
 
     5) REGRESSION TESTS
     
+The "test" folder contains regression tests for most scripts. In order to test
+your installation of the mwetoolkit, navigate to this folder and then call the
+script testAll.sh
 
+cd test
+./testAll.sh
+
+Should one of the tests fail, please send a copy of the output and a brief
+description of your configurations (operating system, version, machine) to our
+email mwetoolkit@gmail.com
