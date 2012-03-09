@@ -129,7 +129,7 @@ def treat_candidate( candidate_i ) :
     if entity_counter % 100 == 0 :
         verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     true_positive = False
-    pdb.set_trace()
+    #pdb.set_trace()
     candidate = Candidate( 0, [], [], [], [], [] )
     for w in candidate_i :
         copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
@@ -206,7 +206,7 @@ def open_gs( gs_filename ) :
     try :
         reference_file = open( gs_filename )
         parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_entry=treat_reference ) )
+        parser.setContentHandler( DictXMLHandler( treat_entry=treat_reference ))
         parser.parse( reference_file )
         reference_file.close()
     except IOError, err:
@@ -253,7 +253,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     # since options such as -g and -c modify the way the list is represented
     if ref_name :
         open_gs( ref_name )
-        gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", a ) )
+        gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", ref_name ) )
     # There's no reference list... Oh oh cannot evaluate :-(
     if not pre_gs :
         print >> sys.stderr, "You MUST provide a non-empty reference list!"
