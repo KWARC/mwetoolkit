@@ -202,7 +202,10 @@ def print_stats() :
         Sorts the tuple list `feat_to_order` and then retrieves the candidates
         from the temporary DB in order to print them out.
     """
-    global feat_to_order, ascending, feat_list, print_precs
+    global feat_to_order
+    global ascending
+    global feat_list
+    global print_precs
     #feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending) )
     # Now print sorted candidates. A candidate is retrieved from temp DB through
     # its ID
@@ -253,8 +256,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.
     """
     global feat_list
-    print ascending
-    print print_precs
+    global ascending
+    global print_precs
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
