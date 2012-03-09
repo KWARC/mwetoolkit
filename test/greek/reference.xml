@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<entry><ngram><w lemma="έλλειψη" pos="N"/><w lemma="εργατικού" pos="AJ"/><w lemma="δυναμικού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="έναρξη" pos="N"/><w lemma="ενταξιακών" pos="AJ"/><w lemma="διαπραγματεύσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ένταση" pos="N"/><w lemma="εργατικού" pos="AJ"/><w lemma="δυναμικού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αγωγός" pos="N"/><w lemma="φυσικού" pos="AJ"/><w lemma="αερίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αναπληρωτής" pos="N"/><w lemma="γενικός" pos="AJ"/><w lemma="γραμματέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="απονομή" pos="N"/><w lemma="οικολογικού" pos="AJ"/><w lemma="σήματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δίκτυο" pos="N"/><w lemma="επιδημιολογικής" pos="AJ"/><w lemma="παρακολούθησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δίκτυο" pos="N"/><w lemma="κινητής" pos="AJ"/><w lemma="τηλεφωνίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διαμονή" pos="N"/><w lemma="μακράς" pos="AJ"/><w lemma="διάρκειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διευκόλυνση" pos="N"/><w lemma="ταχείας" pos="AJ"/><w lemma="αντίδρασης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικαιώματα" pos="N"/><w lemma="πνευματικής" pos="AJ"/><w lemma="ιδιοκτησίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δοκιμασίες" pos="N"/><w lemma="ταχείας" pos="AJ"/><w lemma="διάγνωσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δύναμη" pos="N"/><w lemma="ταχείας" pos="AJ"/><w lemma="αντίδρασης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δύναμη" pos="N"/><w lemma="ταχείας" pos="AJ"/><w lemma="επέμβασης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκμάθηση" pos="N"/><w lemma="ξένων" pos="AJ"/><w lemma="γλωσσών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκπομπές" pos="N"/><w lemma="ρυπογόνων" pos="AJ"/><w lemma="ουσιών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελεγκτές" pos="N"/><w lemma="εναέριας" pos="AJ"/><w lemma="κυκλοφορίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εμπορία" pos="N"/><w lemma="ανθρώπινων" pos="AJ"/><w lemma="όντων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εμπόριο" pos="N"/><w lemma="λευκής" pos="AJ"/><w lemma="σαρκός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιθεώρηση" pos="N"/><w lemma="πυρηνικών" pos="AJ"/><w lemma="εγκαταστάσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιτροπή" pos="N"/><w lemma="ανεξάρτητων" pos="AJ"/><w lemma="εμπειρογνωμόνων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εργοστάσιο" pos="N"/><w lemma="ατομικής" pos="AJ"/><w lemma="ενέργειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ζώνη" pos="N"/><w lemma="ελεύθερων" pos="AJ"/><w lemma="συναλλαγών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θύμα" pos="N"/><w lemma="τροχαίου" pos="AJ"/><w lemma="ατυχήματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιδρύματα" pos="N"/><w lemma="τριτοβάθμιας" pos="AJ"/><w lemma="εκπαίδευσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="καθηγητές" pos="N"/><w lemma="ξένων" pos="AJ"/><w lemma="γλωσσών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="καθορισμός" pos="N"/><w lemma="οριακών" pos="AJ"/><w lemma="τιμών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κανονισμό" pos="N"/><w lemma="υπηρεσιακής" pos="AJ"/><w lemma="καταστάσεως" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="καταστήματα" pos="N"/><w lemma="αφορολογήτων" pos="AJ"/><w lemma="ειδών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κινητήρες" pos="N"/><w lemma="εσωτερικής" pos="AJ"/><w lemma="καύσεως" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κλήσεων" pos="N"/><w lemma="έκτακτης" pos="AJ"/><w lemma="ανάγκης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κριτήρια" pos="N"/><w lemma="ονομαστικής" pos="AJ"/><w lemma="σύγκλισης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μέσα" pos="N"/><w lemma="μαζικής" pos="AJ"/><w lemma="ενημέρωσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μηνύματα" pos="N"/><w lemma="ηλεκτρονικού" pos="AJ"/><w lemma="ταχυδρομείου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μηχανισμός" pos="N"/><w lemma="συναλλαγματικών" pos="AJ"/><w lemma="ισοτιμιών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μηχανισμός" pos="N"/><w lemma="ταχείας" pos="AJ"/><w lemma="αντίδρασης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ξέπλυμα" pos="N"/><w lemma="βρώμικου" pos="AJ"/><w lemma="χρήματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οργανισμοί" pos="N"/><w lemma="τοπικής" pos="AJ"/><w lemma="αυτοδιοίκησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οργανισμός" pos="N"/><w lemma="αφρικανικής" pos="AJ"/><w lemma="ενότητας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οργανισμός" pos="N"/><w lemma="πνευματικής" pos="AJ"/><w lemma="ιδιοκτησίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παραγωγή" pos="N"/><w lemma="ηλεκτρικού" pos="AJ"/><w lemma="ρεύματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παροχή" pos="N"/><w lemma="ηλεκτρικού" pos="AJ"/><w lemma="ρεύματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πετρέλαιο" pos="N"/><w lemma="εσωτερικής" pos="AJ"/><w lemma="καύσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συζητήσεις" pos="N"/><w lemma="στρογγυλής" pos="AJ"/><w lemma="τραπέζης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συστήματα" pos="N"/><w lemma="υγειονομικής" pos="AJ"/><w lemma="περίθαλψης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σωματεμπορία" pos="N"/><w lemma="ανθρώπινων" pos="AJ"/><w lemma="όντων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σύστημα" pos="N"/><w lemma="έγκαιρης" pos="AJ"/><w lemma="προειδοποίησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σύστημα" pos="N"/><w lemma="γενικευμένων" pos="AJ"/><w lemma="προτιμήσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σύστημα" pos="N"/><w lemma="κινητών" pos="AJ"/><w lemma="τηλεπικοινωνιών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τηλεφωνία" pos="N"/><w lemma="τρίτης" pos="AJ"/><w lemma="γενιάς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τραίνα" pos="N"/><w lemma="μεγάλης" pos="AJ"/><w lemma="ταχύτητας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τραίνα" pos="N"/><w lemma="υψηλών" pos="AJ"/><w lemma="ταχυτήτων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υλικό" pos="N"/><w lemma="παιδικής" pos="AJ"/><w lemma="πορνογραφίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υπηρεσία" pos="N"/><w lemma="κοινής" pos="AJ"/><w lemma="ωφέλειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φορείς" pos="N"/><w lemma="τοπικής" pos="AJ"/><w lemma="αυτοδιοίκησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φόρο" pos="N"/><w lemma="προστιθέμενης" pos="AJ"/><w lemma="αξίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χειρονομία" pos="N"/><w lemma="καλής" pos="AJ"/><w lemma="θέλησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χώροι" pos="N"/><w lemma="υγειονομικής" pos="AJ"/><w lemma="ταφής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όπλα" pos="N"/><w lemma="απεμπλουτισμένου" pos="AJ"/><w lemma="ουρανίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όπλα" pos="N"/><w lemma="μαζικής" pos="AJ"/><w lemma="καταστροφής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="έρευνα" pos="N"/><w lemma="και" pos="CJ"/><w lemma="ανάπτυξη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βορρά" pos="N"/><w lemma="και" pos="CJ"/><w lemma="νότο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εισαγωγές" pos="N"/><w lemma="και" pos="CJ"/><w lemma="εξαγωγές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκλέγειν" pos="N"/><w lemma="και" pos="CJ"/><w lemma="εκλέγεσθαι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιστήμης" pos="N"/><w lemma="και" pos="CJ"/><w lemma="τεχνολογίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιστημών" pos="N"/><w lemma="και" pos="CJ"/><w lemma="τεχνολογίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εργαζόμενους" pos="N"/><w lemma="και" pos="CJ"/><w lemma="εργοδότες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εργοδότες" pos="N"/><w lemma="και" pos="CJ"/><w lemma="εργαζόμενοι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κατάρτιση" pos="N"/><w lemma="κι" pos="CJ"/><w lemma="επιμόρφωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πανίδα" pos="N"/><w lemma="και" pos="CJ"/><w lemma="χλωρίδα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παραγωγή" pos="N"/><w lemma="και" pos="CJ"/><w lemma="εμπορία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παραγωγή" pos="N"/><w lemma="και" pos="CJ"/><w lemma="κατανάλωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προσφορά" pos="N"/><w lemma="και" pos="CJ"/><w lemma="ζήτηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόληψη" pos="N"/><w lemma="και" pos="CJ"/><w lemma="καταπολέμηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σάρκα" pos="N"/><w lemma="και" pos="CJ"/><w lemma="οστά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τάξη" pos="N"/><w lemma="και" pos="CJ"/><w lemma="ασφάλεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τελεία" pos="N"/><w lemma="και" pos="CJ"/><w lemma="παύλα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φρούτα" pos="N"/><w lemma="και" pos="CJ"/><w lemma="λαχανικά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χλωρίδα" pos="N"/><w lemma="και" pos="CJ"/><w lemma="πανίδα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αιχμή" pos="N"/><w lemma="του" pos="DT"/><w lemma="δόρατος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αρχή" pos="N"/><w lemma="της" pos="DT"/><w lemma="επικoυρικότητας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δρυμός" pos="N"/><w lemma="της" pos="DT"/><w lemma="doρana" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δόξα" pos="N"/><w lemma="τω" pos="DT"/><w lemma="θεώ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνίας" pos="N"/><w lemma="της" pos="DT"/><w lemma="πληροφορίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μήλον" pos="N"/><w lemma="της" pos="DT"/><w lemma="έριδος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μερίδα" pos="N"/><w lemma="του" pos="DT"/><w lemma="λέοντος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προστασία" pos="N"/><w lemma="του" pos="DT"/><w lemma="καταναλωτή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προστασία" pos="N"/><w lemma="του" pos="DT"/><w lemma="περιβάλλοντος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ώρα" pos="N"/><w lemma="των" pos="DT"/><w lemma="eρωτήσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="aνθρώπινα" pos="AJ"/><w lemma="δικαιώματα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="aντίς" pos="N"/><w lemma="aμπέμπα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eλεγκτικού" pos="AJ"/><w lemma="συνεδρίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eπιτροπή" pos="N"/><w lemma="eλέγχου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eπιτροπή" pos="N"/><w lemma="eξωτερικών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eτήσια" pos="AJ"/><w lemma="έκθεση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eυρωπαϊκή" pos="AJ"/><w lemma="kοινότητα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eυρωπαϊκή" pos="AJ"/><w lemma="ένωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="eυρωπαϊκός" pos="AJ"/><w lemma="oργανισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="hνωμένα" pos="AJ"/><w lemma="έθνη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="hνωμένες" pos="AJ"/><w lemma="πολιτείες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="mπάνια" pos="N"/><w lemma="λούκα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="pωσική" pos="AJ"/><w lemma="oμοσπονδία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ένθερμος" pos="AJ"/><w lemma="υποστηρικτής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ένταλμα" pos="N"/><w lemma="σύλληψης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ίσoις" pos="AJ"/><w lemma="όρoις" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ίσοις" pos="AJ"/><w lemma="όροις" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αvαvεώσιμωv" pos="N"/><w lemma="πηγώv" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αvθρωπίvωv" pos="N"/><w lemma="δικαιωμάτωv" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αγoρά" pos="N"/><w lemma="εργασίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αδύναμος" pos="AJ"/><w lemma="κρίκος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αειφόρος" pos="AJ"/><w lemma="ανάπτυξη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αθλητικοί" pos="AJ"/><w lemma="σύλλογοι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ακρογωνιαίος" pos="AJ"/><w lemma="λίθος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αλκooλoύχα" pos="AJ"/><w lemma="πoτά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανανεώσιμες" pos="AJ"/><w lemma="πηγές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανανεώσιμων" pos="AJ"/><w lemma="πηγών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αναπληρωτής" pos="N"/><w lemma="υπουργός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αναπτυσσόμενων" pos="AJ"/><w lemma="χωρών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανατολικό" pos="AJ"/><w lemma="τιμόρ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικαιωμάτων;" pos="AJ"/><w lemma="ανθρώπινα" pos="N"/><w lemma="δικαιώματα" pos="ανθρωπίνων"/></ngram></entry>
+<entry><ngram><w lemma="ανθρωπιστική" pos="AJ"/><w lemma="βοήθεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανθρώπινα" pos="AJ"/><w lemma="δικαιώματα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανθρώπινος" pos="AJ"/><w lemma="παράγοντας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αντίς" pos="N"/><w lemma="αμπέμπα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανώτατα" pos="AJ"/><w lemma="όρια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανώτατο" pos="AJ"/><w lemma="όριο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανώτατος" pos="AJ"/><w lemma="αξιωματούχος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όριο;" pos="AJ"/><w lemma="ανώτατο" pos="N"/><w lemma="όριο" pos="ανώτερο"/></ngram></entry>
+<entry><ngram><w lemma="απεμπλουτισμένου" pos="AJ"/><w lemma="ουρανίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="απεργία" pos="N"/><w lemma="πείνας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αποδιοπομπαίος" pos="AJ"/><w lemma="τράγος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αρμόδιoς" pos="AJ"/><w lemma="φoρέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αρμόδιοι" pos="AJ"/><w lemma="υπουργοί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αρμόδιος" pos="AJ"/><w lemma="υπάλληλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αρμόδιος" pos="AJ"/><w lemma="υπουργός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ατμοσφαιρική" pos="AJ"/><w lemma="ρύπανση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αφθώδης" pos="AJ"/><w lemma="πυρετός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="αχίλλειος" pos="AJ"/><w lemma="πτέρνα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βήμα" pos="AJ"/><w lemma="βήμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βιολογικού" pos="AJ"/><w lemma="καθαρισμού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βιομηχανικού" pos="AJ"/><w lemma="τομέα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βιομηχανικός" pos="AJ"/><w lemma="τομέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βλαστικά" pos="AJ"/><w lemma="κύτταρα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βουλευτική" pos="AJ"/><w lemma="ασυλία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βραβεία" pos="N"/><w lemma="νόμπελ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βραβείο" pos="N"/><w lemma="νόμπελ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βραχείες" pos="AJ"/><w lemma="ίνες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γαλλική" pos="AJ"/><w lemma="επανάσταση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γεvική" pos="AJ"/><w lemma="διεύθυvση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γενικός" pos="AJ"/><w lemma="γραμματέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γενικός" pos="AJ"/><w lemma="διευθυντής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γενικός" pos="AJ"/><w lemma="εισαγγελέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γεωργική" pos="AJ"/><w lemma="πoλιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γεωργική" pos="AJ"/><w lemma="πολιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γόρδιος" pos="AJ"/><w lemma="δεσμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δίδυμοι" pos="AJ"/><w lemma="πύργοι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δίπλωμα" pos="N"/><w lemma="ευρεσιτεχνίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δακτυλικά" pos="AJ"/><w lemma="αποτυπώματα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δαμόκλειος" pos="AJ"/><w lemma="σπάθη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημοτικοί" pos="AJ"/><w lemma="σύμβουλοι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημοτικός" pos="AJ"/><w lemma="σύμβουλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιoς" pos="AJ"/><w lemma="τoμέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσια" pos="AJ"/><w lemma="υγεία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υγεία;" pos="AJ"/><w lemma="δημόσιας" pos="N"/><w lemma="yγείας" pos="δημόσια"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιας" pos="AJ"/><w lemma="yγείας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιες" pos="AJ"/><w lemma="υπηρεσίες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιος" pos="AJ"/><w lemma="τομέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιος" pos="AJ"/><w lemma="υπάλληλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιος" pos="AJ"/><w lemma="χώρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δημόσιων" pos="AJ"/><w lemma="χώρων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διάσκεψη" pos="N"/><w lemma="κoρυφής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διάσκεψη" pos="N"/><w lemma="κορυφής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διακριτική" pos="AJ"/><w lemma="ευχέρεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διακυβερνητική" pos="AJ"/><w lemma="διάσκεψη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διαρθρωτικά" pos="AJ"/><w lemma="ταμεία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ταμεία;" pos="AJ"/><w lemma="διαρθρωτικό" pos="N"/><w lemma="ταμείο" pos="διαρθρωτικά"/></ngram></entry>
+<entry><ngram><w lemma="διεθvής" pos="AJ"/><w lemma="κoιvότητα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διεθνής" pos="AJ"/><w lemma="διάσκεψη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διεθνής" pos="AJ"/><w lemma="κοινότητα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διεθνής" pos="AJ"/><w lemma="οικονομία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διεθνής" pos="AJ"/><w lemma="πολιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διευθύνων" pos="AJ"/><w lemma="σύμβουλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διευρωπαϊκό" pos="AJ"/><w lemma="δίκτυο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικηγορικού" pos="AJ"/><w lemma="συλλόγου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικηγορικός" pos="AJ"/><w lemma="σύλλογος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικτυακοί" pos="AJ"/><w lemma="τόποι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δικτυακός" pos="AJ"/><w lemma="τόπος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διπλώματα" pos="N"/><w lemma="ευρεσιτεχνίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δομινικανή" pos="AJ"/><w lemma="δημοκρατία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δούρειος" pos="AJ"/><w lemma="ίππος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εθνικό" pos="AJ"/><w lemma="επίπεδο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εθνικό" pos="AJ"/><w lemma="κοινοβούλιο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εθνικός" pos="AJ"/><w lemma="δρυμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ειδικευόμενοι" pos="AJ"/><w lemma="ιατροί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ειδικός" pos="AJ"/><w lemma="σύμβουλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ειρηνευτική" pos="AJ"/><w lemma="διαδικασία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εισαγωγικοί" pos="AJ"/><w lemma="δασμοί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκδοτικός" pos="AJ"/><w lemma="οίκος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκλογικός" pos="AJ"/><w lemma="νόμος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελαιούχοι" pos="AJ"/><w lemma="σπόροι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελεγκτικό" pos="AJ"/><w lemma="συνέδριο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελεύθερο" pos="AJ"/><w lemma="χρόνο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελεύθεροι" pos="AJ"/><w lemma="επαγγελματίες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ελεύθερος" pos="AJ"/><w lemma="χρόνος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εμπορικοί" pos="AJ"/><w lemma="δεσμοί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εμφύλιoς" pos="AJ"/><w lemma="πόλεμoς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εμφύλιος" pos="AJ"/><w lemma="πόλεμος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εναλλακτική" pos="AJ"/><w lemma="λύση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εναρκτήριο" pos="AJ"/><w lemma="λάκτισμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ενδοκρινικές" pos="AJ"/><w lemma="διαταραχές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ενδοκρινικοί" pos="AJ"/><w lemma="διαταράκτες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ενεργειακός" pos="AJ"/><w lemma="εφοδιασμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ενιαία" pos="AJ"/><w lemma="αγορά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ενιαίο" pos="AJ"/><w lemma="νόμισμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νόμισμα;" pos="AJ"/><w lemma="ενιαίου" pos="N"/><w lemma="νομίσματος" pos="ενιαίο"/></ngram></entry>
+<entry><ngram><w lemma="ενωτική" pos="AJ"/><w lemma="αριστερά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εξωτερική" pos="AJ"/><w lemma="πoλιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εξωτερικής" pos="AJ"/><w lemma="πoλιτικής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εξωτερικών" pos="N"/><w lemma="υποθέσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιβραδυντικά" pos="AJ"/><w lemma="φλόγας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιτροπή" pos="N"/><w lemma="γεωργίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιτροπή" pos="N"/><w lemma="περιβάλλοντος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιτροπή" pos="N"/><w lemma="προϋπολογισμού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επιτροπής" pos="N"/><w lemma="περιβάλλοντος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εργατικό" pos="AJ"/><w lemma="δυναμικό" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ερυθρά" pos="N"/><w lemma="ημισέληνος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ερυθρός" pos="AJ"/><w lemma="σταυρός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εσωτερικές" pos="AJ"/><w lemma="υποθέσεις" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εσωτερικός" pos="AJ"/><w lemma="κανονισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ετήσια" pos="AJ"/><w lemma="έκθεση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευήκοον" pos="AJ"/><w lemma="ους" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαική" pos="AJ"/><w lemma="ένωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαική" pos="AJ"/><w lemma="ενωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκή" pos="AJ"/><w lemma="ένωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκή" pos="AJ"/><w lemma="επιτροπή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκή" pos="AJ"/><w lemma="πολιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκούς" pos="AJ"/><w lemma="οργανισμούς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκό" pos="AJ"/><w lemma="δικαστήριo" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκό" pos="AJ"/><w lemma="δικαστήριο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκό" pos="AJ"/><w lemma="κoινoβoύλιo" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκό" pos="AJ"/><w lemma="κοινοβούλιο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκό" pos="AJ"/><w lemma="συμβούλιο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευρωπαϊκός" pos="AJ"/><w lemma="οργανισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ευσεβής" pos="AJ"/><w lemma="πόθος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ζωικά" pos="AJ"/><w lemma="άλευρα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ζωολογικός" pos="AJ"/><w lemma="κήπος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηθικής" pos="N"/><w lemma="δεοντολογίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηλεκτρονικοί" pos="AJ"/><w lemma="υπολογιστές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηλεκτρονικός" pos="AJ"/><w lemma="εξοπλισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηλεκτρονικός" pos="AJ"/><w lemma="υπολογιστής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ημερήσια" pos="AJ"/><w lemma="διάταξη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ημερησία" pos="AJ"/><w lemma="διάταξη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηνωμένα" pos="AJ"/><w lemma="έθνη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ηνωμένο" pos="AJ"/><w lemma="βασίλειο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εθνών;" pos="AJ"/><w lemma="hνωμένα" pos="N"/><w lemma="έθνη" pos="ηνωμένων"/></ngram></entry>
+<entry><ngram><w lemma="θέσεις" pos="N"/><w lemma="απασχόλησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θέσεις" pos="N"/><w lemma="εργασίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θανατική" pos="AJ"/><w lemma="ποινή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θεμέλιος" pos="AJ"/><w lemma="λίθος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θεμελιωδών" pos="N"/><w lemma="δικαιωμάτων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θεραπευτική" pos="N"/><w lemma="αγωγή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θεσμικά" pos="AJ"/><w lemma="οργανα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οργανα;" pos="AJ"/><w lemma="θεσμικό" pos="N"/><w lemma="όργανο" pos="θεσμικά"/></ngram></entry>
+<entry><ngram><w lemma="θεσμικό" pos="AJ"/><w lemma="όργανο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θεσμικώv" pos="N"/><w lemma="oργάvωv" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιατρικής" pos="N"/><w lemma="περίθαλψης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιατρικός" pos="AJ"/><w lemma="εξοπλισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιατρικός" pos="AJ"/><w lemma="σύλλογος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιβηρική" pos="AJ"/><w lemma="χερσόνησος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιδίοις" pos="N"/><w lemma="όμμασιν" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιδιωτικός" pos="AJ"/><w lemma="τομέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ιονίζουσα" pos="AJ"/><w lemma="ακτινοβολία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ισημερινής" pos="AJ"/><w lemma="γουϊνέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ισλαμικός" pos="AJ"/><w lemma="φονταμενταλισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="καθαρός" pos="AJ"/><w lemma="αέρας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="καθεδρικός" pos="AJ"/><w lemma="ναός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κατανάλωση" pos="N"/><w lemma="αλκοόλ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κατευθυντήριες" pos="AJ"/><w lemma="γραμμές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="γραμμές;" pos="AJ"/><w lemma="κατευθυντήρια" pos="N"/><w lemma="γραμμή" pos="κατευθυντηριες"/></ngram></entry>
+<entry><ngram><w lemma="κεντρική" pos="AJ"/><w lemma="τράπεζα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κεντρικός" pos="AJ"/><w lemma="άξονας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κινητή" pos="AJ"/><w lemma="τηλεφωνία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κινητήριος" pos="AJ"/><w lemma="μοχλός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κινητό" pos="AJ"/><w lemma="τηλέφωνο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κλιματικές" pos="AJ"/><w lemma="μεταβολές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινή" pos="AJ"/><w lemma="γνώμη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινής" pos="AJ"/><w lemma="γνώμης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινοβουλευτικός" pos="AJ"/><w lemma="έλεγχος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινοτική" pos="AJ"/><w lemma="νομοθεσία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινοτικό" pos="AJ"/><w lemma="δίκαιο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικές" pos="AJ"/><w lemma="υποθέσεις" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνική" pos="AJ"/><w lemma="ασφάλιση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνική" pos="AJ"/><w lemma="συνοχή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικοί" pos="AJ"/><w lemma="λειτουργοί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικός" pos="AJ"/><w lemma="έλεγχος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικός" pos="AJ"/><w lemma="αποκλεισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικός" pos="AJ"/><w lemma="διάλογος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικός" pos="AJ"/><w lemma="εταίρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικός" pos="AJ"/><w lemma="χώρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικών" pos="AJ"/><w lemma="ασφαλίσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινωνικών" pos="AJ"/><w lemma="υποθέσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινός" pos="AJ"/><w lemma="παρονομαστής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κοινός" pos="AJ"/><w lemma="τόπος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κράτη" pos="N"/><w lemma="μέλη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κράτος" pos="N"/><w lemma="μέλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κρατική" pos="AJ"/><w lemma="ενίσχυση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κρατικού" pos="AJ"/><w lemma="μηχανισμού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κρατώv" pos="N"/><w lemma="μελώv" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κυβερνητικός" pos="AJ"/><w lemma="εκπρόσωπος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κυβερνητικός" pos="AJ"/><w lemma="συνασπισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κυβερνών" pos="AJ"/><w lemma="κόμμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κυκλοφοριακή" pos="AJ"/><w lemma="συμφόρηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κόστα" pos="N"/><w lemma="ρίκα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κώδικας" pos="N"/><w lemma="συμπεριφοράς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λέξη" pos="N"/><w lemma="κλειδί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λαϊκού" pos="AJ"/><w lemma="kόμματος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λαϊκό" pos="AJ"/><w lemma="kόμμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λεκάνη" pos="N"/><w lemma="απορροής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λευκή" pos="AJ"/><w lemma="bίβλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λευκή" pos="AJ"/><w lemma="βίβλoς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λεϊλά" pos="AJ"/><w lemma="ζάνα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λυδία" pos="AJ"/><w lemma="λίθος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μέσα" pos="N"/><w lemma="ενημέρωσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μέση" pos="AJ"/><w lemma="ανατολή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μέση" pos="N"/><w lemma="τιμή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μέσος" pos="AJ"/><w lemma="όρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μαγικό" pos="AJ"/><w lemma="ραβδί" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μείζονος" pos="AJ"/><w lemma="σημασίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μεταβλητή" pos="AJ"/><w lemma="γεωμετρία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μικρομεσαία" pos="AJ"/><w lemma="επιχείρηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μικρομεσαίων" pos="AJ"/><w lemma="επιχειρήσεων" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μονού" pos="AJ"/><w lemma="κύτους" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="μόνιμος" pos="AJ"/><w lemma="κάτοικος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νέες" pos="AJ"/><w lemma="τεχνολογίες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νιτρικά" pos="AJ"/><w lemma="ιόντα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="άλας;" pos="AJ"/><w lemma="νιτρικά" pos="N"/><w lemma="άλατα" pos="νιτρικό"/></ngram></entry>
+<entry><ngram><w lemma="νομική" pos="AJ"/><w lemma="βάση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νομικός" pos="AJ"/><w lemma="σύμβουλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νομισματική" pos="AJ"/><w lemma="ένωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="νωτιαίος" pos="AJ"/><w lemma="μυελός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οδηγία" pos="N"/><w lemma="πλαίσιο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οδικούς" pos="AJ"/><w lemma="άξονες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οδικός" pos="AJ"/><w lemma="χάρτης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οικονομική" pos="AJ"/><w lemma="ανάπτυξη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οικονομική" pos="AJ"/><w lemma="πολιτική" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οινοπνευματώδη" pos="AJ"/><w lemma="ποτά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ομφάλιος" pos="AJ"/><w lemma="λώρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ομόσπονδα" pos="AJ"/><w lemma="κρατίδια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ονομαστική" pos="AJ"/><w lemma="κλήση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οξειδίου" pos="AJ"/><w lemma="πλουτωνίου-ουρανίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οπτικές" pos="N"/><w lemma="γωνίες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οπτική" pos="AJ"/><w lemma="γωνία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="οπτικής" pos="N"/><w lemma="γωνίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ορκωτός" pos="AJ"/><w lemma="ελεγκτής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πoλιτική" pos="AJ"/><w lemma="ομάδα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πoλιτικής" pos="AJ"/><w lemma="ασφάλειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παγκόσμιος" pos="AJ"/><w lemma="οργανισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παγκόσμιος" pos="AJ"/><w lemma="πόλεμος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παιδική" pos="AJ"/><w lemma="πορνογραφία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παιδικός" pos="AJ"/><w lemma="σταθμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πεδίo" pos="N"/><w lemma="εφαρμoγής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πεδίο" pos="N"/><w lemma="εφαρμογής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πηγή" pos="N"/><w lemma="ενέργειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πηγώv" pos="N"/><w lemma="εvέργειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πλύση" pos="N"/><w lemma="εγκεφάλου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πνευματική" pos="AJ"/><w lemma="ιδιοκτησία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ποιοτικός" pos="AJ"/><w lemma="έλεγχος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πολιτική" pos="AJ"/><w lemma="ασφάλειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πολιτικός" pos="AJ"/><w lemma="εκπρόσωπος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πράσινη" pos="AJ"/><w lemma="βίβλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρακτικές" pos="N"/><w lemma="εφαρμογές" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρακτικής" pos="N"/><w lemma="εξάσκησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρακτικής" pos="N"/><w lemma="εφαρμογής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προκείμενη" pos="AJ"/><w lemma="περίπτωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προκειμένη" pos="AJ"/><w lemma="περίπτωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προσφυγικούς" pos="AJ"/><w lemma="καταυλισμούς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρωτογενής" pos="AJ"/><w lemma="τομέας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόγραμμα" pos="N"/><w lemma="δράσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόγραμμα" pos="N"/><w lemma="εκπαίδευσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόγραμμα" pos="N"/><w lemma="πλαίσιo" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόγραμμα" pos="N"/><w lemma="πλαισίου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόταση" pos="N"/><w lemma="κανoνισμoύ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόταση" pos="N"/><w lemma="κανονισμού" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόταση" pos="N"/><w lemma="ψηφίσματoς" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πυρηvικής" pos="AJ"/><w lemma="εvέργειας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πυρηνική" pos="AJ"/><w lemma="ενέργεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πυρηνικός" pos="AJ"/><w lemma="αντιδραστήρας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πυρηνικός" pos="AJ"/><w lemma="αφοπλισμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ραδιοφωνικός" pos="AJ"/><w lemma="σταθμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ριζοσπαστική" pos="AJ"/><w lemma="συμμαχία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ρωσική" pos="AJ"/><w lemma="ομοσπονδία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σανίδα" pos="N"/><w lemma="σωτηρίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σιδηροδρομικός" pos="AJ"/><w lemma="σταθμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σιδηρούν" pos="AJ"/><w lemma="παραπέτασμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σκωτσέζικο" pos="AJ"/><w lemma="ουίσκι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σούπερ" pos="AJ"/><w lemma="μάρκετ" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σπογγώδης" pos="AJ"/><w lemma="εγκεφαλοπάθεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σπονδυλική" pos="AJ"/><w lemma="στήλη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="στ'" pos="AJ"/><w lemma="αλήθεια" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="στατιστικής" pos="N"/><w lemma="υπηρεσίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συμβούλιο" pos="N"/><w lemma="υπουργών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συναισθηματική" pos="AJ"/><w lemma="φόρτιση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συναλλαγματική" pos="AJ"/><w lemma="ισοτιμία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συναλλαγματικής" pos="N"/><w lemma="ισοτιμίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συνδετικός" pos="AJ"/><w lemma="κρίκος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="συνολικός" pos="AJ"/><w lemma="αριθμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σχέδιο" pos="N"/><w lemma="δράσης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σωστικά" pos="AJ"/><w lemma="συνεργεία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σύμφωνο" pos="N"/><w lemma="σταθερότητας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σύνοδος" pos="N"/><w lemma="κορυφής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τελικός" pos="AJ"/><w lemma="δικαιούχος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τηλεοπτικός" pos="AJ"/><w lemma="σταθμός" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τηλεφωνικός" pos="AJ"/><w lemma="κατάλογος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τρoφική" pos="AJ"/><w lemma="αλυσίδα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τρελής" pos="AJ"/><w lemma="αγελάδας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υγειονομική" pos="AJ"/><w lemma="περίθαλψη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υγειονομική" pos="AJ"/><w lemma="ταφή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υδροφόρος" pos="AJ"/><w lemma="ορίζοντας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όψη;" pos="AJ"/><w lemma="υπ'" pos="N"/><w lemma="όψιν" pos="υπ'"/></ngram></entry>
+<entry><ngram><w lemma="υπ'" pos="AJ"/><w lemma="όψιν" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υπάτη" pos="N"/><w lemma="αρμοστεία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υποψήφιος" pos="AJ"/><w lemma="πρόεδρος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υψηλού" pos="AJ"/><w lemma="επιπέδου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υψηλό" pos="AJ"/><w lemma="επίπεδο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φλεβική" pos="AJ"/><w lemma="θρόμβωση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φορολογικός" pos="AJ"/><w lemma="συντελεστής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φτωχός" pos="AJ"/><w lemma="συγγενής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φυτικά" pos="AJ"/><w lemma="λίπη" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="φύλλο" pos="N"/><w lemma="συκής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χέρι" pos="AJ"/><w lemma="χέρι" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χειρουργική" pos="N"/><w lemma="επέμβαση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χρονικά" pos="AJ"/><w lemma="διαστήματα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χρονικό" pos="AJ"/><w lemma="διάστημα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χρονικό" pos="AJ"/><w lemma="ορίζοντα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χρυσή" pos="AJ"/><w lemma="τομή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χρόνος" pos="N"/><w lemma="εργασίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χωρών" pos="N"/><w lemma="μελών" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="χώρα" pos="N"/><w lemma="μέλος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ψυχρός" pos="AJ"/><w lemma="πόλεμος" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ωρολογιακή" pos="AJ"/><w lemma="βόμβα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όξινη" pos="AJ"/><w lemma="βροχή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="όρνιθες" pos="N"/><w lemma="ωοπαραγωγής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ύπατη" pos="AJ"/><w lemma="aρμοστεία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ύπατος" pos="AJ"/><w lemma="αρμοστής" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="ανά" pos="P"/><w lemma="μονάδα" pos="N"/><w lemma="μέτρησης" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διά" pos="P"/><w lemma="βίου" pos="N"/><w lemma="εκπαίδευση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διά" pos="P"/><w lemma="βίου" pos="N"/><w lemma="μάθηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δια" pos="P"/><w lemma="βίου" pos="N"/><w lemma="εκμάθηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="δια" pos="P"/><w lemma="βίου" pos="N"/><w lemma="κατάρτιση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκ" pos="P"/><w lemma="βάθους" pos="N"/><w lemma="καρδίας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εκ" pos="P"/><w lemma="περιτροπής" pos="N"/><w lemma="προεδρίες" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="εν" pos="P"/><w lemma="τοιαύτη" pos="N"/><w lemma="περιπτώσει" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="κατά" pos="P"/><w lemma="κεφαλήν" pos="N"/><w lemma="εισόδημα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρoς" pos="P"/><w lemma="τηv" pos="N"/><w lemma="κατεύθυvση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="προς" pos="P"/><w lemma="λάθος" pos="N"/><w lemma="κατεύθυνση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σε" pos="P"/><w lemma="λάθος" pos="N"/><w lemma="κατεύθυνση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="υπό" pos="P"/><w lemma="εξέταση" pos="N"/><w lemma="οδηγία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="άτομα" pos="N"/><w lemma="με" pos="P"/><w lemma="αναπηρία" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="βήμα" pos="N"/><w lemma="πρoς" pos="P"/><w lemma="βήμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="διάσκεψη" pos="N"/><w lemma="με" pos="P"/><w lemma="θέμα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="επικοινωνία" pos="N"/><w lemma="μέσω" pos="P"/><w lemma="δορυφόρου" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θέμα" pos="N"/><w lemma="προς" pos="P"/><w lemma="συζήτηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="θέματα" pos="N"/><w lemma="προς" pos="P"/><w lemma="συζήτηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="λάδι" pos="N"/><w lemma="στη" pos="P"/><w lemma="φωτιά" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παράδειγμα" pos="N"/><w lemma="προς" pos="P"/><w lemma="αποφυγή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="παράδειγμα" pos="N"/><w lemma="προς" pos="P"/><w lemma="μίμηση" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="περιεκτικότητα" pos="N"/><w lemma="σε" pos="P"/><w lemma="πίσσα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="πρόσωπο" pos="N"/><w lemma="με" pos="P"/><w lemma="πρόσωπο" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σκλήρυνση" pos="N"/><w lemma="κατά" pos="P"/><w lemma="πλάκας" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="σταγόνα" pos="N"/><w lemma="στον" pos="P"/><w lemma="ωκεανό" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τελειοποίησης" pos="N"/><w lemma="προς" pos="P"/><w lemma="επανεξαγωγή" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τηλεόραση" pos="N"/><w lemma="χωρίς" pos="P"/><w lemma="σύνορα" pos="N"/></ngram></entry>
+<entry><ngram><w lemma="τιμή" pos="N"/><w lemma="ανά" pos="P"/><w lemma="μονάδα" pos="N"/></ngram></entry>
+</dict>

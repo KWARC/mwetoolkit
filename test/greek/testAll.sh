@@ -1,61 +1,159 @@
-#!/bin/sh
+#!/bin/bash
+set -e           # Exit on errors...
+exec </dev/null  # Don't hang if a script tries to read from stdin.
 
-# This file runs the whole pipeline of MWE extraction with mwetoolkit on a small
-# example corpus of Greek sentences.
+# Use GNU readlink on Mac OS.
+if which greadlink >/dev/null 2>&1; then
+	readlink() { greadlink "$@"; }
+fi
 
-path_mwttoolkit="../../bin"
-python="/usr/bin/python"
+DIR="$(readlink -f "$(dirname "$0")")"
 
-# INITIAL FILES
+TOOLKITDIR="$DIR/../.."
+OUTDIR="$DIR/output"
 
-# The corpus is a small subset of 325 sentences taken from the Europarl Greek 
-# corpus
-corpus_name="gr_toy"
+run() {
+	local script="$1"; shift
+	eval python "$TOOLKITDIR/bin/$script" --debug "$@"
+}
 
-the_corpus="${corpus_name}.xml"
+dotest() {
+	[[ $# -eq 3 ]] || { echo "dotest: Invalid arguments: $*" >&2; exit 2; }
+	local name="$1" run="$2" verify="$3"
 
-# gr_patterns.xml is a set of POS patterns defined by Evita Linardaki, cf. LREC
-# 2010 workshop on south-eastern european languages.
-the_patterns="gr_patterns.xml"
+	((testnum++ < tests_to_skip)) && return 0		
 
-echo "0) Corpus statistics"
-#${python} ${path_mwttoolkit}/wc.py ${the_corpus}
+	printf "\e[1m%d. %s\e[0m\n" "$testnum" "$name"
+	printf "\e[1;33m%s\e[0m\n" "$run"
 
-${python} ${path_mwttoolkit}/tail.py -n 2000 ${the_corpus}
+	if eval time "$run" && eval "$test"; then
+		printf "\e[1;32mOK\e[0m\n"
+	else
+		printf "\e[1;31mFAILED!\e[0m\n"
+		exit 1
+	fi
+}
 
-echo "1) Generate the initial list of candidates using the POS patterns"
+diff-sorted() {
+	diff <(sort "$1") <(sort "$2")
+}
 
-#${python} ${path_mwttoolkit}/candidates.py -p ${the_patterns} ${the_corpus} > candidates.xml
-#${python} ${path_mwttoolkit}/wc.py candidates.xml
+main() {
+	cd "$DIR"
+	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
+	[[ -d $OUTDIR ]] || mkdir "$OUTDIR"
 
-#echo "2) Filter out candidates occurring less than threshold (2)"
+	cd "$OUTDIR"
+	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
+	[[ -e corpus.xml ]] || cp ../corpus.xml .
 
-#${python} ${path_mwttoolkit}/filter.py -t ${the_corpus}:2 candidates.xml > candidates-filter.xml
-#${python} ${path_mwttoolkit}/wc.py candidates-filter.xml
+	testnum=0
+	tests_to_skip=0
 
-#echo "2) Generate the index files"
+	while [[ $# -gt 0 ]]; do
+		case "$1" in
+			-s) tests_to_skip="$(($2-1))"; shift ;;
+			*) echo "Unknown option \"$1\"!" >&2; return 1 ;;
+		esac
+		shift
+	done
 
-#${python} ${path_mwttoolkit}/index.py -i corpus.index ${the_corpus}
+	dotest "Corpus indexing" \
+		'run index.py -v -i corpus "corpus.xml"' \
+		'true'
 
-#echo "4) Count individual word frequencies"
+	dotest "Extraction from index" \
+		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		true
 
-#${python} ${path_mwttoolkit}/counter.py -i corpus.index candidates-filter.xml > candidates-filter-fCorpus.xml
+	dotest "Extraction from XML" \
+		'run candidates.py -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
+		true
 
-#echo "5) Count words in Yahoo"
+	dotest "Comparison of candidate extraction outputs" \
+		'diff-sorted candidates-from-index.xml candidates-from-corpus.xml' \
+		true
 
-#${python} ${path_mwttoolkit}/counter.py -y candidates-filter-fCorpus.xml > candidates-filter-fCorpus-fYahoo.xml
+	dotest "Individual word frequency counting" \
+		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
+		true
 
-#echo "6) Extract descriptive features"
+	dotest "Association measures" \
+		'run feat_association.py -v -m "mle:pmi:t:dice:ll" candidates-counted.xml >candidates-featureful.xml' \
+		true
 
-#${python} ${path_mwttoolkit}/feat_pattern.py candidates-filter-fCorpus.xml > feat-pos.xml
+	dotest "Evaluation" \
+		'run eval_automatic.py -v -r "$DIR/reference.xml" -g candidates-featureful.xml >eval.xml 2>eval-stats.txt' \
+		true
 
-#echo "7) Extract Association Measure features"
+	dotest "Mean Average Precision" \
+		'run map.py -v -f "mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus" eval.xml >map.txt' \
+		true
 
-#${python} ${path_mwttoolkit}/feat_association.py feat-pos.xml > feat-pos-am.xml
+	for format in csv arff evita owl ucs; do
+		dotest "Conversion from XML to $format" \
+			'run xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt' \
+			true
+	done
 
-#echo "8) Sort the candidates according to Dice, and crop top-30 candidates"
+	dotest "Take first 50 candidates" \
+		'run head.py -v -n 50 candidates-featureful.xml >candidates-featureful-head.xml' \
+		true
 
-#${python} ${path_mwttoolkit}/sort.py -f dice_gr_toy feat-pos-am.xml > tmp
-#${python} ${path_mwttoolkit}/filter.py -c 30 tmp > feat-pos-am-dice.xml
-#rm tmp
+	dotest "Take last 50 candidates" \
+		'run tail.py -v -n 50 candidates-featureful.xml >candidates-featureful-tail.xml' \
+		true
 
+	dotest "Take first 50 corpus sentences" \
+		'run head.py -v -n 50 corpus.xml >corpus-head.xml' \
+		true
+
+	dotest "Take last 50 corpus sentences" \
+		'run tail.py -v -n 50 corpus.xml >corpus-tail.xml' \
+		true
+
+	for base in candidates-featureful corpus; do
+		for suffix in '' -head -tail; do
+			dotest "Word count for $base$suffix" \
+				"run wc.py $base$suffix.xml 2>&1 | tee wc-$base$suffix.txt" \
+				true
+		done
+	done
+
+	dotest "Removal of duplicated candidates" \
+		'run uniq.py candidates-featureful.xml >candidates-uniq.xml' \
+		true
+
+	dotest "Removal of duplicated candidates ignoring POS" \
+		'run uniq.py -g candidates-featureful.xml >candidates-uniq-nopos.xml' \
+		true
+
+	dotest "Filtering out candidates occurring less than twice" \
+		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
+		true
+
+	dotest "Comparison against reference output" \
+		compare-to-reference \
+		true
+}
+
+compare-to-reference() {
+	tar -C .. -xvf ../reference-output.tar.bz2
+	for file in *.*; do
+		ref="../reference-output/$file"
+		printf "  Comparing %s... " "$file"
+		if [[ $file == *uniq* ]]; then
+			cmp -s <(sort "$file") <(sort "$ref")
+		else
+			cmp -s "$file" "$ref"
+		fi
+		if [[ $? -eq 0 ]]; then
+			echo "OK"
+		else
+			echo "FAILED!"
+			return 1
+		fi
+	done
+}
+
+main "$@"
