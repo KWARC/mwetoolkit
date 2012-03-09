@@ -153,19 +153,19 @@ def treat_candidate( candidate ) :
     verb = candidate[ 0 ].lemma
     compl = candidate[ 3 ].lemma
     for variation in candidate.vars :
-    	for freq in variation.freqs :
+        for freq in variation.freqs :
             var_verb = variation[ 0 ].lemma            
-    	    freq_verb = variation[ 0 ].get_freq_value("bnc") + 1
-    	    var_compl = variation[ 2 ].lemma
-    	    freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
-    	    f_entry = (freq.value, freq_verb, f_det, freq_compl )
-    	    append_list_dict( freq_table, freq.name, f_entry ) 
-    	    if verb == "turn" :
-	            pdb.set_trace()
-    	    if verb == var_verb :
-    	        append_list_dict( verb_table, freq.name, f_entry )
-    	    if compl == var_compl :
-    	        append_list_dict( compl_table, freq.name, f_entry )	       	    
+            freq_verb = variation[ 0 ].get_freq_value("bnc") + 1
+            var_compl = variation[ 2 ].lemma
+            freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
+            f_entry = (freq.value, freq_verb, f_det, freq_compl )
+            append_list_dict( freq_table, freq.name, f_entry ) 
+            if verb == "turn" :
+                pdb.set_trace()
+            if verb == var_verb :
+                append_list_dict( verb_table, freq.name, f_entry )
+            if compl == var_compl :
+                append_list_dict( compl_table, freq.name, f_entry )                   
 
     verb_table[ "google" ].sort( key=operator.itemgetter(3), reverse=True )
     verb_table["google"] = verb_table["google"][ 0:5 ]

@@ -243,27 +243,27 @@ def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
 
 def expect( m_list, N ):
     """
-    	Returns the expected joint frequency of the n-gram by multiplying the
-    	individual frequencies of each word divided by N, and then scaling it
-    	back to N. That is, given c(w_1), c(w_2), ..., c(w_n) counts of words
-    	w_1 to w_n, and the size of the corpus N, we calculate the expected
-    	count E(w_1, ..., w_n) as:
-    	
-    	                     w_1   w_2         w_n         w_1 x w_2 x ... x w_n
-    	E(w_1, ..., w_n) = ( --- x --- x ... x --- ) x N = ---------------------
-    	                      N     N           N                 N^(n-1)
-    	                      
-    	Actually, N is adjusted to correspond to the number of n-grams and not
-    	of tokens in the corpus, i.e. N - n + 1 instead of N. For large values 
-    	of N, this is neglectable.
-    	
-    	@param m_list List of the individual word counts. The list has n float
-    	elements, the same size of the n-gram.
-    	
-    	@param N Number of total tokens in the frequency source.
-    	
-    	@return A single float value that corresponds to E(w_1, ..., w_n) as
-    	calculated in the formula above.
+        Returns the expected joint frequency of the n-gram by multiplying the
+        individual frequencies of each word divided by N, and then scaling it
+        back to N. That is, given c(w_1), c(w_2), ..., c(w_n) counts of words
+        w_1 to w_n, and the size of the corpus N, we calculate the expected
+        count E(w_1, ..., w_n) as:
+        
+                             w_1   w_2         w_n         w_1 x w_2 x ... x w_n
+        E(w_1, ..., w_n) = ( --- x --- x ... x --- ) x N = ---------------------
+                              N     N           N                 N^(n-1)
+                              
+        Actually, N is adjusted to correspond to the number of n-grams and not
+        of tokens in the corpus, i.e. N - n + 1 instead of N. For large values 
+        of N, this is neglectable.
+        
+        @param m_list List of the individual word counts. The list has n float
+        elements, the same size of the n-gram.
+        
+        @param N Number of total tokens in the frequency source.
+        
+        @return A single float value that corresponds to E(w_1, ..., w_n) as
+        calculated in the formula above.
     """
     result = 1.0
     for i in range(len(m_list)) :
@@ -344,7 +344,7 @@ def calculate_ams( o, m_list, N, corpus_name ) :
             if warn_ll_bigram_only:
                 warn_ll_bigram_only = False
                 print >> sys.stderr, "WARNING: log-likelihood is only implem" +\
-                					 "ented for 2grams. Defaults to 0.0 for n>2"
+                                     "ented for 2grams. Defaults to 0.0 for n>2"
             ll_final = 0.0
         feats.append( Feature( "ll_" + corpus_name, ll_final ) )
     return feats
@@ -353,15 +353,15 @@ def calculate_ams( o, m_list, N, corpus_name ) :
 
 def interpret_measures( measures_string ) :
     """
-    	Parses the names of the AMs from the command line. It verifies that the
-    	names of the AMs are valid names of available measures that can be
-    	calculated by the script.
-    	
-    	@param measures_string A string containing the names of the AMs the user
-    	wants to calculate separated by ":" colon.
-    	
-    	@return A list os strings containing the names of the AMs we need to 
-    	calculate.
+        Parses the names of the AMs from the command line. It verifies that the
+        names of the AMs are valid names of available measures that can be
+        calculated by the script.
+        
+        @param measures_string A string containing the names of the AMs the user
+        wants to calculate separated by ":" colon.
+        
+        @return A list os strings containing the names of the AMs we need to 
+        calculate.
     """
     global supported_measures
     measures_list = measures_string.split( ":" )

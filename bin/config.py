@@ -58,6 +58,6 @@ YAHOO_APPID = "ngram001"
 
 
 """
-	Path to the C indexer program.
+    Path to the C indexer program.
 """
 C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/c-indexer"

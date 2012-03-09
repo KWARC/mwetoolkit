@@ -61,37 +61,37 @@ attributes = None
 
 def xml2txt(corpus, outfile, attributes):
 
-	def print_sentence(sentence):
-		for word in sentence.word_list:
-			vals = [getattr(word, attr) for attr in attributes]
-			print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
-		print >>outfile, ""
+    def print_sentence(sentence):
+        for word in sentence.word_list:
+            vals = [getattr(word, attr) for attr in attributes]
+            print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
+        print >>outfile, ""
 
-	parser = xml.sax.make_parser()
-	parser.setContentHandler(CorpusXMLHandler(print_sentence))
-	parser.parse(corpus)
+    parser = xml.sax.make_parser()
+    parser.setContentHandler(CorpusXMLHandler(print_sentence))
+    parser.parse(corpus)
 
 ################################################################################
 
 def treat_options(opts, arg, n_arg, usage_string):
     """
     """
-	global attributes
+    global attributes
 
-	treat_options_simplest( opts, arg, n_arg, usage_string )
-	
-	for (o, a) in opts:
-		if o in ("-a", "--attributes"):
-			attributes = a.split(":")
-			for attr in attributes:
-				if attr not in WORD_ATTRIBUTES:
-					print >>sys.stderr, "Unknown attribute '%s'!" % attr
-					sys.exit(2)
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+    
+    for (o, a) in opts:
+        if o in ("-a", "--attributes"):
+            attributes = a.split(":")
+            for attr in attributes:
+                if attr not in WORD_ATTRIBUTES:
+                    print >>sys.stderr, "Unknown attribute '%s'!" % attr
+                    sys.exit(2)
 
-	if attributes is None:
-		print >>sys.stderr, "The option -a <attributes> is mandatory."
-		usage(usage_string)
-		sys.exit(2)
+    if attributes is None:
+        print >>sys.stderr, "The option -a <attributes> is mandatory."
+        usage(usage_string)
+        sys.exit(2)
 
 ################################################################################
 
