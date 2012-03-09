@@ -1,0 +1,11083 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<meta>
+</meta>
+
+  <entry>
+  <ngram>
+    <w lemma="abound" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="act" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="act" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="act" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="add" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="add" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="add" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="air" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="allow" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ante" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="argue" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="argue" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ask" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ask" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="auction" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="average" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="babble" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="back" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="back" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="back" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="back" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="back" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bag" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bail" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bail" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="balance" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bale" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="balls" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ball" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bang" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bang" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bang" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bank" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bargain" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bargain" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="barge" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="barter" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bash" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bash" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="batten" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bawl" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bear" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beat" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beat" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beat" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beat" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beaver" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bed" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bed" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beef" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beetle" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="beg" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="believe" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="belly" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="belt" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="belt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="belt" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bend" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bet" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="big" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bind" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bitch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bite" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bite" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blab" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blacken" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="black" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blank" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blare" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blast" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blast" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blast" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blat" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blaze" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blaze" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blaze" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blazon" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bleach" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blend" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blink" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bliss" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="block" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="block" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="block" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="block" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blossom" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blot" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blubber" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bluff" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blunder" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="blurt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="board" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="board" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bob" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bog" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bog" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boil" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boil" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bollix" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bollocks" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bolster" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bolt" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bolt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bomb" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bomb" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bone" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="book" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="book" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boom" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boost" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boot" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="boot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="border" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="botch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bottle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bottle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bottle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bottom" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bounce" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bounce" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bound" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bowl" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="box" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="box" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brace" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bracket" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="branch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brass" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brave" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="break" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="breathe" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="breathe" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="breeze" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brick" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bridle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brighten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bring" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brisk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bristle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brush" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brush" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brush" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brush" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="brush" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bubble" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bucket" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buckle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buckle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="budge" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bugger" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bug" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="build" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="build" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="build" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bulge" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bulk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bulk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bully" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bump" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bunch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bundle" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bundle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bundle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bunk" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bunk" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buoy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="burn" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="burn" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="burn" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="burn" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="burst" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bush" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="bust" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="butter" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="butt" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="butt" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="button" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="butt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buy" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buy" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buy" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="buzz" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cage" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="call" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="calm" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="camp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="camp" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cancel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cap" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carried" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carry" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carry" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carry" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carry" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carry" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cart" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cart" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carve" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="carve" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cascade" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cash" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cash" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cast" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="catch" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="catch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="catch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cave" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cavern" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="center" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chain" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chalk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chalk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chance" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="charge" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chase" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chase" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chase" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chase" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chat" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cheat" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="check" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="check" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="check" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cheer" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cheer" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chew" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chew" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chew" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chew" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chicken" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chill" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chime" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chin" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chip" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chip" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chirk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chisel" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="choke" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="choke" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="choke" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="choke" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="choose" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chop" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chuck" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chuck" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chuck" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chuck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="chum" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="churn" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="churn" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clag" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clamp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clam" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clap" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clean" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clean" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clear" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clear" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clear" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="click" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="climb" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="climb" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="climb" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cling" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clock" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clock" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clock" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clock" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clog" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="close" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cloud" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clue" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="clutter" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cobble" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="coil" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="color" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="colour" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="comb" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="come" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="concentrate" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="conjure" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="conk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="contract" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="contract" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cook" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cook" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cool" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cool" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="coop" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="coop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="copy" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="copy" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cordon" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="core" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cork" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cost" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cotton" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cotton" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cough" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cough" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="count" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="couple" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="couple" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cover" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cozy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crack" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crack" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crank" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crank" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crawfish" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crawl" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cream" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="creep" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="creep" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="creep" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cross" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cross" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cross" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crowd" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crumb" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="crush" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cry" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cry" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cull" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="curl" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="curtain" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cut" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="cycle" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="damp" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dam" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dash" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dash" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dawn" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="deal" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="decide" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="deck" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="deck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="default" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="depend" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="descant" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="devolve" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="die" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="die" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="die" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="die" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dig" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dig" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dig" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dine" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dine" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dip" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dish" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dish" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dive" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="divide" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="divvy" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="divvy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="do" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dob" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="doctor" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="do" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dole" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="doll" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dope" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dope" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="doss" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="double" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="do" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="doze" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drag" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drag" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drag" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drag" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drag" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="draw" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dream" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dredge" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dress" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dress" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dress" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drift" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drift" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drill" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drill" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drink" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drink" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drink" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drive" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drone" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drop" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drop" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drop" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drown" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drown" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drowse" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drum" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="drum" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dry" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dry" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dry" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="duck" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="duff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dumb" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dummy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dump" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dwell" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dwindle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="dwindle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="earth" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ease" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ease" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ease" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eat" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eat" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eat" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eat" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eat" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ebb" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ebb" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ebb" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ebb" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="edge" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="edge" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="edge" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="edit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="egg" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eke" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="embark" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="empty" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="end" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="end" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="even" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="even" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="even" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="explain" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="eye" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="face" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="face" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="factor" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="factor" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fade" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fade" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="faggot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fag" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fall" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fall" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fall" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fall" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fall" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fancy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fan" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="farm" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fasten" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fasten" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fasten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fathom" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fatten" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fatten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fawn" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fed" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feed" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feed" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feed" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feed" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="feel" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="felt" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fence" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fence" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fend" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ferret" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fess" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fetch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fiddle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fight" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fight" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fig" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fig" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="figure" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="figure" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="file" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="file" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="file" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fill" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fill" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fill" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="filter" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="filter" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="find" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="finish" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="finish" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="finish" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fink" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fink" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fire" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fire" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fire" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="firm" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fish" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fit" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fix" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fizzle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flag" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flag" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flake" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flake" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flame" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flame" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flap" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flare" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flare" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flatten" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flesh" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flick" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fling" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flog" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flood" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flood" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flounce" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flounce" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flow" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flow" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fluff" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fluff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flump" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flush" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="flush" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fly" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fly" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fly" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fob" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="focus" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fog" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="foist" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fold" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="follow" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="follow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="follow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fool" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="foot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="force" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fork" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fork" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fort" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="foul" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="foul" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frame" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frame" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freak" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="free" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freeze" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freeze" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freeze" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freeze" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="freshen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frighten" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frighten" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fritter" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frivol" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="front" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="front" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="front" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="frown" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fuck" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fuck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="fuel" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="furbish" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gang" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="garbage" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gas" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gather" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gather" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gear" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="geek" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="get" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ghost" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ginger" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="give" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="give" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="give" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="give" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="give" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="glam" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="glass" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gobble" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="goof" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="goof" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gouge" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="go" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grass" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grass" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grey" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grind" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grind" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grind" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grind" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grind" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gross" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ground" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grow" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grub" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="grub" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="guide" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gulp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gum" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gun" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="gussy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hack" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hack" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hammer" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hammer" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ham" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hand" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hand" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hand" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hand" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hand" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hang" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hang" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hang" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hang" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="harp" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="harsh" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="haul" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="haul" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="haul" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="haul" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="haul" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="head" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="head" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="head" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="head" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="heap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="heat" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="heave" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hedge" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="heft" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="help" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hem" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hew" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hide" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hide" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hike" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hinge" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hire" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hitch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hit" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hive" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hive" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hive" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hoist" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hold" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hole" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hole" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="holler" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hollow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="home" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hook" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hook" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hop" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="horn" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hose" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hound" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hunker" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hunt" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hunt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hunt" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hurry" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hush" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="hype" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ice" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="impinge" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="inhere" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="intrude" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="invite" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="invite" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="iron" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jabber" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jack" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jack" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jam" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jaw" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jazz" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jerk" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="join" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="join" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jolly" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jot" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="juice" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jumble" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jump" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jump" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jump" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jump" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="jut" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="keep" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="key" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="key" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="key" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kick" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kick" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kick" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kick" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kill" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kink" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kip" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kiss" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="kit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knock" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knock" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knock" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="knuckle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lace" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="land" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lash" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="last" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="latch" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="laugh" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="laugh" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lay" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lead" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lead" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lead" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leak" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lean" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leap" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leap" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leave" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leave" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="leave" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="let" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="level" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="level" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lie" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lie" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lift" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lift" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lift" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lift" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lighten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="light" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="light" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="limber" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="line" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="line" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="link" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="listen" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="listen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="liven" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="live" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="load" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="load" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="loan" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lock" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lock" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lock" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lock" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lodge" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="log" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="log" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="log" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="log" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="log" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="look" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="look" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="look" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="look" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="look" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="loosen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="loose" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="lose" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="louse" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="luck" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="magic" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mail" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="make" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="make" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="make" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="make" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="man" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="map" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="march" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="march" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="march" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mark" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mark" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mark" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mark" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="marry" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="marry" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mash" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="match" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="matte" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mat" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="max" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="measure" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="measure" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="measure" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mellow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="melt" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="melt" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mess" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mete" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="miss" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mix" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mix" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="moggy" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="moon" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mount" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mouth" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="move" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muck" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muddle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muddy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="mug" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muscle" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muscle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muster" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muster" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="muster" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="naff" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nail" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nail" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="narrow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nip" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nod" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nose" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="notch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="note" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="nut" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="offer" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ooze" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="open" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="open" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="operate" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="opt" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="opt" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="order" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="order" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="order" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="originate" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="out" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="own" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pad" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pad" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pair" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pair" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="palm" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pal" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pan" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pan" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="parcel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pare" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="partake" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="partition" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="partner" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pass" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="patch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pat" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pay" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pay" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pay" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pay" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peel" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peg" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peg" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peg" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pencil" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pension" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pep" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="perk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="persist" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="peter" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="phase" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="phase" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pick" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pick" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pick" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="piddle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pig" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pig" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pile" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pile" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pile" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pile" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pin" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pine" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pin" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pin" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pipe" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pipe" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pipe" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="piss" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pitch" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="place" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plank" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plant" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="play" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plead" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plonk" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plough" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plough" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plow" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pluck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plug" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plug" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plump" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plump" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plump" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="plunk" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="point" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="point" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="poke" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="polish" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="polish" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pony" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pooch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="poop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pop" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="portion" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pound" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pound" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pour" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pour" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pour" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="power" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="power" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prang" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prattle" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="press" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="press" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="press" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pretty" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prey" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="price" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prim" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prim" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="print" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="prop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="psych" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="psych" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="puff" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="puff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pull" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pump" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="pump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="punch" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="punch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="push" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="put" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="puzzle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="quarrel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="queer" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="queue" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="quiet" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="quieten" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="quit" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rabbit" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rachet" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rack" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="raffle" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rail" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rail" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rain" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rain" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rain" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="raise" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rake" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rake" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rake" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ramble" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ram" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ramp" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="range" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rap" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ratchet" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ratchet" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rationalise" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rationalize" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ration" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rat" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rat" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rattle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rattle" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rattle" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ravel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reach" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="read" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="read" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="read" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="read" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reason" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reckon" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reel" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reel" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="reel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rein" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rely" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="remain" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="renege" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="renegue" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rent" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="report" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="repose" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rest" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rest" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rev" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ride" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ride" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ride" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ride" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ride" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rig" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rig" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ring" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ring" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ring" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ring" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rinse" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rinse" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rip" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rise" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roar" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="roll" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="romp" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="room" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="root" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="root" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="root" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rope" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rope" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rope" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rope" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rough" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rough" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rough" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="round" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="round" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="round" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="round" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rout" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rout" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rub" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rub" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rub" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rub" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ruck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ruffle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rule" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rule" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="run" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rush" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rush" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rush" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="rush" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sack" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="saddle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sag" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sag" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sally" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="salt" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="save" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="save" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scale" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scale" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scare" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scare" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scarf" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scent" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scoop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scoop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="score" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scout" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scout" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrape" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrape" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrape" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scratch" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scratch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scratch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="screen" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="screen" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="screw" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scribble" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrub" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrub" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrub" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="scrunch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="seal" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="seal" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="seek" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="see" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="see" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="seize" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="seize" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sell" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sell" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sell" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sell" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="send" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="separate" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="separate" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="serve" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="serve" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="settle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="settle" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="settle" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="settle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="set" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sex" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shade" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shake" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shake" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shake" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shake" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shape" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sharpen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shave" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shell" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shine" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shine" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ship" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ship" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoo" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoo" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoot" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoot" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoot" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoot" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shore" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="short" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shoulder" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shout" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shout" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shovel" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shove" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shower" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="show" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="show" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="show" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="show" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shrivel" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shrug" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shut" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="shy" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sidle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sieve" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sign" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="silt" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="simmer" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="single" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sing" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sing" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sink" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="siphon" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sit" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sit" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sit" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="size" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="skim" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="skip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="skive" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slacken" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slack" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slag" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slam" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slam" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slap" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slap" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sleek" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sleep" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sleep" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sleep" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sleep" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slice" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slick" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slide" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slim" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slip" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slope" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slough" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="slow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sluice" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smarten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smash" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smash" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smash" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smell" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smell" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smoke" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smooth" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="smooth" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snaffle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snap" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snarl" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snatch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sneak" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sneak" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sneak" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sneak" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sneak" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sniff" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snitch" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="snuff" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soak" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soak" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soar" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sober" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soften" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soldier" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sort" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sound" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sound" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="soup" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sow" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spaff" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spark" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spark" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="speak" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="speak" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spear" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="speed" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spell" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spew" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spew" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spice" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spiel" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spiff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spike" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spill" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spin" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spin" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spirit" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spirit" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spirit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spit" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="splash" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="splash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="split" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="split" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sponge" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sponge" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sponge" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sponge" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sprawl" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spread" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spring" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spring" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spruce" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="spur" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="square" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="square" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="square" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="squeeze" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="squeeze" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="squeeze" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="squirrel" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stack" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stack" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="staff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stamp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stamp" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stand" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stand" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stand" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stand" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stare" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="start" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="start" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="start" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="start" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stash" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stave" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stave" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stay" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="steady" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="steal" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="steal" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="steal" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="step" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="step" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="step" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="step" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="step" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stick" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stick" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stick" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stick" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stiffen" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stink" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stink" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stir" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stitch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stock" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stop" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stop" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stop" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="storm" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="storm" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stow" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="straighten" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="straighten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stretch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strike" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strike" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strike" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strike" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strike" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="string" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="string" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strip" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="strip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stub" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stuff" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="stump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="suck" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="suck" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="suck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="summon" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sum" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="suss" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swallow" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swallow" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swan" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swan" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swear" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swear" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swear" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sweat" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sweat" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sweep" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sweep" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="sweep" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swell" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swill" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swing" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="switch" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="switch" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swoop" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="swot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="syphon" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tack" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tag" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tail" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tail" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="take" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="talk" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="talk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="talk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tamp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="taper" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tap" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tap" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tart" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="team" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tear" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tear" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tear" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tear" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tease" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="teem" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tee" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tee" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tell" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tell" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tense" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="think" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="think" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="thin" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="thrash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="throw" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="thrust" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="thump" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tick" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tick" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tidy" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tie" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tie" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tie" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tie" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tighten" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tire" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toddle" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tog" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tog" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tone" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tone" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tool" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="top" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="top" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="top" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="toss" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tote" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tot" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="touch" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="touch" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="touch" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="touch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="track" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trade" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trade" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trade" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trade" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trade" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tramp" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tread" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tread" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trice" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trickle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trick" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trick" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trifle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trigger" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trim" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trim" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trip" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trot" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trot" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="true" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trump" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="trump" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="try" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="try" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tuck" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tucker" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tuck" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tuck" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tune" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tune" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="tune" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turf" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="turn" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="type" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="type" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="type" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="urge" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="use" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="usher" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="usher" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vacuum" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vamp" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vege" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="veg" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vomit" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vote" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vote" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="vote" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wade" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wait" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wait" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wait" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wait" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wake" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="walk" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wall" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wall" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wander" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wanton" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="want" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ward" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="warm" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wash" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wash" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wash" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wash" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wash" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="waste" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="watch" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="water" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wave" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wave" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wean" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wear" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wear" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wear" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wear" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wear" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weed" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="ween" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weigh" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weigh" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weigh" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weight" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="weigh" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="well" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="well" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wheel" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="while" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whip" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whip" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whisk" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whisk" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whistle" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="white" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whittle" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whittle" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="whomp" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wiggle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wig" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wimp" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="winch" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wind" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wind" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wind" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wind" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="winkle" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="winnow" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wipe" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wipe" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wipe" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wipe" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wire" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wise" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wolf" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="word" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="work" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="work" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="work" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="work" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="work" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wrap" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="wring" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="down" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="write" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="yack" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="yack" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="yammer" pos="V"/>
+    <w lemma="on" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="yap" pos="V"/>
+    <w lemma="away" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="yield" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zero" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zero" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zip" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zip" pos="V"/>
+    <w lemma="up" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zone" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zone" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zonk" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zoom" pos="V"/>
+    <w lemma="in" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zoom" pos="V"/>
+    <w lemma="off" pos="P"/>
+  </ngram>
+  </entry>
+  <entry>
+  <ngram>
+    <w lemma="zoom" pos="V"/>
+    <w lemma="out" pos="P"/>
+  </ngram>
+  </entry>
+</dict>

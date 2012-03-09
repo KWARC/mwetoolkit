@@ -1,11 +1,26 @@
 <patterns>
-<pat>
-	<pat repeat="+">
+<!--
+   padroes: verbo principal (VV) seguido por (II|RR|RP)·ncmod_prt ate 6 posicoes depois do verbo 
+   VV* * II·ncmod_prt
+   VV* * RR·ncmod_prt
+   VV* * RP·ncmod_prt
+   
+   
+   mas nao
+   
+   VBZ·ccomp * II·ncmod_prt
+   
+   ou
+   RT·ncmod_prt
+-->
+	<pat>
+		<w pos="VV*" id="v1" />
+		<pat ignore="t" repeat="{0,5}"><w /></pat>
 		<either>
-			<pat><w pos="N*"/></pat>
-			<pat><w pos="J*"/></pat>
+			<pat><w pos="II" syndep="ncmod_prt:v1"/></pat>
+			<pat><w pos="RR" syndep="ncmod_prt:v1"/></pat>
+			<pat><w pos="RP" syndep="ncmod_prt:v1"/></pat>
 		</either>
 	</pat>
-	<w pos="N*"/>
-</pat>
+
 </patterns>
