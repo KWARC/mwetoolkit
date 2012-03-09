@@ -122,7 +122,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global limit,  entity_buffer
+    global limit
+    global entity_buffer
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+    
     for ( o, a ) in opts:
         if o in ("-n", "--number") :
             try :
@@ -135,8 +139,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "integer value as argument of -n option."
                 usage( usage_string )
                 sys.exit( 2 )
-                             
-    treat_options_simplest( opts, arg, n_arg, usage_string )
     
 ################################################################################    
 # MAIN SCRIPT

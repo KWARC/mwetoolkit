@@ -241,7 +241,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global measures, supported_measures, main_freq_name, join_all_contrastive
+    global measures
+    global supported_measures
+    global main_freq_name
+    global join_all_contrastive
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+    
     for ( o, a ) in opts:
         if o in ( "-m", "--measures" ) :
             try :
@@ -264,7 +270,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         usage( usage_string )
         sys.exit( 2 )
     
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 ################################################################################
 # MAIN SCRIPT
 

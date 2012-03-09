@@ -287,7 +287,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global ignore_pos, surface_instead_lemmas, perform_retokenisation
+    global ignore_pos
+    global surface_instead_lemmas
+    global perform_retokenisation
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     for ( o, a ) in opts:
         if o in ("-g", "--ignore-pos") :
             ignore_pos = True
@@ -295,8 +300,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             surface_instead_lemmas = True
         elif o in ("-t", "--retokenise") :
             perform_retokenisation = True            
-                             
-    treat_options_simplest( opts, arg, n_arg, usage_string )
     
 ################################################################################    
 # MAIN SCRIPT

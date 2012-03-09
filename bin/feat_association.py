@@ -385,7 +385,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global measures, supported_measures, main_freq, not_normalize_mle
+    global measures
+    global supported_measures
+    global main_freq
+    global not_normalize_mle
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+        
     for ( o, a ) in opts:
         if o in ( "-m", "--measures" ) :
             try :
@@ -401,7 +407,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             main_freq = a
         elif o in ( "-u", "--unnorm-mle" ) :
             not_normalize_mle = True
-    treat_options_simplest( opts, arg, n_arg, usage_string )
+
 ################################################################################
 # MAIN SCRIPT
 

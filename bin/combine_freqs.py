@@ -275,6 +275,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global combination
     global supported_combination
     global main_freq
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+        
     for ( o, a ) in opts:
         if o in ( "-c", "--combination" ) :
             try :
@@ -289,7 +292,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 sys.exit( 2 )
         elif o in ( "-o", "--original" ) :
             main_freq = a
-    treat_options_simplest( opts, arg, n_arg, usage_string )
     
 ################################################################################
 # MAIN SCRIPT

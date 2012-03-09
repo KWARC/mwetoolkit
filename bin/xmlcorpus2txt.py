@@ -1,6 +1,27 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
+################################################################################
+#
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+#
+# xmlcorpus2txt.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
 """
     This script converts an XML corpus into plain-text, one word per line,
     with a blank line ending each sentence.  Only the word attributes specified
@@ -22,20 +43,6 @@ from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
 from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
 from util import usage, read_options, treat_options_simplest, verbose
 
-def xml2txt(corpus, outfile, attributes):
-	def print_sentence(sentence):
-		for word in sentence.word_list:
-			vals = [getattr(word, attr) for attr in attributes]
-			print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
-		print >>outfile, ""
-
-	parser = xml.sax.make_parser()
-	parser.setContentHandler(CorpusXMLHandler(print_sentence))
-	parser.parse(corpus)
-
-
-### Main script.
-
 usage_string = """Usage:
 
 python %(program)s -a <attributes> <corpus.xml>
@@ -50,8 +57,29 @@ python %(program)s -a <attributes> <corpus.xml>
 
 attributes = None
 
+################################################################################
+
+def xml2txt(corpus, outfile, attributes):
+
+	def print_sentence(sentence):
+		for word in sentence.word_list:
+			vals = [getattr(word, attr) for attr in attributes]
+			print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
+		print >>outfile, ""
+
+	parser = xml.sax.make_parser()
+	parser.setContentHandler(CorpusXMLHandler(print_sentence))
+	parser.parse(corpus)
+
+################################################################################
+
 def treat_options(opts, arg, n_arg, usage_string):
+    """
+    """
 	global attributes
+
+	treat_options_simplest( opts, arg, n_arg, usage_string )
+	
 	for (o, a) in opts:
 		if o in ("-a", "--attributes"):
 			attributes = a.split(":")
@@ -65,7 +93,7 @@ def treat_options(opts, arg, n_arg, usage_string):
 		usage(usage_string)
 		sys.exit(2)
 
-	treat_options_simplest( opts, arg, n_arg, usage_string )
+################################################################################
 
 longopts = ["atttibutes="]
 arg = read_options("a:", longopts, treat_options, 1, usage_string)

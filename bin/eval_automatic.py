@@ -42,6 +42,8 @@ import pdb
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
 from xmlhandler.classes.tpclass import TPClass
+from xmlhandler.classes.candidate import Candidate
+from xmlhandler.classes.word import Word
 from xmlhandler.classes.meta_tpclass import MetaTPClass
 from util import usage, read_options, treat_options_simplest, verbose
 from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
@@ -106,21 +108,33 @@ def treat_meta( meta ) :
 
 ################################################################################
 
-def treat_candidate( candidate ) :
+def treat_candidate( candidate_i ) :
     """
         For each candidate, verifies whether it is contained in the reference
         list (in which case it is a *True* positive) or else, it is not in the
         reference list (in which case it is a *False* positive, i.e. a random
         ngram that does not constitute a MWE).
 
-        @param candidate The `Candidate` that is being read from the XML file.
+        @param candidate_i The `Candidate` that is being read from the XML file.
     """
-    global ignore_pos, gs_name, ignore_case, entity_counter, tp_counter, pre_gs, \
-           lemma_or_surface, fuzzy_pre_gs
+    global ignore_pos
+    global gs_name
+    global ignore_case
+    global entity_counter
+    global tp_counter
+    global pre_gs
+    global lemma_or_surface
+    global fuzzy_pre_gs
 
     if entity_counter % 100 == 0 :
         verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
     true_positive = False
+    pdb.set_trace()
+    candidate = Candidate( 0, [], [], [], [], [] )
+    for w in candidate_i :
+        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
+        candidate.append( copy_w )    
+    
     if ignore_pos :
         candidate.set_all( pos=WILDCARD )     # reference has type Pattern
     pre_gs_key = candidate.to_string()
@@ -138,11 +152,11 @@ def treat_candidate( candidate ) :
             break # Stop at first positive match
 
     if true_positive :
-        candidate.add_tpclass( TPClass( gs_name, "True" ) )
+        candidate_i.add_tpclass( TPClass( gs_name, "True" ) )
         tp_counter = tp_counter + 1
     else :
-        candidate.add_tpclass( TPClass( gs_name, "False" ) )
-    print candidate.to_xml().encode( 'utf-8' )
+        candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
+    print candidate_i.to_xml().encode( 'utf-8' )
     entity_counter += 1
 
 ################################################################################
@@ -155,7 +169,12 @@ def treat_reference( reference ) :
 
         @param reference A `Pattern` contained in the reference Gold Standard.
     """
-    global ignore_pos, ref_counter, ignore_case, pre_gs, lemma_or_surface, fuzzy_pre_gs
+    global ignore_pos
+    global ref_counter
+    global ignore_case
+    global pre_gs
+    global lemma_or_surface
+    global fuzzy_pre_gs
     if ignore_pos :
         reference.set_all( pos=WILDCARD )     # reference has type Pattern
     pre_gs_key = reference.to_string()
@@ -212,24 +231,34 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         @param n_arg The number of arguments expected for this script.
     """
-    global pre_gs, ignore_pos, gs_name, ignore_case, lemma_or_surface
+    global pre_gs
+    global ignore_pos
+    global gs_name
+    global ignore_case
+    global lemma_or_surface
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     for ( o, a ) in opts:
         if o in ("-r", "--reference"):
-            open_gs( a )
-            gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", a ) )
+             ref_name = a
         elif o in ("-g", "--ignore-pos"):
             ignore_pos = True
         elif o in ("-c", "--case"):
             ignore_case = False
         elif o in ("-L", "--lemma-or-surface"):
             lemma_or_surface = True
-
+            
+    # The reference list needs to be opened after all the options are read,
+    # since options such as -g and -c modify the way the list is represented
+    if ref_name :
+        open_gs( ref_name )
+        gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", a ) )
+    # There's no reference list... Oh oh cannot evaluate :-(
     if not pre_gs :
         print >> sys.stderr, "You MUST provide a non-empty reference list!"
         usage( usage_string )
         sys.exit( 2 )
-
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################
 # MAIN SCRIPT

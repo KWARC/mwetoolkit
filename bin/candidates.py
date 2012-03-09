@@ -150,12 +150,12 @@ def treat_sentence( sentence ) :
     already_matched = {}
 
     for pattern in patterns:
-        for (match_ngram, wordnums) in match_pattern(pattern, words):
-            wordnums_string = ",".join(map(str, wordnums))
+        for (match_ngram, wordnums) in match_pattern( pattern, words ):
+            wordnums_string = ",".join( map( str, wordnums ) )
             if wordnums_string in already_matched:
                 continue
             else:
-                already_matched[wordnums_string] = True
+                already_matched[ wordnums_string ] = True
 
             #match_ngram = Ngram(copy_word_list(ngram), [])
 
@@ -173,7 +173,8 @@ def treat_sentence( sentence ) :
 
             # Append the id of the source sentence. The number of items in
             # surfaces_dict[form] is the number of occurrences of that form.
-            surfaces_dict[ internal_key ].append(str(sentence.id_number) + ":" + wordnums_string)
+            source_sent_id = str( sentence.id_number ) + ":" + wordnums_string
+            surfaces_dict[ internal_key ].append( source_sent_id )
             temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
 
     sentence_counter += 1
@@ -272,7 +273,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global patterns, ignore_pos, surface_instead_lemmas, print_cand_freq, corpus_from_index, print_source
+    global patterns
+    global ignore_pos
+    global surface_instead_lemmas
+    global print_cand_freq
+    global corpus_from_index
+    global print_source
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+        
     mode = []
     patterns_file = None
     for ( o, a ) in opts:
@@ -298,7 +307,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         usage( usage_string )
         sys.exit( 2 )
         
-    treat_options_simplest( opts, arg, n_arg, usage_string )
+
 
     if "patterns" in mode:
         try:
@@ -310,7 +319,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", "source" ]
+longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", \
+             "source" ]
 arg = read_options( "p:n:ifgsS", longopts, treat_options, -1, usage_string )
 
 try :    

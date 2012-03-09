@@ -184,7 +184,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global surface_instead_lemmas
-    global lemmapos, freq_source
+    global lemmapos
+    global freq_source
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     mode = []
     for ( o, a ) in opts:        
         if o in ("-s", "--surface") : 
@@ -193,9 +197,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             lemmapos = True
         if o in ("-f", "--freq-source"):
             freq_source = a
-
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-
 
 ################################################################################     
 # MAIN SCRIPT

@@ -90,12 +90,12 @@ the -i option is specified, <corpus> must be the basepath for an index generated
 by index.py.
 """
 
-
-
 ngram_counts = {}
 select = {}
 candidates = set()
 corpus_size = 0
+
+################################################################################
 
 def treat_sentence(sentence):
     """
@@ -114,6 +114,7 @@ def treat_sentence(sentence):
 
     corpus_size += len(words)
 
+################################################################################
 
 def localmaxs():
     """
@@ -132,7 +133,8 @@ def localmaxs():
                     select[ngram] = False
                 elif subglue < this_glue:
                     select[subgram] = False
-
+                    
+################################################################################
 
 def main():
     """
@@ -175,6 +177,7 @@ def main():
 
     print XML_FOOTER % { "root": "candidates" }
 
+################################################################################
 
 def dump_ngram(ngram, id):
     """
@@ -191,11 +194,15 @@ def dump_ngram(ngram, id):
 
     print cand.to_xml().encode('utf-8')
 
+################################################################################
+
 def prob(ngram):
     """
         Returns the frequency of the ngram in the corpus.
     """
     return ngram_counts[ngram] / corpus_size_f
+
+################################################################################
 
 def scp_glue(ngram):
     """
@@ -214,7 +221,8 @@ def scp_glue(ngram):
         return 0
     else:
         return square_prob / avp
-
+        
+################################################################################
 
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
@@ -226,8 +234,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global surface_instead_lemmas, glue, corpus_from_index, base_attr
-    global min_ngram, max_ngram, min_frequency
+    global surface_instead_lemmas
+    global glue
+    global corpus_from_index
+    global base_attr
+    global min_ngram
+    global max_ngram
+    global min_frequency
+
+    treat_options_simplest( opts, arg, n_arg, usage_string )
 
     mode = []
     for ( o, a ) in opts:
@@ -247,7 +262,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 print >>sys.stderr, "Unknown glue function '%s'" % a
                 sys.exit(1)
 
-    treat_options_simplest( opts, arg, n_arg, usage_string )
+################################################################################
 
 corpus_from_index = False
 base_attr = 'lemma'

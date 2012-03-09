@@ -265,6 +265,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global field_sep
     global simplify
 
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+
     simplify = simplify_ptb
 
     for ( o, a ) in opts:
@@ -276,8 +278,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             simplify = simplify_genia
         elif o in ("-F", "--fs" ) : 
             field_sep = a               
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-
+            
 ################################################################################
 # MAIN SCRIPT
 

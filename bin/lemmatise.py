@@ -166,6 +166,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.
     """
     global web_freq
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+        
     mode = []
     for ( o, a ) in opts:
         if o in ( "-y", "--yahoo" ) :
@@ -179,8 +182,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print >> sys.stderr, "At most one option -y or -w, should be provided"
         usage( usage_string )
         sys.exit( 2 )
-
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################
 # MAIN SCRIPT

@@ -111,11 +111,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global surface_instead_lemmas
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     mode = []
     for ( o, a ) in opts:
         if o in ("-s", "--surface") : 
-            surface_instead_lemmas = True        
-    treat_options_simplest( opts, arg, n_arg, usage_string )
+            surface_instead_lemmas = True       
 
 ################################################################################     
 # MAIN SCRIPT

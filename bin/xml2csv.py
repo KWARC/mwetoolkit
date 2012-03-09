@@ -166,14 +166,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global surface_instead_lemmas
     global lemmapos
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+        
     mode = []
     for ( o, a ) in opts:        
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True     
         if o in ("-p", "--lemmapos") : 
             lemmapos = True                 
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-
 
 ################################################################################     
 # MAIN SCRIPT

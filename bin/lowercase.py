@@ -262,6 +262,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global algorithm
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     for ( o, a ) in opts:
         if o in ("-a", "--algorithm"):
             algorithm = a.lower()
@@ -273,7 +276,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 usage( usage_string )
                 sys.exit( 2 )    
             
-    treat_options_simplest( opts, arg, n_arg, usage_string )      
+
     
 ################################################################################
 # MAIN SCRIPT

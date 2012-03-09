@@ -65,7 +65,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global used_attributes, name, build_entry
+    global used_attributes
+    global name
+    global build_entry
 
     treat_options_simplest( opts, arg, n_arg, usage_string )    
 

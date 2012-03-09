@@ -90,13 +90,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global original_split
     global sent_split
+    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
+    
     for ( o, a ) in opts:
         if o in ( "-o", "--original-split" ) : 
             original_split = True
         if o in ( "-s", "--sentence" ) : 
             sent_split = a            
-                
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################     
 

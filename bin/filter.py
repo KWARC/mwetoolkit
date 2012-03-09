@@ -254,6 +254,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global equals_value
     global reverse
     
+    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    
     for ( o, a ) in opts:
         if o in ( "-t", "--threshold" ) : 
             threshold = interpret_threshold( a )
@@ -283,8 +285,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-r", "--reverse") :
             reverse = True
             verbose( "Option REVERSE active")
-
-    treat_options_simplest( opts, arg, n_arg, usage_string )
 
 ################################################################################
 # MAIN SCRIPT

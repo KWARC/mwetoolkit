@@ -108,6 +108,8 @@ selected_candidates = {}
 corpus_size = 0
 sentence_count = 0
 
+################################################################################
+
 def key(ngram):
     """
         Returns a string key for the given list of words (strings).
@@ -115,11 +117,15 @@ def key(ngram):
     """
     return WORD_SEPARATOR.join(ngram)
 
+################################################################################
+
 def unkey(str):
     """
         Returns a list of words for the given key.
     """
     return str.split(WORD_SEPARATOR)
+
+################################################################################
 
 def treat_sentence(sentence):
     """
@@ -144,7 +150,8 @@ def treat_sentence(sentence):
             selected_candidates[ngram_key] = True
 
     corpus_size += len(words)
-
+    
+################################################################################
 
 def localmaxs():
     """
@@ -167,7 +174,8 @@ def localmaxs():
                     selected_candidates[subkey] = False
         else:
             selected_candidates[ngram_key] = False
-
+            
+################################################################################
 
 def main():
     """
@@ -220,7 +228,8 @@ def main():
         verbose("Removing temporary files...")
         destroy_shelve(ngram_counts, ngram_counts_tmpfile)
         destroy_shelve(selected_candidates, selected_candidates_tmpfile)
-
+        
+################################################################################
 
 def dump_ngram(ngram_key, id):
     """
@@ -238,11 +247,15 @@ def dump_ngram(ngram_key, id):
 
     print cand.to_xml().encode('utf-8')
 
+################################################################################
+
 def prob(ngram):
     """
         Returns the frequency of the ngram in the corpus.
     """
     return ngram_counts[key(ngram)] / corpus_size_f
+
+################################################################################
 
 def scp_glue(ngram):
     """
@@ -262,6 +275,7 @@ def scp_glue(ngram):
     else:
         return square_prob / avp
 
+################################################################################
 
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
@@ -273,9 +287,16 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global surface_instead_lemmas, glue, corpus_from_index, base_attr
-    global min_ngram, max_ngram, min_frequency
-    global ngram_counts, selected_candidates, use_shelve
+    global surface_instead_lemmas
+    global glue
+    global corpus_from_index
+    global base_attr
+    global min_ngram
+    global max_ngram
+    global min_frequency
+    global ngram_counts
+    global selected_candidates
+    global use_shelve
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
@@ -299,6 +320,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-h", "--shelve"):
             use_shelve = True
 
+################################################################################
+
 def make_shelve():
     """
         Makes a temporary shelve. Returns the shelve and its pathname.
@@ -306,6 +329,8 @@ def make_shelve():
     path = tempfile.mktemp()
     shlv = shelve.open(path, 'n', writeback=True)
     return (shlv, path)
+
+################################################################################
 
 def destroy_shelve(shlv, path):
     """
@@ -319,6 +344,8 @@ def destroy_shelve(shlv, path):
         os.remove(path + ".db")
     except Exception, err:
         print >>sys.stderr, "Error removing temporary file:", err
+
+################################################################################
 
 corpus_from_index = False
 base_attr = 'lemma'
