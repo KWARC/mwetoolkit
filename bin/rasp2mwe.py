@@ -56,8 +56,6 @@ def process_line(l, phrase):
 				pos=escape(pos)		
 				if "+" in s:
 					lemma=escape(s).split('+')[0]
-					print lemma
-					raw_input()
 					if s.split('+')[1] != '':#because 's is followed by + => |'s+:12_$|
 						s=s+'_'+pos
 						p = os.popen('echo '+s+' | ${morphg_res:-./morphg.ix86_linux -t}') 	#generates the surface form using morphg
@@ -97,6 +95,8 @@ def process_tree_branch(l, phrase):
 				phrase[i]['syn']=relation+':'+father_index
 			else:
 				phrase[i]['syn']=phrase[i]['syn']+';'+relation+':'+father_index
+		else:
+			print "Son not found. Dependency tree error on sentence ", n_line
 	elif len(b)==3: #son has two parents
 		father_index=b[0].split(':')[1].split('_')[0]
 		father2_index=b[1].split(':')[1].split('_')[0]
@@ -107,7 +107,8 @@ def process_tree_branch(l, phrase):
 				phrase[i]['syn']=relation+':'+father_index+';'+relation+':'+father2_index
 			else:
 				phrase[i]['syn']=phrase[i]['syn']+';'+relation+':'+father_index+';'+relation+':'+father2_index
-
+		else:
+			print "Son not found. Dependency tree error on sentence .", n_line
 
 import sys
 import os
