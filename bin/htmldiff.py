@@ -30,6 +30,7 @@ import sys
 import pdb
 import difflib
 import os
+import subprocess
 
 from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
 BROWSER = "google-chrome"
@@ -46,7 +47,7 @@ differ = difflib.HtmlDiff( wrapcolumn=50 )
 result = differ.make_file(string1, string2, context=True, numlines=0 )
 
 temp_fh.write( result )
-os.system( BROWSER + " " + temp_name )
+subprocess.call( [BROWSER, temp_name] )
 temp_fh.close()
-os.remove( temp_name )
+#os.remove( temp_name )
 
