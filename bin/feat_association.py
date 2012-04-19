@@ -165,7 +165,7 @@ def treat_candidate( candidate ) :
 def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
     """
         Given an ngram (generic n) w_1 ... w_n, the input is a couple of lists
-        containing integer frequencies, the output is a couble of lists with
+        containing integer frequencies, the output is a couple of lists with
         contingency tables. The first list contains bigram frequencies
         [ f(w_1 w_2), f(w_2 w_3), ..., f(w_n-1 w_n) ]. The second list contains
         unigram frequencies [ f(w_1), f(w_2), ..., f(w_n) ]. While the first
@@ -200,7 +200,8 @@ def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
     """
     observed = []
     expected = []
-    if len(bigram_freqs) != (len(unigram_freqs)-1) :
+    n = len( unigram_freqs )
+    if len( bigram_freqs ) != n - 1 :
         print >> sys.stderr, "WARNING: Invalid unigram/bigram frequencies " +\
                              "passed to calculate_negations function"
         return None
@@ -226,15 +227,18 @@ def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
         e = [ 2 * [ -1 ], 2 * [ -1 ] ]
         cw1 = unigram_freqs[ i ]
         cw2 = unigram_freqs[ i + 1 ]
-        cw1w2 = bigram_freqs[ i ]
+        cw1w2 = bigram_freqs[ i ]        
         o[ 0 ][ 0 ] = cw1w2
         e[ 0 ][ 0 ] = expect( [ cw1, cw2 ], N )
         o[ 0 ][ 1 ] = cw1 - cw1w2
-        e[ 0 ][ 1 ] = expect( [ cw1, N - cw2 ], N )
+        e[ 0 ][ 1 ] = expect( [ cw1, N - n + 1 - cw2 ], N )
         o[ 1 ][ 0 ] = cw2 - cw1w2
-        e[ 1 ][ 0 ] = expect( [ N - cw1, cw2 ], N )
-        o[ 1 ][ 1 ] = N - len( unigram_freqs )  + 1 - cw1w2 #exact nb of bigrams
-        e[ 1 ][ 1 ] = expect( [ N - cw2, N - cw2 ], N )
+        e[ 1 ][ 0 ] = expect( [ N - n + 1 - cw1, cw2 ], N )
+        # BEWARE! THERE WAS A HUGE ERROR HERE, CORRECTED ON APRIL 18, 2012
+        # ALL LOG-LIKELIHOOD VALUES CALCULATED BY THE TOOLKIT WERE WRONG!
+        # PLEASE RE-RUN IF YOU USED THE OLD VERSION!
+        o[ 1 ][ 1 ] = N - len( unigram_freqs )  + 1 - cw1 - cw2 + cw1w2 
+        e[ 1 ][ 1 ] = expect( [ N - n + 1 - cw1, N - n + 1 - cw2 ], N )
         observed.append( o )
         expected.append( e )
     return (observed, expected)
@@ -335,9 +339,9 @@ def calculate_ams( o, m_list, N, corpus_name ) :
                     for j in range( 2 ) :
                         if ct_o[i][j] != 0.0 :
                             
-                            ll += ct_o[i][j] * ( math.log( ct_o[i][j], 2 ) -\
-                                                 math.log( ct_e[i][j], 2 ) )
-
+                            ll += ct_o[i][j] * ( math.log( ct_o[i][j], 10 ) -\
+                                                 math.log( ct_e[i][j], 10 ) )
+                ll = 2 * ll
                 ll_list .append( ll )
             ll_final = heuristic_combine( ll_list )
         else :
