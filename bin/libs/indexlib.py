@@ -26,11 +26,12 @@ import tempfile
 import subprocess
 import struct
 import gc
+import pdb
 
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
+from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WILDCARD
 from config import C_INDEXER_PROGRAM
 from util import verbose
 
@@ -441,7 +442,7 @@ class Index():
 			file does not exist, creates a new suffix array fusing the 
 			arrays for attributes `a1` and `a2`.
 		"""
-
+		#pdb.set_trace()
 		if self.arrays.has_key(attribute):
 			return self.arrays[attribute]
 
@@ -449,8 +450,9 @@ class Index():
 			if '+' in attribute:
 				self.make_fused_array(attribute.split('+'))
 			else:
-				print >>sys.stderr, "Cannot load attribute %s; index files not present." % attribute
-				sys.exit(2)
+				print >>sys.stderr, "WARNING: Cannot load attribute %s; index files not present." % attribute
+				#sys.exit(2)
+				return None
 
 		verbose("Loading corpus files for attribute \"%s\"." % attribute)
 		array = SuffixArray()
@@ -531,9 +533,13 @@ class Index():
 	# Load/save main (non-composite) attributes and metadata
 	def load_main(self):
 		self.load_metadata()
+		present_attributes = []
 		for attr in self.used_word_attributes:
-			self.load(attr)
-
+			present = self.load(attr)
+			if present :
+				present_attributes.append( attr )
+		self.used_word_attributes = present_attributes
+				
 	def save_main(self):
 		self.save_metadata()
 		for attr in self.used_word_attributes:
@@ -572,8 +578,7 @@ class Index():
 
 		id = 1
 		guide = self.used_word_attributes[0]        # guide?
-		length = len(self.arrays[guide].corpus)
-
+		length = len(self.arrays[guide].corpus)		
 		words = []
 		for i in range(0, length):
 			if self.arrays[guide].corpus[i] == 0:
@@ -584,12 +589,16 @@ class Index():
 				yield sentence
 
 			else:
+				args_dict = {}
 				args = []
+				for poss_attr in WORD_ATTRIBUTES :
+					args_dict[ poss_attr ] = WILDCARD
 				for attr in self.used_word_attributes:
 					number = self.arrays[attr].corpus[i]
 					symbol = self.arrays[attr].symbols.number_to_symbol[number]
-					args.append(symbol)
-				
+					args_dict[attr] = symbol
+				for poss_attr in WORD_ATTRIBUTES :
+					args.append( args_dict[ poss_attr ] )
 				args.append([])
 				words.append(Word(*args))
 
