@@ -281,8 +281,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "algorithm=", "verbose" ]
-arg = read_options( "a:v", longopts, treat_options, 1, usage_string )
+longopts = [ "algorithm=" ]
+arg = read_options( "a:", longopts, treat_options, 1, usage_string )
 
 parser = xml.sax.make_parser()
 if algorithm == "complex" :

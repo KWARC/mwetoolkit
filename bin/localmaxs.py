@@ -271,8 +271,8 @@ min_ngram = 2
 max_ngram = 8
 min_frequency = 2
 
-longopts = ["surface", "verbose", "glue=", "ngram=", "freq=", "index"]
-arg = read_options("svG:n:f:i", longopts, treat_options, 1, usage_string)
+longopts = ["surface", "glue=", "ngram=", "freq=", "index"]
+arg = read_options("sG:n:f:i", longopts, treat_options, 1, usage_string)
 corpus_path = arg[0]
 
 main()

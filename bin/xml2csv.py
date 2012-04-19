@@ -179,8 +179,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "verbose", "surface", "lemmapos" ]
-arg = read_options( "vsp", longopts, treat_options, -1, usage_string )
+longopts = [ "surface", "lemmapos" ]
+arg = read_options( "sp", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,

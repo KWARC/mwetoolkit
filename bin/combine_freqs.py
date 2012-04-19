@@ -296,7 +296,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "verbose", "combination=", "original=" ]
+longopts = [ "combination=", "original=" ]
 arg = read_options( "c:o:", longopts, treat_options, -1, usage_string )
 
 parser = xml.sax.make_parser()

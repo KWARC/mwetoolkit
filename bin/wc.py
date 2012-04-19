@@ -93,7 +93,7 @@ def print_counters( filename ) :
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "v", ["verbose"], treat_options_simplest, -1, usage_string )
+arg = read_options( "", [], treat_options_simplest, -1, usage_string )
 
 parser = xml.sax.make_parser()    
 handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )   
