@@ -12,6 +12,7 @@ cd "$DIR"
 for dir in */; do
 	[[ -f $dir/testAll.sh ]] || continue
 	cd "$dir"
+	echo -e "\nEvaluating $dir\n"
 	./testAll.sh
 	cd ..
 done
