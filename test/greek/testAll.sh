@@ -145,9 +145,12 @@ compare-to-reference() {
 		printf "  Comparing %s... " "$file"
 		if [[ $file == *uniq* ]]; then
 			cmp -s <(sort "$file") <(sort "$ref")
+		elif [[ $file == *.suffix ]]; then
+			echo "IGNORED"
+			continue
 		else
 			cmp -s "$file" "$ref"
-		fi
+		fi			
 		if [[ $? -eq 0 ]]; then
 			echo "OK"
 		else
