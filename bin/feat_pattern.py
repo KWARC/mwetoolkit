@@ -40,6 +40,7 @@ from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
 from util import read_options, treat_options_simplest, verbose
+from xmlhandler.classes.__common import SEPARATOR
      
 ################################################################################     
 # GLOBALS     
@@ -87,7 +88,7 @@ def recover_all_patterns( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     global all_patterns
-    pattern = candidate.get_pos_pattern()
+    pattern = candidate.get_pos_pattern().replace( SEPARATOR, "-" )
     all_patterns[ pattern ] = 1    
 
 ################################################################################
@@ -100,7 +101,7 @@ def treat_candidate( candidate ) :
         
         @param candidate The `Candidate` that is being read from the XML file.
     """
-    pattern = candidate.get_pos_pattern()
+    pattern = candidate.get_pos_pattern().replace( SEPARATOR, "-" )
     candidate.add_feat( Feature( "pos_pattern", pattern ) )
     candidate.add_feat( Feature( "n", len( candidate ) ) )
     case_classes = {}
@@ -119,30 +120,29 @@ def treat_candidate( candidate ) :
 
 ################################################################################
 # MAIN SCRIPT
+
 longopts = []
 arg = read_options( "", longopts, treat_options_simplest, 1, usage_string )
 
-try :    
-    # Done in 2 passes, one to define the type of the feature and another to
-    # print the feature values for each candidate
-    verbose( "1st pass : recover all POS patterns fot meta feature" )
-    input_file = open( arg[ 0 ] )        
-    parser = xml.sax.make_parser()
-    # Will ignore meta information and simply recover all the possible patterns
-    candHandler = CandidatesXMLHandler( treat_candidate=recover_all_patterns )
-    parser.setContentHandler( candHandler ) 
-    parser.parse( input_file )
-    input_file.close()     
-    input_file = open( arg[ 0 ] )
-    # Second pass to print the metafeat header with all possible pattern values
-    verbose( "2nd pass : add the features" )
-    handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                    treat_candidate=treat_candidate,
-                                    gen_xml="candidates")
-    parser.setContentHandler( handler )
-    parser.parse( input_file )
-    input_file.close()    
-    print handler.footer
-     
-except IOError, err :
-    print >> sys.stderr, err
+
+# Done in 2 passes, one to define the type of the feature and another to
+# print the feature values for each candidate
+verbose( "1st pass : recover all POS patterns for meta feature" )
+input_file = open( arg[ 0 ] )
+parser = xml.sax.make_parser()
+# Will ignore meta information and simply recover all the possible patterns
+candHandler = CandidatesXMLHandler( treat_candidate=recover_all_patterns )
+parser.setContentHandler( candHandler ) 
+parser.parse( input_file )
+input_file.close()     
+input_file = open( arg[ 0 ] )
+# Second pass to print the metafeat header with all possible pattern values
+verbose( "2nd pass : add the features" )
+handler = CandidatesXMLHandler( treat_meta=treat_meta,
+                                treat_candidate=treat_candidate,
+                                gen_xml="candidates")
+parser.setContentHandler( handler )
+parser.parse( input_file )
+input_file.close()    
+print handler.footer
+    
