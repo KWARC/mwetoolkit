@@ -148,8 +148,12 @@ def transform_format( in_file ) :
             words = []
         elif line != "</s>" :
             line = escape( line )
-            (surface, pos, lemma) = line.split("\t")
-            print "<w surface=\"" + surface + "\" pos=\"" + pos + "\" lemma=\"" + lemma + "\"/>",
+            try :
+                (surface, pos, lemma) = line.split("\t")
+                print "<w surface=\"" + surface + "\" pos=\"" + pos + "\" lemma=\"" + lemma + "\"/>",
+            except ValueError :
+                surface, pos, lemma = line, None, None
+                print "<w surface=\"" + surface + "\"/>",
             words.append( surface )
             # Only works for english if option -s not specified
             if pos == sent_split and not original_split and words :
