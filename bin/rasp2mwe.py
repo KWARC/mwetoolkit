@@ -2,42 +2,133 @@
 # -*- coding:UTF-8 -*-
 
 ################################################################################
-# Convert from RASP output format to mwe toolkit input XML format.
-# ./rasp2mwe.py <file_in> <file_out>
-# @A : Maitê Dupont 2012
+#
+# Copyright 2010-2012 Carlos Ramisch, Maitê Dupont
+#
+# rasp2xml.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
 ################################################################################
+"""
+    This script transforms the output format of Rasp to the XML format of
+    a corpus, as required by the mwetoolkit scripts. The script is language
+    independent as it does not transform the information. Only
+    UTF-8 text is accepted.
+    
+    For more information, call the script with no parameter and read the
+    usage instructions.
+"""
 
-def writeXML_header(f):
-	f.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-	f.write("<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">\n")
-	f.write("<corpus >\n")
-def write_entry(f,n_line, sentence):
-	f.write("<s s_id=\""+repr(n_line)+"\">")
+import sys
+import os
+import string
+from util import read_options, verbose, treat_options_simplest
+import subprocess as sub
+
+################################################################################     
+# GLOBALS     
+usage_string = """Usage: 
+    
+python %(program)s <file_in>
+    The <file_in> file must be rasp output when used without the -m option.
+
+
+"""		
+rasp=""
+
+################################################################################  
+
+def writeXML_header():
+	""" 
+		This function prints the XML header to output 
+	"""
+	print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+	print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">\n",
+	print "<corpus >\n",
+
+################################################################################  
+
+def write_entry(n_line, sentence):
+	""" 
+		This function writes one sentence from the tagged corpus after formating it to xml.
+
+		@param n_line Number of this line in the corpus, starting with 0
+		
+		@param sentence Contains dictionaries corresponding to each word in the sentence.
+	"""
+	print"<s s_id=\""+repr(n_line)+"\">",
 	for elem in sentence:
-		f.write("<w surface=\""+elem["surface"]+"\" lemma=\""+elem["lemma"]+"\" pos=\""+elem["pos"]+"\" syn=\""+elem["syn"]+"\" /> ")
-	f.write("</s>\n")
-def search_son(d,n):
+		print "<w surface=\""+elem["surface"]+"\" lemma=\""+elem["lemma"]+"\" pos=\""+elem["pos"]+"\" syn=\""+elem["syn"]+"\" /> ",
+	print"</s>"
+
+################################################################################  
+
+def search_entry(d,n):
+	""" 
+		This function searches in a list of dictionaries for the entry with index n.
+
+		@param d List of ditionaries containing attributes lemma, surface, syn, pos and index for each word of the sentence being parsed.
+		
+		@param n Index to be found in d
+
+		@return Position in the list of the entry with "index" n.
+	"""
 	i=0
 	for entry in d:
 		if entry['index'] == n:
 			return i
 		i+=1
 	return -1
-def escape(s):
-	if '&' in s:
-		s=s.replace("&","&amp;")
-	if '>' in s:
-		s=s.rreplace(">","&gt;")
-	if '<'  in s:
-		s=s.replace("<","&lt;")
-	if '"' in s:
-		s=s.replace('"',"&quot;")
-	return s
+
+################################################################################  
+
+def escape( line ) :
+    """
+        Replaces the escaped characters " & < > ` by the corresponding XML 
+        entities.
+        
+        @param line The string containing characters that may be escaped
+        
+        @return The same string with the special XML characters replaced by the
+        corresponding entitites
+    """
+    result = line
+    result = result.replace( "&", "&amp;" )
+    result = result.replace( "\"", "&quot;" )
+    result = result.replace( "<", "&lt;" )
+    result = result.replace( ">", "&gt;" )
+    result = result.replace( "'", "&apos;" )
+    return result
+
+
+################################################################################  
+
 def process_line(l, phrase):
+	""" 
+		This function Process the tagged line, extracting each word and it's attributes.
+		Information is stored in a list of dictionaries (one dict per word) where will be filled all the words attributes.
+
+		@param l Line read from input to be processed.
+		
+		@param phrase List of dictionaries to be completed.
+	"""
+
 	if '|ellip|' in l:
 		return
 
-	del phrase[:]
+	del phrase[:] #for each sentence has to be cleaned
 	words=l.split("|")
 	words.pop()		#remove last element => )
 	words.pop(0)	#remove first element => (
@@ -70,10 +161,16 @@ def process_line(l, phrase):
 					lemma=surface		
 			phrase.append({'index':index, 'surface':surface, 'lemma':lemma, 'pos':pos, 'syn':''})
 	
-	
+################################################################################  
 
 def process_tree_branch(l, phrase):
-###########  Process tree
+	""" 
+		This function processed the dependency tree that follows each tagged sentence. Information to be retrieved from here is just the 'syn' attribute, corresponding to the relations between father/son words.
+
+		@param l Line read from input to be processed
+		
+		@param phrase List of dictionaries to be completed
+	"""
 	b=l.replace("(","").replace(")","").replace("|","").replace(" _",'').replace('\n','').split(' ')
 	relation=b[0]
 	del b[0]
@@ -89,7 +186,7 @@ def process_tree_branch(l, phrase):
 	elif len(b)==2: #son has one parent		
 		father_index=b[0].split(':')[1].split('_')[0]
 		son_index=b[1].split(':')[1].split('_')[0]	
-		i=search_son(phrase,son_index)
+		i=search_entry(phrase,son_index)
 		if i >=0:
 			if phrase[i]['syn'] == "":
 				phrase[i]['syn']=relation+':'+father_index
@@ -101,7 +198,7 @@ def process_tree_branch(l, phrase):
 		father_index=b[0].split(':')[1].split('_')[0]
 		father2_index=b[1].split(':')[1].split('_')[0]
 		son_index=b[2].split(':')[1].split('_')[0]	
-		i=search_son(phrase,son_index)
+		i=search_entry(phrase,son_index)
 		if i >=0:
 			if phrase[i]['syn']=="":
 				phrase[i]['syn']=relation+':'+father_index+';'+relation+':'+father2_index
@@ -110,28 +207,48 @@ def process_tree_branch(l, phrase):
 		else:
 			print "Son not found. Dependency tree error on sentence .", n_line
 
-import sys
-import os
-import string
-import subprocess as sub
+################################################################################     
 
-if len(sys.argv) != 3:
-	print "\n\n"
-	print "Usage: ./rasp2mwe.py <file_in_name> <file_out_name>"
-	print "File in is the output of RASP."
-	print "\n\n"
-	sys.exit(0)
+def transform_format(rasp):
+	"""
+		Reads an input file and converts it into mwetoolkit corpus XML format, 
+        printing the XML file to stdout.
+	
+	@param rasp Is the input, file or piped.
 
-try:
-	rasp=open(sys.argv[1], 'r')
-except IOError as e:
-	print 'Error opening file for reading.'
-	exit(1)
-try:
-	mwe=open(sys.argv[2], 'w')
-except IOError as e:
-	print 'Error opening file for writing.'
-	exit(1)
+	"""
+	n_line=0
+	l_empty=2
+	first_line=True	
+	phrase = []
+
+	for l in rasp.readlines():
+		if l=="\n":
+			l_empty+=1
+			if l_empty == 2:
+				write_entry(n_line,phrase)
+				n_line+=1
+				first_line=True
+			l=rasp.readline()
+			continue
+	
+		if first_line:
+			if l_empty>=2:
+				l_empty=0
+				process_line(l,phrase)
+				first_line=False
+				l=rasp.readline() #ignore line
+			else:
+				l_empty=0
+				first_line=True
+		else:
+			process_tree_branch(l,phrase)
+		l=rasp.readline()
+	if l_empty != 2:
+		write_entry(n_line,phrase) #save last entry
+
+################################################################################     
+# MAIN SCRIPT
 
 DIR=os.getcwd() #store current working directory to restore later
 SRC=DIR+'/'+sys.argv[0]
@@ -140,42 +257,24 @@ SRC.pop()  #remove file name
 SRC=string.join(SRC,'/')
 SRC=SRC+'/morph'
 
-os.chdir(SRC) #change directory to morph so morphg can locate verbstem.list
+longopts = [ ]
+arg = read_options( "", longopts, treat_options_simplest, -1, usage_string )
 
-###########  Initialization
-n_line=0
-l_empty=2
-first_line=True
-l=rasp.readline()
-phrase = []
+writeXML_header()
 
-writeXML_header(mwe)
+if len( arg ) == 0 :
+	os.chdir(SRC) #change directory to morph so morphg can locate verbstem.list
+	transform_format( sys.stdin )        
+else :
+	for a in arg :
+		try:
+			input_file=open(a, 'r')
+		except IOError as e:
+			print 'Error opening file for reading.'
+			exit(1)
+		os.chdir(SRC) #change directory to morph so morphg can locate verbstem.list
+		transform_format( input_file )
+		input_file.close()           
 
-while l != "":
-	if l=="\n":
-		l_empty+=1
-		if l_empty == 2:
-			write_entry(mwe,n_line,phrase)
-			n_line+=1
-			first_line=True
-		l=rasp.readline()
-		continue
-	
-	if first_line:
-		if l_empty>=2:
-			l_empty=0
-			process_line(l,phrase)
-			first_line=False
-			l=rasp.readline() #ignore line
-		else:
-			l_empty=0
-			first_line=True
-	else:
-		process_tree_branch(l,phrase)
-	l=rasp.readline()
-if l_empty != 2:
-	write_entry(mwe,n_line,phrase) #save last entry
-mwe.write("</corpus>")
+print "</corpus>"
 os.chdir(DIR)
-rasp.close()
-mwe.close()
