@@ -34,39 +34,61 @@
 import sys
 import os
 import string
-from util import read_options, verbose, treat_options_simplest
+from util import read_options, verbose, treat_options_simplest, strip_xml
+from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 import subprocess as sub
 
 ################################################################################     
-# GLOBALS     
+# GLOBALS 
+morph_path=None
+work_path=os.getcwd()
 usage_string = """Usage: 
     
-python %(program)s <file_in>
+python %(program)s OPTIONS <file_in>
     The <file_in> file must be rasp output when used without the -m option.
 
+OPTIONS may be:
 
-"""		
-rasp=""
+-m OR --morphg
+    KePath to morphg. If this option is
+    activated, you should provide the absolute path to the morphg 
+	installation folder.
 
+"""
 ################################################################################  
+def treat_options( opts, arg, n_arg, usage_string):
+	"""  
+	Callback function that handles the command options of this script.
 
-def writeXML_header():
-	""" 
-		This function prints the XML header to output 
+	@param opts The options parsed by getopts. Ignored.
+
+	@param arg The argument list parsed by getopts.
+
+	@param n_arg The number os arguments expected for this script.
+
+	@param usage_string Instructions that appear if you run the program with
+the wrong parameters or options.
 	"""
-	print "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
-	print "<!DOCTYPE corpus SYSTEM \"dtd/mwetoolkit-corpus.dtd\">\n",
-	print "<corpus >\n",
-
+	global morph_path
+	treat_options_simplest(opts,arg,n_arg,usage_string)
+	for (o, a) in opts:
+		if o in ("-m","--morphg"):
+			morph_path=a
+	if not os.path.exists(morph_path): #Just testing if the file exists
+		print >> sys.stderr, "WARNING: morphg not found! Outputting analysed forms"
+		morph_path=None
+	
 ################################################################################  
 
 def write_entry(n_line, sentence):
 	""" 
-		This function writes one sentence from the tagged corpus after formating it to xml.
+		This function writes one sentence from the tagged corpus after 
+formating it to xml.
 
 		@param n_line Number of this line in the corpus, starting with 0
 		
-		@param sentence Contains dictionaries corresponding to each word in the sentence.
+		@param sentence Contains dictionaries corresponding to each word 
+in the sentence.
 	"""
 	print"<s s_id=\""+repr(n_line)+"\">",
 	for elem in sentence:
@@ -77,9 +99,11 @@ def write_entry(n_line, sentence):
 
 def search_entry(d,n):
 	""" 
-		This function searches in a list of dictionaries for the entry with index n.
+		This function searches in a list of dictionaries for the entry 
+with index n.
 
-		@param d List of ditionaries containing attributes lemma, surface, syn, pos and index for each word of the sentence being parsed.
+		@param d List of ditionaries containing attributes lemma, surface, 
+syn, pos and index for each word of the sentence being parsed.
 		
 		@param n Index to be found in d
 
@@ -94,31 +118,11 @@ def search_entry(d,n):
 
 ################################################################################  
 
-def escape( line ) :
-    """
-        Replaces the escaped characters " & < > ` by the corresponding XML 
-        entities.
-        
-        @param line The string containing characters that may be escaped
-        
-        @return The same string with the special XML characters replaced by the
-        corresponding entitites
-    """
-    result = line
-    result = result.replace( "&", "&amp;" )
-    result = result.replace( "\"", "&quot;" )
-    result = result.replace( "<", "&lt;" )
-    result = result.replace( ">", "&gt;" )
-    result = result.replace( "'", "&apos;" )
-    return result
-
-
-################################################################################  
-
 def process_line(l, phrase):
 	""" 
 		This function Process the tagged line, extracting each word and it's attributes.
-		Information is stored in a list of dictionaries (one dict per word) where will be filled all the words attributes.
+		Information is stored in a list of dictionaries (one dict per word) 
+where will be filled all the words attributes.
 
 		@param l Line read from input to be processed.
 		
@@ -136,7 +140,8 @@ def process_line(l, phrase):
 	for word in words : #e.g.: resume+ed:7_VVN
 		if word!=" ": #words are separated by ' '
 			try:
-				s, aux_morph=word.split(":") # ':' gives something like |::4_:| that cannot be split in 2 pieces
+				s, aux_morph=word.split(":") # ':' gives something like |::4_:|
+											# that cannot be split in 2 pieces
 			except ValueError:
 				index=word.split(":")[2].replace('_','')
 				lemma=':'
@@ -144,20 +149,27 @@ def process_line(l, phrase):
 				pos=':'	
 			else:
 				index, pos=aux_morph.split("_")
-				pos=escape(pos)		
+				pos=strip_xml(pos)		
 				if "+" in s:
-					lemma=escape(s).split('+')[0]
-					if s.split('+')[1] != '':#because 's is followed by + => |'s+:12_$|
+					lemma=strip_xml(s).split('+')[0]
+					if s.split('+')[1] != '':#because 's is followed 
+												#by + => |'s+:12_$|
 						s=s+'_'+pos
-						p = os.popen('echo '+s+' | ${morphg_res:-./morphg.ix86_linux -t}') 	#generates the surface form using morphg
-						l = p.readline()
-						p.close()
-						surface=l.split('_')[0]
-						surface=escape(surface)
+						if morph_path != None:
+							os.chdir(morph_path)
+							p = os.popen('echo '+s+' | ${morphg_res:-./morphg.ix86_linux -t}') 	
+							#generates the surface form using morphg
+							l = p.readline()
+							p.close()
+							os.chdir(work_path)
+							surface=l.split('_')[0]
+							surface=strip_xml(surface)
+						else:
+							surface=lemma
 					else:#it's an 's, then
 							surface=lemma
 				else:#if it doesn't have a '+', then 
-					surface=escape(s)
+					surface=strip_xml(s)
 					lemma=surface		
 			phrase.append({'index':index, 'surface':surface, 'lemma':lemma, 'pos':pos, 'syn':''})
 	
@@ -250,20 +262,14 @@ def transform_format(rasp):
 ################################################################################     
 # MAIN SCRIPT
 
-DIR=os.getcwd() #store current working directory to restore later
-SRC=DIR+'/'+sys.argv[0]
-SRC=SRC.split('/')
-SRC.pop()  #remove file name
-SRC=string.join(SRC,'/')
-SRC=SRC+'/morph'
+work_path=os.getcwd() #store current working directory to restore later
 
-longopts = [ ]
-arg = read_options( "", longopts, treat_options_simplest, -1, usage_string )
+longopts = ["morphg="]
+arg = read_options( "m:", longopts, treat_options, -1, usage_string )
 
-writeXML_header()
+print XML_HEADER % { "root": "corpus", "ns": "" }
 
 if len( arg ) == 0 :
-	os.chdir(SRC) #change directory to morph so morphg can locate verbstem.list
 	transform_format( sys.stdin )        
 else :
 	for a in arg :
@@ -272,9 +278,8 @@ else :
 		except IOError as e:
 			print 'Error opening file for reading.'
 			exit(1)
-		os.chdir(SRC) #change directory to morph so morphg can locate verbstem.list
 		transform_format( input_file )
 		input_file.close()           
 
-print "</corpus>"
-os.chdir(DIR)
+print XML_FOOTER % { "root": "corpus" }
+
