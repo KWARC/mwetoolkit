@@ -161,6 +161,7 @@ def strip_xml( the_string ) :
     cleanContent = cleanContent.replace( "<", "&lt;" ) # Escape sequence
     cleanContent = cleanContent.replace( ">", "&gt;" ) # Escape sequence
     cleanContent = cleanContent.replace( "\"", "&quot;" ) # Escape sequence
+    cleanContent = cleanContent.replace( "\'", "&apos;" ) # Escape sequence
     cleanContent = cleanContent.replace( "*", "&lowast;" ) # Escape WILDCARD (TODO: better generic handling of WILDCARD, since it might be changed in config file)
     return cleanContent
         
