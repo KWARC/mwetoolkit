@@ -48,7 +48,8 @@ usage_string = """Usage:
 python %(program)s -a <attributes> <corpus.xml>
 
 -a <attributes> OR --attributes <attributes>
-    A colon-separated list of attributes to output.
+   A colon-separated list of attributes to output. The possibles attributes are
+   surface:lemma:pos	 
 
 %(common_options)s
 
