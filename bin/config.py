@@ -45,12 +45,6 @@ DEFAULT_LANG = "en"
 MAX_CACHE_DAYS = -1
 
 """
-    Wildcard for MWE patterns. Please chose a token that is not in the corpus as 
-    a token.
-"""
-WILDCARD = "*"
-
-"""
     Application ID to be used with Yahoo Web Search API (see specific doc. for
     more details)
 """
@@ -58,6 +52,6 @@ YAHOO_APPID = "ngram001"
 
 
 """
-    Path to the C indexer program.
+    Path to the C indexer program. The default value should work.
 """
 C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/c-indexer"
