@@ -34,8 +34,6 @@ DEFAULT_LANG = config.DEFAULT_LANG
 
 MAX_CACHE_DAYS = config.MAX_CACHE_DAYS
 
-WILDCARD = config.WILDCARD
-
 YAHOO_APPID = config.YAHOO_APPID
 
 # Name of the cache file where mwetoolkit keeps recent Web queries to speed up
@@ -43,12 +41,12 @@ YAHOO_APPID = config.YAHOO_APPID
 YAHOO_CACHE_FILENAME = "yahoo_cache.dat"
 GOOGLE_CACHE_FILENAME = "google_cache.dat"
 
-
 # Characters internally used as attribute and word separators.
 # Must not appear in the corpus, neither as a word, nor as a POS tag!
 # The probability is minimal but it is nevertheless important to warn you
 # about it!
 # Each separator must be a single character.
+WILDCARD = "\36"             # ASCII level 3 separator
 ATTRIBUTE_SEPARATOR = "\35"  # ASCII level 2 separator
 WORD_SEPARATOR = "\34"       # ASCII level 1 separator
 SEPARATOR = ATTRIBUTE_SEPARATOR
