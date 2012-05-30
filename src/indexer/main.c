@@ -1,8 +1,8 @@
 /*##############################################################################
 #
-# Copyright 2011 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
-# index.c is part of mwetoolkit
+# main.c is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #import "suffixarray.h"
 
 int main(int argc, char **argv) {
-	char *basepath = argv[1];
+	/* char *basepath = argv[1]; */
 	char *line;
 	char *newsym;
 

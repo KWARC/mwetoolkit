@@ -1,6 +1,6 @@
 /*##############################################################################
 #
-# Copyright 2011 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
 # symboltable.c is part of mwetoolkit
 #
@@ -86,7 +86,7 @@ void write_symbols(symboltable_t *table, FILE *file) {
 
 void read_symbols(symboltable_t *table, FILE *file) {
 	char *line, *newname;
-	int length;
+	/*int length;*/
 
 	while (line = readline(file)) {
 		newname = copystring(line);
