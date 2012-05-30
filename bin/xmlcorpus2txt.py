@@ -64,8 +64,8 @@ def xml2txt(corpus, outfile, attributes):
     def print_sentence(sentence):
         for word in sentence.word_list:
             vals = [getattr(word, attr) for attr in attributes]
-            print >>outfile, ATTRIBUTE_SEPARATOR.join(vals)
-        print >>outfile, ""
+            print >>outfile, ATTRIBUTE_SEPARATOR.join(vals),
+        print >> outfile, ""
 
     parser = xml.sax.make_parser()
     parser.setContentHandler(CorpusXMLHandler(print_sentence))
