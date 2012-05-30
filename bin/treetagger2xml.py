@@ -37,7 +37,7 @@
 import sys
 import pdb
 
-from util import read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose, strip_xml
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
      
 ################################################################################     
@@ -99,26 +99,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ( "-s", "--sentence" ) : 
             sent_split = a            
 
-################################################################################     
-
-def escape( line ) :
-    """
-        Replaces the escaped characters " & < > ` by the corresponding XML 
-        entities.
-        
-        @param line The string containing characters that may be escaped
-        
-        @return The same string with the special XML characters replaced by the
-        corresponding entitites
-    """
-    result = line
-    result = result.replace( "&", "&amp;" )
-    result = result.replace( "\"", "&quot;" )
-    result = result.replace( "<", "&lt;" )
-    result = result.replace( ">", "&gt;" )
-    result = result.replace( "'", "&apos;" )
-    return result
-    
 ################################################################################
 
 def transform_format( in_file ) :
@@ -147,7 +127,7 @@ def transform_format( in_file ) :
             new_sent = True
             words = []
         elif line != "</s>" :
-            line = escape( line )
+            line = strip_xml( line )
             try :
                 (surface, pos, lemma) = line.split("\t")
                 print "<w surface=\"" + surface + "\" pos=\"" + pos + "\" lemma=\"" + lemma + "\"/>",
