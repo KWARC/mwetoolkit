@@ -1,4 +1,4 @@
-/^typedef struct .*{/,/^}/p
+/^typedef struct .*{/,/^}/p # Imprime todas as linhas de um typedef struct
 /^struct .*{/,/^};/p
 /^union .*{/,/};/p
 /^typedef .*;/p
@@ -6,10 +6,10 @@
 /^#define .*\\$/!{
 /^[[:space:]]*#[[:alnum:]]/p
 }
-/^typedef\|^struct\|^union/!{
-s/^\([A-Za-z][^{]*\)=.*/extern \1;/p
-s/^\([A-Za-z][^{]*[^ {]\)[[:space:]]*{$/\1;/gp
-/^\([A-Za-z][^{]*[^ {]\)[[:space:]]*,$/,/.*{$/ {
+/^typedef|^struct|^union/!{
+s/^([A-Za-z][^{]*)=.*/extern \1;/p
+s/^([A-Za-z][^{]*[^ {])[[:space:]]*{$/\1;/gp
+/^([A-Za-z][^{]*[^ {])[[:space:]]*,$/,/.*{$/ {
 s/[[:space:]]*{$/;/g;
 p
 }

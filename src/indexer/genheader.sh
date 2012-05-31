@@ -8,5 +8,5 @@ for file; do
 
 	# NOTA: Estas regras assumem que o "{" das definições fique na mesma linha
 	# do início da definição em questão.
-	sed -n -f headersregex.sed <"$file" >"$outname"
+	sed -n -E -f headersregex.sed <"$file" >"$outname"
 done
