@@ -1,4 +1,4 @@
-/^typedef struct .*\{/,/^\}/p # Imprime todas as linhas de um typedef struct
+/^typedef struct .*\{/,/^\}/p
 /^struct .*\{/,/^\};/p
 /^union .*\{/,/\};/p
 /^typedef .*;/p
