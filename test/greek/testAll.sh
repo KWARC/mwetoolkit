@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e           # Exit on errors...
+set -e           # Exit on errors..
 exec </dev/null  # Don't hang if a script tries to read from stdin.
 
 # Use GNU readlink on Mac OS.
