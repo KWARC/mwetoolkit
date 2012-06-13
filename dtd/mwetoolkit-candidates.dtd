@@ -42,7 +42,7 @@ curly brackets, in the same style as WEKA's arff file format -->
     name CDATA #REQUIRED
     type CDATA #REQUIRED
 >
-<!ELEMENT cand (ngram,occurs?,vars?,features?,tpclass*)>
+<!ELEMENT cand (ngram,bigram?,occurs?,vars?,features?,tpclass*)>
 <!ATTLIST cand
     candid CDATA #IMPLIED
 >
@@ -53,6 +53,12 @@ curly brackets, in the same style as WEKA's arff file format -->
     lemma CDATA #IMPLIED
     pos CDATA #IMPLIED
 > 
+<!ELEMENT freq EMPTY>
+<!ATTLIST freq
+    name CDATA #REQUIRED
+    value CDATA #REQUIRED
+>
+<!ELEMENT bigram (freq*)>
 <!ELEMENT freq EMPTY>
 <!ATTLIST freq
     name CDATA #REQUIRED
