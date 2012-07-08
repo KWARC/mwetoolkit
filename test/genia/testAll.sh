@@ -137,7 +137,7 @@ main() {
 
 	dotest "Filtering out candidates occurring less than twice" \
 		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
-		true
+		true	
 
 	dotest "Comparison against reference output" \
 		compare-to-reference \
@@ -149,11 +149,14 @@ compare-to-reference() {
 	for file in *.*; do
 		ref="../reference-output/$file"
 		printf "  Comparing %s... " "$file"
-		if [[ $file == *uniq* ]]; then
+		if [[ $file == *candidates* || $file == *eval* ]]; then
 			cmp -s <(sort "$file") <(sort "$ref")
+		elif [[ $file == *.suffix || $file == warning* ]]; then
+			echo "IGNORED"
+			continue
 		else
 			cmp -s "$file" "$ref"
-		fi
+		fi			
 		if [[ $? -eq 0 ]]; then
 			echo "OK"
 		else
@@ -162,5 +165,6 @@ compare-to-reference() {
 		fi
 	done
 }
+
 
 main "$@"

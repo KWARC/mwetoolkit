@@ -3456,7 +3456,7 @@
 </s>
 <s s_id="116">
 <w surface="Λυπάμαι" lemma="λυπούμαι" pos="V" /> 
-<w surface="γι'" lemma="για" pos="P" /> 
+<w surface="γι&apos;" lemma="για" pos="P" /> 
 <w surface="αυτό" lemma="αυτός" pos="PN" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
 <w surface="όμως" lemma="όμως" pos="CJ" /> 
@@ -4126,7 +4126,7 @@
 <w surface="και" lemma="και" pos="CJ" /> 
 <w surface="παρέχοντάς" lemma="παρέχω" pos="V" /> 
 <w surface="τους" lemma="ο" pos="DT" /> 
-<w surface="αντ'" lemma="αντ'" pos="AJ" /> 
+<w surface="αντ&apos;" lemma="αντ&apos;" pos="AJ" /> 
 <w surface="αυτού" lemma="αυτός" pos="PN" /> 
 <w surface="ένα" lemma="ένας" pos="DT" /> 
 <w surface="διάστημα" lemma="διάστημα" pos="N" /> 
@@ -5587,7 +5587,7 @@
 <w surface="εξέτασής" lemma="εξέταση" pos="N" /> 
 <w surface="τους" lemma="μου" pos="PN" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
-<w surface="παρ'" lemma="παρά" pos="P" /> 
+<w surface="παρ&apos;" lemma="παρά" pos="P" /> 
 <w surface="όλο" lemma="όλο" pos="ADV" /> 
 <w surface="που" lemma="που" pos="CJ" /> 
 <w surface="θα" lemma="θα" pos="PRT" /> 
@@ -5781,7 +5781,7 @@
 <w surface="μόνον" lemma="μόνο" pos="ADV" /> 
 <w surface="η" lemma="ο" pos="DT" /> 
 <w surface="Επιτροπή" lemma="επιτροπή" pos="N" /> 
-<w surface="γι'" lemma="για" pos="P" /> 
+<w surface="γι&apos;" lemma="για" pos="P" /> 
 <w surface="αυτό" lemma="αυτός" pos="PN" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
 <w surface="όμως" lemma="όμως" pos="CJ" /> 
@@ -5858,7 +5858,7 @@
 <w surface="στη" lemma="στου" pos="P" /> 
 <w surface="Σουηδία" lemma="Σουηδία" pos="Prop_N" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
-<w surface="φέρ'" lemma="φέρ'" pos="AJ" /> 
+<w surface="φέρ&apos;" lemma="φέρ&apos;" pos="AJ" /> 
 <w surface="ειπείν" lemma="ειπείν" pos="ADV" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
 <w surface="δεν" lemma="δεν" pos="PRT" /> 
@@ -6583,7 +6583,7 @@
 <w surface="αλλά" lemma="αλλά" pos="CJ" /> 
 <w surface="ας" lemma="ας" pos="PRT" /> 
 <w surface="εργαστούμε" lemma="εργάζομαι" pos="V" /> 
-<w surface="γι'" lemma="για" pos="P" /> 
+<w surface="γι&apos;" lemma="για" pos="P" /> 
 <w surface="αυτό" lemma="αυτός" pos="PN" /> 
 <w surface="κατά" lemma="κατά" pos="P" /> 
 <w surface="την" lemma="ο" pos="DT" /> 
@@ -6853,7 +6853,7 @@
 </s>
 <s s_id="225">
 <w surface="Λυπούμαι" lemma="λυπούμαι" pos="V" /> 
-<w surface="γι'" lemma="για" pos="P" /> 
+<w surface="γι&apos;" lemma="για" pos="P" /> 
 <w surface="αυτό" lemma="αυτός" pos="PN" /> 
 <w surface="," lemma="," pos="PUNCT" /> 
 <w surface="διότι" lemma="διότι" pos="CJ" /> 
@@ -7199,7 +7199,7 @@
 <w surface="σε" lemma="σε" pos="P" /> 
 <w surface="τρεις" lemma="τρεις" pos="AJ" /> 
 <w surface="μήνες" lemma="μήνας" pos="N" /> 
-<w surface="κατ'" lemma="κατά" pos="P" /> 
+<w surface="κατ&apos;" lemma="κατά" pos="P" /> 
 <w surface="ανώτατο" lemma="ανώτερος" pos="AJ" /> 
 <w surface="όριο" lemma="όριο" pos="N" /> 
 <w surface="της" lemma="ο" pos="DT" /> 
@@ -7534,7 +7534,7 @@
 <w surface="τροπολογίες" lemma="τροπολογία" pos="N" /> 
 <w surface="στην" lemma="στου" pos="P" /> 
 <w surface="κατά" lemma="κατά" pos="P" /> 
-<w surface="τ'" lemma="τ'" pos="AJ" /> 
+<w surface="τ&apos;" lemma="τ&apos;" pos="AJ" /> 
 <w surface="άλλα" lemma="άλλος" pos="PN" /> 
 <w surface="εξαιρετική" lemma="εξαιρετικός" pos="AJ" /> 
 <w surface="έκθεση" lemma="έκθεση" pos="N" /> 
@@ -7685,7 +7685,7 @@
 <w surface="θα" lemma="θα" pos="PRT" /> 
 <w surface="ήθελα" lemma="θέλω" pos="V" /> 
 <w surface="πρώτα" lemma="πρώτα" pos="ADV" /> 
-<w surface="απ'" lemma="από" pos="P" /> 
+<w surface="απ&apos;" lemma="από" pos="P" /> 
 <w surface="όλα" lemma="όλος" pos="AJ" /> 
 <w surface="να" lemma="να" pos="PRT" /> 
 <w surface="σας" lemma="εγώ" pos="PN" /> 

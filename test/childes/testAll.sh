@@ -63,11 +63,11 @@ main() {
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -f -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
-		'run candidates.py -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
+		'run candidates.py -f -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
 		true
 
 	dotest "Comparison of candidate extraction outputs" \
@@ -75,7 +75,7 @@ main() {
 		true
 
 	dotest "Individual word frequency counting" \
-		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
+		'run counter.py -v -J -i corpus candidates-from-index.xml >candidates-counted.xml' \
 		true
 
 	dotest "Association measures" \
@@ -142,11 +142,14 @@ compare-to-reference() {
 	for file in *.*; do
 		ref="../reference-output/$file"
 		printf "  Comparing %s... " "$file"
-		if [[ $file == *uniq* ]]; then
+		if [[ $file == *candidates* || $file == *eval* ]]; then
 			cmp -s <(sort "$file") <(sort "$ref")
+		elif [[ $file == *.suffix || $file == warning* ]]; then
+			echo "IGNORED"
+			continue
 		else
 			cmp -s "$file" "$ref"
-		fi
+		fi			
 		if [[ $? -eq 0 ]]; then
 			echo "OK"
 		else

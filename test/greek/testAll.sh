@@ -143,9 +143,9 @@ compare-to-reference() {
 	for file in *.*; do
 		ref="../reference-output/$file"
 		printf "  Comparing %s... " "$file"
-		if [[ $file == *uniq* ]]; then
+		if [[ $file == *candidates* || $file == *eval* ]]; then
 			cmp -s <(sort "$file") <(sort "$ref")
-		elif [[ $file == *.suffix ]]; then
+		elif [[ $file == *.suffix || $file == warning* ]]; then
 			echo "IGNORED"
 			continue
 		else
