@@ -86,6 +86,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         self.meta = None
         self.gen_xml = gen_xml
         self.footer = ""
+        self.inbigram = False
         self.inoccurs = False
         self.invars = False
            
@@ -114,6 +115,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             # Instanciates a new ngram. We do not know which words it
             # contains, so for the moment we just keep it on the stack
             self.ngram = Ngram( [], [] )
+        elif name == "bigrams" :
+            self.inbigram = True
         elif name == "occurs" :
             self.inoccurs = True
         elif name == "vars" :
@@ -200,6 +203,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
         elif name == "ngram" :
             if self.inoccurs :
                 self.candidate.add_occur( self.ngram )
+            elif self.inbigram :
+                self.candidate.add_bigram( self.ngram )
             elif self.invars :
                 self.candidate.add_var( self.ngram )
             else :
@@ -218,6 +223,8 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             # makes it necessary a temporary buffer for the footer. Not really a
             # perfect solution but it will do for now
             self.footer = XML_FOOTER % { "root" : self.gen_xml }
+        elif name == "bigram" :
+            self.inbigram = False
         elif name == "occurs" :
             self.inoccurs = False
         elif name == "vars" :

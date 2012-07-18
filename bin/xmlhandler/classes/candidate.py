@@ -44,7 +44,7 @@ class Candidate ( Entry ) :
 ################################################################################
 
     def __init__( self, id_number, base=[], features=[], \
-                 occurs=[], tpclasses=[], vars=[] ) :
+                 bigrams=[], occurs=[], tpclasses=[], vars=[] ) :
         """
             Instanciates the Multiword Expression candidate.
             
@@ -60,6 +60,9 @@ class Candidate ( Entry ) :
            occurrences when, for instance, several inflections are employed to
            a verb inside the candidate, but all these inflections correspond to
            a single lemma or base form of the verb.
+
+           @param bigrams List of `Ngram`s that represent all the different 
+           bigrams of this candidate. 
            
            @param features List of `Feature`s that describe the candidate in the
            sense of Machine Learning features. A feature is a pair name-value
@@ -80,6 +83,7 @@ class Candidate ( Entry ) :
            @return A new Multiword Term `Candidate` .
         """
         super(Candidate,self).__init__(id_number,base,features)
+        self.bigrams = bigrams        
         self.occurs = occurs              # Ngram list
         self.tpclasses = tpclasses        # TPClass list
         self.freqs = []
@@ -106,7 +110,16 @@ class Candidate ( Entry ) :
             base_string = unicode( base_string, 'utf-8')
         result = result + "    " + base_string + "\n"        
 
-                     
+        if self.bigrams :
+            result = result + "    <bigram>\n"
+            for bigram in self.bigrams :
+                # Unicode support
+                bigram_string = bigram.to_xml()
+                if isinstance( bigram_string, str ) :
+                    bigram_string = unicode( bigram_string, 'utf-8')
+                result = result + "    " + bigram_string +"\n"
+            result = result + "    </bigram>\n"
+
         if self.occurs :
             result = result + "    <occurs>\n"
             for occur in self.occurs :
@@ -137,6 +150,17 @@ class Candidate ( Entry ) :
                 result = result + "    " + tpclass.to_xml() + "\n"                         
         return result + "</cand>"
         
+################################################################################
+
+    def add_bigram( self, bigram ) :
+        """
+            Add an bigram to the list of bigrams of the candidate.
+            
+            @param bigram `Ngram` that corresponds to an bigram of this 
+            candidate. 
+        """
+        self.bigrams.append( bigram )
+
 ################################################################################
 
     def add_occur( self, occur ) :

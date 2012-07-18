@@ -59,11 +59,6 @@ curly brackets, in the same style as WEKA's arff file format -->
     value CDATA #REQUIRED
 >
 <!ELEMENT bigram (freq*)>
-<!ELEMENT freq EMPTY>
-<!ATTLIST freq
-    name CDATA #REQUIRED
-    value CDATA #REQUIRED
->
 <!ELEMENT occurs (ngram*)>
 <!ELEMENT vars (ngram*)>
 <!ELEMENT features (feat*)>
