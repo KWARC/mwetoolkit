@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-patterns.dtd">
+<patterns>
+    <!-- A sequence of common nouns or proper nouns followed by a preposition, 
+         any number of Cardinals (including zero) and a sequence of commons nouns or 
+         proper nouns or adjectives. 
+         Ex: Palanca de Velocidades     [NC PREP NC]
+             Condición de Apoyo Físico  [NC PREP NC ADJ]
+    -->
+    <pat>
+        <pat repeat="+">
+            <either>
+                <pat>
+                    <w pos="NC"/>
+                </pat>
+                <pat>
+                    <w pos="NP"/>
+                </pat>
+            </either>
+        </pat>
+        <w pos="PREP"/>
+        <pat repeat="*"><w pos="CARD" /></pat>
+        <pat repeat="+">        
+            <either>
+                <pat>
+                    <w pos="NP"/>
+                </pat>
+                <pat>
+                    <w pos="NC"/>
+                </pat>
+                <pat>
+                    <w pos="ADJ"/>
+                </pat>
+            </either>
+        </pat>
+    </pat>
+
+    <!-- A sequence of a common noun followed by a preposition, any number of 
+         Negations (including zero) and an adjective or a Lexical verb in past
+         participle or a common noun or a proper noun
+         Ex: Decisión no tomada [NC NEG VLadj]
+             Guardia Civil [NC ADJ]
+    -->
+    <pat>
+        <w pos="NC"/>
+        <pat repeat="*">
+            <w pos="NEG" />
+        </pat>
+        <pat>        
+            <either>
+                <pat>
+                    <w pos="ADJ"/>
+                </pat>
+                <pat>
+                    <w pos="VLadj"/>
+                </pat>
+                <pat>
+                    <w pos="NC"/>
+                </pat>
+                <pat>
+                    <w pos="NP"/>
+                </pat>
+            </either>
+        </pat>
+    </pat>
+
+    <!-- A sequence of common nouns or proper nouns followed by any number of 
+         a structure formed by an adjective, a preposition and a common noun.
+         Ex: Tiempo efectivo de trabajo [NC ADJ PREP NC]
+    -->
+    <pat>
+        <pat repeat="+">
+            <either>
+                <pat>
+                    <w pos="NC"/>
+                </pat>
+                <pat>
+                    <w pos="NP"/>
+                </pat>
+            </either>
+        </pat>
+        <pat repeat="+">        
+            <w pos="ADJ"/>
+            <w pos="PREP"/>
+            <w pos="NC"/>
+        </pat>
+    </pat>
+
+ <!-- A sequence of structures formed by a common noun and a preposition 
+      followed by a common noun and any number of structures formed by any
+      number of sequences of adjective - coordinating conjuction or prepositions
+      and an adjective.     
+ -->
+    <pat>
+        <pat repeat="+">
+            <w pos="NC"/>
+            <w pos="PREP"/>
+        </pat>
+        <w pos="NC"/>
+        <pat repeat="*">
+            <pat repeat="*">
+                <either>
+                    <pat>
+                        <w pos="ADJ"/>
+                        <w pos="CC"/>
+                    </pat>
+                    <pat>
+                        <w pos="PREP"/>
+                    </pat>
+                </either>    
+            </pat>
+            <w pos="ADJ"/>
+        </pat>
+    </pat>
+</patterns>

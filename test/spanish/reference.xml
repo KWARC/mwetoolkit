@@ -1,0 +1,2151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<candidates >
+<meta></meta>
+<cand candid="0">
+    <ngram><w lemma="actividad" pos="NC" /> <w lemma="empresarial" pos="ADJ" /> <w lemma="en" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="actividad" lemma="actividad" pos="NC" /> <w surface="empresarial" lemma="empresarial" pos="ADJ" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="nuestras" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1">
+    <ngram><w lemma="evaluación" pos="NC" /> <w lemma="exhaustivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="evaluación" lemma="evaluación" pos="NC" /> <w surface="exhaustiva" lemma="exhaustivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="2">
+    <ngram><w lemma="garantía" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="seguridad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="garantías" lemma="garantía" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="seguridad" lemma="seguridad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="3">
+    <ngram><w lemma="gasto" pos="NC" /> <w lemma="financiero" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="gasto" lemma="gasto" pos="NC" /> <w surface="financiero" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="4">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="pesquero" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="pesqueras" lemma="pesquero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="5">
+    <ngram><w lemma="requisito" pos="NC" /> <w lemma="pequeño" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="requisitos" lemma="requisito" pos="NC" /> <w surface="mínimos" lemma="pequeño" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="6">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="informe" pos="NC" /> <w lemma="periódico" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="cara" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Sexto" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="informe" lemma="informe" pos="NC" /> <w surface="periódico" lemma="periódico" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cara" lemma="cara" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="7">
+    <ngram><w lemma="competitividad" pos="NC" /> <w lemma="global" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="competitividad" lemma="competitividad" pos="NC" /> <w surface="global" lemma="global" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="8">
+    <ngram><w lemma="interés" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="semejante" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="interés" lemma="interés" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="semejantes" lemma="semejante" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="9">
+    <ngram><w lemma="provisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estrategia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="provisión" lemma="provisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estrategias" lemma="estrategia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="10">
+    <ngram><w lemma="acuerdo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="acuerdos" lemma="acuerdo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="autolimitación" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="11">
+    <ngram><w lemma="aprobación" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="disposición" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="aprobación" lemma="aprobación" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="disposiciones" lemma="disposición" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="12">
+    <ngram><w lemma="carencia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="recurso" pos="NC" /> <w lemma="financiero" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="carencia" lemma="carencia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="recursos" lemma="recurso" pos="NC" /> <w surface="financieros" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="13">
+    <ngram><w lemma="desarrollo" pos="NC" /> <w lemma="óptimo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="óptimo" lemma="óptimo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="14">
+    <ngram><w lemma="objetivo" pos="NC" /> <w lemma="prioritario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="objetivo" lemma="objetivo" pos="NC" /> <w surface="prioritario" lemma="prioritario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="objetivos" lemma="objetivo" pos="NC" /> <w surface="prioritarios" lemma="prioritario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="15">
+    <ngram><w lemma="observación" pos="NC" /> <w lemma="breve" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="observaciones" lemma="observación" pos="NC" /> <w surface="breves" lemma="breve" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="16">
+    <ngram><w lemma="palabra" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="nombre" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="palabra" lemma="palabra" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="nombre" lemma="nombre" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="17">
+    <ngram><w lemma="plan" pos="NC" /> <w lemma="estratégico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="plan" lemma="plan" pos="NC" /> <w surface="estratégico" lemma="estratégico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="18">
+    <ngram><w lemma="provisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estrategia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="salida" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="provisión" lemma="provisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estrategias" lemma="estrategia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="salida" lemma="salida" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="19">
+    <ngram><w lemma="capacidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="iniciativa" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="capacidad" lemma="capacidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="iniciativa" lemma="iniciativa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="20">
+    <ngram><w lemma="competitividad" pos="NC" /> <w lemma="regional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="competitividad" lemma="competitividad" pos="NC" /> <w surface="regional" lemma="regional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="21">
+    <ngram><w lemma="efecto" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="efectos" lemma="efecto" pos="NC" /> <w surface="nocivos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="22">
+    <ngram><w lemma="infracción" pos="NC" /> <w lemma="evidente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="infracciones" lemma="infracción" pos="NC" /> <w surface="evidentes" lemma="evidente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="23">
+    <ngram><w lemma="jueves" pos="NC" /> <w lemma="próximo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="jueves" lemma="jueves" pos="NC" /> <w surface="próximo" lemma="próximo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="24">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="único" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="único" lemma="único" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="25">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="territorial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="territorial" lemma="territorial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="26">
+    <ngram><w lemma="sector" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="sectores" lemma="sector" pos="NC" /> <w surface="económicos" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="27">
+    <ngram><w lemma="tiempo" pos="NC" /> <w lemma="suficiente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="tiempo" lemma="tiempo" pos="NC" /> <w surface="suficiente" lemma="suficiente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="28">
+    <ngram><w lemma="tipo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="actividad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="tipo" lemma="tipo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actividades" lemma="actividad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="29">
+    <ngram><w lemma="transparencia" pos="NC" /> <w lemma="financiero" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="transparencia" lemma="transparencia" pos="NC" /> <w surface="financiera" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="30">
+    <ngram><w lemma="abogado" pos="NC" /> <w lemma="especializado" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="abogados" lemma="abogado" pos="NC" /> <w surface="especializados" lemma="especializado" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="31">
+    <ngram><w lemma="análisis" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="análisis" lemma="análisis" pos="NC" /> <w surface="económico" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="32">
+    <ngram><w lemma="beneficio" pos="NC" /> <w lemma="inmediato" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="beneficios" lemma="beneficio" pos="NC" /> <w surface="inmediatos" lemma="inmediato" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="33">
+    <ngram><w lemma="discurso" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="investidura" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="discurso" lemma="discurso" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="investidura" lemma="investidura" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="34">
+    <ngram><w lemma="fase" pos="NC" /> <w lemma="inicial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fase" lemma="fase" pos="NC" /> <w surface="inicial" lemma="inicial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="35">
+    <ngram><w lemma="fuente" pos="NC" /> <w lemma="alternativo" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="financiación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuentes" lemma="fuente" pos="NC" /> <w surface="alternativas" lemma="alternativo" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="financiación" lemma="financiación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="36">
+    <ngram><w lemma="lugar" pos="NC" /> <w lemma="idóneo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="lugares" lemma="lugar" pos="NC" /> <w surface="idóneos" lemma="idóneo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="37">
+    <ngram><w lemma="moneda" pos="NC" /> <w lemma="común" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="moneda" lemma="moneda" pos="NC" /> <w surface="común" lemma="común" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="38">
+    <ngram><w lemma="yugo" pos="NC" /> <w lemma="artificial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="yugo" lemma="yugo" pos="NC" /> <w surface="artificial" lemma="artificial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="39">
+    <ngram><w lemma="órgano" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="control" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="órgano" lemma="órgano" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="control" lemma="control" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="40">
+    <ngram><w lemma="carácter" pos="NC" /> <w lemma="internacional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="carácter" lemma="carácter" pos="NC" /> <w surface="internacional" lemma="internacional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="41">
+    <ngram><w lemma="intercambio" pos="NC" /> <w lemma="privilegiar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="intercambio" lemma="intercambio" pos="NC" /> <w surface="privilegiado" lemma="privilegiar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="42">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="con" pos="PREP" /> <w lemma="fin" pos="NC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="con" lemma="con" pos="PREP" /> <w surface="fines" lemma="fin" pos="NC" /> <w surface="sociales" lemma="social" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="43">
+    <ngram><w lemma="prueba" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="calidad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="prueba" lemma="prueba" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="calidad" lemma="calidad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="44">
+    <ngram><w lemma="región" pos="NC" /> <w lemma="pobre" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regiones" lemma="región" pos="NC" /> <w surface="pobres" lemma="pobre" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="45">
+    <ngram><w lemma="regla" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="juego" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="reglas" lemma="regla" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="juego" lemma="juego" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="46">
+    <ngram><w lemma="sector" pos="NC" /> <w lemma="privado" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="sector" lemma="sector" pos="NC" /> <w surface="privado" lemma="privado" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="47">
+    <ngram><w lemma="tasa" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="desempleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="tasa" lemma="tasa" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="desempleo" lemma="desempleo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="48">
+    <ngram><w lemma="aplicación" pos="NC" /> <w lemma="directo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="aplicación" lemma="aplicación" pos="NC" /> <w surface="directa" lemma="directo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="49">
+    <ngram><w lemma="autorización" pos="NC" /> <w lemma="singular" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="autorizaciones" lemma="autorización" pos="NC" /> <w surface="singulares" lemma="singular" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="50">
+    <ngram><w lemma="entrada" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="vigor" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="entrada" lemma="entrada" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="vigor" lemma="vigor" pos="NC" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="51">
+    <ngram><w lemma="falta" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="lógica" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="falta" lemma="falta" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="lógica" lemma="lógica" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="52">
+    <ngram><w lemma="pena" pos="NC" /> <w lemma="capital" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="pena" lemma="pena" pos="NC" /> <w surface="capital" lemma="capital" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="53">
+    <ngram><w lemma="proyecto" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="proyecto" lemma="proyecto" pos="NC" /> <w surface="europeo" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="54">
+    <ngram><w lemma="puesta" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="práctica" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="puesta" lemma="puesta" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="práctica" lemma="práctica" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="55">
+    <ngram><w lemma="región" pos="NC" /> <w lemma="rico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regiones" lemma="región" pos="NC" /> <w surface="ricas" lemma="rico" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="56">
+    <ngram><w lemma="derecho" pos="NC" /> <w lemma="constitucional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="derecho" lemma="derecho" pos="NC" /> <w surface="constitucional" lemma="constitucional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="57">
+    <ngram><w lemma="especulación" pos="NC" /> <w lemma="internacional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="especulación" lemma="especulación" pos="NC" /> <w surface="internacional" lemma="internacional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="58">
+    <ngram><w lemma="experto" pos="NC" /> <w lemma="en~materia~de" pos="PREP" /> <w lemma="transporte" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercancía" pos="NC" /> <w lemma="peligroso" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="expertos" lemma="experto" pos="NC" /> <w surface="en materia de" lemma="en~materia~de" pos="PREP" /> <w surface="transporte" lemma="transporte" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+
+
+<cand candid="59">
+    <ngram><w lemma="necesidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="transparencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="necesidad" lemma="necesidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="transparencia" lemma="transparencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="60">
+    <ngram><w lemma="punto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="vista" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="punto" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="vista" lemma="vista" pos="NC" /> <w surface="medioambiental" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+
+<cand candid="61">
+    <ngram><w lemma="visión" pos="NC" /> <w lemma="en~materia~de" pos="PREP" /> <w lemma="política" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="visiones" lemma="visión" pos="NC" /> <w surface="en materia de" lemma="en~materia~de" pos="PREP" /> <w surface="política" lemma="política" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="62">
+    <ngram><w lemma="parlamento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Parlamento" lemma="parlamento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Estrasburgo" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="63">
+    <ngram><w lemma="planteamiento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="fondo" pos="NC" /> <w lemma="común" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="planteamiento" lemma="planteamiento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="fondo" lemma="fondo" pos="NC" /> <w surface="común" lemma="común" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="64">
+    <ngram><w lemma="región" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regiones" lemma="región" pos="NC" /> <w surface="europeas" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="65">
+    <ngram><w lemma="condición" pos="NC" /> <w lemma="humano" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="condición" lemma="condición" pos="NC" /> <w surface="humana" lemma="humano" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="66">
+    <ngram><w lemma="transporte" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercancía" pos="NC" /> <w lemma="peligroso" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="transporte" lemma="transporte" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <freq name="corpus" value="14" /></ngram>
+    <ngram><w surface="Transporte" lemma="transporte" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="67">
+    <ngram><w lemma="turismo" pos="NC" /> <w lemma="rural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="turismo" lemma="turismo" pos="NC" /> <w surface="rural" lemma="rural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="68">
+    <ngram><w lemma="base" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="base" lemma="base" pos="NC" /> <w surface="económica" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="69">
+    <ngram><w lemma="decisión" pos="NC" /> <w lemma="concreto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="decisiones" lemma="decisión" pos="NC" /> <w surface="concretas" lemma="concreto" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="70">
+    <ngram><w lemma="mecanismo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="aplicación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mecanismo" lemma="mecanismo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="aplicación" lemma="aplicación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="71">
+    <ngram><w lemma="norma" pos="NC" /> <w lemma="pequeño" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="normas" lemma="norma" pos="NC" /> <w surface="mínimas" lemma="pequeño" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="72">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="estructural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="estructural" lemma="estructural" pos="ADJ" /> <freq name="corpus" value="5" /></ngram>
+    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="estructurales" lemma="estructural" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="73">
+    <ngram><w lemma="suma" pos="NC" /> <w lemma="competencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="suma" lemma="suma" pos="NC" /> <w surface="competencia" lemma="competencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="74">
+    <ngram><w lemma="acto" pos="NC" /> <w lemma="legislativo" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="aplicación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="acto" lemma="acto" pos="NC" /> <w surface="legislativo" lemma="legislativo" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="aplicación" lemma="aplicación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="75">
+    <ngram><w lemma="aportación" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="capital" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="aportación" lemma="aportación" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="capital" lemma="capital" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="76">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="Europea" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="7" /></ngram>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="Prodi" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="77">
+    <ngram><w lemma="fuerza" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="trabajo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuerzas" lemma="fuerza" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="trabajo" lemma="trabajo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="78">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="europeo" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="competencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="europea" lemma="europeo" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="competencia" lemma="competencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="79">
+    <ngram><w lemma="puesta" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="marcha" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="puesta" lemma="puesta" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="marcha" lemma="marcha" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="80">
+    <ngram><w lemma="media" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="desarrollo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="media" lemma="media" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="desarrollo" lemma="desarrollo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="81">
+    <ngram><w lemma="operación" pos="NC" /> <w lemma="innecesario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="operación" lemma="operación" pos="NC" /> <w surface="innecesaria" lemma="innecesario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="82">
+    <ngram><w lemma="desigualdad" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="desigualdades" lemma="desigualdad" pos="NC" /> <w surface="económicas" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="83">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="transporte" pos="NC" /> <w lemma="común" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="transportes" lemma="transporte" pos="NC" /> <w surface="común" lemma="común" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="84">
+    <ngram><w lemma="modalidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="ejercicio" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="modalidades" lemma="modalidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="ejercicio" lemma="ejercicio" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="85">
+    <ngram><w lemma="progreso" pos="NC" /> <w lemma="tecnológico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="progreso" lemma="progreso" pos="NC" /> <w surface="tecnológico" lemma="tecnológico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="86">
+    <ngram><w lemma="tiempo" pos="NC" /> <w lemma="parcial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="tiempo" lemma="tiempo" pos="NC" /> <w surface="parcial" lemma="parcial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="87">
+    <ngram><w lemma="especialista" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="derecho" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="especialistas" lemma="especialista" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="derecho" lemma="derecho" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="88">
+    <ngram><w lemma="marco" pos="NC" /> <w lemma="comunitario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="marcos" lemma="marco" pos="NC" /> <w surface="comunitarios" lemma="comunitario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="89">
+    <ngram><w lemma="puesta" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="práctica" pos="NC" /> <w lemma="sin" pos="PREP" /> <w lemma="demora" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="puesta" lemma="puesta" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="práctica" lemma="práctica" pos="NC" /> <w surface="sin" lemma="sin" pos="PREP" /> <w surface="demora" lemma="demora" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="90">
+    <ngram><w lemma="burocracia" pos="NC" /> <w lemma="excesivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="burocracia" lemma="burocracia" pos="NC" /> <w surface="excesiva" lemma="excesivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="91">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="transporte" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="transportes" lemma="transporte" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="92">
+    <ngram><w lemma="provisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estrategia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="salida" pos="NC" /> <w lemma="práctico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="provisión" lemma="provisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estrategias" lemma="estrategia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="salida" lemma="salida" pos="NC" /> <w surface="prácticas" lemma="práctico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="93">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Tratado" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Amsterdam" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="coup" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="chapeau" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="94">
+    <ngram><w lemma="enseñanza" pos="NC" /> <w lemma="superior" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Enseñanza" lemma="enseñanza" pos="NC" /> <w surface="Superior" lemma="superior" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="95">
+    <ngram><w lemma="instrumento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercado" pos="NC" /> <w lemma="por" pos="PREP" /> <w lemma="si" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="instrumentos" lemma="instrumento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercado" lemma="mercado" pos="NC" /> <w surface="por" lemma="por" pos="PREP" /> <w surface="si" lemma="si" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="96">
+    <ngram><w lemma="cuarto" pos="NC" /> <w lemma="parte" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="agricultor" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="cuartas" lemma="cuarto" pos="NC" /> <w surface="partes" lemma="parte" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="nuestros" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="agricultores" lemma="agricultor" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="97">
+    <ngram><w lemma="barón" pos="NC" /> <w lemma="Crespo" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Barón" lemma="barón" pos="NC" /> <w surface="Crespo" lemma="Crespo" pos="NP" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="98">
+    <ngram><w lemma="punto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="partida" pos="NC" /> <w lemma="razonable" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="punto" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="partida" lemma="partida" pos="NC" /> <w surface="razonable" lemma="razonable" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="99">
+    <ngram><w lemma="unión" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Unión" lemma="unión" pos="NC" /> <w surface="Europea" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="32" /></ngram>
+    </occurs>
+</cand>
+<cand candid="100">
+    <ngram><w lemma="derecho" pos="NC" /> <w lemma="laboral" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="derechos" lemma="derecho" pos="NC" /> <w surface="laborales" lemma="laboral" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="101">
+    <ngram><w lemma="reembolso" pos="NC" /> <w lemma="efectivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="reembolso" lemma="reembolso" pos="NC" /> <w surface="efectivo" lemma="efectivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="102">
+    <ngram><w lemma="valor" pos="NC" /> <w lemma="añadir" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="valor" lemma="valor" pos="NC" /> <w surface="añadido" lemma="añadir" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="103">
+    <ngram><w lemma="fondo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Fondo" lemma="fondo" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="104">
+    <ngram><w lemma="mediana" pos="NC" /> <w lemma="empresa" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mediana" lemma="mediana" pos="NC" /> <w surface="empresa" lemma="empresa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="105">
+    <ngram><w lemma="pregunta" pos="NC" /> <w lemma="crítico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="pregunta" lemma="pregunta" pos="NC" /> <w surface="crítica" lemma="crítico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="106">
+    <ngram><w lemma="principio" pos="NC" /> <w lemma="legal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="legal" lemma="legal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="107">
+    <ngram><w lemma="programa" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="programa" lemma="programa" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Fondos" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="Estructurales" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="Europeos" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="108">
+    <ngram><w lemma="sociedad" pos="NC" /> <w lemma="rural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="sociedad" lemma="sociedad" pos="NC" /> <w surface="rural" lemma="rural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="109">
+    <ngram><w lemma="año" pos="NC" /> <w lemma="pasar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="año" lemma="año" pos="NC" /> <w surface="pasado" lemma="pasar" pos="VLadj" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="110">
+    <ngram><w lemma="diario" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="diario" lemma="diario" pos="NC" /> <w surface="ABC" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="111">
+    <ngram><w lemma="partido" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Partido" lemma="partido" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="112">
+    <ngram><w lemma="empresa" pos="NC" /> <w lemma="público" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="empresas" lemma="empresa" pos="NC" /> <w surface="públicas" lemma="público" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="113">
+    <ngram><w lemma="punto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="vista" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="punto" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="vista" lemma="vista" pos="NC" /> <freq name="corpus" value="12" /></ngram>
+    <ngram><w surface="puntos" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="vista" lemma="vista" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="114">
+    <ngram><w lemma="acto" pos="NC" /> <w lemma="legislativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="acto" lemma="acto" pos="NC" /> <w surface="legislativo" lemma="legislativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="115">
+    <ngram><w lemma="diferencia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="oportunidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="empleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="diferencia" lemma="diferencia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="oportunidades" lemma="oportunidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="empleo" lemma="empleo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="116">
+    <ngram><w lemma="fin" pos="NC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fines" lemma="fin" pos="NC" /> <w surface="sociales" lemma="social" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="117">
+    <ngram><w lemma="semana" pos="NC" /> <w lemma="pasar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="semana" lemma="semana" pos="NC" /> <w surface="pasada" lemma="pasar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="118">
+    <ngram><w lemma="consecuencia" pos="NC" /> <w lemma="dramático" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="consecuencias" lemma="consecuencia" pos="NC" /> <w surface="dramáticas" lemma="dramático" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="119">
+    <ngram><w lemma="desarrollo" pos="NC" /> <w lemma="rural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Desarrollo" lemma="desarrollo" pos="NC" /> <w surface="Rural" lemma="rural" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="rural" lemma="rural" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="120">
+    <ngram><w lemma="efecto" pos="NC" /> <w lemma="negativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="efectos" lemma="efecto" pos="NC" /> <w surface="negativos" lemma="negativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="121">
+    <ngram><w lemma="organismo" pos="NC" /> <w lemma="político" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="organismos" lemma="organismo" pos="NC" /> <w surface="políticos" lemma="político" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="122">
+    <ngram><w lemma="atención" pos="NC" /> <w lemma="especial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="atención" lemma="atención" pos="NC" /> <w surface="especial" lemma="especial" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="123">
+    <ngram><w lemma="fondo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="de" pos="PREP" /> <w lemma="desarrollo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Fondo" lemma="fondo" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Desarrollo" lemma="desarrollo" pos="NC" /> <w surface="Regional" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="124">
+    <ngram><w lemma="asunto" pos="NC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Asuntos" lemma="asunto" pos="NC" /> <w surface="Sociales" lemma="social" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="125">
+    <ngram><w lemma="golpe" pos="NC" /> <w lemma="militar" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="golpe" lemma="golpe" pos="NC" /> <w surface="militar" lemma="militar" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="126">
+    <ngram><w lemma="respiración" pos="NC" /> <w lemma="asistir" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="respiración" lemma="respiración" pos="NC" /> <w surface="asistida" lemma="asistir" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="127">
+    <ngram><w lemma="tema" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="fondo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="tema" lemma="tema" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="fondo" lemma="fondo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="128">
+    <ngram><w lemma="vivo" pos="NC" /> <w lemma="recuerdo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="vivo" lemma="vivo" pos="NC" /> <w surface="recuerdo" lemma="recuerdo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="129">
+    <ngram><w lemma="brazo" pos="NC" /> <w lemma="secular" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="brazo" lemma="brazo" pos="NC" /> <w surface="secular" lemma="secular" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="130">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="empleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Empleo" lemma="empleo" pos="NC" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="131">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="política" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Política" lemma="política" pos="NC" /> <w surface="Regional" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="7" /></ngram>
+    </occurs>
+</cand>
+<cand candid="132">
+    <ngram><w lemma="socialista" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Socialistas" lemma="socialista" pos="NC" /> <w surface="Europeos" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="6" /></ngram>
+    </occurs>
+</cand>
+<cand candid="133">
+    <ngram><w lemma="poder" pos="NC" /> <w lemma="público" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="poderes" lemma="poder" pos="NC" /> <w surface="públicos" lemma="público" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="134">
+    <ngram><w lemma="tribunal" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Tribunal" lemma="tribunal" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Justicia" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="135">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="ciudadano" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="miles" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="ciudadanos" lemma="ciudadano" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="136">
+    <ngram><w lemma="libro" pos="NC" /> <w lemma="blanco" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Libro" lemma="libro" pos="NC" /> <w surface="Blanco" lemma="blanco" pos="ADJ" /> <freq name="corpus" value="15" /></ngram>
+    </occurs>
+</cand>
+<cand candid="137">
+    <ngram><w lemma="mercancía" pos="NC" /> <w lemma="por" pos="PREP" /> <w lemma="carretera" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="por" lemma="por" pos="PREP" /> <w surface="carretera" lemma="carretera" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="138">
+    <ngram><w lemma="país" pos="NC" /> <w lemma="periférico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="países" lemma="país" pos="NC" /> <w surface="periféricos" lemma="periférico" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="139">
+    <ngram><w lemma="período" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="tiempo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="tiempo" lemma="tiempo" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="140">
+    <ngram><w lemma="discurso" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estreno" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="discurso" lemma="discurso" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estreno" lemma="estreno" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="141">
+    <ngram><w lemma="gasto" pos="NC" /> <w lemma="inferior" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="gastos" lemma="gasto" pos="NC" /> <w surface="inferiores" lemma="inferior" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="142">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Política" lemma="política" pos="NC" /> <w surface="Regional" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="143">
+    <ngram><w lemma="caso" pos="NC" /> <w lemma="concreto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="caso" lemma="caso" pos="NC" /> <w surface="concreto" lemma="concreto" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="144">
+    <ngram><w lemma="desigualdad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="trato" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="desigualdad" lemma="desigualdad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="trato" lemma="trato" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="145">
+    <ngram><w lemma="dimensión" pos="NC" /> <w lemma="político" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="dimensión" lemma="dimensión" pos="NC" /> <w surface="política" lemma="político" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="146">
+    <ngram><w lemma="parlamento" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Parlamento" lemma="parlamento" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="13" /></ngram>
+    </occurs>
+</cand>
+<cand candid="147">
+    <ngram><w lemma="mercancía" pos="NC" /> <w lemma="peligroso" pos="ADJ" /> <w lemma="por" pos="PREP" /> <w lemma="carretera" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <w surface="por" lemma="por" pos="PREP" /> <w surface="carreteras" lemma="carretera" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <w surface="por" lemma="por" pos="PREP" /> <w surface="carretera" lemma="carretera" pos="NC" /> <freq name="corpus" value="10" /></ngram>
+    </occurs>
+</cand>
+<cand candid="148">
+    <ngram><w lemma="nivel" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="vida" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="nivel" lemma="nivel" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="vida" lemma="vida" pos="NC" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="149">
+    <ngram><w lemma="origen" pos="NC" /> <w lemma="humilde" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="origen" lemma="origen" pos="NC" /> <w surface="humilde" lemma="humilde" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="150">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="integral" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="integral" lemma="integral" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="151">
+    <ngram><w lemma="experto" pos="NC" /> <w lemma="en~materia~de" pos="PREP" /> <w lemma="transporte" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="expertos" lemma="experto" pos="NC" /> <w surface="en materia de" lemma="en~materia~de" pos="PREP" /> <w surface="transporte" lemma="transporte" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="152">
+    <ngram><w lemma="junta" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Junta" lemma="junta" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Cuestores" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="153">
+    <ngram><w lemma="capa" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="burocracia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="capas" lemma="capa" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="burocracia" lemma="burocracia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="154">
+    <ngram><w lemma="derecho" pos="NC" /> <w lemma="comunitario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Derecho" lemma="derecho" pos="NC" /> <w surface="comunitario" lemma="comunitario" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="155">
+    <ngram><w lemma="término" pos="NC" /> <w lemma="medio" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="término" lemma="término" pos="NC" /> <w surface="medio" lemma="medio" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="156">
+    <ngram><w lemma="borrador" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="carta" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="borrador" lemma="borrador" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="carta" lemma="carta" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="157">
+    <ngram><w lemma="condición" pos="NC" /> <w lemma="climático" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="condiciones" lemma="condición" pos="NC" /> <w surface="climáticas" lemma="climático" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="158">
+    <ngram><w lemma="condición" pos="NC" /> <w lemma="homogéneo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="condiciones" lemma="condición" pos="NC" /> <w surface="homogéneas" lemma="homogéneo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="159">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="puesto" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="miles" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="puestos" lemma="puesto" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="160">
+    <ngram><w lemma="engranaje" pos="NC" /> <w lemma="federalista" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="engranaje" lemma="engranaje" pos="NC" /> <w surface="federalista" lemma="federalista" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="161">
+    <ngram><w lemma="año" pos="NC" /> <w lemma="nuevo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="año" lemma="año" pos="NC" /> <w surface="nuevo" lemma="nuevo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Año" lemma="año" pos="NC" /> <w surface="Nuevo" lemma="nuevo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="162">
+    <ngram><w lemma="línea" pos="NC" /> <w lemma="fundamental" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="líneas" lemma="línea" pos="NC" /> <w surface="fundamentales" lemma="fundamental" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="163">
+    <ngram><w lemma="transporte" pos="NC" /> <w lemma="ad" pos="NP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercancía" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="transportes" lemma="transporte" pos="NC" /> <w surface="ad" lemma="ad" pos="NP" /> <w surface="hoc" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="164">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="interior" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="interior" lemma="interior" pos="ADJ" /> <freq name="corpus" value="12" /></ngram>
+    </occurs>
+</cand>
+<cand candid="165">
+    <ngram><w lemma="campo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="acción" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="campos" lemma="campo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="acción" lemma="acción" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="166">
+    <ngram><w lemma="carácter" pos="NC" /> <w lemma="prioritario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="carácter" lemma="carácter" pos="NC" /> <w surface="prioritario" lemma="prioritario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="167">
+    <ngram><w lemma="comité" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="sanidad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comité" lemma="comité" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Sanidad" lemma="sanidad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="168">
+    <ngram><w lemma="estado" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="Texas" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Estado" lemma="estado" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Texas" lemma="Texas" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="169">
+    <ngram><w lemma="proveedor" pos="NC" /> <w lemma="potencial" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="empleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="proveedor" lemma="proveedor" pos="NC" /> <w surface="potencial" lemma="potencial" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="empleo" lemma="empleo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="170">
+    <ngram><w lemma="realidad" pos="NC" /> <w lemma="financiero" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="realidad" lemma="realidad" pos="NC" /> <w surface="financiera" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="171">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="Economía" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Economía" lemma="Economía" pos="NP" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="172">
+    <ngram><w lemma="objetivo" pos="NC" /> <w lemma="histórico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="objetivos" lemma="objetivo" pos="NC" /> <w surface="históricos" lemma="histórico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="173">
+    <ngram><w lemma="pobreza" pos="NC" /> <w lemma="relativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="pobreza" lemma="pobreza" pos="NC" /> <w surface="relativa" lemma="relativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="174">
+    <ngram><w lemma="fuente" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="inspiración" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuente" lemma="fuente" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="inspiración" lemma="inspiración" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="nuestra" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="175">
+    <ngram><w lemma="regla" pos="NC" /> <w lemma="claro" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="juego" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="reglas" lemma="regla" pos="NC" /> <w surface="claras" lemma="claro" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="juego" lemma="juego" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="176">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="energía" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Energía" lemma="energía" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="177">
+    <ngram><w lemma="cuestión" pos="NC" /> <w lemma="grave" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="cuestión" lemma="cuestión" pos="NC" /> <w surface="grave" lemma="grave" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="178">
+    <ngram><w lemma="industria" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="alto" pos="ADJ" /> <w lemma="tecnología" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="industrias" lemma="industria" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="alta" lemma="alto" pos="ADJ" /> <w surface="tecnología" lemma="tecnología" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="179">
+    <ngram><w lemma="medida" pos="NC" /> <w lemma="pertinente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="medidas" lemma="medida" pos="NC" /> <w surface="pertinentes" lemma="pertinente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="180">
+    <ngram><w lemma="tecnología" pos="NC" /> <w lemma="punta" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="tecnologías" lemma="tecnología" pos="NC" /> <w surface="punta" lemma="punta" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="181">
+    <ngram><w lemma="enseñanza" pos="NC" /> <w lemma="básico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="enseñanza" lemma="enseñanza" pos="NC" /> <w surface="básica" lemma="básico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="182">
+    <ngram><w lemma="fuente" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="inspiración" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuente" lemma="fuente" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="inspiración" lemma="inspiración" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="183">
+    <ngram><w lemma="riesgo" pos="NC" /> <w lemma="inherente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="riesgos" lemma="riesgo" pos="NC" /> <w surface="inherentes" lemma="inherente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="184">
+    <ngram><w lemma="línea" pos="NC" /> <w lemma="directriz" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="líneas" lemma="línea" pos="NC" /> <w surface="directrices" lemma="directriz" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="185">
+    <ngram><w lemma="renovación" pos="NC" /> <w lemma="urbano" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="renovación" lemma="renovación" pos="NC" /> <w surface="urbana" lemma="urbano" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="186">
+    <ngram><w lemma="restricción" pos="NC" /> <w lemma="vertical" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="restricciones" lemma="restricción" pos="NC" /> <w surface="verticales" lemma="vertical" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="187">
+    <ngram><w lemma="salida" pos="NC" /> <w lemma="práctico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="salida" lemma="salida" pos="NC" /> <w surface="prácticas" lemma="práctico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="188">
+    <ngram><w lemma="voto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="confianza" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="voto" lemma="voto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="confianza" lemma="confianza" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="189">
+    <ngram><w lemma="esfuerzo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="armonización" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="esfuerzos" lemma="esfuerzo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="armonización" lemma="armonización" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="190">
+    <ngram><w lemma="ciudad" pos="NC" /> <w lemma="fantasmo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="ciudades" lemma="ciudad" pos="NC" /> <w surface="fantasma" lemma="fantasmo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="191">
+    <ngram><w lemma="recurso" pos="NC" /> <w lemma="humano" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="recursos" lemma="recurso" pos="NC" /> <w surface="humanos" lemma="humano" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="192">
+    <ngram><w lemma="sociedad" pos="NC" /> <w lemma="ideal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="sociedad" lemma="sociedad" pos="NC" /> <w surface="ideal" lemma="ideal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="193">
+    <ngram><w lemma="media" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="desarrollo" pos="NC" /> <w lemma="regional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="media" lemma="media" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="regional" lemma="regional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="194">
+    <ngram><w lemma="región" pos="NC" /> <w lemma="natal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="región" lemma="región" pos="NC" /> <w surface="natal" lemma="natal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="195">
+    <ngram><w lemma="condena" pos="NC" /> <w lemma="a" pos="PREP" /> <w lemma="muerte" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="condena" lemma="condena" pos="NC" /> <w surface="a" lemma="a" pos="PREP" /> <w surface="muerte" lemma="muerte" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="196">
+    <ngram><w lemma="punto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="equilibrio" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="punto" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="equilibrio" lemma="equilibrio" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="197">
+    <ngram><w lemma="fase" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="institución" pos="NC" /> <w lemma="consultivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fase" lemma="fase" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="institución" lemma="institución" pos="NC" /> <w surface="consultiva" lemma="consultivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="198">
+    <ngram><w lemma="fractura" pos="NC" /> <w lemma="innecesario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fractura" lemma="fractura" pos="NC" /> <w surface="innecesaria" lemma="innecesario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="199">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="adicional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="papeleos" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="adicionales" lemma="adicional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="200">
+    <ngram><w lemma="proceder" pos="NC" /> <w lemma="con" pos="PREP" /> <w lemma="responsabilidad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="proceder" lemma="proceder" pos="NC" /> <w surface="con" lemma="con" pos="PREP" /> <w surface="responsabilidad" lemma="responsabilidad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="201">
+    <ngram><w lemma="adopción" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="medida" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="adopción" lemma="adopción" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="medidas" lemma="medida" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="202">
+    <ngram><w lemma="órgano" pos="NC" /> <w lemma="legislativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="órgano" lemma="órgano" pos="NC" /> <w surface="legislativo" lemma="legislativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand
+<cand candid="203">
+    <ngram><w lemma="espina" pos="NC" /> <w lemma="clavar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="espina" lemma="espina" pos="NC" /> <w surface="clavada" lemma="clavar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="204">
+    <ngram><w lemma="espíritu" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="actividad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="espíritu" lemma="espíritu" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actividad" lemma="actividad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="205">
+    <ngram><w lemma="espíritu" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="iniciativa" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="espíritu" lemma="espíritu" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="iniciativa" lemma="iniciativa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="206">
+    <ngram><w lemma="objeto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="envidia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="objeto" lemma="objeto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="envidia" lemma="envidia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="207">
+    <ngram><w lemma="instrumento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="extremo" pos="ADJ" /> <w lemma="importancia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="instrumento" lemma="instrumento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="extrema" lemma="extremo" pos="ADJ" /> <w surface="importancia" lemma="importancia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="208">
+    <ngram><w lemma="quebradero" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="cabeza" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="quebraderos" lemma="quebradero" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cabeza" lemma="cabeza" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="209">
+    <ngram><w lemma="capital" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="riesgo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="capital" lemma="capital" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="riesgo" lemma="riesgo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="210">
+    <ngram><w lemma="creación" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="puesto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="trabajo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="creación" lemma="creación" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="puestos" lemma="puesto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="trabajo" lemma="trabajo" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="211">
+    <ngram><w lemma="discurso" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="discurso" lemma="discurso" pos="NC" /> <w surface="programático" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="212">
+    <ngram><w lemma="grupo" pos="NC" /> <w lemma="socialisto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Grupo" lemma="grupo" pos="NC" /> <w surface="Socialista" lemma="socialisto" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="213">
+    <ngram><w lemma="persona" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="origen" pos="NC" /> <w lemma="humilde" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="persona" lemma="persona" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="origen" lemma="origen" pos="NC" /> <w surface="humilde" lemma="humilde" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="214">
+    <ngram><w lemma="vía" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="adhesión" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="vía" lemma="vía" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="adhesión" lemma="adhesión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="215">
+    <ngram><w lemma="órgano" pos="NC" /> <w lemma="ejecutivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="órgano" lemma="órgano" pos="NC" /> <w surface="ejecutivo" lemma="ejecutivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="216">
+    <ngram><w lemma="caja" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="ahorro" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="cajas" lemma="caja" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="ahorro" lemma="ahorro" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="217">
+    <ngram><w lemma="documento" pos="NC" /> <w lemma="contradictorio" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="documento" lemma="documento" pos="NC" /> <w surface="contradictorio" lemma="contradictorio" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="218">
+    <ngram><w lemma="estrategia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="salida" pos="NC" /> <w lemma="práctico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="estrategias" lemma="estrategia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="salida" lemma="salida" pos="NC" /> <w surface="prácticas" lemma="práctico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="219">
+    <ngram><w lemma="fondo" pos="NC" /> <w lemma="para" pos="PREP" /> <w lemma="proyecto" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fondos" lemma="fondo" pos="NC" /> <w surface="para" lemma="para" pos="PREP" /> <w surface="proyectos" lemma="proyecto" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="220">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="igualdad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="oportunidad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="igualdad" lemma="igualdad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="oportunidades" lemma="oportunidad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="221">
+    <ngram><w lemma="desastre" pos="NC" /> <w lemma="natural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="desastre" lemma="desastre" pos="NC" /> <w surface="natural" lemma="natural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="222">
+    <ngram><w lemma="fuente" pos="NC" /> <w lemma="alternativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuentes" lemma="fuente" pos="NC" /> <w surface="alternativas" lemma="alternativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="223">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="comunitario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="comunitaria" lemma="comunitario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="224">
+    <ngram><w lemma="principio" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="cohesión" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cohesión" lemma="cohesión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="225">
+    <ngram><w lemma="ser" pos="NC" /> <w lemma="humano" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="seres" lemma="ser" pos="NC" /> <w surface="humanos" lemma="humano" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="226">
+    <ngram><w lemma="toma" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="decisión" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="toma" lemma="toma" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="decisiones" lemma="decisión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="227">
+    <ngram><w lemma="carácter" pos="NC" /> <w lemma="estratégico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="carácter" lemma="carácter" pos="NC" /> <w surface="estratégico" lemma="estratégico" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="228">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="Económica" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="229">
+    <ngram><w lemma="cooperación" pos="NC" /> <w lemma="pleno" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="cooperación" lemma="cooperación" pos="NC" /> <w surface="plena" lemma="pleno" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="230">
+    <ngram><w lemma="motivo" pos="NC" /> <w lemma="suficiente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="motivos" lemma="motivo" pos="NC" /> <w surface="suficientes" lemma="suficiente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="231">
+    <ngram><w lemma="año" pos="NC" /> <w lemma="futuro" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="años" lemma="año" pos="NC" /> <w surface="futuros" lemma="futuro" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="232">
+    <ngram><w lemma="cooperación" pos="NC" /> <w lemma="razonable" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="cooperación" lemma="cooperación" pos="NC" /> <w surface="razonable" lemma="razonable" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="233">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="proteccionista" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="proteccionistas" lemma="proteccionista" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="234">
+    <ngram><w lemma="puesto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="trabajo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="puestos" lemma="puesto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="trabajo" lemma="trabajo" pos="NC" /> <freq name="corpus" value="11" /></ngram>
+    </occurs>
+</cand>
+<cand candid="235">
+    <ngram><w lemma="regla" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="juego" pos="NC" /> <w lemma="claro" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="reglas" lemma="regla" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="juego" lemma="juego" pos="NC" /> <w surface="claras" lemma="claro" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="236">
+    <ngram><w lemma="reparto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="competencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="reparto" lemma="reparto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="competencias" lemma="competencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="237">
+    <ngram><w lemma="cumbre" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="Berlín" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="Cumbre" lemma="cumbre" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Berlín" lemma="Berlín" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand
+<cand candid="238">
+    <ngram><w lemma="autoridad" pos="NC" /> <w lemma="competente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="autoridad" lemma="autoridad" pos="NC" /> <w surface="competente" lemma="competente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="239">
+    <ngram><w lemma="reflexión" pos="NC" /> <w lemma="conjunto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="reflexión" lemma="reflexión" pos="NC" /> <w surface="conjunta" lemma="conjunto" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="240">
+    <ngram><w lemma="programa" pos="NC" /> <w lemma="clave" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="programas" lemma="programa" pos="NC" /> <w surface="clave" lemma="clave" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="241">
+    <ngram><w lemma="órgano" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="órganos" lemma="órgano" pos="NC" /> <w surface="jurisdiccionales" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="242">
+    <ngram><w lemma="situación" pos="NC" /> <w lemma="geográfico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="situación" lemma="situación" pos="NC" /> <w surface="geográfica" lemma="geográfico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="243">
+    <ngram><w lemma="garantía" pos="NC" /> <w lemma="último" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="garantía" lemma="garantía" pos="NC" /> <w surface="última" lemma="último" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="244">
+    <ngram><w lemma="condición" pos="NC" /> <w lemma="destinar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="condiciones" lemma="condición" pos="NC" /> <w surface="destinadas" lemma="destinar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="245">
+    <ngram><w lemma="posibilidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="participación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="posibilidades" lemma="posibilidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="participación" lemma="participación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="246">
+    <ngram><w lemma="puesto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="trabajo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="puestos" lemma="puesto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="trabajo" lemma="trabajo" pos="NC" /> <w surface="inviables" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="247">
+    <ngram><w lemma="realización" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estudio" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="realización" lemma="realización" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estudios" lemma="estudio" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="248">
+    <ngram><w lemma="valor" pos="NC" /> <w lemma="a~cambio~de" pos="PREP" /> <w lemma="dinero" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="valor" lemma="valor" pos="NC" /> <w surface="a cambio de" lemma="a~cambio~de" pos="PREP" /> <w surface="dinero" lemma="dinero" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="249">
+    <ngram><w lemma="víctima" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="catástrofe" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="víctimas" lemma="víctima" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="catástrofes" lemma="catástrofe" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="250">
+    <ngram><w lemma="base" pos="NC" /> <w lemma="sólido" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="base" lemma="base" pos="NC" /> <w surface="sólida" lemma="sólido" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="251">
+    <ngram><w lemma="calidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="vida" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="calidad" lemma="calidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="vida" lemma="vida" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="252">
+    <ngram><w lemma="concesión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="concesión" lemma="concesión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Fondos" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="Estructurales" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="253">
+    <ngram><w lemma="esfuerzo" pos="NC" /> <w lemma="competitivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="esfuerzo" lemma="esfuerzo" pos="NC" /> <w surface="competitivo" lemma="competitivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="254">
+    <ngram><w lemma="mercancía" pos="NC" /> <w lemma="peligroso" pos="ADJ" /> <w lemma="en" pos="PREP" /> <w lemma="territorio" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="territorios" lemma="territorio" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="255">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="activo" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="creación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="activas" lemma="activo" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="creación" lemma="creación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="256">
+    <ngram><w lemma="política" pos="NC" /> <w lemma="europeo" pos="ADJ" /> <w lemma="de" pos="PREP" /> <w lemma="gestión" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="europea" lemma="europeo" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="gestión" lemma="gestión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="257">
+    <ngram><w lemma="presidente" pos="NC" /> <w lemma="regional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Presidente" lemma="presidente" pos="NC" /> <w surface="regional" lemma="regional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="258">
+    <ngram><w lemma="proyecto" pos="NC" /> <w lemma="financiar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="proyecto" lemma="proyecto" pos="NC" /> <w surface="financiado" lemma="financiar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="259">
+    <ngram><w lemma="subvención" pos="NC" /> <w lemma="nacional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="subvenciones" lemma="subvención" pos="NC" /> <w surface="nacionales" lemma="nacional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="260">
+    <ngram><w lemma="zona" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="origen" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="zonas" lemma="zona" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="origen" lemma="origen" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="261">
+    <ngram><w lemma="ad" pos="NP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercancía" pos="NC" /> <w lemma="peligroso" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="ad" lemma="ad" pos="NP" /> <w surface="hoc" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <w surface="peligrosas" lemma="peligroso" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="262">
+    <ngram><w lemma="asunto" pos="NC" /> <w lemma="específico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="asuntos" lemma="asunto" pos="NC" /> <w surface="específicos" lemma="específico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="263">
+    <ngram><w lemma="claridad" pos="NC" /> <w lemma="necesario" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="claridad" lemma="claridad" pos="NC" /> <w surface="necesarias" lemma="necesario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="264">
+    <ngram><w lemma="desarrollo" pos="NC" /> <w lemma="sostenido" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="sostenido" lemma="sostenido" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="265">
+    <ngram><w lemma="espina" pos="NC" /> <w lemma="clavar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="espina" lemma="espina" pos="NC" /> <w surface="clavada" lemma="clavar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="266">
+    <ngram><w lemma="manera" pos="NC" /> <w lemma="significativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="manera" lemma="manera" pos="NC" /> <w surface="significativa" lemma="significativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="267">
+    <ngram><w lemma="factor" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="factores" lemma="factor" pos="NC" /> <w surface="económicos" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="268">
+    <ngram><w lemma="fondo" pos="NC" /> <w lemma="público" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fondos" lemma="fondo" pos="NC" /> <w surface="públicos" lemma="público" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="269">
+    <ngram><w lemma="línea" pos="NC" /> <w lemma="general" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="líneas" lemma="línea" pos="NC" /> <w surface="generales" lemma="general" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="270">
+    <ngram><w lemma="empresa" pos="NC" /> <w lemma="danés" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="empresas" lemma="empresa" pos="NC" /> <w surface="danesas" lemma="danés" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="271">
+    <ngram><w lemma="media" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="media" lemma="media" pos="NC" /> <w surface="europea" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="272">
+    <ngram><w lemma="modo" pos="NC" /> <w lemma="real" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="modo" lemma="modo" pos="NC" /> <w surface="real" lemma="real" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="273">
+    <ngram><w lemma="producto" pos="NC" /> <w lemma="histórico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="producto" lemma="producto" pos="NC" /> <w surface="histórico" lemma="histórico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="274">
+    <ngram><w lemma="propuesta" pos="NC" /> <w lemma="presentar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="propuesta" lemma="propuesta" pos="NC" /> <w surface="presentada" lemma="presentar" pos="VLadj" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="275">
+    <ngram><w lemma="pérdida" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="ciento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="puesto" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="pérdida" lemma="pérdida" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cientos" lemma="ciento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="miles" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="puestos" lemma="puesto" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="276">
+    <ngram><w lemma="regla" pos="NC" /> <w lemma="común" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regla" lemma="regla" pos="NC" /> <w surface="común" lemma="común" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="277">
+    <ngram><w lemma="respecto" pos="NC" /> <w lemma="a" pos="PREP" /> <w lemma="edición" pos="NC" /> <w lemma="precedente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="respecto" lemma="respecto" pos="NC" /> <w surface="a" lemma="a" pos="PREP" /> <w surface="ediciones" lemma="edición" pos="NC" /> <w surface="precedentes" lemma="precedente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="278">
+    <ngram><w lemma="sello" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="calidad" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="sello" lemma="sello" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="calidad" lemma="calidad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="279">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="tipo" pos="NC" /> <w lemma="técnico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="caracterizaciones" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="tipo" lemma="tipo" pos="NC" /> <w surface="técnico" lemma="técnico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="280">
+    <ngram><w lemma="exclusión" pos="NC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="exclusión" lemma="exclusión" pos="NC" /> <w surface="social" lemma="social" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="281">
+    <ngram><w lemma="plan" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="reestructuración" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="planes" lemma="plan" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="reestructuración" lemma="reestructuración" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="282">
+    <ngram><w lemma="principio" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="cohesión" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cohesión" lemma="cohesión" pos="NC" /> <w surface="económica" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="283">
+    <ngram><w lemma="progreso" pos="NC" /> <w lemma="significativo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="progresos" lemma="progreso" pos="NC" /> <w surface="significativos" lemma="significativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="284">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="285">
+    <ngram><w lemma="ejército" pos="NC" /> <w lemma="norteamericano" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="ejército" lemma="ejército" pos="NC" /> <w surface="norteamericano" lemma="norteamericano" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="286">
+    <ngram><w lemma="prueba" pos="NC" /> <w lemma="evidente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="prueba" lemma="prueba" pos="NC" /> <w surface="evidente" lemma="evidente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="287">
+    <ngram><w lemma="regulación" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regulaciones" lemma="regulación" pos="NC" /> <w surface="europeas" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="288">
+    <ngram><w lemma="sector" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="alto" pos="ADJ" /> <w lemma="tecnología" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="sector" lemma="sector" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="alta" lemma="alto" pos="ADJ" /> <w surface="tecnología" lemma="tecnología" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="289">
+    <ngram><w lemma="circunstancia" pos="NC" /> <w lemma="global" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="circunstancias" lemma="circunstancia" pos="NC" /> <w surface="globales" lemma="global" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="290">
+    <ngram><w lemma="competencia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="manera" pos="NC" /> <w lemma="unilateral" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="competencia" lemma="competencia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="manera" lemma="manera" pos="NC" /> <w surface="unilateral" lemma="unilateral" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="291">
+    <ngram><w lemma="cuestión" pos="NC" /> <w lemma="concreto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="cuestión" lemma="cuestión" pos="NC" /> <w surface="concreta" lemma="concreto" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="292">
+    <ngram><w lemma="eje" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="acción" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="ejes" lemma="eje" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="acción" lemma="acción" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="293">
+    <ngram><w lemma="estado" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="cosa" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="estado" lemma="estado" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cosas" lemma="cosa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="294">
+    <ngram><w lemma="medida" pos="NC" /> <w lemma="estructural" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="medidas" lemma="medida" pos="NC" /> <w surface="estructurales" lemma="estructural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="295">
+    <ngram><w lemma="período" pos="NC" /> <w lemma="citar" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="citado" lemma="citar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="296">
+    <ngram><w lemma="período" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="estancamiento" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estancamiento" lemma="estancamiento" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="297">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="empleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="creadoras" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="empleo" lemma="empleo" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="298">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" /> <w lemma="número" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Enmiendas" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="Números" lemma="número" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="299">
+    <ngram><w lemma="papel" pos="NC" /> <w lemma="clave" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="papel" lemma="papel" pos="NC" /> <w surface="clave" lemma="clave" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="300">
+    <ngram><w lemma="tipo" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="actividad" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="tipo" lemma="tipo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actividades" lemma="actividad" pos="NC" /> <w surface="económicas" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="301">
+    <ngram><w lemma="vista" pos="NC" /> <w lemma="poner" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="vista" lemma="vista" pos="NC" /> <w surface="puesta" lemma="poner" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="302">
+    <ngram><w lemma="principio" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="cohesión" pos="NC" /> <w lemma="económico" pos="ADJ" /> <w lemma="y" pos="CC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="cohesión" lemma="cohesión" pos="NC" /> <w surface="económica" lemma="económico" pos="ADJ" /> <w surface="y" lemma="y" pos="CC" /> <w surface="social" lemma="social" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="303">
+    <ngram><w lemma="cierre" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="instalación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="cierre" lemma="cierre" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="instalaciones" lemma="instalación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="304">
+    <ngram><w lemma="comisión" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="asunto" pos="NC" /> <w lemma="económico" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Asuntos" lemma="asunto" pos="NC" /> <w surface="Económicos" lemma="económico" pos="ADJ" /> <freq name="corpus" value="7" /></ngram>
+    </occurs>
+</cand>
+<cand candid="305">
+    <ngram><w lemma="regla" pos="NC" /> <w lemma="claro" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="reglas" lemma="regla" pos="NC" /> <w surface="claras" lemma="claro" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="306">
+    <ngram><w lemma="regulación" pos="NC" /> <w lemma="horizontal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="regulaciones" lemma="regulación" pos="NC" /> <w surface="horizontales" lemma="horizontal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="307">
+    <ngram><w lemma="carencia" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="recurso" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="carencia" lemma="carencia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="recursos" lemma="recurso" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="308">
+    <ngram><w lemma="falta" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="transparencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="falta" lemma="falta" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="transparencia" lemma="transparencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="309">
+    <ngram><w lemma="fase" pos="NC" /> <w lemma="ulterior" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="fase" lemma="fase" pos="NC" /> <w surface="ulterior" lemma="ulterior" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="310">
+    <ngram><w lemma="mundo" pos="NC" /> <w lemma="real" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mundo" lemma="mundo" pos="NC" /> <w surface="real" lemma="real" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="311">
+    <ngram><w lemma="punto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="partida" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="punto" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="partida" lemma="partida" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="puntos" lemma="punto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="partida" lemma="partida" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="312">
+    <ngram><w lemma="ayuda" pos="NC" /> <w lemma="estatal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="ayuda" lemma="ayuda" pos="NC" /> <w surface="estatal" lemma="estatal" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="313">
+    <ngram><w lemma="canal" pos="NC" /> <w lemma="finlandés" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="canales" lemma="canal" pos="NC" /> <w surface="finlandeses" lemma="finlandés" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="314">
+    <ngram><w lemma="desarrollo" pos="NC" /> <w lemma="regional" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="regional" lemma="regional" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
+    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="regionales" lemma="regional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="315">
+    <ngram><w lemma="fondo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="de" pos="PREP" /> <w lemma="desarrollo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Fondo" lemma="fondo" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Desarrollo" lemma="desarrollo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="316">
+    <ngram><w lemma="mercado" pos="NC" /> <w lemma="absoluto" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="absoluta" lemma="absoluto" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="317">
+    <ngram><w lemma="proyecto" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="desarrollo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="proyecto" lemma="proyecto" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="desarrollo" lemma="desarrollo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="318">
+    <ngram><w lemma="república" pos="NC" /> <w lemma="federal" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="República" lemma="república" pos="NC" /> <w surface="Federal" lemma="federal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="319">
+    <ngram><w lemma="actividad" pos="NC" /> <w lemma="empresarial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="actividad" lemma="actividad" pos="NC" /> <w surface="empresarial" lemma="empresarial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="320">
+    <ngram><w lemma="convergencia" pos="NC" /> <w lemma="real" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="convergencia" lemma="convergencia" pos="NC" /> <w surface="real" lemma="real" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="321">
+    <ngram><w lemma="dirección" pos="NC" /> <w lemma="general" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="&lt;unknown&gt;" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Dirección" lemma="dirección" pos="NC" /> <w surface="General" lemma="general" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Pesca" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="322">
+    <ngram><w lemma="espíritu" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="actividad" pos="NC" /> <w lemma="empresarial" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="espíritu" lemma="espíritu" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actividad" lemma="actividad" pos="NC" /> <w surface="empresarial" lemma="empresarial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="323">
+    <ngram><w lemma="fuente" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="empleo" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="fuentes" lemma="fuente" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="empleo" lemma="empleo" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="324">
+    <ngram><w lemma="país" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="tránsito" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="países" lemma="país" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="tránsito" lemma="tránsito" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="país" lemma="país" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="tránsito" lemma="tránsito" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="325">
+    <ngram><w lemma="necesidad" pos="NC" /> <w lemma="social" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="necesidades" lemma="necesidad" pos="NC" /> <w surface="sociales" lemma="social" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="326">
+    <ngram><w lemma="igualdad" pos="NC" /> <w lemma="entre" pos="PREP" /> <w lemma="hombre" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="igualdad" lemma="igualdad" pos="NC" /> <w surface="entre" lemma="entre" pos="PREP" /> <w surface="hombres" lemma="hombre" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="327">
+    <ngram><w lemma="instrumento" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercado" pos="NC" /> <w lemma="por" pos="PREP" /> <w lemma="si" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="instrumentos" lemma="instrumento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercado" lemma="mercado" pos="NC" /> <w surface="por" lemma="por" pos="PREP" /> <w surface="si" lemma="si" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="328">
+    <ngram><w lemma="espíritu" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="espíritu" lemma="espíritu" pos="NC" /> <w surface="emprendedor" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="329">
+    <ngram><w lemma="tránsito" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="mercancía" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="tránsito" lemma="tránsito" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="mercancías" lemma="mercancía" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="330">
+    <ngram><w lemma="consideración" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="principio" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="consideraciones" lemma="consideración" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="principio" lemma="principio" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="331">
+    <ngram><w lemma="economía" pos="NC" /> <w lemma="sumergir" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="economía" lemma="economía" pos="NC" /> <w surface="sumergida" lemma="sumergir" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="332">
+    <ngram><w lemma="papel" pos="NC" /> <w lemma="decisivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="papel" lemma="papel" pos="NC" /> <w surface="decisivo" lemma="decisivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="333">
+    <ngram><w lemma="realidad" pos="NC" /> <w lemma="actual" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="realidad" lemma="realidad" pos="NC" /> <w surface="actual" lemma="actual" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="334">
+    <ngram><w lemma="práctica" pos="NC" /> <w lemma="sin" pos="PREP" /> <w lemma="demora" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="práctica" lemma="práctica" pos="NC" /> <w surface="sin" lemma="sin" pos="PREP" /> <w surface="demora" lemma="demora" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="335">
+    <ngram><w lemma="calidad" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="autoridad" pos="NC" /> <w lemma="competente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="calidad" lemma="calidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="autoridad" lemma="autoridad" pos="NC" /> <w surface="competente" lemma="competente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="336">
+    <ngram><w lemma="centro" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="formación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="centros" lemma="centro" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="formación" lemma="formación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="337">
+    <ngram><w lemma="margen" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="acción" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="margen" lemma="margen" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="acción" lemma="acción" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="338">
+    <ngram><w lemma="camino" pos="NC" /> <w lemma="adecuado" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="camino" lemma="camino" pos="NC" /> <w surface="adecuado" lemma="adecuado" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="339">
+    <ngram><w lemma="atención" pos="NC" /> <w lemma="preferente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="atención" lemma="atención" pos="NC" /> <w surface="preferente" lemma="preferente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="340">
+    <ngram><w lemma="línea" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="actuación" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="líneas" lemma="línea" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actuación" lemma="actuación" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="341">
+    <ngram><w lemma="respuesta" pos="NC" /> <w lemma="a" pos="PREP" /> <w lemma="semejante" pos="ADJ" /> <w lemma="catástrofe" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="respuesta" lemma="respuesta" pos="NC" /> <w surface="a" lemma="a" pos="PREP" /> <w surface="semejantes" lemma="semejante" pos="ADJ" /> <w surface="catástrofes" lemma="catástrofe" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="342">
+    <ngram><w lemma="siglo" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="siglo" lemma="siglo" pos="NC" /> <w surface="XXI" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="343">
+    <ngram><w lemma="unidad" pos="NC" /> <w lemma="competitivo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="unidades" lemma="unidad" pos="NC" /> <w surface="competitivas" lemma="competitivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="344">
+    <ngram><w lemma="tronco" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="tronco" lemma="tronco" pos="NC" /> <w surface="europeo" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="345">
+    <ngram><w lemma="comunidad" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comunidad" lemma="comunidad" pos="NC" /> <w surface="europea" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="346">
+    <ngram><w lemma="condición" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="competencia" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="condiciones" lemma="condición" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="competencia" lemma="competencia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="347">
+    <ngram><w lemma="empresa" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> </ngram>
+    <occurs>
+    <ngram><w surface="empresa" lemma="empresa" pos="NC" /> <w surface="Holzmann" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="348">
+    <ngram><w lemma="partido" pos="NC" /> <w lemma="conservador" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Partido" lemma="partido" pos="NC" /> <w surface="Conservador" lemma="conservador" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="349">
+    <ngram><w lemma="trabajo" pos="NC" /> <w lemma="competente" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="trabajo" lemma="trabajo" pos="NC" /> <w surface="competente" lemma="competente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="350">
+    <ngram><w lemma="comité" pos="NC" /> <w lemma="&lt;unknown&gt;" pos="NP" /> <w lemma="de" pos="PREP" /> <w lemma="normalización" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="Comité" lemma="comité" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Normalización" lemma="normalización" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="351">
+    <ngram><w lemma="disposición" pos="NC" /> <w lemma="propio" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="disposiciones" lemma="disposición" pos="NC" /> <w surface="propias" lemma="propio" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="352">
+    <ngram><w lemma="foro" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="especialista" pos="NC" /> <w lemma="en" pos="PREP" /> <w lemma="derecho" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="foro" lemma="foro" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="especialistas" lemma="especialista" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="derecho" lemma="derecho" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="353">
+    <ngram><w lemma="pregunta" pos="NC" /> <w lemma="oral" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="pregunta" lemma="pregunta" pos="NC" /> <w surface="oral" lemma="oral" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="354">
+    <ngram><w lemma="déficit" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="ejecución" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="déficit" lemma="déficit" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="ejecución" lemma="ejecución" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+</candidates>
