@@ -96,7 +96,12 @@ def treat_candidate( candidate ) :
     global all_feats
     line = ""
     for feat_name in all_feats :
-        line = line + str( candidate.get_feat_value( feat_name ) ) + ","
+    	feat_value = candidate.get_feat_value( feat_name )
+    	if type(feat_value) == float :
+    		feat_value = "%.8f" % feat_value
+    	else :
+    		feat_value = str( feat_value )
+        line = line + feat_value + ","
     for tpclass in candidate.tpclasses :
         line = line + tpclass.value + ","        
     if isinstance( line, unicode ) :
