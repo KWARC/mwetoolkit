@@ -151,7 +151,7 @@ compare-to-reference() {
 		printf "  Comparing %s... " "$file"
 		if [[ $file == *candidates* || $file == *eval* ]]; then
 			cmp -s <(sort "$file") <(sort "$ref")
-		elif [[ $file == *.suffix || $file == warning* ]]; then
+		elif [[ $file == *.suffix || $file == warning* || $file == *.corpus ]]; then
 			echo "IGNORED"
 			continue
 		else
