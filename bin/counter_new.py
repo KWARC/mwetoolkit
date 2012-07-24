@@ -172,7 +172,7 @@ def append_counters( ngram ):
         
         @param ngram The `Ngram` that is being counted.
     """
-    global get_freq_function, freq_name
+    global get_freq_function, freq_name, count_joint_frequency, count_bigrams
     ( c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
     for w in ngram :
         c_surfaces.append( w.surface )
