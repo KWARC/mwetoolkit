@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<candidates >
+<meta>
+    <corpussize name="corpus" value="12878" />
+</meta>
+<cand candid="0">
+    <ngram><w surface="current" pos="A" ><freq name="corpus" value="1" /></w> <w surface="knowledge" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="current" lemma="current" pos="A" /> <w surface="knowledge" lemma="knowledge" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="1">
+    <ngram><w surface="cyclin-like" pos="A" ><freq name="corpus" value="3" /></w> <w surface="dna" pos="N" ><freq name="corpus" value="19" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>  
+    <occurs>
+    <ngram><w surface="cyclin-like" lemma="cyclin-like" pos="A" /> <w surface="dna" lemma="dna" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="2">
+    <ngram><w surface="fp" pos="N" ><freq name="corpus" value="1" /></w> <w surface="promoter" pos="N" ><freq name="corpus" value="63" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="fp" lemma="fp" pos="N" /> <w surface="promoter" lemma="promoter" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="3">
+    <ngram><w surface="gp350/" pos="N" ><freq name="corpus" value="1" /></w> <w surface="220" pos="NUM" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="gp350/" lemma="gp350/" pos="N" /> <w surface="220" lemma="@card@" pos="NUM" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="4">
+    <ngram><w surface="granulocyte" pos="N" ><freq name="corpus" value="2" /></w> <w surface="colony-stimulating" pos="N" ><freq name="corpus" value="7" /></w> <w surface="factor" pos="N" ><freq name="corpus" value="45" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="granulocyte" lemma="granulocyte" pos="N" /> <w surface="colony-stimulating" lemma="colony-stimulating" pos="N" /> <w surface="factor" lemma="factor" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="5">
+    <ngram><w surface="higher" pos="A" ><freq name="corpus" value="2" /></w> <w surface="order" pos="N" ><freq name="corpus" value="2" /></w> <w surface="nf-atp" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="higher" lemma="high" pos="A" /> <w surface="order" lemma="order" pos="N" /> <w surface="nf-atp" lemma="nf-atp" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="6">
+    <ngram><w surface="physiological" pos="A" ><freq name="corpus" value="1" /></w> <w surface="conditions" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="physiological" lemma="physiological" pos="A" /> <w surface="conditions" lemma="condition" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="7">
+    <ngram><w surface="potent" pos="A" ><freq name="corpus" value="4" /></w> <w surface="inhibitors" pos="N" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="potent" lemma="potent" pos="A" /> <w surface="inhibitors" lemma="inhibitor" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="8">
+    <ngram><w surface="ric" pos="A" ><freq name="corpus" value="5" /></w> <w surface="gire" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="ric" lemma="ric" pos="A" /> <w surface="gire" lemma="gire" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="9">
+    <ngram><w surface="second" pos="A" ><freq name="corpus" value="5" /></w> <w surface="e2f-i" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="second" lemma="second" pos="A" /> <w surface="e2f-i" lemma="e2f-i" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="10">
+    <ngram><w surface="serine-threonine" pos="A" ><freq name="corpus" value="1" /></w> <w surface="phosphatase" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="serine-threonine" lemma="serine-threonine" pos="A" /> <w surface="phosphatase" lemma="phosphatase" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="11">
+    <ngram><w surface="transcriptional" pos="A" ><freq name="corpus" value="23" /></w> <w surface="regulation" pos="N" ><freq name="corpus" value="15" /></w> <freq name="corpus" value="3" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="transcriptional" lemma="transcriptional" pos="A" /> <w surface="regulation" lemma="regulation" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="12">
+    <ngram><w surface="transient" pos="A" ><freq name="corpus" value="5" /></w> <w surface="transfection" pos="N" ><freq name="corpus" value="10" /></w> <w surface="assay" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="4" />
+    <freq name="corpus" value="5" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="transient" lemma="transient" pos="A" /> <w surface="transfection" lemma="transfection" pos="N" /> <w surface="assay" lemma="assay" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="13">
+    <ngram><w surface="type" pos="N" ><freq name="corpus" value="8" /></w> <w surface="2" pos="NUM" ><freq name="corpus" value="8" /></w> <w surface="enhancer" pos="N" ><freq name="corpus" value="16" /></w> <w surface="activation" pos="N" ><freq name="corpus" value="72" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="2" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="type" lemma="type" pos="N" /> <w surface="2" lemma="2" pos="NUM" /> <w surface="enhancer" lemma="enhancer" pos="N" /> <w surface="activation" lemma="activation" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="14">
+    <ngram><w surface="17-bp" pos="A" ><freq name="corpus" value="2" /></w> <w surface="gas" pos="N" ><freq name="corpus" value="3" /></w> <w surface="homology" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="17-bp" lemma="17-bp" pos="A" /> <w surface="gas" lemma="gas" pos="N" /> <w surface="homology" lemma="homology" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="15">
+    <ngram><w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <w surface="division" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="cell" lemma="cell" pos="N" /> <w surface="division" lemma="division" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="16">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="cytomegalovirus" pos="N" ><freq name="corpus" value="2" /></w> <w surface="ie2" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="cytomegalovirus" lemma="cytomegalovirus" pos="N" /> <w surface="ie2" lemma="ie2" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="17">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="nk" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="3" /></ngram>
+    <bigram>
+    <freq name="corpus" value="3" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="nk" lemma="nk" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+</cand>
+<cand candid="18">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="t" pos="N" ><freq name="corpus" value="76" /></w> <w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <w surface="line" pos="N" ><freq name="corpus" value="19" /></w> <w surface="jurkat" pos="N" ><freq name="corpus" value="13" /></w> <w surface="j6" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="8" />
+    <freq name="corpus" value="57" />
+    <freq name="corpus" value="17" />
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="t" lemma="t" pos="N" /> <w surface="cell" lemma="cell" pos="N" /> <w surface="line" lemma="line" pos="N" /> <w surface="jurkat" lemma="jurkat" pos="N" /> <w surface="j6" lemma="j6" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="19">
+    <ngram><w surface="interleukin" pos="N" ><freq name="corpus" value="7" /></w> <w surface="responsiveness" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="interleukin" lemma="interleukin" pos="N" /> <w surface="responsiveness" lemma="responsiveness" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="20">
+    <ngram><w surface="linear" pos="A" ><freq name="corpus" value="2" /></w> <w surface="ebv" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="linear" lemma="linear" pos="A" /> <w surface="ebv" lemma="ebv" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="21">
+    <ngram><w surface="major" pos="A" ><freq name="corpus" value="9" /></w> <w surface="histocompatibility" pos="N" ><freq name="corpus" value="3" /></w> <w surface="complex" pos="N" ><freq name="corpus" value="17" /></w> <w surface="class" pos="N" ><freq name="corpus" value="18" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="3" />
+    <freq name="corpus" value="2" />
+    <freq name="corpus" value="2" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="major" lemma="major" pos="A" /> <w surface="histocompatibility" lemma="histocompatibility" pos="N" /> <w surface="complex" lemma="complex" pos="N" /> <w surface="class" lemma="class" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="22">
+    <ngram><w surface="ngfi-b/" pos="A" ><freq name="corpus" value="3" /></w> <w surface="nur77-related" pos="A" ><freq name="corpus" value="1" /></w> <w surface="transcription" pos="N" ><freq name="corpus" value="80" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="ngfi-b/" lemma="ngfi-b/" pos="A" /> <w surface="nur77-related" lemma="nur77-related" pos="A" /> <w surface="transcription" lemma="transcription" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="23">
+    <ngram><w surface="nucleoside" pos="N" ><freq name="corpus" value="3" /></w> <w surface="diphosphate" pos="N" ><freq name="corpus" value="3" /></w> <w surface="kinase" pos="N" ><freq name="corpus" value="35" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="3" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="nucleoside" lemma="nucleoside" pos="N" /> <w surface="diphosphate" lemma="diphosphate" pos="N" /> <w surface="kinase" lemma="kinase" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="24">
+    <ngram><w surface="b-independent" pos="N" ><freq name="corpus" value="1" /></w> <w surface="hiv" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="b-independent" lemma="b-independent" pos="N" /> <w surface="hiv" lemma="hiv" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="25">
+    <ngram><w surface="cell-specific" pos="A" ><freq name="corpus" value="5" /></w> <w surface="histone" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="cell-specific" lemma="cell-specific" pos="A" /> <w surface="histone" lemma="histone" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="26">
+    <ngram><w surface="double-stranded" pos="A" ><freq name="corpus" value="1" /></w> <w surface="gire" pos="N" ><freq name="corpus" value="4" /></w> <w surface="sequence" pos="N" ><freq name="corpus" value="22" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="double-stranded" lemma="double-stranded" pos="A" /> <w surface="gire" lemma="gire" pos="N" /> <w surface="sequence" lemma="sequence" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="27">
+    <ngram><w surface="expression" pos="N" ><freq name="corpus" value="87" /></w> <w surface="vectors" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="expression" lemma="expression" pos="N" /> <w surface="vectors" lemma="vector" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="28">
+    <ngram><w surface="functional" pos="A" ><freq name="corpus" value="9" /></w> <w surface="promoter" pos="N" ><freq name="corpus" value="63" /></w> <w surface="region" pos="N" ><freq name="corpus" value="28" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="4" />   
+    </bigram>
+    <occurs>
+    <ngram><w surface="functional" lemma="functional" pos="A" /> <w surface="promoter" lemma="promoter" pos="N" /> <w surface="region" lemma="region" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="29">
+    <ngram><w surface="gm-csf" pos="N" ><freq name="corpus" value="26" /></w> <w surface="proximal" pos="A" ><freq name="corpus" value="6" /></w> <w surface="promoter" pos="N" ><freq name="corpus" value="63" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="3" />   
+    </bigram>
+    <occurs>
+    <ngram><w surface="gm-csf" lemma="gm-csf" pos="N" /> <w surface="proximal" lemma="proximal" pos="A" /> <w surface="promoter" lemma="promoter" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="30">
+    <ngram><w surface="induction" pos="N" ><freq name="corpus" value="42" /></w> <w surface="levels" pos="N" ><freq name="corpus" value="27" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="induction" lemma="induction" pos="N" /> <w surface="levels" lemma="level" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="31">
+    <ngram><w surface="intercellular" pos="A" ><freq name="corpus" value="2" /></w> <w surface="adhesion" pos="N" ><freq name="corpus" value="14" /></w> <w surface="molecule-1" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    <freq name="corpus" value="4" />   
+    </bigram>
+    <occurs>
+    <ngram><w surface="intercellular" lemma="intercellular" pos="A" /> <w surface="adhesion" lemma="adhesion" pos="N" /> <w surface="molecule-1" lemma="molecule-1" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="32">
+    <ngram><w surface="main" pos="A" ><freq name="corpus" value="3" /></w> <w surface="regulatory" pos="A" ><freq name="corpus" value="7" /></w> <w surface="pathways" pos="N" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />   
+    </bigram>
+    <occurs>
+    <ngram><w surface="main" lemma="main" pos="A" /> <w surface="regulatory" lemma="regulatory" pos="A" /> <w surface="pathways" lemma="pathway" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="33">
+    <ngram><w surface="relative" pos="A" ><freq name="corpus" value="3" /></w> <w surface="ratio" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="relative" lemma="relative" pos="A" /> <w surface="ratio" lemma="ratio" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="34">
+    <ngram><w surface="several" pos="A" ><freq name="corpus" value="11" /></w> <w surface="hours" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="several" lemma="several" pos="A" /> <w surface="hours" lemma="hour" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="35">
+    <ngram><w surface="src" pos="N" ><freq name="corpus" value="2" /></w> <w surface="homology" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="src" lemma="src" pos="N" /> <w surface="homology" lemma="homology" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="36">
+    <ngram><w surface="target" pos="N" ><freq name="corpus" value="10" /></w> <w surface="quantity" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="target" lemma="target" pos="N" /> <w surface="quantity" lemma="quantity" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="37">
+    <ngram><w surface="thp-1" pos="A" ><freq name="corpus" value="3" /></w> <w surface="cells" pos="N" ><freq name="corpus" value="152" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="thp-1" lemma="thp-1" pos="A" /> <w surface="cells" lemma="cell" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="38">
+    <ngram><w surface="tumour" pos="N" ><freq name="corpus" value="1" /></w> <w surface="necrosis" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="tumour" lemma="tumour" pos="N" /> <w surface="necrosis" lemma="necrosis" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="39">
+    <ngram><w surface="virus" pos="N" ><freq name="corpus" value="9" /></w> <w surface="i" pos="N" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="virus" lemma="virus" pos="N" /> <w surface="i" lemma="i" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="40">
+    <ngram><w surface="additional" pos="A" ><freq name="corpus" value="5" /></w> <w surface="mechanism" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="additional" lemma="additional" pos="A" /> <w surface="mechanism" lemma="mechanism" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="41">
+    <ngram><w surface="cell-specific" pos="A" ><freq name="corpus" value="5" /></w> <w surface="histone" pos="N" ><freq name="corpus" value="1" /></w> <w surface="h5" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="cell-specific" lemma="cell-specific" pos="A" /> <w surface="histone" lemma="histone" pos="N" /> <w surface="h5" lemma="h5" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="42">
+    <ngram><w surface="common" pos="A" ><freq name="corpus" value="3" /></w> <w surface="control" pos="N" ><freq name="corpus" value="14" /></w> <w surface="mechanisms" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="common" lemma="common" pos="A" /> <w surface="control" lemma="control" pos="N" /> <w surface="mechanisms" lemma="mechanism" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="43">
+    <ngram><w surface="electrophoretic" pos="A" ><freq name="corpus" value="5" /></w> <w surface="mobility" pos="N" ><freq name="corpus" value="8" /></w> <w surface="shift" pos="N" ><freq name="corpus" value="8" /></w> <w surface="assay" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="4" />
+    <freq name="corpus" value="7" />
+    <freq name="corpus" value="3" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="electrophoretic" lemma="electrophoretic" pos="A" /> <w surface="mobility" lemma="mobility" pos="N" /> <w surface="shift" lemma="shift" pos="N" /> <w surface="assay" lemma="assay" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="44">
+    <ngram><w surface="epo-inducible" pos="A" ><freq name="corpus" value="1" /></w> <w surface="tal1" pos="A" ><freq name="corpus" value="6" /></w> <w surface="dna" pos="N" ><freq name="corpus" value="19" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="epo-inducible" lemma="epo-inducible" pos="A" /> <w surface="tal1" lemma="tal1" pos="A" /> <w surface="dna" lemma="dna" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="45">
+    <ngram><w surface="estrogen" pos="N" ><freq name="corpus" value="6" /></w> <w surface="receptor" pos="N" ><freq name="corpus" value="44" /></w> <freq name="corpus" value="4" /></ngram>
+    <bigram>
+    <freq name="corpus" value="4" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="estrogen" lemma="estrogen" pos="N" /> <w surface="receptor" lemma="receptor" pos="N" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+</cand>
+<cand candid="46">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="epor" pos="N" ><freq name="corpus" value="3" /></w> <w surface="gene" pos="N" ><freq name="corpus" value="96" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="1" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="epor" lemma="epor" pos="N" /> <w surface="gene" lemma="gene" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="47">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="t" pos="N" ><freq name="corpus" value="76" /></w> <w surface="lymphoid" pos="A" ><freq name="corpus" value="4" /></w> <w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <freq name="corpus" value="1" /></ngram>
+    <bigram>
+    <freq name="corpus" value="8" />
+    <freq name="corpus" value="1" />
+    <freq name="corpus" value="3" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="t" lemma="t" pos="N" /> <w surface="lymphoid" lemma="lymphoid" pos="A" /> <w surface="cell" lemma="cell" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+</cand>
+<cand candid="48">
+    <ngram><w surface="initiation" pos="N" ><freq name="corpus" value="3" /></w> <w surface="site" pos="N" ><freq name="corpus" value="39" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="initiation" lemma="initiation" pos="N" /> <w surface="site" lemma="site" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="49">
+    <ngram><w surface="jak-stat" pos="N" ><freq name="corpus" value="3" /></w> <w surface="pathway" pos="N" ><freq name="corpus" value="13" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="2" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="jak-stat" lemma="jak-stat" pos="N" /> <w surface="pathway" lemma="pathway" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+<cand candid="50">
+    <ngram><w surface="lymphoid" pos="A" ><freq name="corpus" value="4" /></w> <w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <w surface="line" pos="N" ><freq name="corpus" value="19" /></w> <freq name="corpus" value="2" /></ngram>
+    <bigram>
+    <freq name="corpus" value="3" />
+    <freq name="corpus" value="17" />
+    </bigram>
+    <occurs>
+    <ngram><w surface="lymphoid" lemma="lymphoid" pos="A" /> <w surface="cell" lemma="cell" pos="N" /> <w surface="line" lemma="line" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+</cand>
+</candidates>
