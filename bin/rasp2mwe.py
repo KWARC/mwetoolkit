@@ -164,14 +164,14 @@ where will be filled all the words attributes.
 			except ValueError: #word is or contains ':'
 				n_colons=word.count(':')
 				pieces=word.split(":")
-				index=pieces[2].split('_')[0]
+				index=pieces[len(pieces)-1].split('_')[0]
 				if n_colons ==3 and len(pieces)==4 and pieces[0]=="" and \
 				pieces[1]=="" and pieces[3]=="": 
 					lemma=':'
 					surface=':'
 					pos=':'	
 					process=False
-				elif n_colons>=2 and n_colons !=3:
+				else :
 					aux_morph=pieces[len(pieces)-1]
 					pieces.pop()
 					s=':'.join(pieces)
