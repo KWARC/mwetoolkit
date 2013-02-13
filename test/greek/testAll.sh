@@ -132,7 +132,7 @@ main() {
 	dotest "Filtering out candidates occurring less than twice" \
 		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
 		true
-
+		
 	dotest "Comparison against reference output" \
 		compare-to-reference \
 		true
@@ -140,6 +140,9 @@ main() {
 
 compare-to-reference() {
 	tar -C .. -xvf ../reference-output.tar.bz2
+	countfail=0
+	errorreport="`pwd`/../error-report.log"
+	printf "" > $errorreport
 	for file in *.*; do
 		ref="../reference-output/$file"
 		printf "  Comparing %s... " "$file"
@@ -155,9 +158,16 @@ compare-to-reference() {
 			echo "OK"
 		else
 			echo "FAILED!"
-			return 1
+			difference=`diff <(sort "$file") <(sort "$ref")`
+			printf "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
+			#return 1
+			(( countfail++ ))
 		fi
 	done
+	if [[ countfail -gt 0 ]]; then
+		printf "\n\e[1;31mWARNING: $countfail tests FAILED!\e[0m\n"
+		printf "Please consult the detailed error report in $errorreport\n"
+	fi
 }
 
 main "$@"
