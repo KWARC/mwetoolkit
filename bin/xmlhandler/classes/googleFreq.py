@@ -29,7 +29,7 @@
 
 import pdb
 import urllib
-import simplejson
+import json as simplejson
 
 from __common import GOOGLE_CACHE_FILENAME
 from webFreq import WebFreq

@@ -49,7 +49,7 @@
 
 import pdb
 import urllib
-import simplejson
+import json as simplejson
 
 from webFreq import WebFreq
 from __common import YAHOO_CACHE_FILENAME, YAHOO_APPID

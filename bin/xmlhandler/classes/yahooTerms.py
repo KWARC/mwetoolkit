@@ -28,7 +28,7 @@ import sys
 import pdb
 import urllib2
 import urllib
-import simplejson
+import json as simplejson
 
 from __common import DEFAULT_LANG, YAHOO_APPID
 
