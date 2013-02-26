@@ -34,6 +34,7 @@
 import sys
 import os
 import string
+import pdb
 from util import read_options, verbose, treat_options_simplest, strip_xml
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 import subprocess as sub
@@ -176,6 +177,7 @@ where will be filled all the words attributes.
 					pieces.pop()
 					s=':'.join(pieces)
 			if process:
+				#pdb.set_trace()
 				index, pos=aux_morph.split("_")
 				pos=strip_xml(pos)		
 				if "+" in s and not is_number(s.split('+')[1]):
@@ -280,9 +282,10 @@ def transform_format(rasp):
 	phrase = []
 	l=rasp.readline()
 	while l != "":
+		#pdb.set_trace()
 		if l=="\n":
 			l_empty+=1
-			if l_empty == 2:
+			if l_empty == 1:
 				write_entry(n_line,phrase)
 				n_line+=1
 				first_line=True
