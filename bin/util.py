@@ -155,8 +155,20 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
 
 def strip_xml( the_string ) :
     """
+    	Escapes the XML special characters in the string by replacing them with
+    	the corresponding XML entities. The five special characters in XML are :
+    	' " < > &
     """
-    cleanContent = the_string
+    cleanContent = the_string    
+    # First, replace entities with their characters, guaranteeing that, if the
+    # text already contains escaped entities, they won't become something like
+    # &amp;quot; 
+    cleanContent = cleanContent.replace( "&apos;", "\'" ) # Escape sequence
+    cleanContent = cleanContent.replace( "&quot;", "\"" ) # Escape sequence    
+    cleanContent = cleanContent.replace( "&gt;", ">" ) # Escape sequence    
+    cleanContent = cleanContent.replace( "&lt;", "<" ) # Escape sequence    
+    cleanContent = cleanContent.replace( "&amp;", "&" ) # Escape sequence
+	# Now, replace the characters with the entities
     cleanContent = cleanContent.replace( "&", "&amp;" ) # Escape sequence
     cleanContent = cleanContent.replace( "<", "&lt;" ) # Escape sequence
     cleanContent = cleanContent.replace( ">", "&gt;" ) # Escape sequence

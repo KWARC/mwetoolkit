@@ -101,8 +101,8 @@ in the sentence.
 	"""
 	print"<s s_id=\""+repr(n_line)+"\">",
 	for elem in sentence:
-		print "<w surface=\""+elem["surface"]+"\" lemma=\""+elem["lemma"],
-		print "\" pos=\""+elem["pos"]+"\" syn=\""+elem["syn"]+"\" /> ",
+		print "<w surface=\""+elem["surface"]+"\" lemma=\""+elem["lemma"]+\
+		      "\" pos=\""+elem["pos"]+"\" syn=\""+elem["syn"]+"\" /> ",
 	print "</s>"
 
 ###############################################################################
@@ -177,28 +177,25 @@ where will be filled all the words attributes.
 					pieces.pop()
 					s=':'.join(pieces)
 			if process:
-				#pdb.set_trace()
 				index, pos=aux_morph.split("_")
-				pos=strip_xml(pos)		
+				pos=strip_xml(pos)
 				if "+" in s and not is_number(s.split('+')[1]):
-					lemma=strip_xml(s).split('+')[0]
-					if s.split('+')[1] != '':
-					#because 's is followed by + => |'s+:12_$|
-						s=s+'_'+pos
-						if morph_path != None and morph != None:
-							os.chdir(morph_path)
-							cmd='echo '+s
-							cmd+=' | ${morphg_res:-./'+morph+' -t}'
-							p = os.popen(cmd)
-							#generates the surface form using morphg
-							l = p.readline()
-							p.close()
-							os.chdir(work_path)
-							surface=l.split('_')[0]
-							surface=strip_xml(surface)
-						else:
-							surface=lemma
-					else:#it's an 's, then
+					lemma=strip_xml(s).split('+')[0] 
+					if "'" in s :
+						s = s.replace("'","\\'")
+					s=s+'_'+pos
+					if morph_path != None and morph != None:							
+						os.chdir(morph_path)
+						cmd='echo '+s
+						cmd+=' | ${morphg_res:-./'+morph+' -t}'
+						p = os.popen(cmd)
+						#generates the surface form using morphg
+						l = p.readline()
+						p.close()
+						os.chdir(work_path)
+						surface=l.split('_')[0]
+						surface=strip_xml(surface)
+					else:
 						surface=lemma
 				else:#if it doesn't have a '+', then 
 					lemma=strip_xml(s).replace(" ","")
@@ -282,7 +279,6 @@ def transform_format(rasp):
 	phrase = []
 	l=rasp.readline()
 	while l != "":
-		#pdb.set_trace()
 		if l=="\n":
 			l_empty+=1
 			if l_empty == 1:
@@ -293,7 +289,7 @@ def transform_format(rasp):
 			continue
 	
 		if first_line:
-			if l_empty>=2:
+			if l_empty>=1:
 				l_empty=0
 				process_line(l,phrase)
 				first_line=False
@@ -304,7 +300,7 @@ def transform_format(rasp):
 		else:
 			process_tree_branch(l,phrase)
 		l=rasp.readline()
-	if l_empty != 2:
+	if l_empty != 1:
 		write_entry(n_line,phrase) #save last entry
 
 ###############################################################################
