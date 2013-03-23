@@ -118,6 +118,7 @@ def parse_pattern(node):
 			state.pattern += "(?P=%s)" % id
 
 		elif node.nodeName == "w":
+			negated = node.getAttribute("neg")		
 			attrs = { "wordnum": ATTRIBUTE_WILDCARD }
 			id = node.getAttribute("id")
 			for attr in WORD_ATTRIBUTES:
@@ -131,7 +132,12 @@ def parse_pattern(node):
 
 				else:
 					val = ATTRIBUTE_WILDCARD
-
+				if attr in negated.split(":") :
+					if val != ATTRIBUTE_WILDCARD :
+						val = "(?!" + val + ")" + ATTRIBUTE_WILDCARD
+					else :
+						raise Exception, "You cannot negate an undefined \
+attribute: " + attr + "\nIn: " + node.toxml()
 				attrs[attr] = val
 
 			
@@ -180,6 +186,7 @@ def parse_pattern(node):
 
 
 	parse(node)
+	#print state.pattern
 	return re.compile(state.pattern)
 
 
