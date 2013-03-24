@@ -113,7 +113,7 @@ def parse_pattern(node):
 			if repeat:
 				state.pattern += repeat
 
-		elif node.nodeName == "backpat":
+		elif node.nodeName == "backpat": 
 			id = node.getAttribute("id")
 			state.pattern += "(?P=%s)" % id
 
