@@ -20,9 +20,9 @@
 ##############################################################################*/
 
 #include <stdio.h>
-#import "base.h"
-#import "rbtree.h"
-#import "readline.h"
+#include "base.h"
+#include "rbtree.h"
+#include "readline.h"
 
 typedef int symbolnumber_t;
 typedef char *symbolname_t;

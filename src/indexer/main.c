@@ -19,9 +19,9 @@
 #
 ##############################################################################*/
 #include <stdio.h>
-#import "base.h"
-#import "readline.h"
-#import "suffixarray.h"
+#include "base.h"
+#include "readline.h"
+#include "suffixarray.h"
 
 int main(int argc, char **argv) {
 	/* char *basepath = argv[1]; */

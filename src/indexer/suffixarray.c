@@ -19,17 +19,9 @@
 #
 ##############################################################################*/
 #include <stdio.h>
-#import "base.h"
-#import "symboltable.h"
-
-typedef struct suffixarray_t {
-	symbolnumber_t *corpus;
-	symbolnumber_t *suffix;
-	symboltable_t *symboltable;
-
-	int allocated;
-	int used;
-} suffixarray_t;
+#include "base.h"
+#include "symboltable.h"
+#include "suffixarray.h"
 
 suffixarray_t *current_suffix_array;
 
@@ -102,13 +94,13 @@ void suffixarray_sort(suffixarray_t *suf) {
 }
 
 void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
-	int nread1, nread2;
+	int nread1;//nread2;
 	while (1) {
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 		resize_alloc(suf->corpus, suf->allocated, symbolnumber_t);
 		resize_alloc(suf->suffix, suf->allocated, symbolnumber_t);
 		nread1 = fread(corpusfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, corpusfile);
-		nread2 = fread(suffixfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
+		         fread(suffixfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
 		suf->used += nread1;
 		if (nread1 < SUFFIX_ARRAY_ALLOC_CHUNK)
 			break;

@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include "base.h"
 #include <string.h>
+#include "readline.h"
 
 char *readline(FILE *stream) {
 	static char buffer[LINE_BUFFER_LEN];

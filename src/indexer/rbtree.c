@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#import "base.h"
+#include "base.h"
 
 typedef char *rbkey_t;
 typedef int rbvalue_t;
@@ -212,12 +212,11 @@ void rbfreesub(rbnode_t *this) {
 		dealloc(this);
 	}
 }
+
 void rbfree(rbtree_t *t) {
 	rbfreesub(t->root);
 	rbfree(t);
 }
-
-
 
 ////// This won't be used, I believe.
 
