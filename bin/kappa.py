@@ -164,7 +164,7 @@ def compute_weighted_kappa( rater1, rater2, Ni, Nk ) :
         @return The weighted kappa value
     """
     global distances_matrix
-    max_distance = 0.0
+    max_distance = 0.0000001 # Avoids division by zero in case of 100% agreement
     # In the case of weighted kappa, the agreement is the mean over all items of
     # the distance between the ratings of the two raters, normalized by the max
     # distance
