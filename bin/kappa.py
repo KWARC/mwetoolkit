@@ -53,7 +53,7 @@ OPTIONS may be:
     First row should be considered as header. Default false.
     
 -r OR --raters
-    First column should be considered as rater identification. Default false.   
+    First column should be considered as subject identification. Default false.   
 
 -s OR --separator SEP
     Define a character SEP to be the field separator. The default is TAB.
