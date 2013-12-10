@@ -28,6 +28,7 @@
 import getopt
 import sys
 import traceback
+import xml.sax
 
 ################################################################################
 
@@ -43,7 +44,15 @@ common_options_usage_string = """\
     
 -h or --help
     Print usage information about parameters and options"""
-
+    
+class LimitReachedError ( Exception ) :
+    """
+        Means that I read the first n lines, now I can stop parsing the XML. The
+        exception is empty since it does not need additional information and it
+        does not correspond to a real error.
+    """
+    
+    
 ################################################################################
 
 def set_verbose( value ) :
@@ -221,6 +230,45 @@ def interpret_ngram( argument ) :
         return None
     except ValueError :
         return None
+
+################################################################################
+
+def parse_xml( handler, arg, postfunction=None ) :
+    """
+        Create a default XML parser, assign the handler and parse input in arg.
+        If during parsing the script should do additional stuff, this generic
+        function should not be used.
+        
+        @param handler The XML handler used to parse the XML
+        @param arg The command line arguments, containing the filenames. If 
+        empty, use sys.stdin
+        @param postfunction Post-processing function that takes as an argument 
+        the string filename. Most of the time this is None.
+    """
+    parser = xml.sax.make_parser()
+    # Ignores the DTD declaration. This will not validate the document!
+    parser.setFeature( xml.sax.handler.feature_external_ges, False )
+    parser.setContentHandler( handler )
+    if len( arg ) == 0 :
+        try :
+            parser.parse( sys.stdin )
+        except LimitReachedError : # Read only part of XML file
+            pass # Not an error, just used to interrupt parsing
+        if postfunction :
+            postfunction( "stdin" )
+    else :
+        for a in arg :
+            input_file = open( a )
+            try :
+                parser.parse( input_file )
+            except LimitReachedError : # Read only part of XML file
+                pass # Not an error, just used to interrupt parsing
+            input_file.close()
+            handler.gen_xml = False
+            if postfunction :
+                postfunction( a )
+
+################################################################################
 
 def default_exception_handler(type, value, trace):
     """
