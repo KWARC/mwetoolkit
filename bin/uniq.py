@@ -45,7 +45,7 @@ from xmlhandler.classes.entry import Entry
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.__common import WILDCARD
-from util import read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose, parse_xml
 
 ################################################################################
 # GLOBALS
@@ -300,7 +300,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             surface_instead_lemmas = True
         elif o in ("-t", "--retokenise") :
             perform_retokenisation = True            
-    
+            
+################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0 
+    verbose( "Output the unified ngrams..." )
+    print_entities()
+                
 ################################################################################    
 # MAIN SCRIPT
 
@@ -311,20 +325,5 @@ parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :        
-    parser.parse( sys.stdin )
-    verbose( "Output the unified ngrams..." )        
-    print_entities()
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )            
-        parser.parse( input_file )
-        verbose( "Output the unified ngrams..." )
-        print_entities() 
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+parse_xml( handler, arg, reset_entity_counter )
+print handler.footer
