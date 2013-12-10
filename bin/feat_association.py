@@ -47,7 +47,7 @@ from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
 from util import usage, read_options, treat_options_simplest, \
-                 verbose
+                 verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -105,7 +105,8 @@ def treat_meta( meta ) :
         
         @param meta The `Meta` header that is being read from the XML file.       
     """
-    global corpussize_dict, measures
+    global corpussize_dict
+    global measures
     for corpus_size in meta.corpus_sizes :
         corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
     for corpus_size in meta.corpus_sizes :
@@ -143,7 +144,8 @@ def treat_candidate( candidate ) :
             if freq.value < 0 :
                 backed_off = True
     
-    for corpus_name in joint_freq.keys() :
+    for freq in candidate.freqs :
+        corpus_name = freq.name
         if not backed_off and corpus_name == "backoff" :
             N = corpussize_dict[ main_freq ]
         else :
@@ -413,25 +415,25 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             not_normalize_mle = True
 
 ################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
+
+################################################################################
 # MAIN SCRIPT
 
 longopts = ["measures=", "original=", "unnorm-mle"]
 arg = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
 
-parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates" )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+parse_xml( handler, arg, reset_entity_counter )
+print handler.footer
