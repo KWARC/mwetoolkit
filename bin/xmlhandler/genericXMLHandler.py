@@ -5,7 +5,7 @@
 # 
 # Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 # 
-# genericDTDHandler.py is part of mwetoolkit
+# genericXMLHandler.py is part of mwetoolkit
 # 
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
