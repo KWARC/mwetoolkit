@@ -37,7 +37,7 @@ import xml.sax
 import re
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest
+from util import read_options, treat_options_simplest, parse_xml
 from xmlhandler.classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
      
 ################################################################################     
@@ -89,6 +89,7 @@ def treat_entity( entry ) :
         else :
             form = word.lemma
         # Special symbols can break the ontology systems, better avoid them
+        # TODO: check!
         form = form.replace( "&quot;", "QUOTSYMBOL" )
         form = form.replace( "&amp;", "ANDSYMBOL" )
         form = form.replace( "&gt;", "GTSYMBOL" )
@@ -117,26 +118,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     mode = []
     for ( o, a ) in opts:
         if o in ("-s", "--surface") : 
-            surface_instead_lemmas = True       
+            surface_instead_lemmas = True
 
 ################################################################################     
 # MAIN SCRIPT
 
 longopts = [ "surface" ]
 arg = read_options( "s", longopts, treat_options, -1, usage_string ) 
-
-parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_entity=treat_entity,
                              gen_xml=False )
-parser.setContentHandler( handler )
 print OWL_HEADER
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        footer = handler.footer
-        input_file.close()
-        entity_counter = 0
+parse_xml( handler, arg )
 print OWL_FOOTER

@@ -36,7 +36,7 @@ import pdb
 import xml.sax
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import read_options, treat_options_simplest, usage, verbose
+from util import read_options, treat_options_simplest, usage, verbose, parse_xml
 from xmlhandler.classes.__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
@@ -206,7 +206,7 @@ def print_stats() :
     global ascending
     global feat_list
     global print_precs
-    #feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending) )
+    #feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending))
     # Now print sorted candidates. A candidate is retrieved from temp DB through
     # its ID
     for tpclass in feat_to_order.keys() :
@@ -288,15 +288,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = [ "feat=", "asc", "desc", "precs" ]
 arg = read_options( "f:adp", longopts, treat_options, 1, usage_string )
-
-input_file = open( arg[ 0 ] )
-parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
                                 treat_meta=treat_meta,
-                                gen_xml=False )
-parser.setContentHandler( handler )
-verbose( "Reading feature values" )
-parser.parse( input_file )
-input_file.close()
-verbose( "Calculating MAP for each feature" )
+                                gen_xml=False )                                
+parse_xml( handler, arg )
 print_stats()    

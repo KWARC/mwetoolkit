@@ -36,8 +36,9 @@ import xml.sax
 import re
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest
+from util import read_options, treat_options_simplest, parse_xml
 from xmlhandler.classes.__common import WILDCARD
+from util import verbose
      
 ################################################################################     
 # GLOBALS     
@@ -60,6 +61,7 @@ OPTIONS may be:
 """   
 surface_instead_lemmas = False  
 lemmapos = False
+sentence_counter = 0
             
 ################################################################################     
 
@@ -88,6 +90,9 @@ def treat_entity( entity ) :
     """
     global surface_instead_lemmas
     global lemmapos
+    global sentence_counter
+    if sentence_counter % 100 == 0 :
+        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
     string_cand = ""
     if entity.id_number >= 0 :
         string_cand += str( entity.id_number )
@@ -151,6 +156,8 @@ def treat_entity( entity ) :
     string_cand = string_cand.strip()
 
     print string_cand.encode( 'utf-8' )
+    sentence_counter += 1
+    
 
 ################################################################################     
 
@@ -181,18 +188,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = [ "surface", "lemmapos" ]
 arg = read_options( "sp", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=False )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
+parse_xml( handler, arg )

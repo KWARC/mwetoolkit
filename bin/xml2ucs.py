@@ -37,7 +37,7 @@ import xml.sax
 import re
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest
+from util import read_options, treat_options_simplest, parse_xml, verbose
 from xmlhandler.classes.__common import WILDCARD
      
 ################################################################################     
@@ -69,17 +69,20 @@ lemmapos = False
 xml_meta = None
 freq_source = None
 corpus_size_string = None
+entity_counter = 0
+           
+################################################################################           
             
 def freq_value(items):
     """
-        Given a list of items with a `name`    and a `value` attribute, return
+        Given a list of items with a `name` and a `value` attribute, return
         the item whose name is the same as that of `freq_source`.
     """
     for item in items:
         if freq_source is None or item.name == freq_source:
             return item.value
 
-    print >>sys.stderr, "WARNING: frequency source '%s' not found!" % freq_source
+    print >>sys.stderr,"WARNING: frequency source '%s' not found!" % freq_source
     return 0
 
 
@@ -115,6 +118,11 @@ def treat_entity( entity ) :
     """
     global surface_instead_lemmas
     global lemmapos
+    global entity_counter
+    
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+    entity_counter = entity_counter + 1
     string_cand = ""
     if entity.id_number >= 0 :
         string_cand += str( entity.id_number )
@@ -131,7 +139,6 @@ def treat_entity( entity ) :
             string_cand += w.lemma + "\t"
         else :
             string_cand += w.surface + "\t"
-
     string_cand += "%f\t" % freq_value(entity.freqs)
 
     try:
@@ -139,36 +146,9 @@ def treat_entity( entity ) :
             string_cand += "%f\t" % freq_value(w.freqs)
     except:
         string_cand += "0\t"
-        print >>sys.stderr, "WARNING: Word frequency information missing for entity %d" % entity.id_number
-
-    #try:
-    #    occur_dict = {}
-    #    sources = []
-    #    for occur in entity.occurs :
-    #        surfaces = []
-    #        sources.extend(occur.sources)
-    #        for w in occur :
-    #            surfaces.append( w.surface )
-    #        occur_dict[ " ".join( surfaces ) ] = True
-
-    #    string_cand += "; ".join( occur_dict.keys() ) + "\t"
-    #    string_cand += ";".join(sources) + "\t"
-
-    #except AttributeError:
-    #    # This kind of entry probably doesnt have occurs
-    #    string_cand = string_cand.strip() + "\t-\t"
-
-    #try :
-    #    for feat in entity.features :
-    #        string_cand += str( feat.value ) + "\t"
-    #except AttributeError:
-    #    # This kind of entry probably doesnt have tpclass
-    #    string_cand = string_cand.strip()
-
+        print >>sys.stderr, "WARNING: Word frequency information missing for"+\
+                            " entity %d" % entity.id_number
     string_cand += corpus_size_string
-        
-    #string_cand = string_cand.strip()
-
     print string_cand.encode( 'utf-8' )
 
 ################################################################################     
@@ -198,23 +178,24 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-f", "--freq-source"):
             freq_source = a
 
+################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
+
 ################################################################################     
 # MAIN SCRIPT
 
 longopts = [ "surface", "lemmapos", "freq-source" ]
 arg = read_options( "spf:", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=False )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
+parse_xml( handler, arg, reset_entity_counter )

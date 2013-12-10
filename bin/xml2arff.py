@@ -39,7 +39,7 @@ import xml.sax
 import re
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -111,11 +111,9 @@ def treat_candidate( candidate ) :
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, 1, usage_string ) 
-
-relation_name = re.sub( "\.xml", "", arg[ 0 ] )
-input_file = open( arg[ 0 ] )        
-parser = xml.sax.make_parser()
-parser.setContentHandler(CandidatesXMLHandler( treat_meta, treat_candidate)) 
-parser.parse( input_file )
-input_file.close() 
+arg = read_options( "", [], treat_options_simplest, -1, usage_string ) 
+if len( arg ) > 0 :
+    relation_name = re.sub( "\.xml", "", arg[ 0 ] )
+else :
+    relation_name = "stdin"
+parse_xml( CandidatesXMLHandler( treat_meta, treat_candidate), arg )
