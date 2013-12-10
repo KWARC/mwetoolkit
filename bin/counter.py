@@ -42,7 +42,8 @@ import re
 import subprocess
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DEFAULT_LANG
+from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, \
+                                        DEFAULT_LANG
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
@@ -50,7 +51,7 @@ from xmlhandler.classes.googleFreqUniv import GoogleFreqUniv
 from xmlhandler.classes.corpus_size import CorpusSize
 #from xmlhandler.classes.corpus import Corpus
 #from xmlhandler.classes.suffix_array import SuffixArray
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 
 from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
 
@@ -171,9 +172,9 @@ def append_counters( ngram ):
         c_surfaces.append( w.surface )
         c_lemmas.append( w.lemma )
         c_pos.append( w.pos )
-        freq_value = get_freq_function( [ w.surface.strip() ], 
-                                        [ w.lemma.strip() ], 
-                                        [ w.pos.strip() ] )
+        freq_value = get_freq_function( [ w.surface ], 
+                                        [ w.lemma ], 
+                                        [ w.pos ] )
         w.add_frequency( Frequency( freq_name, freq_value ) )
     # Global frequency
     if count_joint_frequency:
@@ -505,7 +506,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         usage( usage_string )
         sys.exit( 2 )
         
-                
+################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0               
 
 ################################################################################
 # MAIN SCRIPT
@@ -514,32 +525,20 @@ longopts = ["yahoo", "google", "index=", "ignore-pos", "surface", "old", \
             "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=", "web1t=" ]
 arg = read_options( "ywi:gsof:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
 
-try : 
-    parser = xml.sax.make_parser()
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=treat_entity,
-                                 gen_xml=True )
-    parser.setContentHandler( handler )
+try :
     verbose( "Counting ngrams in candidates file" )
-    if len( arg ) == 0 :
-        if text_input :
+    if text_input :
+        if len( arg ) == 0 :
             treat_text( sys.stdin )
         else :
-            parser.parse( sys.stdin )
-            print handler.footer
+            for a in arg : 
+                treat_text( a )       
     else :
-        for a in arg :
-            input_file = open( a )
-            if text_input :
-                treat_text( input_file )
-            else :
-                parser.parse( input_file )
-                footer = handler.footer
-                handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        if not text_input :
-            print footer   
+        handler = GenericXMLHandler( treat_meta=treat_meta,
+                                     treat_entity=treat_entity,
+                                     gen_xml=True )
+        parse_xml( handler, arg, reset_entity_counter )        
+        print handler.footer
             
 finally :
     if web_freq :
