@@ -44,7 +44,7 @@ import pdb
 from xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.dictXMLHandler import DictXMLHandler
 from libs.patternlib import parse_patterns_file, match_pattern
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -285,27 +285,27 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-r", "--reverse") :
             reverse = True
             verbose( "Option REVERSE active")
+            
+################################################################################
 
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
+    
 ################################################################################
 # MAIN SCRIPT
 
 longopts = [ "threshold=", "equals=", "patterns=", "reverse" ]
 arg = read_options( "t:e:p:r", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :        
-    parser.parse( sys.stdin )
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )            
-        parser.parse( input_file )
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+parse_xml( handler, arg, reset_entity_counter )
+print handler.footer
+

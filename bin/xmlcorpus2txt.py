@@ -41,7 +41,7 @@ from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
 from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 
 usage_string = """Usage:
 
@@ -57,25 +57,36 @@ python %(program)s -a <attributes> <corpus.xml>
 """
 
 attributes = None
+entity_counter = 0
 
 ################################################################################
 
-def xml2txt(corpus, outfile, attributes):
-
-    def print_sentence(sentence):
-        for word in sentence.word_list:
-            vals = [getattr(word, attr) for attr in attributes]
-            print >>outfile, ATTRIBUTE_SEPARATOR.join(vals),
-        print >> outfile, ""
-
-    parser = xml.sax.make_parser()
-    parser.setContentHandler(CorpusXMLHandler(print_sentence))
-    parser.parse(corpus)
+def print_sentence(sentence):
+    """
+        TODO: doc
+    """
+    global attributes, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+    for word in sentence.word_list:
+        vals = [getattr(word, attr) for attr in attributes]
+        print ATTRIBUTE_SEPARATOR.join(vals),
+    print ""
+    entity_counter = entity_counter + 1
 
 ################################################################################
 
 def treat_options(opts, arg, n_arg, usage_string):
     """
+        Callback function that handles the command line options of this script.
+        
+        @param opts The options parsed by getopts. Ignored.
+        
+        @param arg The argument list parsed by getopts.
+        
+        @param n_arg The number of arguments expected for this script.
+        
+        @param usage_string The usage string for the current script.    
     """
     global attributes
 
@@ -96,7 +107,21 @@ def treat_options(opts, arg, n_arg, usage_string):
 
 ################################################################################
 
-longopts = ["atttibutes="]
-arg = read_options("a:", longopts, treat_options, 1, usage_string)
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
+    
+################################################################################
+# MAIN SCRIPT    
 
-xml2txt(arg[0], sys.stdout, attributes)
+longopts = ["atttibutes="]
+arg = read_options("a:", longopts, treat_options, -1, usage_string)
+parse_xml( CorpusXMLHandler(print_sentence), arg, reset_entity_counter )
+
+
