@@ -39,7 +39,7 @@ import operator
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
-from util import read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -114,10 +114,12 @@ def probs_weighted( varfreqs, weights ) :
     #pdb.set_trace()
     for vfi in range(len(varfreqs)) : 
         if weights[ vfi ] != 0 :        
-            sum_vf = sum_vf + ( varfreqs[ vfi ] / float( reduce( operator.mul, weights[ vfi ] ) ) )
+            sum_vf = sum_vf + ( varfreqs[ vfi ] / \
+                     float( reduce( operator.mul, weights[ vfi ] ) ) )
     if sum_vf != 0 :       
         for vfi in range(len(varfreqs)) :
-            probabilities.append( ( varfreqs[ vfi ] / float( reduce( operator.mul, weights[ vfi ] ) ) ) / sum_vf )
+            probabilities.append( ( varfreqs[ vfi ] / \
+            float( reduce( operator.mul, weights[ vfi ] ) ) ) / sum_vf )
     return probabilities
        
 ################################################################################
@@ -171,27 +173,31 @@ def treat_candidate( candidate ) :
     verb_table["google"] = verb_table["google"][ 0:5 ]
     compl_table[ "google" ].sort( key=operator.itemgetter(1), reverse=True )
     compl_table["google"] = compl_table["google"][ 0:5 ]
-    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0), freq_table["google"] ) ) )
-    ent_w = entropy( probs_weighted( map( operator.itemgetter(0), freq_table["google"] ), map( operator.itemgetter(1,2,3), freq_table["google"] ) ) )
-    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0), compl_table["google"] ), map( operator.itemgetter(1,2,3), compl_table["google"] ) ) )
-    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0), verb_table["google"] ), map( operator.itemgetter(1,2,3), verb_table["google"] ) ) )    
+    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0), \
+                   freq_table["google"] ) ) )
+    ent_w = entropy( probs_weighted( map( operator.itemgetter(0), \
+                     freq_table["google"] ), map( operator.itemgetter(1,2,3), \
+                     freq_table["google"] ) ) )
+    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0), \
+                          compl_table["google"] ), \
+                          map( operator.itemgetter(1,2,3), \
+                          compl_table["google"] ) ) )
+    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0), \
+                           verb_table["google"] ), \
+                           map( operator.itemgetter(1,2,3), \
+                           verb_table["google"] ) ) )    
     candidate.add_feat( Feature( "entropy_google", str( ent ) ) )
     candidate.add_feat( Feature( "entropy_w_google", str( ent_w ) ) )
     candidate.add_feat( Feature( "entropy_w_verb_google", str( ent_w_verb ) ) )    
-    candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl ) ) )    
+    candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl )))    
     print candidate.to_xml().encode( 'utf-8' )
 
 ################################################################################
 # MAIN SCRIPT
 longopts = []
-arg = read_options( "", longopts, treat_options_simplest, 1, usage_string )
-
-input_file = open( arg[ 0 ] )        
-parser = xml.sax.make_parser()
+arg = read_options( "", longopts, treat_options_simplest, -1, usage_string )
 handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates")
-parser.setContentHandler( handler )
-parser.parse( input_file )
-input_file.close()    
+parse_xml( handler, arg )
 print handler.footer

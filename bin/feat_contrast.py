@@ -39,7 +39,7 @@ from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
 from util import usage, read_options, treat_options_simplest, \
-                 verbose
+                 verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -269,6 +269,18 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print >> sys.stderr, "Option -o is mandatory"
         usage( usage_string )
         sys.exit( 2 )
+  
+################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0  
     
 ################################################################################
 # MAIN SCRIPT
@@ -281,24 +293,14 @@ parser = xml.sax.make_parser()
 totalcalculator = CandidatesXMLHandler( treat_meta=initialise_totals,
                                         treat_candidate=calculate_totals,
                                         gen_xml=False )
-      
 handler = CandidatesXMLHandler( treat_meta=add_metafeatures,
                                 treat_candidate=calculate_measures,
                                 gen_xml="candidates" )
 
 for a in arg :
     verbose( "Pass 1 for " + a )
-    parser.setContentHandler( totalcalculator )    
-    input_file = open( a )
+    parse_xml( totalcalculator, [a] )
     # First calculate Nc for each contrastive corpus        
-    parser.parse( input_file )
-    input_file.close()
-    verbose( "Pass 2 for " + a )
-    parser.setContentHandler( handler )            
-    input_file = open( a )
-    parser.parse( input_file )        
-    footer = handler.footer
-    handler.gen_xml = False
-    input_file.close()        
-    entity_counter = 0
-print footer
+    verbose( "Pass 2 for " + a )    
+    parse_xml( handler, [a], reset_entity_counter )
+print handler.footer

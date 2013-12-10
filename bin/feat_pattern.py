@@ -39,7 +39,7 @@ import pdb
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta_feat import MetaFeat
-from util import read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose, parse_xml
 from xmlhandler.classes.__common import SEPARATOR
      
 ################################################################################     
@@ -121,28 +121,19 @@ def treat_candidate( candidate ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = []
-arg = read_options( "", longopts, treat_options_simplest, 1, usage_string )
-
+arg = read_options( "", [], treat_options_simplest, 1, usage_string )
 
 # Done in 2 passes, one to define the type of the feature and another to
 # print the feature values for each candidate
 verbose( "1st pass : recover all POS patterns for meta feature" )
-input_file = open( arg[ 0 ] )
-parser = xml.sax.make_parser()
 # Will ignore meta information and simply recover all the possible patterns
 candHandler = CandidatesXMLHandler( treat_candidate=recover_all_patterns )
-parser.setContentHandler( candHandler ) 
-parser.parse( input_file )
-input_file.close()     
-input_file = open( arg[ 0 ] )
+parse_xml( candHandler, arg )
 # Second pass to print the metafeat header with all possible pattern values
 verbose( "2nd pass : add the features" )
 handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates")
-parser.setContentHandler( handler )
-parser.parse( input_file )
-input_file.close()    
+parse_xml( handler, arg )
 print handler.footer
     
