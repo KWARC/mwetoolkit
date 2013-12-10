@@ -37,7 +37,7 @@ import xml.sax
 import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 
 ################################################################################
 # GLOBALS
@@ -89,13 +89,16 @@ def treat_entity( entity ) :
     
 ################################################################################    
 
-def print_entities() :
+def print_entities( filename ) :
     """
         After we read all the XML file, we can finally be sure about which lines
         need to be printed. Those correspond exactly to the N last lines added
         to the buffer.
+        
+        @param filename Dummy parameter containing the filename. Not used but
+        must be present to respect format of postprocessing function
     """
-    global entity_buffer, entity_counter
+    global entity_buffer, entity_counter, handler
     for i in range( min( limit, entity_counter ) ) :
         #pdb.set_trace()
         # entity_buffer is a circular buffer. In order to print the entities in
@@ -109,6 +112,7 @@ def print_entities() :
             print entity_buffer[ index ].to_xml().encode( 'utf-8' )
         else :
             break
+    entity_counter = 0
     
 ################################################################################  
 
@@ -143,25 +147,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################    
 # MAIN SCRIPT
 
-longopts = [ "number=" ]
-arg = read_options( "n:", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
+arg = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :        
-    parser.parse( sys.stdin )
-    print_entities()
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )            
-        parser.parse( input_file )
-        print_entities() 
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+parse_xml( handler, arg, print_entities )
+print handler.footer
