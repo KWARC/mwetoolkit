@@ -37,15 +37,8 @@ import xml.sax
 import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
-
-################################################################################
-
-class LimitReachedError ( Exception ) :
-    """
-        Means that I read the first n lines, now I can stop parsing the XML.
-    """
-
+from util import usage, read_options, treat_options_simplest, verbose, \
+                 parse_xml, LimitReachedError
 
 ################################################################################
 # GLOBALS
@@ -123,35 +116,24 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 usage( usage_string )
                 sys.exit( 2 )
 
+################################################################################
 
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
 
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "number=" ]
-arg = read_options( "n:", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
+arg = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
-                             gen_xml=True )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    try :
-        parser.parse( sys.stdin )
-    except LimitReachedError :
-        pass # Do nothing, of course, since this is not really an Error, but
-        # just a way to show the first n lines have been read
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )
-        try :
-            parser.parse( input_file )
-        except LimitReachedError :
-            pass # cf above
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+                             gen_xml=True )                             
+parse_xml( handler, arg, reset_entity_counter )
+print handler.footer

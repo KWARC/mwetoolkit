@@ -37,7 +37,7 @@ import xml.sax
 import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, verbose
+from util import read_options, treat_options_simplest, verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -76,6 +76,7 @@ def treat_entity( entity ) :
     entity_counter += 1
 
 ################################################################################
+
 def print_counters( filename ) :
         """
             Prints the entity, word and character counters on stderr. The
@@ -86,7 +87,7 @@ def print_counters( filename ) :
         print >> sys.stderr, str(entity_counter) + " entities in "   + filename
         print >> sys.stderr, str(word_counter)   + " words in "      + filename
         print >> sys.stderr, str(char_counter)   + " characters in " + filename
-        entity_counter = 0
+        entity_counter = 0 
         word_counter = 0
         char_counter = 0
 
@@ -94,17 +95,6 @@ def print_counters( filename ) :
 # MAIN SCRIPT
 
 arg = read_options( "", [], treat_options_simplest, -1, usage_string )
+handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )
+parse_xml( handler, arg, print_counters )
 
-parser = xml.sax.make_parser()    
-handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )   
-parser.setContentHandler( handler )
-
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-    print_counters( "stdin" )
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        input_file.close()
-        print_counters( a )    

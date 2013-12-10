@@ -40,7 +40,7 @@ import tempfile
 import shelve
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest
+from util import usage, read_options, treat_options_simplest, parse_xml
 from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
      
 ################################################################################     
@@ -219,26 +219,12 @@ except IOError, err :
     print >> sys.stderr, "Please verify __common.py configuration"
     sys.exit( 2 )
 
-
-parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates" )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-    sort_and_print()
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    sort_and_print()
-    print footer
+parse_xml( handler, arg )
+sort_and_print()
+print handler.footer
 
 try :
     temp_file.close()
