@@ -5,7 +5,7 @@
 #
 # Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
 #
-# candidatesDTDHandler.py is part of mwetoolkit
+# __init__.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -41,5 +41,3 @@
     the classes described above. Treats all entities as special types of Ngrams,
     achieving uniform treatment for all files.
 """
-
-import install
