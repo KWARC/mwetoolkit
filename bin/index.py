@@ -55,6 +55,8 @@ OPTIONS may be:
 <index> option is mandatory.
 """
 
+################################################################################
+
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
         Callback function that handles the command line options of this script.
@@ -92,7 +94,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         usage( usage_string )
         sys.exit( 2 )   
                             
-
+################################################################################
 # MAIN SCRIPT
 
 longopts = ["index=", "attributes=", "old" ]

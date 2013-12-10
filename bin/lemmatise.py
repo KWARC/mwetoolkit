@@ -31,7 +31,7 @@ import math
 import xml.sax
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
 from config import DEFAULT_LANG
@@ -183,6 +183,19 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         usage( usage_string )
         sys.exit( 2 )
 
+
+################################################################################
+
+def reset_entity_counter( filename ) :
+    """
+        After processing each file, simply reset the entity_counter to zero.
+        
+        @param filename Dummy parameter to respect the format of postprocessing
+        function
+    """
+    global entity_counter
+    entity_counter = 0
+
 ################################################################################
 # MAIN SCRIPT
 
@@ -190,23 +203,12 @@ longopts = [ "google", "yahoo" ]
 arg = read_options( "wy", longopts, treat_options, -1, usage_string )
 
 try :
-    parser = xml.sax.make_parser()
+
     handler = GenericXMLHandler( treat_meta=treat_meta,
                                  treat_entity=treat_entity,
                                  gen_xml=True )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :
-        parser.parse( sys.stdin )
-        print handler.footer
-    else :
-        for a in arg :
-            input_file = open( a )
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-            input_file.close()
-            entity_counter = 0
-        print footer
+    parse_xml( handler, arg, reset_entity_counter )
+    print handler.footer
 finally :
     if web_freq :
         web_freq.flush_cache()

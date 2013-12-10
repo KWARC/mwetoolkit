@@ -39,7 +39,7 @@ import pdb
 import math
 
 from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 
 ################################################################################
 # GLOBALS
@@ -83,13 +83,14 @@ def treat_candidate( candidate ) :
 
 ################################################################################         
        
-def print_histogram() :
+def print_histogram( filename ) :
     """
         Prints to standard output the histogram calculated based on the 
         candidates file and stored in the global variable hist.
     """
     global hist
     global limit
+    global entity_counter
     for fname in hist.keys() :
         print "FREQUENCY SOURCE : %(source)s" % { "source" : fname }
         print "Number of candidates : %(n)d" % { "n" : entity_counter }
@@ -107,6 +108,8 @@ def print_histogram() :
                 print "%(f)d : %(c)d (%(p)f)" % { "f" : f, "c" : h[f], "p" : p }
 
         print "Entropy : %(e)f" % { "e" : entropy }
+    hist = {}
+    entity_counter = 0
         
 ################################################################################           
   
@@ -135,26 +138,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "integer value as argument of -n option."
                 usage( usage_string )
                 sys.exit( 2 )
-       
+                
 ################################################################################         
 # MAIN SCRIPT
 
 longopts = [ "number=" ]
 arg = read_options( "n:", longopts, treat_options, -1, usage_string )
-
-parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
                                 gen_xml=False )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :        
-    parser.parse( sys.stdin )
-    print_histogram()        
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        print_histogram()            
-        input_file.close()
-        hist = {}
-        entity_counter = 0
-        total  = 0
+parse_xml( handler, arg, print_histogram )
+        

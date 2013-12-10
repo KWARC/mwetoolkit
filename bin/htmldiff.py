@@ -33,7 +33,7 @@ import os
 import subprocess
 
 from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
-BROWSER = "google-chrome"
+BROWSER = "chromium-browser"
 
 ################################################################################
 

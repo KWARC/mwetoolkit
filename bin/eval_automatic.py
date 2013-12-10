@@ -45,7 +45,7 @@ from xmlhandler.classes.tpclass import TPClass
 from xmlhandler.classes.candidate import Candidate
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.meta_tpclass import MetaTPClass
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
 
 ################################################################################
@@ -236,6 +236,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global gs_name
     global ignore_case
     global lemma_or_surface
+    ref_name = None
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
@@ -266,23 +267,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["reference=", "ignore-pos", "case", "lemma-or-surface"]
 arg = read_options( "r:gcL", longopts, treat_options, -1, usage_string )
 
-parser = xml.sax.make_parser()
 handler = CandidatesXMLHandler( treat_meta=treat_meta,
                              treat_candidate=treat_candidate,
                              gen_xml="candidates" )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :        
-    parser.parse( sys.stdin )
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )            
-        parser.parse( input_file )
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        #entity_counter = 0
-    print footer
+parse_xml( handler, arg )
+print handler.footer
         
 precision = float( tp_counter ) / float( entity_counter )
 recall = float( tp_counter ) / float( ref_counter )

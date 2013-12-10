@@ -38,9 +38,8 @@ import xml.sax
 import pdb
 import re
 
-import install
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose
+from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 
 ################################################################################
 # GLOBALS
@@ -69,9 +68,9 @@ python %(program)s [OPTIONS] <file.xml>
 
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """
-algorithm = "simple"
+algorithm = None
 vocab = {}
-sentence_counter = 0
+entity_counter = 0
 # In complex algorithm, a Firstupper form occurring 80% of the time or more 
 # at the beginning of a sentence is systematically lowercased.
 START_THRESHOLD=0.8
@@ -96,15 +95,15 @@ def treat_sentence_simple( sentence ) :
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """
-    global sentence_counter
+    global entity_counter
     
-    if sentence_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
 
     for w in sentence :
         w.surface = w.surface.lower()
     print sentence.to_xml().encode( "utf-8" )
-    sentence_counter += 1
+    entity_counter += 1
 
 ################################################################################
 
@@ -115,9 +114,9 @@ def treat_sentence_complex( sentence ) :
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """    
-    global vocab, sentence_counter, START_THRESHOLD    
-    if sentence_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
+    global vocab, entity_counter, START_THRESHOLD    
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
 
     for w_i in range(len(sentence)) :
         w = sentence[ w_i ]
@@ -146,7 +145,7 @@ def treat_sentence_complex( sentence ) :
                     # is a proper noun, a sentence start, a title word, a spell 
                     # error, etc.                   
     print sentence.to_xml().encode( 'utf-8' )
-    sentence_counter += 1
+    entity_counter += 1
 
 ################################################################################
        
@@ -159,9 +158,9 @@ def build_vocab( sentence ) :
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """
-    global vocab, sentence_counter
-    if sentence_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":sentence_counter } )
+    global vocab, entity_counter
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     for w_i in range(len(sentence)) :
         key = sentence[ w_i ].surface        
         low_key = sentence[ w_i ].surface.lower()
@@ -177,7 +176,7 @@ def build_vocab( sentence ) :
             form_entry[ 1 ] = form_entry[ 1 ] + 1 
         forms[ key ] = form_entry
         vocab[ low_key ] = forms
-    sentence_counter += 1
+    entity_counter += 1
     
 ################################################################################
 
@@ -262,48 +261,36 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global algorithm
-    
+    algorithm = treat_sentence_simple # Default value
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
     for ( o, a ) in opts:
         if o in ("-a", "--algorithm"):
-            algorithm = a.lower()
-            if algorithm != "simple" and algorithm != "complex" :
-                print >> sys.stderr, "ERROR: " + algorithm + " is not a valid"+\
+            algoname = a.lower()
+            if algoname == "complex" :
+                algorithm = treat_sentence_complex
+            elif algoname == "simple" : 
+                algorithm = treat_sentence_simple # Redundant, kept for clarity
+            else :
+                print >> sys.stderr, "ERROR: " + algoname + " is not a valid"+\
                                      " algorithm"
                 print >> sys.stderr, "ERROR: You must provide a valid " + \
                                      "algorithm (e.g. \"complex\", \"simple\")."
                 usage( usage_string )
-                sys.exit( 2 )    
-            
-
+                sys.exit( 2 )  
     
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "algorithm=" ]
-arg = read_options( "a:", longopts, treat_options, 1, usage_string )
+arg = read_options( "a:", [ "algorithm=" ], treat_options, 1, usage_string )
 
-parser = xml.sax.make_parser()
-if algorithm == "complex" :
+if algorithm == treat_sentence_complex :
     verbose( "Pass 1: Reading vocabulary from file... please wait" )
-    input_file = open( arg[ 0 ] )
-    parser.setContentHandler( GenericXMLHandler( treat_entity=build_vocab ))
-    parser.parse( input_file )
-    input_file.close()
-# Second pass
-sentence_counter = 0
+    parse_xml( GenericXMLHandler( treat_entity=build_vocab ), arg )
+    entity_counter = 0
+handler = GenericXMLHandler( treat_meta=treat_meta,
+                             treat_entity=algorithm,
+                             gen_xml=True )
 verbose( "Pass 2: Lowercasing the words in the XML file" )
-input_file = open( arg[ 0 ] )    
-if algorithm == "complex" :
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=treat_sentence_complex,
-                                 gen_xml=True )
-elif algorithm == "simple" :    
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=treat_sentence_simple,
-                                 gen_xml=True )
-parser.setContentHandler( handler )
-parser.parse( input_file )
+parse_xml( handler, arg )
 print handler.footer
-input_file.close() 
