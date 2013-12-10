@@ -618,6 +618,7 @@ def index_from_corpus(corpus, basepath=None, attrs=None):
 	index = Index(basepath, attrs)
 	index.fresh_arrays()
 	parser.setContentHandler(CorpusXMLHandler(index.append_sentence))
+	parser.setFeature(xml.sax.handler.feature_external_ges, False) # IGNORE DTD!
 	parser.parse(corpus)
 	index.build_suffix_arrays()
 	index.save_main()
