@@ -49,6 +49,11 @@ OPTIONS may be:
     Additionally output pairwise coefficients like S, pi and Cohen's kappa. 
     Default false.
     
+-c OR --confusion
+    Additionally output, for each category, the coefficients when other 
+    cantegories are collapsed, which gives an idea of its difficulty. Also 
+    output a confusion matrix with the proportion of mistakes per category.
+    
 -H OR --header
     First row should be considered as header. Default false.
     
@@ -57,6 +62,11 @@ OPTIONS may be:
 
 -s OR --separator SEP
     Define a character SEP to be the field separator. The default is TAB.
+    
+-u OR --unknown (TODO: implement)
+    String that represents unknown values. This means that the data can be 
+    incomplete, e.g. if a rater was not able to judge an item. Default value is 
+    question mark "?" - This feature is not yet implemented
 
 -d OR --distances <dist-file.txt>
     Give a file containing the distances between each pair of categories. This
@@ -83,8 +93,26 @@ OPTIONS may be:
 first_header = False
 first_rater = 0
 calculate_pairwise = False
+calculate_confusion = False
 separator = "\t"
 distances_matrix = {}
+unknown = "?"
+
+################################################################################
+
+def safe_increment( dictionary, key ) :
+    """
+        Increments dictionary[key] by one, and initializes the value to 1 if the
+        key was not present in the initial dictionary.
+        
+        @param dictionary Any python dict object
+        @param key A key that should be incremented (can be absent from dict)
+        @return The same dictionary but with position key incremented by one
+    """
+    entry = dictionary.get( key, 0 )
+    entry = entry + 1
+    dictionary[ key ] = entry
+    return dictionary
 
 ################################################################################
 
@@ -194,7 +222,7 @@ def compute_weighted_kappa( rater1, rater2, Ni, Nk ) :
 
 def compute_pairwise( rater1, rater2, Ni, Nk ):
     """ 
-        Computes four agreement coefficients for a pair of raters. The 
+        Computes five agreement coefficients for a pair of raters. The 
         calculated coefficients are ao (percentage of agreement, not chance-
         corrected) and the chance-corrected coefficients S, pi, Cohen's kappa
         and weighted Cohen's kappa as defined in Artstein and Poesio's article.
@@ -236,10 +264,10 @@ def compute_pairwise( rater1, rater2, Ni, Nk ):
     ae_kappa = ae_kappa / ( Ni * Ni )
     (S, pi, kappa) = map(lambda ae: (ao - ae)/(1.0-ae), (ae_S, ae_pi, ae_kappa))
     w_kappa = compute_weighted_kappa( rater1, rater2, Ni, Nk )
-    if w_kappa :
-        return (ao, S, pi, kappa, w_kappa)
-    else :
-        return (ao, S, pi, kappa )    
+    #if w_kappa :
+    return (ao, S, pi, kappa, w_kappa)
+    #else :
+    #    return (ao, S, pi, kappa )    
     
 ################################################################################    
 
@@ -263,7 +291,36 @@ def compute_pairwise_all( annotations, Ni, Nc, Nk ):
             coeffs = compute_pairwise( rater1_annot, rater2_annot, Ni, Nk )
             pairwise_map[ "%d-%d" % (rater1, rater2) ] = coeffs
     return pairwise_map
-   
+
+################################################################################
+
+def compute_confusion( annotations, Nc ) :
+    """
+        Calculates the confusion matrix containing the counts of each annotation
+        pair. That is, for each item, generate the pairs of ratings ki,kj with
+        i < j, and count them.
+        
+        @param annotations The list of annotations containing one row per item,
+        one column per rater, and the nominal categories in the cells
+        @param Nc The total number of raters C in the data        
+        @return A tuple. The first element contains the confusion matrix in form
+        of a dictionary, with the keys being pairs of category IDs in the form
+        "categ1-categ2", and the values being the counts of that pair. The 
+        second element in the tuple is another dictionary containing, for each
+        category (key) the number of times it was assigned in the data set.
+    """    
+    all_pairs = {}
+    annot_counter = {}
+    for annot in annotations :
+        for c1 in range( Nc ) :
+            a1 = annot[ c1 ]
+            safe_increment( annot_counter, a1 )          
+            for c2 in range( c1 + 1, Nc ) :
+                a2 = annot[ c2 ]
+                pair = "-".join( map( lambda x: str(x), sorted( ( a1, a2 ) ) ) )
+                safe_increment( all_pairs, pair )
+    return ( all_pairs, annot_counter )
+    
 ################################################################################
 
 def compute_multi( annotations, Ni, Nc, Nk ) :
@@ -282,7 +339,7 @@ def compute_multi( annotations, Ni, Nc, Nk ) :
     ao = 0.0
     # ao is the number of agreeing pairs over all possible pairs
     for item in annot_matrix :
-        ao += sum( map( lambda x: x * (x-1), item) )
+        ao = ao + sum( map( lambda x: x * (x-1), item) )
     ao = ao / (Ni * Nc * (Nc - 1) ) 
     # For multi-pi (called generally Fleiss' kappa), we estimate ae from the
     # overall distribution of the categories. The probability of a coder chosing
@@ -382,18 +439,25 @@ def categories_to_ids( annotations, all_categories ) :
         @param all_categories A map in which each category occurring in the data
         is a key mapping to the integer 1. This is simply a way to represent all
         the categories without repetition, that is, the set K.
-        @return A table equivalent to annotations, but in which instead of 
-        strings each cell contains a unique integer ID for each category. The
-        IDs are assigned in lexicographic sorting order.
+        @return A tuple. The first element is a table equivalent to annotations,
+        but in which instead of strings each cell contains a unique integer ID 
+        for each category. The second element is a sorted list of the category
+        strings, sorted by IDs. The IDs are assigned in lexicographic sorting
+        order of category string values.
     """
     global distances_matrix
+    global unknown
     # A unique position identifier for each category, so that each category is
     # mapped to a list index
     category_id = 0
     # Needs to be sorted otherwise order of columns could be different
-    for category in sorted(all_categories.keys()) :
-        all_categories[ category ] = category_id
-        category_id = category_id + 1
+    sorted_categ_names = sorted(all_categories.keys())
+    for category in sorted_categ_names :
+        #if category == unknown : #Represent incomplete data (rater cannot judge)
+        #    all_categories[ category ] = -1 # represented as -1
+        #else :
+            all_categories[ category ] = category_id
+            category_id = category_id + 1
     new_annotations = []
     for annot_row in annotations :
         new_annot_row = []
@@ -401,7 +465,7 @@ def categories_to_ids( annotations, all_categories ) :
             new_annot_row.append( all_categories[ annotation ] )
         new_annotations.append( new_annot_row )
     distances_matrix = calculate_distances(distances_matrix, all_categories)
-    return new_annotations 
+    return (new_annotations, sorted_categ_names)
       
 ################################################################################
 
@@ -503,7 +567,10 @@ def read_data( f_data ) :
         @return A tuple containing, in the first position, the matrix with one 
         subject per row, one rater per column, and the annotation category IDs 
         in the cells as integers. The second, third and fourth fields of the 
-        tuple are the number of items Ni, of coders Nc and of categories Nk.
+        tuple are the number of items Ni, of coders Nc and of categories Nk. The
+        fifth field is a list containing the names of the categories sorted by
+        their IDs (position 0 contains the name of category IDentified by 0, and
+        so on).
     """
     global first_rater
     global first_header
@@ -525,13 +592,17 @@ def read_data( f_data ) :
             elif Nc != len( annot_row ) :
                 raise ValueError, "Row %d: the file must contain the same \
                                    number of fields in all rows" % Ni
+            # improvement for cases where file was Space-Tab separated                                   
+            clean_annot_row = [] # contains the annotation cleaned from spaces
             for annotation in annot_row :
-                all_categories[ annotation ] = 1             
-            annotations.append( annot_row )
-    annotations = categories_to_ids( annotations, all_categories )
+                clean_annot = annotation.strip() # Remove spurious spaces
+                all_categories[ clean_annot ] = 1
+                clean_annot_row.append( clean_annot )          
+            annotations.append( clean_annot_row )
+    (annotations,categ_names) = categories_to_ids( annotations, all_categories )
     Nk = len( all_categories )
     verbose( "\n%d items\n%d raters\n%d categories\n" % (Ni, Nc, Nk) )
-    return ( annotations, Ni, Nc, Nk ) 
+    return ( annotations, Ni, Nc, Nk, categ_names ) 
 
 ################################################################################
 
@@ -562,16 +633,75 @@ def print_matrix_kappa( pairwise_map, Nc ) :
     for i in range(Nc-1) :        
         for j in range(1,Nc) :
             kappa = matrix_kappa[ i ][ j ]
-            if kappa == 0.0 :
+            if j <= i :
                 print 10*" ",
             else :
                 print "%+.5f |" % kappa,
         print "Rater %3d" % i
     print Nc * 11 * "="  
     
-################################################################################    
+################################################################################  
 
-def calculate_and_print( annotations, Ni, Nc, Nk ) :
+def print_matrix_confusion( confusion, categ_names, counters, Ni, Nc, Nk ) :
+    """
+        Given a confusion matrix in form of a list, prints it in a nice matrix 
+        with categories vs. categories counts. This is a nice way of seeing 
+        which categories are the ones with highest/lowest disagreement and thus
+        identify blurry and sharp distinctions that raters are able to make.
+        
+        @param pairwise_map A map in which the keys are in the form 
+        "categ1-categ2" and the values are the counts of that pair
+        @param Nk The total number of categories Nk in the data
+        @param categ_names The list with the names of the categories ordered by
+        their IDs
+        @param counters The dict with the count each time a category (key) was
+        assigned by a rater to an item
+        @param Ni The total number of items I in the data
+        @param Nc The total number of raters C in the data        
+        @param Nk The total number of categories K in the data
+    """
+    matrix_confusion = []
+    list_pair_count = []
+    Npairs = 0.0
+    for i in range(Nk) :
+        matrix_confusion.append( Nk * [ 0.0 ] )
+        list_pair_count.append( 0.0 )
+    for pair in confusion.keys() :
+        categ_count = confusion[ pair ]
+        ( categ1, categ2 ) = map( lambda x: int(x), pair.split("-") )
+        matrix_confusion[ categ1 ][ categ2 ] = categ_count
+        list_pair_count[ categ1 ] = list_pair_count[ categ1 ] + categ_count
+        if categ1 != categ2 :
+            list_pair_count[ categ2 ] = list_pair_count[ categ2 ] + categ_count        
+        Npairs = Npairs + categ_count
+    print "Category confusion matrix of judgement pairs"
+    print (Nk + 1) * 9 * "="
+    for j in range(Nk) :
+        print "Cat%3d |" % j,
+    print ""
+    for i in range(Nk) :        
+        for j in range(Nk) :
+            count = matrix_confusion[ i ][ j ]
+            if j < i :
+                print 8 * " ",
+            else :
+                print "%6d |" % count,
+        print "Cat%3d" % i
+    print (Nk + 1) * 9 * "=" + "\n"
+    # Print the detail of agreement/disagreement proportions and category names
+    print " " * 12 + "Cat distrib |  Agree | Disagree"
+    for i in range(Nk) :
+        count_categ = float(counters[i])
+        prop_agree = matrix_confusion[ i ][ i ] / list_pair_count[i]
+        prop_disagree = 1.0 - prop_agree
+        print "Cat%3d - %5d (%.4f) | %.4f | %.4f   ---> %s" % ( i, count_categ, (count_categ/(Ni*Nc)), prop_agree, prop_disagree, categ_names[i] )
+    print
+    
+    
+    
+###############################################################################    
+
+def calculate_and_print( annotations, Ni, Nc, Nk, categ_names ) :
     """
         Given the set of annotations read from the files, calculate the
         agreement coefficients and print them in a nice way.
@@ -581,8 +711,11 @@ def calculate_and_print( annotations, Ni, Nc, Nk ) :
         @param Ni The total number of items I in the data
         @param Nc The total number of raters C in the data        
         @param Nk The total number of categories K in the data
+        @param categ_names The names of the categories used to annotate, sorted
+        by their IDs.
     """
     global calculate_pairwise
+    global calculate_confusion
     if Ni != 0 and Nc != 0 and Nk != 0 : # empty file
         if calculate_pairwise :
             pairwise_map = compute_pairwise_all( annotations, Ni, Nc, Nk)
@@ -591,6 +724,9 @@ def calculate_and_print( annotations, Ni, Nc, Nk ) :
                 print ("ao = %f, S = %f, pi = %f, (Cohen's) kappa = %f, "+\
                       "weighted kappa = %f") % pairwise_map[pair]
             print_matrix_kappa( pairwise_map, Nc )
+        print ( "\nNc = %(Nc)d raters\nNi = %(Ni)d items\nNk = %(Nk)d " + \
+              "categories\nNc x Ni = %(j)d judgements" ) %\
+              {"Nc": Nc, "Ni": Ni, "Nk": Nk, "j": Ni * Nc }
         coeffs = compute_multi( annotations, Ni, Nc, Nk )
         print "\nOverall agreement coefficients for all annotators:"
         print ("multi-ao = %f\nmulti-pi (Fleiss' kappa) = %f\n" + \
@@ -598,6 +734,9 @@ def calculate_and_print( annotations, Ni, Nc, Nk ) :
         coeffs_weighted = compute_weighted_multi( annotations, Ni, Nc, Nk )
         print "Weighted agreement coefficients for all annotators:"
         print "alpha = %f\nalpha-kappa = %f\n" % coeffs_weighted
+        if calculate_confusion :
+            confusion, counters = compute_confusion( annotations, Nc )
+            print_matrix_confusion( confusion, categ_names, counters, Ni, Nc, Nk )
     else :
         print >> sys.stderr, "ERROR: you probably provided an empty file"  
           
@@ -616,8 +755,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global first_header
     global first_rater
     global calculate_pairwise
+    global calculate_confusion
     global separator
     global distances_matrix
+    global unknown
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
@@ -630,7 +771,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             first_rater = 1 
         if o in ("-p", "--pairwise") : 
             verbose( "Computing pairwise coefficients" )
-            calculate_pairwise = True           
+            calculate_pairwise = True
+        if o in ("-u", "--unknown") : 
+            verbose( "Unknown value - TODO: implement: " + a )
+            unknown = a
         if o in ("-s", "--separator") : 
             verbose( "Field separator: " + a )
             separator = a
@@ -643,18 +787,22 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 print >> sys.stderr, "WARNING: error in distance matrix!"
                 print >> sys.stderr, "Weighted coefficients will use 1.0 as" +\
                       " default distance"
+        if o in ("-c", "--confusion") :
+            verbose( "Calculating confusion matrices" )
+            calculate_confusion = True
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "header", "raters", "pairwise", "separator=", "distance=" ]
-arg = read_options( "Hrps:d:", longopts, treat_options, -1, usage_string )   
+longopts = [ "header", "raters", "pairwise", "separator=", "distance=", \
+              "confusion", "unknown=" ]
+arg = read_options( "Hrps:d:cu:", longopts, treat_options, -1, usage_string )   
 
 if len( arg ) == 0 :
-    (annotations, Ni, Nc, Nk) = read_data( sys.stdin )
-    calculate_and_print( annotations, Ni, Nc, Nk )
+    (annotations, Ni, Nc, Nk, categ_names) = read_data( sys.stdin )
+    calculate_and_print( annotations, Ni, Nc, Nk, categ_names )
 else :
     for a in arg :
         input_file = open( a )
-        (annotations, Ni, Nc, Nk) = read_data( input_file )
-        calculate_and_print( annotations, Ni, Nc, Nk )
+        (annotations, Ni, Nc, Nk, categ_names) = read_data( input_file )
+        calculate_and_print( annotations, Ni, Nc, Nk, categ_names )
