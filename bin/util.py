@@ -270,6 +270,41 @@ def parse_xml( handler, arg, postfunction=None ) :
 
 ################################################################################
 
+def parse_txt( handler, arg, postfunction=None ) :
+    """
+        Create a default TXT parser, assign the handler and parse input in arg.
+        If during parsing the script should do additional stuff, this generic
+        function should not be used.
+        
+        @param handler The function used to parse the TXT, takes one sentence
+        @param arg The command line arguments, containing the filenames. If 
+        empty, use sys.stdin
+        @param postfunction Post-processing function that takes as an argument 
+        the string filename. Most of the time this is None.
+    """
+    if len( arg ) == 0 :
+        try :
+            for line in sys.stdin.readlines() :
+                handler( line.strip().split() );
+        except LimitReachedError : # Read only part of XML file
+            pass # Not an error, just used to interrupt parsing
+        if postfunction :
+            postfunction( "stdin" )
+    else :
+        for a in arg :
+            input_file = open( a )
+            try :
+                for line in input_file.readlines() :
+                    handler( line.strip().split() );
+            except LimitReachedError : # Read only part of XML file
+                pass # Not an error, just used to interrupt parsing
+            input_file.close()
+            handler.gen_xml = False
+            if postfunction :
+                postfunction( a )
+
+################################################################################
+
 def default_exception_handler(type, value, trace):
     """
        The default exception handler. This replaces Python's standard behaviour

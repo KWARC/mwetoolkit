@@ -39,7 +39,9 @@ import pdb
 import re
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
+from xmlhandler.classes.word import Word
+from util import usage, read_options, treat_options_simplest, verbose, \
+                 parse_xml, parse_txt
 
 ################################################################################
 # GLOBALS
@@ -59,6 +61,10 @@ python %(program)s [OPTIONS] <file.xml>
     i.e. words that might occur uppercased even if they are not at the beginning 
     of a sentence. Some fuzzy thresholds are hardcoded and were fixed based on
     empirical observation of the Genia corpus.
+    
+-x OR --text
+    Use as input a text file instead of XML file. One sentence per line, 
+    tokenised with spaces. Output will be text as well.
 
 %(common_options)s
 
@@ -74,6 +80,7 @@ entity_counter = 0
 # In complex algorithm, a Firstupper form occurring 80% of the time or more 
 # at the beginning of a sentence is systematically lowercased.
 START_THRESHOLD=0.8
+text_version = False
 
 ################################################################################
 
@@ -96,13 +103,20 @@ def treat_sentence_simple( sentence ) :
         @param sentence A `Sentence` that is being read from the XML file.    
     """
     global entity_counter
+    global text_version
     
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-
+    new_sent = []
     for w in sentence :
-        w.surface = w.surface.lower()
-    print sentence.to_xml().encode( "utf-8" )
+        if text_version :
+            new_sent.append( w.lower() )
+        else :
+            w.surface = w.surface.lower()
+    if text_version :
+        print " ".join( new_sent )
+    else :
+        print sentence.to_xml().encode( "utf-8" )
     entity_counter += 1
 
 ################################################################################
@@ -114,11 +128,17 @@ def treat_sentence_complex( sentence ) :
         
         @param sentence A `Sentence` that is being read from the XML file.    
     """    
-    global vocab, entity_counter, START_THRESHOLD    
+    global vocab
+    global entity_counter
+    global START_THRESHOLD    
+    global text_version
+    
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
 
     for w_i in range(len(sentence)) :
+        if text_version :
+            sentence[ w_i ] = Word( sentence[ w_i ], None, None, None, None )
         w = sentence[ w_i ]
         case_class = w.get_case_class()
         # Does nothing if it's aready lowercase or if it's not alphabetic
@@ -143,8 +163,14 @@ def treat_sentence_complex( sentence ) :
                     w.surface = pref_form
                     # Else, don't modify case, since we cannot know whether it
                     # is a proper noun, a sentence start, a title word, a spell 
-                    # error, etc.                   
-    print sentence.to_xml().encode( 'utf-8' )
+                    # error, etc.
+    if text_version :
+        result = ""
+        for w in sentence :
+            result = result + w.surface + " "
+        print result.strip()
+    else :
+        print sentence.to_xml().encode( 'utf-8' )
     entity_counter += 1
 
 ################################################################################
@@ -156,14 +182,21 @@ def build_vocab( sentence ) :
         dictionary that associate the case configurations to occurrence counters
         both general and start-of-sentence (see below).
         
-        @param sentence A `Sentence` that is being read from the XML file.    
+        @param sentence A `Sentence` that is being read from the XML file. If
+        text_version, then it is simply a list of string tokens    
     """
-    global vocab, entity_counter
+    global vocab
+    global entity_counter
+    global text_version
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+    prev_key = ""
     for w_i in range(len(sentence)) :
-        key = sentence[ w_i ].surface        
-        low_key = sentence[ w_i ].surface.lower()
+        if text_version :
+            key = sentence[ w_i ]
+        else :
+            key = sentence[ w_i ].surface        
+        low_key = key.lower()
         forms = vocab.get( low_key, {} )
         form_entry = forms.get( key, [ 0, 0 ] )
         # a form entry has two counters, one for the occurrences and one for
@@ -172,10 +205,11 @@ def build_vocab( sentence ) :
         form_entry[ 0 ] = form_entry[ 0 ] + 1  
         # This form occurrs at the first position of the sentence or after a
         # period (semicolon, colon, exclamation or question mark). Count it
-        if w_i == 0 or re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) :
+        if w_i == 0 or re.match( "[:\.\?!;]", prev_key ) :
             form_entry[ 1 ] = form_entry[ 1 ] + 1 
         forms[ key ] = form_entry
         vocab[ low_key ] = forms
+        prev_key = key
     entity_counter += 1
     
 ################################################################################
@@ -261,11 +295,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global algorithm
+    global text_version
     algorithm = treat_sentence_simple # Default value
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
     for ( o, a ) in opts:
-        if o in ("-a", "--algorithm"):
+        if o in ("-x", "--text" ) :
+            text_version = True
+        elif o in ("-a", "--algorithm"):
             algoname = a.lower()
             if algoname == "complex" :
                 algorithm = treat_sentence_complex
@@ -278,19 +315,27 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "algorithm (e.g. \"complex\", \"simple\")."
                 usage( usage_string )
                 sys.exit( 2 )  
-    
+ 
 ################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "a:", [ "algorithm=" ], treat_options, 1, usage_string )
+longopts = [ "algorithm=", "text" ]
+arg = read_options( "a:x", longopts, treat_options, 1, usage_string )
 
 if algorithm == treat_sentence_complex :
     verbose( "Pass 1: Reading vocabulary from file... please wait" )
-    parse_xml( GenericXMLHandler( treat_entity=build_vocab ), arg )
+    if text_version :
+        parse_txt( build_vocab, arg )
+    else :
+        parse_xml( GenericXMLHandler( treat_entity=build_vocab ), arg )
     entity_counter = 0
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=algorithm,
-                             gen_xml=True )
-verbose( "Pass 2: Lowercasing the words in the XML file" )
-parse_xml( handler, arg )
-print handler.footer
+    
+verbose( "Pass 2: Lowercasing the words in the file" )
+if text_version :
+    parse_txt( algorithm, arg )
+else :
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                                 treat_entity=algorithm,
+                                 gen_xml=True )
+    parse_xml( handler, arg )
+    print handler.footer
