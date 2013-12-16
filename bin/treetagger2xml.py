@@ -139,7 +139,9 @@ def transform_format( in_file ) :
             if pos == sent_split and not original_split and words :
                 print "</s>"
                 new_sent = True
-                words = []    
+                words = []
+    if not new_sent :
+        print "</s>"
 
 ################################################################################     
 # MAIN SCRIPT
