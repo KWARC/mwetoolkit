@@ -8,6 +8,7 @@ from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
+import pdb
 
 ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
 WORD_FORMAT = ATTRIBUTE_SEPARATOR.join(map(lambda s: "%(" + s + ")s", ["wordnum"] + WORD_ATTRIBUTES))
@@ -83,6 +84,10 @@ def parse_pattern(node):
 			if id or repeat:
 				state.pattern += ")"
 			if repeat:
+				if repeat != "*" and repeat != "?" and repeat != "+" and \
+					not re.match(r"^\{[0-9]*,[0-9]*\}|\{[0-9]+\}$",repeat ) :
+					warningrepeat = "WARNING: invalid repeat pattern: " + repeat
+					print >> sys.stderr, warningrepeat
 				state.pattern += repeat
 
 			if ignore:
@@ -156,8 +161,8 @@ attribute: " + attr + "\nIn: " + node.toxml()
 				if depref in state.defined_ids:
 					# Backreference.
 					attrs["syn"] = (ATTRIBUTE_WILDCARD +
-					               ";%s:(?P=%s_wordnum);" % (deptype, depref) +
-					               ATTRIBUTE_WILDCARD)
+								   ";%s:(?P=%s_wordnum);" % (deptype, depref) +
+								   ATTRIBUTE_WILDCARD)
 				else:
 					# Fore-reference.
 					foredep = "foredep_%d" % state.temp_id
@@ -165,8 +170,8 @@ attribute: " + attr + "\nIn: " + node.toxml()
 					state.forepattern_ids[depref] = foredep
 
 					attrs["syn"] = (ATTRIBUTE_WILDCARD +
-					                ";%s:(?P<%s>[0-9]*);" % (deptype, foredep) +
-					                ATTRIBUTE_WILDCARD)
+									";%s:(?P<%s>[0-9]*);" % (deptype, foredep) +
+									ATTRIBUTE_WILDCARD)
 
 			state.pattern += WORD_FORMAT % attrs + WORD_SEPARATOR
 
@@ -218,7 +223,6 @@ def match_pattern(pattern, words):
 		wordnum += 1
 
 	limit = len(wordstring)
-
 	for current_start in positions:
 		current_end = limit
 		while True:
@@ -226,6 +230,7 @@ def match_pattern(pattern, words):
 
 			if result:
 				# Beware: [x for x ...] exposes the variable x to the surrounding environment.
+				#pdb.set_trace()
 				ignore_ids = [id for id in result.groupdict().keys() if id.startswith("ignore_")]
 				ignore_spans = [result.span(id) for id in ignore_ids]
 
@@ -254,7 +259,7 @@ def build_generic_pattern(min, max):
 	"""
 
 	pattern = WORD_SEPARATOR + "(?:[^%s]*" % WORD_SEPARATOR + \
-	          WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
+			  WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
 
 	return re.compile(pattern)
 
@@ -268,10 +273,10 @@ def patternlib_test():
 
 	p = parse_patterns_file("/tmp/a.xml")  # pattern: N+
 	ws = [Word("the", "the", "Det", "x", []),
-	      Word("foos", "foo", "N", "x", []),
-	      Word("bars", "bar", "V", "x", []),
-	      Word("quuxes", "quux", "N", "x", []),
-	      Word("foose", "foo", "N", "x", []),
-	      Word("etiam", "etiam", "N", "x", [])]
+		  Word("foos", "foo", "N", "x", []),
+		  Word("bars", "bar", "V", "x", []),
+		  Word("quuxes", "quux", "N", "x", []),
+		  Word("foose", "foo", "N", "x", []),
+		  Word("etiam", "etiam", "N", "x", [])]
 	show(match_pattern(p[0], ws))
 	#show(match_pattern(build_generic_pattern(2,3), ws))

@@ -30,7 +30,7 @@
 
 import sys
 from util import usage, read_options, treat_options_simplest, verbose
-from libs.indexlib import index_from_corpus, Index
+from libs.indexlib import index_from_corpus, index_from_text, Index
 
 usage_string = """Usage: 
     
@@ -48,12 +48,22 @@ OPTIONS may be:
 
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
+    
+-m OR --moses
+    Uses Moses factored corpus format as input. This format must be pure text,
+    one sentence per line, tokens separated by spaces, each token being:
+    surface|lemma|POS|syntrelation:synthead
+    Which are equivalent to the xml fields. Empty fields should be left blank,
+    but every token must have 3 vertical bars. The actual character for vertical
+    bars must be escabed and replaced by a placeholder that does not contain
+    this character (e.g. %%VERTICAL_BAR%%)
 
 %(common_options)s
 
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd). The -i
 <index> option is mandatory.
 """
+use_moses_format = False
 
 ################################################################################
 
@@ -70,6 +80,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global used_attributes
     global name
     global build_entry
+    global use_moses_format
 
     treat_options_simplest( opts, arg, n_arg, usage_string )    
 
@@ -85,6 +96,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 sys.exit( 2 )
         elif o in ("-a", "--attributes"): 
             used_attributes = a.split(":")
+        elif o in ("-m", "--moses"):
+            use_moses_format = True
         elif o in ("-o", "--old"):
             Index.use_c_indexer(False)
             
@@ -97,8 +110,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["index=", "attributes=", "old" ]
-arg = read_options( "i:a:o", longopts, treat_options, 1, usage_string )
+longopts = ["index=", "attributes=", "old", "moses" ]
+arg = read_options( "i:a:om", longopts, treat_options, 1, usage_string )
 
 simple_attrs = [a for a in used_attributes if '+' not in a]
 composite_attrs = [a for a in used_attributes if '+' in a]
@@ -108,7 +121,9 @@ for attrs in [attr.split('+') for attr in composite_attrs]:
         if attr not in simple_attrs:
             simple_attrs.append(attr)
 
-index = index_from_corpus(arg[0], name, simple_attrs)
-
+if use_moses_format :
+    index = index_from_text(arg[0], name, simple_attrs)
+else :
+    index = index_from_corpus(arg[0], name, simple_attrs)
 for attr in composite_attrs:
     index.make_fused_array(attr.split('+'))
