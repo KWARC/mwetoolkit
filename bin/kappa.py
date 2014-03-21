@@ -30,7 +30,7 @@
     Computational Linguistics. In: Computational Linguistics, 34(4):555-596. ACL
     
     The required input is a tab-separated file with the data annotation, one
-    subject per row, one rater/annotator per column.
+    item per row, one rater/annotator per column.
 """
  
 import sys
@@ -54,11 +54,11 @@ OPTIONS may be:
     cantegories are collapsed, which gives an idea of its difficulty. Also 
     output a confusion matrix with the proportion of mistakes per category.
     
--H OR --header
-    First row should be considered as header. Default false.
-    
 -r OR --raters
-    First column should be considered as subject identification. Default false.   
+    First row should be considered as header with rater labels. Default false.
+    
+-i OR --items
+    First column should be considered as header with item labels. Default false.   
 
 -s OR --separator SEP
     Define a character SEP to be the field separator. The default is TAB.
@@ -85,9 +85,10 @@ OPTIONS may be:
 %(common_options)s
 
     The <file.txt> file is a tab-separated file with the data annotation, one
-    subject per row, one rater/annotator per column. If the file includes a
-    header row for identifying the raters and/or a first column to identify the
-    subjects, please specify the appropriate options above.
+    item per row, one rater/annotator per column. Categories are treated as
+    eumerations, where each class is a string. If the file includes a header row 
+    for identifying the raters and/or a first column to identify the items, 
+    please specify the appropriate options --r and/or -i above.
 """   
 
 first_header = False
@@ -763,11 +764,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
     for ( o, a ) in opts:        
-        if o in ("-H", "--header") :
-            verbose( "First line in file ignored -> considered as the header" )
+        if o in ("-r", "--raters") :
+            verbose( "First row in file ignored -> considered as rater labels")
             first_header = True     
-        if o in ("-r", "--raters") : 
-            verbose( "First column in file ignored -> considered as item IDs" )        
+        if o in ("-i", "--items") : 
+            verbose("First column in file ignored -> considered as item labels")        
             first_rater = 1 
         if o in ("-p", "--pairwise") : 
             verbose( "Computing pairwise coefficients" )
@@ -794,9 +795,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "header", "raters", "pairwise", "separator=", "distance=", \
+longopts = [ "raters", "items", "pairwise", "separator=", "distance=", \
               "confusion", "unknown=" ]
-arg = read_options( "Hrps:d:cu:", longopts, treat_options, -1, usage_string )   
+arg = read_options( "rips:d:cu:", longopts, treat_options, -1, usage_string )   
 
 if len( arg ) == 0 :
     (annotations, Ni, Nc, Nk, categ_names) = read_data( sys.stdin )
