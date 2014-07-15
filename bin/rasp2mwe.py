@@ -41,7 +41,7 @@ import subprocess as sub
 
 ###############################################################################
 # GLOBALS 
-morph_path=None
+morph_path="X"
 morph=None
 work_path=os.getcwd()
 d=["index","surface","lemma","pos", "syn"]
@@ -54,9 +54,8 @@ python %(program)s OPTIONS <file_in>
 OPTIONS may be:
 
 -m OR --morphg
-    KePath to morphg. If this option is
-    activated, you should provide the absolute path to the morphg 
-	installation folder.
+    Path to morphg. If this option is activated, you should provide the absolute 
+    path to the morphg installation folder.
 
 """
 ###############################################################################
