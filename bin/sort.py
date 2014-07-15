@@ -209,7 +209,7 @@ arg = read_options( "f:ad", longopts, treat_options, -1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
-                                           dir=TEMP_FOLDER )
+                                           dir=TEMP_FOLDER, delete=True )
     temp_name = temp_fh.name
     temp_fh.close()
     temp_file = shelve.open( temp_name, 'n' )
@@ -228,7 +228,7 @@ print handler.footer
 
 try :
     temp_file.close()
-    os.remove( temp_name )
+    #os.remove( temp_name )
 except IOError, err :
     print >> sys.stderr, err
     print >> sys.stderr, "Error closing temporary file. " + \
