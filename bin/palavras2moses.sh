@@ -36,6 +36,36 @@ for file in $@; do
     # Remove empty lines, "star" lines, "long" lines, "lixo", etc
     sed -e '/^$/d' -e '/^<star>$/d' -e '/^<long.*$/d' -e '/^<lixo.*$/d' |    
     # Now build the sentences. Some ill-formed senences will be discarded.
-    awk -f build-sentences.awk 
+    awk 'BEGIN{	FS="|";	OFS="|"; }
+{
+    if ($0=="</s>"){ 
+        if(invalid){
+        	#print sent;
+            invalid=0;
+            sent = "";
+        }
+        else{
+            print sent; 
+            sent="";
+        }
+    } 
+    else if (NF == 4){
+    	surf=$1;
+    	gsub(/ /,"=",surf)
+    	lemma=$2;
+    	gsub(/ /,"=",lemma)
+    	pos=$3;
+    	gsub(/ /,"_",pos);
+    	synt=$4;
+    	gsub(/[<>@]/,"",synt);
+    	gsub(/ /,"_",synt);
+        sent = sent surf "|" lemma "|" pos "|" synt " ";
+    }
+    else{
+        invalid=1;
+        print "Discarding " sent " because of " $0 > "/dev/stderr";
+    }
+}
+END{ if(sent != "") { print "Sent was not empty" sent > "/dev/stderr"; } }' 
     #cat
 done
