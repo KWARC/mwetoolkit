@@ -168,6 +168,7 @@ def process_line(l, phrase):
 
 	if '|ellip|' in l:
 		return False
+	lbef = l
 	l = l.replace( "\\|", "@@VERTICALBAR@@" )
 	del phrase[:] #for each sentence has to be cleaned
 	words=l.split("|")
@@ -189,7 +190,7 @@ def process_line(l, phrase):
 				pieces=word.split(":")
 				index=pieces[len(pieces)-1].split('_')[0]
 				if n_colons ==3 and len(pieces)==4 and pieces[0]=="" and \
-				pieces[1]=="" and pieces[3]=="": 
+				pieces[3]=="": 
 					lemma=':'
 					surface=':'
 					pos=':'	
@@ -202,12 +203,14 @@ def process_line(l, phrase):
 				try :
 					index, pos=aux_morph.split("_")
 				except Exception :
-					print >>sys.stderr, l
+					print >>sys.stderr, lbef 
+					print >>sys.stderr, pieces
+					#print >>sys.stderr, phrase
 				pos=strip_xml(pos)
 				if "+" in s and not is_number(s.split('+')[1]):
 					lemma=strip_xml(s).split('+')[0] 
-					if "'" in s :
-						s = s.replace("'","\\'")
+					s = s.replace("'","\\'").replace("\"","\\\"")
+					s = s.replace("`","\\`")+"_"+pos
 					s=s+'_'+pos
 					if morph_path != None and morph != None:							
 						os.chdir(morph_path)
@@ -218,7 +221,7 @@ def process_line(l, phrase):
 						#generates the surface form using morphg
 						lerr = p.stderr.readlines()
 						if len(lerr) > 0 :
-							print >> sys.stderr, "Error morphg: " + lerr
+							print >> sys.stderr, "Error morphg: " + str(lerr)
 							print >> sys.stderr, "Offending command: " + cmd
 						l = p.stdout.readline()
 						p.stdout.close()
@@ -332,7 +335,12 @@ def transform_format(rasp):
 				l_empty=0
 				first_line=True
 		else:
-			process_tree_branch(l,phrase)
+			if l.startswith("(X") :
+				while l != "\n": 
+					l = rasp.readline()
+				continue
+			else :
+				process_tree_branch(l,phrase)
 		l=rasp.readline()
 	if l_empty != 1:
 		write_entry(n_line,phrase) #save last entry
