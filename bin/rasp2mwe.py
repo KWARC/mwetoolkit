@@ -154,21 +154,29 @@ def is_number(string):
 
 def process_line(l, phrase):
 	""" 
-		This functiosn Process the tagged line, extracting each word and it's attributes.
+		This function processes the tagged line, extracting each word and its 
+		attributes.
 		Information is stored in a list of dictionaries (one dict per word) 
-where will be filled all the words attributes.
+		where we store all word attributes.
 
 		@param l Line read from input to be processed.
 		
 		@param phrase List of dictionaries to be completed.
+
+		@return True if everything went fine, False otherwise
 	"""
 
 	if '|ellip|' in l:
-		return
+		return False
+	l = l.replace( "\\|", "@@VERTICALBAR@@" )
 	del phrase[:] #for each sentence has to be cleaned
 	words=l.split("|")
-	words.pop()		#remove last element => )
-	words.pop(0)	#remove first element => (
+	try :
+		words.pop()		#remove last element => )
+		words.pop(0)	#remove first element => (
+	except Exception:
+		print >> sys.stderr, "Ignoring line \"" + l.strip() + "\""
+		return False
 	for word in words : #e.g.: resume+ed:7_VVN
 		process=True
 		if word!=" ": #words are separated by ' '
@@ -191,7 +199,10 @@ where will be filled all the words attributes.
 					pieces.pop()
 					s=':'.join(pieces)
 			if process:
-				index, pos=aux_morph.split("_")
+				try :
+					index, pos=aux_morph.split("_")
+				except Exception :
+					print >>sys.stderr, l
 				pos=strip_xml(pos)
 				if "+" in s and not is_number(s.split('+')[1]):
 					lemma=strip_xml(s).split('+')[0] 
@@ -200,12 +211,18 @@ where will be filled all the words attributes.
 					s=s+'_'+pos
 					if morph_path != None and morph != None:							
 						os.chdir(morph_path)
-						cmd='echo '+s
+						cmd='echo "%s"' % s
 						cmd+=' | ${morphg_res:-./'+morph+' -t}'
-						p = os.popen(cmd)
+						p = sub.Popen(cmd, shell=True, 
+									  stdout=sub.PIPE, stderr=sub.PIPE)
 						#generates the surface form using morphg
-						l = p.readline()
-						p.close()
+						lerr = p.stderr.readlines()
+						if len(lerr) > 0 :
+							print >> sys.stderr, "Error morphg: " + lerr
+							print >> sys.stderr, "Offending command: " + cmd
+						l = p.stdout.readline()
+						p.stdout.close()
+						p.stderr.close()
 						os.chdir(work_path)
 						surface=l.split('_')[0]
 						surface=strip_xml(surface)
@@ -216,6 +233,7 @@ where will be filled all the words attributes.
 					surface=lemma
 			dic={d[0]:index,d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:''}
 			phrase.append(dic)
+	return True
 	
 ###############################################################################
 
@@ -305,7 +323,9 @@ def transform_format(rasp):
 		if first_line:
 			if l_empty>=1:
 				l_empty=0
-				process_line(l,phrase)
+				#repeats till valid line found
+				while not process_line(l,phrase) : 
+					l=rasp.readline()
 				first_line=False
 				l=rasp.readline() #ignore line
 			else:
