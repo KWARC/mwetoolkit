@@ -3,7 +3,7 @@
 
 ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Maitê Dupont
+# Copyright 2010-2014 Carlos Ramisch, Maitê Dupont
 #
 # rasp2xml.py is part of mwetoolkit
 #
@@ -22,13 +22,15 @@
 #
 ###############################################################################
 """
-    This script transforms the output format of Rasp to the XML format of
-    a corpus, as required by the mwetoolkit scripts. The script is language
-    independent as it does not transform the information. Only
-    UTF-8 text is accepted.
-    
-    For more information, call the script with no parameter and read the
-    usage instructions.
+	This script transforms the output format of Rasp 2 to the XML format of
+	a corpus, as required by the mwetoolkit scripts. Only UTF-8 text is
+	accepted. For generating the surface forms (not provided by RASP), please
+	indicate the path to morphg program, provided with older versions of RASP
+	and unfortunately not available anymore (but send me an email if you need
+	it ;-)
+	
+	For more information, call the script with no parameter and read the
+	usage instructions.
 """
 
 import sys
@@ -43,19 +45,25 @@ import subprocess as sub
 # GLOBALS 
 morph_path="X"
 morph=None
+generate_text=False
 work_path=os.getcwd()
 d=["index","surface","lemma","pos", "syn"]
 usage_string = """Usage: 
-    
+	
 python %(program)s OPTIONS <file_in>
-    The <file_in> file must be rasp output when used without the -m option of 
+	The <file_in> file must be rasp output when used without the -m option of 
 	rasp parser.
 
 OPTIONS may be:
 
 -m OR --morphg
-    Path to morphg. If this option is activated, you should provide the absolute 
-    path to the morphg installation folder.
+	Path to morphg. If this option is activated, you should provide the absolute 
+	path to the morphg installation folder.
+	
+-x OR --moses
+	Generate the Moses factored text format instead of the usual mwetoolkit
+	XML file. We will gradually move to this format and abandon the old 
+	verbose XML files for corpora, since they create too large files.
 
 """
 ###############################################################################
@@ -70,10 +78,11 @@ def treat_options( opts, arg, n_arg, usage_string):
 	@param n_arg The number os arguments expected for this script.
 
 	@param usage_string Instructions that appear if you run the program with
-the wrong parameters or options.
+	the wrong parameters or options.
 	"""
 	global morph_path
 	global morph
+	global generate_text
 	treat_options_simplest(opts,arg,n_arg,usage_string)
 	for (o, a) in opts:
 		if o in ("-m","--morphg"):
@@ -81,6 +90,8 @@ the wrong parameters or options.
 			morph=a.pop()
 			a=string.join(a, '/')
 			morph_path=a
+		if o in ("-x","--moses"):
+			generate_text = True
 	if not os.path.exists(morph_path): #Just testing if the file exists
 		print >> sys.stderr, "WARNING: morphg not found!",
 		print >> sys.stderr, " Outputting analysed forms"
@@ -88,21 +99,25 @@ the wrong parameters or options.
 	
 ###############################################################################
 
-def write_entry(n_line, sentence):
+def write_entry(n_line, sent):
 	""" 
 		This function writes one sentence from the tagged corpus after 
-formating it to xml.
+		formating it into xml or Moses factored text.
 
 		@param n_line Number of this line in the corpus, starting with 0
 		
-		@param sentence Contains dictionaries corresponding to each word 
-in the sentence.
+		@param sent Contains dictionaries corresponding to each word in the
+		sentence.
 	"""
-	print"<s s_id=\""+repr(n_line)+"\">",
-	for elem in sentence:
-		print "<w surface=\""+elem["surface"]+"\" lemma=\""+elem["lemma"]+\
-		      "\" pos=\""+elem["pos"]+"\" syn=\""+elem["syn"]+"\" /> ",
-	print "</s>"
+	global generate_text
+	if generate_text :
+		sent_templ ="%(sent)s"
+		word_templ="%(surface)s|%(lemma)s|%(pos)s|%(syn)s"
+	else :
+		sent_templ ="<s s_id=\""+str(n_line)+"\">%(sent)s</s>"
+		word_templ="<w surface=\"%(surface)s\" lemma=\"%(lemma)s\" pos="+\
+		           "\"%(pos)s\" syn=\"%(syn)s\" />"
+	print sent_templ % { "sent":" ".join(map(lambda x: word_templ % x, sent)) }
 
 ###############################################################################
 def search_entry(lst,n):
@@ -267,9 +282,9 @@ def process_tree_branch(l, phrase):
 def transform_format(rasp):
 	"""
 		Reads an input file and converts it into mwetoolkit corpus XML format,
-        printing the XML file to stdout.
+		printing the XML file to stdout.
 	
-	@param rasp Is the input, file or piped.
+		@param rasp Is the input, file or piped.
 
 	"""
 	n_line=0
@@ -307,10 +322,11 @@ def transform_format(rasp):
 
 work_path=os.getcwd() #store current working directory to restore later
 
-longopts = ["morphg="]
-arg = read_options( "m:", longopts, treat_options, -1, usage_string )
+longopts = ["morphg=", "moses"]
+arg = read_options( "m:x", longopts, treat_options, -1, usage_string )
 
-print XML_HEADER % { "root": "corpus", "ns": "" }
+if not generate_text :
+	print XML_HEADER % { "root": "corpus", "ns": "" }
 
 if len( arg ) == 0 :
 	transform_format( sys.stdin )
@@ -322,7 +338,8 @@ else :
 			print >> sys.stderr, 'Error opening file for reading.'
 			exit(1)
 		transform_format( input_file )
-		input_file.close()           
-
-print XML_FOOTER % { "root": "corpus" }
+		input_file.close()	
+			   
+if not generate_text :
+	print XML_FOOTER % { "root": "corpus" }
 
