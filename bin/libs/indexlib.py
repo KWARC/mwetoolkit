@@ -643,7 +643,6 @@ class Index():
         for word_str in sentence.split() :
             if word_str.count("|") != 3 :
                 print >> sys.stderr, "Ignoring token : " + word_str
-                self.append_word_text( "INVALID", "INVALID", "INVALID", "INVALID" )
             else :
                 self.append_word_text( *word_str.split( "|" ) )
             nb_words = nb_words + 1
@@ -785,7 +784,6 @@ def index_from_text(corpus, txtformat, basepath=None, attrs=None):
                     index.append_end_sentence( nb_words )
                     nb_words = 0
                 else :
-                    pdb.set_trace()
                     print >> sys.stderr, "WARNING: Ingnored line: \"%s\"" % line
                 
         text_file.close()
