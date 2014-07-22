@@ -170,8 +170,13 @@ def treat_sentence_complex( sentence ) :
         if text_version :
             sentence[ w_i ] = Word( sentence[ w_i ], None, None, None, None )
         elif moses_version :
-        	parts = sentence[ w_i ].split("|")
-        	sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
+            parts = sentence[ w_i ].split("|")
+            if len(parts) != 4 :
+                print >> sys.stderr, "WARNING: malformed token %s" % \
+                                     sentence[ w_i ]
+                print >> sys.stderr, "Ignoring sentence %d" % entity_counter
+                return
+            sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
         w = sentence[ w_i ]
         case_class = w.get_case_class()
         # Does nothing if it's aready lowercase or if it's not alphabetic
