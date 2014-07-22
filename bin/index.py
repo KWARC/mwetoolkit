@@ -50,20 +50,33 @@ OPTIONS may be:
     Use the old (slower) Python indexer, even when the C indexer is available.
     
 -m OR --moses
-    Uses Moses factored corpus format as input. This format must be pure text,
-    one sentence per line, tokens separated by spaces, each token being:
-    surface|lemma|POS|syntrelation:synthead
+    Uses Moses factored corpus format as input. This format must be pure text in
+    UTF-8, one sentence per line, tokens separated by spaces, each token being:
+    surface|lemma|POStag|deprel:head
     Which are equivalent to the xml fields. Empty fields should be left blank,
     but every token must have 3 vertical bars. The actual character for vertical
     bars must be escabed and replaced by a placeholder that does not contain
     this character (e.g. %%VERTICAL_BAR%%)
+    
+-c OR --conll
+    Uses CoNLL shared task format as input. This format must be pure text in 
+    UTF-8, one word per line, sentences separated by blank lines, each line 
+    containing 10 tab-separated fields:
+    
+    ID	form	lemma	cPOStag	POStag	feats	head	deprel	pHead	pDeprel
+    
+    Fields POStag, feats, pHead and pDeprel are ignored. ID is a numerical token 
+    identifier (1,2,3...), form is the surface form, lemma is the lemma, cPOStag
+    is the coarse part of speech, head is the ID of the token on which the 
+    current token depends syntactically, and deprel is the type of syntactic 
+    relation. Empty fields should contain an underscore "_"
 
 %(common_options)s
 
     The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd). The -i
 <index> option is mandatory.
 """
-use_moses_format = False
+use_text_format = None
 
 ################################################################################
 
@@ -80,7 +93,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global used_attributes
     global name
     global build_entry
-    global use_moses_format
+    global use_text_format
 
     treat_options_simplest( opts, arg, n_arg, usage_string )    
 
@@ -97,7 +110,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-a", "--attributes"): 
             used_attributes = a.split(":")
         elif o in ("-m", "--moses"):
-            use_moses_format = True
+            use_text_format = "moses"
+        elif o in ("-c", "--conll"):
+            use_text_format = "conll"            
         elif o in ("-o", "--old"):
             Index.use_c_indexer(False)
             
@@ -110,8 +125,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["index=", "attributes=", "old", "moses" ]
-arg = read_options( "i:a:om", longopts, treat_options, 1, usage_string )
+longopts = ["index=", "attributes=", "old", "moses", "conll" ]
+arg = read_options( "i:a:omc", longopts, treat_options, 1, usage_string )
 
 simple_attrs = [a for a in used_attributes if '+' not in a]
 composite_attrs = [a for a in used_attributes if '+' in a]
@@ -121,8 +136,8 @@ for attrs in [attr.split('+') for attr in composite_attrs]:
         if attr not in simple_attrs:
             simple_attrs.append(attr)
 
-if use_moses_format :
-    index = index_from_text(arg[0], name, simple_attrs)
+if use_text_format :
+    index = index_from_text(arg[0], use_text_format, name, simple_attrs)
 else :
     index = index_from_corpus(arg[0], name, simple_attrs)
 for attr in composite_attrs:
