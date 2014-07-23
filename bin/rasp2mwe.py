@@ -97,8 +97,7 @@ def treat_options( opts, arg, n_arg, usage_string):
         print >> sys.stderr, "WARNING: morphg not found!",
         print >> sys.stderr, " Outputting analysed forms"
         morphg_file = None
-    else :            
-        os.chdir( morphg_folder )
+        morphg_folder = None
 
 ###############################################################################
 
@@ -237,6 +236,10 @@ def transform_format(rasp):
         @param rasp Is the input, file or piped.
 
     """
+    global morphg_folder
+    global work_path
+    if morphg_folder :
+        os.chdir( morphg_folder )
     n_line=0
     l_empty=2
     first_line=True    
@@ -272,6 +275,8 @@ def transform_format(rasp):
         l=rasp.readline()
     if l_empty != 1 and len(phrase) != 0 :
         write_entry(n_line,phrase) #save last entry
+    if morphg_folder :
+        os.chdir( work_path )
 
 ###############################################################################
 # MAIN SCRIPT
@@ -296,5 +301,4 @@ else :
                
 if not generate_text :
     print XML_FOOTER % { "root": "corpus" }
-os.chdir( word_folder )
 
