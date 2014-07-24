@@ -59,7 +59,7 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 	suf->used++;
 }
 
-inline int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
+int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
 	int limit = suf->used;
 	symbolnumber_t *corpus = suf->corpus;
 	int first = 1;

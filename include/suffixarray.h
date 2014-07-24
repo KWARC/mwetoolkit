@@ -19,7 +19,7 @@ void free_suffixarray(suffixarray_t *suf);
 
 void suffixarray_append_word(suffixarray_t *suf, symbolname_t word);
 
-inline int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2);
+int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2);
 
 int suffixarray_compare_global(const void *ptr1, const void *ptr2);
 

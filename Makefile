@@ -1,10 +1,14 @@
 SRC := src
 INCLUDE := include
+OBJECTS := src/indexer/basefuns.o src/indexer/readline.o src/indexer/rbtree.o src/indexer/symboltable.o src/indexer/suffixarray.o src/indexer/main.o
 LIBS :=
 BIN := bin
 
-indexer:
-	gcc -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $(SRC)/indexer/*.c
+%.o: %.c
+	gcc -Wall -Wno-parentheses -c -I $(INCLUDE) $^ -o $*.o
+
+indexer: $(OBJECTS)
+	gcc -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
 
 doc: doc/html/index.html
 
@@ -14,4 +18,5 @@ doc/html/index.html:
 	
 clean:
 	rm -rf doc/html bin/c-indexer
+	rm $(SRC)/indexer/*.o
 	
