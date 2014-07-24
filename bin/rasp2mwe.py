@@ -192,7 +192,7 @@ where will be filled all the words attributes.
                 dic[key] = dic[key].replace( "|","%%VERTICAL_BAR%%" )
             else : # escape XML elements
                 dic[key] = strip_xml(dic[key])  
-        phrase[ index ] = dic
+        phrase[ int(index) ] = dic
 
 ###############################################################################
 
@@ -211,15 +211,16 @@ def process_tree_branch(l, phrase):
     members = []
     for part in parts :
         if ":" not in part :
-            rel = rel + part.replace("|","")
+            rel = rel + "_" + part.replace("|","")
         else:
             members.append( part )
+    rel = rel[1:]
     if len(members) >= 2:        
         syn = rel + ":" + get_tokens( members[0] )[1] 
         if len(members) == 3 :
             syn = syn + ";" + rel + ":" + get_tokens( members[1] )[1]
         son = get_tokens( members[-1] )[1]
-        entry = phrase.get( son, None )
+        entry = phrase.get( int(son), None )
         if entry :
             if entry[ "syn" ] == "" :
                 entry[ "syn" ] = syn
@@ -249,8 +250,9 @@ def transform_format(rasp):
     while l != "":
         if l=="\n":
             l_empty+=1
-            if l_empty == 1:
-                write_entry(n_line,phrase.values())
+            if l_empty == 1:           	    
+            	sorted_phrase = map( lambda x: x[1], sorted( phrase.items() ) )
+                write_entry(n_line,sorted_phrase)
                 phrase = {}
                 n_line+=1
                 first_line=True
