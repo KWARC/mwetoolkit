@@ -325,7 +325,7 @@ def get_preferred_form( percents ) :
     # If a given forms occurrs 70% of the cases (for 2 forms) or more, it is 
     # considered preferred
     # TODO: Test an entropy-based measure for choosing among the forms
-    PRED_THRESHOLD = .9 - 0.1 * len(percents)
+    PRED_THRESHOLD = .9 - 0.05 * len(percents)
     max_like = (0, None)
     for form in percents.keys() :
         if percents[form] >= PRED_THRESHOLD and percents[form] > max_like[0]:
