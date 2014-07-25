@@ -342,7 +342,7 @@ class Word :
             
 ################################################################################
 
-    def get_case_class( self ) :
+    def get_case_class( self, s_or_l="surface" ) :
         """
             For a given word (surface form), assigns a class that can be:        
             * lowercase - All characters are lowercase
@@ -351,13 +351,17 @@ class Word :
             * MiXeD - This token contains mixed lowercase and uppercase characters
             * ? - This token contains non-alphabetic characters
             
+            @param s_or_l Surface or lemma? Default value is "surface" but set it
+            to "lemma" if you want to know the class based on the lemma.
+
             @return A string that describes the case class according to the list 
             above.
         """
-        if self.surface != WILDCARD :
-            token_list = list( self.surface )
+        form = getattr( self, s_or_l )
+        if form != WILDCARD :
+            token_list = list( form )
         else :
-            token_list = list( self.lemma )
+            token_list = []
         case_class = "?"
         for letter_i in range( len( token_list ) ) :
             letter = token_list[ letter_i ]

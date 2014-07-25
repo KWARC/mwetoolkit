@@ -63,6 +63,9 @@ python %(program)s [OPTIONS] <file.xml>
     i.e. words that might occur uppercased even if they are not at the beginning 
     of a sentence. Some fuzzy thresholds are hardcoded and were fixed based on
     empirical observation of the Genia corpus.
+    * aggressive: lowercases all words that do not occur more than 90% of the
+    time in upper/mixed case. For instance, if a word never appears in lowercase,
+    it will be kept. Words that occur in various cases will be lowercased.
     
 -x OR --text
     Use as input a text file instead of XML file. One sentence per line, 
@@ -78,9 +81,9 @@ python %(program)s [OPTIONS] <file.xml>
     this character (e.g. %%VERTICAL_BAR%%)
     
 -l OR --lemmas
-	Lowercase lemmas instead of surface forms. Might be useful when dealing with
-	corpora which were accidentally parsed before lowercasing, and the parser
-	doesn't lowercase lemmas (as it is the case in RASP 2, for instance)
+    Lowercase lemmas instead of surface forms. Might be useful when dealing with
+    corpora which were accidentally parsed before lowercasing, and the parser
+    doesn't lowercase lemmas (as it is the case in RASP 2, for instance)
 
 %(common_options)s
 
@@ -133,12 +136,12 @@ def treat_sentence_simple( sentence ) :
         if text_version :
             new_sent.append( w.lower() )
         elif moses_version :
-        	word = w.split( "|" )
-        	if lower_attr == "lemma" : # option --lemmas passed
-        		word[1] = word[1].lower()
-        	else :
-        		word[0] = word[0].lower()
-        	new_sent.append( "|".join( word ) )
+            word = w.split( "|" )
+            if lower_attr == "lemma" : # option --lemmas passed
+                word[1] = word[1].lower()
+            else :
+                word[0] = word[0].lower()
+            new_sent.append( "|".join( word ) )
         else :
             setattr(w, lower_attr, getattr(w, lower_attr).lower() )
     if text_version or moses_version :
@@ -205,9 +208,9 @@ def treat_sentence_complex( sentence ) :
                     # error, etc.
 
     if text_version :
-    	print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
+        print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
     elif moses_version :
-    	print " ".join( map( lambda x : x.to_moses(), sentence ) )    	
+        print " ".join( map( lambda x : x.to_moses(), sentence ) )        
     else :
         print sentence.to_xml().encode( 'utf-8' )
     entity_counter += 1
@@ -244,20 +247,22 @@ def treat_sentence_aggressive( sentence ) :
                 return
             sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
         w = sentence[ w_i ]
-        case_class = w.get_case_class()
+        case_class = w.get_case_class( s_or_l=lower_attr )
         # Does nothing if it's aready lowercase or if it's not alphabetic
         
         if case_class != "lowercase" and case_class != "?" :
-        	current_form = getattr( w, lower_attr ) 
+            current_form = getattr( w, lower_attr ) 
+            #if current_form == "Advance" or current_form == "Abstract" :
+            #    pdb.set_trace()
             token_stats = vocab[ current_form.lower() ]
             percents = get_percents( token_stats )
             if percents[ current_form ] < AGG_THRESH :
-            	setattr( w, lowerattr, current_form.lower() )          
+                setattr( w, lower_attr, current_form.lower() )          
 
     if text_version :
-    	print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
+        print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
     elif moses_version :
-    	print " ".join( map( lambda x : x.to_moses(), sentence ) )    	
+        print " ".join( map( lambda x : x.to_moses(), sentence ) )        
     else :
         print sentence.to_xml().encode( 'utf-8' )
     entity_counter += 1
@@ -429,7 +434,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = [ "algorithm=", "text", "moses", "lemmas" ]
 arg = read_options( "a:xml", longopts, treat_options, 1, usage_string )
 
-if algorithm == treat_sentence_complex :
+if algorithm != treat_sentence_simple :
     verbose( "Pass 1: Reading vocabulary from file... please wait" )
     if text_version or moses_version :
         parse_txt( build_vocab, arg )
