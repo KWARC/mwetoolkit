@@ -213,6 +213,56 @@ def treat_sentence_complex( sentence ) :
     entity_counter += 1
 
 ################################################################################
+
+def treat_sentence_aggressive( sentence ) :
+    """
+        For each sentence in the corpus, lowercases its words except if it 
+        occurs in uppercase in 90% of the occurrences.
+        
+        @param sentence A `Sentence` that is being read from the XML file.    
+    """    
+    global vocab
+    global entity_counter
+    global text_version
+    global moses_version
+    global lower_attr
+    
+    AGG_THRESH = .9
+    
+    if entity_counter % 100 == 0 :
+        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+
+    for w_i in range(len(sentence)) :
+        if text_version :
+            sentence[ w_i ] = Word( sentence[ w_i ], None, None, None, None )
+        elif moses_version :
+            parts = sentence[ w_i ].split("|")
+            if len(parts) != 4 :
+                print >> sys.stderr, "WARNING: malformed token %s" % \
+                                     sentence[ w_i ]
+                print >> sys.stderr, "Ignoring sentence %d" % entity_counter
+                return
+            sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
+        w = sentence[ w_i ]
+        case_class = w.get_case_class()
+        # Does nothing if it's aready lowercase or if it's not alphabetic
+        
+        if case_class != "lowercase" and case_class != "?" :
+        	current_form = getattr( w, lower_attr ) 
+            token_stats = vocab[ current_form.lower() ]
+            percents = get_percents( token_stats )
+            if percents[ current_form ] < AGG_THRESH :
+            	setattr( w, lowerattr, current_form.lower() )          
+
+    if text_version :
+    	print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
+    elif moses_version :
+    	print " ".join( map( lambda x : x.to_moses(), sentence ) )    	
+    else :
+        print sentence.to_xml().encode( 'utf-8' )
+    entity_counter += 1
+
+################################################################################
        
 def build_vocab( sentence ) :
     """
@@ -325,7 +375,7 @@ def get_preferred_form( percents ) :
     # If a given forms occurrs 70% of the cases (for 2 forms) or more, it is 
     # considered preferred
     # TODO: Test an entropy-based measure for choosing among the forms
-    PRED_THRESHOLD = .9 - 0.05 * len(percents)
+    PRED_THRESHOLD = .9 - .15 * len(percents)
     max_like = (0, None)
     for form in percents.keys() :
         if percents[form] >= PRED_THRESHOLD and percents[form] > max_like[0]:
@@ -363,6 +413,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 algorithm = treat_sentence_complex
             elif algoname == "simple" : 
                 algorithm = treat_sentence_simple # Redundant, kept for clarity
+            elif algoname == "aggressive" :
+                algorithm = treat_sentence_aggressive # Redundant, kept for clarity                
             else :
                 print >> sys.stderr, "ERROR: " + algoname + " is not a valid"+\
                                      " algorithm"
