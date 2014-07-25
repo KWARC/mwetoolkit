@@ -686,7 +686,7 @@ class Index():
                 value = getattr(word, attr)
                 self.arrays[attr].append_word(value)
             # '' (symbol 0)  means end-of-sentence
-        append_end_sentence( len(sentence.word_list) )
+        self.append_end_sentence( len(sentence.word_list) )
 
 ################################################################################
 
