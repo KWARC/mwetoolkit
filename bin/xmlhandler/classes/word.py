@@ -48,7 +48,8 @@ class Word :
 
 ################################################################################
 
-    def __init__( self, surface, lemma, pos, syn, freqs ) :
+    def __init__(self, surface=WILDCARD, lemma=WILDCARD,
+            pos=WILDCARD, syn=WILDCARD, freqs=None):
         """
             Instanciates a new `Word`. A Word might be one of: a token in a 
             corpus, in which case it will probably have at least a defined 
@@ -108,7 +109,7 @@ class Word :
         self.lemma = lemma
         self.pos = pos
         self.syn = syn
-        self.freqs = freqs
+        self.freqs = freqs or []
 
 ################################################################################
 

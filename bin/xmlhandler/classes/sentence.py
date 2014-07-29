@@ -65,10 +65,16 @@ class Sentence( Ngram ) :
             
             @return A new instance of a `Sentence`
         """
-        self.word_list = word_list
+        self.word_list = list(word_list)
         self.id_number = id_number
         self.freqs = None
         
+################################################################################
+
+    def append_word(self, word):
+        """Appends word at the back of this Sentence."""
+        self.word_list.append(word)
+
 ################################################################################
         
     def to_surface( self ) :
