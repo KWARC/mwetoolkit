@@ -233,6 +233,88 @@ def interpret_ngram( argument ) :
 
 ################################################################################
 
+def open_files(paths):
+    for path in paths:
+        if isinstance(path, file):
+            yield path
+        else:
+            yield open(path, "r")
+
+
+class DummyPrinter(object):
+    r"""Dummy implementation of a printer-style class."""
+    def __enter__(self):
+        return self
+    def __exit__(self, *e):
+        pass
+
+
+class AbstractParser(object):
+    r"""(Base class for text parsing objects).
+    @param paths A list of target file paths."""
+    def __init__(self, paths, printer=None):
+        assert isinstance(paths, list)
+        self.files = list(open_files(paths)) if paths else [sys.stdin]
+        self.printer = printer or DummyPrinter()
+
+    def parse(self):
+        r"""Parse all files with this parser."""
+        with self.printer:
+            for f in self.files:
+                try:
+                    self._parse_file(f)
+                except LimitReachedError : # Read only part of XML file
+                    pass # Not an error, just used to interrupt parsing
+                self.postfunction(f.name)
+        self.close()
+
+    def close(self):
+        r"""Close all files opened by this parser."""
+        for f in self.files:
+            if f != sys.stdin:
+                f.close()
+        self.files = []
+
+    def _parse_file(self, f):
+        r"""Internal function. (Parses file with this parser)."""
+        raise NotImplementedError
+
+    def postfunction(self, fname):
+        r"""Post-processing function that is called
+        after parsing each file.
+        @param fname A string with the file name.
+        """
+        pass
+
+
+class XMLParser(AbstractParser):
+    r"""Instances of this function parse XML, calling `treat_sentence`."""
+    def _parse_file(self, f):
+        from xmlhandler.genericXMLHandler import GenericXMLHandler
+        self.parser = xml.sax.make_parser()
+        # Ignores the DTD declaration. This will not validate the document!
+        self.parser.setFeature(xml.sax.handler.feature_external_ges, False)
+        handler = GenericXMLHandler(treat_entity=self.treat_sentence)
+        self.parser.setContentHandler(handler)
+        self.parser.parse(f)
+
+    def treat_sentence(self, entity):
+        r"""Called to parse an Entity object. Subclasses may override."""
+        pass
+
+
+class TxtParser(AbstractParser):
+    r"""Instances of this function parse TXT, calling `treat_sentence`."""
+    def _parse_file(self, f):
+        for line in f.readlines():
+            self.treat_sentence(line.strip().split())
+
+    def treat_sentence(self, sentence):
+        r"""Called to parse a list of words (unicode strings).
+        Subclasses may override."""
+        pass
+
+
 def parse_xml( handler, arg, postfunction=None ) :
     """
         Create a default XML parser, assign the handler and parse input in arg.

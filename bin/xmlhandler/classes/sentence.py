@@ -68,13 +68,8 @@ class Sentence( Ngram ) :
         self.word_list = list(word_list)
         self.id_number = id_number
         self.freqs = None
+        self.mweoccurs = []
         
-################################################################################
-
-    def append_word(self, word):
-        """Appends word at the back of this Sentence."""
-        self.word_list.append(word)
-
 ################################################################################
         
     def to_surface( self ) :
@@ -109,6 +104,12 @@ class Sentence( Ngram ) :
             result += ">"
         for word in self.word_list :
             result = result  + word.to_xml() + " "
+
+        if self.mweoccurs:
+            result += "\n<mweoccurs>\n"
+            for mweoccur in self.mweoccurs:
+                result += "  " + mweoccur.to_xml() + "\n"
+            result += "</mweoccurs>\n"
         result += "</s>"
         return result.strip()
 

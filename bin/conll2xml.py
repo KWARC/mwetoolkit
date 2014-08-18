@@ -102,7 +102,7 @@ def transform_format(printer, in_file):
         if data[6] != WILDCARD:
             syn = syn + ":" + str(data[6])
         objectWord = Word(surface, lemma, pos, syn)
-        printer.last().append_word(objectWord)
+        printer.last().append(objectWord)
 
 
 warned = set()

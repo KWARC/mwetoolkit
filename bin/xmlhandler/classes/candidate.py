@@ -177,7 +177,7 @@ class Candidate ( Entry ) :
 
     def add_var( self, var ) :
         """
-            Add an occurrence to the list of occurrences of the candidate.
+            Add a variation to the list of variations of the candidate.
 
             @param occur `Ngram` that corresponds to a variation of this
             candidate. No test is performed in order to verify whether this is a

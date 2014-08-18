@@ -77,17 +77,18 @@ class Printer(object) :
     def flush(self):
         r"""Eagerly print the current contents."""
         for obj in self.xml_objects:
-            print(obj.to_xml(), file=self.output)
+            print(obj.to_xml().encode('utf-8'), file=self.output)
         del self.xml_objects[:]
         return self  # enable chaining
 
     def __enter__(self):
         return self
 
-    def __exit__(self, *e):
-        self.flush()
-        if self.root:
-            print(XML_FOOTER % {"root": self.root})
+    def __exit__(self, t, v, tb):
+        if t is None:
+            self.flush()
+            if self.root:
+                print(XML_FOOTER % {"root": self.root})
 
 
 ################################################################################
