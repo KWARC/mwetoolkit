@@ -23,8 +23,12 @@ mkdir -p "$T"
 
 rm -rf "./output"
 mkdir -p "./output"
-python "$BIN/head.py" -n10 corpus.xml | "$BIN/annotate_mwe.py" \
-        -c candidates.xml >output/out.xml
+
+#python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
+#        -c ContiguousLemma/candidates.xml >output/out.xml
+
+python "$BIN/head.py" -n10 Sources/corpus.xml | "$BIN/annotate_mwe.py" \
+        -S -c Sources/candidates.xml >output/out.xml
 
 
 #test_from_xml() {

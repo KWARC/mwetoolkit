@@ -105,6 +105,8 @@ OPTIONS may be:
 
 -S OR --source
     Output a <source> tag with the IDs of the sentences where each ngram occurs.
+    The syntax is `ID_A:w1,w2,w3...wN;ID_B:w1,w2...;ID_K:w1,w2...`.
+    Example: "158:48,49;455:8,9".
 
 %(common_options)s
 

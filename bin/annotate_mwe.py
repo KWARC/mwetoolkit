@@ -75,9 +75,14 @@ python %(program)s -c <candidates.xml> OPTIONS <corpus>
     
 OPTIONS may be:
 
-XXX XXX CHANGE TO THE ACTUAL OPTIONS
--i OR --index
-     Read the corpus from an index instead of an XML file. Default false.
+-d <method> OR --detection <method>
+    Name of a valid detection method.
+    * Method "ContiguousLemma" = detects contiguous lemmas.
+    * Method "Source" = uses `<sources>` tag from candidates file.
+
+-S OR --source
+    Annotate based on the `<sources>` tag from the candidates file.
+    Same as passing the parameter `-d Sources`.
 """
 candidates_fnames = []
 candidate_from_id = {}  # ID -> Candidate
@@ -109,7 +114,40 @@ class AnnotatingXMLParser(XMLParser):
         self.printer.add(sentence)
 
 
-class ConsecutiveLemmaDetector(object):
+################################################################################
+
+
+class SourcesDetector(object):
+    r"""MWE candidates detector that uses information
+    from the <sources> tag in the candidates file to
+    annotate the original corpus.
+
+    Attributes:
+    -- candidate_from_id: A mapping from `Candidate.id_number`
+    to the candidate instance itself.
+    -- sentence_occurs: A mapping from `Sentence.id_number`
+    to a list of (candidate, indexes) for an MWE occurrence.
+    """
+    def __init__(self, candidate_from_id):
+        self.candidate_from_id = candidate_from_id
+        self.sentence_occurs = collections.defaultdict(list)
+        for cand in candidate_from_id.itervalues():
+            for ngram in cand.occurs:
+                for source in ngram.sources:
+                    sentence_id, indexes = source.split(":")
+                    indexes = [int(i) for i in indexes.split(",")]
+                    if len(cand) != len(indexes):
+                        raise Exception("Bad value of indexes for cand {}: {}"
+                                .format(cand.id_number, indexes))
+                    self.sentence_occurs[int(sentence_id)].append((cand,indexes))
+
+    def detect(self, sentence):
+        r"""Yield MWEOccurrence objects for this sentence."""
+        for cand, indexes in self.sentence_occurs[sentence.id_number]:
+            yield MWEOccurrence(sentence, cand, indexes).rebase()
+
+
+class ContiguousLemmaDetector(object):
     r"""MWE candidates detector that detects MWEs whose
     lemmas appear contiguously in a sentence.
     
@@ -120,11 +158,9 @@ class ConsecutiveLemmaDetector(object):
     # Similar to JMWE's `Consecutive`.
     def __init__(self, candidate_from_id):
         self.candidate_from_id = candidate_from_id
-        assert all(k==v.id_number for (k,v) in
-                self.candidate_from_id.iteritems())
 
     def detect(self, sentence):
-        r"""Return a list of MWEOccurrence objects for this sentence."""
+        r"""Yield MWEOccurrence objects for this sentence."""
         cur_b = []  # similar to JMWE's local var `in_progress`
         done_b = [] # similar to JMWE's local var `done`
         for i in xrange(len(sentence)):
@@ -152,27 +188,10 @@ class ConsecutiveLemmaDetector(object):
             return s.lemma == c.lemma
 
 
-class XXXXXXXXXXXXAbstractDetector(object):
-    r"""Instances of this class are used to detect the occurrence
-    of candidate MWEs in sentences.
-
-    Protected attributes:
-    @param _from_lemma_set Map from set(lemmas) to subset of candidates.
-    @param _from_first_lemma Map from lemma to subset of candidates.
-       Maps to the subset of candidates that start with this lemma.
-    """
-    def __init__(self, candidates):
-        r"""Initialize detector with given candidates."""
-        self._from_lemma_set = collections.defaultdict(set)
-        self._from_first_lemma = {}
-        for c in candidates:
-            if len(c):
-                self._from_first_lemma[c[0]].add(c)
-            self._from_lemma_set[set(c)].add(c)
-
-    def detect(self, sentence):
-        r"""Yield all occurrences of a candidate in `sentence`."""
-        IMPLEMENT_ME
+detectors = {
+    "Sources" : SourcesDetector,
+    "ContiguousLemma" : ContiguousLemmaDetector,
+}
 
 
 ################################################################################  
@@ -187,21 +206,22 @@ class CandidatesParser(XMLParser):
 ################################################################################  
 
 def treat_options( opts, arg, n_arg, usage_string ) :
-    """
-        Callback function that handles the command line options of this script.
-        
-        @param opts The options parsed by getopts. Ignored.
-        
-        @param arg The argument list parsed by getopts.
-        
-        @param n_arg The number of arguments expected for this script.    
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.    
     """
     global candidates_fnames, detector, candidate_from_id
     treat_options_simplest(opts, arg, n_arg, usage_string)
+    detector_class = ContiguousLemmaDetector
 
     for (o, a) in opts:
         if o in ("-c", "--candidates"):
             candidates_fnames.append(a)
+        if o in ("-d", "--detector"):
+            detector_class = detectors[a]
+        if o in ("-S", "--source"):
+            detector_class = SourcesDetector
 
     if not candidates_fnames:
         print("No candidates file given!", file=sys.stderr)
@@ -213,12 +233,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print("Error loading candidates file!", file=sys.stderr)
         raise
 
-    detector = ConsecutiveLemmaDetector(candidate_from_id)
+    assert all(k==v.id_number for (k,v) in
+            candidate_from_id.iteritems())
+
+    detector = detector_class(candidate_from_id)
 
         
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = ["candidates="]
-arg = read_options("c:", longopts, treat_options, -1, usage_string)
+longopts = ["candidates=", "detector=", "source"]
+arg = read_options("c:d:S", longopts, treat_options, -1, usage_string)
 AnnotatingXMLParser(arg).parse()
