@@ -76,16 +76,15 @@ python %(program)s -c <candidates.xml> OPTIONS <corpus>
 OPTIONS may be:
 
 -d <method> OR --detection <method>
-    Name of a valid detection method.
-    * Method "ContiguousLemma" = detects contiguous lemmas.
-    * Method "Source" = uses `<sources>` tag from candidates file.
+    Choose a method of MWE detection (default: "ContiguousLemma"):
+    * Method "ContiguousLemma": detects contiguous lemmas.
+    * Method "Source": uses `<sources>` tag from candidates file.
 
 -S OR --source
     Annotate based on the `<sources>` tag from the candidates file.
-    Same as passing the parameter `-d Sources`.
+    Same as passing the parameter `--detection=Source`.
 """
 candidates_fnames = []
-candidate_from_id = {}  # ID -> Candidate
 detector = None
 
 
@@ -117,67 +116,60 @@ class AnnotatingXMLParser(XMLParser):
 ################################################################################
 
 
-class SourcesDetector(object):
+class SourceDetector(object):
     r"""MWE candidates detector that uses information
     from the <sources> tag in the candidates file to
     annotate the original corpus.
-
-    Attributes:
-    -- candidate_from_id: A mapping from `Candidate.id_number`
-    to the candidate instance itself.
-    -- sentence_occurs: A mapping from `Sentence.id_number`
-    to a list of (candidate, indexes) for an MWE occurrence.
     """
-    def __init__(self, candidate_from_id):
-        self.candidate_from_id = candidate_from_id
-        self.sentence_occurs = collections.defaultdict(list)
-        for cand in candidate_from_id.itervalues():
-            for ngram in cand.occurs:
-                for source in ngram.sources:
-                    sentence_id, indexes = source.split(":")
-                    indexes = [int(i) for i in indexes.split(",")]
-                    if len(cand) != len(indexes):
-                        raise Exception("Bad value of indexes for cand {}: {}"
-                                .format(cand.id_number, indexes))
-                    self.sentence_occurs[int(sentence_id)].append((cand,indexes))
+    def __init__(self, candidate_info):
+        self.candidates_list = candidate_info.candidates_list()
+        self.info_from_s_id = candidate_info.parsed_source_tag()
 
     def detect(self, sentence):
         r"""Yield MWEOccurrence objects for this sentence."""
-        for cand, indexes in self.sentence_occurs[sentence.id_number]:
+        for cand, indexes in self.info_from_s_id[sentence.id_number]:
             yield MWEOccurrence(sentence, cand, indexes).rebase()
 
 
 class ContiguousLemmaDetector(object):
     r"""MWE candidates detector that detects MWEs whose
     lemmas appear contiguously in a sentence.
-    
-    Attributes:
-    -- candidate_from_id: A mapping from `Candidate.id_number`
-    to the candidate instance itself.
+
+    This is similar to JMWE's Consecutive class, but:
+    -- We build MWEOccurrence objects based on a hash table
+    from the first lemma of the candidate, turning that ugly
+    `O(n*m)` algorithm into a best-case `O(n+m)` algorithm,
+    attempting to match against only a small fraction of the
+    set of candidates for each index of the sentence.
+    (Assuming `n = number of words in all sentences`
+    and `m = number of MWE candidates`).
+    -- Instead of keeping a local variable `done` with the list
+    of MWE builders that are `full`, we keep a list `all_b` with
+    all builders created, and then filter out the bad ones in the end.
+    This allows us to report MWEs in the order they were seen.
     """
     # Similar to JMWE's `Consecutive`.
-    def __init__(self, candidate_from_id):
-        self.candidate_from_id = candidate_from_id
+    def __init__(self, candidate_info):
+        self.candidates_from_1st_lemma = \
+                candidate_info.candidates_from_1st_lemma()
 
     def detect(self, sentence):
         r"""Yield MWEOccurrence objects for this sentence."""
+        all_b = []  # all builders ever created
         cur_b = []  # similar to JMWE's local var `in_progress`
-        done_b = [] # similar to JMWE's local var `done`
         for i in xrange(len(sentence)):
-            # Keep only builders that can fill next slot
+            # Keep only builders that can (and did) fill next slot
             cur_b = [b for b in cur_b if b.fill_next_slot(i)]
-            # Move full builders to `done_b`
-            done_b.extend(b for b in cur_b if b.is_full())
-            # Remove full builders from `cur_b`
-            cur_b = [b for b in cur_b if not b.is_full()]
 
             # Append new builders for whom `i` can fill the first slot
-            for candidate in self.candidate_from_id.itervalues():
+            first_lemma = sentence[i].lemma
+            for candidate in self.candidates_from_1st_lemma[first_lemma]:
                 b = self.LemmaMWEOBuilder(sentence, candidate)
-                if b.fill_next_slot(i):
-                    cur_b.append(b)
+                b.checked_fill_next_slot(i)
+                cur_b.append(b)
+                all_b.append(b)
 
-        return [b.create() for b in done_b]
+        return [b.create() for b in all_b if b.is_full()]
 
 
     class LemmaMWEOBuilder(MWEOccurrenceBuilder):
@@ -189,7 +181,7 @@ class ContiguousLemmaDetector(object):
 
 
 detectors = {
-    "Sources" : SourcesDetector,
+    "Source" : SourceDetector,
     "ContiguousLemma" : ContiguousLemmaDetector,
 }
 
@@ -198,9 +190,52 @@ detectors = {
 
 
 class CandidatesParser(XMLParser):
+    r"""Parse file and populate a CandidateInfo object."""
+    def __init__(self, candidate_fnames):
+        super(CandidatesParser,self).__init__(candidate_fnames)
+        self.info = CandidateInfo()
+
     def treat_sentence(self, candidate):
-        global candidate_from_id
-        candidate_from_id[candidate.id_number] = candidate
+        self.info.add(candidate)
+
+
+class CandidateInfo(object):
+    r"""Object with information about candidates."""
+    def __init__(self):
+        self._L = []
+
+    def add(self, candidate):
+        r"""Add a candidate to this object."""
+        self._L.append(candidate)
+
+    def candidates_list(self):
+        """Return a list of candidates [c..]."""
+        return self._L
+
+    def candidate_from_id(self):
+        r"""Return a dict {c.id_number: c}."""
+        return dict((c.id_number,c) for c in self._L)
+
+    def candidates_from_1st_lemma(self):
+        r"""Return a dict {1st lemma: [list of candidates]}."""
+        ret = collections.defaultdict(list)
+        for c in self._L:
+            ret[c[0].lemma].append(c)
+        return ret
+
+    def parsed_source_tag(self):
+        r"""Return a dict {s_id: [(cand,indexes), ...]}."""
+        ret = collections.defaultdict(list)
+        for cand in self._L:
+            for ngram in cand.occurs:
+                for source in ngram.sources:
+                    sentence_id, indexes = source.split(":")
+                    indexes = [int(i)-1 for i in indexes.split(",")]
+                    if len(cand) != len(indexes):
+                        raise Exception("Bad value of indexes for cand {}: {}"
+                                .format(cand.id_number, indexes))
+                    ret[int(sentence_id)].append((cand,indexes))
+        return ret
 
 
 ################################################################################  
@@ -211,7 +246,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     @param arg The argument list parsed by getopts.
     @param n_arg The number of arguments expected for this script.    
     """
-    global candidates_fnames, detector, candidate_from_id
+    global candidates_fnames, detector
     treat_options_simplest(opts, arg, n_arg, usage_string)
     detector_class = ContiguousLemmaDetector
 
@@ -221,22 +256,20 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-d", "--detector"):
             detector_class = detectors[a]
         if o in ("-S", "--source"):
-            detector_class = SourcesDetector
+            detector_class = SourceDetector
 
     if not candidates_fnames:
         print("No candidates file given!", file=sys.stderr)
         exit(1)
 
     try:
-        CandidatesParser(candidates_fnames).parse()
+        p = CandidatesParser(candidates_fnames)
+        p.parse()
     except Exception:
         print("Error loading candidates file!", file=sys.stderr)
         raise
 
-    assert all(k==v.id_number for (k,v) in
-            candidate_from_id.iteritems())
-
-    detector = detector_class(candidate_from_id)
+    detector = detector_class(p.info)
 
         
 ################################################################################  

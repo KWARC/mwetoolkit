@@ -88,7 +88,9 @@ class MWEOccurrence(object):
 
     def to_xml(self):
         ret = ['<mweoccur base_index="']
-        ret.append(unicode(self.base_index))
+        # IMPORTANT: if removing `base_index`,
+        # update indexing below to become 1-based
+        ret.append(unicode(self.base_index + 1)) # 1-based indexing
         ret.append('" candid="')
         ret.append(unicode(self.candidate.id_number))
         ret.append('">')
@@ -121,6 +123,7 @@ class MWEOccurrenceBuilder(object):
     def is_full(self):
         r"""Return whether the builder is ready to create an MWEOccurrence."""
         # Similar to JMWE's `MWEBuilder.isFull`.
+        assert len(self.indexes) <= len(self.candidate)
         return len(self.indexes) == len(self.candidate)
 
     def match(self, index_sentence, index_candidate):
@@ -134,10 +137,17 @@ class MWEOccurrenceBuilder(object):
         appending an index from sentence to this builder
         and return True.  Otherwise, return False."""
         # Similar to JMWE's `MWEBuilder.fillNextSlot`.
+        if self.is_full():
+            return False  # Cannot match anything else
         if not self.match(index_sentence, len(self.indexes)):
-            return False
+            return False  # Does not match POS or whatever
         self.indexes.append(index_sentence)
         return True
+
+    def checked_fill_next_slot(self, index_sentence):
+        r"""Call `fill_next_slot` and raise if it returns False."""
+        if not self.fill_next_slot(index_sentence):
+            raise Exception("Unable to fill next slot!")
 
     def create(self):
         r"""Create an MWEOccurrence object."""
