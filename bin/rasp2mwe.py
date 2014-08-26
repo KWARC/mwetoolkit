@@ -39,7 +39,8 @@ import os.path
 from subprocess import Popen, PIPE
 import string
 import pdb
-from util import read_options, verbose, treat_options_simplest, strip_xml
+from util import read_options, verbose, treat_options_simplest, strip_xml, \
+                 warn, error
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 import subprocess as sub
 
@@ -94,8 +95,7 @@ def treat_options( opts, arg, n_arg, usage_string):
         elif o in ("-x","--moses"):
             generate_text = True
     if not os.path.exists( os.path.join( morphg_folder, morphg_file ) ) :
-        print >> sys.stderr, "WARNING: morphg not found!",
-        print >> sys.stderr, " Outputting analysed forms"
+        warn( "morphg not found !!! - outputting analysed forms" )
         morphg_file = None
         morphg_folder = None
 
@@ -131,7 +131,7 @@ def get_tokens( word ) :
         suffix.
     """
     if word.startswith("|") and word.endswith("|") : # regular token
-        word = word[1:-1]
+        word = word[1:-1]    
     lemma_and_index, pos = word.rsplit( "_", 1 )
     lemma, index = lemma_and_index.rsplit( ":", 1 )
     if lemma.endswith("\\") :
@@ -148,7 +148,9 @@ def get_surface( lemma_morph, pos ) :
     """
     global morphg_file
     parts = lemma_morph.rsplit("+",1)
-    if len(parts) == 2 and parts[1] != "" :        
+    if len(parts) == 1 or lemma_morph == "+": # No inflection
+        lemma = surface = lemma_morph
+    elif len(parts) == 2 and "+" not in parts[0]: # Standard inflected unit
         lemma = parts[0] 
         if morphg_file is not None : 
             lemma_morph = lemma_morph.replace("\"","\\\"")
@@ -160,39 +162,39 @@ def get_surface( lemma_morph, pos ) :
             p.close()
         else:
             surface = lemma
-    else:#if it doesn't have a '+', then
-        lemma = surface = lemma_morph
+    else: # the token contains one or several '+'
+        lemma = surface = parts[0]
     return ( surface, lemma )
 
 ###############################################################################
 
-def process_line(l, phrase):
+def process_line( l, phrase ):
     """ 
-        This functiosn Process the tagged line, extracting each word and it's attributes.
-        Information is stored in a list of dictionaries (one dict per word) 
-where will be filled all the words attributes.
+        This function processes the tagged line, extracting each word and its 
+        attributes. Information is stored in a list of dictionaries (one dict 
+        per word) where will be filled all the words' attributes.
 
         @param l Line read from input to be processed.
         
         @param phrase List of dictionaries to be completed.
     """
-    # relations involving ellipsis 
-    #if '|ellip|' in phrase: 
-    #    return 
     global generate_text
     words = l.split(" ")[:-3]                            #remove last 3 elements
     words = " ".join( words )[1:-1].split( " " )         # remove parentheses
     for word in words : #e.g.: resume+ed:7_VVN
-        (s,index,pos) = get_tokens(word)
-        (surface, lemma) = get_surface(s, pos)
-        dic={d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:''}
-        for key in dic.keys() :
-            dic[key] = dic[key].replace(" ","") # remove spaces
-            if generate_text : # escape vertical bars
-                dic[key] = dic[key].replace( "|","%%VERTICAL_BAR%%" )
-            else : # escape XML elements
-                dic[key] = strip_xml(dic[key])  
-        phrase[ int(index) ] = dic
+        try :
+            (s, index, pos) = get_tokens(word)
+            (surface, lemma) = get_surface(s, pos)
+            dic={d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:''}
+            for key in dic.keys() :
+                dic[key] = dic[key].replace(" ","") # remove spaces
+                if generate_text : # escape vertical bars
+                    dic[key] = dic[key].replace( "|","%%VERTICAL_BAR%%" )
+                else : # escape XML elements
+                    dic[key] = strip_xml(dic[key])  
+            phrase[ int(index) ] = dic
+        except Exception:
+            warn( "Line \"%s\" could not be processed as sentence" % l.strip() )
 
 ###############################################################################
 
@@ -206,7 +208,7 @@ def process_tree_branch(l, phrase):
         
         @param phrase List of dictionaries to be completed
     """
-    parts = l.strip().replace("(","").replace(")","").replace(" _",'').split(' ')
+    parts = l.strip().translate( None, "()" ).replace( " _", "" ).split( " " )
     rel = ""
     members = []
     for part in parts :
@@ -226,6 +228,8 @@ def process_tree_branch(l, phrase):
                 entry[ "syn" ] = syn
             else :
                 entry[ "syn" ] = entry[ "syn" ] + ";" + syn
+    else :
+        warn( "Unrecogized grammatical relation \"%s\"" % l.strip() )
 
 ###############################################################################
 
@@ -235,7 +239,6 @@ def transform_format(rasp):
         printing the XML file to stdout.
     
         @param rasp Is the input, file or piped.
-
     """
     global morphg_folder
     global work_path
@@ -258,7 +261,7 @@ def transform_format(rasp):
                 first_line=True
             l=rasp.readline()
             continue
-        # too long sentences, not parsed because of -w word limit passed to parser
+        # too long sentences not parsed because -w word limit passed to parser
         elif l.startswith( "(X" ) :
             while l != "\n" :
                 l = rasp.readline()
@@ -267,6 +270,7 @@ def transform_format(rasp):
             if l_empty>=1:
                 l_empty=0
                 process_line(l,phrase)
+                #pdb.set_trace()
                 first_line=False
                 l=rasp.readline() #ignore line
             else:
@@ -275,8 +279,8 @@ def transform_format(rasp):
         else:
             process_tree_branch(l,phrase)
         l=rasp.readline()
-    if l_empty != 1 and len(phrase) != 0 :
-        write_entry(n_line,phrase) #save last entry
+    if l_empty != 1 and len(phrase) != 0 : #save last entry
+        write_entry(n_line,map( lambda x: x[1], sorted( phrase.items() ) )) 
     if morphg_folder :
         os.chdir( work_path )
 
@@ -296,8 +300,7 @@ else :
         try:
             input_file=open(a, 'r')
         except IOError as e:
-            print >> sys.stderr, 'Error opening file for reading.'
-            exit(1)
+            error( 'Error opening file for reading.' )
         transform_format( input_file )
         input_file.close()    
                
