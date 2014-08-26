@@ -233,6 +233,23 @@ def interpret_ngram( argument ) :
 
 ################################################################################
 
+def error( message ) :
+    """
+        Utility function to show error message and quit
+    """
+    print >> sys.stderr, "ERROR: " + message
+    sys.exit( -1 )
+
+################################################################################
+
+def warn( message ) :
+    """
+        Utility function to show warning message
+    """
+    print >> sys.stderr, "WARNING: " + message
+
+################################################################################
+
 def open_files(paths):
     for path in paths:
         if isinstance(path, file):
@@ -240,6 +257,7 @@ def open_files(paths):
         else:
             yield open(path, "r")
 
+################################################################################
 
 class DummyPrinter(object):
     r"""Dummy implementation of a printer-style class."""
@@ -247,7 +265,8 @@ class DummyPrinter(object):
         return self
     def __exit__(self, *e):
         pass
-
+        
+################################################################################
 
 class AbstractParser(object):
     r"""(Base class for text parsing objects).
@@ -285,7 +304,8 @@ class AbstractParser(object):
         @param fname A string with the file name.
         """
         pass
-
+        
+################################################################################
 
 class XMLParser(AbstractParser):
     r"""Instances of this function parse XML, calling `treat_sentence`."""
@@ -301,7 +321,8 @@ class XMLParser(AbstractParser):
     def treat_sentence(self, entity):
         r"""Called to parse an Entity object. Subclasses may override."""
         pass
-
+        
+################################################################################
 
 class TxtParser(AbstractParser):
     r"""Instances of this function parse TXT, calling `treat_sentence`."""
@@ -314,6 +335,7 @@ class TxtParser(AbstractParser):
         Subclasses may override."""
         pass
 
+################################################################################
 
 def parse_xml( handler, arg, postfunction=None ) :
     """
