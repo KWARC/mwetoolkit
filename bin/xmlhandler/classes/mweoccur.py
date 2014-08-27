@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2014 Silvio Ricardo Cordeiro
+# Copyright 2014 Silvio Ricardo Cordeiro, Carlos Ramisch
 #
 # mweoccur.py is part of mwetoolkit
 #
@@ -27,6 +27,8 @@ occurrence of an MWE `Candidate` inside a `Sentence`.
 """
 
 ################################################################################
+
+import pdb
 
 
 class MWEOccurrence(object):
@@ -94,12 +96,14 @@ class MWEOccurrence(object):
         ret.append('" candid="')
         ret.append(unicode(self.candidate.id_number))
         ret.append('">')
+        j = 0 #CR Bug correction, was not working for discontiguous candidates
         for i in self.iter_relative_indexes():
             ret.append('<mwepart index="')
             ret.append(unicode(i))
             ret.append('">')
-            ret.append(self.candidate[i].lemma)
+            ret.append(self.candidate[j].lemma) #CR j instead of i
             ret.append('</mwepart>')
+            j = j + 1 #CR in the candidate, words are contiguous so j is increm.
         ret.append("</mweoccur>")
         return ''.join(ret)
 
