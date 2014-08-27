@@ -52,7 +52,7 @@ OPTIONS may be:
 
     The <files.moses> file(s) must be valid Moses-formatted files.
 """          
-
+s_id = 0
 ################################################################################
 
 def transform_format( in_file ) :
@@ -63,7 +63,7 @@ def transform_format( in_file ) :
         @param in_file The file in Moses format, one sentence per line, words
         separated by spaces, each word is in format "surface|lemma|pos|syntax". 
     """
-    s_id = 0
+    global s_id
     for line in in_file.readlines() :
         s_id = s_id + 1   
         s = Sentence( [], s_id )     
