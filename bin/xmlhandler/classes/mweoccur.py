@@ -96,14 +96,13 @@ class MWEOccurrence(object):
         ret.append('" candid="')
         ret.append(unicode(self.candidate.id_number))
         ret.append('">')
-        j = 0 #CR Bug correction, was not working for discontiguous candidates
-        for i in self.iter_relative_indexes():
+        # For each (index_candidate, index_sentence)...
+        for i_c, i_s in enumerate(self.iter_relative_indexes()):
             ret.append('<mwepart index="')
-            ret.append(unicode(i))
+            ret.append(unicode(i_s))
             ret.append('">')
-            ret.append(self.candidate[j].lemma) #CR j instead of i
+            ret.append(self.candidate[i_c].lemma)
             ret.append('</mwepart>')
-            j = j + 1 #CR in the candidate, words are contiguous so j is increm.
         ret.append("</mweoccur>")
         return ''.join(ret)
 
