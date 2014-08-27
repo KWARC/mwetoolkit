@@ -59,7 +59,7 @@ from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, \
-                 verbose, interpret_ngram, XMLParser
+                 verbose, interpret_ngram, XMLParser, error
 from xmlhandler.classes.printer import Printer as XMLPrinter
 
 ################################################################################
@@ -83,11 +83,16 @@ OPTIONS may be:
 -S OR --source
     Annotate based on the `<sources>` tag from the candidates file.
     Same as passing the parameter `--detection=Source`.
+
+-x OR --text
+    Output the corpus in textual format, only surface forms, with <mwe> XML
+    tags around MWE members.
+
+%(common_options)s
 """
 candidates_fnames = []
 detector = None
-
-
+out_text = False
 
 ################################################################################
 
@@ -103,6 +108,7 @@ class AnnotatingXMLParser(XMLParser):
 
         @param sentence A `Sentence` that is being read from the XML file.    
         """
+        global out_text
         self.sentence_counter += 1
         if self.sentence_counter % 100 == 0:
             verbose("Processing sentence number %(n)d"
@@ -110,7 +116,11 @@ class AnnotatingXMLParser(XMLParser):
 
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)
-        self.printer.add(sentence)
+            
+        if out_text :  #CR - probably better with a TxTPrinter class?
+            print( sentence.to_surface() )            
+        else : #CR
+            self.printer.add(sentence)
 
 
 ################################################################################
@@ -246,7 +256,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     @param arg The argument list parsed by getopts.
     @param n_arg The number of arguments expected for this script.    
     """
-    global candidates_fnames, detector
+    global candidates_fnames, detector, out_text
     treat_options_simplest(opts, arg, n_arg, usage_string)
     detector_class = ContiguousLemmaDetector
 
@@ -257,10 +267,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             detector_class = detectors[a]
         if o in ("-S", "--source"):
             detector_class = SourceDetector
-
+        if o in ("-x", "--text"):  #CR
+            out_text = True #CR
     if not candidates_fnames:
-        print("No candidates file given!", file=sys.stderr)
-        exit(1)
+        error("No candidates file given!") #CR refactoring
 
     try:
         p = CandidatesParser(candidates_fnames)
@@ -275,6 +285,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = ["candidates=", "detector=", "source"]
-arg = read_options("c:d:S", longopts, treat_options, -1, usage_string)
+longopts = ["candidates=", "detector=", "source", "text"]
+arg = read_options("c:d:Sx", longopts, treat_options, -1, usage_string)
 AnnotatingXMLParser(arg).parse()
