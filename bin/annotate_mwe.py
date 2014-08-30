@@ -139,7 +139,7 @@ class SourceDetector(object):
     def detect(self, sentence):
         r"""Yield MWEOccurrence objects for this sentence."""
         for cand, indexes in self.info_from_s_id[sentence.id_number]:
-            yield MWEOccurrence(sentence, cand, indexes).rebase()
+            yield MWEOccurrence(sentence, cand, indexes)
 
 
 class ContiguousLemmaDetector(object):

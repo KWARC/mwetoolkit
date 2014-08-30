@@ -340,7 +340,7 @@ def default_exception_handler(type, value, trace):
     else:
         import os
         here = os.path.dirname(__file__)
-        tb = traceback.extract_tb(trace, limit=1)[0]
+        tb = traceback.extract_tb(trace)[-1]
         fname, lineno, func, text = tb
         fname = os.path.relpath(fname, '.')
         print("Error in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)

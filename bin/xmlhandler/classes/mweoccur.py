@@ -37,71 +37,39 @@ class MWEOccurrence(object):
     Attributes:
     -- sentence: The sentence in this occurrence.
     -- candidate: The MWE candidate in this occurrence.
-    -- base_index: The first index in `self.sentence`.
-    -- indexes: A list of indexes that, after being offset by `self.base_index`,
-    represent the position of each word from `self.candidate` in `self.sentence`.
-    This list can be `None` or `list(xrange(len(self.candidate)))` when
+    -- indexes: A list of indexes that represent the position of
+    each word from `self.candidate` in `self.sentence`.
+    This list will be `list(xrange(i, i + len(self.candidate)))` when
     referring to the simplest kinds of MWEs.  If the MWE in-sentence has
     different word order (e.g. passive voice in English), a permutation of
-    those indexes should be used.  If there are gaps inside the MWE
-    (e.g. verb-particle compounds in English), the list will be missing indexes
-    below `len(self.candidate)` and will have indexes above this threshold.
+    those indexes should be used.  If there are gaps inside the MWE (e.g.
+    verb-particle compounds in English), other sentence indexes may be used.
+    IMPORTANT: This list is 0-based in python but 1-based in XML.
 
     Examples:
         Today ,  a  demo was given  Sentence
                  ~  ~~~~     ~~~~~  Candidate = "give a demo"
-        0     1  ^  3    4   5      base_index = 2
-        _     _  1  2    _   0      indexes = [1, 2, 0]
+        _     _  2  3    _   5      indexes = [5, 2, 3]
 
         The old man kicked the proverbial bucket  Sentence
                     ~~~~~~ ~~~            ~~~~~~  Candidate = "kick the bucket"
-        0   1   2   ^      4   5          6       base_index = 3
-        _   _   _   0      1   _          3       indexes = [0, 1, 3]
+        _   _   _   3      4   _          6       indexes = [3, 4, 6]
     """
-    def __init__(self, sentence, candidate, indexes=None, base_index=0):
-        if indexes is None:
-            indexes = tuple(xrange(len(candidate)))
-        assert 0 <= base_index < len(candidate)
-        assert len(indexes) == len(candidate)
-        self.candidate, self.sentence = candidate, sentence
-        self.base_index, self.indexes = base_index, indexes
-
-    def rebase(self):
-        r"""Update the value of `base_index` to the lowest possible.
-        (After this, there will be a `0` in `self.indexes`)."""
-        offset = min(self.indexes)
-        self.indexes = [i-offset for i in self.indexes]
-        self.base_index += offset
-        return self
-
-    def iter_relative_indexes(self):
-        r"""For each word in `self.candidate`, yield the
-        index of `self.sentence` that correspond to that word
-        WHEN offset by `self.base_index`."""
-        indexes = self.indexes or xrange(len(self.candidate))
-        for i in indexes:
-            yield i
-
-    def iter_absolute_indexes(self):
-        r"""For each word in `self.candidate`, yield the
-        index of `self.sentence` that correspond to that word."""
-        for i in self.iter_relative_indexes():
-            yield self.base_index + i
+    def __init__(self, sentence, candidate, sentence_indexes):
+        self.candidate = candidate
+        self.sentence = sentence
+        self.indexes = sentence_indexes
 
     def to_xml(self):
-        ret = ['<mweoccur base_index="']
-        # IMPORTANT: if removing `base_index`,
-        # update indexing below to become 1-based
-        ret.append(unicode(self.base_index + 1)) # 1-based indexing
-        ret.append('" candid="')
+        ret = ['<mweoccur candid="']
         ret.append(unicode(self.candidate.id_number))
         ret.append('">')
-        # For each (index_candidate, index_sentence)...
-        for i_c, i_s in enumerate(self.iter_relative_indexes()):
+        # For each (candidate index, sentence index)...
+        for c_i, s_i in enumerate(self.indexes):
             ret.append('<mwepart index="')
-            ret.append(unicode(i_s))
+            ret.append(unicode(s_i + 1))
             ret.append('">')
-            ret.append(self.candidate[i_c].lemma)
+            ret.append(self.candidate[c_i].lemma)
             ret.append('</mwepart>')
         ret.append("</mweoccur>")
         return ''.join(ret)
@@ -157,7 +125,7 @@ class MWEOccurrenceBuilder(object):
         if not self.is_full():
             raise Exception("MWEOccurrence not ready to be created")
         return MWEOccurrence(self.sentence,
-                self.candidate, self.indexes).rebase()
+                self.candidate, self.indexes)
     
     def __repr__(self):
         return b" ".join(w.lemma.encode('utf8') for w in self.candidate.word_list)

@@ -84,9 +84,8 @@ class Sentence( Ngram ) :
         surface_list = map( lambda x: getattr( x, "surface" ), self.word_list )
         mwetags_list = [ [] for i in range(len(surface_list)) ]
         for mweoccur in self.mweoccurs :
-            base = mweoccur.base_index
             for i in mweoccur.indexes :
-                mwetags_list[ base + i ].append( mweoccur.candidate.id_number )
+                mwetags_list[ i ].append( mweoccur.candidate.id_number )
         for (mwetag_i, mwetag) in enumerate(mwetags_list) :
             if mwetag : 
                 surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag) + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
