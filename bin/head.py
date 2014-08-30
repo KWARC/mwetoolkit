@@ -37,8 +37,9 @@ import xml.sax
 import pdb
 
 from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose, \
-                 parse_xml, LimitReachedError
+from util import usage, read_options, \
+        treat_options_simplest, verbose, parse_xml
+from libs.parser_wrappers import StopParsing
 
 ################################################################################
 # GLOBALS
@@ -85,7 +86,7 @@ def treat_entity( entity ) :
     if entity_counter < limit :
         print entity.to_xml().encode('utf-8')
     else :
-        raise LimitReachedError
+        raise StopParsing
     entity_counter += 1
 
 ################################################################################

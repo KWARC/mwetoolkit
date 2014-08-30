@@ -24,11 +24,16 @@
 """
     Set of utility functions that are common to several scripts.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
 import getopt
 import sys
 import traceback
 import xml.sax
+from libs.parser_wrappers import StopParsing
 
 ################################################################################
 
@@ -45,12 +50,6 @@ common_options_usage_string = """\
 -h or --help
     Print usage information about parameters and options"""
     
-class LimitReachedError ( Exception ) :
-    """
-        Means that I read the first n lines, now I can stop parsing the XML. The
-        exception is empty since it does not need additional information and it
-        does not correspond to a real error.
-    """
     
     
 ################################################################################
@@ -81,7 +80,7 @@ def set_debug_mode(value):
     global debug_mode
     debug_mode = value
     if debug_mode:
-        print >>sys.stderr, "Debug mode on"
+        print("Debug mode on", file=sys.stderr)
 
 ################################################################################
 
@@ -91,8 +90,8 @@ def usage( usage_string ) :
         that uses this function should provide a variable containing the
         usage string.
     """
-    print >> sys.stderr, usage_string % {"program": sys.argv[ 0 ],
-                                         "common_options": common_options_usage_string }
+    print(usage_string % {"program": sys.argv[ 0 ],
+             "common_options": common_options_usage_string}, file=sys.stderr)
     
 ################################################################################
 
@@ -250,92 +249,6 @@ def warn( message ) :
 
 ################################################################################
 
-def open_files(paths):
-    for path in paths:
-        if isinstance(path, file):
-            yield path
-        else:
-            yield open(path, "r")
-
-################################################################################
-
-class DummyPrinter(object):
-    r"""Dummy implementation of a printer-style class."""
-    def __enter__(self):
-        return self
-    def __exit__(self, *e):
-        pass
-        
-################################################################################
-
-class AbstractParser(object):
-    r"""(Base class for text parsing objects).
-    @param paths A list of target file paths."""
-    def __init__(self, paths, printer=None):
-        assert isinstance(paths, list)
-        self.files = list(open_files(paths)) if paths else [sys.stdin]
-        self.printer = printer or DummyPrinter()
-
-    def parse(self):
-        r"""Parse all files with this parser."""
-        with self.printer:
-            for f in self.files:
-                try:
-                    self._parse_file(f)
-                except LimitReachedError : # Read only part of XML file
-                    pass # Not an error, just used to interrupt parsing
-                self.postfunction(f.name)
-        self.close()
-
-    def close(self):
-        r"""Close all files opened by this parser."""
-        for f in self.files:
-            if f != sys.stdin:
-                f.close()
-        self.files = []
-
-    def _parse_file(self, f):
-        r"""Internal function. (Parses file with this parser)."""
-        raise NotImplementedError
-
-    def postfunction(self, fname):
-        r"""Post-processing function that is called
-        after parsing each file.
-        @param fname A string with the file name.
-        """
-        pass
-        
-################################################################################
-
-class XMLParser(AbstractParser):
-    r"""Instances of this function parse XML, calling `treat_sentence`."""
-    def _parse_file(self, f):
-        from xmlhandler.genericXMLHandler import GenericXMLHandler
-        self.parser = xml.sax.make_parser()
-        # Ignores the DTD declaration. This will not validate the document!
-        self.parser.setFeature(xml.sax.handler.feature_external_ges, False)
-        handler = GenericXMLHandler(treat_entity=self.treat_sentence)
-        self.parser.setContentHandler(handler)
-        self.parser.parse(f)
-
-    def treat_sentence(self, entity):
-        r"""Called to parse an Entity object. Subclasses may override."""
-        pass
-        
-################################################################################
-
-class TxtParser(AbstractParser):
-    r"""Instances of this function parse TXT, calling `treat_sentence`."""
-    def _parse_file(self, f):
-        for line in f.readlines():
-            self.treat_sentence(line.strip().split())
-
-    def treat_sentence(self, sentence):
-        r"""Called to parse a list of words (unicode strings).
-        Subclasses may override."""
-        pass
-
-################################################################################
 
 def parse_xml( handler, arg, postfunction=None ) :
     """
@@ -356,7 +269,7 @@ def parse_xml( handler, arg, postfunction=None ) :
     if len( arg ) == 0 :
         try :
             parser.parse( sys.stdin )
-        except LimitReachedError : # Read only part of XML file
+        except StopParsing : # Read only part of XML file
             pass # Not an error, just used to interrupt parsing
         if postfunction :
             postfunction( "stdin" )
@@ -365,7 +278,7 @@ def parse_xml( handler, arg, postfunction=None ) :
             input_file = open( a )
             try :
                 parser.parse( input_file )
-            except LimitReachedError : # Read only part of XML file
+            except StopParsing : # Read only part of XML file
                 pass # Not an error, just used to interrupt parsing
             input_file.close()
             handler.gen_xml = False
@@ -390,7 +303,7 @@ def parse_txt( handler, arg, postfunction=None ) :
         try :
             for line in sys.stdin.readlines() :
                 handler( line.strip().split() );
-        except LimitReachedError : # Read only part of XML file
+        except StopParsing : # Read only part of XML file
             pass # Not an error, just used to interrupt parsing
         if postfunction :
             postfunction( "stdin" )
@@ -400,7 +313,7 @@ def parse_txt( handler, arg, postfunction=None ) :
             try :
                 for line in input_file.readlines() :
                     handler( line.strip().split() );
-            except LimitReachedError : # Read only part of XML file
+            except StopParsing : # Read only part of XML file
                 pass # Not an error, just used to interrupt parsing
             input_file.close()
             handler.gen_xml = False
@@ -419,19 +332,24 @@ def default_exception_handler(type, value, trace):
     global debug_mode
 
     if type == KeyboardInterrupt:
-        print >>sys.stderr, "\nInterrupted!"
+        print("\nInterrupted!", file=sys.stderr)
         sys.exit(130)  # 128 + SIGINT; Unix standard
-
-    print >> sys.stderr, "%s:" % type.__name__, value
-
-    if type != IOError:
-        print >> sys.stderr, "You probably provided an invalid XML file, " + \
-                             "please validate it against the DTD."
 
     if debug_mode:
         traceback.print_exception(type, value, trace)
     else:
-        print >> sys.stderr, "For more information, run with --debug."
+        import os
+        here = os.path.dirname(__file__)
+        tb = traceback.extract_tb(trace, limit=1)[0]
+        fname, lineno, func, text = tb
+        fname = os.path.relpath(fname, '.')
+        print("Error in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)
+        print("  %s:" % type.__name__, value, file=sys.stderr)
+        print("For more information, run with --debug.", file=sys.stderr)
+
+    if type != IOError:
+        print("You probably provided an invalid XML file, please " \
+               "validate it against the DTD.", file=sys.stderr)
 
     sys.exit(1)
 

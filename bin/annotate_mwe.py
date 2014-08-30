@@ -59,8 +59,9 @@ from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, \
-                 verbose, interpret_ngram, XMLParser, error
-from xmlhandler.classes.printer import Printer as XMLPrinter
+                 verbose, interpret_ngram, error
+from libs.printers import XMLPrinter
+from libs.parser_wrappers import XMLParser
 
 ################################################################################
 # GLOBALS
@@ -97,9 +98,9 @@ out_text = False
 ################################################################################
 
 class AnnotatingXMLParser(XMLParser):
-    def __init__(self, args):
+    def __init__(self, fileobjs):
         super(AnnotatingXMLParser,self).__init__(
-                args, printer=XMLPrinter("corpus"))
+                fileobjs, printer=XMLPrinter("corpus"))
         self.sentence_counter = 0
 
     def treat_sentence(self, sentence):

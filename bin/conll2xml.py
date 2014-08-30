@@ -37,10 +37,12 @@ from __future__ import absolute_import
 
 import sys
 from util import read_options, treat_options_simplest, verbose, strip_xml
-from xmlhandler.classes.printer import Printer
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word
 from xmlhandler.classes.__common import *
+
+from libs.printers import XMLPrinter
+from libs.parser_wrappers import TxtParser
      
 
 ################################################################################     
@@ -59,11 +61,11 @@ OPTIONS:
 
 ################################################################################
 
-def transform_format(printer, in_file):
-    """Reads an input file and converts it into mwetoolkit corpus XML format, 
-    printing the XML file to stdout.
+class ConllParser(TxtParser):
+    """Parser that reads an input file and converts it into mwetoolkit
+    corpus XML format, printing the XML file to stdout.
 
-    @param in_file The file, in CONLL format: one word per line,
+    @param in_files The input files, in CONLL format: one word per line,
     with each word represented by the following 10 entries.
 
     Per-word entries:
@@ -81,37 +83,39 @@ def transform_format(printer, in_file):
     8. PHEAD   -- (XXX currently ignored).
     9. PDEPREL -- (XXX currently ignored).
     """
-    s_id = 0
-    for line in in_file.readlines():
+    def __init__(self, in_files, printer):
+        super(ConllParser,self).__init__(in_files, printer)
+        self.warned = set()
+        self.s_id = 0
+
+    def treat_line(self, line):
         data = line.strip().split()
-        if len(data) <= 1: continue
+        if len(data) <= 1: return
 
         if data[0] == "1":
-            printer.flush().add(Sentence([], s_id))
-            s_id += 1
+            self.printer.flush().add(Sentence([], self.s_id))
+            self.s_id += 1
 
         data = [(WILDCARD if d == "_" else d) for d in data]
         surface, lemma, pos, syn = data[1], data[2], data[3], data[7]
 
         if data[4] != data[3]:
-            maybe_warn(data[4], "POSTAG != CPOSTAG")
-        maybe_warn(data[5], "FEATS")
-        maybe_warn(data[8], "PHEAD")
-        maybe_warn(data[9], "PDEPREL")
+            self.maybe_warn(data[4], "POSTAG != CPOSTAG")
+        self.maybe_warn(data[5], "FEATS")
+        self.maybe_warn(data[8], "PHEAD")
+        self.maybe_warn(data[9], "PDEPREL")
 
         if data[6] != WILDCARD:
             syn = syn + ":" + str(data[6])
         objectWord = Word(surface, lemma, pos, syn)
-        printer.last().append(objectWord)
+        self.printer.last().append(objectWord)
 
 
-warned = set()
-def maybe_warn(entry, entry_name):
-    global warned
-    if entry != WILDCARD and entry_name not in warned:
-        print("WARNING: unable to handle CONLL entry: {}." \
-                .format(entry_name), file=sys.stderr)
-        warned.add(entry_name)
+    def maybe_warn(self, entry, entry_name):
+        if entry != WILDCARD and entry_name not in self.warned:
+            print("WARNING: unable to handle CONLL entry: {}." \
+                    .format(entry_name), file=sys.stderr)
+            self.warned.add(entry_name)
 
 
 ################################################################################     
@@ -137,11 +141,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = []
 args = read_options("", longopts, treat_options, -1, usage_string)
-
-with Printer("corpus") as p:
-    if len(args) == 0 :
-        transform_format(p, sys.stdin)
-    else:
-        for fname in args:
-            with open(fname) as f:
-                transform_format(p, f)
+ConllParser(args, printer=XMLPrinter("corpus")).parse()
