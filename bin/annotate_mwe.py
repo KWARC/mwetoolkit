@@ -60,7 +60,7 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, \
                  verbose, interpret_ngram, error
-from libs.printers import XMLPrinter
+from libs.printers import XMLPrinter, SurfacePrinter
 from libs.parser_wrappers import XMLParser
 
 ################################################################################
@@ -85,22 +85,22 @@ OPTIONS may be:
     Annotate based on the `<sources>` tag from the candidates file.
     Same as passing the parameter `--detection=Source`.
 
--x OR --text
-    Output the corpus in textual format, only surface forms, with <mwe> XML
-    tags around MWE members.
+-o <format> OR --output <format>
+    Choose a method of output (default: "XML"):
+    * Method "XML": output corpus in XML format.
+    * Method "Text": output corpus in textual format, showing only
+      surface forms and <mwe> XML tags surrounding MWE tokens.
 
 %(common_options)s
 """
-candidates_fnames = []
 detector = None
-out_text = False
+printer_class = None
 
 ################################################################################
 
 class AnnotatingXMLParser(XMLParser):
-    def __init__(self, fileobjs):
-        super(AnnotatingXMLParser,self).__init__(
-                fileobjs, printer=XMLPrinter("corpus"))
+    def __init__(self, fileobjs, printer):
+        super(AnnotatingXMLParser,self).__init__(fileobjs, printer)
         self.sentence_counter = 0
 
     def treat_sentence(self, sentence):
@@ -109,7 +109,6 @@ class AnnotatingXMLParser(XMLParser):
 
         @param sentence A `Sentence` that is being read from the XML file.    
         """
-        global out_text
         self.sentence_counter += 1
         if self.sentence_counter % 100 == 0:
             verbose("Processing sentence number %(n)d"
@@ -118,10 +117,7 @@ class AnnotatingXMLParser(XMLParser):
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)
             
-        if out_text :  #CR - probably better with a TxTPrinter class?
-            print( sentence.to_surface() )            
-        else : #CR
-            self.printer.add(sentence)
+        self.printer.add(sentence)
 
 
 ################################################################################
@@ -202,8 +198,8 @@ detectors = {
 
 class CandidatesParser(XMLParser):
     r"""Parse file and populate a CandidateInfo object."""
-    def __init__(self, candidate_fnames):
-        super(CandidatesParser,self).__init__(candidate_fnames)
+    def __init__(self, candidates_fnames):
+        super(CandidatesParser,self).__init__(candidates_fnames)
         self.info = CandidateInfo()
 
     def treat_sentence(self, candidate):
@@ -257,9 +253,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     @param arg The argument list parsed by getopts.
     @param n_arg The number of arguments expected for this script.    
     """
-    global candidates_fnames, detector, out_text
     treat_options_simplest(opts, arg, n_arg, usage_string)
+
     detector_class = ContiguousLemmaDetector
+    printer_class = XMLPrinter
+    candidates_fnames = []
 
     for (o, a) in opts:
         if o in ("-c", "--candidates"):
@@ -268,10 +266,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             detector_class = detectors[a]
         if o in ("-S", "--source"):
             detector_class = SourceDetector
-        if o in ("-x", "--text"):  #CR
-            out_text = True #CR
+        if o in ("-o", "--output"):
+            printers = {"XML": XMLPrinter, "Text": SurfacePrinter}
+            printer_class = printers[a]
+
     if not candidates_fnames:
-        error("No candidates file given!") #CR refactoring
+        error("No candidates file given!")
 
     try:
         p = CandidatesParser(candidates_fnames)
@@ -280,12 +280,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print("Error loading candidates file!", file=sys.stderr)
         raise
 
+    global detector, printer
+    printer = printer_class(root="corpus")
     detector = detector_class(p.info)
 
         
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = ["candidates=", "detector=", "source", "text"]
-arg = read_options("c:d:Sx", longopts, treat_options, -1, usage_string)
-AnnotatingXMLParser(arg).parse()
+longopts = ["candidates=", "detector=", "source", "output="]
+arg = read_options("c:d:So:", longopts, treat_options, -1, usage_string)
+AnnotatingXMLParser(arg, printer).parse()

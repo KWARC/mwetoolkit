@@ -72,7 +72,7 @@ class AbstractParser(object):
         self.printer = printer
         if self.printer is None:
             from . import printers
-            self.printer = printers.SimplePrinter()
+            self.printer = printers.SimplePrinter(root=None)
 
     def _parse_file(self, fileobj):
         r"""(Called to parse file `fileobj`)"""

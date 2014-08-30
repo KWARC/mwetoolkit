@@ -69,7 +69,7 @@ def verbose( message ) :
     """
     global verbose_on
     if verbose_on :
-        print >> sys.stderr, message
+        print(message, file=sys.stderr)
 
 ################################################################################
 
@@ -116,8 +116,8 @@ def treat_options_simplest( opts, arg, n_arg, usage_string ) :
             sys.exit( 0 )
     
     if n_arg >= 0 and len( arg ) != n_arg :
-        print >> sys.stderr, "You must provide %(n)s arguments to this script" \
-                             % { "n" : n_arg }
+        print("You must provide %(n)s arguments to this script" \
+                             % { "n" : n_arg }, file=sys.stderr)
         usage( usage_string )
         sys.exit( 2 )
 
@@ -152,8 +152,8 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
         opts, arg = getopt.getopt( sys.argv[ 1: ], shortopts, longopts )
     except getopt.GetoptError, err:
         # will print something like "option -a not recognized"
-        print >> sys.stderr, str( err ) 
-        usage( usage_string )
+        print(ster(err), sys.stderr)
+        usage(usage_string)
         sys.exit( -1 )
 
     treat_options( opts, arg, n_args, usage_string ) 
@@ -217,10 +217,12 @@ def interpret_ngram( argument ) :
             if n_min >= 1:
                 return ( n_min, n_max )
             else:
-                print >>sys.stderr, "Error parsing argument for -n: <min> must be at least 1"
+                print("Error parsing argument for -n: <min> " \
+                        "must be at least 1", file=sys.stderr)
                 return None
         else :                
-           print >>sys.stderr, "Error parsing argument for -n: <min> is greater than <max>"
+           print("Error parsing argument for -n: <min> is greater than <max>",
+                   file=sys.stderr)
            return None
 
     except IndexError :
@@ -236,7 +238,7 @@ def error( message ) :
     """
         Utility function to show error message and quit
     """
-    print >> sys.stderr, "ERROR: " + message
+    print("ERROR:", message, file=sys.stderr)
     sys.exit( -1 )
 
 ################################################################################
@@ -245,7 +247,7 @@ def warn( message ) :
     """
         Utility function to show warning message
     """
-    print >> sys.stderr, "WARNING: " + message
+    print("WARNING:", message, file=sys.stderr)
 
 ################################################################################
 

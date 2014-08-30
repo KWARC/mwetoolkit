@@ -81,8 +81,8 @@ class Sentence( Ngram ) :
             @return A string with the surface form of the sentence, 
             space-separated.
         """
-        surface_list = map( lambda x: getattr( x, "surface" ), self.word_list )
-        mwetags_list = [ [] for i in range(len(surface_list)) ]
+        surface_list = [w.surface for w in self.word_list]
+        mwetags_list = [[] for i in range(len(surface_list))]
         for mweoccur in self.mweoccurs :
             for i in mweoccur.indexes :
                 mwetags_list[ i ].append( mweoccur.candidate.id_number )

@@ -24,11 +24,14 @@ mkdir -p "$T"
 rm -rf "./output"
 mkdir -p "./output"
 
-python "$BIN/head.py" -n30 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
+python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
+        -o Text -c ContiguousLemma/candidates.xml >output/outTxtContigLemma.xml
+
+python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
         -c ContiguousLemma/candidates.xml >output/outContigLemma.xml
 
 python "$BIN/head.py" -n10 Source/corpus.xml | "$BIN/annotate_mwe.py" \
-        -S -c Source/candidates.xml >output/outSource.xml
+        --debug -S -c Source/candidates.xml >output/outSource.xml
 
 
 #test_from_xml() {

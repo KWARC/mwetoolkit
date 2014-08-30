@@ -48,10 +48,13 @@ class AbstractPrinter(object):
     also `header` and `footer`.
     
     Constructor Arguments:
+    @param root The type of the output file. This value
+    must be one of [None, "corpus", "candidates", "patterns"].
     @param output An IO-like object, such as sys.stdout
     or an instance of StringIO.
     """
-    def __init__(self, output=None):
+    def __init__(self, root, output=None):
+        self._root = root
         self._output = output or sys.stdout
         self._waiting_objects = []
         self._scope = 0
@@ -93,7 +96,7 @@ class AbstractPrinter(object):
     def __enter__(self):
         r"""(Called when entering `with` statement)"""
         if self._scope == 0:
-            self.add(self.header())
+            self._write(self.header())
         self._scope += 1
         return self
 
@@ -102,7 +105,8 @@ class AbstractPrinter(object):
         self._scope -= 1
         if self._scope == 0:
             if t is None:
-                self.add(self.footer()).flush()
+                self._write(self.footer())
+                self.flush()
         return False
 
 
@@ -123,6 +127,10 @@ class SimplePrinter(AbstractPrinter) :
     Sample sentence .
     Another sentence !
     A plain-text sentence.
+
+    Constructor Arguments:
+    Same as `AbstractPrinter`.
+    Parameter `root` is ignored.
     """
     def stringify(self, obj):
         return unicode(obj) + "\n"
@@ -146,22 +154,19 @@ class XMLPrinter(AbstractPrinter):
     A plain-text sentence.
 
     Constructor Arguments:
-    @param root Name of the root for the XML output.
-    May be None to skip printing header/footers.
+    @param root Name of the root for the XML output. This value
+    must be one of [None, "corpus", "candidates", "patterns"].
+    When it is None, skip printing header/footers.
     @param output An IO-like object, such as sys.stdout
     or an instance of StringIO.
     """
-    def __init__(self, root, output=None) :
-        super(XMLPrinter,self).__init__(output=output)
-        self.root = root
-
     def header(self):
-        if not self.root: return ""
-        return XML_HEADER % {"root": self.root, "ns": ""} + "\n"
+        if not self._root: return ""
+        return XML_HEADER % {"root": self._root, "ns": ""} + "\n"
 
     def footer(self):
-        if not self.root: return ""
-        return XML_FOOTER % {"root": self.root} + "\n"
+        if not self._root: return ""
+        return XML_FOOTER % {"root": self._root} + "\n"
 
     def stringify(self, obj):
         try:

@@ -56,6 +56,11 @@ class MWEOccurrence(object):
         _   _   _   3      4   _          6       indexes = [3, 4, 6]
     """
     def __init__(self, sentence, candidate, sentence_indexes):
+        for s_i in sentence_indexes:
+            if not (0 <= s_i < len(sentence)):
+                raise Exception("Candidate %r has Sentence %r " \
+                        "as a source at bad word index: %r." % (
+                        candidate.id_number, sentence.id_number, s_i+1))
         self.candidate = candidate
         self.sentence = sentence
         self.indexes = sentence_indexes
@@ -67,7 +72,7 @@ class MWEOccurrence(object):
         # For each (candidate index, sentence index)...
         for c_i, s_i in enumerate(self.indexes):
             ret.append('<mwepart index="')
-            ret.append(unicode(s_i + 1))
+            ret.append(unicode(s_i + 1))  # 1-based indexing
             ret.append('">')
             ret.append(self.candidate[c_i].lemma)
             ret.append('</mwepart>')
@@ -112,6 +117,7 @@ class MWEOccurrenceBuilder(object):
             return False  # Cannot match anything else
         if not self.match(index_sentence, len(self.indexes)):
             return False  # Does not match POS or whatever
+        assert index_sentence < len(self.sentence)
         self.indexes.append(index_sentence)
         return True
 
