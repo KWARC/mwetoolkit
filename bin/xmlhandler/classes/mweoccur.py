@@ -34,15 +34,15 @@ import pdb
 class MWEOccurrence(object):
     r"""Represents the occurrence of an MWE candidate in a sentence.
 
-    Attributes:
-    -- sentence: The sentence in this occurrence.
-    -- candidate: The MWE candidate in this occurrence.
-    -- indexes: A list of indexes that represent the position of
+    Constructor Arguments:
+    @param sentence The sentence in this occurrence.
+    @param candidate The MWE candidate in this occurrence.
+    @param indexes A list of indexes that represent the position of
     each word from `self.candidate` in `self.sentence`.
     This list will be `list(xrange(i, i + len(self.candidate)))` when
     referring to the simplest kinds of MWEs.  If the MWE in-sentence has
     different word order (e.g. passive voice in English), a permutation of
-    those indexes should be used.  If there are gaps inside the MWE (e.g.
+    those indexes will be used.  If there are gaps inside the MWE (e.g.
     verb-particle compounds in English), other sentence indexes may be used.
     IMPORTANT: This list is 0-based in python but 1-based in XML.
 
@@ -58,8 +58,8 @@ class MWEOccurrence(object):
     def __init__(self, sentence, candidate, sentence_indexes):
         for s_i in sentence_indexes:
             if not (0 <= s_i < len(sentence)):
-                raise Exception("Candidate %r has Sentence %r " \
-                        "as a source at bad word index: %r." % (
+                raise Exception("Candidate %r references bad word " \
+                        "index: Sentence %r, index %r."  % (
                         candidate.id_number, sentence.id_number, s_i+1))
         self.candidate = candidate
         self.sentence = sentence
@@ -82,18 +82,22 @@ class MWEOccurrence(object):
 
 
 class MWEOccurrenceBuilder(object):
-    r"""Creates an instance of MWEOccurrence.
+    r"""MWEOccurrenceBuilder's can be filled up with data
+    to create an instance of MWEOccurrence.
 
+    Constructor Arguments:
+    @param sentence Will become `MWEOccurrence.sentence`.
+    @param candidate Will become `MWEOccurrence.candidate`.
+    @param n_gaps Number of remaining gaps allowed inside
+       the indexes of the MWEOccurrence (see `fill_next_slot`) .
+    
     Attributes:
-    -- sentence: Will become `MWEOccurrence.sentence`.
-    -- candidate: Will become `MWEOccurrence.candidate`.
-    -- indexes: Will become `MWEOccurrence.indexes`.
+    @param indexes Will become `MWEOccurrence.indexes`.
     """
-    # XXX implement a JMWE-style comparator
-    def __init__(self, sentence, candidate):
-        self.sentence, self.candidate = sentence, candidate
-        words = set(w.lemma for w in self.sentence.word_list)
-        self.has_multiple = len(words) != len(sentence)
+    def __init__(self, sentence, candidate, n_gaps=None):
+        self.sentence = sentence
+        self.candidate = candidate
+        self.n_gaps = n_gaps or 0
         self.indexes = []  # similar to JMWE's `MWEBuilder.slot`
 
     def is_full(self):
@@ -102,24 +106,39 @@ class MWEOccurrenceBuilder(object):
         assert len(self.indexes) <= len(self.candidate)
         return len(self.indexes) == len(self.candidate)
 
-    def match(self, index_sentence, index_candidate):
-        r"""Return whether we should fill position `index_candidate`
-        with the word in `index_sentence`."""
-        # Similar to JMWE's `IMWEDesc.isFillerForSlot`.
+    def match_key(self, word_obj):
+        r"""Return some `key(word_obj)` for comparison at `self.match`."""
         raise NotImplementedError
 
+    def match(self, index_sentence, index_candidate):
+        r"""Return whether we should fill position
+        `index_candidate` with the word in `index_sentence`."""
+        # Similar to JMWE's `IMWEDesc.isFillerForSlot`.
+        s_word = self.sentence[index_sentence]
+        c_word = self.candidate[index_candidate]
+        return self.match_key(s_word) == self.match_key(c_word)
+
     def fill_next_slot(self, index_sentence):
-        r"""If possible to fill next index slot, do it by
+        r"""Try the following things, in order:
+        -- If possible to fill next index slot, do it by
         appending an index from sentence to this builder
-        and return True.  Otherwise, return False."""
+        and return non-False "FILLED".
+        -- If possible to insert a gap, ignore this index
+        and return non-False "GAP".
+        -- Return False.
+        """
         # Similar to JMWE's `MWEBuilder.fillNextSlot`.
+        assert index_sentence < len(self.sentence)
+        index_candidate = len(self.indexes)
         if self.is_full():
             return False  # Cannot match anything else
-        if not self.match(index_sentence, len(self.indexes)):
-            return False  # Does not match POS or whatever
-        assert index_sentence < len(self.sentence)
-        self.indexes.append(index_sentence)
-        return True
+        if self.match(index_sentence, index_candidate):
+            self.indexes.append(index_sentence)
+            return "FILLED"
+        if self.n_gaps > 0 and index_candidate != 0:
+            self.n_gaps -= 1
+            return "GAP"
+        return False
 
     def checked_fill_next_slot(self, index_sentence):
         r"""Call `fill_next_slot` and raise if it returns False."""
@@ -130,11 +149,11 @@ class MWEOccurrenceBuilder(object):
         r"""Create an MWEOccurrence object."""
         if not self.is_full():
             raise Exception("MWEOccurrence not ready to be created")
-        return MWEOccurrence(self.sentence,
-                self.candidate, self.indexes)
+        return MWEOccurrence(self.sentence, self.candidate, self.indexes)
     
     def __repr__(self):
-        return b" ".join(w.lemma.encode('utf8') for w in self.candidate.word_list)
+        return b" ".join(w.lemma.encode('utf8')
+                for w in self.candidate.word_list)
 
         
 ################################################################################

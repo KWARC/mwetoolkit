@@ -79,11 +79,15 @@ OPTIONS may be:
 -d <method> OR --detection <method>
     Choose a method of MWE detection (default: "ContiguousLemma"):
     * Method "ContiguousLemma": detects contiguous lemmas.
-    * Method "Source": uses `<sources>` tag from candidates file.
+    * Method "Source": uses "<sources>" tag from candidates file.
+
+-g <n-gaps> OR --gaps <n-gaps>
+    Allow a number of gaps inside the detected MWE.
+    (This argument is NOT allowed for the method of detection "Source").
 
 -S OR --source
-    Annotate based on the `<sources>` tag from the candidates file.
-    Same as passing the parameter `--detection=Source`.
+    Annotate based on the "<sources>" tag from the candidates file.
+    Same as passing the parameter "--detection=Source".
 
 -o <format> OR --output <format>
     Choose a method of output (default: "XML"):
@@ -123,22 +127,40 @@ class AnnotatingXMLParser(XMLParser):
 ################################################################################
 
 
-class SourceDetector(object):
-    r"""MWE candidates detector that uses information
-    from the <sources> tag in the candidates file to
-    annotate the original corpus.
+class AbstractDetector(object):
+    r"""Base MWE candidates detector.
+    
+    Constructor Arguments:
+    @param candidate_info An instance of CandidateInfo.
+    @param n_gaps Number of gaps to allow inside detected MWEs.
+    Subclasses are NOT required to honor `n_gaps`.
     """
-    def __init__(self, candidate_info):
-        self.candidates_list = candidate_info.candidates_list()
-        self.info_from_s_id = candidate_info.parsed_source_tag()
+    def __init__(self, candidate_info, n_gaps):
+        self.candidate_info = candidate_info
+        self.n_gaps = n_gaps
 
     def detect(self, sentence):
         r"""Yield MWEOccurrence objects for this sentence."""
+        raise NotImplementedError
+
+
+class SourceDetector(AbstractDetector):
+    r"""MWE candidates detector that uses information
+    from the <sources> tag in the candidates file to
+    annotate the original corpus.
+
+    See `AbstractDetector`.
+    """
+    def __init__(self, *args, **kwargs):
+        super(SourceDetector,self).__init__(*args, **kwargs)
+        self.info_from_s_id = self.candidate_info.parsed_source_tag()
+
+    def detect(self, sentence):
         for cand, indexes in self.info_from_s_id[sentence.id_number]:
             yield MWEOccurrence(sentence, cand, indexes)
 
 
-class ContiguousLemmaDetector(object):
+class ContiguousLemmaDetector(AbstractDetector):
     r"""MWE candidates detector that detects MWEs whose
     lemmas appear contiguously in a sentence.
 
@@ -154,14 +176,16 @@ class ContiguousLemmaDetector(object):
     of MWE builders that are `full`, we keep a list `all_b` with
     all builders created, and then filter out the bad ones in the end.
     This allows us to report MWEs in the order they were seen.
+
+    See `AbstractDetector`.
     """
     # Similar to JMWE's `Consecutive`.
-    def __init__(self, candidate_info):
+    def __init__(self, *args, **kwargs):
+        super(ContiguousLemmaDetector,self).__init__(*args, **kwargs)
         self.candidates_from_1st_lemma = \
-                candidate_info.candidates_from_1st_lemma()
+                self.candidate_info.candidates_from_1st_lemma()
 
     def detect(self, sentence):
-        r"""Yield MWEOccurrence objects for this sentence."""
         all_b = []  # all builders ever created
         cur_b = []  # similar to JMWE's local var `in_progress`
         for i in xrange(len(sentence)):
@@ -171,7 +195,7 @@ class ContiguousLemmaDetector(object):
             # Append new builders for whom `i` can fill the first slot
             first_lemma = sentence[i].lemma
             for candidate in self.candidates_from_1st_lemma[first_lemma]:
-                b = self.LemmaMWEOBuilder(sentence, candidate)
+                b = self.LemmaMWEOBuilder(sentence, candidate, self.n_gaps)
                 b.checked_fill_next_slot(i)
                 cur_b.append(b)
                 all_b.append(b)
@@ -181,10 +205,8 @@ class ContiguousLemmaDetector(object):
 
     class LemmaMWEOBuilder(MWEOccurrenceBuilder):
         r"""Matches equal lemmas in sentence-vs-candidate."""
-        def match(self, index_sentence, index_candidate):
-            s = self.sentence[index_sentence]
-            c = self.candidate[index_candidate]
-            return s.lemma == c.lemma
+        def match_key(self, word):
+            return word.lemma
 
 
 detectors = {
@@ -258,6 +280,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     detector_class = ContiguousLemmaDetector
     printer_class = XMLPrinter
     candidates_fnames = []
+    n_gaps = None
 
     for (o, a) in opts:
         if o in ("-c", "--candidates"):
@@ -269,9 +292,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-o", "--output"):
             printers = {"XML": XMLPrinter, "Text": SurfacePrinter}
             printer_class = printers[a]
+        if o in ("-g", "--gaps"):
+            n_gaps = int(a)
 
     if not candidates_fnames:
         error("No candidates file given!")
+    if detector_class == SourceDetector and n_gaps is not None:
+        error('Bad arguments: method "Source" with "--gaps"')
 
     try:
         p = CandidatesParser(candidates_fnames)
@@ -282,12 +309,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
     global detector, printer
     printer = printer_class(root="corpus")
-    detector = detector_class(p.info)
+    detector = detector_class(p.info, n_gaps)
 
         
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = ["candidates=", "detector=", "source", "output="]
-arg = read_options("c:d:So:", longopts, treat_options, -1, usage_string)
+longopts = ["candidates=", "detector=", "gaps=", "source", "output="]
+arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
 AnnotatingXMLParser(arg, printer).parse()

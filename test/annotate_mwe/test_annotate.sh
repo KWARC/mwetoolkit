@@ -25,13 +25,16 @@ rm -rf "./output"
 mkdir -p "./output"
 
 python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
-        -o Text -c ContiguousLemma/candidates.xml >output/outTxtContigLemma.xml
+        -o Text -c ContiguousLemma/candidates.xml >output/TxtContigLemma.xml
 
 python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
-        -c ContiguousLemma/candidates.xml >output/outContigLemma.xml
+        -c ContiguousLemma/candidates.xml >output/ContigLemma.xml
+
+python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
+        -g 3 -c ContiguousLemma/candidates.xml >output/Gapped3ContigLemma.xml
 
 python "$BIN/head.py" -n10 Source/corpus.xml | "$BIN/annotate_mwe.py" \
-        --debug -S -c Source/candidates.xml >output/outSource.xml
+        --debug -S -c Source/candidates.xml >output/Source.xml
 
 
 #test_from_xml() {
