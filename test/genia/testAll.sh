@@ -77,6 +77,10 @@ main() {
 		'run candidates.py -s -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
 		true
 
+	dotest "Extraction with Longest match-distance" \
+		'run candidates.py --match-distance=Longest -s -v -p "$DIR/patterns.xml" "corpus.xml" >long-candidates.xml' \
+		true
+
 	dotest "Comparison of candidate extraction outputs" \
 		'diff-sorted candidates-from-index.xml candidates-from-corpus.xml' \
 		true

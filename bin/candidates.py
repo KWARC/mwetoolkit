@@ -87,7 +87,13 @@ python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
 OPTIONS may be:
 
 -i OR --index
-     Read the corpus from an index instead of an XML file. Default false.
+    Read the corpus from an index instead of an XML file. Default false.
+
+-d <distance> OR --match-distance <distance>
+    Select the distance through which patterns will match (default: "All"):
+    * Distance "Shortest": Output on the shortest matches (non-greedy).
+    * Distance "Longest": Output on the longest matches (greedy).
+    * Distance "All": Output all match sizes.
      
 -f OR --freq     
     Output the count of the candidate. This counter will merge the candidates if
@@ -119,6 +125,7 @@ at the same time.
 """
 patterns = []
 ignore_pos = False
+match_distance = "All"
 surface_instead_lemmas = False
 print_cand_freq = False
 corpus_from_index = False
@@ -149,15 +156,14 @@ def treat_sentence( sentence ) :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
 
     words = sentence.word_list
-    already_matched = {}
+    already_matched = set()
 
     for pattern in patterns:
-        for (match_ngram, wordnums) in match_pattern( pattern, words ):
+        for (match_ngram, wordnums) in pattern.matches(words, match_distance):
             wordnums_string = ",".join( map( str, wordnums ) )
             if wordnums_string in already_matched:
                 continue
-            else:
-                already_matched[ wordnums_string ] = True
+            already_matched.add( wordnums_string )
 
             #match_ngram = Ngram(copy_word_list(ngram), [])
 
@@ -295,6 +301,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             mode.append( "ngram" )
         elif o in ("-g", "--ignore-pos") : 
             ignore_pos = True
+        elif o in ("-d", "--match-distance") : 
+            match_distance = a
         elif o in ("-s", "--surface") : 
             surface_instead_lemmas = True
         elif o in ("-S", "--source") :
@@ -308,8 +316,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         print >> sys.stderr, "Exactly one option, -p or -n, must be provided"
         usage( usage_string )
         sys.exit( 2 )
-        
-
 
     if "patterns" in mode:
         try:
@@ -318,12 +324,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             print >>sys.stderr, "Error loading patterns file!"
             raise
         
+
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "freq", "ignore-pos", "surface", \
-             "source" ]
-arg = read_options( "p:n:ifgsS", longopts, treat_options, -1, usage_string )
+longopts = [ "patterns=", "ngram=", "index", "match-distance=",
+        "freq", "ignore-pos", "surface", "source" ]
+arg = read_options( "p:n:id:fgsS", longopts, treat_options, -1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
