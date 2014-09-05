@@ -60,7 +60,7 @@ from xmlhandler.classes.word import Word
 from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, \
                  verbose, interpret_ngram, error
-from libs.printers import XMLPrinter, SurfacePrinter
+from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
 from libs.parser_wrappers import XMLParser
 
 ################################################################################
@@ -92,8 +92,10 @@ OPTIONS may be:
 -o <format> OR --output <format>
     Choose a method of output (default: "XML"):
     * Method "XML": output corpus in XML format.
-    * Method "Text": output corpus in textual format, showing only
-      surface forms and <mwe> XML tags surrounding MWE tokens.
+    * Method "Text": output corpus in textual format, showing only surface forms 
+      and <mwe> XML tags surrounding MWE tokens.
+    * Method "Moses": output corpus in Moses factored format, with word factors 
+      separated by vertical bars | and <mwe> XML tags surrounding MWE tokens.
 
 %(common_options)s
 """
@@ -119,9 +121,14 @@ class AnnotatingXMLParser(XMLParser):
                     % {"n": self.sentence_counter})
 
         for mwe_occurrence in detector.detect(sentence):
-            sentence.mweoccurs.append(mwe_occurrence)
-            
-        self.printer.add(sentence)
+            sentence.mweoccurs.append(mwe_occurrence)            
+        if out_text :  #CR - probably better with a TxTPrinter class?
+            print( sentence.to_surface() )   
+        elif out_moses :
+            print( sentence.to_moses() )         
+        else : #CR
+            self.printer.add(sentence)
+
 
 
 ################################################################################
@@ -275,6 +282,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     @param arg The argument list parsed by getopts.
     @param n_arg The number of arguments expected for this script.    
     """
+
+    global printer_class
+
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
     detector_class = ContiguousLemmaDetector
@@ -290,11 +300,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-S", "--source"):
             detector_class = SourceDetector
         if o in ("-o", "--output"):
-            printers = {"XML": XMLPrinter, "Text": SurfacePrinter}
+            printers = {
+                "XML": XMLPrinter, 
+                "Text": SurfacePrinter, 
+                "Moses": MosesPrinter 
+            }
             printer_class = printers[a]
         if o in ("-g", "--gaps"):
             n_gaps = int(a)
-
     if not candidates_fnames:
         error("No candidates file given!")
     if detector_class == SourceDetector and n_gaps is not None:
@@ -315,6 +328,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
+
 longopts = ["candidates=", "detector=", "gaps=", "source", "output="]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
 AnnotatingXMLParser(arg, printer).parse()
+
