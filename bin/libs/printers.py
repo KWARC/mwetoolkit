@@ -33,8 +33,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-from .xmlhandler.classes.sentence import Sentence
-from .xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
+from xmlhandler.classes.sentence import Sentence
+from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 
 
 ################################################################################
@@ -195,6 +195,29 @@ class SurfacePrinter(AbstractPrinter):
     def stringify(self, obj):
         try:
             return obj.to_surface() + "\n"
+        except AttributeError:
+            return unicode(obj)
+            
+#################################################
+class MosesPrinter(AbstractPrinter):
+    """Instances can be used to print Moses factored format.
+
+    Example:
+    >>> from sentence import *
+    >>> from word import *
+    >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
+    >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
+    >>> s3 = "A plain-text sentence."
+    >>> with MosesPrinter(root=None) as p:  # doctest: +ELLIPSIS
+    ...     p.add(s1, s2)
+    <__main__.TextPrinter object at ...>
+    Sample sentence .
+    Another sentence !
+    A plain-text sentence.
+    """
+    def stringify(self, obj):
+        try:
+            return obj.to_moses() + "\n"
         except AttributeError:
             return unicode(obj)
 
