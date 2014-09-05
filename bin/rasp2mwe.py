@@ -60,7 +60,7 @@ python %(program)s OPTIONS <file_in>
 OPTIONS may be:
 
 -m OR --morphg
-    Path to morphg. If this option is activated, you should provide the absolute 
+    Path to morphg. If this option is activated, you should provide the absolute
     path to the morphg installation folder.
     
 -x OR --moses
@@ -181,11 +181,11 @@ def process_line( l, phrase ):
     global generate_text
     words = l.split(" ")[:-3]                            #remove last 3 elements
     words = " ".join( words )[1:-1].split( " " )         # remove parentheses
-    for word in words : #e.g.: resume+ed:7_VVN
+    for (iword, word) in enumerate( words ) : #e.g.: resume+ed:7_VVN
         try :
             (s, index, pos) = get_tokens(word)
             (surface, lemma) = get_surface(s, pos)
-            dic={d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:''}
+            dic={d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:'',d[0]:str(iword+1)}
             for key in dic.keys() :
                 dic[key] = dic[key].replace(" ","") # remove spaces
                 if generate_text : # escape vertical bars
@@ -216,19 +216,32 @@ def process_tree_branch(l, phrase):
             rel = rel + "_" + part.replace("|","")
         else:
             members.append( part )
-    rel = rel[1:]
-    if len(members) >= 2:        
-        syn = rel + ":" + get_tokens( members[0] )[1] 
-        if len(members) == 3 :
-            syn = syn + ";" + rel + ":" + get_tokens( members[1] )[1]
-        son = get_tokens( members[-1] )[1]
-        entry = phrase.get( int(son), None )
-        if entry :
-            if entry[ "syn" ] == "" :
-                entry[ "syn" ] = syn
-            else :
-                entry[ "syn" ] = entry[ "syn" ] + ";" + syn
+    # First char is _
+    # Also remove ; and : from rel, since they have special meanings in format
+    rel = rel[1:].replace( ";", "SEMICOLON").replace( ":", "COLON" )
+    if len(members) >= 1 :
+        if len(members) >= 2:    # binary (typical) dependency relation                 
+            # This line below converts RASP's token IDs into token positions in
+            # moses format. This is required because sometimes RASP skips words
+            # and assigns e.g. 1 2 4 5, so dependency 2->4 should be converted
+            # into 2->3 in new sentence 1 2 3 4.
+            head = phrase[ int( get_tokens( members[0] )[1] ) ][ "index" ] 
+            syn = rel + ":" + head 
+            if len(members) == 3 :
+                syn = syn + ";" + rel + ":" + get_tokens( members[1] )[1]
+            son = get_tokens( members[-1] )[1]
+            entry = phrase.get( int(son), None )        
+        else:                    # simple property: passive, have_to, etc.    
+            word_index = get_tokens( members[ 0 ] )[ 1 ]
+            entry = phrase.get( int(word_index), None )
+            syn = rel
+    if entry and syn :
+        if entry[ "syn" ] == "" :
+            entry[ "syn" ] = syn
+        else :
+            entry[ "syn" ] = entry[ "syn" ] + ";" + syn
     else :
+        pdb.set_trace()
         warn( "Unrecogized grammatical relation \"%s\"" % l.strip() )
 
 ###############################################################################
@@ -250,13 +263,15 @@ def transform_format(rasp):
     phrase = {}
     l=rasp.readline()
     #pdb.set_trace()
-    while l != "":
+    while l != "":        
         if l=="\n":
             l_empty+=1
-            if l_empty == 1:           	    
+            if l_empty == 1:
             	sorted_phrase = map( lambda x: x[1], sorted( phrase.items() ) )
                 write_entry(n_line,sorted_phrase)
                 phrase = {}
+                if n_line % 100 == 0 :
+                    verbose( "Processing sentence number %d" % n_line )
                 n_line+=1
                 first_line=True
             l=rasp.readline()
