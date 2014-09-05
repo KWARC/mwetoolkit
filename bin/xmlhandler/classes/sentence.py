@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro
 #
 # sentence.py is part of mwetoolkit
 #
@@ -71,12 +71,34 @@ class Sentence( Ngram ) :
         self.mweoccurs = []
         
 ################################################################################
+
+    def add_mwe_tags( self, tokens ) :
+        """
+            Given a list of tokens (words represented somehow), adds <mwepart>
+            tags aroung them in order to indicate those words that are parts of
+            identified MWEs.
+            
+            @param tokens A list of strings containing the sentence tokens
+            @return A copy of the list of tokens with eack MWE part tagged
+        """
+        mwetags_list = [ [] for i in range( len( tokens ) ) ]
+        result = list( tokens )
+        for mweoccur in self.mweoccurs :
+            base = mweoccur.base_index
+            for i in mweoccur.indexes :
+                mwetags_list[ base + i ].append( mweoccur.candidate.id_number )
+        for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
+            if mwetag : 
+                result[mwetag_i] = "<%(tag)s id=\"%(ids)s\">%(w)s</%(tag)s>" % \
+                {"tag":"mwepart", "ids":",".join(mwetag), "w":result[mwetag_i]}
+        return result
+            
+################################################################################        
         
     def to_surface( self ) :
         """
             Returns a simple readable string where the surface forms of the 
             current sentence are concatenated and separated by a single space.
-            Used only for debug.
             
             @return A string with the surface form of the sentence, 
             space-separated.
@@ -88,10 +110,25 @@ class Sentence( Ngram ) :
                 mwetags_list[ i ].append( mweoccur.candidate.id_number )
         for (mwetag_i, mwetag) in enumerate(mwetags_list) :
             if mwetag : 
-                surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag) + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
+                surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag)\
+                              + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
                    
         return " ".join( surface_list )
              
+################################################################################
+
+    def to_moses( self ) :
+        """
+            Returns a simple Moses-factored string where words are separated by 
+            a single space and each word part (surface, lemma, POS, syntax) is 
+            separated from the next using a vertical bar |
+            
+            @return A string with the Moses factored form of the sentence
+        """
+        moses_list = map( lambda x: x.to_moses(), self.word_list )
+        tagged_list = self.add_mwe_tags( moses_list )        
+        return " ".join( tagged_list )
+
 ################################################################################
         
     def to_xml( self ) :
