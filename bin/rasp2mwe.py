@@ -119,7 +119,7 @@ def write_entry(n_line, sent):
         sent_templ ="<s s_id=\""+str(n_line)+"\">%(sent)s</s>"
         word_templ="<w surface=\"%(surface)s\" lemma=\"%(lemma)s\" pos="+\
                    "\"%(pos)s\" syn=\"%(syn)s\" />"
-    print sent_templ % { "sent":" ".join(map(lambda x: word_templ % x, sent)) }
+    print(sent_templ % { "sent":" ".join(map(lambda x: (word_templ % x).encode("utf-8"), sent)) })
 
 ###############################################################################
 
@@ -188,12 +188,11 @@ def process_line( l, phrase ):
             dic={d[1]:surface,d[2]:lemma,d[3]:pos,d[4]:'',d[0]:str(iword+1)}
             for key in dic.keys() :
                 dic[key] = dic[key].replace(" ","") # remove spaces
+                dic[key] = strip_xml(dic[key])
                 if generate_text : # escape vertical bars
                     dic[key] = dic[key].replace( "|","%%VERTICAL_BAR%%" )
-                else : # escape XML elements
-                    dic[key] = strip_xml(dic[key])  
             phrase[ int(index) ] = dic
-        except Exception:
+        except IndexError:
             warn( "Line \"%s\" could not be processed as sentence" % l.strip() )
 
 ###############################################################################
@@ -208,7 +207,7 @@ def process_tree_branch(l, phrase):
         
         @param phrase List of dictionaries to be completed
     """
-    parts = l.strip().translate( None, "()" ).replace( " _", "" ).split( " " )
+    parts = l.strip().replace( " _", "" ).replace( "(", "" ).replace( ")", "" ).split( " " )
     rel = ""
     members = []
     for part in parts :
@@ -240,8 +239,7 @@ def process_tree_branch(l, phrase):
             entry[ "syn" ] = syn
         else :
             entry[ "syn" ] = entry[ "syn" ] + ";" + syn
-    else :
-        pdb.set_trace()
+    else :        
         warn( "Unrecogized grammatical relation \"%s\"" % l.strip() )
 
 ###############################################################################
@@ -261,8 +259,9 @@ def transform_format(rasp):
     l_empty=2
     first_line=True    
     phrase = {}
-    l=rasp.readline()
+    l=unicode(rasp.readline(),"utf-8")
     #pdb.set_trace()
+    # THIS LOOP IS HORRIBLE. PLEASE REFACTOR ME, PLEEEEASE!!!! - CR 20140905    
     while l != "":        
         if l=="\n":
             l_empty+=1
@@ -274,12 +273,12 @@ def transform_format(rasp):
                     verbose( "Processing sentence number %d" % n_line )
                 n_line+=1
                 first_line=True
-            l=rasp.readline()
+            l=unicode( rasp.readline(), "utf-8" )
             continue
         # too long sentences not parsed because -w word limit passed to parser
         elif l.startswith( "(X" ) :
             while l != "\n" :
-                l = rasp.readline()
+                l = unicode( rasp.readline(), "utf-8" )
             continue
         if first_line:
             if l_empty>=1:
@@ -287,13 +286,13 @@ def transform_format(rasp):
                 process_line(l,phrase)
                 #pdb.set_trace()
                 first_line=False
-                l=rasp.readline() #ignore line
+                l=unicode( rasp.readline(), "utf-8" ) #ignore line
             else:
                 l_empty=0
                 first_line=True
         else:
             process_tree_branch(l,phrase)
-        l=rasp.readline()
+        l=unicode( rasp.readline(), "utf-8" )
     if l_empty != 1 and len(phrase) != 0 : #save last entry
         write_entry(n_line,map( lambda x: x[1], sorted( phrase.items() ) )) 
     if morphg_folder :
@@ -306,7 +305,7 @@ longopts = ["morphg=", "moses"]
 arg = read_options( "m:x", longopts, treat_options, -1, usage_string )
 
 if not generate_text :
-    print XML_HEADER % { "root": "corpus", "ns": "" }
+    print( XML_HEADER % { "root": "corpus", "ns": "" } )
 
 if len( arg ) == 0 :
     transform_format( sys.stdin )
@@ -320,5 +319,5 @@ else :
         input_file.close()    
                
 if not generate_text :
-    print XML_FOOTER % { "root": "corpus" }
+    print( XML_FOOTER % { "root": "corpus" } )
 
