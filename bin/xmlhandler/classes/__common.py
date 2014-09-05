@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo
 #
 # __common.py is part of mwetoolkit
 #
@@ -22,57 +22,99 @@
 #
 ################################################################################
 """
-    INTERNAL OPTIONS (Do not modify unless you know what you are doing)
+    Internal options and common configuration parameters and options for 
+    mwetoolkit.
 """
 
-# Some internal parameters are taken from config file. They're actually external
-# parameters but for transparency, everything is grouped in the __common.py 
-# file.
-import config
+import os
 
-DEFAULT_LANG = config.DEFAULT_LANG
+################################################################################
 
-MAX_CACHE_DAYS = config.MAX_CACHE_DAYS
+"""
+    Two-letters language code of the working corpus. This information will not
+    be used by mwetoolkit, but it is important for searching the correct
+    language pages in Yahoo's and Google's indices.
+"""
+DEFAULT_LANG = "en"
 
-YAHOO_APPID = config.YAHOO_APPID
+"""
+    Maximum number of days that a Web result might stay in the cache file. A 
+    negative value means that there is no expiration date for cache entries. If 
+    you set this parameter to zero, no cache will be used. Note that expired 
+    cache entries will be searched again and will count as a search for the 
+    daily limit of 5000 searches.
+"""
+MAX_CACHE_DAYS = -1
 
-# Name of the cache file where mwetoolkit keeps recent Web queries to speed up
-# the process.
+"""
+    Application ID to be used with Yahoo Web Search API (see specific doc. for
+    more details)
+"""
+YAHOO_APPID = "ngram001"
+
+
+"""
+    Path to the C indexer program. The default value should work.
+"""
+C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/c-indexer"
+
+# Internal options below (do not modify unless you know what you are doing)
+
+"""
+    Name of the cache file where mwetoolkit keeps recent Web queries to speed up
+    the process.
+"""
 YAHOO_CACHE_FILENAME = "yahoo_cache.dat"
 GOOGLE_CACHE_FILENAME = "google_cache.dat"
 
-# Characters internally used as attribute and word separators.
-# Must not appear in the corpus, neither as a word, nor as a POS tag!
-# The probability is minimal but it is nevertheless important to warn you
-# about it!
-# Each separator must be a single character.
+"""
+    Characters internally used as attribute and word separators.
+    Must not appear in the corpus, neither as a word, nor as POS tag etc!
+    The probability is minimal but it is nevertheless important to warn you
+    about it! Each separator must be a single character.
+"""
 WILDCARD = "\36"             # ASCII level 3 separator
 ATTRIBUTE_SEPARATOR = "\35"  # ASCII level 2 separator
 WORD_SEPARATOR = "\34"       # ASCII level 1 separator
 SEPARATOR = ATTRIBUTE_SEPARATOR
 
-# A temporary file
+"""
+    The prefix of the name of a temporary file
+"""
 TEMP_PREFIX = "mwetk_"
 
-# Existing folder where the toolkit keeps temporary files
+"""
+    Existing folder where the toolkit keeps temporary files. Default in Linux
+"""
 TEMP_FOLDER = "/tmp"
 
-# Should not be a token of the corpus neither a POS tag! The probability is 
-# minimal but it is nevertheless important to warn you about it!
+"""
+    Should not be a token of the corpus neither a POS tag! The probability is 
+    minimal but it is nevertheless important to warn you about it!
+"""
 INDEX_NAME_KEY = "___index_name___"
 
-# Should not be a token of the corpus neither a POS tag! The probability is 
-# minimal but it is nevertheless important to warn you about it!
+"""
+    Should not be a token of the corpus neither a POS tag! The probability is 
+    minimal but it is nevertheless important to warn you about it!
+"""
 CORPUS_SIZE_KEY = "___corpus_size___"
 
-# Unknown feature value is represented by quote mark in WEKA's arff file format
+"""
+    Unknown feature value is represented by quote mark in WEKA's arff file 
+    format
+"""
 UNKNOWN_FEAT_VALUE = "?"
 
-# Default XML header used for all files
+""" 
+    Default XML header used for all files 
+"""
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE %(root)s SYSTEM "dtd/mwetoolkit-%(root)s.dtd">
 <%(root)s %(ns)s>"""
 
-# Default XML footer
+"""
+    Default XML footer
+"""
 XML_FOOTER = """</%(root)s>"""
 
