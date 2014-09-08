@@ -34,7 +34,7 @@ python "$BIN/head.py" -n10 ContiguousLemma/corpus.xml | "$BIN/annotate_mwe.py" \
         -g 3 -c ContiguousLemma/candidates.xml >output/Gapped3ContigLemma.xml
 
 python "$BIN/head.py" -n10 Source/corpus.xml | "$BIN/annotate_mwe.py" \
-        --debug -S -c Source/candidates.xml >output/Source.xml
+        -S -c Source/candidates.xml >output/Source.xml
 
 
 #test_from_xml() {
