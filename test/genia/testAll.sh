@@ -81,6 +81,10 @@ main() {
 		'run candidates.py --match-distance=Longest -s -v -p "$DIR/patterns.xml" "corpus.xml" >long-candidates.xml' \
 		true
 
+	dotest "Extraction with Non-Overlapping Longest match-distance" \
+		'run candidates.py --match-distance=Longest --non-overlapping -s -v -p "$DIR/patterns.xml" "corpus.xml" >long-candidates-nonoverlap.xml' \
+		true
+
 	dotest "Comparison of candidate extraction outputs" \
 		'diff-sorted candidates-from-index.xml candidates-from-corpus.xml' \
 		true

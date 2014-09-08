@@ -34,7 +34,7 @@ from xmlhandler.genericXMLHandler import GenericXMLHandler
 from util import usage, read_options, treat_options_simplest, verbose, parse_xml
 from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
-from config import DEFAULT_LANG
+from xmlhandler.classes.__common import DEFAULT_LANG
 
 ################################################################################
 # GLOBALS

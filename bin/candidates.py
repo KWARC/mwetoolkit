@@ -62,7 +62,7 @@ from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, \
                  verbose, interpret_ngram
 
-from libs.patternlib import parse_patterns_file, match_pattern, \
+from libs.patternlib import parse_patterns_file, \
                             build_generic_pattern
 from libs.indexlib import Index
 
@@ -91,9 +91,13 @@ OPTIONS may be:
 
 -d <distance> OR --match-distance <distance>
     Select the distance through which patterns will match (default: "All"):
-    * Distance "Shortest": Output on the shortest matches (non-greedy).
-    * Distance "Longest": Output on the longest matches (greedy).
+    * Distance "Shortest": Output the shortest matches (non-greedy).
+    * Distance "Longest": Output the longest matches (greedy).
     * Distance "All": Output all match sizes.
+
+-N OR --non-overlapping
+    Do not output overlapping word matches.
+    This option should not be used if match-distance is "All".
      
 -f OR --freq     
     Output the count of the candidate. This counter will merge the candidates if
@@ -126,6 +130,7 @@ at the same time.
 patterns = []
 ignore_pos = False
 match_distance = "All"
+non_overlapping = False
 surface_instead_lemmas = False
 print_cand_freq = False
 corpus_from_index = False
@@ -159,7 +164,8 @@ def treat_sentence( sentence ) :
     already_matched = set()
 
     for pattern in patterns:
-        for (match_ngram, wordnums) in pattern.matches(words, match_distance):
+        for (match_ngram, wordnums) in pattern.matches(words,
+                match_distance, overlapping=not non_overlapping):
             wordnums_string = ",".join( map( str, wordnums ) )
             if wordnums_string in already_matched:
                 continue
@@ -303,6 +309,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             ignore_pos = True
         elif o in ("-d", "--match-distance") : 
             match_distance = a
+        elif o in ("-N", "--non-overlapping") : 
+            non_overlapping = True
         elif o in ("-s", "--surface") : 
             surface_instead_lemmas = True
         elif o in ("-S", "--source") :
@@ -329,8 +337,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "patterns=", "ngram=", "index", "match-distance=",
-        "freq", "ignore-pos", "surface", "source" ]
-arg = read_options( "p:n:id:fgsS", longopts, treat_options, -1, usage_string )
+        "non-overlapping", "freq", "ignore-pos", "surface", "source" ]
+arg = read_options( "p:n:id:NfgsS", longopts, treat_options, -1, usage_string )
 
 try :    
     temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 

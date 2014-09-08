@@ -233,7 +233,7 @@ attribute: " + attr + "\nIn: " + node.toxml()
         self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
 
 
-    def matches(self, words, match_distance="All"):
+    def matches(self, words, match_distance="All", overlapping=True):
         """Returns an iterator over all matches of the pattern in the word list.
         Each iteration yields a pair `(ngram, match_indexes)`.
         """
@@ -249,37 +249,13 @@ attribute: " + attr + "\nIn: " + node.toxml()
             wordstring += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
             wordnum += 1
 
-        limit = len(wordstring)
-        for current_start in positions:
-            current_end = limit
-            matches_here = []
-            while True:
-                result = self.compiled_pattern.match(wordstring, current_start - 1, current_end)
+        i = 0
+        while i < len(positions):
+            matches_here = list(self._matches_at(words, wordstring,
+                    positions[i], len(wordstring), positions))
 
-                if result:
-                    # Beware: [x for x ...] exposes the variable x to the surrounding environment.
-                    #pdb.set_trace()
-                    ignore_ids = [id for id in result.groupdict().keys() if id.startswith("ignore_")]
-                    ignore_spans = [result.span(id) for id in ignore_ids]
-
-                    start = result.start()
-                    end = result.end()
-                    current_end = end - 1
-                    ngram = []
-                    wordnums = []
-                    for i in xrange(len(words)):
-                        if positions[i] >= start and positions[i] < end:
-                            while ignore_spans and ignore_spans[0][1] <= positions[i]:
-                                # If the ignore-end is before this point, we don't need it anymore.
-                                ignore_spans = ignore_spans[1:] # Inefficient?
-                            if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
-                                ngram.append(words[i])
-                                wordnums.append(i+1)
-                    t = (Ngram(copy_word_list(ngram), []), wordnums)
-                    matches_here.append(t)
-                else:
-                    break
             if match_distance == "All":
+                if not overlapping: raise Exception("All requires Overlapping")
                 for m in matches_here: yield m
             elif match_distance == "Longest":
                 if matches_here: yield matches_here[0]
@@ -287,6 +263,39 @@ attribute: " + attr + "\nIn: " + node.toxml()
                 if matches_here: yield matches_here[-1]
             else:
                 raise Exception("Bad match_distance: " + match_distance)
+
+            i += 1
+            if not overlapping and matches_here:
+                i += max(len(m[0]) for m in matches_here) - 1
+
+
+    def _matches_at(self, words, wordstring, current_start, limit, positions):
+        current_end = limit
+        matches_here = []
+        while True:
+            result = self.compiled_pattern.match(wordstring, current_start - 1, current_end)
+            if not result: return
+
+            # Beware: [x for x ...] exposes the variable x to the surrounding environment.
+            #pdb.set_trace()
+            ignore_ids = [id for id in result.groupdict().keys() if id.startswith("ignore_")]
+            ignore_spans = [result.span(id) for id in ignore_ids]
+
+            start = result.start()
+            end = result.end()
+            current_end = end - 1
+            ngram = []
+            wordnums = []
+            for i in xrange(len(words)):
+                if positions[i] >= start and positions[i] < end:
+                    while ignore_spans and ignore_spans[0][1] <= positions[i]:
+                        # If the ignore-end is before this point, we don't need it anymore.
+                        ignore_spans = ignore_spans[1:] # Inefficient?
+                    if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
+                        ngram.append(words[i])
+                        wordnums.append(i+1)
+            yield (Ngram(copy_word_list(ngram), []), wordnums)
+
 
 
 def copy_word(w):
@@ -324,6 +333,10 @@ def patternlib_test():
     patternlib_do_test(p, ws, "Longest")
     patternlib_do_test(p, ws, "All")
 
+    print()
+    patternlib_do_test(p, ws, "Shortest", False)
+    patternlib_do_test(p, ws, "Longest", False)
+
     p = patternlib_make("""<w pos="V"/> 
             <pat repeat="*" ignore="true"> <w/> </pat>
             <w pos="P"/>""")  # pat: V .*{IGNORE} P
@@ -337,9 +350,10 @@ def patternlib_test():
 def pretty_ngram(ngram):
     return " ".join(w.surface for w in ngram)
 
-def patternlib_do_test(p, words, distance="All"):
-    lls = p.matches(words, distance)
-    print("Match distance:", distance)
+def patternlib_do_test(p, words, distance="All", overlapping=True):
+    lls = p.matches(words, distance, overlapping)
+    print("Match distance:", distance,
+            ("(" if overlapping else "(non ") + "overlapping)")
     for ngram, pos in lls:
         print("  ", pretty_ngram(ngram), pos)
 

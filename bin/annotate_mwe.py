@@ -122,12 +122,7 @@ class AnnotatingXMLParser(XMLParser):
 
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)            
-        if out_text :  #CR - probably better with a TxTPrinter class?
-            print( sentence.to_surface() )   
-        elif out_moses :
-            print( sentence.to_moses() )         
-        else : #CR
-            self.printer.add(sentence)
+        self.printer.add(sentence)
 
 
 

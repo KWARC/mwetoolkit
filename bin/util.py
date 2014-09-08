@@ -152,7 +152,7 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
         opts, arg = getopt.getopt( sys.argv[ 1: ], shortopts, longopts )
     except getopt.GetoptError, err:
         # will print something like "option -a not recognized"
-        print(ster(err), sys.stderr)
+        print(err, file=sys.stderr)
         usage(usage_string)
         sys.exit( -1 )
 

@@ -31,8 +31,8 @@ import pdb
 from xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WILDCARD
-from config import C_INDEXER_PROGRAM
+from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, \
+        WILDCARD, C_INDEXER_PROGRAM
 from util import verbose, strip_xml
 
 NGRAM_LIMIT=16

@@ -123,7 +123,7 @@ class SimplePrinter(AbstractPrinter) :
     >>> s3 = "A plain-text sentence."
     >>> with XMLPrinter(root=None) as p:  # doctest: +ELLIPSIS
     ...     p.add(s1, s2)
-    <__main__.TextPrinter object at ...>
+    <__main__.SimplePrinter object at ...>
     Sample sentence .
     Another sentence !
     A plain-text sentence.
@@ -178,19 +178,7 @@ class XMLPrinter(AbstractPrinter):
 #################################################
 class SurfacePrinter(AbstractPrinter):
     """Instances can be used to print XML surface forms.
-
-    Example:
-    >>> from sentence import *
-    >>> from word import *
-    >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
-    >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
-    >>> s3 = "A plain-text sentence."
-    >>> with XMLPrinter(root=None) as p:  # doctest: +ELLIPSIS
-    ...     p.add(s1, s2)
-    <__main__.TextPrinter object at ...>
-    Sample sentence .
-    Another sentence !
-    A plain-text sentence.
+    Similar to `SimplePrinter`.
     """
     def stringify(self, obj):
         try:
@@ -201,19 +189,7 @@ class SurfacePrinter(AbstractPrinter):
 #################################################
 class MosesPrinter(AbstractPrinter):
     """Instances can be used to print Moses factored format.
-
-    Example:
-    >>> from sentence import *
-    >>> from word import *
-    >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
-    >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
-    >>> s3 = "A plain-text sentence."
-    >>> with MosesPrinter(root=None) as p:  # doctest: +ELLIPSIS
-    ...     p.add(s1, s2)
-    <__main__.TextPrinter object at ...>
-    Sample sentence .
-    Another sentence !
-    A plain-text sentence.
+    Similar to `SimplePrinter`.
     """
     def stringify(self, obj):
         try:
