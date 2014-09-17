@@ -87,6 +87,8 @@ class Parser(object):
     def _do_parse(self, node):
         if node.nodeName == "pat":
             self._parse_pat(node)
+        elif node.nodeName == "neg":
+            self._parse_neg(node)
         elif node.nodeName == "either":
             self._parse_either(node)
 
@@ -166,6 +168,14 @@ class Parser(object):
         self.pattern += ")"
         if repeat:
             self.pattern += repeat
+
+
+    def _parse_neg(self, node):
+        self.pattern += "(?!"
+        for subnode in node.childNodes:
+            if isinstance(subnode, minidom.Element):
+                self._do_parse(subnode)
+        self.pattern += ")"
 
 
     def _parse_w(self, node):
@@ -297,6 +307,17 @@ attribute: " + attr + "\nIn: " + node.toxml()
             yield (Ngram(copy_word_list(ngram), []), wordnums)
 
 
+    def printable_pattern(self):
+        r"""Return a printable printable of `self.pattern`.
+        The pattern follows the syntax `@attr1,attr2,...,attrN@` where
+           * @ = word separator (words are surrounded by these)
+           * attrK = attribute K ("_" for undefined)
+        """
+        return self.pattern.replace(self.WORD_SEPARATOR, "@") \
+                .replace(self.ATTRIBUTE_SEPARATOR, ",") \
+                .replace("[^,@]*", "_")
+
+
 
 def copy_word(w):
     return Word(w.surface, w.lemma, w.pos, w.syn, [])
@@ -339,12 +360,27 @@ def patternlib_test():
 
     p = patternlib_make("""<w pos="V"/> 
             <pat repeat="*" ignore="true"> <w/> </pat>
-            <w pos="P"/>""")  # pat: V .*{IGNORE} P
+            <w pos="P"/>""")  # pat: V (WORD*){ignore} P
     ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2".split()
     ws = [Word(w, w, w[0], "") for w in ws]
     patternlib_do_test(p, ws, "Shortest")
     patternlib_do_test(p, ws, "Longest")
     patternlib_do_test(p, ws, "All")
+
+
+    p = patternlib_make("""<w pos="V"/> 
+            <pat repeat="*"> <w pos="V" neg="pos"/> </pat>
+            <w pos="P"/>""")  # pat: V WORD{lemma!="that}* P
+    ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2 Verb3 Prt3".split()
+    ws = [Word(w, w, w[0], "") for w in ws]
+    patternlib_do_test(p, ws, "Longest")
+
+    p = patternlib_make("""<w pos="V"/> 
+            <pat repeat="*"> <neg><w pos="V"/></neg> </pat>
+            <w pos="P"/>""")  # pat: V (!(WORD{lemma="that}))* P
+    ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2 Verb3 Prt3".split()
+    ws = [Word(w, w, w[0], "") for w in ws]
+    patternlib_do_test(p, ws, "Longest")
 
 
 def pretty_ngram(ngram):
@@ -362,8 +398,8 @@ def patternlib_make(str_pattern):
     s = "<patterns><pat>{}</pat></patterns>".format(str_pattern)
     p = parse_patterns_file(StringIO(s))[0]
     print("-" * 40)
-    print("Node pattern:", repr(p.node.toxml()))
-    print("Binary pattern:", repr(p.pattern))
+    print("XML pattern:", re.sub(r"\s+", " ", p.node.toxml()))
+    print("Printable-pattern:", p.printable_pattern())
     return p
 
 
