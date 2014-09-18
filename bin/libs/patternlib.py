@@ -265,18 +265,22 @@ attribute: " + attr + "\nIn: " + node.toxml()
                     positions[i], len(wordstring), positions))
 
             if match_distance == "All":
-                if not overlapping: raise Exception("All requires Overlapping")
-                for m in matches_here: yield m
+                if not overlapping:
+                    raise Exception("All requires Overlapping")
+                for m in matches_here:
+                    yield m
             elif match_distance == "Longest":
-                if matches_here: yield matches_here[0]
+                if matches_here:
+                    yield matches_here[0]
+                    increment = len(matches_here[0][0])
             elif match_distance == "Shortest":
-                if matches_here: yield matches_here[-1]
+                if matches_here:
+                    yield matches_here[-1]
+                    increment = len(matches_here[-1][0])
             else:
                 raise Exception("Bad match_distance: " + match_distance)
 
-            i += 1
-            if not overlapping and matches_here:
-                i += max(len(m[0]) for m in matches_here) - 1
+            i += 1 if overlapping else increment
 
 
     def _matches_at(self, words, wordstring, current_start, limit, positions):
