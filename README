@@ -1,15 +1,22 @@
->>>   MULTIWORD EXPRESSIONS TOOLKIT   <<<
->>>    mwetoolkit readme file         <<<
 
-Version 0.5
-Released: Mar 09, 2012
-Author: Carlos Ramisch, Vitor de Araujo
-Contact: mwetoolkit@gmail.com
-Website: mwetoolkit.sf.net 
-Project: sf.net/projects/mwetoolkit
+                  *****************************************
+                  >>>   MULTIWORD EXPRESSIONS TOOLKIT   <<<
+                  >>>     http://mwetoolkit.sf.net      <<<
+                  >>>      mwetoolkit AT gmail.com      <<<
+                  >>>                                   <<<
+                  >>>    mwetoolkit readme file         <<<
+                  *****************************************
+
+Version 0.6
+Released: Sep 19, 2014
+Authors: Carlos Ramisch, Vitor de Araujo, Silvio Ricardo Cordeiro, Sandra 
+Castellanos
+Contact: mwetoolkit AT gmail.com
+Website: http://mwetoolkit.sf.net 
+Project: http://sf.net/projects/mwetoolkit
 
 The goal of the mwetoolkit is to perform automatic Multiword Expression 
-extraction. Please read this documentation before you start the work.
+extraction. Please read this documentation before you start.
 
     1) INSTALLING
     
@@ -18,17 +25,13 @@ extraction. Please read this documentation before you start the work.
 To install the mwetoolkit, just download it from the SVN repository using the 
 following command:
 
-svn co https://mwetoolkit.svn.sourceforge.net/svnroot/mwetoolkit mwetoolkit
+svn checkout svn://svn.code.sf.net/p/mwetoolkit/code/ mwetoolkit
 
-The toolkit is also availaible as a stable release at:
+As the code evolves fast, we recommend you to use the SVN version instead of old
+releases.
 
-https://sourceforge.net/projects/mwetoolkit/files/latest/download
-
-However, as the code evolves fast, we recommend you to use the SVN version 
-instead.
-
-Once you have downloaded (and unzipped, in the case of a release) the toolkit, 
-navigate to the main folder and run the command
+Once you have downloaded the toolkit, navigate to the main folder and run the 
+command
 
 make
 
@@ -44,7 +47,7 @@ MWE extraction process. Call each script with option -h and you will have
 a complete list of arguments and options to use.
 
 Alternatively, for simple MWE extraction tasks you can call bin/mweconsole.sh, 
-which contains a friendlier command-line interface to the scripts.
+which contains a friendlier command-line interface to the scripts [DEPRECATED].
 
 The "src" folder cotains source code in C. Please do not bother about it unless
 you are a mwetoolkit developer.
@@ -60,13 +63,6 @@ inputs of the MWT toolkit scripts:
 * mwttoolkit-dict.dtd
 * mwttoolkit-candidates.dtd
 * mwetoolkit-patterns.dtd
-
-You should add a link to the folder containing the DTD specifications to every
-folder containing XML files used by the mwetoolkit (working-dir). Therefore, 
-please use the following command:
-
-cd working-dir
-ln -s mwetoolkit-dir/dtd
 
     4) EXAMPLES
 
@@ -85,4 +81,8 @@ cd test
 
 Should one of the tests fail, please send a copy of the output and a brief
 description of your configurations (operating system, version, machine) to our
-email mwetoolkit@gmail.com
+email mwetoolkit AT gmail.com
+
+Please, beware that on Mac OS some test will appear to fail when they actually
+succeed, the only differences being in rounding less significant digits of float
+numbers.
