@@ -4,11 +4,13 @@ OBJECTS := src/indexer/basefuns.o src/indexer/readline.o src/indexer/rbtree.o sr
 LIBS :=
 BIN := bin
 
+all: $(BIN)/c-indexer
+
+$(BIN)/c-indexer: $(OBJECTS)
+	gcc -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
+
 %.o: %.c
 	gcc -Wall -Wno-parentheses -c -I $(INCLUDE) $^ -o $*.o
-
-indexer: $(OBJECTS)
-	gcc -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
 
 doc: doc/html/index.html
 
