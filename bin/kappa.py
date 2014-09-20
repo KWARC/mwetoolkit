@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # kappa.py is part of mwetoolkit
 #
@@ -32,10 +33,15 @@
     The required input is a tab-separated file with the data annotation, one
     item per row, one rater/annotator per column.
 """
- 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
-import pdb
-from util import read_options, treat_options_simplest, verbose
+
+from libs.util import read_options, treat_options_simplest, verbose, warn, error
+
 
 ################################################################################ 
 # GLOBALS     
@@ -405,13 +411,12 @@ def calculate_distances( distances_map, all_categories ) :
         try :
             k1,k2 = map(lambda x : all_categories[x], cats )
         except KeyError :
-            print >> sys.stderr, ("ERROR: Distance file incompatible with "+\
-                  "annotations\nDid not find categories %s in the annotation"+\
-                  " data") % cats            
+            error("Distance file incompatible with annotations\nDid not find "
+                  "categories %s in the annotation data" % cats)
             return None
         if k1 == k2 :
-            print >> sys.stderr, "WARNING: defined distance for category and "+\
-                  "self for %s. Replacing by 0" % cats[ 0 ]
+            warn("defined distance for category and self for %s. Replacing by 0"
+                 % cats[ 0 ])
         distances_matrix[ k1 ][ k2 ] = distance
         distances_matrix[ k2 ][ k1 ] = distance
         if distance > max_distance :
@@ -532,26 +537,20 @@ def read_distances( d_filename ) :
     """
     try :
         d_data = open( d_filename )
+
+        distances_map = {} # Use a map to remove duplicates if present
+        for line in d_data.readlines() :
+            if len(line.strip()) > 0 : # Ignore blank lines
+                try :
+                    cat1, cat2, distance = line.strip().split("\t")
+                    key = "###SEPARATOR###".join( sorted( [ cat1, cat2 ] ) )
+                    distances_map[ key ] = float( distance )
+                except ValueError :
+                    error("ERROR reading distances, expected three values "
+                          "separated by TAB, found:\n" + line)
+        return distances_map
     except IOError :
-        print sys.stderr, "\nERROR: Distance file \"%s\" not found" % d_filename
-        return None
-    distances_map = {} # Use a map to remove duplicates if present
-    for line in d_data.readlines() :
-        if len(line.strip()) > 0 : # Ignore blank lines
-            try :
-                cat1, cat2, distance = line.strip().split("\t")
-            except ValueError :
-                print >> sys.stderr, "ERROR reading distances, expected " + \
-                      "three values separated by TAB, found:\n" + line
-                return None
-            key = "###SEPARATOR###".join( sorted( [ cat1, cat2 ] ) )
-            try :
-                distances_map[ key ] = float( distance )
-            except ValueError :
-                print >> sys.stderr, "ERROR reading distance, expected a " + \
-                         "number in third position, but found:\n" + line
-                return None
-    return distances_map    
+        error("\nERROR: Distance file \"%s\" not found" % d_filename)
     
 ################################################################################
 
@@ -626,20 +625,20 @@ def print_matrix_kappa( pairwise_map, Nc ) :
         kappa = pairwise_map[ pair ][3]
         ( rater1, rater2 ) = map( lambda x: int(x), pair.split("-") )
         matrix_kappa[ rater1 ][ rater2 ] = kappa
-    print "\nPairwise Cohen's kappa visualisation"
-    print Nc * 11 * "="
+    print("\nPairwise Cohen's kappa visualisation")
+    print(Nc * 11 * "=")
     for j in range(1,Nc) :
-        print "Rater%3d |" % j,
-    print ""
+        print("Rater%3d |" % j,end="")
+    print()
     for i in range(Nc-1) :        
         for j in range(1,Nc) :
             kappa = matrix_kappa[ i ][ j ]
             if j <= i :
-                print 10*" ",
+                print(10*" ",end="")
             else :
-                print "%+.5f |" % kappa,
-        print "Rater %3d" % i
-    print Nc * 11 * "="  
+                print("%+.5f |" % kappa,end="")
+        print("Rater %3d" % i)
+    print(Nc * 11 * "=")
     
 ################################################################################  
 
@@ -650,7 +649,7 @@ def print_matrix_confusion( confusion, categ_names, counters, Ni, Nc, Nk ) :
         which categories are the ones with highest/lowest disagreement and thus
         identify blurry and sharp distinctions that raters are able to make.
         
-        @param pairwise_map A map in which the keys are in the form 
+        @param confusion A map in which the keys are in the form
         "categ1-categ2" and the values are the counts of that pair
         @param Nk The total number of categories Nk in the data
         @param categ_names The list with the names of the categories ordered by
@@ -675,28 +674,30 @@ def print_matrix_confusion( confusion, categ_names, counters, Ni, Nc, Nk ) :
         if categ1 != categ2 :
             list_pair_count[ categ2 ] = list_pair_count[ categ2 ] + categ_count        
         Npairs = Npairs + categ_count
-    print "Category confusion matrix of judgement pairs"
+    print("Category confusion matrix of judgement pairs")
     print (Nk + 1) * 9 * "="
     for j in range(Nk) :
-        print "Cat%3d |" % j,
-    print ""
+        print("Cat%3d |" % j,end="")
+    print()
     for i in range(Nk) :        
         for j in range(Nk) :
             count = matrix_confusion[ i ][ j ]
             if j < i :
-                print 8 * " ",
+                print(8 * " ",end="")
             else :
-                print "%6d |" % count,
-        print "Cat%3d" % i
+                print("%6d |" % count,end="")
+        print("Cat%3d" % i)
     print (Nk + 1) * 9 * "=" + "\n"
     # Print the detail of agreement/disagreement proportions and category names
-    print " " * 12 + "Cat distrib |  Agree | Disagree"
+    print(" " * 12 + "Cat distrib |  Agree | Disagree")
     for i in range(Nk) :
         count_categ = float(counters[i])
         prop_agree = matrix_confusion[ i ][ i ] / list_pair_count[i]
         prop_disagree = 1.0 - prop_agree
-        print "Cat%3d - %5d (%.4f) | %.4f | %.4f   ---> %s" % ( i, count_categ, (count_categ/(Ni*Nc)), prop_agree, prop_disagree, categ_names[i] )
-    print
+        print("Cat%3d - %5d (%.4f) | %.4f | %.4f   ---> %s" %
+              ( i, count_categ, (count_categ/(Ni*Nc)), prop_agree,
+                prop_disagree, categ_names[i] ))
+    print()
     
     
     
@@ -721,25 +722,26 @@ def calculate_and_print( annotations, Ni, Nc, Nk, categ_names ) :
         if calculate_pairwise :
             pairwise_map = compute_pairwise_all( annotations, Ni, Nc, Nk)
             for pair in pairwise_map.keys() :
-                print "\nAgreement for pair " + pair                
-                print ("ao = %f, S = %f, pi = %f, (Cohen's) kappa = %f, "+\
-                      "weighted kappa = %f") % pairwise_map[pair]
+                print("\nAgreement for pair " + pair)
+                (a0, S, pi, kappa, wkappa) = pairwise_map[pair]
+                print("ao = %f, S = %f, pi = %f, (Cohen's) kappa = %f, "
+                      "weighted kappa = %f" % (a0, S, pi, kappa, wkappa) )
             print_matrix_kappa( pairwise_map, Nc )
         print ( "\nNc = %(Nc)d raters\nNi = %(Ni)d items\nNk = %(Nk)d " + \
               "categories\nNc x Ni = %(j)d judgements" ) %\
               {"Nc": Nc, "Ni": Ni, "Nk": Nk, "j": Ni * Nc }
         coeffs = compute_multi( annotations, Ni, Nc, Nk )
-        print "\nOverall agreement coefficients for all annotators:"
-        print ("multi-ao = %f\nmulti-pi (Fleiss' kappa) = %f\n" + \
-              "multi-kappa = %f\n") % coeffs
+        print("\nOverall agreement coefficients for all annotators:")
+        print("multi-ao = %f\nmulti-pi (Fleiss' kappa) = %f\nmulti-kappa = %f\n"
+              % coeffs)
         coeffs_weighted = compute_weighted_multi( annotations, Ni, Nc, Nk )
-        print "Weighted agreement coefficients for all annotators:"
-        print "alpha = %f\nalpha-kappa = %f\n" % coeffs_weighted
+        print("Weighted agreement coefficients for all annotators:")
+        print("alpha = %f\nalpha-kappa = %f\n" % coeffs_weighted)
         if calculate_confusion :
             confusion, counters = compute_confusion( annotations, Nc )
-            print_matrix_confusion( confusion, categ_names, counters, Ni, Nc, Nk )
+            print_matrix_confusion(confusion, categ_names, counters, Ni, Nc, Nk)
     else :
-        print >> sys.stderr, "ERROR: you probably provided an empty file"  
+        error("you probably provided an empty file")
           
 ################################################################################
    
@@ -780,14 +782,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             verbose( "Field separator: " + a )
             separator = a
             if len( separator ) > 1 :
-                print >> sys.stderr, "WARNING: multi-char field separator!"
+                warn("multi-char field separator!")
         if o in ("-d", "--distance") :
             verbose( "Calculating weighted coefficients using distance file")
             distances_matrix = read_distances( a )
             if distances_matrix is None :
-                print >> sys.stderr, "WARNING: error in distance matrix!"
-                print >> sys.stderr, "Weighted coefficients will use 1.0 as" +\
-                      " default distance"
+                warn( "WARNING: error in distance matrix!\n"
+                      "Weighted coefficients will use 1.0 as default distance")
         if o in ("-c", "--confusion") :
             verbose( "Calculating confusion matrices" )
             calculate_confusion = True
@@ -795,7 +796,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "raters", "items", "pairwise", "separator=", "distance=", \
+longopts = [ "raters", "items", "pairwise", "separator=", "distance=",
               "confusion", "unknown=" ]
 arg = read_options( "rips:d:cu:", longopts, treat_options, -1, usage_string )   
 

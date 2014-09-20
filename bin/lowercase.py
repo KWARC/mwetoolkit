@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # lowercase.py is part of mwetoolkit
 #
@@ -34,16 +35,17 @@
    use -l option.
 """
 
-import sys
-import xml.sax
-import pdb
-import re
-import operator
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.word import Word
-from util import usage, read_options, treat_options_simplest, verbose, \
-                 parse_xml, parse_txt
+import re
+
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.base.word import Word
+from libs.util import read_options, treat_options_simplest, verbose, \
+                 parse_xml, parse_txt, warn, error
 
 ################################################################################
 # GLOBALS
@@ -113,7 +115,7 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.
     """
 
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
     
 ################################################################################
 
@@ -145,9 +147,9 @@ def treat_sentence_simple( sentence ) :
         else :
             setattr(w, lower_attr, getattr(w, lower_attr).lower() )
     if text_version or moses_version :
-        print " ".join( new_sent )
+        print(" ".join( new_sent ))
     else :
-        print sentence.to_xml().encode( "utf-8" )
+        print(sentence.to_xml().encode( "utf-8" ))
     entity_counter += 1
 
 ################################################################################
@@ -175,9 +177,9 @@ def treat_sentence_complex( sentence ) :
         elif moses_version :
             parts = sentence[ w_i ].split("|")
             if len(parts) != 4 :
-                print >> sys.stderr, "WARNING: malformed token %s" % \
-                                     sentence[ w_i ]
-                print >> sys.stderr, "Ignoring sentence %d" % entity_counter
+                warn("malformed token %(a)s\nIgnoring sentence %(s)d" %
+                     {"a":sentence[ w_i ],"s":entity_counter})
+
                 return
             sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
         w = sentence[ w_i ]
@@ -197,7 +199,7 @@ def treat_sentence_complex( sentence ) :
                     # Nothing, I just ignore it, it's a freaky weird creature!   
             elif case_class == "Firstupper" :
                 occurs = token_stats[ getattr( w, lower_attr) ]
-                if ( w_i == 0 or \
+                if ( w_i == 0 or
                    re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) ) and \
                    float(occurs[ 1 ]) / float(occurs[ 0 ]) >= START_THRESHOLD :
                     setattr( w, lower_attr, getattr( w, lower_attr ).lower() )  
@@ -208,11 +210,11 @@ def treat_sentence_complex( sentence ) :
                     # error, etc.
 
     if text_version :
-        print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
+        print(" ".join( map( lambda x : getattr( x, lower_attr), sentence ) ))
     elif moses_version :
-        print " ".join( map( lambda x : x.to_moses(), sentence ) )        
+        print(" ".join( map( lambda x : x.to_moses(), sentence ) ))
     else :
-        print sentence.to_xml().encode( 'utf-8' )
+        print(sentence.to_xml().encode( 'utf-8' ))
     entity_counter += 1
 
 ################################################################################
@@ -241,9 +243,8 @@ def treat_sentence_aggressive( sentence ) :
         elif moses_version :
             parts = sentence[ w_i ].split("|")
             if len(parts) != 4 :
-                print >> sys.stderr, "WARNING: malformed token %s" % \
-                                     sentence[ w_i ]
-                print >> sys.stderr, "Ignoring sentence %d" % entity_counter
+                warn("malformed token %(a)s\nIgnoring sentence %(s)d" %
+                     {"a":sentence[ w_i ],"s":entity_counter})
                 return
             sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
         w = sentence[ w_i ]
@@ -260,11 +261,11 @@ def treat_sentence_aggressive( sentence ) :
                 setattr( w, lower_attr, current_form.lower() )          
 
     if text_version :
-        print " ".join( map( lambda x : getattr( x, lower_attr), sentence ) )
+        print(" ".join( map( lambda x : getattr( x, lower_attr), sentence ) ))
     elif moses_version :
-        print " ".join( map( lambda x : x.to_moses(), sentence ) )        
+        print(" ".join( map( lambda x : x.to_moses(), sentence ) ))
     else :
-        print sentence.to_xml().encode( 'utf-8' )
+        print(sentence.to_xml().encode( 'utf-8' ))
     entity_counter += 1
 
 ################################################################################
@@ -297,8 +298,7 @@ def build_vocab( sentence ) :
             elif lower_attr == "lemma" :
                 key = fields[1]
             else : # Will never occur
-                print >> sys.stderr, "ERROR: unkown attrbute %s" % lower_attr
-                exit(-1)
+                error("unkown attrbute %s" % lower_attr)
         else :
             key = getattr( sentence[ w_i ], lower_attr )
         low_key = key.lower()
@@ -343,7 +343,7 @@ def get_percents( token_stats ) :
     percents = {}
     total_count = 0
     for a_form in token_stats.keys() :
-        count = percents.get( a_form, 0 );
+        count = percents.get( a_form, 0 )
         count_notstart = token_stats[ a_form ][ 0 ] - token_stats[ a_form ][ 1 ]
         # Smoothing to avoid division by zero (occurs ONLY in first position)
         # Add-one smoothing is simple and solves the problem
@@ -355,8 +355,7 @@ def get_percents( token_stats ) :
         if total_count != 0 :
             percents[ a_form ] = percents[ a_form ] / float(total_count)
         else :
-            print >> sys.stderr, "ERROR: Percents cannot be calculated for " \
-                                 "non-occurring words!"
+            warn("Percents cannot be calculated for non-occurring words!")
     return percents
 
 ################################################################################
@@ -421,12 +420,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             elif algoname == "aggressive" :
                 algorithm = treat_sentence_aggressive # Redundant, kept for clarity                
             else :
-                print >> sys.stderr, "ERROR: " + algoname + " is not a valid"+\
-                                     " algorithm"
-                print >> sys.stderr, "ERROR: You must provide a valid " + \
-                                     "algorithm (e.g. \"complex\", \"simple\")."
-                usage( usage_string )
-                sys.exit( 2 )  
+                error("%s is not a valid algorithm\nYou must provide a valid "+\
+                      "algorithm (e.g. \"complex\", \"simple\")." % algoname)
  
 ################################################################################
 # MAIN SCRIPT
@@ -450,4 +445,4 @@ else :
                                  treat_entity=algorithm,
                                  gen_xml=True )
     parse_xml( handler, arg )
-    print handler.footer
+    print(handler.footer)

@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xml2csv.py is part of mwetoolkit
 #
@@ -32,13 +33,17 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import re
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, parse_xml, verbose
-from xmlhandler.classes.__common import WILDCARD
+import sys
+
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml, verbose,\
+    warn
+from libs.base.__common import WILDCARD
      
 ################################################################################     
 # GLOBALS     
@@ -106,7 +111,7 @@ def treat_meta( meta ) :
     xml_meta = meta
     corpus_size_string = str(freq_value(xml_meta.corpus_sizes))
         
-    print string_cand.encode( 'utf-8' )       
+    print(string_cand.encode( 'utf-8' ))
        
 ################################################################################     
        
@@ -129,7 +134,7 @@ def treat_entity( entity ) :
     string_cand = string_cand.strip() + "\t"    
     
     if len(entity) != 2:
-        print >>sys.stderr, "WARNING: Ignoring entity %s, of length %d!=2" % (entity.id_number, len(entity))
+        warn("Ignoring entity %s, of length %d!=2" % (entity.id_number, len(entity)))
         return
 
     for w in entity :
@@ -149,7 +154,7 @@ def treat_entity( entity ) :
         print >>sys.stderr, "WARNING: Word frequency information missing for"+\
                             " entity %d" % entity.id_number
     string_cand += corpus_size_string
-    print string_cand.encode( 'utf-8' )
+    print(string_cand.encode( 'utf-8' ))
 
 ################################################################################     
 

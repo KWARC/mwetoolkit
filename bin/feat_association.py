@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # feat_association.py is part of mwetoolkit
 #
@@ -38,17 +39,22 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import math
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta_feat import MetaFeat
-from util import usage, read_options, treat_options_simplest, \
-                 verbose, parse_xml
-     
+import math
+
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.base.feature import Feature
+from libs.base.meta_feat import MetaFeat
+from libs.util import read_options, treat_options_simplest, \
+                 verbose, parse_xml, warn, error
+
+
+
+
 ################################################################################     
 # GLOBALS     
      
@@ -112,7 +118,7 @@ def treat_meta( meta ) :
     for corpus_size in meta.corpus_sizes :
         for meas in measures :
             meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
        
 ################################################################################     
        
@@ -151,15 +157,14 @@ def treat_candidate( candidate ) :
         else :
             N = corpussize_dict[ corpus_name ]
         try :
-            feats = calculate_ams( joint_freq[ corpus_name ], \
-                    singleword_freq[ corpus_name ], \
+            feats = calculate_ams( joint_freq[ corpus_name ],
+                    singleword_freq[ corpus_name ],
                     N, corpus_name )
+            for feat in feats :
+                candidate.add_feat( feat )
         except Exception :
-            pdb.set_trace()
-
-        for feat in feats :
-            candidate.add_feat( feat )
-    print candidate.to_xml().encode( 'utf-8' )
+            error( "This should never be printed. The end of the world is here")
+    print(candidate.to_xml().encode( 'utf-8' ))
     entity_counter = entity_counter + 1
 
 ################################################################################     
@@ -204,24 +209,23 @@ def contingency_tables( bigram_freqs, unigram_freqs, N, corpus_name ):
     expected = []
     n = len( unigram_freqs )
     if len( bigram_freqs ) != n - 1 :
-        print >> sys.stderr, "WARNING: Invalid unigram/bigram frequencies " +\
-                             "passed to calculate_negations function"
+        warn( "Invalid unigram/bigram frequencies passed to "
+              "calculate_negations function")
         return None
     # 1) Verify that all the frequencies are valid
     for i in range( len( bigram_freqs ) ) :
         if bigram_freqs[ i ] > unigram_freqs[ i ] or \
            bigram_freqs[ i ] > unigram_freqs[ i + 1 ] :
-            print >> sys.stderr, "WARNING: " + corpus_name + " unigrams " +\
-                                 "must occur at least as much as bigram."
+            warn( corpus_name + " unigrams must occur at least as much as bigram.")
         if bigram_freqs[ i ] > unigram_freqs[ i ] :
-            print >> sys.stderr, "Automatic correction: " + \
+            warn("Automatic correction: " + \
                                  str( unigram_freqs[ i ] ) + " -> " + \
-                                 str( bigram_freqs[ i ] )
+                                 str( bigram_freqs[ i ] ))
             unigram_freqs[ i ] = bigram_freqs[ i ]
         if bigram_freqs[ i ] > unigram_freqs[ i + 1 ] :            
-            print >> sys.stderr, "Automatic correction: " + \
+            warn("Automatic correction: " + \
                                  str( unigram_freqs[ i + 1 ] ) + " -> " + \
-                                 str( bigram_freqs[ i ] )
+                                 str( bigram_freqs[ i ] ))
             unigram_freqs[ i + 1 ] = bigram_freqs[ i ]
     # 2) Calculate negative freqs 
     for i in range( len( bigram_freqs ) ) :        
@@ -341,16 +345,16 @@ def calculate_ams( o, m_list, N, corpus_name ) :
                     for j in range( 2 ) :
                         if ct_o[i][j] != 0.0 :
                             
-                            ll += ct_o[i][j] * ( math.log( ct_o[i][j], 10 ) -\
+                            ll += ct_o[i][j] * ( math.log( ct_o[i][j], 10 ) -
                                                  math.log( ct_e[i][j], 10 ) )
-                ll = 2 * ll
+                ll *= 2
                 ll_list .append( ll )
             ll_final = heuristic_combine( ll_list )
         else :
             if warn_ll_bigram_only:
                 warn_ll_bigram_only = False
-                print >> sys.stderr, "WARNING: log-likelihood is only implem" +\
-                                     "ented for 2grams. Defaults to 0.0 for n>2"
+                warn("log-likelihood is only implemented for 2grams. "
+                     "Defaults to 0.0 for n>2")
             ll_final = 0.0
         feats.append( Feature( "ll_" + corpus_name, ll_final ) )
     return feats
@@ -402,13 +406,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ( "-m", "--measures" ) :
             try :
                 measures = interpret_measures( a )
-            except ValueError, message :
-                print >> sys.stderr, message
-                print >> sys.stderr, "ERROR: argument must be list separated"+ \
-                                     "by \":\" and containing the names: "+\
-                                     str( supported_measures )
-                usage( usage_string )
-                sys.exit( 2 )
+            except ValueError as message :
+                error( str(message) + "\nargument must be list separated by "
+                                      "\":\" and containing the names: " +
+                       str( supported_measures ))
         elif o in ( "-o", "--original" ) :
             main_freq = a
         elif o in ( "-u", "--unnorm-mle" ) :
@@ -436,4 +437,4 @@ handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates" )
 parse_xml( handler, arg, reset_entity_counter )
-print handler.footer
+print(handler.footer)

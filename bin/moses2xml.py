@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # moses2xml.py is part of mwetoolkit
 #
@@ -30,14 +31,17 @@
     For more information, call the script with -h parameter and read the
     usage instructions.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
 import sys
-import pdb
 
-from util import read_options, treat_options_simplest, verbose, strip_xml
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
+from libs.util import read_options, treat_options_simplest, warn
+from libs.base.sentence import Sentence
+from libs.base.word import Word
+from libs.base.__common import XML_HEADER, XML_FOOTER
      
 ################################################################################     
 # GLOBALS     
@@ -71,11 +75,11 @@ def transform_format( in_file ) :
         for w in words :
             try :
                 surface, lemma, pos, syntax = w.split("|")
-            except Exception, e:
-                warning( str(type(e) ) )
-                warning( "Ignored token " + w )                
-            s.append( Word( surface, lemma, pos, syntax ) )
-        print s.to_xml()
+                s.append( Word( surface, lemma, pos, syntax ) )
+            except Exception as e:
+                warn( str(type(e) ) )
+                warn( "Ignored token " + w )
+        print(s.to_xml())
     
 
 ################################################################################     
@@ -83,7 +87,7 @@ def transform_format( in_file ) :
 
 arg = read_options( "", [], treat_options_simplest, -1, usage_string )
 
-print XML_HEADER % { "root": "corpus", "ns": "" }
+print(XML_HEADER % { "root": "corpus", "ns": "" })
 if len( arg ) == 0 :
     transform_format( sys.stdin )        
 else :
@@ -91,4 +95,4 @@ else :
         input_file = open( a )
         transform_format( input_file )
         input_file.close()                
-print XML_FOOTER % { "root": "corpus" }
+print(XML_FOOTER % { "root": "corpus" })

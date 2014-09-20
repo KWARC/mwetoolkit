@@ -2,9 +2,10 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
-# candidates.py is part of mwetoolkit
+# mweconsole.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

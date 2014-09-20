@@ -3,7 +3,8 @@
 
 ################################################################################
 # 
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 # 
 # histogram.py is part of mwetoolkit
 # 
@@ -33,13 +34,18 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import math
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.util import read_options, treat_options_simplest, verbose, \
+    parse_xml, error
+
+
 
 ################################################################################
 # GLOBALS
@@ -92,9 +98,9 @@ def print_histogram( filename ) :
     global limit
     global entity_counter
     for fname in hist.keys() :
-        print "FREQUENCY SOURCE : %(source)s" % { "source" : fname }
-        print "Number of candidates : %(n)d" % { "n" : entity_counter }
-        print
+        print("FREQUENCY SOURCE : %(source)s" % { "source" : fname })
+        print("Number of candidates : %(n)d" % { "n" : entity_counter })
+        print()
         h = hist[ fname ]
         entropy = 0
         #entropy_delta = 0
@@ -105,9 +111,9 @@ def print_histogram( filename ) :
             #entropy_delta -= p_delta * math.log( p_delta, 2 )
             counter = counter + 1
             if limit is None or counter <= limit :
-                print "%(f)d : %(c)d (%(p)f)" % { "f" : f, "c" : h[f], "p" : p }
+                print("%(f)d : %(c)d (%(p)f)" % { "f": f, "c": h[f], "p": p })
 
-        print "Entropy : %(e)f" % { "e" : entropy }
+        print("Entropy : %(e)f" % { "e" : entropy })
     hist = {}
     entity_counter = 0
         
@@ -134,11 +140,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 if limit < 0 :
                     raise ValueError
             except ValueError :
-                print >> sys.stderr, "ERROR: You must provide a positive " + \
-                                     "integer value as argument of -n option."
-                usage( usage_string )
-                sys.exit( 2 )
-                
+                error("You must provide a positive integer value as argument "
+                      "of -n option.")
+
 ################################################################################         
 # MAIN SCRIPT
 

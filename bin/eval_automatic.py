@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # eval_automatic.py is part of mwetoolkit
 #
@@ -33,20 +34,23 @@
     For more information, call the script with no parameter and read the
     usage instructions.
 """
-
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 import sys
 import re
 import xml.sax
-import pdb
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
-from xmlhandler.classes.tpclass import TPClass
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.meta_tpclass import MetaTPClass
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
-from xmlhandler.classes.__common import WILDCARD, WORD_SEPARATOR
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.dictXMLHandler import DictXMLHandler
+from libs.base.tpclass import TPClass
+from libs.base.candidate import Candidate
+from libs.base.word import Word
+from libs.base.meta_tpclass import MetaTPClass
+from libs.util import read_options, treat_options_simplest, verbose, \
+    parse_xml, error
+from libs.base.__common import WILDCARD, WORD_SEPARATOR
 
 ################################################################################
 # GLOBALS
@@ -104,7 +108,7 @@ def treat_meta( meta ) :
     """
     global gs_name
     meta.add_meta_tpclass( MetaTPClass( gs_name, "{True,False}" ) )
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 
@@ -156,7 +160,7 @@ def treat_candidate( candidate_i ) :
         tp_counter = tp_counter + 1
     else :
         candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
-    print candidate_i.to_xml().encode( 'utf-8' )
+    print(candidate_i.to_xml().encode( 'utf-8' ))
     entity_counter += 1
 
 ################################################################################
@@ -186,8 +190,10 @@ def treat_reference( reference ) :
     pre_gs[ pre_gs_key ] = pre_gs_entry
 
     if lemma_or_surface:
-        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join([w.lemma for w in reference]), []).append(reference)
-        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join([w.surface for w in reference]), []).append(reference)
+        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
+            [w.lemma for w in reference]), []).append(reference)
+        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
+            [w.surface for w in reference]), []).append(reference)
 
     #gs.append( reference )
     ref_counter = ref_counter + 1
@@ -209,15 +215,12 @@ def open_gs( gs_filename ) :
         parser.setContentHandler( DictXMLHandler( treat_entry=treat_reference ))
         parser.parse( reference_file )
         reference_file.close()
-    except IOError, err:
-        print >> sys.stderr, err
-        sys.exit( 2 )
-    except Exception, err :
-        print >> sys.stderr,  err
-        print >> sys.stderr, "You probably provided an invalid reference " + \
-                             "file, please validate it against the DTD " + \
-                             "(mwetoolkit-patterns.dtd)"
-        sys.exit( 2 )
+    except IOError as err:
+        error(str(err))
+    except Exception as err :
+        error(str(err)+"\nYou probably provided an invalid reference file, "
+                       "please validate it against the DTD (mwetoolkit-"
+                       "patterns.dtd)")
 
 ################################################################################
 
@@ -257,9 +260,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", ref_name ) )
     # There's no reference list... Oh oh cannot evaluate :-(
     if not pre_gs :
-        print >> sys.stderr, "You MUST provide a non-empty reference list!"
-        usage( usage_string )
-        sys.exit( 2 )
+        error("You MUST provide a non-empty reference list!")
 
 ################################################################################
 # MAIN SCRIPT
@@ -271,7 +272,7 @@ handler = CandidatesXMLHandler( treat_meta=treat_meta,
                              treat_candidate=treat_candidate,
                              gen_xml="candidates" )
 parse_xml( handler, arg )
-print handler.footer
+print(handler.footer)
         
 precision = float( tp_counter ) / float( entity_counter )
 recall = float( tp_counter ) / float( ref_counter )
@@ -279,9 +280,9 @@ if precision + recall > 0 :
     fmeas =  ( 2 * precision * recall) / ( precision + recall )
 else :
     fmeas = 0.0
-print >> sys.stderr, "Nb. of true positives: %(tp)d" % {"tp" : tp_counter }
-print >> sys.stderr, "Nb. of candidates: %(cand)d" % {"cand" : entity_counter }
-print >> sys.stderr, "Nb. of references: %(refs)d" % {"refs" : ref_counter }
-print >> sys.stderr, "Precision: %(p)f" % {"p" : precision }
-print >> sys.stderr, "Recall: %(r)f" % {"r" : recall }
-print >> sys.stderr, "F-measure: %(f)f" % {"f" : fmeas }
+print("Nb. of true positives: %(tp)d" % {"tp" : tp_counter }, file=sys.stderr)
+print("Nb. of candidates: %(ca)d" % {"ca" : entity_counter }, file=sys.stderr)
+print("Nb. of references: %(refs)d" % {"refs" : ref_counter }, file=sys.stderr)
+print("Precision: %(p)f" % {"p" : precision }, file=sys.stderr)
+print("Recall: %(r)f" % {"r" : recall }, file=sys.stderr)
+print("F-measure: %(f)f" % {"f" : fmeas }, file=sys.stderr)

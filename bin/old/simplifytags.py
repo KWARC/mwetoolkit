@@ -29,9 +29,9 @@
 import sys
 import xml.sax
 
-import install
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, verbose
+from bin.libs.xmlhandler.genericXMLHandler import GenericXMLHandler
+from util import read_options, treat_options_simplest
+
 
 ################################################################################
 # GLOBALS

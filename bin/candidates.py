@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # candidates.py is part of mwetoolkit
 #
@@ -39,31 +40,26 @@
     usage instructions.
 """
 
-import sys
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import re
 import shelve
 import xml.sax
 import os
 import tempfile
-import pdb
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
-from xmlhandler.classes.__common import WILDCARD, \
-                                        TEMP_PREFIX, \
-                                        TEMP_FOLDER, \
-                                        XML_HEADER, \
-                                        XML_FOOTER
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.ngram import Ngram
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
-from util import usage, read_options, treat_options_simplest, \
-                 verbose, interpret_ngram
-
-from libs.patternlib import parse_patterns_file, \
-                            build_generic_pattern
+from libs.corpusXMLHandler import CorpusXMLHandler
+from libs.base.__common import WILDCARD, TEMP_PREFIX, TEMP_FOLDER, XML_HEADER, \
+    XML_FOOTER
+from libs.base.frequency import Frequency
+from libs.base.candidate import Candidate
+from libs.base.ngram import Ngram
+from libs.util import read_options, treat_options_simplest, error, verbose,\
+                 interpret_ngram
+from libs.patternlib import parse_patterns_file, build_generic_pattern
 from libs.indexlib import Index
 
 ################################################################################
@@ -135,12 +131,9 @@ surface_instead_lemmas = False
 print_cand_freq = False
 corpus_from_index = False
 longest_pattern = 0
-shortest_pattern = sys.maxint
+shortest_pattern = float("inf")
 sentence_counter = 0
 print_source = False
-
-
-
 
 ################################################################################
        
@@ -160,11 +153,10 @@ def treat_sentence( sentence ) :
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
 
-    words = sentence.word_list
     already_matched = set()
 
     for pattern in patterns:
-        for (match_ngram, wordnums) in pattern.matches(words,
+        for (match_ngram, wordnums) in pattern.matches(sentence,
                 match_distance, overlapping=not non_overlapping):
             wordnums_string = ",".join( map( str, wordnums ) )
             if wordnums_string in already_matched:
@@ -201,9 +193,8 @@ def read_patterns_file( filename ) :
 
     try:
         patterns = parse_patterns_file(filename)
-    except IOError, err:
-        print >> sys.stderr, err
-        sys.exit( 2 )
+    except IOError as err:
+        error(str(err))
         
 ################################################################################  
 
@@ -223,9 +214,7 @@ def create_patterns_file( ngram_range ) :
         ( shortest_pattern, longest_pattern ) = result
         patterns.append(build_generic_pattern(shortest_pattern, longest_pattern))
     else :
-        print >> sys.stderr, "Invalid argument for -n."
-        usage( usage_string )
-        sys.exit( 2 )  
+        error("Invalid argument for -n.")
 
 ################################################################################  
 
@@ -246,8 +235,8 @@ def print_candidates( temp_file, corpus_name ) :
     global print_cand_freq, print_source
     verbose("Outputting candidates file...")
     try :
-        print XML_HEADER % { "root" : "candidates", "ns" : "" }
-        print "<meta></meta>"
+        print(XML_HEADER % { "root" : "candidates", "ns" : "" })
+        print("<meta></meta>")
         id_number = 0        
         for base_string in temp_file.keys() :
             (surface_dict, total_freq) = temp_file[ base_string ]
@@ -259,7 +248,7 @@ def print_candidates( temp_file, corpus_name ) :
             id_number = id_number + 1                        
             for occur_string in surface_dict.keys() :
                 occur_form = Ngram( [], [] )
-                occur_form.from_string( occur_string )
+                occur_form.from_string( unicode(occur_string, 'utf-8') )
                 sources = surface_dict[occur_string]
                 freq_value = len(sources)
                 freq = Frequency( corpus_name, freq_value )
@@ -267,13 +256,11 @@ def print_candidates( temp_file, corpus_name ) :
                 if print_source:
                     occur_form.add_sources(sources)
                 cand.add_occur( occur_form )
-            print cand.to_xml().encode( 'utf-8' )
-        print XML_FOOTER % { "root" : "candidates" }
-    except IOError, err :
-        print >> sys.stderr, err
-        print >> sys.stderr, "Error reading temporary file."
-        print >> sys.stderr, "Please verify __common.py configuration"        
-        sys.exit( 2 )
+            print(cand.to_xml().encode( 'utf-8' ))
+        print(XML_FOOTER % { "root" : "candidates" })
+    except IOError as err :
+        error(str(err) + "\nError reading temporary file.\n"
+                         "Please verify __common.py configuration")
 
 ################################################################################  
 
@@ -319,19 +306,13 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             print_cand_freq = True
         elif o in ("-i", "--index") :
             corpus_from_index = True
-
     if len(mode) != 1 :
-        print >> sys.stderr, "Exactly one option, -p or -n, must be provided"
-        usage( usage_string )
-        sys.exit( 2 )
-
+        error("Exactly one option, -p or -n, must be provided")
     if "patterns" in mode:
         try:
             read_patterns_file( patterns_file )
         except Exception:
-            print >>sys.stderr, "Error loading patterns file!"
-            raise
-        
+            error("Error loading patterns file!")
 
 ################################################################################  
 # MAIN SCRIPT
@@ -340,17 +321,17 @@ longopts = [ "patterns=", "ngram=", "index", "match-distance=",
         "non-overlapping", "freq", "ignore-pos", "surface", "source" ]
 arg = read_options( "p:n:id:NfgsS", longopts, treat_options, -1, usage_string )
 
+temp_fh = None # Initialise to remove PyCharm warning
 try :    
-    temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
+    temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX,
                                            dir=TEMP_FOLDER )
     temp_name = temp_fh.name
     temp_fh.close()
     temp_file = shelve.open( temp_name, 'n' )
-except IOError, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "Error opening temporary file."
-    print >> sys.stderr, "Please verify __common.py configuration"
-    sys.exit( 2 )
+except IOError as err :
+    error(str(err)+"\nError opening temporary file.\n"
+                   "Please verify __common.py configuration")
+
 
 
 if corpus_from_index:
@@ -365,10 +346,7 @@ elif len(arg) > 0 :
     parser.parse( input_file )
     input_file.close()
 else :
-    print >> sys.stderr, "Error! You must specify a XML corpus or -i index"
-    usage( usage_string )
-    sys.exit( 2 )
-    
+    error("Error! You must specify a XML corpus or -i index")
 
 corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", arg[ 0 ] ) )
 print_candidates( temp_file, corpus_name )
@@ -379,8 +357,6 @@ try :
     except OSError :
         os.remove( temp_fh.name + ".db" ) # Some dbms used by shelve add the
         # .db suffix to the file
-except IOError, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "Error closing temporary file. " + \
-          "Please verify __common.py configuration"        
-    sys.exit( 2 )            
+except IOError as err :
+    error(str(err)+"\nError closing temporary file.\n"
+                   "Please verify __common.py configuration")

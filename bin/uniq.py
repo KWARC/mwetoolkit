@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # tail.py is part of mwetoolkit
 #
@@ -32,20 +33,22 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import pdb
-import re
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.ngram import Ngram
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.__common import WILDCARD
-from util import read_options, treat_options_simplest, verbose, parse_xml
+import xml.sax
+
+from libs.base.frequency import Frequency
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.base.ngram import Ngram
+from libs.base.word import Word
+from libs.base.entry import Entry
+from libs.base.sentence import Sentence
+from libs.base.candidate import Candidate
+from libs.base.__common import WILDCARD
+from libs.util import read_options, treat_options_simplest, verbose, parse_xml
 
 ################################################################################
 # GLOBALS
@@ -89,7 +92,7 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.
     """
 
-    print meta.to_xml().encode( 'utf-8' ) 
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 
@@ -270,7 +273,7 @@ def print_entities() :
             pass
         elif isinstance( entity, Sentence ) :
             pass          
-        print entity.to_xml().encode( 'utf-8' )
+        print(entity.to_xml().encode( 'utf-8' ))
         uniq_counter += 1
     verbose( "%(n)d entities, %(u)d unique entities" % { "n":entity_counter, \
                                                          "u":uniq_counter } )
@@ -326,4 +329,4 @@ handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
 parse_xml( handler, arg, reset_entity_counter )
-print handler.footer
+print(handler.footer)

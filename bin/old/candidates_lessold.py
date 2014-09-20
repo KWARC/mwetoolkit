@@ -45,10 +45,8 @@ import shelve
 import xml.sax
 import os
 import tempfile
-import pdb
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
+from bin.libs.xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.__common import WILDCARD, \
                                         TEMP_PREFIX, \
                                         TEMP_FOLDER, \
@@ -56,12 +54,12 @@ from xmlhandler.classes.__common import WILDCARD, \
                                         XML_FOOTER
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.ngram import Ngram
+from bin.libs.base.ngram import Ngram
 from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
 from util import usage, read_options, treat_options_simplest, verbose
-
 from patternlib import parse_patterns_file, match_pattern, build_generic_pattern
+
+
 
 ################################################################################
 # GLOBALS

@@ -3,7 +3,8 @@
 
 ################################################################################
 # 
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 # 
 # map.py is part of mwetoolkit
 # 
@@ -31,13 +32,15 @@
     measures.
 """
 
-import sys
-import pdb
-import xml.sax
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import read_options, treat_options_simplest, usage, verbose, parse_xml
-from xmlhandler.classes.__common import UNKNOWN_FEAT_VALUE
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.util import read_options, treat_options_simplest, warn, verbose, \
+    parse_xml, error
+from libs.base.__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
 # GLOBALS
@@ -105,10 +108,8 @@ def treat_meta( meta ) :
             for feat_name in all_feats :
                 feat_to_order[ meta_tp.name ][ feat_name ] = []
     if not tp_classes_ok :
-        print >> sys.stderr,"ERROR: You must define a boolean TP class"
-        print >> sys.stderr, usage_string
-        sys.exit( -1 )
-        
+        error("You must define a boolean TP class")
+
 ################################################################################
 
 def treat_candidate( candidate ) :
@@ -130,12 +131,11 @@ def treat_candidate( candidate ) :
     if not feat_list_ok :
         for feat_name in feat_list :
             if feat_name not in all_feats :
-                print >> sys.stderr, "ERROR: %(feat)s is not a valid feature" %\
-                                     { "feat" : feat_name }
-                print >> sys.stderr, "Please chose features from the list below"
-                for feat in all_feats :
-                    print >> sys.stderr, "* " + feat
-                sys.exit( -1 )                
+                error("%(feat)s is not a valid feature\n" + \
+                      "Please chose features from the list below\n" + \
+                      "%(list)s" % {"feat": feat_name,
+                                    "list": "\n".join(
+                                        map(lambda x: "* " + x, all_feats))})
         feat_list_ok = True
 
     for tp_class in candidate.tpclasses :
@@ -211,22 +211,22 @@ def print_stats() :
     # its ID
     for tpclass in feat_to_order.keys() :
         precisions = []
-        print "----------------------------------------------------------------"
-        print "Statistics for %(tp)s:" % { "tp" : tpclass }
-        print "----------------------------------------------------------------"
+        print("----------------------------------------------------------------")
+        print("Statistics for %(tp)s:" % { "tp" : tpclass })
+        print("----------------------------------------------------------------")
         for feat_name in feat_list :
             feat_values = feat_to_order[ tpclass ][ feat_name ]
-            feat_values.sort( key=lambda x: x[ 0 ], reverse=(not ascending) )
-            ( mapr, variance, tps, precs ) = calculate_map( feat_values )
-            print "Feature: %(m)s" % { "m" : feat_name }
-            print "MAP      : %(m).4f" % { "m": mapr }
-            print "# of TPs : %(m).0f" % { "m": tps }
-            print "Variance : %(m).4f" % { "m": variance }
-            print ""
+            feat_values.sort( key=lambda x: x[ 0 ], reverse=(not ascending))
+            ( mapr, variance, tps, precs ) = calculate_map(feat_values)
+            print("Feature: %(m)s" % { "m" : feat_name })
+            print("MAP      : %(m).4f" % { "m": mapr })
+            print("# of TPs : %(m).0f" % { "m": tps })
+            print("Variance : %(m).4f" % { "m": variance })
+            print()
             precisions.append( precs )
         if print_precs :
             for line in zip( *precisions ) :
-                print "\t".join( map( str, line ) )
+                print("\t".join( map( str, line ) ))
 
 ################################################################################
 
@@ -236,7 +236,7 @@ def treat_feat_list( feat_string ) :
         "<feat1>:<feat2>:<feat3>" and so on, i.e. feature names separated by
         colons.
 
-        @param argument String argument of the -f option, has the form
+        @param feat_string String argument of the -f option, has the form
         "<feat1>:<feat2>:<feat3>"
 
         @return A list of strings containing the (unverified) key feature names.
@@ -275,13 +275,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             print_precs = True
 
     if len( a_or_d ) > 1 :
-        print >> sys.stderr, "WARNING: you should provide only one option, " + \
-                             "-a OR -d. Only the last one will be considered."
+        warn("you should provide only one option, -a OR -d. Only the last one"+\
+             " will be considered.")
     if not feat_list :
-        print >> sys.stderr, "You MUST provide at least one feature with -f"
-        usage( usage_string )
-        sys.exit( 2 )
-
+        error("You MUST provide at least one feature with -f")
 
 ################################################################################
 # MAIN SCRIPT

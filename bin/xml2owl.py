@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xml2owl.py is part of mwetoolkit
 #
@@ -32,13 +33,14 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import re
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, parse_xml
-from xmlhandler.classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml
+from libs.base.__common import XML_HEADER, XML_FOOTER
      
 ################################################################################     
 # GLOBALS     
@@ -97,7 +99,7 @@ def treat_entity( entry ) :
         owl_cand += form + "_"
     owl_cand = owl_cand[:len(owl_cand)-1] + "\"/>" # remove extra underline char
     
-    print owl_cand.encode( 'utf-8' )
+    print(owl_cand.encode( 'utf-8' ))
 
 ################################################################################     
 
@@ -127,6 +129,6 @@ longopts = [ "surface" ]
 arg = read_options( "s", longopts, treat_options, -1, usage_string ) 
 handler = GenericXMLHandler( treat_entity=treat_entity,
                              gen_xml=False )
-print OWL_HEADER
+print(OWL_HEADER)
 parse_xml( handler, arg )
-print OWL_FOOTER
+print(OWL_FOOTER)

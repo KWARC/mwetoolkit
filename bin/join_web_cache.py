@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # join_web_cache.py is part of mwetoolkit
 #
@@ -32,12 +33,16 @@
     usage instructions.
 """
 
-import sys
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import cPickle
 
-from util import read_options, treat_options_simplest, usage, verbose
+from libs.util import read_options, treat_options_simplest, verbose
                  
-#from classes.__common import TEMP_PREFIX, TEMP_FOLDER
+#from base.__common import TEMP_PREFIX, TEMP_FOLDER
      
 ################################################################################     
 # GLOBALS     

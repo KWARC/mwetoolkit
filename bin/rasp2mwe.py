@@ -3,7 +3,8 @@
 
 ###############################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch, Maitê Dupont
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos, Maitê Dupont
 #
 # rasp2xml.py is part of mwetoolkit
 #
@@ -33,16 +34,21 @@
     usage instructions.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
 import os
 import os.path
 from subprocess import Popen, PIPE
-import string
-import pdb
-from util import read_options, verbose, treat_options_simplest, strip_xml, \
+
+from libs.util import read_options, verbose, treat_options_simplest, strip_xml,\
                  warn, error
-from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
-import subprocess as sub
+from libs.base.__common import XML_HEADER, XML_FOOTER
+
+
 
 ###############################################################################
 # GLOBALS 
@@ -234,11 +240,11 @@ def process_tree_branch(l, phrase):
             word_index = get_tokens( members[ 0 ] )[ 1 ]
             entry = phrase.get( int(word_index), None )
             syn = rel
-    if entry and syn :
-        if entry[ "syn" ] == "" :
-            entry[ "syn" ] = syn
-        else :
-            entry[ "syn" ] = entry[ "syn" ] + ";" + syn
+        if entry and syn :
+            if entry[ "syn" ] == "" :
+                entry[ "syn" ] = syn
+            else :
+                entry[ "syn" ] = entry[ "syn" ] + ";" + syn
     else :        
         warn( "Unrecogized grammatical relation \"%s\"" % l.strip() )
 
@@ -266,7 +272,7 @@ def transform_format(rasp):
         if l=="\n":
             l_empty+=1
             if l_empty == 1:
-            	sorted_phrase = map( lambda x: x[1], sorted( phrase.items() ) )
+                sorted_phrase = map( lambda x: x[1], sorted( phrase.items() ) )
                 write_entry(n_line,sorted_phrase)
                 phrase = {}
                 if n_line % 100 == 0 :

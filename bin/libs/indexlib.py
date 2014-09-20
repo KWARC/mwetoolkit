@@ -1,3 +1,28 @@
+#!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+# ###############################################################################
+#
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
+#
+# indexlib.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+# ###############################################################################
+
 """
     index.py - Routines for index manipulation.
 """
@@ -6,8 +31,8 @@
 # original (more well tested) Python indexer. We face the doubt of how to
 # implement that:
 #
-#  1. Subclassing: we implement a class for interfacing with the C indexer
-#  as as subclass of the current one (or make both the current one and the
+# 1. Subclassing: we implement a class for interfacing with the C indexer
+# as as subclass of the current one (or make both the current one and the
 #  C one subclasses of a new generic/abstract Index class).
 #
 #  2. Lots of if/elses. (Not so many of them, actually.)
@@ -17,30 +42,34 @@
 # dynamic index building (attribute fusion), we have already instantiated 
 # mrkrrhgrghgrgrh, rethink all of this.
 
+from __future__ import division
+from __future__ import print_function
+# Incompatibility with array library
+#from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
 import os
 import array
-import shelve
 import xml.sax
 import tempfile
 import subprocess
 import struct
-import gc
-import pdb
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, \
-        WILDCARD, C_INDEXER_PROGRAM
-from util import verbose, strip_xml
+from libs.corpusXMLHandler import CorpusXMLHandler
+from libs.base.sentence import Sentence
+from libs.util import verbose, strip_xml, warn, error
+from libs.base.word import Word, WORD_ATTRIBUTES
+from libs.base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
 
-NGRAM_LIMIT=16
+
+NGRAM_LIMIT = 16
 
 ################################################################################
 
 def copy_list(ls):
     return map(lambda x: x, ls)
+
 
 ################################################################################
 
@@ -49,23 +78,25 @@ def make_array(initializer=None):
         return array.array('i')
     else:
         return array.array('i', initializer)
-        
+
+
 ################################################################################
 
 # Taken from counter.py
-def load_array_from_file( an_array, a_filename ) :
+def load_array_from_file(an_array, a_filename):
     """
         Fills an existing array with the contents of a file.
     """
     MAX_MEM = 10000
-    fd = open( a_filename )
+    fd = open(a_filename)
     isMore = True
-    while isMore :
-        try :    
-            an_array.fromfile( fd, MAX_MEM )
-        except EOFError :
-            isMore = False # Did not read MAX_MEM_ITEMS items? Not a problem...
+    while isMore:
+        try:
+            an_array.fromfile(fd, MAX_MEM)
+        except EOFError:
+            isMore = False  # Did not read MAX_MEM_ITEMS items? Not a problem...
     fd.close()
+
 
 ################################################################################
 
@@ -76,6 +107,7 @@ def save_array_to_file(array, path):
     file = open(path, "w")
     array.tofile(file)
     file.close()
+
 
 ################################################################################
 
@@ -95,7 +127,8 @@ def load_symbols_from_file(symbols, path):
         id += 1
 
     file.close()
-    
+
+
 ################################################################################
 
 def save_symbols_to_file(symbols, path):
@@ -106,7 +139,8 @@ def save_symbols_to_file(symbols, path):
     for sym in symbols.number_to_symbol:
         file.write(sym.encode("utf-8") + '\n')
     file.close()
-    
+
+
 ################################################################################
 
 def read_attribute_from_index(attr, path):
@@ -122,17 +156,18 @@ def read_attribute_from_index(attr, path):
 
     while True:
         ## Assuming 32-bit int! (right in x86 and x86-64)
-        wordcode = corpus_file.read(4)  
+        wordcode = corpus_file.read(4)
         if wordcode == "":
             return
         wordnum = struct.unpack('i', wordcode)[0]
         yield symbols.number_to_symbol[wordnum]
 
     corpus_file.close()
-    
+
+
 ################################################################################
 
-def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1, 
+def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1,
                    ngram2_exhausted=1, limit=NGRAM_LIMIT):
     """
         Compares the ngram at position `pos1` in the word list `ngram1` with
@@ -158,21 +193,22 @@ def compare_ngrams(ngram1, pos1, ngram2, pos2, ngram1_exhausted=-1,
     max1 = len(ngram1)
     max2 = len(ngram2)
     i = 0
-    while pos1 < max1 and pos2 < max2 and ngram1[ pos1 ] == ngram2[ pos2 ] and \
-          i < NGRAM_LIMIT:
+    while pos1 < max1 and pos2 < max2 and ngram1[pos1] == ngram2[pos2] and \
+                    i < limit:
         pos1 += 1
         pos2 += 1
         i += 1
 
-    if pos1>=max1 and pos2>=max2:
+    if pos1 >= max1 and pos2 >= max2:
         return 0
-    elif pos1>=max1:
+    elif pos1 >= max1:
         return ngram1_exhausted
-    elif pos2>=max2:
+    elif pos2 >= max2:
         return ngram2_exhausted
     else:
         return int(ngram1[pos1] - ngram2[pos2])
-        
+
+
 ################################################################################
 
 def fuse_suffix_arrays(array1, array2):
@@ -187,6 +223,7 @@ def fuse_suffix_arrays(array1, array2):
         fused_array.append_word(sym1 + ATTRIBUTE_SEPARATOR + sym2)
 
     return fused_array
+
 
 ################################################################################
 ################################################################################
@@ -210,10 +247,11 @@ class SymbolTable():
             self.symbol_to_number[symbol] = self.last_number
             #self.number_to_symbol[self.last_number] = symbol
             # Risky and not intention-expressing            
-            self.number_to_symbol.append(symbol)  
+            self.number_to_symbol.append(symbol)
 
         return self.symbol_to_number[symbol]
-        
+
+
 ################################################################################
 ################################################################################
 
@@ -226,8 +264,8 @@ class SuffixArray():
 ################################################################################
 
     def __init__(self):
-        self.corpus = make_array()    # List of word numbers
-        self.suffix = make_array()    # List of word positions
+        self.corpus = make_array()  # List of word numbers
+        self.suffix = make_array()  # List of word positions
         self.symbols = SymbolTable()  # word<->number conversion table
 
 ################################################################################
@@ -284,8 +322,8 @@ class SuffixArray():
             Builds the sorted suffix array from the corpus array.
         """
         tmpseq = range(0, len(self.corpus))
-        tmpseq.sort(cmp=(lambda a,b: compare_ngrams(self.corpus, a, \
-                    self.corpus, b)))
+        tmpseq.sort(cmp=(lambda a, b: compare_ngrams(self.corpus, a,
+                                                     self.corpus, b)))
         self.suffix = make_array(tmpseq)
 
 ################################################################################
@@ -297,12 +335,12 @@ class SuffixArray():
         """
         # TODO: We will need a more "incremental" approach for searching for
         # patterns that use multple word attributes. (Can't be done!)
-        
+
         if max is None:
             max = len(self.suffix) - 1
 
         first = self.binary_search_ngram(ngram, min, max, array.array.__ge__)
-        last  = self.binary_search_ngram(ngram, min, max, array.array.__gt__)
+        last = self.binary_search_ngram(ngram, min, max, array.array.__gt__)
 
         if first is None:
             return None
@@ -326,25 +364,24 @@ class SuffixArray():
 
         # 'max' must be one more than 'last', for the case no suffix
         # satisfies the comparison.
-        max = last + 1
-        min = first
+        maxi = last + 1
+        mini = first
         ngram_array = make_array(ngram)
         length = len(ngram)
-
-        while min < max:
-            mid = (min+max)/2
+        mid = -1
+        while mini < maxi:
+            mid = (mini + maxi) // 2
             midsuf = self.suffix[mid]
             #if cmp(compare_ngrams(self.corpus, self.suffix[mid], ngram, 0, \
             #                      ngram2_exhausted=0), 0):
-            if cmp(self.corpus[midsuf : midsuf+length], ngram_array):
+            if cmp(self.corpus[midsuf: midsuf + length], ngram_array):
                 # If 'mid' satisfies, then what we want *is* mid or *is before*
                 # mid            
-                max = mid      
+                maxi = mid
             else:
                 # If 'mid' does not satisfy, what we want *must be after* mid.            
                 mid += 1
-                min = mid      
-
+                mini = mid
         if mid > last:
             return None
         else:
@@ -363,17 +400,18 @@ class SuffixArray():
         #for pos in self.suffix:
         for suf in xrange(start, max):
             pos = self.suffix[suf]
-            print "%4d:" % pos,
-            for i in range(pos, pos+limit):
+            print("%4d:" % pos, end="")
+            for i in range(pos, pos + limit):
                 if i < len(self.corpus):
                     sym = self.symbols.number_to_symbol[self.corpus[i]]
                     if sym == "":
                         sym = "#"
-                    print sym,
+                    print(sym, end="")
                 else:
-                    print "*",
+                    print("*", end="")
 
-            print ""
+            print("")
+
 
 ################################################################################
 ################################################################################
@@ -405,20 +443,21 @@ class CSuffixArray(SuffixArray):
 
     def build_suffix_array(self):
         if self.basepath is None:
-            print >>sys.stderr, "Base path not specified for suffix array " + \
-                                 "to be built with C indexer"
+            error("Base path not specified for suffix array to be built " + \
+                  "with C indexer")
             sys.exit(2)
 
         self.wordlist_file.seek(0)
         verbose("Using C indexer to build suffix array %s" % self.basepath)
-        subprocess.call( [C_INDEXER_PROGRAM, self.basepath], \
-                         stdin=self.wordlist_file)
+        subprocess.call([C_INDEXER_PROGRAM, self.basepath],
+                        stdin=self.wordlist_file)
 
 ################################################################################
 
     def save(self):
         self.wordlist_file.close()
         os.remove(self.wordlist_path)
+
 
 ################################################################################
 ################################################################################
@@ -462,20 +501,20 @@ class Index():
             Index.make_suffix_array = CSuffixArray
         else:
             if wants_to_use:
-                print >>sys.stderr, "WARNING: C indexer not found; using " + \
-                                    "(slower) Python indexer instead."
+                warn(
+                    "C indexer not found; using (slower) Python indexer instead.")
             Index.make_suffix_array = SuffixArray
 
     use_c_indexer = staticmethod(use_c_indexer)
 
 ################################################################################
 
-    def __init__( self, basepath=None, used_word_attributes=None, \
-                  use_c_indexer=None):
+    def __init__(self, basepath=None, used_word_attributes=None,
+                 use_c_indexer=None):
         self.arrays = {}
-        self.metadata = { "corpus_size": 0 }
+        self.metadata = {"corpus_size": 0}
         self.sentence_count = 0
-        
+
         Index.use_c_indexer(use_c_indexer)
 
         if used_word_attributes is not None:
@@ -485,7 +524,7 @@ class Index():
 
         if basepath is not None:
             self.set_basepath(basepath)
-            
+
 ################################################################################
 
     def fresh_arrays(self):
@@ -494,7 +533,7 @@ class Index():
         """
         for attr in self.used_word_attributes:
             self.arrays[attr] = Index.make_suffix_array()
-            
+
 ################################################################################
 
     def set_basepath(self, path):
@@ -526,9 +565,8 @@ class Index():
             if '+' in attribute:
                 self.make_fused_array(attribute.split('+'))
             else:
-                print >>sys.stderr, "WARNING: Cannot load attribute %s; " + \
-                                    "index files not present." % attribute
-                #sys.exit(2)
+                warn("Cannot load attribute %s; index files not present."
+                     % attribute)
                 return None
 
         verbose("Loading corpus files for attribute \"%s\"." % attribute)
@@ -556,6 +594,7 @@ class Index():
         sufarray.set_basepath(self.basepath + "." + '+'.join(attrs))
         while True:
             try:
+                g = ""
                 next_words = [g.next() for g in generators]
                 if g == "":
                     sufarray.append_word("")
@@ -570,7 +609,7 @@ class Index():
 
         # Is this any good? (May be with the old indexer; must test)
         sufarray = None
-        print >>sys.stderr, gc.collect(), "objects collected by gc.collect()"
+        print("objects collected by gc.collect()", file=sys.stderr)
 
 ################################################################################
 
@@ -598,7 +637,7 @@ class Index():
         metafile.close()
 
 ################################################################################
-    
+
     def save_metadata(self):
         """
             Saves the index metadata to the corresponding file.
@@ -622,17 +661,17 @@ class Index():
         present_attributes = []
         for attr in self.used_word_attributes:
             present = self.load(attr)
-            if present :
-                present_attributes.append( attr )
+            if present:
+                present_attributes.append(attr)
         self.used_word_attributes = present_attributes
-    
-################################################################################
-                
+
+    ################################################################################
+
     def save_main(self):
         self.save_metadata()
         for attr in self.used_word_attributes:
             self.save(attr)
-            
+
 ################################################################################
 
     def append_sentence_moses(self, sentence):
@@ -640,20 +679,20 @@ class Index():
             Adds a moses sentence (a line in the text file) to the index.
         """
         nb_words = 0
-        for word_str in sentence.split() :
-            if word_str.count("|") != 3 :
-                print >> sys.stderr, "Ignoring token : " + word_str
-            else :
-                self.append_word_text( *word_str.split( "|" ) )
+        for word_str in sentence.split():
+            if word_str.count("|") != 3:
+                warn("Ignoring token : " + word_str)
+            else:
+                self.append_word_text(*word_str.split("|"))
             nb_words = nb_words + 1
-        self.append_end_sentence( nb_words )
-            
+        self.append_end_sentence(nb_words)
+
 ################################################################################
 
-    def append_end_sentence( self, nb_words ) :
-        for attr in self.used_word_attributes:    
+    def append_end_sentence(self, nb_words):
+        for attr in self.used_word_attributes:
             # '' (symbol 0)  means end-of-sentence
-            self.arrays[attr].append_word('')  
+            self.arrays[attr].append_word('')
         self.metadata["corpus_size"] += nb_words
         self.sentence_count += 1
         if self.sentence_count % 100 == 0:
@@ -661,20 +700,20 @@ class Index():
 
 ################################################################################
 
-    def append_word_text(self, surface, lemma, pos, syn ) :
+    def append_word_text(self, surface, lemma, pos, syn):
         for attr in self.used_word_attributes:
-            if attr == "surface" :
+            if attr == "surface":
                 value = surface
-            elif attr == "lemma" :
+            elif attr == "lemma":
                 value = lemma
-            elif attr == "pos" :
+            elif attr == "pos":
                 value = pos
-            elif attr == "syn" :
+            elif attr == "syn":
                 value = syn
-            else :
-                raise ValueError( "Unknown attribute name : " + attr )
+            else:
+                raise ValueError("Unknown attribute name : " + attr)
             self.arrays[attr].append_word(value)
-            
+
 ################################################################################
 
     def append_sentence(self, sentence):
@@ -682,11 +721,11 @@ class Index():
             Adds a `Sentence` (extracted from a XML file) to the index.
         """
         for attr in self.used_word_attributes:
-            for word in sentence.word_list:
+            for word in sentence:
                 value = getattr(word, attr)
                 self.arrays[attr].append_word(value)
-            # '' (symbol 0)  means end-of-sentence
-        self.append_end_sentence( len(sentence.word_list) )
+                # '' (symbol 0)  means end-of-sentence
+        self.append_end_sentence(len(sentence))
 
 ################################################################################
 
@@ -697,7 +736,7 @@ class Index():
         for attr in self.arrays.keys():
             verbose("Building suffix array for %s..." % attr)
             ## REFACTOR FIXME
-            self.arrays[attr].set_basepath(self.basepath + "." + attr)  
+            self.arrays[attr].set_basepath(self.basepath + "." + attr)
             self.arrays[attr].build_suffix_array()
 
 ################################################################################
@@ -708,8 +747,8 @@ class Index():
         """
 
         id = 1
-        guide = self.used_word_attributes[0]        # guide?
-        length = len(self.arrays[guide].corpus)        
+        guide = self.used_word_attributes[0]  # guide?
+        length = len(self.arrays[guide].corpus)
         words = []
         for i in range(0, length):
             if self.arrays[guide].corpus[i] == 0:
@@ -722,23 +761,26 @@ class Index():
             else:
                 args_dict = {}
                 args = []
-                for poss_attr in WORD_ATTRIBUTES :
-                    args_dict[ poss_attr ] = WILDCARD
+                for poss_attr in WORD_ATTRIBUTES:
+                    args_dict[poss_attr] = WILDCARD
                 for attr in self.used_word_attributes:
                     number = self.arrays[attr].corpus[i]
                     symbol = self.arrays[attr].symbols.number_to_symbol[number]
                     args_dict[attr] = symbol
-                for poss_attr in WORD_ATTRIBUTES :
-                    args.append( args_dict[ poss_attr ] )
+                for poss_attr in WORD_ATTRIBUTES:
+                    args.append(args_dict[poss_attr])
                 args.append([])
                 words.append(Word(*args))
+
+################################################################################
 
     # For debugging.
     def print_sentences(self):
         for sentence in self.iterate_sentences():
-            for word in sentence.word_list:
-                print word.surface, 
-            print ""
+            for word in sentence:
+                print(word.surface, end="")
+            print("")
+
 
 ################################################################################
 ################################################################################
@@ -751,11 +793,13 @@ def index_from_corpus(corpus, basepath=None, attrs=None):
     index = Index(basepath, attrs)
     index.fresh_arrays()
     parser.setContentHandler(CorpusXMLHandler(index.append_sentence))
-    parser.setFeature(xml.sax.handler.feature_external_ges, False) # IGNORE DTD!
+    parser.setFeature(xml.sax.handler.feature_external_ges,
+                      False)  # IGNORE DTD!
     parser.parse(corpus)
     index.build_suffix_arrays()
     index.save_main()
     return index
+
 
 ################################################################################
 
@@ -765,34 +809,34 @@ def index_from_text(corpus, txtformat, basepath=None, attrs=None):
     """
     index = Index(basepath, attrs)
     index.fresh_arrays()
-    try :
-        text_file = open( corpus )
+    try:
+        text_file = open(corpus)
         nb_words = 0
-        for line in text_file.readlines() :
-            clean_sentence = strip_xml( unicode( line.strip(), "utf-8" ) )        
-            if txtformat == "moses" :
-                index.append_sentence_moses( clean_sentence )
-            elif txtformat == "conll" :
-                fields = clean_sentence.split( "\t" )
-                if len(fields) == 10 :
-                    nb_words = nb_words + 1
-                    synt = fields[7].replace(":","_") + ":" + \
-                           fields[6].replace(":","_")
-                    index.append_word_text( fields[1], fields[2], fields[3], \
-                                            synt)
+        for line in text_file.readlines():
+            clean_sentence = strip_xml(unicode(line.strip(), "utf-8"))
+            if txtformat == "moses":
+                index.append_sentence_moses(clean_sentence)
+            elif txtformat == "conll":
+                fields = clean_sentence.split("\t")
+                if len(fields) == 10:
+                    nb_words += 1
+                    synt = fields[7].replace(":", "_") + ":" + \
+                           fields[6].replace(":", "_")
+                    index.append_word_text(fields[1], fields[2], fields[3],
+                                           synt)
                 elif len(fields) == 1 and len(fields[0]) == 0 and nb_words != 0:
-                    index.append_end_sentence( nb_words )
+                    index.append_end_sentence(nb_words)
                     nb_words = 0
-                else :
-                    print >> sys.stderr, "WARNING: Ingnored line: \"%s\"" % line
-                
+                else:
+                    warn("Ignored line: \"%s\"" % line)
+
         text_file.close()
-    except IOError :
-        print >> sys.stderr, "IO Error reading file " + corpus
-        sys.exit( 2 )    
+    except IOError:
+        error("IO Error reading file " + corpus)
     index.build_suffix_arrays()
     index.save_main()
     return index
+
 
 ################################################################################
 #t = fuse_suffix_arrays(h.arrays["surface"], h.arrays["pos"])
@@ -800,7 +844,7 @@ def index_from_text(corpus, txtformat, basepath=None, attrs=None):
 # For debugging.
 def standalone_main(argv):
     if len(argv) != 3:
-        print >>sys.stderr, "Usage: python indexlib.py <basepath> <corpus>"
+        print("Usage: python indexlib.py <basepath> <corpus>", file=sys.stderr)
         return 1
 
     basepath = argv[1]
@@ -808,7 +852,7 @@ def standalone_main(argv):
 
     index = index_from_corpus(corpus, basepath)
     index.save_main()
-    print >>sys.stderr, "Done."
+    print("Done.", file=sys.stderr)
 
 ################################################################################
 

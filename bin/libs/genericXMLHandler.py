@@ -3,7 +3,8 @@
 
 ################################################################################
 # 
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 # 
 # genericXMLHandler.py is part of mwetoolkit
 # 
@@ -30,9 +31,14 @@
     beginning. This is done through the document's root element.
 """
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.corpusXMLHandler import CorpusXMLHandler
+from libs.dictXMLHandler import DictXMLHandler
 import xml.sax
 
 

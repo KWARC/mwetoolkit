@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xml2evita.py is part of mwetoolkit
 #
@@ -38,14 +39,15 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import re
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import read_options, treat_options_simplest, parse_xml
-from xmlhandler.classes.__common import SEPARATOR, WORD_SEPARATOR
-     
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml
+from libs.base.__common import SEPARATOR, WORD_SEPARATOR
+
 ################################################################################     
 # GLOBALS     
 usage_string = """Usage: 
@@ -55,11 +57,11 @@ python %(program)s <candidates.xml>
 %(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-"""     
-            
+"""
+
 ################################################################################     
-       
-def treat_candidate( candidate ) :
+
+def treat_candidate(candidate):
     """
         For each `Candidate`, print the candidate ID, its POS pattern and the 
         list of occurrences one per line
@@ -67,20 +69,20 @@ def treat_candidate( candidate ) :
         @param candidate The `Candidate` that is being read from the XML file.
     """
     pos = candidate.get_pos_pattern()
-    pos = pos.replace( SEPARATOR, " " )
-    print "candid=%(id)s pos=\"%(pos)s\"" % \
-          { "id": candidate.id_number, "pos": pos }
-    for form in candidate.occurs :
-        form.set_all( lemma="", pos="" )
+    pos = pos.replace(SEPARATOR, " ")
+    print("candid=%(id)s pos=\"%(pos)s\"" % {"id": candidate.id_number,
+                                             "pos": pos})
+    for form in candidate.occurs:
+        form.set_all(lemma="", pos="")
         occur = form.to_string()
-        occur = occur.replace( SEPARATOR, "" )
-        occur = occur.replace( WORD_SEPARATOR, " " )
-        print "\"%(occur)s\"" % { "occur": occur.encode( 'utf-8' ) }
-    print
+        occur = occur.replace(SEPARATOR, "")
+        occur = occur.replace(WORD_SEPARATOR, " ")
+        print(("\"%(occur)s\"" % {"occur": occur}).encode('utf-8'))
+    print()
 
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, -1, usage_string )
-parse_xml( CandidatesXMLHandler( treat_candidate=treat_candidate ), arg )
+arg = read_options("", [], treat_options_simplest, -1, usage_string)
+parse_xml(CandidatesXMLHandler(treat_candidate=treat_candidate), arg)
 

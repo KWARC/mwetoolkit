@@ -3,7 +3,8 @@
 
 ################################################################################
 # 
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 # 
 # htmldiff.py is part of mwetoolkit
 # 
@@ -26,13 +27,17 @@
     (as in unix's diff) and then shows it as an html page.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
-import pdb
 import difflib
-import os
 import subprocess
 
-from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
+from bin.libs.base.__common import TEMP_PREFIX, TEMP_FOLDER
+
 BROWSER = "chromium-browser"
 
 ################################################################################

@@ -26,16 +26,16 @@
 
 import sys
 import xml.sax
-import pdb
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
+from bin.libs.xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 from util import read_options, treat_options_simplest
 from xmlhandler.classes.yahooTerms import YahooTerms
 from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.ngram import Ngram
 from xmlhandler.classes.word import Word
 from config import WILDCARD
+
+
 
 ################################################################################
 # GLOBALS

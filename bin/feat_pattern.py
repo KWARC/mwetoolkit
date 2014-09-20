@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # feat_pattern.py is part of mwetoolkit
 #
@@ -31,16 +32,16 @@
     For more information, call the script with no parameter and read the
     usage instructions.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-import sys
-import xml.sax
-import pdb
-
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta_feat import MetaFeat
-from util import read_options, treat_options_simplest, verbose, parse_xml
-from xmlhandler.classes.__common import SEPARATOR
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.base.feature import Feature
+from libs.base.meta_feat import MetaFeat
+from libs.util import read_options, treat_options_simplest, verbose, parse_xml
+from libs.base.__common import SEPARATOR
      
 ################################################################################     
 # GLOBALS     
@@ -76,7 +77,7 @@ def treat_meta( meta ) :
     meta.add_meta_feat( MetaFeat( "n", "integer" ) )
     meta.add_meta_feat( MetaFeat( "capitalized", "{UPPERCASE,Firstupper,lowercase,MiXeD}" ) )    
     meta.add_meta_feat( MetaFeat( "hyphen", "{True,False}" ) )        
-    print meta.to_xml()
+    print(meta.to_xml())
        
 ################################################################################
 
@@ -116,7 +117,7 @@ def treat_candidate( candidate ) :
                                   case_classes.keys() ) )[ 1 ]
     candidate.add_feat( Feature( "capitalized", argmax_case_class ) )        
     candidate.add_feat( Feature( "hyphen", str( has_hyphen ) ) )
-    print candidate.to_xml().encode( 'utf-8' )
+    print(candidate.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 # MAIN SCRIPT
@@ -135,5 +136,4 @@ handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates")
 parse_xml( handler, arg )
-print handler.footer
-    
+print(handler.footer)

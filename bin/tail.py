@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # tail.py is part of mwetoolkit
 #
@@ -32,12 +33,14 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, verbose, \
+    parse_xml, error
 
 ################################################################################
 # GLOBALS
@@ -57,22 +60,23 @@ OPTIONS may be:
 """
 limit = 10
 entity_counter = 0
-entity_buffer = [ None ] * limit
+entity_buffer = [None] * limit
 
 ################################################################################
 
-def treat_meta( meta ) :
+def treat_meta(meta):
     """
         Simply prints the meta header to the output without modifications.
 
         @param meta The `Meta` header that is being read from the XML file.
     """
 
-    print meta.to_xml().encode( 'utf-8' ) 
+    print(meta.to_xml().encode('utf-8'))
+
 
 ################################################################################
-       
-def treat_entity( entity ) :
+
+def treat_entity(entity):
     """
         For each entity in the corpus, puts it in a circular buffer. This is
         necessary because we do not know the total number of lines, so we always
@@ -81,15 +85,16 @@ def treat_entity( entity ) :
         @param entity A subclass of `Ngram` that is being read from the XM.
     """
     global entity_counter, entity_buffer, limit
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    if limit > 0 :
-        entity_buffer[ entity_counter % limit ] = entity
+    if entity_counter % 100 == 0:
+        verbose("Processing ngram number %(n)d" % {"n": entity_counter})
+    if limit > 0:
+        entity_buffer[entity_counter % limit] = entity
         entity_counter += 1
-    
+
+
 ################################################################################    
 
-def print_entities( filename ) :
+def print_entities(filename):
     """
         After we read all the XML file, we can finally be sure about which lines
         need to be printed. Those correspond exactly to the N last lines added
@@ -99,7 +104,7 @@ def print_entities( filename ) :
         must be present to respect format of postprocessing function
     """
     global entity_buffer, entity_counter, handler
-    for i in range( min( limit, entity_counter ) ) :
+    for i in range(min(limit, entity_counter)):
         #pdb.set_trace()
         # entity_buffer is a circular buffer. In order to print the entities in
         # the correct order, we go from the cell imediately after the last one
@@ -107,16 +112,17 @@ def print_entities( filename ) :
         # last one stored in the buffer (position entity_counter-1). If there
         # are less entities in the file than the limit, this padding is not
         # needed and we simply go from 0 until entity_counter-1
-        index = ( entity_counter + i ) % min( limit, entity_counter )
-        if entity_buffer[ index ] != None :
-            print entity_buffer[ index ].to_xml().encode( 'utf-8' )
-        else :
+        index = ( entity_counter + i ) % min(limit, entity_counter)
+        if entity_buffer[index] != None:
+            print(entity_buffer[index].to_xml().encode('utf-8'))
+        else:
             break
     entity_counter = 0
-    
+
+
 ################################################################################  
 
-def treat_options( opts, arg, n_arg, usage_string ) :
+def treat_options(opts, arg, n_arg, usage_string):
     """
         Callback function that handles the command line options of this script.
         
@@ -128,28 +134,27 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global limit
     global entity_buffer
-    
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-    
+
+    treat_options_simplest(opts, arg, n_arg, usage_string)
+
     for ( o, a ) in opts:
-        if o in ("-n", "--number") :
-            try :
-                limit = int( a )
-                entity_buffer = [ None ] * limit
-                if limit < 0 :
+        if o in ("-n", "--number"):
+            try:
+                limit = int(a)
+                entity_buffer = [None] * limit
+                if limit < 0:
                     raise ValueError
-            except ValueError :
-                print >> sys.stderr, "ERROR: You must provide a positive " + \
-                                     "integer value as argument of -n option."
-                usage( usage_string )
-                sys.exit( 2 )
-    
-################################################################################    
+            except ValueError:
+                error("You must provide a positive " + \
+                      "integer value as argument of -n option.")
+
+################################################################################
+
 # MAIN SCRIPT
 
-arg = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=treat_entity,
-                             gen_xml=True )
-parse_xml( handler, arg, print_entities )
-print handler.footer
+arg = read_options("n:", ["number="], treat_options, -1, usage_string)
+handler = GenericXMLHandler(treat_meta=treat_meta,
+                            treat_entity=treat_entity,
+                            gen_xml=True)
+parse_xml(handler, arg, print_entities)
+print(handler.footer)

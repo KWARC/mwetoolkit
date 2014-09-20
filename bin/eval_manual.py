@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2014 Venera Arnaoudova, Carlos Ramisch
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos, Venera Arnaoudova
 #
 # eval_manual.py is part of mwetoolkit
 #
@@ -22,6 +23,11 @@
 #
 ################################################################################
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 __author__ = 'Neni'
 
 """
@@ -36,8 +42,10 @@ __author__ = 'Neni'
 
 import os
 from lxml import etree
-from util import usage, read_options, treat_options_simplest, verbose
-     
+
+from bin.libs.util import read_options, treat_options_simplest
+
+
 ################################################################################     
 # GLOBALS     
 usage_string = """Usage: 
@@ -47,84 +55,81 @@ python %(program)s [OPTIONS] <candidates.xml> <output.csv>
 %(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-"""     
-candidates_filename = None
-output_filename = None       
-     
+"""
+
+
 ################################################################################   
 
-def annotate_candidates() :
-	"""
+def annotate_candidates():
+    """
 		Main function, opens both files (candidates and output), looks for the 
 		next MWE to annotate and launches annotation interface.
 	"""
-	global candidates_filename
-	global output_filename
-	parser = etree.HTMLParser(remove_blank_text=True)
-	tree   = etree.parse(candidates_filename, parser)
-	validatedMWEfileName = output_filename
+    global candidates_filename
+    global output_filename
+    parser = etree.HTMLParser(remove_blank_text=True)
+    tree = etree.parse(candidates_filename, parser)
+    validatedMWEfileName = output_filename
 
-	alreadyValidated=[]
-	totalValidated=-1
+    alreadyValidated = []
+    totalValidated = -1
 
-	if os.path.exists(validatedMWEfileName):
-		 validatedMWEfile = file(validatedMWEfileName, "r")
-		 for line in validatedMWEfile:
-		    print "READ:" +line
-		    alreadyValidated.append(line.split(";")[0])
-		    totalValidated=totalValidated+1
-		 validatedMWEfile.close()
-		 validatedMWEfile = file(validatedMWEfileName, "a")
-	else:
-		 validatedMWEfile = file(validatedMWEfileName, "w")
-		 header = "Cand id;Frequency;word1;word2;word3;validation\n"
-		 validatedMWEfile.write(header)
-		 totalValidated=totalValidated+1
+    if os.path.exists(validatedMWEfileName):
+        validatedMWEfile = file(validatedMWEfileName, "r")
+        for line in validatedMWEfile:
+            print("READ:" + line)
+            alreadyValidated.append(line.split(";")[0])
+            totalValidated = totalValidated + 1
+        validatedMWEfile.close()
+        validatedMWEfile = file(validatedMWEfileName, "a")
+    else:
+        validatedMWEfile = file(validatedMWEfileName, "w")
+        header = "Cand id;Frequency;word1;word2;word3;validation\n"
+        validatedMWEfile.write(header)
+        totalValidated = totalValidated + 1
 
+    print("Total validated:", str(totalValidated))
 
-	print "Total validated:", str(totalValidated)
+    for cand in tree.xpath('.//cand'):
+        ngram = cand.find('ngram')
+        ngrams = cand.findall('occurs/ngram')
+        candidateId = cand.get('candid')
+        if alreadyValidated.__contains__(candidateId + ";"):
+            print("Already validated:" + candidateId)
+            continue
 
-	for cand in tree.xpath('.//cand'):
-		ngram=cand.find('ngram')
-		ngrams=cand.findall('occurs/ngram')
-		candidateId = cand.get('candid')
-		if alreadyValidated.__contains__(candidateId+";"):
-		    print "Already validated:" + candidateId
-		    continue
+        print("----------\nNgram ", candidateId, ", Freq.:",
+              ngram.find('freq').get("value"))
 
-		print "----------\nNgram ",candidateId, ", Freq.:", \
-		      ngram.find('freq').get("value")
+        for currentNgram in ngrams:
+            print()
+            for word in currentNgram.xpath('./w'):
+                print("\t " + str(word.attrib))
 
-		for currentNgram in ngrams:
-		    print ""
-		    for word in currentNgram.xpath('./w'):
-		        print "\t "+str(word.attrib)
+        currentMWE = candidateId + ";" + ngram.find('freq').get("value") + ";"
 
-		currentMWE=candidateId+";"+ngram.find('freq').get("value")+";"
+        print()
+        for word in ngram.xpath('./w'):
+            print(word.attrib)
+            currentMWE = currentMWE + str(word.attrib) + ";"
+        if currentMWE.count(";") == 4:
+            currentMWE = currentMWE + ";"
+        validation = raw_input("Is this a MWE: ")
+        print("\t You entered: ", validation)
+        if validation == ".":
+            validatedMWEfile.close()
+            exit()
+        currentMWE = currentMWE + validation
+        validatedMWEfile.write(currentMWE + "\n")
+        totalValidated = totalValidated + 1
+        print("\t ---> Total validated:", str(totalValidated))
 
-		print ""
-		for word in ngram.xpath('./w'):
-		    print word.attrib
-		    currentMWE=currentMWE+str(word.attrib)+";"
-		if currentMWE.count(";")==4:
-		    currentMWE=currentMWE+";"
-		validation = raw_input("Is this a MWE: ")
-		print "\t You entered: ", validation
-		if validation == ".":
-		    validatedMWEfile.close()
-		    exit()
-		currentMWE=currentMWE+validation
-		validatedMWEfile.write(currentMWE+"\n")
-		totalValidated=totalValidated+1
-		print "\t ---> Total validated:", str(totalValidated)
+    validatedMWEfile.close()
 
-
-	validatedMWEfile.close()
-	
 ################################################################################   	
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, 2, usage_string )
+arg = read_options("", [], treat_options_simplest, 2, usage_string)
 candidates_filename = arg[0]
 output_filename = arg[1]
 annotate_candidates()

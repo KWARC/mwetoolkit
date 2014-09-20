@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2014 Silvio Ricardo Cordeiro
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # annotate_mwe.py is part of mwetoolkit
 #
@@ -32,36 +33,18 @@ usage instructions.
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
+from __future__ import absolute_import
 
 import collections
 import sys
-import re
-import shelve
-import xml.sax
-import os
-import tempfile
-import pdb
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
-from xmlhandler.classes.__common import WILDCARD, \
-                                        TEMP_PREFIX, \
-                                        TEMP_FOLDER, \
-                                        XML_HEADER, \
-                                        XML_FOOTER
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.mweoccur import MWEOccurrence
-from xmlhandler.classes.mweoccur import MWEOccurrenceBuilder
-from xmlhandler.classes.ngram import Ngram
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
-from util import usage, read_options, treat_options_simplest, \
-                 verbose, interpret_ngram, error
+from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
+from libs.util import read_options, treat_options_simplest, verbose, error
 from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
 from libs.parser_wrappers import XMLParser
+
+
+
 
 ################################################################################
 # GLOBALS
@@ -104,7 +87,9 @@ printer_class = None
 
 ################################################################################
 
+
 class AnnotatingXMLParser(XMLParser):
+
     def __init__(self, fileobjs, printer):
         super(AnnotatingXMLParser,self).__init__(fileobjs, printer)
         self.sentence_counter = 0
@@ -123,7 +108,6 @@ class AnnotatingXMLParser(XMLParser):
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)            
         self.printer.add(sentence)
-
 
 
 ################################################################################

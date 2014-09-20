@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2014 Silvio Ricardo Cordeiro
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # parser_wrappers.py is part of mwetoolkit
 #
@@ -22,7 +23,7 @@
 #
 ################################################################################
 """
-This module provides wrapper classes for parsers.
+This module provides wrapper base for parsers.
 They provide a more elegant interface to file parsers such as
 `xmlhandler.genericXMLHandler.GenericXMLHandler`.
 """
@@ -115,7 +116,7 @@ class XMLParser(AbstractParser):
     Run it like this: `XMLParser(xml_file_objs...).parse()`.
     """
     def _parse_file(self, fileobj):
-        from xmlhandler.genericXMLHandler import GenericXMLHandler
+        from bin.libs.xmlhandler.genericXMLHandler import GenericXMLHandler
         self.parser = xml.sax.make_parser()
         # Ignores the DTD declaration. This will not validate the document!
         self.parser.setFeature(xml.sax.handler.feature_external_ges, False)

@@ -1,24 +1,16 @@
 import sys
-import tempfile
+
 from libs.indexlib import Index
-
-
 from xmlhandler.classes.frequency import Frequency
 from xmlhandler.classes.feature import Feature
 from xmlhandler.classes.meta import Meta
 from xmlhandler.classes.meta_feat import MetaFeat
 from xmlhandler.classes.corpus_size import CorpusSize
 from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.ngram import Ngram
+from bin.libs.base.ngram import Ngram
 from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
-from util import usage, read_options, treat_options_simplest, verbose, interpret_ngram
+from util import read_options, treat_options_simplest, verbose, interpret_ngram
 
-from xmlhandler.classes.__common import WILDCARD, \
-                                        TEMP_PREFIX, \
-                                        TEMP_FOLDER, \
-                                        XML_HEADER, \
-                                        XML_FOOTER
 
 usage_string = """Usage:
 

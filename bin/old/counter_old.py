@@ -34,21 +34,18 @@
 """
 
 import sys
-import shelve
 import xml.sax
-import pdb
-import array
 import re
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, DEFAULT_LANG                                       
+from bin.libs.xmlhandler.genericXMLHandler import GenericXMLHandler
 from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.yahooFreq import YahooFreq
 from xmlhandler.classes.googleFreq import GoogleFreq
-from xmlhandler.classes.googleFreqUniv import GoogleFreqUniv
+from bin.libs.base.googleFreqUniv import GoogleFreqUniv
 from xmlhandler.classes.corpus_size import CorpusSize
-#from xmlhandler.classes.corpus import Corpus
-#from xmlhandler.classes.suffix_array import SuffixArray
+
+
+#from xmlhandler.base.corpus import Corpus
+#from xmlhandler.base.suffix_array import SuffixArray
 from util import usage, read_options, treat_options_simplest, verbose
 
 from libs.indexlib import Index, ATTRIBUTE_SEPARATOR

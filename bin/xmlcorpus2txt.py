@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xmlcorpus2txt.py is part of mwetoolkit
 #
@@ -35,13 +36,18 @@
     usage instructions.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
-import xml.sax
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
+
+from libs.corpusXMLHandler import CorpusXMLHandler
+from libs.base.__common import ATTRIBUTE_SEPARATOR
+from libs.base.word import WORD_ATTRIBUTES
+from libs.util import usage, read_options, treat_options_simplest, verbose, parse_xml, error
+
 
 usage_string = """Usage:
 
@@ -68,10 +74,10 @@ def print_sentence(sentence):
     global attributes, entity_counter
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    for word in sentence.word_list:
+    for word in sentence:
         vals = [getattr(word, attr) for attr in attributes]
-        print ATTRIBUTE_SEPARATOR.join(vals),
-    print ""
+        print(ATTRIBUTE_SEPARATOR.join(vals),end="")
+    print("")
     entity_counter = entity_counter + 1
 
 ################################################################################
@@ -97,8 +103,7 @@ def treat_options(opts, arg, n_arg, usage_string):
             attributes = a.split(":")
             for attr in attributes:
                 if attr not in WORD_ATTRIBUTES:
-                    print >>sys.stderr, "Unknown attribute '%s'!" % attr
-                    sys.exit(2)
+                    error("Unknown attribute '%s'!" % attr)
 
     if attributes is None:
         print >>sys.stderr, "The option -a <attributes> is mandatory."

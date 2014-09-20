@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2014 Silvio Ricardo Cordeiro
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xml2conll.py is part of mwetoolkit
 #
@@ -37,13 +38,10 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-import xml.sax
-import re
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, parse_xml
-from xmlhandler.classes.__common import WILDCARD
-from util import verbose
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml, verbose
+from libs.base.__common import WILDCARD
      
 ################################################################################     
 # GLOBALS     

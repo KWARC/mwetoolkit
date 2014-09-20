@@ -1,14 +1,14 @@
 import sys
 import array
-import shelve
 import codecs
 import xml.sax
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
+import gc
+
+from bin.libs.xmlhandler.corpusXMLHandler import CorpusXMLHandler
 from xmlhandler.classes.sentence import Sentence
 from xmlhandler.classes.word import Word
 from util import verbose
 
-import gc
 gc.set_debug(gc.DEBUG_LEAK)
 
 

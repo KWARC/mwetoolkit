@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # filter.py is part of mwetoolkit
 #
@@ -36,15 +37,16 @@
     For more information, call the script with no parameter and read the
     usage instructions.
 """
-
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 import sys
-import xml.sax
-import pdb
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.dictXMLHandler import DictXMLHandler
+from libs.genericXMLHandler import GenericXMLHandler
 from libs.patternlib import parse_patterns_file, match_pattern
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
+from libs.util import read_options, treat_options_simplest, verbose, \
+    parse_xml, error
      
 ################################################################################     
 # GLOBALS     
@@ -103,7 +105,7 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.        
     """   
     
-    print meta.to_xml().encode( 'utf-8' ) 
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
        
@@ -135,7 +137,7 @@ def treat_entity( entity ) :
     # Threshold test
     for freq in entity.freqs :
         if thresh_source :
-            if ( thresh_source == freq.name or \
+            if ( thresh_source == freq.name or
                  thresh_source == freq.name + ".xml" ) and \
                  freq.value < thresh_value :
                 print_it = False
@@ -155,11 +157,11 @@ def treat_entity( entity ) :
     # we are only printing the first such match.
     if print_it and patterns :
         print_it = False
-        words = entity.word_list
+        words = entity
         for pattern in patterns :
             for (match_ngram, wordnums) in match_pattern(pattern, words) :
                 print_it = True
-                ngram_to_print.word_list = match_ngram.word_list
+                ngram_to_print = match_ngram
                 break
             if print_it :
                 break
@@ -168,7 +170,7 @@ def treat_entity( entity ) :
         print_it = not print_it
 
     if print_it :   
-        print ngram_to_print.to_xml().encode( 'utf-8' )
+        print(ngram_to_print.to_xml().encode( 'utf-8' ))
     entity_counter += 1
     
 ################################################################################
@@ -232,9 +234,8 @@ def read_patterns_file( filename ) :
 
     try:
         patterns = parse_patterns_file(filename, anchored=True)
-    except IOError, err:
-        print >> sys.stderr, err
-        sys.exit( 2 )
+    except IOError as err:
+        error(str(err))
 
 ################################################################################
 
@@ -262,23 +263,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             if threshold :
                 (thresh_source, thresh_value) = threshold
             else :
-                print >> sys.stderr, "The format of the -t argument must be" + \
-                                     " <source>:<value>"
-                print >> sys.stderr, "<source> must be a valid corpus name " + \
-                                     "and <value> must be a non-negative " + \
-                                     "integer"
-                usage( usage_string )
-                sys.exit( 2 )
+                error( "The format of the -t argument must be <source>:"
+                       "<value>\n<source> must be a valid corpus name and "
+                       "<value> must be a non-negative integer")
         elif o in ( "-e", "--equals" ) :
             equals = interpret_equals( a )
             if equals :
                 ( equals_name, equals_value ) = equals
             else :
-                print >> sys.stderr, "The format of the -e argument must be" + \
-                                     " <name>:<value>"
-                print >> sys.stderr, "<name> must be a valid feat name " + \
-                                     "and <value> must be a non-empty " + \
-                                     "string"
+                error( "The format of the -e argument must be <name>:"
+                       "<value>\n<name> must be a valid feat name and "
+                       "<value> must be a non-empty string")
         elif o in ("-p", "--patterns") :
             verbose( "Reading patterns file" )
             read_patterns_file( a )
@@ -307,5 +302,5 @@ handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
 parse_xml( handler, arg, reset_entity_counter )
-print handler.footer
+print(handler.footer)
 

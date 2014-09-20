@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # wc.py is part of mwetoolkit
 #
@@ -32,12 +33,15 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, verbose, parse_xml
+import sys
+
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, verbose, parse_xml
      
 ################################################################################     
 # GLOBALS     
@@ -63,7 +67,7 @@ def treat_entity( entity ) :
         For each candidate/sentence, counts the number of occurrences, the 
         number of words and the number of characters (except spaces and XML).
         
-        @param ngram A subclass of `Ngram` that is being read from the XML.
+        @param entity A subclass of `Ngram` that is being read from the XML.
     """
     global char_counter, word_counter, entity_counter
     
@@ -84,9 +88,9 @@ def print_counters( filename ) :
             after a call to this function.
         """
         global entity_counter, word_counter, char_counter
-        print >> sys.stderr, str(entity_counter) + " entities in "   + filename
-        print >> sys.stderr, str(word_counter)   + " words in "      + filename
-        print >> sys.stderr, str(char_counter)   + " characters in " + filename
+        print(str(entity_counter) + " entities in " + filename,file=sys.stderr)
+        print(str(word_counter) + " words in " + filename,file=sys.stderr)
+        print(str(char_counter) + " characters in " + filename,file=sys.stderr)
         entity_counter = 0 
         word_counter = 0
         char_counter = 0

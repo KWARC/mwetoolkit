@@ -3,9 +3,10 @@
 
 ################################################################################
 #
-# Copyright 2014 Silvio Ricardo Cordeiro
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
-# printer.py is part of mwetoolkit
+# printers.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,8 +23,8 @@
 #
 ################################################################################
 """
-This module provides `Printer` classes.
-These classes can be used to print all kinds of
+This module provides `Printer` base.
+These base can be used to print all kinds of
 objects in different output formats.
 """
 
@@ -33,9 +34,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
 
+from libs.base.__common import XML_HEADER, XML_FOOTER
 
 ################################################################################
 
@@ -116,8 +116,8 @@ class SimplePrinter(AbstractPrinter) :
     """Instances can be used to print plain-text data.
 
     Example:
-    >>> from sentence import *
-    >>> from word import *
+    >>> from base.sentence import *
+    >>> from base.word import *
     >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
     >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
     >>> s3 = "A plain-text sentence."
@@ -141,8 +141,8 @@ class XMLPrinter(AbstractPrinter):
     """Instances can be used to print XML objects.
     
     Example:
-    >>> from sentence import *
-    >>> from word import *
+    >>> from base.sentence import *
+    >>> from base.word import *
     >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
     >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
     >>> s3 = "A plain-text sentence."

@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # util.py is part of mwetoolkit
 #
@@ -49,27 +50,29 @@ common_options_usage_string = """\
     
 -h or --help
     Print usage information about parameters and options"""
-    
-    
-    
+
+
+
 ################################################################################
 
-def set_verbose( value ) :
+def set_verbose(value):
     """
         Sets whether to show verbose messages.
     """
     global verbose_on
     verbose_on = value
 
+
 ################################################################################
 
-def verbose( message ) :
+def verbose(message):
     """
         Prints a message if in verbose mode.
     """
     global verbose_on
-    if verbose_on :
+    if verbose_on:
         print(message, file=sys.stderr)
+
 
 ################################################################################
 
@@ -82,20 +85,23 @@ def set_debug_mode(value):
     if debug_mode:
         print("Debug mode on", file=sys.stderr)
 
+
 ################################################################################
 
-def usage( usage_string ) :
+def usage(usage_string):
     """
         Print detailed instructions about the use of this program. Each script
         that uses this function should provide a variable containing the
         usage string.
     """
-    print(usage_string % {"program": sys.argv[ 0 ],
-             "common_options": common_options_usage_string}, file=sys.stderr)
-    
+    print(usage_string % {"program": sys.argv[0],
+                          "common_options": common_options_usage_string},
+          file=sys.stderr)
+
+
 ################################################################################
 
-def treat_options_simplest( opts, arg, n_arg, usage_string ) :
+def treat_options_simplest(opts, arg, n_arg, usage_string):
     """
         Verifies that the number of arguments given to the script is correct.
         
@@ -105,25 +111,26 @@ def treat_options_simplest( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.
     """
-    for ( o, a ) in opts:      
-        if o in ("-v", "--verbose") :
-            set_verbose( True )
-            verbose( "Verbose mode on" )
+    for ( o, a ) in opts:
+        if o in ("-v", "--verbose"):
+            set_verbose(True)
+            verbose("Verbose mode on")
         elif o in ("-D", "--debug"):
             set_debug_mode(True)
-        elif o in ("-h", "--help") :
-            usage( usage_string )
-            sys.exit( 0 )
-    
-    if n_arg >= 0 and len( arg ) != n_arg :
+        elif o in ("-h", "--help"):
+            usage(usage_string)
+            sys.exit(0)
+
+    if n_arg >= 0 and len(arg) != n_arg:
         print("You must provide %(n)s arguments to this script" \
-                             % { "n" : n_arg }, file=sys.stderr)
-        usage( usage_string )
-        sys.exit( 2 )
+              % {"n": n_arg}, file=sys.stderr)
+        usage(usage_string)
+        sys.exit(2)
 
-################################################################################     
 
-def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
+################################################################################
+
+def read_options(shortopts, longopts, treat_options, n_args, usage_string):
     """
         Generic function that parses the input options using the getopt module.
         The options are then treated through the `treat_options` callback.
@@ -149,45 +156,47 @@ def read_options( shortopts, longopts, treat_options, n_args, usage_string ) :
             longopts += [opt]
 
     try:
-        opts, arg = getopt.getopt( sys.argv[ 1: ], shortopts, longopts )
-    except getopt.GetoptError, err:
+        opts, arg = getopt.getopt(sys.argv[1:], shortopts, longopts)
+    except getopt.GetoptError as err:
         # will print something like "option -a not recognized"
         print(err, file=sys.stderr)
         usage(usage_string)
-        sys.exit( -1 )
+        sys.exit(-1)
 
-    treat_options( opts, arg, n_args, usage_string ) 
+    treat_options(opts, arg, n_args, usage_string)
     return arg
-        
+
+
 ################################################################################             
 
-def strip_xml( the_string ) :
+def strip_xml(the_string):
     """
     	Escapes the XML special characters in the string by replacing them with
     	the corresponding XML entities. The five special characters in XML are :
     	' " < > &
     """
-    cleanContent = the_string    
+    cleanContent = the_string
     # First, replace entities with their characters, guaranteeing that, if the
     # text already contains escaped entities, they won't become something like
     # &amp;quot; 
-    cleanContent = cleanContent.replace( "&apos;", "\'" ) # Escape sequence
-    cleanContent = cleanContent.replace( "&quot;", "\"" ) # Escape sequence    
-    cleanContent = cleanContent.replace( "&gt;", ">" ) # Escape sequence    
-    cleanContent = cleanContent.replace( "&lt;", "<" ) # Escape sequence    
-    cleanContent = cleanContent.replace( "&amp;", "&" ) # Escape sequence
-	# Now, replace the characters with the entities
-    cleanContent = cleanContent.replace( "&", "&amp;" ) # Escape sequence
-    cleanContent = cleanContent.replace( "<", "&lt;" ) # Escape sequence
-    cleanContent = cleanContent.replace( ">", "&gt;" ) # Escape sequence
-    cleanContent = cleanContent.replace( "\"", "&quot;" ) # Escape sequence
-    cleanContent = cleanContent.replace( "\'", "&apos;" ) # Escape sequence
+    cleanContent = cleanContent.replace("&apos;", "\'")  # Escape sequence
+    cleanContent = cleanContent.replace("&quot;", "\"")  # Escape sequence
+    cleanContent = cleanContent.replace("&gt;", ">")  # Escape sequence
+    cleanContent = cleanContent.replace("&lt;", "<")  # Escape sequence
+    cleanContent = cleanContent.replace("&amp;", "&")  # Escape sequence
+    # Now, replace the characters with the entities
+    cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
+    cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
+    cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
+    cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
+    cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
     #cleanContent = cleanContent.replace( "*", "&lowast;" ) # Escape WILDCARD
     return cleanContent
-        
+
+
 ################################################################################
 
-def interpret_ngram( argument ) :
+def interpret_ngram(argument):
     """
         Parses the argument of the "-n" option. This option is of the form
         "<min>:<max>" and defines the length of n-grams to extract. For 
@@ -205,11 +214,11 @@ def interpret_ngram( argument ) :
         the argument is incoherent.
     """
     try:
-        if ":" in argument :
-            [ n_min, n_max ] = argument.split( ":" )
+        if ":" in argument:
+            [n_min, n_max] = argument.split(":")
             n_min = int(n_min)
             n_max = int(n_max)
-        else :
+        else:
             n_min = int(argument)
             n_max = int(argument)
 
@@ -218,41 +227,44 @@ def interpret_ngram( argument ) :
                 return ( n_min, n_max )
             else:
                 print("Error parsing argument for -n: <min> " \
-                        "must be at least 1", file=sys.stderr)
+                      "must be at least 1", file=sys.stderr)
                 return None
-        else :                
-           print("Error parsing argument for -n: <min> is greater than <max>",
-                   file=sys.stderr)
-           return None
+        else:
+            print("Error parsing argument for -n: <min> is greater than <max>",
+                  file=sys.stderr)
+            return None
 
-    except IndexError :
+    except IndexError:
         return None
-    except TypeError :
+    except TypeError:
         return None
-    except ValueError :
+    except ValueError:
         return None
+
 
 ################################################################################
 
-def error( message ) :
+def error(message):
     """
         Utility function to show error message and quit
     """
     print("ERROR:", message, file=sys.stderr)
-    sys.exit( -1 )
+    sys.exit(-1)
+
 
 ################################################################################
 
-def warn( message ) :
+def warn(message):
     """
         Utility function to show warning message
     """
     print("WARNING:", message, file=sys.stderr)
 
+
 ################################################################################
 
 
-def parse_xml( handler, arg, postfunction=None ) :
+def parse_xml(handler, arg, postfunction=None):
     """
         Create a default XML parser, assign the handler and parse input in arg.
         If during parsing the script should do additional stuff, this generic
@@ -266,30 +278,31 @@ def parse_xml( handler, arg, postfunction=None ) :
     """
     parser = xml.sax.make_parser()
     # Ignores the DTD declaration. This will not validate the document!
-    parser.setFeature( xml.sax.handler.feature_external_ges, False )
-    parser.setContentHandler( handler )
-    if len( arg ) == 0 :
-        try :
-            parser.parse( sys.stdin )
-        except StopParsing : # Read only part of XML file
-            pass # Not an error, just used to interrupt parsing
-        if postfunction :
-            postfunction( "stdin" )
-    else :
-        for a in arg :
-            input_file = open( a )
-            try :
-                parser.parse( input_file )
-            except StopParsing : # Read only part of XML file
-                pass # Not an error, just used to interrupt parsing
+    parser.setFeature(xml.sax.handler.feature_external_ges, False)
+    parser.setContentHandler(handler)
+    if len(arg) == 0:
+        try:
+            parser.parse(sys.stdin)
+        except StopParsing:  # Read only part of XML file
+            pass  # Not an error, just used to interrupt parsing
+        if postfunction:
+            postfunction("stdin")
+    else:
+        for a in arg:
+            input_file = open(a)
+            try:
+                parser.parse(input_file)
+            except StopParsing:  # Read only part of XML file
+                pass  # Not an error, just used to interrupt parsing
             input_file.close()
             handler.gen_xml = False
-            if postfunction :
-                postfunction( a )
+            if postfunction:
+                postfunction(a)
+
 
 ################################################################################
 
-def parse_txt( handler, arg, postfunction=None ) :
+def parse_txt(handler, arg, postfunction=None):
     """
         Create a default TXT parser, assign the handler and parse input in arg.
         If during parsing the script should do additional stuff, this generic
@@ -301,26 +314,27 @@ def parse_txt( handler, arg, postfunction=None ) :
         @param postfunction Post-processing function that takes as an argument 
         the string filename. Most of the time this is None.
     """
-    if len( arg ) == 0 :
-        try :
-            for line in sys.stdin.readlines() :
-                handler( line.strip().split() );
-        except StopParsing : # Read only part of XML file
-            pass # Not an error, just used to interrupt parsing
-        if postfunction :
-            postfunction( "stdin" )
-    else :
-        for a in arg :
-            input_file = open( a )
-            try :
-                for line in input_file.readlines() :
-                    handler( line.strip().split() );
-            except StopParsing : # Read only part of XML file
-                pass # Not an error, just used to interrupt parsing
+    if len(arg) == 0:
+        try:
+            for line in sys.stdin.readlines():
+                handler(line.strip().split());
+        except StopParsing:  # Read only part of XML file
+            pass  # Not an error, just used to interrupt parsing
+        if postfunction:
+            postfunction("stdin")
+    else:
+        for a in arg:
+            input_file = open(a)
+            try:
+                for line in input_file.readlines():
+                    handler(line.strip().split());
+            except StopParsing:  # Read only part of XML file
+                pass  # Not an error, just used to interrupt parsing
             input_file.close()
             handler.gen_xml = False
-            if postfunction :
-                postfunction( a )
+            if postfunction:
+                postfunction(a)
+
 
 ################################################################################
 
@@ -341,6 +355,7 @@ def default_exception_handler(type, value, trace):
         traceback.print_exception(type, value, trace)
     else:
         import os
+
         here = os.path.dirname(__file__)
         tb = traceback.extract_tb(trace)[-1]
         fname, lineno, func, text = tb
@@ -351,8 +366,9 @@ def default_exception_handler(type, value, trace):
 
     if type != IOError:
         print("You probably provided an invalid XML file, please " \
-               "validate it against the DTD.", file=sys.stderr)
+              "validate it against the DTD.", file=sys.stderr)
 
     sys.exit(1)
+
 
 sys.excepthook = default_exception_handler

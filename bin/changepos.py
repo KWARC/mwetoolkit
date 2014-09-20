@@ -27,12 +27,18 @@
 
 """
 
+from __future__ import division
+from __future__ import print_function
+#from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
-import pdb
 import xml.sax
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, verbose
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, verbose, warn
+
+
 
 ################################################################################
 # GLOBALS
@@ -96,7 +102,7 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.
     """
 
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 
@@ -105,14 +111,14 @@ def treat_entity( entity ) :
         For each sentence in the corpus, simplify the POS tags using simple
         heuristics.
 
-        @param sentence A `Sentence` that is being read from the XML file.
+        @param entity A `Sentence` that is being read from the XML file.
     """
     global sentence_counter
     if sentence_counter % 100 == 0 :
         verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
     for w in entity :
         w.pos = simplify( w.pos )        
-    print entity.to_xml().encode( 'utf-8' )
+    print(entity.to_xml().encode( 'utf-8' ))
     sentence_counter += 1
 
 ################################################################################
@@ -157,8 +163,7 @@ def simplify_palavras( pos ) :
         try :
             newpos = palavras_table[ newpos ]
         except Exception :
-            print >> sys.stderr, "WARNING: part of speech " + str( newpos ) + \
-                              " not converted."
+            warn("part of speech " + str( newpos ) + " not converted.")
     return newpos                                  
 
 ################################################################################
@@ -195,8 +200,7 @@ def simplify_ptb( pos ) :
         try :
             newpos = ptb_table[ newpos ]
         except Exception :
-            print >> sys.stderr, "WARNING: part of speech " + str( newpos ) + \
-                              " not converted."
+            warn("part of speech " + str( newpos ) + " not converted.")
     return newpos    
 
 ################################################################################
@@ -247,7 +251,7 @@ def treat_text( stream ):
                 newword = newword + part + field_sep
             newword = newword[ : len(newword)-len(field_sep) ]                
             newsent = newsent + newword + " "
-        print newsent.strip()
+        print(newsent.strip())
 
 ################################################################################
 
@@ -295,8 +299,9 @@ if len( arg ) == 0 :
         treat_text( sys.stdin )
     else :
         parser.parse( sys.stdin )
-        print handler.footer
+        print(handler.footer)
 else :
+    footer = ""
     for a in arg :
         input_file = open( a )
         if text_input :
@@ -308,4 +313,4 @@ else :
         input_file.close()
         entity_counter = 0
     if not text_input :    
-        print footer
+        print(footer)

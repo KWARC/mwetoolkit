@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # corpusDTDHandler.py is part of mwetoolkit
 #
@@ -27,12 +28,17 @@
     mwetoolkit-corpus.dtd.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import xml.sax
 
-from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
-from classes.word import Word
-from classes.sentence import Sentence
-from util import strip_xml
+from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.base.word import Word
+from libs.base.sentence import Sentence
+from libs.util import strip_xml
 
 ################################################################################
 
@@ -96,7 +102,7 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
             # Add word to the sentence that is currently bein read
             self.sentence.append( Word( surface, lemma, pos, syn, [] ) )
         elif name == "corpus" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
+            print(XML_HEADER % { "root" : self.gen_xml, "ns" : "" })
             
 
 ################################################################################

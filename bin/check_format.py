@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # check_format.py is part of mwetoolkit
 #
@@ -31,8 +32,12 @@
       - Support to mwetoolkit custom XML formats - DTD (cands, corpus, patterns)
 """
 
-import sys
-from util import verbose, warn, error, strip_xml, treat_options_simplest, \
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
+from libs.util import verbose, warn, error, strip_xml, treat_options_simplest, \
                  read_options
 from libs.parser_wrappers import TxtParser
 

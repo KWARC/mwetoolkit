@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # feat_contrast.py is part of mwetoolkit
 #
@@ -30,17 +31,20 @@
     usage instructions.
 """
 
-import sys
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import xml.sax
 import math
-import pdb
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta_feat import MetaFeat
-from util import usage, read_options, treat_options_simplest, \
-                 verbose, parse_xml
-     
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.base.feature import Feature
+from libs.base.meta_feat import MetaFeat
+from libs.util import read_options, treat_options_simplest, \
+                 verbose, parse_xml, error
+
 ################################################################################     
 # GLOBALS     
      
@@ -105,7 +109,7 @@ def add_metafeatures( meta ) :
         if corpus_size.name != main_freq_name :
             for meas in measures :
                 meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################     
 
@@ -125,9 +129,8 @@ def initialise_totals( meta ) :
         if corpus_size.name == main_freq_name :
             main_freq_valid = True    
     if not main_freq_valid :
-        print >> sys.stderr, "ERROR: main frequency must be a valid freq. name"
-        print >> sys.stderr, "Possible values: " + str( totals_dict.keys() ),
-        raise ValueError
+        error("main frequency must be a valid freq. name\nPossible values: " +
+              str( totals_dict.keys() ))
           
 ################################################################################     
 
@@ -181,13 +184,11 @@ def calculate_measures( candidate ) :
                                      contrast_freqs[ contrast_name ], 
                                      totals_dict[ contrast_name ],                                      
                                      contrast_name )
+            for feat in feats :
+                candidate.add_feat( feat )
         except Exception :
-            print "Error in calculating the measures. Starting Python debugger"
-            pdb.set_trace()
-                
-        for feat in feats :
-            candidate.add_feat( feat )
-    print candidate.to_xml().encode( 'utf-8' )
+            error("Error in calculating the measures.")
+    print(candidate.to_xml().encode( 'utf-8' ))
     entity_counter = entity_counter + 1
 
 ################################################################################
@@ -253,23 +254,18 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             try :
                 measures = []
                 measures = interpret_measures( a )
-            except ValueError, message :
-                print >> sys.stderr, message
-                print >> sys.stderr, "ERROR: argument must be list separated"+ \
-                                     "by \":\" and containing the names: "+\
-                                     str( supported_measures )
-                usage( usage_string )
-                sys.exit( 2 )
+            except ValueError as message :
+                error( str(message)+"\nargument must be list separated by "
+                                    "\":\" and containing the names: "+
+                       str( supported_measures ))
         elif o in ( "-o", "--original" ) :
             main_freq_name = a
         elif o in ( "-a", "--all" ) :
             join_all_contrastive = True
     
     if not main_freq_name :
-        print >> sys.stderr, "Option -o is mandatory"
-        usage( usage_string )
-        sys.exit( 2 )
-  
+        error( "Option -o is mandatory")
+
 ################################################################################
 
 def reset_entity_counter( filename ) :
@@ -303,4 +299,4 @@ for a in arg :
     # First calculate Nc for each contrastive corpus        
     verbose( "Pass 2 for " + a )    
     parse_xml( handler, [a], reset_entity_counter )
-print handler.footer
+print(handler.footer)

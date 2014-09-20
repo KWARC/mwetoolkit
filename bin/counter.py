@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # counter.py is part of mwetoolkit
 #
@@ -33,31 +34,28 @@
     usage instructions.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import sys
-import shelve
-import xml.sax
-import pdb
-import array
 import re
 import subprocess
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from xmlhandler.classes.__common import WILDCARD, CORPUS_SIZE_KEY, SEPARATOR, \
-                                        DEFAULT_LANG
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.yahooFreq import YahooFreq
-from xmlhandler.classes.googleFreq import GoogleFreq
-from xmlhandler.classes.googleFreqUniv import GoogleFreqUniv
-from xmlhandler.classes.corpus_size import CorpusSize
-#from xmlhandler.classes.corpus import Corpus
-#from xmlhandler.classes.suffix_array import SuffixArray
-from util import usage, read_options, treat_options_simplest, verbose, parse_xml
-
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.base.frequency import Frequency
+from libs.base.googleFreq import GoogleFreq
+from libs.base.googleFreqUniv import GoogleFreqUniv
+from libs.base.corpus_size import CorpusSize
+from libs.util import read_options, treat_options_simplest, verbose, \
+    parse_xml, error, warn
 from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
+from libs.base.__common import DEFAULT_LANG
 
 ################################################################################
 # GLOBALS    
-    
+
 usage_string = """Usage: 
     
 python %(program)s [-w | -u <id> | -T <dir> | -i <corpus.index>] OPTIONS <candidates.xml>
@@ -117,6 +115,9 @@ OPTIONS may be:
 -J OR --no-joint
    Do not count joint ngram frequencies; count only individual word frequencies.
 
+-B OR --bigrams
+   Count bigrams frequencies in each ngram.
+
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
     
@@ -125,9 +126,9 @@ OPTIONS may be:
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 You must choose exactly one of -u, -w or -i. More than one is not allowed at
 the same time. 
-"""    
+"""
 
-index = None         # Index()
+index = None  # Index()
 suffix_array = None  # SuffixArray()
 
 get_freq_function = None
@@ -140,11 +141,12 @@ up_limit = -1
 text_input = False
 count_vars = False
 count_joint_frequency = True
+count_bigrams = False
 language = DEFAULT_LANG
 
 ################################################################################
-       
-def treat_meta( meta ) :
+
+def treat_meta(meta):
     """
         Adds a `CorpusSize` meta-information to the header and prints the 
         header. The corpus size is important to allow the calculation of 
@@ -153,37 +155,50 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.        
     """
     global freq_name, the_corpus_size
-    meta.add_corpus_size( CorpusSize( name=freq_name, value=the_corpus_size ) )
-    print meta.to_xml()
-       
+    meta.add_corpus_size(CorpusSize(name=freq_name, value=the_corpus_size))
+    print(meta.to_xml())
+
+
 ################################################################################
 
-def append_counters( ngram ):
+def append_counters(ngram):
     """
         Calls the frequency function for each word of the n-gram as well as for
         the n-gram as a whole. The result is appended to the frequency list
         of the `Ngram` given as input.
+
+        If the option "--bigrams" is active, calls the frequency function for
+        each bigram in the 'Ngram'.
         
         @param ngram The `Ngram` that is being counted.
     """
-    global get_freq_function, freq_name
+    global get_freq_function, freq_name, count_joint_frequency, count_bigrams
     ( c_surfaces, c_lemmas, c_pos ) = ( [], [], [] )
-    for w in ngram :
-        c_surfaces.append( w.surface )
-        c_lemmas.append( w.lemma )
-        c_pos.append( w.pos )
-        freq_value = get_freq_function( [ w.surface ], 
-                                        [ w.lemma ], 
-                                        [ w.pos ] )
-        w.add_frequency( Frequency( freq_name, freq_value ) )
+    for w in ngram:
+        c_surfaces.append(w.surface)
+        c_lemmas.append(w.lemma)
+        c_pos.append(w.pos)
+        freq_value = get_freq_function([w.surface],
+                                       [w.lemma],
+                                       [w.pos])
+        w.add_frequency(Frequency(freq_name, freq_value))
     # Global frequency
     if count_joint_frequency:
-        freq_value = get_freq_function( c_surfaces, c_lemmas, c_pos )
-        ngram.add_frequency( Frequency( freq_name, freq_value ) )
+        freq_value = get_freq_function(c_surfaces, c_lemmas, c_pos)
+        ngram.add_frequency(Frequency(freq_name, freq_value))
+    # Bigrams frequency
+    if count_bigrams:
+        i = 0
+        while i < len(ngram) - 1:
+            freq_value = get_freq_function(c_surfaces[i:i + 2],
+                                           c_lemmas[i:i + 2], c_pos[i:i + 2])
+            i = i + 1
+            ngram.add_bigram(Frequency(freq_name, freq_value))
+
 
 ################################################################################
 
-def treat_entity( entity ) :
+def treat_entity(entity):
     """
         For each entity, searches for the individual word frequencies of the
         base ngram. The corresponding function, for a corpus index or for yahoo,
@@ -191,66 +206,70 @@ def treat_entity( entity ) :
         are added as a child element of the word and then the candidate is 
         printed.
         
-        @param candidate The `Candidate` that is being read from the XML file.        
+        @param entity The `Candidate` that is being read from the XML file.
     """
     global entity_counter
     global low_limit, up_limit
     global count_vars
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+    if entity_counter % 100 == 0:
+        verbose("Processing ngram number %(n)d" % {"n": entity_counter})
     if ( entity_counter >= low_limit or low_limit < 0 ) and \
-       ( entity_counter <= up_limit or up_limit < 0 ) :
-        if count_vars :
-            for var in entity.vars :
-                append_counters( var )
-        else :
-            append_counters( entity )
-    print entity.to_xml().encode( 'utf-8' )
+            ( entity_counter <= up_limit or up_limit < 0 ):
+        if count_vars:
+            for var in entity.vars:
+                append_counters(var)
+        else:
+            append_counters(entity)
+    print(entity.to_xml().encode('utf-8'))
     entity_counter += 1
 
-################################################################################     
-       
-def get_freq_index( surfaces, lemmas, pos ) :
+
+################################################################################
+
+def get_freq_index(surfaces, lemmas, pos):
     """
         Gets the frequency (number of occurrences) of a token (word) in the
         index file. Calling this function assumes that you called the script
         with the -i option and with a valid index file.
         
-        @param token A string corresponding to the surface form or lemma
-        of a word.
+        @param surfaces A string corresponding to the surface form of a word.
+
+        @param lemmas A string corresponding to the lemma of a word.
         
         @param pos A string corresponding to the Part Of Speech of a word.
     """
     global build_entry, suffix_array
     ngram_ids = []
     #pdb.set_trace()
-    for i in range( len( surfaces ) ) :
-        word = build_entry( surfaces[i], lemmas[i], pos[i] )
+    for i in range(len(surfaces)):
+        word = build_entry(surfaces[i], lemmas[i], pos[i])
         wordid = suffix_array.symbols.symbol_to_number.get(word, None)
         if wordid:
-            ngram_ids.append( wordid )
+            ngram_ids.append(wordid)
         else:
             return 0
 
-    #i_last = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a > b )
-    #i_first = binary_search( ng_ids, ngrams_file, corpus_file, lambda a, b: a >= b ) 
+    #i_last = binary_search(ng_ids, ngrams_file,corpus_file,lambda a, b:a > b)
+    #i_first = binary_search(ng_ids, ngrams_file,corpus_file,lambda a, b:a >= b)
     indexrange = suffix_array.find_ngram_range(ngram_ids)
     if indexrange is not None:
         first, last = indexrange
         return last - first + 1
     else:
         return 0
-    
+
+
 ################################################################################
 
-def get_freq_web( surfaces, lemmas, pos ) : 
+def get_freq_web(surfaces, lemmas, pos):
     """
         Gets the frequency (number of occurrences) of a token (word) in the
         Web through Yahoo's or Google's index. Calling this function assumes 
         that you called the script with the -u or -w option.
         
-        @param token A list corresponding to the surface forms or lemmas of a
-        word.
+        @param surfaces A list corresponding to the surface forms of a word.
+
+        @param lemmas A list corresponding to the lemmas of a word.
         
         @param pos A list corresponding to the Part Of Speeches of a word. This
         parameter is ignored since Web search engines dos no provide linguistic 
@@ -258,10 +277,11 @@ def get_freq_web( surfaces, lemmas, pos ) :
     """
     # POS is ignored
     global web_freq, build_entry, language
-    search_term = ""    
-    for i in range( len( surfaces ) ) :
-        search_term = search_term + build_entry( surfaces[ i ], lemmas[i], pos[ i ] ) + " "   
-    return web_freq.search_frequency( search_term.strip(), language )
+    search_term = ""
+    for i in range(len(surfaces)):
+        search_term = search_term + build_entry(surfaces[i], lemmas[i],
+                                                pos[i]) + " "
+    return web_freq.search_frequency(search_term.strip(), language)
 
 
 ################################################################################
@@ -272,9 +292,10 @@ def read_file(path):
     fh.close()
     return txt
 
+
 ################################################################################
 
-def get_freq_web1t(surfaces, lemmas, pos) :
+def get_freq_web1t(surfaces, lemmas, pos):
     """
         Gets the frequency (number of occurrences) of an ngram in Google's
         Web 1T 5-gram Corpus.
@@ -285,7 +306,7 @@ def get_freq_web1t(surfaces, lemmas, pos) :
     length = len(surfaces)
 
     if length > 5:
-        print >>sys.stderr, "WARNING: Cannot count the frequency of an n-gram, n>5!"
+        warn("Cannot count the frequency of an n-gram, n>5!")
         return 0
 
     search_term = ' '.join(map(build_entry, surfaces, lemmas, pos))
@@ -308,8 +329,7 @@ def get_freq_web1t(surfaces, lemmas, pos) :
             return 0
         filename = "%s/%dgms/%s" % (web1t_data_path, length, filename)
 
-    print >>sys.stderr, "WEB1T: Opening %s, looking for %s" % (filename, search_term)
-
+    verbose("WEB1T: Opening %s, looking for %s" % (filename, search_term))
 
     # This has been absurdly slow in Python.
     #file = gzip.open(filename, "rb")
@@ -326,47 +346,44 @@ def get_freq_web1t(surfaces, lemmas, pos) :
     #
     #file.close()
 
-    file = subprocess.Popen(["zgrep", "--", "^" + re.escape(search_term) + "\t", filename],
-                            stdout=subprocess.PIPE).stdout
+    file = subprocess.Popen(
+        ["zgrep", "--", "^" + re.escape(search_term) + "\t", filename],
+        stdout=subprocess.PIPE).stdout
     line = file.read()
     file.close()
     if line:
         freq = int(line.split("\t")[1])
     else:
         freq = 0
-    print >>sys.stderr, "freq =", freq
+    verbose("freq =" + str(freq))
     return freq
 
 
 ################################################################################
 
-def open_index( prefix ) :
+def open_index(prefix):
     """
         Open the index files (valid index created by the `index3.py` script). 
                 
-        @param index_filename The string name of the index file.
+        @param prefix The string name of the index file.
     """
     global freq_name, the_corpus_size
     global index, suffix_array
-    try :      
-        verbose( "Loading index files... this may take some time." )
+    try:
+        verbose("Loading index files... this may take some time.")
         index = Index(prefix)
         index.load_metadata()
-        freq_name = re.sub( ".*/", "", prefix )
+        freq_name = re.sub(".*/", "", prefix)
         #pdb.set_trace()
         the_corpus_size = index.metadata["corpus_size"]
-    except IOError :        
-        print >> sys.stderr, "Error opening the index."
-        print >> sys.stderr, "Try again with another index filename."
-        sys.exit( 2 )
-    except KeyError :        
-        print >> sys.stderr, "Error opening the index."
-        print >> sys.stderr, "Try again with another index filename."
-        sys.exit( 2 )        
+    except IOError:
+        error("Error opening the index.\nTry again with another index filename")
+    except KeyError:
+        error("Error opening the index.\nTry again with another index filename")
 
 ################################################################################
 
-def treat_text( stream ):
+def treat_text(stream):
     """
         Treats a text file by getting the frequency of the lines. Useful for 
         quick web queries from a text file containing one query per line.
@@ -374,15 +391,16 @@ def treat_text( stream ):
         @param stream File or stdin from which the lines (queries) are read.
     """
     global web_freq
-    for line in stream.readlines() :
+    for line in stream.readlines():
         query = line.strip()
         #pdb.set_trace()
-        count = str( web_freq.search_frequency( query ) )
-        print query + "\t" + count
+        count = str(web_freq.search_frequency(query))
+        print(query + "\t" + count)
+
 
 ################################################################################
 
-def treat_options( opts, arg, n_arg, usage_string ) :
+def treat_options(opts, arg, n_arg, usage_string):
     """
         Callback function that handles the command line options of this script.
         
@@ -399,116 +417,113 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global language
     global suffix_array
     global count_joint_frequency
+    global count_bigrams
     global web1t_data_path
     surface_flag = False
     ignorepos_flag = False
     mode = []
 
-    treat_options_simplest( opts, arg, n_arg, usage_string )
+    treat_options_simplest(opts, arg, n_arg, usage_string)
 
     for ( o, a ) in opts:
-        if o in ( "-i", "--index" ) : 
-            open_index( a )
+        if o in ( "-i", "--index" ):
+            open_index(a)
             get_freq_function = get_freq_index
-            mode.append( "index" )              
-        elif o in ( "-y", "--yahoo" ) :
-            print >> sys.stderr, "THIS OPTION IS DEPRECATED AS YAHOO " + \
-                                 "SHUT DOWN THEIR FREE SEARCH API"
-            sys.exit( 3 )
+            mode.append("index")
+        elif o in ( "-y", "--yahoo" ):
+            error("THIS OPTION IS DEPRECATED AS YAHOO SHUT DOWN THEIR FREE "
+                  "SEARCH API")
             #web_freq = YahooFreq()          
             #freq_name = "yahoo"
             #ignorepos_flag = True 
             #the_corpus_size = web_freq.corpus_size()         
             #get_freq_function = get_freq_web
             #mode.append( "yahoo" )   
-        elif o in ( "-w", "--google" ) :
-            web_freq = GoogleFreq()          
+        elif o in ( "-w", "--google" ):
+            web_freq = GoogleFreq()
             freq_name = "google"
-            ignorepos_flag = True 
-            the_corpus_size = web_freq.corpus_size()         
+            ignorepos_flag = True
+            the_corpus_size = web_freq.corpus_size()
             get_freq_function = get_freq_web
-            mode.append( "google" ) 
-        elif o in ( "-u", "--univ" ) :
-            web_freq = GoogleFreqUniv( a )          
+            mode.append("google")
+        elif o in ( "-u", "--univ" ):
+            web_freq = GoogleFreqUniv(a)
             freq_name = "google"
-            ignorepos_flag = True 
-            the_corpus_size = web_freq.corpus_size()         
+            ignorepos_flag = True
+            the_corpus_size = web_freq.corpus_size()
             get_freq_function = get_freq_web
-            mode.append( "google" )             
-        elif o in ("-T", "--web1t") :
+            mode.append("google")
+        elif o in ("-T", "--web1t"):
             ignorepos_flag = True
             freq_name = "web1t"
             web1t_data_path = a
             the_corpus_size = int(read_file(web1t_data_path + "/1gms/total"))
             get_freq_function = get_freq_web1t
             mode.append("web1t")
-        elif o in ("-s", "--surface" ) :
+        elif o in ("-s", "--surface" ):
             surface_flag = True
-        elif o in ("-g", "--ignore-pos"): 
+        elif o in ("-g", "--ignore-pos"):
             ignorepos_flag = True
-        elif o in ("-f", "--from", "-t", "--to" ) :
-            try :
+        elif o in ("-f", "--from", "-t", "--to" ):
+            try:
                 limit = int(a)
-                if limit < 0 :
+                if limit < 0:
                     raise ValueError, "Argument of " + o + " must be positive"
-                if o in ( "-f", "--from" ) :
-                    if up_limit == -1 or up_limit >= limit :
+                if o in ( "-f", "--from" ):
+                    if up_limit == -1 or up_limit >= limit:
                         low_limit = limit
-                    else :
+                    else:
                         raise ValueError, "Argument of -f >= argument of -t"
-                else :
-                    if low_limit == -1 or low_limit <= limit :
+                else:
+                    if low_limit == -1 or low_limit <= limit:
                         up_limit = limit
-                    else :
+                    else:
                         raise ValueError, "Argument of -t <= argument of -t"
-            except ValueError, message :
-                print >> sys.stderr, message
-                print >> sys.stderr, "Argument of " + o + " must be integer"
-                usage( usage_string )
-                sys.exit( 2 )
-        elif o in ("-x", "--text" ) : 
+            except ValueError as message:
+                error( str(message) + "\nArgument of " + o + " must be integer")
+        elif o in ("-x", "--text" ):
             text_input = True
-        elif o in ("-a", "--vars" ) : 
+        elif o in ("-a", "--vars" ):
             count_vars = True
-        elif o in ("-l", "--lang" ) : 
+        elif o in ("-l", "--lang" ):
             language = a
-        elif o in ("-J", "--no-joint") :
+        elif o in ("-J", "--no-joint"):
             count_joint_frequency = False
+        elif o in ("-B", "--bigrams"):
+            count_bigrams = True
         elif o in ("-o", "--old"):
             Index.use_c_indexer(False)
 
-    if mode == [ "index" ] :       
-        if surface_flag and ignorepos_flag :
+    if mode == ["index"]:
+        if surface_flag and ignorepos_flag:
             build_entry = lambda surface, lemma, pos: surface
             suffix_array = index.load("surface")
-        elif surface_flag :
-            build_entry = lambda surface, lemma, pos: surface + ATTRIBUTE_SEPARATOR + pos
+        elif surface_flag:
+            build_entry = lambda surface, lemma, pos: surface +\
+                                                      ATTRIBUTE_SEPARATOR + pos
             suffix_array = index.load("surface+pos")
-        elif ignorepos_flag :
+        elif ignorepos_flag:
             build_entry = lambda surface, lemma, pos: lemma
             suffix_array = index.load("lemma")
-        else :      
-            build_entry = lambda surface, lemma, pos: lemma + ATTRIBUTE_SEPARATOR + pos
+        else:
+            build_entry = lambda surface, lemma, pos: lemma +\
+                                                      ATTRIBUTE_SEPARATOR + pos
             suffix_array = index.load("lemma+pos")
 
-    else : # Web search, entries are single surface or lemma forms         
-        if surface_flag :
+    else:  # Web search, entries are single surface or lemma forms
+        if surface_flag:
             build_entry = lambda surface, lemma, pos: surface
-        else :
+        else:
             build_entry = lambda surface, lemma, pos: lemma
-        
-    if len(mode) != 1 :
-        print >> sys.stderr, "Exactly one option -u, -w or -i, must be provided"
-        usage( usage_string )
-        sys.exit( 2 )
-    elif text_input and web_freq is None :
-        print >> sys.stderr, "-x option MUST be used with either -u or -w"
-        usage( usage_string )
-        sys.exit( 2 )
-        
+
+    if len(mode) != 1:
+        error("Exactly one option -u, -w or -i, must be provided")
+    elif text_input and web_freq is None:
+        error("-x option MUST be used with either -u or -w")
+
 ################################################################################
 
-def reset_entity_counter( filename ) :
+def reset_entity_counter(filename):
     """
         After processing each file, simply reset the entity_counter to zero.
         
@@ -516,30 +531,32 @@ def reset_entity_counter( filename ) :
         function
     """
     global entity_counter
-    entity_counter = 0               
+    entity_counter = 0
 
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "ignore-pos", "surface", "old", \
-            "from=", "to=", "text", "vars", "lang=", "no-joint", "univ=", "web1t=" ]
-arg = read_options( "ywi:gsof:t:xal:Ju:T:", longopts, treat_options, -1, usage_string )
+longopts = ["yahoo", "google", "index=", "ignore-pos", "surface", "old",
+            "from=", "to=", "text", "vars", "lang=", "no-joint", "bigrams",
+            "univ=", "web1t="]
+arg = read_options("ywi:gsof:t:xal:Jbu:T:", longopts, treat_options, -1,
+                   usage_string)
 
-try :
-    verbose( "Counting ngrams in candidates file" )
-    if text_input :
-        if len( arg ) == 0 :
-            treat_text( sys.stdin )
-        else :
-            for a in arg : 
-                treat_text( a )       
-    else :
-        handler = GenericXMLHandler( treat_meta=treat_meta,
-                                     treat_entity=treat_entity,
-                                     gen_xml=True )
-        parse_xml( handler, arg, reset_entity_counter )        
-        print handler.footer
-            
-finally :
-    if web_freq :
-        web_freq.flush_cache() # VERY IMPORTANT!
+try:
+    verbose("Counting ngrams in candidates file")
+    if text_input:
+        if len(arg) == 0:
+            treat_text(sys.stdin)
+        else:
+            for a in arg:
+                treat_text(a)
+    else:
+        handler = GenericXMLHandler(treat_meta=treat_meta,
+                                    treat_entity=treat_entity,
+                                    gen_xml=True)
+        parse_xml(handler, arg, reset_entity_counter)
+        print(handler.footer)
+
+finally:
+    if web_freq:
+        web_freq.flush_cache()  # VERY IMPORTANT!

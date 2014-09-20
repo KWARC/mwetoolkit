@@ -3,7 +3,8 @@
 
 ################################################################################
 # 
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 # 
 # head.py is part of mwetoolkit
 # 
@@ -32,13 +33,14 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import usage, read_options, \
-        treat_options_simplest, verbose, parse_xml
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, verbose, parse_xml,\
+    error
 from libs.parser_wrappers import StopParsing
 
 ################################################################################
@@ -69,7 +71,7 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.
     """
 
-    print meta.to_xml().encode( 'utf-8' )
+    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 
@@ -84,7 +86,7 @@ def treat_entity( entity ) :
     if entity_counter % 100 == 0 :
         verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
     if entity_counter < limit :
-        print entity.to_xml().encode('utf-8')
+        print(entity.to_xml().encode('utf-8'))
     else :
         raise StopParsing
     entity_counter += 1
@@ -112,10 +114,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 if limit < 0 :
                     raise ValueError
             except ValueError :
-                print >> sys.stderr, "ERROR: You must provide a positive " + \
-                                     "integer value as argument of -n option."
-                usage( usage_string )
-                sys.exit( 2 )
+                error("You must provide a positive " + \
+                                     "integer value as argument of -n option.")
 
 ################################################################################
 
@@ -137,4 +137,4 @@ handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )                             
 parse_xml( handler, arg, reset_entity_counter )
-print handler.footer
+print(handler.footer)

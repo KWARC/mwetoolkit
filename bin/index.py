@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # index.py is part of mwetoolkit
 #
@@ -27,10 +28,15 @@
     For more information, call the script with no parameter and read the
     usage instructions.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-import sys
-from util import usage, read_options, treat_options_simplest, verbose
+from libs.util import error, treat_options_simplest, read_options
 from libs.indexlib import index_from_corpus, index_from_text, Index
+
+################################################################################
 
 usage_string = """Usage: 
     
@@ -95,7 +101,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global build_entry
     global use_text_format
 
-    treat_options_simplest( opts, arg, n_arg, usage_string )    
+    treat_options_simplest( opts, arg, n_arg, usage_string )
 
     used_attributes = ["lemma", "pos", "surface", "syn"]
     name = None
@@ -104,10 +110,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             try :
                 name = a
             except IOError :        
-                print >> sys.stderr, "Error opening the index."
-                print >> sys.stderr, "Try again with another index filename."
-                sys.exit( 2 )
-        elif o in ("-a", "--attributes"): 
+                error("Error opening the index.\n"
+                      "Try again with another index filename.")
+        elif o in ("-a", "--attributes"):
             used_attributes = a.split(":")
         elif o in ("-m", "--moses"):
             use_text_format = "moses"
@@ -117,10 +122,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             Index.use_c_indexer(False)
             
     if name is None:     
-        print >> sys.stderr, "ERROR: You must provide a filename for the index."
-        print >> sys.stderr, "Option -i is mandatory."
-        usage( usage_string )
-        sys.exit( 2 )   
+        error("You must provide a filename for the index.\n"
+              "Option -i is mandatory.")
                             
 ################################################################################
 # MAIN SCRIPT

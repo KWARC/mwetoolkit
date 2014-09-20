@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Victor Yoshiaki Miyai, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos, Victor Yoshiaki Miyai
 #
 # csv2xml.py is part of mwetoolkit
 #
@@ -32,22 +33,24 @@
     This script parses a plain text file and generates a .xml file, usable
     by other scripts in mwetoolkit.
 """
-
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 import string
 import re
-import sys
-from xmlhandler.classes.meta import Meta
-from xmlhandler.classes.corpus_size import CorpusSize
-from xmlhandler.classes.meta_tpclass import MetaTPClass
-from xmlhandler.classes.meta_feat import MetaFeat
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.tpclass import TPClass
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.frequency import Frequency
-from util import read_options
-from util import strip_xml
-from xmlhandler.classes.__common import *
+
+from libs.base.meta import Meta
+from libs.base.corpus_size import CorpusSize
+from libs.base.meta_tpclass import MetaTPClass
+from libs.base.meta_feat import MetaFeat
+from libs.base.word import Word
+from libs.base.feature import Feature
+from libs.base.tpclass import TPClass
+from libs.base.candidate import Candidate
+from libs.base.frequency import Frequency
+from libs.util import read_options, strip_xml, error
+from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
 
 ################################################################################
 #GLOBALS
@@ -281,8 +284,8 @@ def getMeta( filename ):
         line = string.split ( line.strip ( "\n" ) , SEPCHAR )
         
         if len ( line ) != len ( header ):
-            print >> sys.stderr, "the number of columns in line " + str ( lineCounter ) + " and header is different"
-            sys.exit( 1 )
+            error("the number of columns in line " + str ( lineCounter ) +
+                  " and header is different")
         for feature in features:
             #get feature value
             feat = line [ indexes [ feature ] ]
@@ -291,7 +294,8 @@ def getMeta( filename ):
             elif isFloat ( feat ):
                 featType [ feature ] = "float"
             else:
-                # while the threshold is not reached, the feature type is a list of elements
+                # while the threshold is not reached, the feature type is a
+                # list of elements
                 if featType [ feature ] != "string":
                     featType [ feature ].add ( feat )
                 # threshold reached, feature type is assigned to string
@@ -312,11 +316,11 @@ def getMeta( filename ):
     for tpclass in tpclassType:
         tpclassName = tpclass.split ( "_" ) [ 1 ]
         tpclassType [ tpclass ] = setToString ( tpclassType [ tpclass ] )
-        objectMetaTPClass = MetaTPClass ( tpclassName , tpclassType [ tpclass ] )
+        objectMetaTPClass = MetaTPClass (tpclassName , tpclassType [ tpclass ])
         objectMeta.add_meta_feat ( objectMetaTPClass )
 
     # prints the meta object
-    print objectMeta.to_xml().encode( 'utf-8' )
+    print(objectMeta.to_xml().encode( 'utf-8' ))
 
 
 ################################################################################
@@ -403,7 +407,7 @@ def getCand( filename ):
                 objectCand.add_tpclass( objecttp )
 
         # print candidate object. we can now start processing a new candidate
-        print objectCand.to_xml().encode( 'utf-8' )
+        print(objectCand.to_xml().encode( 'utf-8' ))
         
         # increase candidate id counter to the next candidate object
         candid = candid + 1
@@ -435,9 +439,7 @@ def treat_options_csv2xml( opts, arg, n_arg, usage_string ):
             # default is set to "lemma".
             SURFACE_FLAG = 1
         else:
-            print >> sys.stderr, "Option " + " is not a valid option"
-            usage( usage_string )
-            sys.exit( 0 )
+            error("Option " + o + " is not a valid option")
 
 ################################################################################
 # MAIN SCRIPT
@@ -448,8 +450,8 @@ if __name__ == '__main__':
 
     for file in files:
         initialize(file)
-        print XML_HEADER % { "root":"candidates", "ns":"" }
+        print(XML_HEADER % { "root":"candidates", "ns":"" })
         getMeta(file)
         getCand(file)
-        print XML_FOOTER % { "root":"candidates" }
+        print(XML_FOOTER % { "root":"candidates" })
     

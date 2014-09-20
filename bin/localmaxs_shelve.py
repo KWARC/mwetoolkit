@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # localmaxs_shelve.py is part of mwetoolkit
 #
@@ -36,34 +37,30 @@
     usage instructions.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-import sys
 import os
 import xml.sax
 import shelve
 import tempfile
 
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.classes.__common import WILDCARD, \
-                                        TEMP_PREFIX, \
-                                        TEMP_FOLDER, \
-                                        XML_HEADER, \
-                                        XML_FOOTER, \
-                                        WORD_SEPARATOR
-
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta import Meta
-from xmlhandler.classes.meta_feat import MetaFeat
-from xmlhandler.classes.corpus_size import CorpusSize
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.candidate import Candidate
-from xmlhandler.classes.ngram import Ngram
-from xmlhandler.classes.word import Word
-from xmlhandler.classes.entry import Entry
-from util import usage, read_options, treat_options_simplest, \
-                 verbose, interpret_ngram
-
+from libs.corpusXMLHandler import CorpusXMLHandler
+from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER, WORD_SEPARATOR
+from libs.base.feature import Feature
+from libs.base.meta import Meta
+from libs.base.meta_feat import MetaFeat
+from libs.base.corpus_size import CorpusSize
+from libs.base.frequency import Frequency
+from libs.base.candidate import Candidate
+from libs.base.word import Word
+from libs.util import read_options, treat_options_simplest, verbose, warn, \
+    error, interpret_ngram
 from libs.indexlib import Index
+
+################################################################################
 
 usage_string = """Usage:
 
@@ -135,7 +132,7 @@ def treat_sentence(sentence):
 
     # 'shelve' does not speak Unicode; we must convert Unicode strings back to
     # plain bytestrings to use them as keys.
-    words = [getattr(w, base_attr).encode('utf-8') for w in sentence.word_list]
+    words = [getattr(w, base_attr).encode('utf-8') for w in sentence]
 
     sentence_count += 1
     if sentence_count % 100 == 0:
@@ -183,7 +180,8 @@ def main():
     """
     global corpus_size_f
     global use_shelve, ngram_counts, selected_candidates
-
+    # Dummy file initialisation to avoid warnings in PyCharm
+    ngram_counts_tmpfile = selected_candidates_tmpfile = None
     if use_shelve:
         verbose("Making temporary file...")
         (ngram_counts, ngram_counts_tmpfile) = make_shelve()
@@ -208,12 +206,12 @@ def main():
     localmaxs()
 
     verbose("Outputting candidates file...")
-    print XML_HEADER % { "root": "candidates", "ns": "" }
+    print(XML_HEADER % { "root": "candidates", "ns": "" })
     
 
     meta = Meta([CorpusSize("corpus", corpus_size)],
                 [MetaFeat("glue", "real")], [])
-    print meta.to_xml().encode('utf-8')
+    print(meta.to_xml().encode('utf-8'))
 
     id = 0
 
@@ -222,7 +220,7 @@ def main():
             dump_ngram(ngram_key, id)
             id += 1
 
-    print XML_FOOTER % { "root": "candidates" }
+    print(XML_FOOTER % { "root": "candidates" })
 
     if use_shelve:
         verbose("Removing temporary files...")
@@ -245,7 +243,7 @@ def dump_ngram(ngram_key, id):
     cand.add_frequency(freq)
     cand.add_feat(Feature('glue', glue(ngram)))
 
-    print cand.to_xml().encode('utf-8')
+    print(cand.to_xml().encode('utf-8'))
 
 ################################################################################
 
@@ -315,8 +313,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             if a == "scp":
                 glue = scp_glue
             else:
-                print >>sys.stderr, "Unknown glue function '%s'" % a
-                sys.exit(1)
+                error("Unknown glue function '%s'" % a)
         elif o in ("-h", "--shelve"):
             use_shelve = True
 
@@ -342,8 +339,8 @@ def destroy_shelve(shlv, path):
         os.remove(path)
     except OSError:
         os.remove(path + ".db")
-    except Exception, err:
-        print >>sys.stderr, "Error removing temporary file:", err
+    except Exception as err:
+        warn("Error removing temporary file: " + str(err))
 
 ################################################################################
 

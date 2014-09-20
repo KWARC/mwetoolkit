@@ -35,15 +35,16 @@
 import sys
 import xml.sax
 import math
-import pdb
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.frequency import Frequency
-from xmlhandler.classes.corpus_size import CorpusSize
-from util import usage, read_options, treat_options_simplest, \
-                 verbose
-     
+from bin.libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.base.frequency import Frequency
+from libs.base.corpus_size import CorpusSize
+from bin.libs.util import usage, read_options, treat_options_simplest, verbose
+
+
+
+
+
 ################################################################################     
 # GLOBALS     
      
@@ -282,8 +283,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ( "-c", "--combination" ) :
             try :
                 combination = []
-                combination = interpret_combination( a )
-            except ValueError, message :
+                combination = interpret_combinations( a )
+            except ValueError as message :
                 print >> sys.stderr, message
                 print >> sys.stderr, "ERROR: argument must be list separated"+ \
                                      "by \":\" and containing the names: "+\

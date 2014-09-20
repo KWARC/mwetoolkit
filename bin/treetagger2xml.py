@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # treetagger2xml.py is part of mwetoolkit
 #
@@ -34,15 +35,19 @@
     usage instructions.
 """
 
-import sys
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from util import read_options, treat_options_simplest, verbose, strip_xml
-from xmlhandler.classes.__common import XML_HEADER, XML_FOOTER
-     
+import sys
+
+from libs.util import read_options, treat_options_simplest, strip_xml
+from libs.base.__common import XML_HEADER, XML_FOOTER
+
 ################################################################################     
 # GLOBALS     
-     
+
 usage_string = """Usage: 
     
 python %(program)s OPTIONS <files.xml>
@@ -69,13 +74,13 @@ OPTIONS may be:
 %(common_options)s
 
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
-"""    
+"""
 original_split = False
 sent_split = "SENT"
 
 ################################################################################     
-       
-def treat_options( opts, arg, n_arg, usage_string ) :
+
+def treat_options(opts, arg, n_arg, usage_string):
     """
         Callback function that handles the command line options of this script.
         
@@ -90,18 +95,19 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global original_split
     global sent_split
-    
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-    
+
+    treat_options_simplest(opts, arg, n_arg, usage_string)
+
     for ( o, a ) in opts:
-        if o in ( "-o", "--original-split" ) : 
+        if o in ( "-o", "--original-split" ):
             original_split = True
-        if o in ( "-s", "--sentence" ) : 
-            sent_split = a            
+        if o in ( "-s", "--sentence" ):
+            sent_split = a
 
 ################################################################################
 
-def transform_format( in_file ) :
+
+def transform_format(in_file):
     """
         Reads an input file and converts it into mwetoolkit corpus XML format, 
         printing the XML file to stdout.
@@ -115,46 +121,47 @@ def transform_format( in_file ) :
     s_id = 0
     new_sent = True
     words = []
-    for line in in_file.readlines() :
+    for line in in_file.readlines():
         line = line.strip()
-        if new_sent and line != "</s>" :
-            print "<s s_id=\"" + str( s_id ) + "\">",
-            s_id = s_id + 1
+        if new_sent and line != "</s>":
+            print("<s s_id=\"" + str(s_id) + "\"> ", end="")
+            s_id += 1
             new_sent = False
             #pdb.set_trace()
-        if line == "</s>" and original_split and words :
-            print "</s>"
+        if line == "</s>" and original_split and words:
+            print("</s>")
             new_sent = True
             words = []
-        elif line != "</s>" :
-            line = strip_xml( line )
-            try :
+        elif line != "</s>":
+            line = strip_xml(line)
+            try:
                 (surface, pos, lemma) = line.split("\t")
-                print "<w surface=\"" + surface + "\" pos=\"" + pos + "\" lemma=\"" + lemma + "\"/>",
-            except ValueError :
+                print("<w surface=\"" + surface + "\" pos=\"" + pos +
+                      "\" lemma=\"" + lemma + "\"/> ",end="")
+            except ValueError:
                 surface, pos, lemma = line, None, None
-                print "<w surface=\"" + surface + "\"/>",
-            words.append( surface )
+                print("<w surface=\"" + surface + "\"/> ", end="")
+            words.append(surface)
             # Only works for english if option -s not specified
-            if pos == sent_split and not original_split and words :
-                print "</s>"
+            if pos == sent_split and not original_split and words:
+                print("</s>")
                 new_sent = True
                 words = []
-    if not new_sent :
-        print "</s>"
+    if not new_sent:
+        print("</s>")
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "original-split", "sentence="]
-arg = read_options( "os:", longopts, treat_options, -1, usage_string )
+longopts = ["original-split", "sentence="]
+arg = read_options("os:", longopts, treat_options, -1, usage_string)
 
-print XML_HEADER % { "root": "corpus", "ns": "" }
-if len( arg ) == 0 :
-    transform_format( sys.stdin )        
-else :
-    for a in arg :
-        input_file = open( a )
-        transform_format( input_file )
-        input_file.close()                
-print XML_FOOTER % { "root": "corpus" }
+print(XML_HEADER % {"root": "corpus", "ns": ""})
+if len(arg) == 0:
+    transform_format(sys.stdin)
+else:
+    for a in arg:
+        input_file = open(a)
+        transform_format(input_file)
+        input_file.close()
+print(XML_FOOTER % {"root": "corpus"})

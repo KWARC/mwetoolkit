@@ -1,3 +1,28 @@
+#!/usr/bin/python
+# -*- coding:UTF-8 -*-
+
+################################################################################
+#
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
+#
+# patternlib.py is part of mwetoolkit
+#
+# mwetoolkit is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# mwetoolkit is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with mwetoolkit.  If not, see <http://www.gnu.org/licenses/>.
+#
+################################################################################
+
 """
     patternlib.py - Functions for manipulating complex ngram patterns.
 """
@@ -7,8 +32,9 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from xml.dom import minidom
-from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.ngram import Ngram
+from libs.base.word import Word, WORD_ATTRIBUTES
+from libs.base.ngram import Ngram
+from libs.base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
 
@@ -65,7 +91,6 @@ def build_generic_pattern(min, max):
 ########################################
 
 class Parser(object):
-    from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
     ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
     WORD_FORMAT = ATTRIBUTE_SEPARATOR.join("%("+s+")s" for s in (["wordnum"] + WORD_ATTRIBUTES))
 
@@ -73,6 +98,7 @@ class Parser(object):
         self.temp_id = 0
         self.defined_ids = []
         self.forepattern_ids = {}
+        self.WORD_SEPARATOR = WORD_SEPARATOR
 
     def parse(self, node):
         self.node = node
@@ -98,11 +124,11 @@ class Parser(object):
 
         elif node.nodeName == "w":
             self._parse_w(node)
-        elif node.nodeName == "backw":
+        #elif node.nodeName == "backw":
             # Obsolete. Use "back:id.attribute" syntax instead.
-            self._parse_backw(node)
+        #    self._parse_backw(node)
         else:
-            raise Exception, "Invalid node name '%s'" % node.nodeName
+            raise (Exception, "Invalid node name '%s'" % node.nodeName)
 
 
     def _parse_pat(self, node):
@@ -116,7 +142,8 @@ class Parser(object):
             if self.pattern == self.WORD_SEPARATOR:
                 self.pattern = "^" + self.WORD_SEPARATOR
             else:
-                raise Exception, "Pattern anchoring is currently only supported in non-nested <pat> elements."
+                raise (Exception, "Pattern anchoring is currently only "
+                                  "supported in non-nested <pat> elements.")
 
         if ignore:
             self.pattern += "(?P<ignore_%d>" % self.temp_id
@@ -197,8 +224,9 @@ class Parser(object):
                 if val != self.ATTRIBUTE_WILDCARD :
                     val = "(?!" + val + ")" + self.ATTRIBUTE_WILDCARD
                 else :
-                    raise Exception, "You cannot negate an undefined \
-attribute: " + attr + "\nIn: " + node.toxml()
+                    raise (Exception, "You cannot negate an undefined "
+                                     "attribute: " + attr + "\nIn: " +
+                                     node.toxml())
             attrs[attr] = val
 
         
@@ -208,7 +236,7 @@ attribute: " + attr + "\nIn: " + node.toxml()
             for attr in attrs:
                 attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
             if id in self.defined_ids:
-                raise Exception, "Id '%s' defined twice" % id
+                raise (Exception, "Id '%s' defined twice" % id)
             self.defined_ids.append(id)
 
         syndep = node.getAttribute("syndep")
@@ -232,15 +260,15 @@ attribute: " + attr + "\nIn: " + node.toxml()
         self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
 
 
-    def _parse_backw(self, node):
-        # Obsolete. Use "back:id.attribute" syntax instead.
-        for attr in WORD_ATTRIBUTES:
-            id = node.getAttribute(attr)
-            if id:
-                attrs[attr] = "(?P=%s_%s)" % (id, attr)
-            else:
-                attrs[attr] = self.ATTRIBUTE_WILDCARD
-        self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
+    #def _parse_backw(self, node):
+    #    # Obsolete. Use "back:id.attribute" syntax instead.
+    #    for attr in WORD_ATTRIBUTES:
+    #        id = node.getAttribute(attr)
+    #        if id:
+    #            attrs[attr] = "(?P=%s_%s)" % (id, attr)
+    #        else:
+    #            attrs[attr] = self.ATTRIBUTE_WILDCARD
+    #    self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
 
 
     def matches(self, words, match_distance="All", overlapping=True):
@@ -264,6 +292,7 @@ attribute: " + attr + "\nIn: " + node.toxml()
             matches_here = list(self._matches_at(words, wordstring,
                     positions[i], len(wordstring), positions))
 
+            increment = 0
             if match_distance == "All":
                 if not overlapping:
                     raise Exception("All requires Overlapping")
@@ -318,7 +347,7 @@ attribute: " + attr + "\nIn: " + node.toxml()
            * attrK = attribute K ("_" for undefined)
         """
         return self.pattern.replace(self.WORD_SEPARATOR, "@") \
-                .replace(self.ATTRIBUTE_SEPARATOR, ",") \
+                .replace(ATTRIBUTE_SEPARATOR, ",") \
                 .replace("[^,@]*", "_")
 
 

@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
 
-################################################################################
+# ###############################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # sort.py is part of mwetoolkit
 #
@@ -33,19 +34,23 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import os
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import tempfile
 import shelve
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from util import usage, read_options, treat_options_simplest, parse_xml
-from xmlhandler.classes.__common import TEMP_PREFIX, TEMP_FOLDER
-     
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml, \
+    error, warn
+from libs.base.__common import TEMP_PREFIX, TEMP_FOLDER
+
+
 ################################################################################     
 # GLOBALS     
-     
+
 usage_string = """Usage: 
     
 python %(program)s [OPTIONS] -f <feat> <candidates.xml>
@@ -67,17 +72,17 @@ OPTIONS may be:
 %(common_options)s
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-"""          
+"""
 feat_list = []
 all_feats = []
 feat_list_ok = False
 temp_file = None
 feat_to_order = []
 ascending = False
- 
+
 ################################################################################     
-       
-def treat_meta( meta ) :
+
+def treat_meta(meta):
     """
         Treats the meta information of the file. Besides of printing the meta
         header out, it also keeps track of all the meta-features. The list of
@@ -89,13 +94,14 @@ def treat_meta( meta ) :
         @param meta The `Meta` header that is being read from the XML file.         
     """
     global all_feats
-    for meta_feat in meta.meta_feats :
-        all_feats.append( meta_feat.name )
-    print meta.to_xml().encode( 'utf-8' )
-    
+    for meta_feat in meta.meta_feats:
+        all_feats.append(meta_feat.name)
+    print(meta.to_xml().encode('utf-8'))
+
+
 ################################################################################         
-    
-def treat_candidate( candidate ) :
+
+def treat_candidate(candidate):
     """
         For each candidate, stores it in a temporary Database (so that it can be
         retrieved later) and also creates a tuple containing the sorting key
@@ -109,32 +115,32 @@ def treat_candidate( candidate ) :
     # First, verifies if all the features defined as sorting keys are real 
     # features, by matching them against the meta-features of the header. This
     # is only performed once, before the first candidate is processed
-    if not feat_list_ok :
-        for feat_name in feat_list :
-            if feat_name not in all_feats :
-                print >> sys.stderr, "%(feat)s is not a valid feature" % \
-                                     { "feat" : feat_name }
-                print >> sys.stderr, "Please chose features from the list below"
-                for feat in all_feats :
-                    print >> sys.stderr, "* " + feat
-                sys.exit( 2 )
+    if not feat_list_ok:
+        for feat_name in feat_list:
+            if feat_name not in all_feats:
+                error("%(feat)s is not a valid feature\n" + \
+                      "Please chose features from the list below\n" + \
+                      "%(list)s" % {"feat": feat_name,
+                                    "list": "\n".join(
+                                        map(lambda x: "* " + x, all_feats))})
         feat_list_ok = True
-        
+
     # Store the whole candidate in a temporary database
-    temp_file[ str( candidate.id_number ) ] = candidate
+    temp_file[str(candidate.id_number)] = candidate
     # Create a tuple to be added to a list. The tuple contains the sorting key
     # values and...
     one_tuple = ()
-    for feat_name in feat_list :
-        one_tuple = one_tuple + ( candidate.get_feat_value( feat_name ), )
+    for feat_name in feat_list:
+        one_tuple = one_tuple + ( candidate.get_feat_value(feat_name), )
     # ... the candidate ID. The former are used to sort the candidates, the 
     # latter is used to retrieve a candidate from the temporary DB
     one_tuple = one_tuple + ( candidate.id_number, )
-    feat_to_order.append( one_tuple )
+    feat_to_order.append(one_tuple)
 
-################################################################################     
 
-def sort_and_print() :
+################################################################################
+
+def sort_and_print():
     """
         Sorts the tuple list `feat_to_order` and then retrieves the candidates
         from the temporary DB in order to print them out.
@@ -143,31 +149,33 @@ def sort_and_print() :
     # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
     # If I didn't ignore the last entry, algorithm wouldn't be stable
     # If the user didn't ask "-a" explicitely, sorting is reversed (descending)
-    feat_to_order.sort( key=lambda x: x[ 0:len(x)-1 ], reverse=(not ascending) )    
+    feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
     # Now print sorted candidates. A candidate is retrieved from temp DB through
     # its ID
-    for feat_entry in feat_to_order :
-        candidate = temp_file[ str( feat_entry[ len( feat_entry ) - 1 ] ) ]
-        print candidate.to_xml().encode( 'utf-8' )
+    for feat_entry in feat_to_order:
+        candidate = temp_file[str(feat_entry[len(feat_entry) - 1])]
+        print(candidate.to_xml().encode('utf-8'))
 
-################################################################################     
 
-def treat_feat_list( feat_string ) :
+################################################################################
+
+def treat_feat_list(feat_string):
     """
         Parses the option of the "-f" option. This option is of the form 
         "<feat1>:<feat2>:<feat3>" and so on, i.e. feature names separated by
         colons.
         
-        @param argument String argument of the -f option, has the form 
+        @param feat_string String argument of the -f option, has the form
         "<feat1>:<feat2>:<feat3>"
         
         @return A list of strings containing the (unverified) key feature names.
     """
-    return feat_string.split( ":" )
+    return feat_string.split(":")
 
-################################################################################     
 
-def treat_options( opts, arg, n_arg, usage_string ) :
+################################################################################
+
+def treat_options(opts, arg, n_arg, usage_string):
     """
         Callback function that handles the command line options of this script.
         
@@ -179,58 +187,51 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global feat_list
     global ascending
-    
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-        
+
+    treat_options_simplest(opts, arg, n_arg, usage_string)
+
     a_or_d = []
     for ( o, a ) in opts:
-        if o in ("-f", "--feat"): 
-            feat_list = treat_feat_list( a )
-        elif o in ("-a", "--asc") :        
-            ascending = True      
-            a_or_d.append( "a" )
-        elif o in ("-d", "--desc") :
-            ascending = False   
-            a_or_d.append( "d" )         
-            
-    if len( a_or_d ) > 1 :
-        print >> sys.stderr, "WARNING: you must provide only one option, -a" + \
-                             " OR -d. Only the last one will be considered."            
-    if not feat_list :
-        print >> sys.stderr, "You MUST provide at least one sorting key with -f"
-        usage( usage_string )
-        sys.exit( 2 )
+        if o in ("-f", "--feat"):
+            feat_list = treat_feat_list(a)
+        elif o in ("-a", "--asc"):
+            ascending = True
+            a_or_d.append("a")
+        elif o in ("-d", "--desc"):
+            ascending = False
+            a_or_d.append("d")
+
+    if len(a_or_d) > 1:
+        warn("you must provide only one option, -a OR -d. Only the last one" + \
+             " will be considered.")
+    if not feat_list:
+        error("You MUST provide at least one sorting key with -f")
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc" ]
-arg = read_options( "f:ad", longopts, treat_options, -1, usage_string )
+longopts = ["feat=", "asc", "desc"]
+arg = read_options("f:ad", longopts, treat_options, -1, usage_string)
 
-try :    
-    temp_fh = tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX, 
-                                           dir=TEMP_FOLDER, delete=True )
+try:
+    temp_fh = tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX,
+                                          dir=TEMP_FOLDER, delete=True)
     temp_name = temp_fh.name
     temp_fh.close()
-    temp_file = shelve.open( temp_name, 'n' )
-except IOError, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "Error opening temporary file."
-    print >> sys.stderr, "Please verify __common.py configuration"
-    sys.exit( 2 )
+    temp_file = shelve.open(temp_name, 'n')
+except IOError as err:
+    error("Error opening temporary file.\n" + \
+          "Please verify __common.py configuration")
 
-handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                treat_candidate=treat_candidate,
-                                gen_xml="candidates" )
-parse_xml( handler, arg )
+handler = CandidatesXMLHandler(treat_meta=treat_meta,
+                               treat_candidate=treat_candidate,
+                               gen_xml="candidates")
+parse_xml(handler, arg)
 sort_and_print()
-print handler.footer
+print(handler.footer)
 
-try :
+try:
     temp_file.close()
-    #os.remove( temp_name )
-except IOError, err :
-    print >> sys.stderr, err
-    print >> sys.stderr, "Error closing temporary file. " + \
-          "Please verify __common.py configuration"        
-    sys.exit( 2 )
+except IOError as err:
+    error("Error closing temporary file.\n" + \
+          "Please verify __common.py configuration")

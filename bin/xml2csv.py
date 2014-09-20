@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # xml2csv.py is part of mwetoolkit
 #
@@ -31,14 +32,15 @@
     usage instructions.
 """
 
-import sys
-import xml.sax
-import re
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from xmlhandler.genericXMLHandler import GenericXMLHandler
-from util import read_options, treat_options_simplest, parse_xml
-from xmlhandler.classes.__common import WILDCARD
-from util import verbose
+from libs.genericXMLHandler import GenericXMLHandler
+from libs.util import read_options, treat_options_simplest, parse_xml
+from libs.base.__common import WILDCARD
+from libs.util import verbose
      
 ################################################################################     
 # GLOBALS     
@@ -77,7 +79,7 @@ def treat_meta( meta ) :
     for cs in meta.meta_feats :
         string_cand = string_cand + cs.name + "\t"  
         
-    print string_cand.encode( 'utf-8' )       
+    print(string_cand.encode( 'utf-8' ))
        
 ################################################################################     
        
@@ -155,7 +157,7 @@ def treat_entity( entity ) :
         
     string_cand = string_cand.strip()
 
-    print string_cand.encode( 'utf-8' )
+    print(string_cand.encode( 'utf-8' ))
     sentence_counter += 1
     
 

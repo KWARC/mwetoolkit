@@ -22,9 +22,9 @@
 #
 ################################################################################
 """
-    This package provides the classes that are used by the XML handlers as
+    This package provides the base that are used by the XML handlers as
     Object Oriented representations of the XML entities contained in the files
-    that are used by mwetoolkit. The classes provided in this package are:
+    that are used by mwetoolkit. The base provided in this package are:
     
     `Candidate` - representation of a MWE candidate, including base form, id,
     occurrences, features and the TP class (true/false MWE).

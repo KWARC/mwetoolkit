@@ -1,12 +1,13 @@
 import sys
 import array
-import shelve
 import xml.sax
-from xmlhandler.corpusXMLHandler import CorpusXMLHandler
-from xmlhandler.classes.sentence import Sentence
-from xmlhandler.classes.word import Word, WORD_ATTRIBUTES
-from xmlhandler.classes.__common import ATTRIBUTE_SEPARATOR
+
+from bin.libs.corpusXMLHandler import CorpusXMLHandler
+from base.sentence import Sentence
+from base.word import Word, WORD_ATTRIBUTES
+from base.__common import ATTRIBUTE_SEPARATOR
 from util import verbose
+
 
 NGRAM_LIMIT=16
 
@@ -226,8 +227,8 @@ class SuffixArray():
 		if max is None:
 			max = len(self.suffix) - 1
 
-		first = self.binary_search_ngram(ngram, min, max, (lambda a,b: a >= b))
-		last  = self.binary_search_ngram(ngram, min, max, (lambda a,b: a > b))
+		first = self.binary_search_ngram(ngram, min, max, array.array.__ge__)
+		last  = self.binary_search_ngram(ngram, min, max, array.array.__gt__)
 
 		if first is None:
 			return None
@@ -251,10 +252,14 @@ class SuffixArray():
 		# satisfies the comparison.
 		max = last + 1
 		min = first
+		ngram_array = make_array(ngram)
+		length = len(ngram)
 
 		while min < max:
 			mid = (min+max)/2
-			if cmp(compare_ngrams(self.corpus, self.suffix[mid], ngram, 0, ngram2_exhausted=0), 0):
+			midsuf = self.suffix[mid]
+			#if cmp(compare_ngrams(self.corpus, self.suffix[mid], ngram, 0, ngram2_exhausted=0), 0):
+			if cmp(self.corpus[midsuf : midsuf+length], ngram_array):
 				max = mid      # If 'mid' satisfies, then what we want *is* mid or *is before* mid
 			else:
 				mid += 1

@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # candidatesDTDHandler.py is part of mwetoolkit
 #
@@ -27,20 +28,25 @@
     mwetoolkit-candidates.dtd.
 """
 
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+
 import xml.sax
 
-from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
-from classes.meta import Meta
-from classes.corpus_size import CorpusSize
-from classes.meta_feat import MetaFeat
-from classes.meta_tpclass import MetaTPClass
-from classes.candidate import Candidate
-from classes.ngram import Ngram
-from classes.word import Word
-from classes.frequency import Frequency
-from classes.feature import Feature
-from classes.tpclass import TPClass
-from util import strip_xml
+from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.base.meta import Meta
+from libs.base.corpus_size import CorpusSize
+from libs.base.meta_feat import MetaFeat
+from libs.base.meta_tpclass import MetaTPClass
+from libs.base.candidate import Candidate
+from libs.base.ngram import Ngram
+from libs.base.word import Word
+from libs.base.frequency import Frequency
+from libs.base.feature import Feature
+from libs.base.tpclass import TPClass
+from libs.util import strip_xml
 
 ################################################################################
 
@@ -186,7 +192,7 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             mtp = MetaTPClass( attrs[ "name" ], attrs[ "type" ] )        
             self.meta.add_meta_tpclass( mtp )
         elif name == "candidates" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
+            print(XML_HEADER % { "root" : self.gen_xml, "ns" : "" })
 
 ################################################################################
 

@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # dictDTDHandler.py is part of mwetoolkit
 #
@@ -27,18 +28,22 @@
     to mwetoolkit-dict.dtd.
 """
 
-import xml.sax
-import pdb
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-from classes.word import Word
-from classes.entry import Entry
-from classes.meta import Meta
-from classes.feature import Feature
-from classes.frequency import Frequency
-from classes.corpus_size import CorpusSize
-from classes.meta_feat import MetaFeat
-from classes.__common import WILDCARD, XML_HEADER, XML_FOOTER
-from util import strip_xml
+import xml.sax
+
+from libs.base.word import Word
+from libs.base.entry import Entry
+from libs.base.meta import Meta
+from libs.base.feature import Feature
+from libs.base.frequency import Frequency
+from libs.base.corpus_size import CorpusSize
+from libs.base.meta_feat import MetaFeat
+from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.util import strip_xml
 
 ################################################################################
 
@@ -151,7 +156,7 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
             mf = MetaFeat( attrs[ "name" ], attrs[ "type" ] )
             self.meta.add_meta_feat( mf )
         elif name == "dict" and self.gen_xml :
-            print XML_HEADER % { "root" : self.gen_xml, "ns" : "" }
+            print(XML_HEADER % { "root" : self.gen_xml, "ns" : "" })
             
 ################################################################################
 

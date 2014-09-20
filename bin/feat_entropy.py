@@ -3,7 +3,8 @@
 
 ################################################################################
 #
-# Copyright 2010-2012 Carlos Ramisch, Vitor De Araujo
+# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Sandra Castellanos
 #
 # feat_entropy.py is part of mwetoolkit
 #
@@ -29,18 +30,23 @@
     For more information, call the script with no parameter and read the
     usage instructions.
 """
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
 
-import sys
-import xml.sax
-import pdb
+
 import math
 import operator
 
-from xmlhandler.candidatesXMLHandler import CandidatesXMLHandler
-from xmlhandler.classes.feature import Feature
-from xmlhandler.classes.meta_feat import MetaFeat
-from util import read_options, treat_options_simplest, verbose, parse_xml
-     
+from libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.base.feature import Feature
+from libs.base.meta_feat import MetaFeat
+from libs.util import read_options, treat_options_simplest, parse_xml
+
+
+
+
 ################################################################################     
 # GLOBALS     
      
@@ -69,7 +75,7 @@ def treat_meta( meta ) :
     pattern_feat_values = "{"
     for corpus_size in meta.corpus_sizes :
         meta.add_meta_feat( MetaFeat( "entropy_" + corpus_size.name, "real" ) )        
-    print meta.to_xml()
+    print(meta.to_xml())
 
 ################################################################################
 
@@ -114,11 +120,11 @@ def probs_weighted( varfreqs, weights ) :
     #pdb.set_trace()
     for vfi in range(len(varfreqs)) : 
         if weights[ vfi ] != 0 :        
-            sum_vf = sum_vf + ( varfreqs[ vfi ] / \
+            sum_vf = sum_vf + ( varfreqs[ vfi ] /
                      float( reduce( operator.mul, weights[ vfi ] ) ) )
     if sum_vf != 0 :       
         for vfi in range(len(varfreqs)) :
-            probabilities.append( ( varfreqs[ vfi ] / \
+            probabilities.append( ( varfreqs[ vfi ] /
             float( reduce( operator.mul, weights[ vfi ] ) ) ) / sum_vf )
     return probabilities
        
@@ -161,9 +167,7 @@ def treat_candidate( candidate ) :
             var_compl = variation[ 2 ].lemma
             freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
             f_entry = (freq.value, freq_verb, f_det, freq_compl )
-            append_list_dict( freq_table, freq.name, f_entry ) 
-            if verb == "turn" :
-                pdb.set_trace()
+            append_list_dict( freq_table, freq.name, f_entry )
             if verb == var_verb :
                 append_list_dict( verb_table, freq.name, f_entry )
             if compl == var_compl :
@@ -173,24 +177,24 @@ def treat_candidate( candidate ) :
     verb_table["google"] = verb_table["google"][ 0:5 ]
     compl_table[ "google" ].sort( key=operator.itemgetter(1), reverse=True )
     compl_table["google"] = compl_table["google"][ 0:5 ]
-    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0), \
+    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0),
                    freq_table["google"] ) ) )
-    ent_w = entropy( probs_weighted( map( operator.itemgetter(0), \
-                     freq_table["google"] ), map( operator.itemgetter(1,2,3), \
+    ent_w = entropy( probs_weighted( map( operator.itemgetter(0),
+                     freq_table["google"] ), map( operator.itemgetter(1,2,3),
                      freq_table["google"] ) ) )
-    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0), \
-                          compl_table["google"] ), \
-                          map( operator.itemgetter(1,2,3), \
+    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0),
+                          compl_table["google"] ),
+                          map( operator.itemgetter(1,2,3),
                           compl_table["google"] ) ) )
-    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0), \
-                           verb_table["google"] ), \
-                           map( operator.itemgetter(1,2,3), \
+    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0),
+                           verb_table["google"] ),
+                           map( operator.itemgetter(1,2,3),
                            verb_table["google"] ) ) )    
     candidate.add_feat( Feature( "entropy_google", str( ent ) ) )
     candidate.add_feat( Feature( "entropy_w_google", str( ent_w ) ) )
     candidate.add_feat( Feature( "entropy_w_verb_google", str( ent_w_verb ) ) )    
     candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl )))    
-    print candidate.to_xml().encode( 'utf-8' )
+    print(candidate.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 # MAIN SCRIPT
@@ -200,4 +204,4 @@ handler = CandidatesXMLHandler( treat_meta=treat_meta,
                                 treat_candidate=treat_candidate,
                                 gen_xml="candidates")
 parse_xml( handler, arg )
-print handler.footer
+print(handler.footer)
