@@ -14,14 +14,15 @@ OUTDIR="$DIR/output"
 
 run() {
 	local script="$1"; shift
-	eval python "$TOOLKITDIR/bin/$script" --debug "$@"
+	eval python "${TOOLKITDIR}/bin/${script}" --debug "$@"
+
 }
 
 dotest() {
 	[[ $# -eq 3 ]] || { echo "dotest: Invalid arguments: $*" >&2; exit 2; }
 	local name="$1" run="$2" verify="$3"
 
-	((testnum++ < tests_to_skip)) && return 0		
+	((testnum++ < tests_to_skip)) && return 0
 
 	printf "\e[1m%d. %s\e[0m\n" "$testnum" "$name"
 	printf "\e[1;33m%s\e[0m\n" "$run"
@@ -70,7 +71,7 @@ main() {
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -s -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -sD -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
@@ -145,7 +146,7 @@ main() {
 
 	dotest "Filtering out candidates occurring less than twice" \
 		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
-		true	
+		true
 
 	dotest "Comparison against reference output" \
 		compare-to-reference \
@@ -173,7 +174,7 @@ compare-to-reference() {
 		else
 			echo "FAILED!"
 			difference=`diff <(sort "$file") <(sort "$ref")`
-			printf "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
+			echo -ne "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
 			#return 1
 			(( countfail++ ))
 		fi

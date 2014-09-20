@@ -159,7 +159,7 @@ compare-to-reference() {
 		else
 			echo "FAILED!"
 			difference=`diff <(sort "$file") <(sort "$ref")`
-			printf "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
+			echo -ne "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
 			#return 1
 			(( countfail++ ))
 		fi
