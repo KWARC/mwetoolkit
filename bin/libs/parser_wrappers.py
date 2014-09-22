@@ -25,7 +25,7 @@
 """
 This module provides wrapper base for parsers.
 They provide a more elegant interface to file parsers such as
-`xmlhandler.genericXMLHandler.GenericXMLHandler`.
+`libs.genericXMLHandler.GenericXMLHandler`.
 """
 
 from __future__ import division
@@ -97,10 +97,6 @@ class AbstractParser(object):
                 f.close()
         self._files = []
 
-    def _parse_file(self, f):
-        r"""Internal function. (Parses file with this parser)."""
-        raise NotImplementedError
-
     def postfunction(self, fname):
         r"""Post-processing function that is called
         after parsing each file.
@@ -116,7 +112,7 @@ class XMLParser(AbstractParser):
     Run it like this: `XMLParser(xml_file_objs...).parse()`.
     """
     def _parse_file(self, fileobj):
-        from bin.libs.xmlhandler.genericXMLHandler import GenericXMLHandler
+        from .genericXMLHandler import GenericXMLHandler
         self.parser = xml.sax.make_parser()
         # Ignores the DTD declaration. This will not validate the document!
         self.parser.setFeature(xml.sax.handler.feature_external_ges, False)
