@@ -121,13 +121,12 @@ def transform_format(in_file):
     s_id = 0
     new_sent = True
     words = []
-    for line in in_file.readlines():
-        line = line.strip()
+    for line in in_file:
+        line = unicode(line.strip(),'utf-8')
         if new_sent and line != "</s>":
             print("<s s_id=\"" + str(s_id) + "\"> ", end="")
             s_id += 1
             new_sent = False
-            #pdb.set_trace()
         if line == "</s>" and original_split and words:
             print("</s>")
             new_sent = True
