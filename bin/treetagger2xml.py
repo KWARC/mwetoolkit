@@ -135,11 +135,12 @@ def transform_format(in_file):
             line = strip_xml(line)
             try:
                 (surface, pos, lemma) = line.split("\t")
-                print("<w surface=\"" + surface + "\" pos=\"" + pos +
-                      "\" lemma=\"" + lemma + "\"/> ",end="")
+                result = "<w surface=\"" + surface + "\" pos=\"" + pos + \
+                         "\" lemma=\"" + lemma + "\"/> "
             except ValueError:
                 surface, pos, lemma = line, None, None
-                print("<w surface=\"" + surface + "\"/> ", end="")
+                result = "<w surface=\"" + surface + "\"/> "
+            print(result.encode('utf-8'), end="")
             words.append(surface)
             # Only works for english if option -s not specified
             if pos == sent_split and not original_split and words:
