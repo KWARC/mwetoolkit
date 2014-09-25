@@ -91,7 +91,9 @@ def build_generic_pattern(min, max):
 ########################################
 
 class Parser(object):
+    # ATTRIBUTE_WILDCARD: Match .* inside an attribute.
     ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
+    # WORD_FORMAT: Internal Regex format to match a word with its attributes.
     WORD_FORMAT = ATTRIBUTE_SEPARATOR.join("%("+s+")s" for s in (["wordnum"] + WORD_ATTRIBUTES))
 
     def __init__(self):
@@ -113,8 +115,6 @@ class Parser(object):
     def _do_parse(self, node):
         if node.nodeName == "pat":
             self._parse_pat(node)
-        elif node.nodeName == "neg":
-            self._parse_neg(node)
         elif node.nodeName == "either":
             self._parse_either(node)
 
@@ -128,7 +128,7 @@ class Parser(object):
             # Obsolete. Use "back:id.attribute" syntax instead.
         #    self._parse_backw(node)
         else:
-            raise (Exception, "Invalid node name '%s'" % node.nodeName)
+            raise Exception("Invalid node name '%s'" % node.nodeName)
 
 
     def _parse_pat(self, node):
@@ -142,7 +142,7 @@ class Parser(object):
             if self.pattern == self.WORD_SEPARATOR:
                 self.pattern = "^" + self.WORD_SEPARATOR
             else:
-                raise (Exception, "Pattern anchoring is currently only "
+                raise Exception("Pattern anchoring is currently only "
                                   "supported in non-nested <pat> elements.")
 
         if ignore:
@@ -197,16 +197,17 @@ class Parser(object):
             self.pattern += repeat
 
 
-    def _parse_neg(self, node):
-        self.pattern += "(?!"
+    def _neg_children(self, node, only_attr):
         for subnode in node.childNodes:
             if isinstance(subnode, minidom.Element):
-                self._do_parse(subnode)
-        self.pattern += ")"
-
+                if subnode.nodeName != "neg":
+                    raise Exception("<w> only accepts subnode <neg>")
+                for attr,val in subnode.attributes.items():
+                    if attr == only_attr:
+                        yield "(?!" + re.escape(val) + ")"
 
     def _parse_w(self, node):
-        negated = node.getAttribute("neg")      
+        negated = set(node.getAttribute("neg").split(":"))
         attrs = { "wordnum": self.ATTRIBUTE_WILDCARD }
         id = node.getAttribute("id")
         for attr in WORD_ATTRIBUTES:
@@ -214,20 +215,21 @@ class Parser(object):
             if val.startswith("back:"):
                 (refid, refattr) = val.split(":")[1].split(".")
                 val = "(?P=%s_%s)" % (refid, refattr)
-
             elif val:
                 val = re.escape(val).replace("\\*", self.ATTRIBUTE_WILDCARD)
-
             else:
                 val = self.ATTRIBUTE_WILDCARD
-            if attr in negated.split(":") :
-                if val != self.ATTRIBUTE_WILDCARD :
+
+            if attr in negated:
+                if val != self.ATTRIBUTE_WILDCARD:
                     val = "(?!" + val + ")" + self.ATTRIBUTE_WILDCARD
                 else :
-                    raise (Exception, "You cannot negate an undefined "
+                    raise Exception("You cannot negate an undefined "
                                      "attribute: " + attr + "\nIn: " +
                                      node.toxml())
-            attrs[attr] = val
+
+            neg_val = "".join(self._neg_children(node, attr))
+            attrs[attr] = neg_val + val
 
         
         if id:
@@ -236,7 +238,7 @@ class Parser(object):
             for attr in attrs:
                 attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
             if id in self.defined_ids:
-                raise (Exception, "Id '%s' defined twice" % id)
+                raise Exception("Id '%s' defined twice" % id)
             self.defined_ids.append(id)
 
         syndep = node.getAttribute("syndep")
@@ -402,14 +404,21 @@ def patternlib_test():
 
 
     p = patternlib_make("""<w pos="V"/> 
-            <pat repeat="*"> <w pos="V" neg="pos"/> </pat>
+            <pat repeat="*"> <w lemma="take" pos="V" neg="pos"/> </pat>
             <w pos="P"/>""")  # pat: V WORD{lemma!="that}* P
     ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2 Verb3 Prt3".split()
     ws = [Word(w, w, w[0], "") for w in ws]
     patternlib_do_test(p, ws, "Longest")
 
     p = patternlib_make("""<w pos="V"/> 
-            <pat repeat="*"> <neg><w pos="V"/></neg> </pat>
+            <pat repeat="*"> <w lemma="take"><neg pos="V"/></w> </pat>
+            <w pos="P"/>""")  # pat: V (!(WORD{lemma="that}))* P
+    ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2 Verb3 Prt3".split()
+    ws = [Word(w, w, w[0], "") for w in ws]
+    patternlib_do_test(p, ws, "Longest")
+
+    p = patternlib_make("""<w pos="V"/> 
+            <pat repeat="*"> <w><neg pos="V"/><neg pos="N"/><neg lemma="that"/></w> </pat>
             <w pos="P"/>""")  # pat: V (!(WORD{lemma="that}))* P
     ws = "Verb1 Noun1 Noun2 Prt1 Adj1 Prt2 Verb3 Prt3".split()
     ws = [Word(w, w, w[0], "") for w in ws]
