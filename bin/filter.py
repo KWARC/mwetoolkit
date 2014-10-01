@@ -41,12 +41,11 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
-import sys
 
 from libs.genericXMLHandler import GenericXMLHandler
 from libs.patternlib import parse_patterns_file, match_pattern
 from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error
+    parse_xml, error, warn
      
 ################################################################################     
 # GLOBALS     
@@ -81,6 +80,14 @@ OPTIONS may be:
 -r OR --reverse
     Reverses the filtering mechanism, in order to print out only those 
     candidates that do NOT obbey the criteria.
+    
+-a OR --maxlength
+-i OR --minlength
+    Defines the maximum/minimum number of tokens for a given element to be kept.
+    Can be useful, for instance, to remove too long and/or short sentences from
+    a given corpus, or candidates from a list. Both options can be defined at 
+    the same time, but the maximum cannot be inferior to the minimum, e.g. 
+    -a 10 -i 11 will return an empty list.    
 
 %(common_options)s
 
@@ -94,7 +101,9 @@ equals_value = None
 entity_counter = 0
 patterns = []
 longest_pattern = 0
-shortest_pattern = sys.maxint
+shortest_pattern = float("inf")
+maxlength = float("inf")
+minlength = 0
      
 ################################################################################
        
@@ -118,7 +127,7 @@ def treat_entity( entity ) :
         printed to stdout only if it occurrs thres_value times or more in the
         corpus names thresh_source.
         
-        @param entity The `Ngram` that is being read from the XML file.
+        @param entity: The `Ngram` that is being read from the XML file.
     """
     global thresh_source
     global thresh_value
@@ -127,6 +136,8 @@ def treat_entity( entity ) :
     global entity_counter
     global reverse
     global patterns
+    global maxlength
+    global minlength
 
     if entity_counter % 100 == 0 :
         verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
@@ -135,15 +146,17 @@ def treat_entity( entity ) :
     ngram_to_print = entity
 
     # Threshold test
-    for freq in entity.freqs :
-        if thresh_source :
-            if ( thresh_source == freq.name or
-                 thresh_source == freq.name + ".xml" ) and \
-                 freq.value < thresh_value :
-                print_it = False
-        else :
-            if freq.value < thresh_value :
-                print_it = False
+    if entity.freqs :
+        for freq in entity.freqs :
+            if thresh_source :
+                if ( thresh_source == freq.name or
+                     thresh_source == freq.name + ".xml" ) and \
+                     freq.value < thresh_value :
+                    print_it = False
+            else :
+                if freq.value < thresh_value :
+                    print_it = False
+
     # Equality test
     if print_it and equals_name :
         print_it = False
@@ -165,6 +178,12 @@ def treat_entity( entity ) :
                 break
             if print_it :
                 break
+
+    # Filter out too long or too short elements
+    lenentity = len(entity)
+    if lenentity < minlength or lenentity > maxlength :
+        print_it = False
+        verbose("Filtered out: %d tokens" % lenentity)
 
     if reverse :
         print_it = not print_it
@@ -239,6 +258,25 @@ def read_patterns_file( filename ) :
 
 ################################################################################
 
+def interpret_length( l, maxormin ):
+    """
+    Transform argument given to -a or -i options into integer + error checks.
+
+    @param l: A string passed as argument to -i or -a
+    @param maxormin: A string indicating whether this is "maximum" or "minimum"
+    @return: An integer corresponding to l
+    """
+    try :
+        result = int( l )
+        if result < 0:
+            raise ValueError
+        verbose( "%s length: %d" % (maxormin, result) )
+        return result
+    except ValueError:
+        error("Argument of -i must be positive integer")
+
+################################################################################
+
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
         Callback function that handles the command line options of this script.
@@ -254,6 +292,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global equals_name
     global equals_value
     global reverse
+    global minlength
+    global maxlength
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
@@ -280,6 +320,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-r", "--reverse") :
             reverse = True
             verbose( "Option REVERSE active")
+        elif o in ("-i", "--minlength") :
+            minlength = interpret_length( a, "minimum" )
+        elif o in ("-a", "--maxlength") :
+            maxlength = interpret_length( a, "maximum" )
+    if minlength > maxlength:
+        warn( "ATTENTION : minlength should be <= maxlength")
             
 ################################################################################
 
@@ -296,8 +342,9 @@ def reset_entity_counter( filename ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "threshold=", "equals=", "patterns=", "reverse" ]
-arg = read_options( "t:e:p:r", longopts, treat_options, -1, usage_string )
+longopts = [ "threshold=", "equals=", "patterns=", "reverse", "maxlength=",
+             "minlength=" ]
+arg = read_options( "t:e:p:ra:i:", longopts, treat_options, -1, usage_string )
 handler = GenericXMLHandler( treat_meta=treat_meta,
                              treat_entity=treat_entity,
                              gen_xml=True )
