@@ -231,7 +231,7 @@ def interpret_ngram(argument):
             if n_min >= 1:
                 return ( n_min, n_max )
             else:
-                print("Error parsing argument for -n: <min> " \
+                print("Error parsing argument for -n: <min> "
                       "must be at least 1", file=sys.stderr)
                 return None
         else:
@@ -322,7 +322,7 @@ def parse_txt(handler, arg, postfunction=None):
     if len(arg) == 0:
         try:
             for line in sys.stdin.readlines():
-                handler(line.strip().split());
+                handler(line.strip().split())
         except StopParsing:  # Read only part of XML file
             pass  # Not an error, just used to interrupt parsing
         if postfunction:
@@ -332,7 +332,7 @@ def parse_txt(handler, arg, postfunction=None):
             input_file = open(a)
             try:
                 for line in input_file.readlines():
-                    handler(line.strip().split());
+                    handler(line.strip().split())
             except StopParsing:  # Read only part of XML file
                 pass  # Not an error, just used to interrupt parsing
             input_file.close()
@@ -370,7 +370,7 @@ def default_exception_handler(type, value, trace):
         print("For more information, run with --debug.", file=sys.stderr)
 
     if type != IOError:
-        print("You probably provided an invalid XML file, please " \
+        print("You probably provided an invalid XML file, please "
               "validate it against the DTD.", file=sys.stderr)
 
     sys.exit(1)
