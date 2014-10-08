@@ -97,7 +97,10 @@ class AbstractPrinter(object):
     def _write(self, string, end=""):
         r"""(Print string in self._output)"""
         string = string.encode('utf-8')
-        self._output.write(string)
+        try:
+            self._output.write(string)
+        except IOError:
+            sys.exit(-1)
 
     def __enter__(self):
         r"""(Called when entering `with` statement)"""
