@@ -53,10 +53,13 @@ class AbstractPrinter(object):
     must be one of [None, "corpus", "candidates", "patterns"].
     @param output An IO-like object, such as sys.stdout
     or an instance of StringIO.
+    @param flush_on_add If True, calls `self.flush()` automatically
+    inside `self.add()`, before actually adding the element(s).
     """
-    def __init__(self, root, output=None):
+    def __init__(self, root, output=None, flush_on_add=True):
         self._root = root
         self._output = output or sys.stdout
+        self._flush_on_add = flush_on_add
         self._waiting_objects = []
         self._scope = 0
 
@@ -75,6 +78,8 @@ class AbstractPrinter(object):
 
     def add(self, *objects):
         r"""Queue objects to be printed."""
+        if self._flush_on_add:
+            self.flush()
         self._waiting_objects.extend(objects)
         return self  # enable call chaining
 
