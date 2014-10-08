@@ -36,13 +36,13 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-from util import read_options, treat_options_simplest, verbose, strip_xml
-from bin.libs.base.sentence import Sentence
-from bin.libs.base.word import Word
-from bin.libs.base.__common import *
+from libs.util import read_options, treat_options_simplest, verbose, strip_xml
+from libs.base.sentence import Sentence
+from libs.base.word import Word
+from libs.base.__common import *
 
-from bin.libs.printers import XMLPrinter
-from bin.libs.parser_wrappers import TxtParser
+from libs.printers import XMLPrinter
+from libs.parser_wrappers import TxtParser
      
 
 ################################################################################     
