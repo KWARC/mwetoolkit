@@ -125,7 +125,8 @@ def write_entry(n_line, sent):
         sent_templ ="<s s_id=\""+str(n_line)+"\">%(sent)s</s>"
         word_templ="<w surface=\"%(surface)s\" lemma=\"%(lemma)s\" pos="+\
                    "\"%(pos)s\" syn=\"%(syn)s\" />"
-    print(sent_templ % { "sent":" ".join(map(lambda x: (word_templ % x).encode("utf-8"), sent)) })
+    print((sent_templ % { "sent":" ".join(map(lambda x: (word_templ % x), 
+           sent)) }).encode("utf-8"))
 
 ###############################################################################
 
@@ -164,7 +165,7 @@ def get_surface( lemma_morph, pos ) :
                   ( lemma_morph, pos, morphg_file )
             p = Popen(cmd, shell=True, stdout=PIPE).stdout
             #generates the surface form using morphg
-            surface = p.readline().split("_")[ 0 ]
+            surface = unicode(p.readline(), 'utf-8').split("_")[ 0 ]
             p.close()
         else:
             surface = lemma
@@ -282,7 +283,7 @@ def transform_format(rasp):
             l=unicode( rasp.readline(), "utf-8" )
             continue
         # too long sentences not parsed because -w word limit passed to parser
-        elif l.startswith( "(X" ) :
+        elif l.startswith( "(X " ) :
             while l != "\n" :
                 l = unicode( rasp.readline(), "utf-8" )
             continue
