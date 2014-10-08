@@ -65,11 +65,11 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             Creates a new generic file handler. The argument is a
             callback function that will treat the XML information.
 
-            @param treat_meta Callback function that receives as argument an
+            @param treat_meta: Callback function that receives as argument an
             object of type `Meta`, default is dummy function that does nothing.
             You should implement your own function to treat the meta element.
 
-            @param treat_entity Callback function that receives as argument an
+            @param treat_entity: Callback function that receives as argument an
             object subtype of `Ngram`, default is dummy function that does
             nothing. You should implement your own function to treat an entity.
 
@@ -94,9 +94,9 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             parameter and should rather consider it as a generic object that
             inherits from `Ngram`
 
-            @param name The name of the opening element.
+            @param name: The name of the opening element.
 
-            @param attrs Dictionary containing the attributes of this element.
+            @param attrs: Dictionary containing the attributes of this element.
         """
         if self.gen_xml :
             xml_type = name
@@ -125,8 +125,19 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
             Treats ending tags in generic XML file, overwrites default SAX dummy
             function.
 
-            @param name The name of the closing element.
+            @param name: The name of the closing element.
         """
         self.handler.endElement(name)        
+
+################################################################################
+
+    def characters( self, content ):
+        """
+            Treats character content in generic XML file, overwrites default SAX
+            dummy function.
+
+        @param content: The text found in the XML file
+        """
+        self.handler.characters(content)
 
 ################################################################################

@@ -36,8 +36,10 @@ from __future__ import absolute_import
 import xml.sax
 
 from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.base.mweoccur import MWEOccurrence
 from libs.base.word import Word
 from libs.base.sentence import Sentence
+from libs.base.candidate import Candidate
 from libs.util import strip_xml
 
 ################################################################################
@@ -101,6 +103,12 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
                 syn = WILDCARD
             # Add word to the sentence that is currently bein read
             self.sentence.append( Word( surface, lemma, pos, syn, [] ) )
+        elif name == "mweoccur":
+            occur_cand = Candidate(int(attrs["candid"]))
+            new_occur = MWEOccurrence(self.sentence, occur_cand, [])
+            self.sentence.mweoccurs.append(new_occur)
+        elif name == "mwepart":
+            self.sentence.mweoccurs[-1].indexes.append(int(attrs["index"])-1)
         elif name == "corpus" and self.gen_xml :
             print(XML_HEADER % { "root" : self.gen_xml, "ns" : "" })
             
@@ -125,4 +133,13 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
             self.footer = XML_FOOTER % { "root" : self.gen_xml }
 
      
- ################################################################################
+################################################################################
+
+    def characters(self, content ):
+        """
+            Deals with textual content in the XML file. Useful for mweoccurs.
+
+        @param content:  The text found in the XML file
+        """
+        if content.strip() and self.sentence.mweoccurs :
+            self.sentence.mweoccurs[-1].candidate.append( Word(lemma=content) )
