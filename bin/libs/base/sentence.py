@@ -81,18 +81,17 @@ class Sentence( Ngram ) :
     def add_mwe_tags( self, tokens ) :
         """
             Given a list of tokens (words represented somehow), adds <mwepart>
-            tags aroung them in order to indicate those words that are parts of
+            tags around them in order to indicate those words that are parts of
             identified MWEs.
             
             @param tokens A list of strings containing the sentence tokens
-            @return A copy of the list of tokens with eack MWE part tagged
+            @return A copy of the list of tokens with each MWE part tagged
         """
         mwetags_list = [ [] for i in range( len( tokens ) ) ]
         result = list( tokens )
         for mweoccur in self.mweoccurs :
-            base = mweoccur.base_index
             for i in mweoccur.indexes :
-                mwetags_list[ base + i ].append( mweoccur.candidate.id_number )
+                mwetags_list[ i ].append( mweoccur.candidate.id_number )
         for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
             if mwetag : 
                 result[mwetag_i] = "<%(tag)s id=\"%(ids)s\">%(w)s</%(tag)s>" % \
@@ -118,9 +117,52 @@ class Sentence( Ngram ) :
             if mwetag : 
                 surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag)\
                               + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
-                   
         return " ".join( surface_list )
-             
+
+################################################################################
+
+    def add_mwe_tags_html( self, tokens ) :
+        """
+            Given a list of tokens (words represented somehow), adds <span>
+            tags around them in order to indicate those words that are parts of
+            identified MWEs.
+
+            @param tokens: A list of strings containing the sentence tokens
+            @return A copy of the list of tokens with each MWE part tagged
+        """
+        candids = {}
+        mwetags_list = [ [] for i in range( len( tokens ) ) ]
+        result = list( tokens )
+        for mweoccur in self.mweoccurs :
+            for i in mweoccur.indexes :
+                candids[ mweoccur.candidate.id_number ] = "X" # Check, no repet
+                mwetags_list[ i ].append( mweoccur.candidate.id_number )
+        # Number the mwes in a sequence, 1, 2, 3...
+        for (i,candid) in enumerate(candids.keys()):
+            candids[candid] = "mwe" + str(i + 1)
+        for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
+            if mwetag :
+                mwetag_new = map(lambda x: candids[x], mwetag)
+                templ =  "<span class=\"mwepart,%(ids)s\">%(w)s</span>"
+                result[mwetag_i] = templ % {"ids":",".join(mwetag_new),
+                                            "w":result[mwetag_i]}
+        return result
+
+
+################################################################################
+
+    def to_html( self ):
+        """
+        Provides an HTML simple representation of the sentence.
+
+        @return: An HTML string representing the current sentence
+        """
+        templ = "<p class=\"sent\">\n<span class=\"sid\">%(sid)d</span>\n" \
+                "%(sent)s</p>"
+        list = map(lambda (i, w): w.to_html( i + 1 ), enumerate(self.word_list))
+        return templ % {"sent": "\n".join(self.add_mwe_tags_html(list)),
+                        "sid": self.id_number}
+
 ################################################################################
 
     def to_moses( self ) :

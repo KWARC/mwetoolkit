@@ -202,7 +202,21 @@ class Word :
             for freq in self.freqs :
                 result = result + freq.to_xml()                
             return result + "</w>"
-        
+
+################################################################################
+
+    def to_html( self, wid ) :
+        """
+            TODO
+            @return TODO
+        """
+        wtempl = "<a href=\"#\" class=\"word\">%(surface)s" \
+                 "<span class=\"wid\">%(wid)d</span>" \
+                 "<span class=\"lps\">%(lemma)s%(pos)s%(syn)s</span></a>"
+        templ = lambda x: "<span class=\"%s\">%s</span>" % (x, getattr(self,x))
+        attr_map = map( lambda x: (x, templ(x)), WORD_ATTRIBUTES) + [("wid", wid)]
+        return wtempl % dict(attr_map)
+
 ################################################################################
         
     def to_xml_custom( self, print_surface=True, print_lemma=True,                        

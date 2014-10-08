@@ -269,16 +269,18 @@ def warn(message):
 ################################################################################
 
 
-def parse_xml(handler, arg, postfunction=None):
+def parse_xml(handler, arg, postfunction=None, prefunction=None):
     """
         Create a default XML parser, assign the handler and parse input in arg.
         If during parsing the script should do additional stuff, this generic
         function should not be used.
         
-        @param handler The XML handler used to parse the XML
-        @param arg The command line arguments, containing the filenames. If 
+        @param handler: The XML handler used to parse the XML
+        @param arg: The command line arguments, containing the filenames. If
         empty, use sys.stdin
-        @param postfunction Post-processing function that takes as an argument 
+        @param postfunction: Post-processing function that takes as an argument
+        the string filename. Most of the time this is None.
+        @param prefunction: Pre-processing function that takes as an argument
         the string filename. Most of the time this is None.
     """
     parser = xml.sax.make_parser()
@@ -286,6 +288,8 @@ def parse_xml(handler, arg, postfunction=None):
     parser.setFeature(xml.sax.handler.feature_external_ges, False)
     parser.setContentHandler(handler)
     if len(arg) == 0:
+        if prefunction:
+            prefunction("stdin")
         try:
             parser.parse(sys.stdin)
         except StopParsing:  # Read only part of XML file
@@ -294,6 +298,8 @@ def parse_xml(handler, arg, postfunction=None):
             postfunction("stdin")
     else:
         for a in arg:
+            if prefunction:
+                prefunction(a)
             input_file = open(a)
             try:
                 parser.parse(input_file)

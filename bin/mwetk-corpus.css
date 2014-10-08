@@ -1,0 +1,141 @@
+/* CSS Style for a corpus converted into HTML by the mwetoolkit */
+
+/******************************************************************************/
+/* Heading and meta-information */
+
+h1{
+    margin: 0px;
+}
+
+p.notice{
+    font-family: Arial;
+    font-size: 10pt;  
+    margin: 0px 0px 0px 0px;  
+}
+
+hr{
+    margin: 10px 0px 10px 0px;
+}
+
+/******************************************************************************/
+/* Sentences */
+
+p.sent{
+    margin: 2px 100px 2px 0px;
+    line-height: 145%;
+    padding: 4px 2px;
+}
+
+p.sent:hover{
+    background-color: #FFFFCC;
+}
+
+p.sent span.sid{
+    border: 1px solid #000000;
+    border-radius: 2px;
+    padding: 1px 5px;
+}
+
+p.sent:hover span.sid{
+    background: #FF2222;
+    color: #FFFFFF;    
+}
+
+p.sent:hover a.word{
+    border-color: #0033AA;   
+}
+
+/******************************************************************************/
+/* Multiword parts */
+
+span.mwepart a.word {
+    border: 2px solid #000;
+}
+
+span.mwe1 a.word{
+    background-color: #F66;
+}
+
+span.mwe2 a.word{
+    background-color: #9C0;
+}
+
+span.mwe3 a.word{
+    background-color: #69F;
+}
+
+span.mwe4 a.word{
+    background-color: #F90;
+}
+
+/******************************************************************************/
+/* Words */
+
+a.word {
+    position: relative; 
+    border: 1px solid #CCCCFF;
+    border-radius: 2px;
+    padding: 1px 2px;
+    margin: auto 0px;
+    font-family: Verdana sans-serif;    
+    text-decoration: none;
+    color: #000000;     
+}
+
+a.word:hover{
+    background-color: #0033AA;
+    border-color: #000000;
+    color: #FFFFFF;
+}
+
+a.word span.surface{
+    font-weight: bold;    
+}
+
+a.word span.wid{
+    font-size: 70%;
+    position: relative;
+    top: .3em;
+    font-style: italic;
+    padding-left: 3px;    
+}
+
+/******************************************************************************/
+/* Extra word information (tooltips) */
+
+a.word span.lps {
+    color: #000000;
+    padding: 2px 5px;
+    top: 1em;
+    z-index: 1;
+    height: auto;
+    opacity: 0;
+    position:absolute;
+    visibility: hidden;
+    background-color: #AAAAAA;
+    border: 1px solid #000;
+    border-radius: 2px;
+    box-shadow:#000 2px 2px 6px;  
+}
+
+a.word:hover span.lps {
+    opacity: .95; 
+    visibility: visible;
+}
+
+a.word span.lps span.lemma{
+    font-style: italic;
+    display:block;
+}
+
+a.word span.lps span.pos{
+    font-weight: bold;
+    display:block;    
+}
+
+a.word span.lps span.syn{
+    font-weight: normal;
+    display:block;   
+    font-family: Arial; 
+}
+
