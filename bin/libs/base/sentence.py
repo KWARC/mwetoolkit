@@ -143,8 +143,8 @@ class Sentence( Ngram ) :
         for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
             if mwetag :
                 mwetag_new = map(lambda x: candids[x], mwetag)
-                templ =  "<span class=\"mwepart,%(ids)s\">%(w)s</span>"
-                result[mwetag_i] = templ % {"ids":",".join(mwetag_new),
+                templ =  "<span class=\"mwepart %(ids)s\">%(w)s</span>"
+                result[mwetag_i] = templ % {"ids":" ".join(mwetag_new),
                                             "w":result[mwetag_i]}
         return result
 

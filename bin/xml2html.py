@@ -67,30 +67,7 @@ class XML2HTMLParser(XMLParser):
 
     def treat_sentence(self, entity):
         self.printer.add( entity )
-       
-################################################################################     
 
-def treat_options( opts, arg, n_arg, usage_string ) :
-    """
-        Callback function that handles the command line options of this script.
-        
-        @param opts The options parsed by getopts. Ignored.
-        
-        @param arg The argument list parsed by getopts.
-        
-        @param n_arg The number of arguments expected for this script.    
-    """
-    global surface_instead_lemmas
-    global lemmapos
-    
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-        
-    mode = []
-    for ( o, a ) in opts:        
-        if o in ("-s", "--surface") : 
-            surface_instead_lemmas = True     
-        if o in ("-p", "--lemmapos") : 
-            lemmapos = True
 
 ################################################################################
 # MAIN SCRIPT
