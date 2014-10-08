@@ -71,7 +71,7 @@ def transform_format( in_file ) :
     for line in in_file.readlines() :
         s_id = s_id + 1   
         s = Sentence( [], s_id )     
-        words = line.strip().split(" ")
+        words = unicode(line, 'utf-8').strip().split(" ")
         for w in words :
             try :
                 surface, lemma, pos, syntax = w.split("|")
@@ -79,7 +79,7 @@ def transform_format( in_file ) :
             except Exception as e:
                 warn( str(type(e) ) )
                 warn( "Ignored token " + w )
-        print(s.to_xml())
+        print(s.to_xml().encode('utf-8'))
     
 
 ################################################################################     
