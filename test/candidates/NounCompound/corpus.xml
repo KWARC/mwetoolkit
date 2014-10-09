@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
+<corpus >
+    <s s_id="32293"><w surface="It" lemma="It" pos="PPH1" /> <w surface="is" lemma="be" pos="VBZ" /> <w surface="a" lemma="a" pos="AT1" /> <w surface="kind" lemma="kind" pos="NN1" /> <w surface="of" lemma="of" pos="IO" /> <w surface="Hudson" lemma="Hudson" pos="NP1" /> <w surface="River" lemma="River" pos="NNL1" /> <w surface="school" lemma="school" pos="NNJ1" /> <w surface="landscape" lemma="landscape" pos="NN1" /> <w surface="featuring" lemma="feature" pos="VVG" /> <w surface="open" lemma="open" pos="JJ" /> <w surface="spaces" lemma="space" pos="NN2" /> <w surface="of" lemma="of" pos="IO" /> <w surface="low" lemma="low" pos="JJ" /> <w surface="grasses" lemma="grass" pos="NN2" /> <w surface="interspersed" lemma="intersperse" pos="VVN" /> <w surface="with" lemma="with" pos="IW" /> <w surface="tree" lemma="tree" pos="NN1" /> <w surface="copses" lemma="copse" pos="NN2" /> <w surface="of" lemma="of" pos="IO" /> <w surface="." lemma="." pos="." /> </s>
+</corpus>

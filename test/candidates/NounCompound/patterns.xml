@@ -1,0 +1,12 @@
+<patterns>
+    <!--
+        Pattern: a noun (N*) followed by other nouns.
+             (A.K.A: a noun compound).
+    -->
+    <pat>
+        <w pos="N*" />
+        <pat repeat="+">
+            <w pos="N*" />
+        </pat>
+    </pat>
+</patterns>
