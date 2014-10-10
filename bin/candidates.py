@@ -280,6 +280,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global print_cand_freq
     global corpus_from_index
     global print_source
+    global match_distance
+    global non_overlapping
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
         

@@ -294,7 +294,7 @@ class Parser(object):
             matches_here = list(self._matches_at(words, wordstring,
                     positions[i], len(wordstring), positions))
 
-            increment = 0
+            increment = 1
             if match_distance == "All":
                 if not overlapping:
                     raise Exception("All requires Overlapping")
@@ -303,15 +303,17 @@ class Parser(object):
             elif match_distance == "Longest":
                 if matches_here:
                     yield matches_here[0]
-                    increment = len(matches_here[0][0])
+                    if not overlapping:
+                        increment = len(matches_here[0][0])
             elif match_distance == "Shortest":
                 if matches_here:
                     yield matches_here[-1]
-                    increment = len(matches_here[-1][0])
+                    if not overlapping:
+                        increment = len(matches_here[-1][0])
             else:
                 raise Exception("Bad match_distance: " + match_distance)
 
-            i += 1 if overlapping else increment
+            i += increment
 
 
     def _matches_at(self, words, wordstring, current_start, limit, positions):

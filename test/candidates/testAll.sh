@@ -34,12 +34,12 @@ find_candidates() {
 
 
 rm -rf ./output
-ln -sf "$(cd ../data; pwd)/ted500.xml" VerbParticle/corpus.xml
+ln -sf "$t_SHARED/ted500.xml" VerbParticle/corpus.xml
 
 
 for DATADIR in NounCompound VerbParticle; do
     # XXX why is dtd necessary here?
-    (cd "$DATADIR"; test -e dtd || ln -s "$BIN/../dtd")
+    (cd "$DATADIR"; test -e dtd || ln -s "$t_BIN/../dtd")
 
     DIR_IN="$DATADIR"
     DIR_OUT="./output/$DATADIR"
