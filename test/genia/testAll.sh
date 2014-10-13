@@ -30,7 +30,9 @@ dotest() {
 	if eval time "$run" && eval "$test"; then
 		printf "\e[1;32mOK\e[0m\n"
 	else
-		printf "\e[1;31mFAILED!\e[0m\n"
+		source "$DIR/../testlib.sh"
+		t_backtrace
+		printf "\e[1;31mTest $testnum FAILED!\e[0m\n"
 		exit 1
 	fi
 }

@@ -24,7 +24,7 @@ find_candidates() {
     local txt_out="$DIR_OUT/txt/${out_fname}.txt"
     local txt_ref="$DIR_REF/${out_fname}.txt"
 
-    t_run "candidates.py --debug -s -v $args \
+    t_run "python $t_BIN/candidates.py --debug -s -v $args \
 -p $DIR_IN/patterns.xml $DIR_IN/corpus.xml >$xml_out"
 
     quiet=1 t_xml_to_sorted_txt "$xml_out" "$txt_out"
@@ -38,9 +38,6 @@ ln -sf "$t_SHARED/ted500.xml" VerbParticle/corpus.xml
 
 
 for DATADIR in NounCompound VerbParticle; do
-    # XXX why is dtd necessary here?
-    (cd "$DATADIR"; test -e dtd || ln -s "$t_BIN/../dtd")
-
     DIR_IN="$DATADIR"
     DIR_OUT="./output/$DATADIR"
     DIR_REF="./reference-txt/$DATADIR"
