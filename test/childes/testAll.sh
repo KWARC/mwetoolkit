@@ -40,11 +40,9 @@ diff-sorted() {
 
 main() {
 	cd "$DIR"
-	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .	
 	[[ -d $OUTDIR ]] || mkdir "$OUTDIR"
 
 	cd "$OUTDIR"
-	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
 	[[ -e corpus.xml ]] || cp ../corpus.xml .
 
 	testnum=0

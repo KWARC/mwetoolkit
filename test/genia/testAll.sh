@@ -43,11 +43,9 @@ diff-sorted() {
 
 main() {
 	cd "$DIR"
-	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
 	[[ -d $OUTDIR ]] || mkdir "$OUTDIR"
 
 	cd "$OUTDIR"
-	[[ -e dtd ]] || ln -s "$TOOLKITDIR/dtd" .
 
 	testnum=0
 	tests_to_skip=0

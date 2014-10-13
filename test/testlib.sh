@@ -2,6 +2,7 @@
 
 set -o nounset    # Using "$UNDEF" var raises error
 set -o errexit    # Exit on error, do not continue quietly
+exec </dev/null   # Don't hang if a script tries to read from stdin
 
 t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
 t_BIN="$t_TOOLKIT/bin"
@@ -56,7 +57,7 @@ t_run() {
 # Convert XML into TXT with sorted sentences.
 t_xml_to_sorted_txt() {
     local _INPUT="$1"; local _OUTPUT="$2"
-    t_run "$t_BIN/xml2csv.py $_INPUT | cut -f 2 | tail -n +2 | sort >$_OUTPUT"
+    t_run "python $t_BIN/xml2csv.py $_INPUT | cut -f 2 | tail -n +2 | sort >$_OUTPUT"
 }
 
 
