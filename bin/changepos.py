@@ -36,7 +36,8 @@ import sys
 import xml.sax
 
 from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, warn
+from libs.util import read_options, treat_options_simplest, verbose, warn, \
+    parse_xml, parse_txt
 
 
 
@@ -229,7 +230,7 @@ def simplify_genia(pos):
 
 ################################################################################
 
-def treat_text( stream ):
+def treat_text( line ):
     """
         Treats a text file by simplifying the POS of the lines. Useful for 
         treating a text file containing one sentence per line.
@@ -237,21 +238,20 @@ def treat_text( stream ):
         @param stream File or stdin from which the lines (sentences) are read.
     """
     global field_sep
-    for line in stream.readlines() :
-        sentence = line.strip()
-        newsent = ""
-        #pdb.set_trace()
-        for word in sentence.split( " " ) :
-            newword = ""
-            partlist = word.split( field_sep )
-            for partindex in range( len( partlist ) ) :
-                part = partlist[ partindex ]
-                if partindex == len( partlist ) - 1 :
-                    part = simplify( part )
-                newword = newword + part + field_sep
-            newword = newword[ : len(newword)-len(field_sep) ]                
-            newsent = newsent + newword + " "
-        print(newsent.strip())
+    sentence = line.strip()
+    newsent = ""
+    #pdb.set_trace()
+    for word in sentence.split( " " ) :
+        newword = ""
+        partlist = word.split( field_sep )
+        for partindex in range( len( partlist ) ) :
+            part = partlist[ partindex ]
+            if partindex == len( partlist ) - 1 :
+                part = simplify( part )
+            newword = newword + part + field_sep
+        newword = newword[ : len(newword)-len(field_sep) ]                
+        newsent = newsent + newword + " "
+    print(newsent.strip())
 
 ################################################################################
 
@@ -289,28 +289,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["text", "fs=", "palavras", "genia" ]
 arg = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
 
-parser = xml.sax.make_parser()
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=treat_entity,
-                             gen_xml=True )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    if text_input :
-        treat_text( sys.stdin )
-    else :
-        parser.parse( sys.stdin )
-        print(handler.footer)
+
+if text_input :
+    parse_txt( treat_text, args )
 else :
-    footer = ""
-    for a in arg :
-        input_file = open( a )
-        if text_input :
-            treat_text( input_file )
-        else :
-            parser.parse( input_file )
-            footer = handler.footer
-            handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    if not text_input :    
-        print(footer)
+    handler = GenericXMLHandler( treat_meta=treat_meta,
+                             	 treat_entity=treat_entity,
+	                             gen_xml=True )
+    parse_xml(handler, arg)
+    print(handler.footer)

@@ -383,19 +383,17 @@ def open_index(prefix):
 
 ################################################################################
 
-def treat_text(stream):
+def treat_text( line ):
     """
         Treats a text file by getting the frequency of the lines. Useful for 
         quick web queries from a text file containing one query per line.
         
-        @param stream File or stdin from which the lines (queries) are read.
+        @param line Lines (queries) being read from file or stdin.
     """
     global web_freq
-    for line in stream.readlines():
-        query = line.strip()
-        #pdb.set_trace()
-        count = str(web_freq.search_frequency(query))
-        print(query + "\t" + count)
+    query = line.strip()
+    count = str(web_freq.search_frequency(query))
+    print(query + "\t" + count)
 
 
 ################################################################################
@@ -545,11 +543,7 @@ arg = read_options("ywi:gsof:t:xal:Jbu:T:", longopts, treat_options, -1,
 try:
     verbose("Counting ngrams in candidates file")
     if text_input:
-        if len(arg) == 0:
-            treat_text(sys.stdin)
-        else:
-            for a in arg:
-                treat_text(a)
+        parse_txt(treat_text, arg)        
     else:
         handler = GenericXMLHandler(treat_meta=treat_meta,
                                     treat_entity=treat_entity,

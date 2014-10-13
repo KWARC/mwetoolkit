@@ -333,6 +333,7 @@ with closing(shelve.open( temp_name, 'n' )) as temp_file :
         index.load_main()
         for sentence in index.iterate_sentences():
             treat_sentence(sentence)
+        print_candidates( arg[0] )
     else :
         parse_xml(CorpusXMLHandler(treat_sentence), arg, print_candidates )
 

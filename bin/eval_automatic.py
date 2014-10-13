@@ -210,11 +210,7 @@ def open_gs( gs_filename ) :
         in valid XML (dtd/mwetoolkit-dict.dtd).
     """
     try :
-        reference_file = open( gs_filename )
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( DictXMLHandler( treat_entry=treat_reference ))
-        parser.parse( reference_file )
-        reference_file.close()
+        parse_xml( DictXMLHandler( treat_entry=treat_reference ), [ gs_filename] )
     except IOError as err:
         error(str(err))
     except Exception as err :
