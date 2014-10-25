@@ -89,6 +89,7 @@ class AbstractParser(object):
                     pass  # Just interrupt parsing
                 self.postfunction(f.name)
         self.close()
+        return self
 
     def close(self):
         r"""Close all files opened by this parser."""

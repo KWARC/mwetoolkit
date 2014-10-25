@@ -34,7 +34,7 @@ import getopt
 import sys
 import traceback
 import xml.sax
-from libs.parser_wrappers import StopParsing
+from .parser_wrappers import StopParsing
 
 ################################################################################
 
@@ -382,4 +382,7 @@ def default_exception_handler(type, value, trace):
     sys.exit(1)
 
 
-sys.excepthook = default_exception_handler
+if not hasattr(sys, "ps1"):
+    # If not running in interpreter (interactive),
+    # set up pretty exception handler
+    sys.excepthook = default_exception_handler

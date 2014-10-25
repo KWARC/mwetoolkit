@@ -37,6 +37,7 @@ t_error() { t_echo_bold_rgb 1 "ERROR: $1"; }
 t_testname() {
     _THIS_TEST_NAME="$1"
     _THIS_TEST_NUM="$((${_THIS_TEST_NUM:-}+1))"
+    test "$_THIS_TEST_NUM" -ne 1  && echo ""
     t_echo_bold "$_THIS_TEST_NUM: $_THIS_TEST_NAME"
 }
 
