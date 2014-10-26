@@ -34,7 +34,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-import xml.sax
+import itertools
+from xml.etree import ElementTree
 
 
 ################################################################################
@@ -105,25 +106,86 @@ class AbstractParser(object):
         """
         pass
         
+
 ################################################################################
 
 class XMLParser(AbstractParser):
     r"""Instances of this function parse XML,
-    calling `treat_sentence` for each Sentence object read.
-    Run it like this: `XMLParser(xml_file_objs...).parse()`.
+    calling `treat_*` for each object that is parsed.
+    Run it like this: `XMLParser(xml_fileobjs...).parse()`.
     """
-    def _parse_file(self, fileobj):
-        from .genericXMLHandler import GenericXMLHandler
-        self.parser = xml.sax.make_parser()
-        # Ignores the DTD declaration. This will not validate the document!
-        self.parser.setFeature(xml.sax.handler.feature_external_ges, False)
-        handler = GenericXMLHandler(treat_entity=self.treat_sentence)
-        self.parser.setContentHandler(handler)
-        self.parser.parse(fileobj)
+    def treat_entity(self, entity):
+        r"""Called to treat a generic entity. Subclasses may override."""
+        pass  # by default, we ignore unknown entities
 
-    def treat_sentence(self, entity):
-        r"""Called to parse an Entity object. Subclasses may override."""
-        pass
+    def treat_meta(self, meta_obj):
+        r"""Called to treat a Meta object. Subclasses may override."""
+        return self.treat_entity(meta_obj)
+
+    def treat_sentence(self, sentence):
+        r"""Called to treat a Sentence object. Subclasses may override."""
+        return self.treat_entity(sentence)
+
+    def treat_candidate(self, candidate):
+        r"""Called to treat a Candidate object. Subclasses may override."""
+        return self.treat_entity(candidate)
+
+    def treat_pattern(self, pattern):
+        r"""Called to treat a ParsedPattern object. Subclasses may override."""
+        return self.treat_entity(pattern)
+
+
+    def _parse_file(self, fileobj):
+        outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"])
+
+        for event, elem in outer_iterator:
+            inner_iterator = itertools.chain(
+                    [(event, elem)], outer_iterator)
+
+            if event == "end":
+                raise Exception("Unexpected end-tag!")
+
+            elif event == "start":
+                if elem.tag == "dict":
+                    # Delegate all the work to "dict" handler
+                    from .dictXMLHandler import DictXMLHandler
+                    self._handle(inner_iterator, DictXMLHandler(
+                            treat_meta=self.treat_meta,
+                            treat_entry=self.treat_entity))
+                elif elem.tag == "corpus":
+                    # Delegate all the work to "corpus" handler
+                    from .corpusXMLHandler import CorpusXMLHandler
+                    self._handle(inner_iterator, CorpusXMLHandler(
+                            treat_sentence=self.treat_sentence))
+                elif elem.tag == "candidates":
+                    # Delegate all the work to "candidates" handler
+                    from .candidatesXMLHandler import CandidatesXMLHandler
+                    self._handle(inner_iterator, CandidatesXMLHandler(
+                            treat_meta=self.treat_meta,
+                            treat_candidate=self.treat_candidate))
+                elif elem.tag == "patterns":
+                    # Delegate all the work to "patterns" handler
+                    from .patternlib import iterparse_patterns
+                    for pattern in iterparse_patterns(inner_iterator):
+                        self.treat_pattern(pattern)
+                else:
+                    raise Exception("Bad outer tag: " + repr(elem.tag))
+
+
+    def _handle(self, iterator, handler):
+        r"""Call startElement/endElement on handler for all sub-elements."""
+        depth = 0
+        for event, elem in iterator:
+            if event == "start":
+                handler.startElement(elem.tag, elem.attrib)
+                depth += 1
+            elif event == "end":
+                handler.endElement(elem.tag)
+                depth -= 1
+                if depth == 0:
+                    return
+            elem.clear()
+
 
 ################################################################################
 
@@ -132,14 +194,14 @@ class TxtParser(AbstractParser):
     calling `treat_line` on each line.
     Run it like this: `TxtParser(txt_file_objs...).parse()`.
     """
+    def treat_line(self, line):
+        r"""Called to parse a line of the TXT file.
+        Subclasses may override."""
+        pass  # by default, we ignore all lines of text
+
     def _parse_file(self, fileobj):
         for line in fileobj.readlines():
             self.treat_line(line.strip())
-
-    def treat_line(self, sentence):
-        r"""Called to parse a line of the TXT file.
-        Subclasses may override."""
-        pass
 
 
 ################################################################################

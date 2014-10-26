@@ -55,10 +55,10 @@ class Sentence( Ngram ) :
 
     def __init__( self, word_list, id_number ) :
         """
-            Instanciates a new sentence from a list of words. A sentence has a
+            Instantiates a new sentence from a list of words. A sentence has a
             list of adjacent words and an integer unique identifier. If the 
             sentence ends with a punctuation sign, it should be included as the
-            last token of the list. Inermediary punctuation signs such as commas
+            last token of the list. Intermediary punctuation signs such as commas
             and parentheses should also be considered as separate tokens, please
             pay attention to correctly tokenise your corpus before using 
             mwetoolkit.

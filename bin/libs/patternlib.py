@@ -31,45 +31,62 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from xml.dom import minidom
-from libs.base.word import Word, WORD_ATTRIBUTES
-from libs.base.ngram import Ngram
-from libs.base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
+from xml.etree import ElementTree
+from .base.word import Word, WORD_ATTRIBUTES
+from .base.ngram import Ngram
+from .base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
 
 
 
 def parse_patterns_file(path, anchored=False):
-    """Generates a list of precompiled regular expressions, one for each
-    pattern in `file`.
+    """Returns an iterator that yields precompiled regular expressions,
+    one for each pattern in file at `path`.
 
-    @param `file` The path for a patterns XML file (mwetoolkit-patterns.dtd).
+    @param `path` The path for a patterns XML file (mwetoolkit-patterns.dtd).
     """
-    patterns = []
-    doc = minidom.parse(path)
-
-    for root in doc.childNodes:
-        if isinstance(root, minidom.Element):
-            # Found root element.
-            for node in root.childNodes:
-                if isinstance(node, minidom.Element):
-                    if anchored:
-                        node.setAttribute("anchor_start", "true")
-                        node.setAttribute("anchor_end", "true")
-                    patterns.append(parse_pattern(node))
-    return patterns
+    with open(path, "r") as fileobj:
+        iterator = ElementTree.iterparse(fileobj)
+        try:
+            while True:
+                for pattern in iterparse_patterns(iterator):
+                    yield pattern
+        except StopIteration:
+            return
 
 
 ########################################
 
-def parse_pattern(node):
-    """Generates a precompiled regular expression from a pattern description.
+def iterparse_patterns(elementtree_iterator):
+    """Yields ParsedPattern objects representing precompiled
+    regular expressions based on an XML pattern description.
 
-    @param node An `xml.dom.Element` from the patterns file representing
-    a single pattern.
+    @param elementtree_iterator: An iterator following the
+    interface of `xml.etree.iterparse`.
     """
-    return Parser().parse(node)
+    depth = 0
+    for event, elem in elementtree_iterator:
+        if event == "start":
+            depth += 1
+        elif event == "end":
+            depth -= 1
+            if depth == 1:
+                # Just closed an outermost </pat>
+                yield parse_pattern(elem)
+                elem.clear()
+            elif depth == 0:
+                # Just closed </patterns>
+                return
+
+def parse_pattern(node):
+    """Generates a ParsedPattern object, with an internal
+    precompiled regular expression following a pattern description.
+
+    @param node: An `xml.etree.Element` from the patterns
+    file representing a single pattern.
+    """
+    return ParsedPattern()._parse(node)
 
 
 def match_pattern(pattern, words):
@@ -81,7 +98,7 @@ def match_pattern(pattern, words):
 def build_generic_pattern(min, max):
     """Returns a pattern matching any ngram of size min~max."""
     # TODO make this implementation less hack-ish
-    p = Parser()
+    p = ParsedPattern()
     p.pattern = p.WORD_SEPARATOR + "(?:[^%s]*" % p.WORD_SEPARATOR + \
               p.WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
     p._post_parsing()
@@ -90,7 +107,7 @@ def build_generic_pattern(min, max):
 
 ########################################
 
-class Parser(object):
+class ParsedPattern(object):
     # ATTRIBUTE_WILDCARD: Match .* inside an attribute.
     ATTRIBUTE_WILDCARD = "[^" + ATTRIBUTE_SEPARATOR + WORD_SEPARATOR + "]*"
     # WORD_FORMAT: Internal Regex format to match a word with its attributes.
@@ -102,7 +119,7 @@ class Parser(object):
         self.forepattern_ids = {}
         self.WORD_SEPARATOR = WORD_SEPARATOR
 
-    def parse(self, node):
+    def _parse(self, node):
         self.node = node
         self.pattern = self.WORD_SEPARATOR
         self._do_parse(node)
@@ -113,30 +130,30 @@ class Parser(object):
         self.compiled_pattern = re.compile(self.pattern)
 
     def _do_parse(self, node):
-        if node.nodeName == "pat":
+        if node.tag == "pat":
             self._parse_pat(node)
-        elif node.nodeName == "either":
+        elif node.tag == "either":
             self._parse_either(node)
 
-        elif node.nodeName == "backpat": 
-            id = node.getAttribute("id")
+        elif node.tag == "backpat": 
+            id = node.get("id", "")
             self.pattern += "(?P=%s)" % id
 
-        elif node.nodeName == "w":
+        elif node.tag == "w":
             self._parse_w(node)
-        #elif node.nodeName == "backw":
+        #elif node.tag == "backw":
             # Obsolete. Use "back:id.attribute" syntax instead.
         #    self._parse_backw(node)
         else:
-            raise Exception("Invalid node name '%s'" % node.nodeName)
+            raise Exception("Invalid node name '%s'" % node.tag)
 
 
     def _parse_pat(self, node):
-        id = node.getAttribute("id")
-        repeat = node.getAttribute("repeat")
-        ignore = node.getAttribute("ignore")
-        anchor_start = node.getAttribute("anchor_start")
-        anchor_end = node.getAttribute("anchor_end")
+        id = node.get("id", "")
+        repeat = node.get("repeat", "")
+        ignore = node.get("ignore", "")
+        anchor_start = node.get("anchor_start", "")
+        anchor_end = node.get("anchor_end", "")
 
         if anchor_start:
             if self.pattern == self.WORD_SEPARATOR:
@@ -154,9 +171,8 @@ class Parser(object):
         elif repeat:
             self.pattern += "(?:"
 
-        for subnode in node.childNodes:
-            if isinstance(subnode, minidom.Element):
-                self._do_parse(subnode)
+        for subnode in node:
+            self._do_parse(subnode)
 
         if id or repeat:
             self.pattern += ")"
@@ -175,22 +191,21 @@ class Parser(object):
 
 
     def _parse_either(self, node):
-        id = node.getAttribute("id")
-        repeat = node.getAttribute("repeat")
+        id = node.get("id", "")
+        repeat = node.get("repeat", "")
         if id:
             self.pattern += "(?P<%s>" % id
         else:
             self.pattern += "(?:"
 
         first_pattern = True
-        for subnode in node.childNodes:
-            if isinstance(subnode, minidom.Element):
-                if first_pattern:
-                    first_pattern = False
-                else:
-                    self.pattern += "|"
+        for subnode in node:
+            if first_pattern:
+                first_pattern = False
+            else:
+                self.pattern += "|"
 
-                self._do_parse(subnode)
+            self._do_parse(subnode)
 
         self.pattern += ")"
         if repeat:
@@ -198,20 +213,19 @@ class Parser(object):
 
 
     def _neg_children(self, node, only_attr):
-        for subnode in node.childNodes:
-            if isinstance(subnode, minidom.Element):
-                if subnode.nodeName != "neg":
-                    raise Exception("<w> only accepts subnode <neg>")
-                for attr,val in subnode.attributes.items():
-                    if attr == only_attr:
-                        yield "(?!" + re.escape(val) + ")"
+        for subnode in node:
+            if subnode.tag != "neg":
+                raise Exception("<w> only accepts subnode <neg>")
+            for attr,val in subnode.items():
+                if attr == only_attr:
+                    yield "(?!" + re.escape(val) + ")"
 
     def _parse_w(self, node):
-        negated = set(node.getAttribute("neg").split(":"))
+        negated = set(node.get("neg", "").split(":"))
         attrs = { "wordnum": self.ATTRIBUTE_WILDCARD }
-        id = node.getAttribute("id")
+        id = node.get("id", "")
         for attr in WORD_ATTRIBUTES:
-            val = node.getAttribute(attr)
+            val = node.get(attr, "")
             if val.startswith("back:"):
                 (refid, refattr) = val.split(":")[1].split(".")
                 val = "(?P=%s_%s)" % (refid, refattr)
@@ -226,7 +240,7 @@ class Parser(object):
                 else :
                     raise Exception("You cannot negate an undefined "
                                      "attribute: " + attr + "\nIn: " +
-                                     node.toxml())
+                                     ElementTree.tostring(node))
 
             neg_val = "".join(self._neg_children(node, attr))
             attrs[attr] = neg_val + val
@@ -241,7 +255,7 @@ class Parser(object):
                 raise Exception("Id '%s' defined twice" % id)
             self.defined_ids.append(id)
 
-        syndep = node.getAttribute("syndep")
+        syndep = node.get("syndep", "")
         if syndep:
             (deptype, depref) = syndep.split(":")
             if depref in self.defined_ids:
@@ -265,7 +279,7 @@ class Parser(object):
     #def _parse_backw(self, node):
     #    # Obsolete. Use "back:id.attribute" syntax instead.
     #    for attr in WORD_ATTRIBUTES:
-    #        id = node.getAttribute(attr)
+    #        id = node.get(attr, "")
     #        if id:
     #            attrs[attr] = "(?P=%s_%s)" % (id, attr)
     #        else:
@@ -442,7 +456,7 @@ def patternlib_make(str_pattern):
     s = "<patterns><pat>{}</pat></patterns>".format(str_pattern)
     p = parse_patterns_file(StringIO(s))[0]
     print("-" * 40)
-    print("XML pattern:", re.sub(r"\s+", " ", p.node.toxml()))
+    print("XML pattern:", re.sub(r"\s+", " ", ElementTree.tostring(p.node)))
     print("Printable-pattern:", p.printable_pattern())
     return p
 
