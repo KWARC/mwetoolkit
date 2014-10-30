@@ -192,7 +192,7 @@ def read_patterns_file( filename ) :
     global patterns
 
     try:
-        patterns = parse_patterns_file(filename)
+        patterns = list(parse_patterns_file(filename))
     except IOError as err:
         error(str(err))
         
@@ -307,6 +307,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             print_cand_freq = True
         elif o in ("-i", "--index") :
             corpus_from_index = True
+
+    if non_overlapping and match_distance == "All":
+        # If we are taking all matches, we need to be able to overlap...
+        error("Conflicting options: --match-distance=All and --non-overlapping")
+
     if len(mode) != 1 :
         error("Exactly one option, -p or -n, must be provided")
     if "patterns" in mode:

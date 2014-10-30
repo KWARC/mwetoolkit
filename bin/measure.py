@@ -275,10 +275,9 @@ class LinkBasedMWEEvaluator(AbstractMWEEvaluator):
     """
     def _one_sided_compare(self, s_a, s_b):
         ret = OneSidedComparison()
-        links_a = set()
-        for mweo_a in s_a.mweoccurs:
-            for link_a in zip(mweo_a.indexes, mweo_a.indexes[1:]):
-                links_a.add(link_a)
+        # links_a = all links in flattened(s_a.mweoccurs.indexes)
+        links_a = set(link for mweo in s_a.mweoccurs \
+                for link in zip(mweo.indexes, mweo.indexes[1:]))
         for mweo_b in s_b.mweoccurs:
             for link_b in zip(mweo_b.indexes, mweo_b.indexes[1:]):
                 ret.add(link_b in links_a, 1)

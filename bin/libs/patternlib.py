@@ -47,13 +47,12 @@ def parse_patterns_file(path, anchored=False):
     @param `path` The path for a patterns XML file (mwetoolkit-patterns.dtd).
     """
     with open(path, "r") as fileobj:
-        iterator = ElementTree.iterparse(fileobj)
-        try:
-            while True:
-                for pattern in iterparse_patterns(iterator):
-                    yield pattern
-        except StopIteration:
-            return
+        iterator = ElementTree.iterparse(fileobj, ["start", "end"])
+        while True:
+            for pattern in iterparse_patterns(iterator):
+                yield pattern
+            else:
+                return
 
 
 ########################################
@@ -63,10 +62,12 @@ def iterparse_patterns(elementtree_iterator):
     regular expressions based on an XML pattern description.
 
     @param elementtree_iterator: An iterator following the
-    interface of `xml.etree.iterparse`.
+    interface of `xml.etree.iterparse`. Reported events
+    MUST be ["start", "end"].
     """
     depth = 0
     for event, elem in elementtree_iterator:
+        assert depth >= 0, "Not seeing `start` events?"
         if event == "start":
             depth += 1
         elif event == "end":
@@ -288,7 +289,7 @@ class ParsedPattern(object):
 
 
     def matches(self, words, match_distance="All", overlapping=True):
-        """Returns an iterator over all matches of the pattern in the word list.
+        """Returns an iterator over all matches of this pattern in the word list.
         Each iteration yields a pair `(ngram, match_indexes)`.
         """
         wordstring = self.WORD_SEPARATOR

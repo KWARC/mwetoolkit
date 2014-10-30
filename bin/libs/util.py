@@ -358,13 +358,14 @@ def default_exception_handler(type, value, trace):
 
     global debug_mode
 
-    if type == KeyboardInterrupt:
-        print("\nInterrupted!", file=sys.stderr)
-        sys.exit(130)  # 128 + SIGINT; Unix standard
-
     if debug_mode:
         traceback.print_exception(type, value, trace)
+
     else:
+        if type == KeyboardInterrupt:
+            print("\nInterrupted!", file=sys.stderr)
+            sys.exit(130)  # 128 + SIGINT; Unix standard
+
         import os
 
         here = os.path.dirname(__file__)
