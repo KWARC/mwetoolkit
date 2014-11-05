@@ -328,7 +328,7 @@ def parse_txt(handler, arg, postfunction=None):
     if len(arg) == 0:
         try:
             for line in sys.stdin.readlines():
-                handler(line.strip().split())
+                handler(unicode(line.strip(), 'utf-8').split())
         except StopParsing:  # Read only part of XML file
             pass  # Not an error, just used to interrupt parsing
         if postfunction:
@@ -338,7 +338,7 @@ def parse_txt(handler, arg, postfunction=None):
             input_file = open(a)
             try:
                 for line in input_file.readlines():
-                    handler(line.strip().split())
+                    handler(unicode(line.strip(), 'utf-8').split())
             except StopParsing:  # Read only part of XML file
                 pass  # Not an error, just used to interrupt parsing
             input_file.close()

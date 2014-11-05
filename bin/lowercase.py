@@ -147,7 +147,7 @@ def treat_sentence_simple( sentence ) :
         else :
             setattr(w, lower_attr, getattr(w, lower_attr).lower() )
     if text_version or moses_version :
-        print(" ".join( new_sent ))
+        print(" ".join( new_sent ).encode('utf-8'))
     else :
         print(sentence.to_xml().encode( "utf-8" ))
     entity_counter += 1
@@ -173,7 +173,7 @@ def treat_sentence_complex( sentence ) :
 
     for w_i in range(len(sentence)) :
         if text_version :
-            sentence[ w_i ] = Word( sentence[ w_i ], None, None, None, None )
+            sentence[ w_i ] = Word( surface=sentence[ w_i ] )
         elif moses_version :
             parts = sentence[ w_i ].split("|")
             if len(parts) != 4 :
@@ -210,11 +210,12 @@ def treat_sentence_complex( sentence ) :
                     # error, etc.
 
     if text_version :
-        print(" ".join( map( lambda x : getattr( x, lower_attr), sentence ) ))
+        outs = " ".join(map(lambda x : getattr(x, lower_attr), sentence))
     elif moses_version :
-        print(" ".join( map( lambda x : x.to_moses(), sentence ) ))
+        outs = " ".join(map( lambda x : x.to_moses(), sentence ))
     else :
-        print(sentence.to_xml().encode( 'utf-8' ))
+        outs = sentence.to_xml()
+    print(outs.encode( 'utf-8' ))
     entity_counter += 1
 
 ################################################################################
