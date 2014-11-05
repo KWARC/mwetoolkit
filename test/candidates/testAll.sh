@@ -1,5 +1,5 @@
 #! /bin/bash
-here="$(cd "$(dirname "$0")" && pwd)"
+HERE="$(cd "$(dirname "$0")" && pwd)"
 
 source ../testlib.sh
 
@@ -34,7 +34,6 @@ find_candidates() {
 
 
 rm -rf ./output
-ln -sf "$t_SHARED/ted500.xml" VerbParticle/corpus.xml
 
 
 for DATADIR in NounCompound VerbParticle; do
