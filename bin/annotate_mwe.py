@@ -210,7 +210,7 @@ class CandidatesParser(XMLParser):
         super(CandidatesParser,self).__init__(candidates_fnames)
         self.info = CandidateInfo()
 
-    def treat_sentence(self, candidate):
+    def treat_candidate(self, candidate):
         self.info.add(candidate)
 
 
