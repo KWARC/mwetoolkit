@@ -33,7 +33,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.__common import WILDCARD, SEPARATOR
+from xml.sax.saxutils import quoteattr
+from .__common import WILDCARD, SEPARATOR
 
 
 # List of valid word attributes. Must appear in the same order as the
@@ -186,22 +187,9 @@ class Word :
             mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd. Attributes that
             do not have a defined value (i.e. are `WILDCARD`) are not printed.
         """
-        result = "<w "
-        if( self.surface != WILDCARD ) :
-            result += "surface=\"" + self.surface + "\" "
-        if( self.lemma != WILDCARD ) :
-            result += "lemma=\"" + self.lemma + "\" "
-        if( self.pos != WILDCARD ) :
-            result += "pos=\"" + self.pos + "\" " 
-        if( self.syn != WILDCARD ) :
-            result += "syn=\"" + self.syn + "\" "
-        if not self.freqs :       
-            return result + "/>"
-        else :
-            result = result + ">"
-            for freq in self.freqs :
-                result = result + freq.to_xml()                
-            return result + "</w>"
+        # TODO merge `to_xml_custom` into `to_xml`?
+        return self.to_xml_custom()
+
 
 ################################################################################
 
@@ -210,6 +198,7 @@ class Word :
             TODO
             @return TODO
         """
+        # TODO: properly escape this stuff
         wtempl = "<a href=\"#\" class=\"word\">%(surface)s" \
                  "<span class=\"wid\">%(wid)d</span>" \
                  "<span class=\"lps\">%(lemma)s%(pos)s%(syn)s</span></a>"
@@ -219,8 +208,8 @@ class Word :
 
 ################################################################################
         
-    def to_xml_custom( self, print_surface=True, print_lemma=True,                        
-                       print_pos=True, print_freqs=True ) :
+    def to_xml_custom(self, print_surface=True, print_lemma=True,
+                       print_pos=True, print_syn=True, print_freqs=True):
         """
             Provides an XML string representation of the current object, 
             including internal variables. The printed attributes of the word
@@ -247,20 +236,23 @@ class Word :
             mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd and 
             depending on the input flags.
         """
-        result = "<w "
-        if( self.surface != WILDCARD and print_surface ) :
-            result += "surface=\"" + self.surface + "\" "
-        if( self.lemma != WILDCARD and print_lemma ) :
-            result += "lemma=\"" + self.lemma + "\" "
-        if( self.pos != WILDCARD and print_pos ) :
-            result += "pos=\"" + self.pos + "\" "        
-        if not self.freqs or not print_freqs:       
-            return result + "/>"
-        else :
-            result = result + ">"
+        result = "<w"
+        if self.surface != WILDCARD and print_surface:
+            result += " surface=" + quoteattr(self.surface)
+        if self.lemma != WILDCARD and print_lemma:
+            result += " lemma=" + quoteattr(self.lemma)
+        if self.pos != WILDCARD and print_pos:
+            result += " pos=" + quoteattr(self.pos)
+        if self.syn != WILDCARD and print_syn:
+            result += " syn=" + quoteattr(self.syn)
+        if not self.freqs or not print_freqs:
+            return result + " />"
+        else:
+            result = result + " >"
             for freq in self.freqs :
                 result = result + freq.to_xml()                
             return result + "</w>"
+
 ################################################################################
 
     def __eq__( self, a_word ) :
