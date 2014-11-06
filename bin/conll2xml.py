@@ -43,6 +43,7 @@ from libs.base.__common import *
 
 from libs.printers import XMLPrinter
 from libs.parser_wrappers import TxtParser
+from libs.util import warn_once
      
 
 ################################################################################     
@@ -83,39 +84,50 @@ class ConllParser(TxtParser):
     8. PHEAD   -- (XXX currently ignored).
     9. PDEPREL -- (XXX currently ignored).
     """
-    def __init__(self, in_files, printer):
-        super(ConllParser,self).__init__(in_files, printer)
-        self.warned = set()
+    ENTRIES = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
+            "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
+
+    def __init__(self, in_files, printer, encoding='utf-8'):
+        super(ConllParser,self).__init__(in_files, printer, encoding)
+        self.name2index = {name:index for (index, name) \
+                in enumerate(self.ENTRIES)}
         self.s_id = 0
 
     def treat_line(self, line):
         data = line.strip().split()
         if len(data) <= 1: return
+        data = [(WILDCARD if d == "_" else d) for d in data]
 
-        if data[0] == "1":
+        def get(attribute):
+            try:
+                return data[self.name2index[attribute]]
+            except KeyError:
+                return WILDCARD
+
+        # TODO handle cases where len(data) < len(ENTRIES)
+        if get("ID") == "1":
             self.printer.flush().add(Sentence([], self.s_id))
             self.s_id += 1
 
-        data = [(WILDCARD if d == "_" else d) for d in data]
-        surface, lemma, pos, syn = data[1], data[2], data[3], data[7]
+        surface, lemma = get("FORM"), get("LEMMA")
+        pos, syn = get("CPOSTAG"), get("DEPREL")
 
-        if data[4] != data[3]:
-            self.maybe_warn(data[4], "POSTAG != CPOSTAG")
-        self.maybe_warn(data[5], "FEATS")
-        self.maybe_warn(data[8], "PHEAD")
-        self.maybe_warn(data[9], "PDEPREL")
+        if get("POSTAG") != get("CPOSTAG"):
+            self.maybe_warn(get("POSTAG"), "POSTAG != CPOSTAG")
+        self.maybe_warn(get("FEATS"), "found FEATS")
+        self.maybe_warn(get("PHEAD"), "found PHEAD")
+        self.maybe_warn(get("PDEPREL"), "found PDEPREL")
 
-        if data[6] != WILDCARD:
-            syn = syn + ":" + str(data[6])
+        if get("HEAD") != WILDCARD:
+            syn = syn + ":" + unicode(get("HEAD"))
         objectWord = Word(surface, lemma, pos, syn)
         self.printer.last().append(objectWord)
 
 
     def maybe_warn(self, entry, entry_name):
-        if entry != WILDCARD and entry_name not in self.warned:
-            print("WARNING: unable to handle CONLL entry: {}." \
-                    .format(entry_name), file=sys.stderr)
-            self.warned.add(entry_name)
+        if entry != WILDCARD:
+            warn_once("WARNING: unable to handle CONLL " \
+                    "entry: {}.".format(entry_name))
 
 
 ################################################################################     

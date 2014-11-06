@@ -72,8 +72,8 @@ python %(program)s OPTIONS <file>
 
 class MosesChecker(TxtParser):
 
-    def __init__( self, in_files, printers=None ) :
-        super( TxtParser, self ).__init__( in_files, printers )
+    def __init__( self, in_files, printers=None, encoding='utf-8' ) :
+        super( MosesChecker, self ).__init__( in_files, printers, encoding )
         self.check_syntax = False
         self.check_xml = False
         self.stop_first = False
