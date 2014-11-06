@@ -41,7 +41,8 @@ from __future__ import absolute_import
 from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, verbose, parse_xml,\
     error
-from libs.parser_wrappers import StopParsing
+from libs.parser_wrappers import XMLParser, StopParsing
+from libs.printers import XMLPrinter
 
 ################################################################################
 # GLOBALS
@@ -60,36 +61,41 @@ OPTIONS may be:
     The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
 """
 limit = 10
-entity_counter = 0
+
 
 ################################################################################
 
-def treat_meta( meta ) :
-    """
-        Simply prints the meta header to the output without modifications.
+class HeadPrintingParser(XMLParser):
+    def __init__(self, input_files, limit):
+        super(HeadPrintingParser, self).__init__(
+                input_files, XMLPrinter(None))
+        self.limit = limit
 
-        @param meta The `Meta` header that is being read from the XML file.
-    """
+    def _parse_file(self, fileobj):
+        self.counter = 0
+        super(HeadPrintingParser, self)._parse_file(fileobj)
 
-    print(meta.to_xml().encode( 'utf-8' ))
+    def treat_meta(self, meta):
+        """Simply prints the meta header to the output without modifications.
 
-################################################################################
+            @param meta The `Meta` header that is being read from the XML file.
+        """
+        self.printer.add(meta)
 
-def treat_entity( entity ) :
-    """
-        For each entity in the file, prints it if the limit is still not
+
+    def treat_entity(self, entity):
+        """For each entity in the file, prints it if the limit is still not
         achieved. No buffering as in tail, this is not necessary here.
 
-        @param entity A subclass of `Ngram` that is being read from the XML.
-    """
-    global entity_counter, limit
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    if entity_counter < limit :
-        print(entity.to_xml().encode('utf-8'))
-    else :
-        raise StopParsing
-    entity_counter += 1
+            @param entity A subclass of `Ngram` that is being read from the XML.
+        """
+        if self.counter % 100 == 0:
+            verbose( "Processing ngram number %(n)d" % { "n":self.counter } )
+        if self.counter < self.limit:
+            self.printer.add(entity)
+        else:
+            raise StopParsing
+        self.counter += 1
 
 ################################################################################
 
@@ -118,23 +124,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                                      "integer value as argument of -n option.")
 
 ################################################################################
-
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
-
-################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=treat_entity,
-                             gen_xml=True )                             
-parse_xml( handler, arg, reset_entity_counter )
-print(handler.footer)
+args = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
+HeadPrintingParser(args, limit).parse()

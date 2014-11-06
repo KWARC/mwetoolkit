@@ -36,20 +36,11 @@ from __future__ import absolute_import
 import sys
 import itertools
 from xml.etree import ElementTree
+from . import util
 
 
 ################################################################################
 
-
-def open_files_r(paths):
-    r"""(Yield readable file objects for all paths)"""
-    for path in paths:
-        if isinstance(path, file):
-            yield path
-        elif path == "-":
-            yield sys.stdin
-        else:
-            yield open(path, "r")
 
 
 class StopParsing(Exception):
@@ -65,12 +56,12 @@ class AbstractParser(object):
     Subclasses should override `_parse_file` and provide callbacks.
 
     Constructor Arguments:
-    @param in_files A list of target file paths.
-    @param printer A printer-like object (see `printers.py`).
+    @param input_files: A list of target file paths.
+    @param printer: A printer-like object (see `printers.py`).
     """
-    def __init__(self, in_files, printer=None):
-        assert isinstance(in_files, list)
-        self._files = list(open_files_r(in_files or ["-"]))
+    def __init__(self, input_files, printer=None):
+        assert isinstance(input_files, list)
+        self._files = list(self._open_files(input_files or ["-"]))
         self.printer = printer
         if self.printer is None:
             from . import printers
@@ -91,6 +82,22 @@ class AbstractParser(object):
                 self.postfunction(f.name)
         self.close()
         return self
+
+
+    def _open_files(self, paths):
+        r"""(Yield readable file objects for all paths.)"""
+        for path in paths:
+            yield self._open_file(path)
+
+    def _open_file(self, path):
+        r"""(Return readable raw file object for given path)"""
+        if isinstance(path, file):
+            return path
+        elif path == "-":
+            return sys.stdin
+        else:
+            return open(path, "r")
+
 
     def close(self):
         r"""Close all files opened by this parser."""
@@ -114,13 +121,13 @@ class XMLParser(AbstractParser):
     calling `treat_*` for each object that is parsed.
     Run it like this: `XMLParser(xml_fileobjs...).parse()`.
     """
-    def treat_entity(self, entity):
-        r"""Called to treat a generic entity. Subclasses may override."""
-        pass  # by default, we ignore unknown entities
-
     def treat_meta(self, meta_obj):
         r"""Called to treat a Meta object. Subclasses may override."""
-        return self.treat_entity(meta_obj)
+        pass  # By default, we just ignore meta
+
+    def treat_entity(self, entity):
+        r"""Called to treat a generic entity. Subclasses may override."""
+        util.warn("Ignoring entity")  # XXX we should say what entity (line number...)
 
     def treat_sentence(self, sentence):
         r"""Called to treat a Sentence object. Subclasses may override."""
@@ -136,6 +143,8 @@ class XMLParser(AbstractParser):
 
 
     def _parse_file(self, fileobj):
+        # Here, fileobj is raw bytes, not unicode, because ElementTree
+        # complains if we feed it a pre-decoded stream in python2k
         outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"])
 
         for event, elem in outer_iterator:
@@ -193,15 +202,24 @@ class TxtParser(AbstractParser):
     r"""Instances of this function parse TXT,
     calling `treat_line` on each line.
     Run it like this: `TxtParser(txt_file_objs...).parse()`.
+
+    Constructor Arguments:
+    @param input_files: A list of target file paths.
+    @param printer: A printer-like object (see `printers.py`).
+    @param encoding: The encoding to use when reading files.
     """
+    def __init__(self, input_files, printer, encoding):
+        super(TxtParser, self).__init__(input_files, printer)
+        self.encoding = encoding
+
     def treat_line(self, line):
         r"""Called to parse a line of the TXT file.
         Subclasses may override."""
-        pass  # by default, we ignore all lines of text
+        util.warn("Ignoring entity")  # XXX we should say what entity (line number...)
 
     def _parse_file(self, fileobj):
         for line in fileobj.readlines():
-            self.treat_line(line.strip())
+            self.treat_line(line.strip().decode(self.encoding))
 
 
 ################################################################################

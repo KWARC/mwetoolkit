@@ -34,7 +34,6 @@ import getopt
 import sys
 import traceback
 import xml.sax
-from .parser_wrappers import StopParsing
 
 ################################################################################
 
@@ -266,6 +265,16 @@ def warn(message):
     print("WARNING:", message, file=sys.stderr)
 
 
+def warn_once(message):
+    r"""Same as `warn(message)`, but only warns once."""
+    # (Maybe we should use a bloom filter, just in case?)
+    if message not in _warned:
+        _warned.add(message)
+        warn(message)
+
+_warned = set()
+
+
 ################################################################################
 
 
@@ -283,6 +292,7 @@ def parse_xml(handler, arg, postfunction=None, prefunction=None):
         @param prefunction: Pre-processing function that takes as an argument
         the string filename. Most of the time this is None.
     """
+    from .parser_wrappers import StopParsing
     parser = xml.sax.make_parser()
     # Ignores the DTD declaration. This will not validate the document!
     parser.setFeature(xml.sax.handler.feature_external_ges, False)
@@ -325,6 +335,7 @@ def parse_txt(handler, arg, postfunction=None):
         @param postfunction Post-processing function that takes as an argument 
         the string filename. Most of the time this is None.
     """
+    from .parser_wrappers import StopParsing
     if len(arg) == 0:
         try:
             for line in sys.stdin.readlines():
