@@ -82,7 +82,7 @@ class PrettyPrinterHandler(InputHandler):
 
     def handle_candidate(self, candidate, info={}):
         self.handling("Candidates")
-        self.printer.add_line(candidate.to_surface())
+        self.printer.add_line(" ".join(w.lemma for w in candidate.word_list))
 
     def handling(self, handled_type):
         self.printer.handling(handled_type)

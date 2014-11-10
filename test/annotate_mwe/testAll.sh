@@ -41,7 +41,7 @@ mkdir -p ./output
 t_testname "Annotate candidates with ContiguousLemma's"
 annotate '' "ContiguousLemma" "ContigLemma"
 
-t_testname "Annotate candidates with up to 3 gaps"
+t_testname "Annotate gappy candidates (up to 3 gaps)"
 annotate '-g 3' "ContiguousLemma" "Gapped3ContigLemma"
 
 t_testname "Annotate candidates from Source information"
