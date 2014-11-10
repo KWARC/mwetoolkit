@@ -41,7 +41,7 @@ import sys
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
 from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
-from libs.parser_wrappers import XMLParser
+from libs.parser_wrappers import parse, InputHandler
 
 
 
@@ -88,17 +88,18 @@ printer_class = None
 ################################################################################
 
 
-class AnnotatingXMLParser(XMLParser):
-
-    def __init__(self, fileobjs, printer):
-        super(AnnotatingXMLParser,self).__init__(fileobjs, printer)
+class AnnotatorHandler(InputHandler):
+    r"""An InputHandler that prints the input with annotated MWEs."""
+    def __init__(self, printer):
+        self.printer = printer
         self.sentence_counter = 0
 
-    def treat_sentence(self, sentence):
+    def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, detect MWEs and append
         MWEOccurrence instances to its `mweoccur` attribute.
 
-        @param sentence A `Sentence` that is being read from the XML file.    
+        @param sentence: A `Sentence` that is being read from the XML file.    
+        @param info: A dictionary with info regarding `sentence`.
         """
         self.sentence_counter += 1
         if self.sentence_counter % 100 == 0:
@@ -204,13 +205,12 @@ detectors = {
 ################################################################################  
 
 
-class CandidatesParser(XMLParser):
+class CandidatesHandler(InputHandler):
     r"""Parse file and populate a CandidateInfo object."""
-    def __init__(self, candidates_fnames):
-        super(CandidatesParser,self).__init__(candidates_fnames)
+    def __init__(self):
         self.info = CandidateInfo()
 
-    def treat_candidate(self, candidate):
+    def handle_candidate(self, candidate, info={}):
         self.info.add(candidate)
 
 
@@ -287,14 +287,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             printer_class = printers[a]
         if o in ("-g", "--gaps"):
             n_gaps = int(a)
+
     if not candidates_fnames:
         error("No candidates file given!")
     if detector_class == SourceDetector and n_gaps is not None:
         error('Bad arguments: method "Source" with "--gaps"')
 
     try:
-        p = CandidatesParser(candidates_fnames)
-        p.parse()
+        p = parse(candidates_fnames, CandidatesHandler())
     except Exception:
         print("Error loading candidates file!", file=sys.stderr)
         raise
@@ -310,5 +310,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = ["candidates=", "detector=", "gaps=", "source", "output="]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
-AnnotatingXMLParser(arg, printer).parse()
-
+parse(arg, AnnotatorHandler(printer))

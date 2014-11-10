@@ -41,7 +41,7 @@ from __future__ import absolute_import
 from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, verbose, parse_xml,\
     error
-from libs.parser_wrappers import XMLParser, StopParsing
+from libs.parser_wrappers import parse, InputHandler, StopParsing
 from libs.printers import XMLPrinter
 
 ################################################################################
@@ -65,17 +65,15 @@ limit = 10
 
 ################################################################################
 
-class HeadPrintingParser(XMLParser):
-    def __init__(self, input_files, limit):
-        super(HeadPrintingParser, self).__init__(
-                input_files, XMLPrinter(None))
+class HeadPrinterHandler(InputHandler):
+    def __init__(self, limit):
         self.limit = limit
 
-    def _parse_file(self, fileobj):
+    def before_file(self, fileobj, info={}):
+        self.printer = XMLPrinter(info["root"])
         self.counter = 0
-        super(HeadPrintingParser, self)._parse_file(fileobj)
 
-    def treat_meta(self, meta):
+    def handle_meta(self, meta, info={}):
         """Simply prints the meta header to the output without modifications.
 
             @param meta The `Meta` header that is being read from the XML file.
@@ -83,7 +81,7 @@ class HeadPrintingParser(XMLParser):
         self.printer.add(meta)
 
 
-    def treat_entity(self, entity):
+    def handle_entity(self, entity, info={}):
         """For each entity in the file, prints it if the limit is still not
         achieved. No buffering as in tail, this is not necessary here.
 
@@ -127,4 +125,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 args = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
-HeadPrintingParser(args, limit).parse()
+parse(args, HeadPrinterHandler(limit))

@@ -41,7 +41,7 @@ from __future__ import absolute_import
 
 from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml
-from libs.parser_wrappers import XMLParser
+from libs.parser_wrappers import parse, InputHandler
 from libs.printers import HTMLPrinter
 import datetime
      
@@ -60,18 +60,17 @@ OPTIONS may be:
 
 ################################################################################
 
-class XML2HTMLParser(XMLParser):
+class XML2HTMLHandler(InputHandler):
+    def __init__(self, printer):
+        self.printer = printer
 
-    def __init__(self, in_files, printer):
-        super(XML2HTMLParser, self).__init__(in_files, printer)
-
-    def treat_sentence(self, entity):
+    def handle_sentence(self, entity, info={}):
         self.printer.add( entity )
 
 
 ################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, -1, usage_string )
-XML2HTMLParser( arg, HTMLPrinter( arg[0] if arg else "stdin" ) ).parse()
+args = read_options( "", [], treat_options_simplest, -1, usage_string )
+parse(args, XML2HTMLHandler(HTMLPrinter(args[0] if args else "stdin")))
 

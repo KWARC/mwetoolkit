@@ -179,6 +179,9 @@ def strip_xml(the_string):
     	@return an equivalent unicode object where special XML characters were
     	replaced by their corresponding entities
     """
+    if not isinstance(the_string, unicode):
+        warn_once("Will fail to replace in `bytes` instance")
+
     cleanContent = the_string
     # First, replace entities with their characters, guaranteeing that, if the
     # text already contains escaped entities, they won't become something like

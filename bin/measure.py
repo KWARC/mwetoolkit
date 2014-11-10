@@ -41,8 +41,7 @@ import sys
 
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
-from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
-from libs.parser_wrappers import XMLParser
+from libs.parser_wrappers import parse, InputHandler
 
 
 
@@ -287,12 +286,11 @@ class LinkBasedMWEEvaluator(AbstractMWEEvaluator):
 ###########################################################
 
 
-class SentenceExtractingXMLParser(XMLParser):
-    def __init__(self, fileobjs):
-        super(SentenceExtractingXMLParser, self).__init__(fileobjs)
+class SentenceExtractorHandler(InputHandler):
+    def __init__(self):
         self.sentences = []
 
-    def treat_sentence(self, sentence):
+    def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, puts its `mweoccurs`
         at the back of `self.annotation`.
 
@@ -352,8 +350,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 if __name__ == "__main__":
     longopts = ["reference=", "sentence-aligner=", "evaluator="]
     arg = read_options("r:e:", longopts, treat_options, -1, usage_string)
-    reference = SentenceExtractingXMLParser([reference_fname]).parse().sentences
-    prediction = SentenceExtractingXMLParser(arg).parse().sentences
+    reference = parse([reference_fname], SentenceExtractorHandler()).sentences
+    prediction = parse(arg, SentenceExtractorHandler()).sentences
     results = mwe_evaluator.compare_sentence_lists(reference, prediction)
     print("DEBUG:", results)
     print("Precision:", results.precision())

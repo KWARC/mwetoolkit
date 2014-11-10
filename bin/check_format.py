@@ -39,7 +39,7 @@ from __future__ import absolute_import
 
 from libs.util import verbose, warn, error, strip_xml, treat_options_simplest, \
                  read_options
-from libs.parser_wrappers import TxtParser
+from libs.parser_wrappers import parse, InputHandler
 
 ################################################################################
 # GLOBALS
@@ -70,10 +70,9 @@ python %(program)s OPTIONS <file>
 
 ################################################################################
 
-class MosesChecker(TxtParser):
+class MosesCheckerHandler(InputHandler):
 
-    def __init__( self, in_files, printers=None, encoding='utf-8' ) :
-        super( MosesChecker, self ).__init__( in_files, printers, encoding )
+    def __init__( self ) :
         self.check_syntax = False
         self.check_xml = False
         self.stop_first = False
@@ -115,7 +114,7 @@ class MosesChecker(TxtParser):
                 
 #############################     
 
-    def treat_line( self, line ):
+    def handle_line( self, line, info={} ):
         self.nline = self.nline + 1
         tokens = unicode( line.strip(), "utf-8" ).split( " " )
         for (ntoken, token) in enumerate( tokens ) :
@@ -134,7 +133,7 @@ class MosesChecker(TxtParser):
                             
 #############################     
                       
-    def postfunction( self, fname ) :
+    def after_file( self, fileobj ) :
         if self.check_syntax :
             nsynttypes = len( self.synt_types )
             verbose( "Found %d types of synt. relation:" % nsynttypes )
@@ -162,7 +161,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             checkers = {
                 #"XML": XMLPrinter, 
                 #"Text": SurfacePrinter, 
-                "Moses": MosesChecker
+                "Moses": MosesCheckerHandler
             }
             checker_class = checkers[a]
         if o in ("-f", "--first"):
@@ -171,7 +170,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             check_syntax = True
         if o in ("-x", "--xml"):
             check_xml = True            
-    checker = checker_class( arg )
+    checker = checker_class( )
     checker.stop_first = stop_first
     checker.check_syntax = check_syntax
     checker.check_xml = check_xml    
@@ -180,9 +179,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN       
 
-checker_class = MosesChecker # Default type of checker - others not implemented
+checker_class = MosesCheckerHandler # Default type of checker - others not implemented
 checker = None          
 
 longopts = [ "first", "syntax", "xml", "input" ]
 arg = read_options( "fsxi:", longopts, treat_options, -1, usage_string )
-checker.parse()
+parse(arg, checker)

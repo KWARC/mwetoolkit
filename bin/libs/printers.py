@@ -36,14 +36,16 @@ from __future__ import absolute_import
 import sys
 import datetime
 
-from libs.base.__common import XML_HEADER, XML_FOOTER
+from .base.__common import XML_HEADER, XML_FOOTER
+from .parser_wrappers import StopParsing
 
 ################################################################################
 
 
 class AbstractPrinter(object):
     r"""Base implementation of a printer-style class.
-    Instances support reentrant `with` constructs.
+    Instances support reentrant `with` constructs, which
+    should be used when `root` is not None.
 
     Subclasses should override `stringify`, and optionally
     also `header` and `footer`.
@@ -57,6 +59,7 @@ class AbstractPrinter(object):
     inside `self.add()`, before actually adding the element(s).
     """
     def __init__(self, root, output=None, flush_on_add=True):
+        assert root in [None, "corpus", "candidates", "patterns"]
         self._root = root
         self._output = output or sys.stdout
         self._flush_on_add = flush_on_add
@@ -113,7 +116,7 @@ class AbstractPrinter(object):
         r"""(Called when exiting `with` statement)"""
         self._scope -= 1
         if self._scope == 0:
-            if t is None:
+            if v is None or isinstance(v, StopParsing):
                 self.flush()
                 self._write(self.footer())
         return False
@@ -209,8 +212,11 @@ class MosesPrinter(AbstractPrinter):
 #################################################
 class HTMLPrinter(AbstractPrinter):
     """Instances can be used to print HTML format.
-    Similar to `SimplePrinter`.
     """
+    def __init__(self, source):
+        super(HTMLPrinter, self).__init__(None)
+        self.source = source
+
     def header(self):
         html_header="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -250,7 +256,7 @@ class HTMLPrinter(AbstractPrinter):
 <p class="notice"> Timestamp: %(timestamp)s</p>
 <p class="notice">Source: <tt>%(filename)s</tt></p>
 <hr/>"""
-        s = self._root
+        s = self.source
         return html_header % { "timestamp": datetime.datetime.now(),
                               "corpusname": s[max(0,s.rfind("/")):],
                               "filename": s}
