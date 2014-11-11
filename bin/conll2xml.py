@@ -24,7 +24,8 @@
 """
 This script transforms the CONLL file format to the XML corpus format of
 required by the mwetoolkit scripts. The script is language independent
-as it does not transform the information. Only UTF-8 text is accepted.
+as it does not transform the information. Only UTF-8 text is accepted,
+as per CONLL specification.
 
 For more information, call the script with no parameter and read the
 usage instructions.
@@ -36,14 +37,11 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import sys
-from libs.util import read_options, treat_options_simplest, verbose, strip_xml
-from libs.base.sentence import Sentence
-from libs.base.word import Word
-from libs.base.__common import *
+from libs.util import read_options, treat_options_simplest, verbose
 
 from libs.printers import XMLPrinter
-from libs.parser_wrappers import TxtParser
-from libs.util import warn_once
+from libs.parser_wrappers import parse, InputHandler
+from libs.util import warn_once, warn
      
 
 ################################################################################     
@@ -62,73 +60,25 @@ OPTIONS:
 
 ################################################################################
 
-class ConllParser(TxtParser):
-    """Parser that reads an input file and converts it into mwetoolkit
-    corpus XML format, printing the XML file to stdout.
+class ConllToXMLHandler(InputHandler):
+    r"""An InputHandler that converts CONLL into XML."""
+    def before_file(self, fileobj, info={}):
+        self.printer = XMLPrinter(info["root"])
+        self.sentence_counter = 0
 
-    @param in_files The input files, in CONLL format: one word per line,
-    with each word represented by the following 10 entries.
+    def handle_sentence(self, sentence, info={}):
+        """For each sentence in the corpus, detect MWEs and append
+        MWEOccurrence instances to its `mweoccur` attribute.
 
-    Per-word entries:
-    0. ID      -- word index in sentence (starting at 1).
-    1. FORM    -- equivalent to `surface` in XML.
-    2. LEMMA   -- equivalent to `lemma` in XML.
-    3. CPOSTAG -- equivalent to `pos` in XML.
-    4. POSTAG  -- simplified version of `pos` in XML.
-                  (XXX currently ignored).
-    5. FEATS   -- (XXX currently ignored).
-    6. HEAD    -- equivalent to second part of `syn` in XML
-                  (that is, the parent of this word)
-    7. DEPREL  -- equivalent to the first part of `syn` in XML
-                  (that is, the relation between this word and HEAD).
-    8. PHEAD   -- (XXX currently ignored).
-    9. PDEPREL -- (XXX currently ignored).
-    """
-    ENTRIES = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
-            "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
+        @param sentence: A `Sentence` that is being read from the XML file.    
+        @param info: A dictionary with info regarding `sentence`.
+        """
+        self.sentence_counter += 1
+        if self.sentence_counter % 100 == 0:
+            verbose("Processing sentence number %(n)d"
+                    % {"n": self.sentence_counter})
 
-    def __init__(self, in_files, printer, encoding='utf-8'):
-        super(ConllParser,self).__init__(in_files, printer, encoding)
-        self.name2index = {name:index for (index, name) \
-                in enumerate(self.ENTRIES)}
-        self.s_id = 0
-
-    def treat_line(self, line):
-        data = line.strip().split()
-        if len(data) <= 1: return
-        data = [(WILDCARD if d == "_" else d) for d in data]
-
-        def get(attribute):
-            try:
-                return data[self.name2index[attribute]]
-            except KeyError:
-                return WILDCARD
-
-        # TODO handle cases where len(data) < len(ENTRIES)
-        if get("ID") == "1":
-            self.printer.flush().add(Sentence([], self.s_id))
-            self.s_id += 1
-
-        surface, lemma = get("FORM"), get("LEMMA")
-        pos, syn = get("CPOSTAG"), get("DEPREL")
-
-        if get("POSTAG") != get("CPOSTAG"):
-            self.maybe_warn(get("POSTAG"), "POSTAG != CPOSTAG")
-        self.maybe_warn(get("FEATS"), "found FEATS")
-        self.maybe_warn(get("PHEAD"), "found PHEAD")
-        self.maybe_warn(get("PDEPREL"), "found PDEPREL")
-
-        if get("HEAD") != WILDCARD:
-            syn = syn + ":" + unicode(get("HEAD"))
-        objectWord = Word(surface, lemma, pos, syn)
-        self.printer.last().append(objectWord)
-
-
-    def maybe_warn(self, entry, entry_name):
-        if entry != WILDCARD:
-            warn_once("WARNING: unable to handle CONLL " \
-                    "entry: {}.".format(entry_name))
-
+        self.printer.add(sentence)
 
 ################################################################################     
        
@@ -153,4 +103,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = []
 args = read_options("", longopts, treat_options, -1, usage_string)
-ConllParser(args, printer=XMLPrinter("corpus")).parse()
+parse(args, ConllToXMLHandler(), "CONLL")

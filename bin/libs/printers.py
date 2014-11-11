@@ -59,7 +59,7 @@ class AbstractPrinter(object):
     inside `self.add()`, before actually adding the element(s).
     """
     def __init__(self, root, output=None, flush_on_add=True):
-        assert root in [None, "corpus", "candidates", "patterns"]
+        assert root in [None, "corpus", "candidates", "patterns"], root
         self._root = root
         self._output = output or sys.stdout
         self._flush_on_add = flush_on_add

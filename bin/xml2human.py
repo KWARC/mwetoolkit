@@ -99,12 +99,13 @@ class HumanPrinter(AbstractPrinter):
 
     def add_line(self, line):
         for split_line in line.split("\n"):
-            self.add("[", self.counter+1, "] ", split_line, "\n")
+            self.add(self.counter, "| ", split_line, "\n")
 
     def handling(self, handled_type):
         if self.handled_type == handled_type:
             self.counter += 1
             if self.counter >= limit:
+                self.add("...\n")
                 raise StopParsing
         else:
             if self.handled_type is not None:
@@ -112,15 +113,6 @@ class HumanPrinter(AbstractPrinter):
             self.add(handled_type, ":\n")
             self.handled_type = handled_type
             self.counter = 0
-
-        # Corpus:
-        # | FOUND A SENTENCE
-        # | <libs.base.sentence.Sentence object at 0x7fc1f9354190>
-        # 
-        # Pattern:
-        # | FOUND A PATTERN
-        # | <libs.patternlib.ParsedPattern object at 0x7fc1f934add0>
-        # | @_,_,_,N_,_@(?:_,_,_,N_,_@)+
 
 
 
