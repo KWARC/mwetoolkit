@@ -524,19 +524,22 @@ class BinaryIndexInfo(FiletypeInfo):
     def make_parser(self, fileobjs):
         return BinaryIndexParser(fileobjs)
 
+    def check(self, fileobj):
+        if fileobj == sys.stdin:
+            raise Exception("Cannot read BinaryIndex file from stdin!")
+        if not fileobj.name.endswith(".info"):
+            raise Exception("BinaryIndex file should have extension .info!")
+        super(BinaryIndexInfo, self).check(fileobj)
+
     def matches_header(self, fileobj, strict):
-        return False  # XXX incomplete
+        return fileobj.peek(20).startswith(b"corpus_size int")
 
 
 class BinaryIndexParser(AbstractParser):
-    def _open_files(self, paths):
-        r"""(We need our `input_files` as a list
-        of strings, to be passed directly to Index."""
-        return paths
-
     def _parse_file(self, fileobj, handler):
         from .indexlib import Index
-        index = Index(fileobj)
+        assert fileobj.name.endswith(".info")
+        index = Index(fileobj.name[:-len(".info")])
         index.load_main()
         for sentence in index.iterate_sentences():
             handler.handle_sentence(sentence)
@@ -548,7 +551,7 @@ class SmartParser(AbstractParser):
     def __init__(self, input_files, filetype_hint=None):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
-        self.filetype_infos = [XMLInfo(), ConllInfo(),
+        self.filetype_infos = [XMLInfo(), ConllInfo(), BinaryIndexInfo(),
                 MosesInfo()] # TODO CSVInfo
 
     def parse(self, handler):
