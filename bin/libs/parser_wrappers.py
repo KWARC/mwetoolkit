@@ -397,6 +397,37 @@ class XMLParser(AbstractParser):
 
 
 
+class WaCInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for ukWaC format."""
+    def __init__(self):
+        super(WaCInfo, self).__init__("WaC")
+
+    def make_parser(self, fileobjs):
+        return WaCParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        return fileobj.peek(20).startswith(b"CURRENT URL")
+
+
+class WaCParser(AbstractTxtParser):
+    r"""Instances of this class parse the ukWaC format,
+    calling the `handler` for each object that is parsed.
+    """
+    def __init__(self, in_files, encoding='utf-8'):
+        super(WaCParser,self).__init__(in_files, encoding)
+        self.root = "corpus"
+        self.line_terminators = ".!?"
+
+    def _parse_line(self, line, handler, info={}):
+        if not line.startswith("CURRENT URL"):
+            import re
+            eols = self.line_terminators
+            for m in re.finditer("([^"+eols+"]+ .(?! [a-z])|[^"+eols+"]+$) *", line):
+                words = [Word(surface) for surface in m.group(1).split(" ")]
+                handler.handle_sentence(Sentence(words, info["linenum"]//2))
+
+
+
 class MosesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for Moses."""
     def __init__(self):
@@ -551,7 +582,8 @@ class SmartParser(AbstractParser):
     def __init__(self, input_files, filetype_hint=None):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
-        self.filetype_infos = [XMLInfo(), ConllInfo(), BinaryIndexInfo(),
+        self.filetype_infos = [XMLInfo(), ConllInfo(),
+                WaCInfo(), BinaryIndexInfo(),
                 MosesInfo()] # TODO CSVInfo
 
     def parse(self, handler):

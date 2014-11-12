@@ -23,8 +23,8 @@
 #
 ################################################################################
 """
-This script implements conversion from XML format to a more
-human-readable format for easier visual inspection.
+This script implements conversion from any known input format to
+a more human-readable format for easier visual inspection.
 
 For more information, call the script with no parameter and read the
 usage instructions.

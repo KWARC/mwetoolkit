@@ -133,7 +133,7 @@ class SimplePrinter(AbstractPrinter) :
     >>> s1 = Sentence((Word(w) for w in "Sample sentence .".split()), 1)
     >>> s2 = Sentence((Word(w) for w in "Another sentence !".split()), 2)
     >>> s3 = "A plain-text sentence."
-    >>> with XMLPrinter(root=None) as p:  # doctest: +ELLIPSIS
+    >>> with SimplePrinter(root=None) as p:  # doctest: +ELLIPSIS
     ...     p.add(s1, s2)
     <__main__.SimplePrinter object at ...>
     Sample sentence .
