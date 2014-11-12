@@ -57,7 +57,7 @@ class Word :
     def __init__(self, surface=WILDCARD, lemma=WILDCARD,
             pos=WILDCARD, syn=WILDCARD, freqs=None):
         """
-            Instanciates a new `Word`. A Word might be one of: a token in a 
+            Instantiates a new `Word`. A Word might be one of: a token in a 
             corpus, in which case it will probably have at least a defined 
             surface form (mwetoolkit-corpus.dtd); a part of a pattern, in which
             case it will probably contain some `WILDCARD`s; a part of a 
@@ -116,6 +116,12 @@ class Word :
         self.pos = pos
         self.syn = syn
         self.freqs = freqs or []
+
+################################################################################
+
+    def lemma_or_surface(self):
+        r"""Return lemma if it is defined; otherwise, return surface."""
+        return self.lemma if self.lemma != WILDCARD else self.surface
 
 ################################################################################
 

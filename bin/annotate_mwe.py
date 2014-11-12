@@ -107,7 +107,7 @@ class AnnotatorHandler(InputHandler):
                     % {"n": self.sentence_counter})
 
         for mwe_occurrence in detector.detect(sentence):
-            sentence.mweoccurs.append(mwe_occurrence)            
+            sentence.mweoccurs.append(mwe_occurrence)
         self.printer.add(sentence)
 
 
@@ -180,7 +180,7 @@ class ContiguousLemmaDetector(AbstractDetector):
             cur_b = [b for b in cur_b if b.fill_next_slot(i)]
 
             # Append new builders for whom `i` can fill the first slot
-            first_lemma = sentence[i].lemma
+            first_lemma = sentence[i].lemma_or_surface()
             for candidate in self.candidates_from_1st_lemma[first_lemma]:
                 b = self.LemmaMWEOBuilder(sentence, candidate, self.n_gaps)
                 b.checked_fill_next_slot(i)
@@ -193,7 +193,7 @@ class ContiguousLemmaDetector(AbstractDetector):
     class LemmaMWEOBuilder(MWEOccurrenceBuilder):
         r"""Matches equal lemmas in sentence-vs-candidate."""
         def match_key(self, word):
-            return word.lemma
+            return word.lemma_or_surface()
 
 
 detectors = {
@@ -235,7 +235,7 @@ class CandidateInfo(object):
         r"""Return a dict {1st lemma: [list of candidates]}."""
         ret = collections.defaultdict(list)
         for c in self._L:
-            ret[c[0].lemma].append(c)
+            ret[c[0].lemma_or_surface()].append(c)
         return ret
 
     def parsed_source_tag(self):

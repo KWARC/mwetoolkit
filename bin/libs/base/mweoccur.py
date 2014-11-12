@@ -77,7 +77,7 @@ class MWEOccurrence(object):
             ret.append('<mwepart index="')
             ret.append(unicode(s_i + 1))  # 1-based indexing
             ret.append('">')
-            ret.append(self.candidate[c_i].lemma)
+            ret.append(self.sentence[s_i].lemma_or_surface())
             ret.append('</mwepart>')
         ret.append("</mweoccur>")
         return ''.join(ret)
@@ -155,7 +155,7 @@ class MWEOccurrenceBuilder(object):
         return MWEOccurrence(self.sentence, self.candidate, self.indexes)
     
     def __repr__(self):
-        return b" ".join(w.lemma.encode('utf8')
+        return b" ".join(w.lemma_or_surface().encode('utf8')
                 for w in self.candidate)
 
         

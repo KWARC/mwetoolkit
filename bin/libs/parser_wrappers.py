@@ -39,6 +39,7 @@ import sys
 
 from xml.etree import ElementTree
 from .base.__common import WILDCARD
+from .base.candidate import Candidate
 from .base.sentence import Sentence
 from .base.word import Word
 from . import util
@@ -417,6 +418,7 @@ class WaCParser(AbstractTxtParser):
         super(WaCParser,self).__init__(in_files, encoding)
         self.root = "corpus"
         self.line_terminators = ".!?"
+        self.s_id = 1
 
     def _parse_line(self, line, handler, info={}):
         if not line.startswith("CURRENT URL"):
@@ -424,7 +426,36 @@ class WaCParser(AbstractTxtParser):
             eols = self.line_terminators
             for m in re.finditer("([^"+eols+"]+ .(?! [a-z])|[^"+eols+"]+$) *", line):
                 words = [Word(surface) for surface in m.group(1).split(" ")]
-                handler.handle_sentence(Sentence(words, info["linenum"]//2))
+                handler.handle_sentence(Sentence(words, self.s_id))
+                self.s_id += 1
+
+
+
+class PlainCandidatesInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for PlainCandidates format."""
+    def __init__(self):
+        super(PlainCandidatesInfo, self).__init__("WaC")
+
+    def make_parser(self, fileobjs):
+        return PlainCandidatesParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        header = fileobj.peek(1024)
+        return " " not in header and "_" in header
+
+
+class PlainCandidatesParser(AbstractTxtParser):
+    r"""Instances of this class parse the PlainCandidates format,
+    calling the `handler` for each object that is parsed.
+    """
+    def __init__(self, in_files, encoding='utf-8'):
+        super(PlainCandidatesParser, self).__init__(in_files, encoding)
+        self.root = "candidates"
+
+    def _parse_line(self, line, handler, info={}):
+        words = [Word(lemma) for lemma in line.split("_")]
+        c = Candidate(info["linenum"], words)
+        handler.handle_candidate(c)
 
 
 
@@ -584,7 +615,7 @@ class SmartParser(AbstractParser):
         self.filetype_hint = filetype_hint
         self.filetype_infos = [XMLInfo(), ConllInfo(),
                 WaCInfo(), BinaryIndexInfo(),
-                MosesInfo()] # TODO CSVInfo
+                MosesInfo(), PlainCandidatesInfo()]
 
     def parse(self, handler):
         with handler:
