@@ -61,6 +61,7 @@ from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, parse_xml
 from libs.patternlib import parse_patterns_file, build_generic_pattern
 from libs.indexlib import Index
+from libs.parser_wrappers import parse, InputHandler
 
 ################################################################################
 # GLOBALS
@@ -137,9 +138,11 @@ print_source = False
 
 ################################################################################
        
-def treat_sentence( sentence ) :
-    """
-        For each sentence in the corpus, generates all the candidates that match
+class CandidatesGeneratorHandler(InputHandler):
+    r"""An InputHandler that generates Candidates."""
+
+    def handle_sentence(self, sentence, info={}):
+        """For each sentence in the corpus, generates all the candidates that match
         at least one pattern in the patterns file (-p option) or all the
         ngrams that are in the valid range (-n option). The candidates are
         stored into a temporary file and will be further printed to a XML file.
@@ -147,43 +150,43 @@ def treat_sentence( sentence ) :
         to count occurrences of the same candidate.
         
         @param sentence A `Sentence` that is being read from the XML file.    
-    """
-    global patterns, temp_file, ignore_pos, surface_instead_lemmas, \
-           longest_pattern, shortest_pattern, sentence_counter
-    if sentence_counter % 100 == 0 :
-        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
+        """
+        global patterns, temp_file, ignore_pos, surface_instead_lemmas, \
+               longest_pattern, shortest_pattern, sentence_counter
+        if sentence_counter % 100 == 0 :
+            verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
 
-    already_matched = set()
+        already_matched = set()
 
-    for pattern in patterns:
-        for (match_ngram, wordnums) in pattern.matches(sentence,
-                match_distance, overlapping=not non_overlapping):
-            wordnums_string = ",".join( map( str, wordnums ) )
-            if wordnums_string in already_matched:
-                continue
-            already_matched.add( wordnums_string )
+        for pattern in patterns:
+            for (match_ngram, wordnums) in pattern.matches(sentence,
+                    match_distance, overlapping=not non_overlapping):
+                wordnums_string = ",".join( map( str, wordnums ) )
+                if wordnums_string in already_matched:
+                    continue
+                already_matched.add( wordnums_string )
 
-            #match_ngram = Ngram(copy_word_list(ngram), [])
+                #match_ngram = Ngram(copy_word_list(ngram), [])
 
-            if ignore_pos :    
-                match_ngram.set_all( pos=WILDCARD )
-            internal_key = unicode( match_ngram.to_string() ).encode('utf-8')
+                if ignore_pos :    
+                    match_ngram.set_all( pos=WILDCARD )
+                internal_key = unicode( match_ngram.to_string() ).encode('utf-8')
 
-            if( surface_instead_lemmas ) :
-                match_ngram.set_all( lemma=WILDCARD )
-            else :
-                match_ngram.set_all( surface=WILDCARD )                    
-            key = unicode( match_ngram.to_string() ).encode('utf-8')
-            ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
-            freq_surface = surfaces_dict.setdefault( internal_key, [] )
+                if( surface_instead_lemmas ) :
+                    match_ngram.set_all( lemma=WILDCARD )
+                else :
+                    match_ngram.set_all( surface=WILDCARD )                    
+                key = unicode( match_ngram.to_string() ).encode('utf-8')
+                ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
+                freq_surface = surfaces_dict.setdefault( internal_key, [] )
 
-            # Append the id of the source sentence. The number of items in
-            # surfaces_dict[form] is the number of occurrences of that form.
-            source_sent_id = str( sentence.id_number ) + ":" + wordnums_string
-            surfaces_dict[ internal_key ].append( source_sent_id )
-            temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
+                # Append the id of the source sentence. The number of items in
+                # surfaces_dict[form] is the number of occurrences of that form.
+                source_sent_id = str( sentence.id_number ) + ":" + wordnums_string
+                surfaces_dict[ internal_key ].append( source_sent_id )
+                temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
 
-    sentence_counter += 1
+        sentence_counter += 1
          
 
 ################################################################################  
@@ -333,14 +336,14 @@ with tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX,
 
 from contextlib import closing
 with closing(shelve.open( temp_name, 'n' )) as temp_file :
+    #parse(arg, CandidatesGeneratorHandler(),
+    #        filetype_hint="BinaryIndex" if corpus_from_index else None)
     if corpus_from_index:
-        index = Index( arg[0] )
-        index.load_main()
-        for sentence in index.iterate_sentences():
-            treat_sentence(sentence)
-        print_candidates( arg[0] )
-    else :
-        parse_xml(CorpusXMLHandler(treat_sentence), arg, print_candidates )
+        from libs.parser_wrappers import BinaryIndexParser
+        BinaryIndexParser(arg).parse(CandidatesGeneratorHandler())
+    else:
+        parse(arg, CandidatesGeneratorHandler())
+    print_candidates( arg[0] )
 
 # Try to remove temp file, if the system didn't do it automatically
 try :
@@ -351,13 +354,3 @@ except OSError :
 except IOError as err :
     error(str(err)+"\nError closing temporary file.\n"
                    "Please verify __common.py configuration")
-
-#elif len(arg) > 0 :
-#    input_file = open( arg[ 0 ] )
-#    parser = xml.sax.make_parser()
-#    parser.setContentHandler( CorpusXMLHandler( treat_sentence ) )
-#    parser.parse( input_file )
-#    input_file.close()
-#else :
-#    error("Error! You must specify a XML corpus or -i index")
-#print_candidates( temp_file, corpus_name )

@@ -67,9 +67,7 @@ class ConllToXMLHandler(InputHandler):
         self.sentence_counter = 0
 
     def handle_sentence(self, sentence, info={}):
-        """For each sentence in the corpus, detect MWEs and append
-        MWEOccurrence instances to its `mweoccur` attribute.
-
+        """Generate XML for given sentence.
         @param sentence: A `Sentence` that is being read from the XML file.    
         @param info: A dictionary with info regarding `sentence`.
         """

@@ -118,39 +118,13 @@ def parse(input_files, handler, filetype_hint=None):
     whose contents should be parsed.
     @param handler: an InputHandler.
     @param filetype_hint: either None or a valid
-    filetype hint string.
+    filetype_ext string.
     """
     return SmartParser(input_files, filetype_hint).parse(handler)
 
 
 
 ################################################################################
-
-
-class Python2kFileWrapper(object):
-    r"""Wrapper to make Python2k stdin/stdout
-    behave as in Python3k.  When wrapping io.BytesIO,
-    this will also fix Python Issue 1539381."""
-    def __init__(self, wrapped):
-        self._wrapped = wrapped
-
-    def __getattr__(self, name):
-        r"""Behave like the underlying file."""
-        return getattr(self._wrapped, name)
-
-    def readable(self):
-        r"""(Override required by `sys.stdin`)."""
-        try:
-            return self._wrapped.readable()
-        except AttributeError:
-            return True  # Very deeply though-out code...
-
-    def readinto(self, b):
-        r"""(Override required by `io.StringIO`)."""
-        try:
-            return self._wrapped.readinto(b)
-        except AttributeError:
-            b[:] = self._wrapped.read(len(b))
 
 
 class AbstractParser(object):
@@ -222,14 +196,41 @@ class AbstractParser(object):
     def close(self):
         r"""Close all files opened by this parser."""
         for f in self._files:
-            if f != sys.stdin:  # XXX 2014-11-07 broken by Python2kFileWrapper
-                f.close()
+            if hasattr(f, "close"):
+                if f != sys.stdin:  # XXX 2014-11-07 broken by Python2kFileWrapper
+                    f.close()
         self._files = []
+
+
+class Python2kFileWrapper(object):
+    r"""Wrapper to make Python2k stdin/stdout
+    behave as in Python3k.  When wrapping io.BytesIO,
+    this will also fix Python Issue 1539381."""
+    def __init__(self, wrapped):
+        self._wrapped = wrapped
+
+    def __getattr__(self, name):
+        r"""Behave like the underlying file."""
+        return getattr(self._wrapped, name)
+
+    def readable(self):
+        r"""(Override required by `sys.stdin`)."""
+        try:
+            return self._wrapped.readable()
+        except AttributeError:
+            return True  # Very deeply though-out code...
+
+    def readinto(self, b):
+        r"""(Override required by `io.StringIO`)."""
+        try:
+            return self._wrapped.readinto(b)
+        except AttributeError:
+            b[:] = self._wrapped.read(len(b))
 
 
 class AbstractTxtParser(AbstractParser):
     r"""Base class for plaintext-file parsing objects.
-    (For example, CSV parsers, Moses parsers, CONLL parsers...)
+    (For example, CONLL parsers, Moses parsers...)
 
     Subclasses should override `_parse_line`,
     calling the appropriate `handler` methods.
@@ -241,6 +242,7 @@ class AbstractTxtParser(AbstractParser):
     def __init__(self, input_files, encoding):
         super(AbstractTxtParser, self).__init__(input_files)
         self.encoding = encoding
+        self.encoding_errors = "replace"
         self.root = "<unknown-root>"
 
     def _parse_file(self, fileobj, handler):
@@ -250,8 +252,8 @@ class AbstractTxtParser(AbstractParser):
         with ParsingContext(fileobj, handler, info):
             for i, line in enumerate(fileobj):
                 self._parse_line(
-                        line.strip().decode(self.encoding), handler,
-                        {"fileobj": fileobj, "linenum": i})
+                        line[:-1].decode(self.encoding, self.encoding_errors),
+                        handler, {"fileobj": fileobj, "linenum": i+1})
 
     def _parse_line(self, line, handler, info={}):
         r"""Called to parse a line of the TXT file.
@@ -274,13 +276,65 @@ class ParsingContext(object):
         return self.handler.__exit__(t, v, tb)
 
 
+class FiletypeInfo(object):
+    r"""Instances of this class represent a filetype.
+    Subclasses must define `filetype_ext` and override
+    the methods `make_parser` and `matches`.
+
+    Attributes:
+    -- filetype_ext: the extension for this filetype.
+    Also used as a filetype hint.
+    """
+    def __init__(self, ext):
+        self.filetype_ext = ext
+
+    def make_parser(self, fileobjs):
+        r"""Return a parser for given file objects."""
+        raise NotImplementedError
+
+    def matches_header(self, fileobj, strict):
+        r"""Return whether the header of `fileobj`
+        could be interpreted as an instance of this filetype.
+
+        If `strict` is True, perform stricter checks and
+        only return True if the header is *known* to be in
+        the format of this filetype (usually, one should use
+        strict=True when detecting filetypes and strict=False
+        when checking for bad matches."""
+        raise NotImplementedError
+
+    def matches_filetype(self, filetype_hint):
+        r"""Return whether the binary contents
+        of `header` matches this filetype."""
+        return self.filetype_ext == filetype_hint
+
+    def check(self, fileobj):
+        r"""Check if `fileobj` belongs to this filetype
+        and raise an exception if it does not."""
+        if not self.matches_header(fileobj, strict=False):
+            raise Exception("Bad {} input".format(self.filetype_ext))
+
+
+
 ################################################################################
 
 
+class XMLInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for mwetoolkit's XML."""
+    def __init__(self):
+        super(XMLInfo, self).__init__("XML")
+
+    def make_parser(self, fileobjs):
+        return XMLParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        header = fileobj.peek(20)
+        return header.startswith(b"<?xml") or header.startswith(b"<pattern")
+
+
 class XMLParser(AbstractParser):
-    r"""Instances of this class parse XML,
-    calling `handle_*` for each object that is parsed.
-    Run it like this: `XMLParser(xml_fileobjs...).parse()`.
+    r"""Instances of this class parse the mwetoolkit XML format,
+    calling the `handler` for each object that is parsed.
     """
     def _parse_file(self, fileobj, handler):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
@@ -324,7 +378,7 @@ class XMLParser(AbstractParser):
                         for pattern in iterparse_patterns(inner_iterator):
                             handler.handle_pattern(pattern)
                 else:
-                    raise Exception("Bad outer tag: " + repr(elem.tag))
+                    raise Exception("Bad outer tag in XML filetype: " + repr(elem.tag))
 
 
     def _handle(self, iterator, xmlhandler):
@@ -342,14 +396,60 @@ class XMLParser(AbstractParser):
             elem.clear()
 
 
+
+class MosesInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for Moses."""
+    def __init__(self):
+        super(MosesInfo, self).__init__("Moses")
+
+    def make_parser(self, fileobjs):
+        return MosesParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        return False  # XXX add code
+
+
+class MosesParser(AbstractTxtParser):
+    r"""Instances of this class parse the Moses format,
+    calling the `handler` for each object that is parsed.
+    """
+    def __init__(self, in_files, encoding='utf-8'):
+        super(MosesParser,self).__init__(in_files, encoding)
+        self.root = "corpus"
+
+    def _parse_line(self, line, handler, info={}):
+        s = Sentence([], info["linenum"])
+        words = line.split(" ")
+        for w in words:
+            try:
+                surface, lemma, pos, syntax = w.split("|")
+                s.append(Word(surface, lemma, pos, syntax))
+            except Exception as e:
+                util.warn("Ignored token " + w)
+                util.warn(unicode(type(e)))
+        handler.handle_sentence(s)
+
+
+
+class ConllInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for CONLL."""
+    def __init__(self):
+        super(ConllInfo, self).__init__("CONLL")
+
+    def make_parser(self, fileobjs):
+        return ConllParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        header = fileobj.peek(1024)
+        return len(header.split(b"\n", 1)[0].split()) \
+                == len(ConllParser.ENTRIES)
+
+
 class ConllParser(AbstractTxtParser):
-    """Parser that reads an input file and converts it into mwetoolkit
-    corpus XML format, printing the XML file to stdout.
+    r"""Instances of this class parse the CONLL format,
+    calling the `handler` for each object that is parsed.
 
-    @param in_files The input files, in CONLL format: one word per line,
-    with each word represented by the following 10 entries.
-
-    Per-word entries:
+    Each line should have these entries:
     0. ID      -- word index in sentence (starting at 1).
     1. FORM    -- equivalent to `surface` in XML.
     2. LEMMA   -- equivalent to `lemma` in XML.
@@ -366,10 +466,10 @@ class ConllParser(AbstractTxtParser):
     """
     ENTRIES = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
             "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
-    NAME_TO_INDEX = {name:i for (i, name) in enumerate(ENTRIES)}
 
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
+        self.name2index = {name:i for (i, name) in enumerate(self.ENTRIES)}
         self.root = "corpus"
         self.s_id = 0
 
@@ -379,13 +479,13 @@ class ConllParser(AbstractTxtParser):
         data = [(WILDCARD if d == "_" else d) for d in data]
 
         if len(data) < len(self.ENTRIES):
-            util.warn("Ignoring line {} ({} entries)" \
+            util.warn("Ignoring line {} (only {} entries)" \
                     .format(info["linenum"], len(data)))
             return
 
         def get(attribute):
             try:
-                return data[self.NAME_TO_INDEX[attribute]]
+                return data[self.name2index[attribute]]
             except KeyError:
                 return WILDCARD
 
@@ -406,7 +506,7 @@ class ConllParser(AbstractTxtParser):
         if get("HEAD") != WILDCARD:
             syn = syn + ":" + unicode(get("HEAD"))
         objectWord = Word(surface, lemma, pos, syn)
-        self.partial_obj.word_list.append(objectWord)
+        self.partial_obj.append(objectWord)
 
 
     def maybe_warn(self, entry, entry_name):
@@ -415,58 +515,64 @@ class ConllParser(AbstractTxtParser):
                     "entry: {}.".format(entry_name))
 
 
+
+class BinaryIndexInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for BinaryIndex files."""
+    def __init__(self):
+        super(BinaryIndexInfo, self).__init__("BinaryIndex")
+
+    def make_parser(self, fileobjs):
+        return BinaryIndexParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        return False  # XXX incomplete
+
+
+class BinaryIndexParser(AbstractParser):
+    def _open_files(self, paths):
+        r"""(We need our `input_files` as a list
+        of strings, to be passed directly to Index."""
+        return paths
+
+    def _parse_file(self, fileobj, handler):
+        from .indexlib import Index
+        index = Index(fileobj)
+        index.load_main()
+        for sentence in index.iterate_sentences():
+            handler.handle_sentence(sentence)
+
+
 class SmartParser(AbstractParser):
     r"""Class that detects the file format
     and delegates the work to the correct parser."""
     def __init__(self, input_files, filetype_hint=None):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
-        self.parsers = [
-                (XMLParser,   "XML",   self.matches_xml),
-                (ConllParser, "CONLL", self.matches_conll),
-                #(MosesParser, "Moses", self.matches_moses),
-                #(CSVParser,   "CSV",   self.matches_csv),
-        ]
+        self.filetype_infos = [XMLInfo(), ConllInfo(),
+                MosesInfo()] # TODO CSVInfo
 
     def parse(self, handler):
         with handler:
             for f in self._files:
-                p = self._parser_for(f, self.filetype_hint)([f])
-                # Delegate the whole work to `p`.
+                fti = self._detect_filetype(f, self.filetype_hint)
+                fti.check(f)
+                p = fti.make_parser([f])
+                # Delegate the whole work to parser `p`.
                 p.parse(handler)
         return handler
 
 
-    def _parser_for(self, fileobj, filetype_hint):
-        r"""Find parser class for given fileobj."""
-        for (p_class, ext, matches) in self.parsers:
-            if ext == filetype_hint:
-                return p_class
+    def _detect_filetype(self, fileobj, filetype_hint):
+        r"""Return a FiletypeInfo instance for given fileobj."""
+        for fti in self.filetype_infos:
+            if fti.matches_filetype(filetype_hint):
+                return fti
 
-        header = fileobj.peek(1024)
-        for (p_class, ext, matches) in self.parsers:
-            if matches(header):
-                return p_class
+        for fti in self.filetype_infos:
+            if fti.matches_header(fileobj, strict=True):
+                return fti
 
         raise Exception("Unknown file format")
-
-
-    def matches_xml(self, header):
-        r"""Return True if binary `header` is in mwetoolkit's XML."""
-        return header.startswith(b"<")
-
-    def matches_conll(self, header):
-        r"""Return True if binary `header` is in CONLL."""
-        return len(header.split(b"\n", 1)[0].split()) \
-                == len(ConllParser.ENTRIES)
-
-    def matches_moses(self, header):
-        r"""Return True if binary `header` is in Moses."""
-        return False  # XXX add code
-
-    def matches_csv(self, header):
-        r"""Return True if binary `header` is in CSV."""
-        return False  # XXX add code
 
 
 

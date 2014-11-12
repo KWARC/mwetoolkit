@@ -191,13 +191,13 @@ def strip_xml(the_string):
     cleanContent = cleanContent.replace("&gt;", ">")  # Escape sequence
     cleanContent = cleanContent.replace("&lt;", "<")  # Escape sequence
     cleanContent = cleanContent.replace("&amp;", "&")  # Escape sequence
-    # Now, replace the characters with the entities
-    cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
-    cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
-    cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
-    cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
-    cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
-    #cleanContent = cleanContent.replace( "*", "&lowast;" ) # Escape WILDCARD
+    ## Now, replace the characters with the entities
+    #cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
+    #cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
+    #cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
+    #cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
+    #cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
+    ##cleanContent = cleanContent.replace( "*", "&lowast;" ) # Escape WILDCARD
     return cleanContent
 
 

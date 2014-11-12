@@ -38,10 +38,11 @@ from __future__ import absolute_import
 
 import sys
 
-from libs.util import read_options, treat_options_simplest, warn
-from libs.base.sentence import Sentence
-from libs.base.word import Word
-from libs.base.__common import XML_HEADER, XML_FOOTER
+from libs.util import read_options, treat_options_simplest, verbose
+
+from libs.printers import XMLPrinter
+from libs.parser_wrappers import parse, InputHandler
+from libs.util import warn_once, warn
      
 ################################################################################     
 # GLOBALS     
@@ -56,43 +57,29 @@ OPTIONS may be:
 
     The <files.moses> file(s) must be valid Moses-formatted files.
 """          
-s_id = 0
 ################################################################################
 
-def transform_format( in_file ) :
-    """
-        Reads a Moses file and converts it into mwetoolkit corpus XML format, 
-        printing the XML file to stdout.
-        
-        @param in_file The file in Moses format, one sentence per line, words
-        separated by spaces, each word is in format "surface|lemma|pos|syntax". 
-    """
-    global s_id
-    for line in in_file.readlines() :
-        s_id = s_id + 1   
-        s = Sentence( [], s_id )     
-        words = unicode(line, 'utf-8').strip().split(" ")
-        for w in words :
-            try :
-                surface, lemma, pos, syntax = w.split("|")
-                s.append( Word( surface, lemma, pos, syntax ) )
-            except Exception as e:
-                warn( str(type(e) ) )
-                warn( "Ignored token " + w )
-        print(s.to_xml().encode('utf-8'))
-    
+class MosesToXMLHandler(InputHandler):
+    r"""An InputHandler that converts Moses into XML."""
+    def before_file(self, fileobj, info={}):
+        self.printer = XMLPrinter(info["root"])
+        self.sentence_counter = 0
+
+    def handle_sentence(self, sentence, info={}):
+        """Generate XML for given sentence.
+        @param sentence: A `Sentence` that is being read from the XML file.    
+        @param info: A dictionary with info regarding `sentence`.
+        """
+        self.sentence_counter += 1
+        if self.sentence_counter % 100 == 0:
+            verbose("Processing sentence number %(n)d"
+                    % {"n": self.sentence_counter})
+
+        self.printer.add(sentence)
+
 
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, -1, usage_string )
-
-print(XML_HEADER % { "root": "corpus", "ns": "" })
-if len( arg ) == 0 :
-    transform_format( sys.stdin )        
-else :
-    for a in arg :
-        input_file = open( a )
-        transform_format( input_file )
-        input_file.close()                
-print(XML_FOOTER % { "root": "corpus" })
+args = read_options("", [], treat_options_simplest, -1, usage_string)
+parse(args, MosesToXMLHandler(), "Moses")
