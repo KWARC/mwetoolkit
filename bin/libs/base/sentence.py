@@ -100,6 +100,26 @@ class Sentence( Ngram ) :
             
 ################################################################################        
         
+    def to_plaincorpus( self ) :
+        """Returns this Sentence as a PlainCorpus line, consisting of
+        space-separated Word surfaces.  MWEs are separated by "_"s.
+        """
+        surface_list = [w.surface for w in self.word_list]
+
+        mwe_parts = set()
+        for mweoccur in self.mweoccurs:
+            for i in mweoccur.indexes:
+                mwe_parts.add(i)
+
+        for i in xrange(len(surface_list)-1):
+            if i in mwe_parts and i+1 in mwe_parts:
+                surface_list[i] += "_"
+            else:
+                surface_list[i] += " "
+        return "".join(surface_list)
+            
+################################################################################        
+        
     def to_surface( self ) :
         """
             Returns a simple readable string where the surface forms of the 

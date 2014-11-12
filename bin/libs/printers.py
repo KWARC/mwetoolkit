@@ -198,6 +198,17 @@ class SurfacePrinter(AbstractPrinter):
         except AttributeError:
             return unicode(obj)
             
+
+#################################################
+class PlainCorpusPrinter(AbstractPrinter):
+    """Instances can be used to print PlainCorpus format."""
+    def stringify(self, obj):
+        try:
+            return obj.to_plaincorpus() + "\n"
+        except AttributeError:
+            return unicode(obj)
+
+
 #################################################
 class MosesPrinter(AbstractPrinter):
     """Instances can be used to print Moses factored format.
@@ -208,6 +219,7 @@ class MosesPrinter(AbstractPrinter):
             return obj.to_moses() + "\n"
         except AttributeError:
             return unicode(obj)
+
 
 #################################################
 class HTMLPrinter(AbstractPrinter):
@@ -270,6 +282,17 @@ class HTMLPrinter(AbstractPrinter):
             return obj.to_html() + "\n"
         except AttributeError:
             return unicode(obj)
+
+
+################################################################################
+
+printers = {
+    "XML": XMLPrinter,
+    "PlainCorpus": PlainCorpusPrinter,
+    "Surface": SurfacePrinter,
+    "Moses": MosesPrinter,
+    "HTML": HTMLPrinter,
+}
 
 
 ################################################################################

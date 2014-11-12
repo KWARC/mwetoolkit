@@ -40,7 +40,7 @@ import sys
 
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
-from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
+from libs.printers import printers
 from libs.parser_wrappers import parse, InputHandler
 
 
@@ -79,6 +79,8 @@ OPTIONS may be:
       and <mwe> XML tags surrounding MWE tokens.
     * Method "Moses": output corpus in Moses factored format, with word factors 
       separated by vertical bars | and <mwe> XML tags surrounding MWE tokens.
+    * Method "PlainCorpus": output corpus in PlainCorpus format, showing only
+      surface forms and joining MWE components with "_".
 
 %(common_options)s
 """
@@ -267,7 +269,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
     detector_class = ContiguousLemmaDetector
-    printer_class = XMLPrinter
+    printer_class = printers["XML"]
     candidates_fnames = []
     n_gaps = None
 
@@ -279,11 +281,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-S", "--source"):
             detector_class = SourceDetector
         if o in ("-o", "--output"):
-            printers = {
-                "XML": XMLPrinter, 
-                "Text": SurfacePrinter, 
-                "Moses": MosesPrinter 
-            }
             printer_class = printers[a]
         if o in ("-g", "--gaps"):
             n_gaps = int(a)
