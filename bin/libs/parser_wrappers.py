@@ -599,12 +599,14 @@ class BinaryIndexInfo(FiletypeInfo):
 
 class BinaryIndexParser(AbstractParser):
     def _parse_file(self, fileobj, handler):
-        from .indexlib import Index
-        assert fileobj.name.endswith(".info")
-        index = Index(fileobj.name[:-len(".info")])
-        index.load_main()
-        for sentence in index.iterate_sentences():
-            handler.handle_sentence(sentence)
+        info = {"parser": self, "root": "corpus"}
+        with ParsingContext(fileobj, handler, info):
+            from .indexlib import Index
+            assert fileobj.name.endswith(".info")
+            index = Index(fileobj.name[:-len(".info")])
+            index.load_main()
+            for sentence in index.iterate_sentences():
+                handler.handle_sentence(sentence)
 
 
 class SmartParser(AbstractParser):
