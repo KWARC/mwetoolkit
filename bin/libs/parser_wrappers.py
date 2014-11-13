@@ -254,7 +254,7 @@ class AbstractTxtParser(AbstractParser):
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
                 self._parse_line(
-                        line[:-1].decode(self.encoding, self.encoding_errors),
+                        line.decode(self.encoding, self.encoding_errors),
                         handler, {"fileobj": fileobj, "linenum": i+1})
 
     def _parse_line(self, line, handler, info={}):

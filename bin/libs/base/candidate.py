@@ -33,8 +33,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.entry import Entry
-from libs.base.__common import UNKNOWN_FEAT_VALUE
+from .entry import Entry
+from .__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
 
@@ -99,6 +99,12 @@ class Candidate ( Entry ) :
         
 ################################################################################
 
+    def to_plaincandidate(self):
+        r"""Return this Candidate in the PlainCandidates format."""
+        return "_".join(w.lemma_or_surface() for w in self)
+
+################################################################################
+
     def to_xml( self ) :
         """
             Provides an XML string representation of the current object, 
@@ -112,7 +118,7 @@ class Candidate ( Entry ) :
             result = result + " candid=\"" + str(self.id_number) + "\">\n"
 
         # Unicode support          
-        base_string = super( Entry, self ).to_xml()
+        base_string = super( Candidate, self ).to_xml()
         if isinstance( base_string, str ) :
             base_string = unicode( base_string, 'utf-8')
         result = result + "    " + base_string + "\n"        

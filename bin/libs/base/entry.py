@@ -34,8 +34,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.ngram import Ngram
-from libs.base.__common import UNKNOWN_FEAT_VALUE
+from .ngram import Ngram
+from .__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
 
