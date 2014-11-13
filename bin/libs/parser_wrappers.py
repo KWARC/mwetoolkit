@@ -252,6 +252,7 @@ class AbstractTxtParser(AbstractParser):
         info = {"parser": self, "root": self.root}
         with ParsingContext(fileobj, handler, info):
             for i, line in enumerate(fileobj):
+                line = line.rstrip()
                 self._parse_line(
                         line[:-1].decode(self.encoding, self.encoding_errors),
                         handler, {"fileobj": fileobj, "linenum": i+1})
@@ -441,7 +442,7 @@ class PlainCandidatesInfo(FiletypeInfo):
 
     def matches_header(self, fileobj, strict):
         header = fileobj.peek(1024)
-        return " " not in header and "_" in header
+        return b" " not in header and b"_" in header
 
 
 class PlainCandidatesParser(AbstractTxtParser):
@@ -468,7 +469,9 @@ class MosesInfo(FiletypeInfo):
         return MosesParser(fileobjs)
 
     def matches_header(self, fileobj, strict):
-        return False  # XXX add code
+        header = fileobj.peek(256)
+        first_words = header.split(b" ", 5)[:-1]
+        return all(w.count(b"|") == 3 for w in first_words)
 
 
 class MosesParser(AbstractTxtParser):
@@ -487,7 +490,7 @@ class MosesParser(AbstractTxtParser):
                 surface, lemma, pos, syntax = w.split("|")
                 s.append(Word(surface, lemma, pos, syntax))
             except Exception as e:
-                util.warn("Ignored token " + w)
+                util.warn("Ignored token " + repr(w))
                 util.warn(unicode(type(e)))
         handler.handle_sentence(s)
 
@@ -536,7 +539,7 @@ class ConllParser(AbstractTxtParser):
         self.s_id = 0
 
     def _parse_line(self, line, handler, info={}):
-        data = line.strip().split()
+        data = line.split()
         if len(data) <= 1: return
         data = [(WILDCARD if d == "_" else d) for d in data]
 
