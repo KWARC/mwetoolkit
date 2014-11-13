@@ -289,7 +289,7 @@ class HTMLPrinter(AbstractPrinter):
 printers = {
     "XML": XMLPrinter,
     "PlainCorpus": PlainCorpusPrinter,
-    "Surface": SurfacePrinter,
+    "Text": SurfacePrinter,
     "Moses": MosesPrinter,
     "HTML": HTMLPrinter,
 }

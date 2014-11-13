@@ -233,7 +233,7 @@ def print_candidates( filename ) :
         candidates.
     """
     global print_cand_freq, print_source, temp_file
-    corpus_name = re.sub( ".*/", "", re.sub( "\.xml", "", filename ) )
+    corpus_name = re.sub( ".*/", "", re.sub( "\.(xml|info)", "", filename ) )
     verbose("Outputting candidates file...")
     try :
         print(XML_HEADER % { "root" : "candidates", "ns" : "" })

@@ -61,11 +61,11 @@ main() {
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -f -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -f -v -p "$DIR/patterns.xml" corpus.info >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
-		'run candidates.py -f -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
+		'run candidates.py -f -v -p "$DIR/patterns.xml" corpus.xml >candidates-from-corpus.xml' \
 		true
 
 	dotest "Comparison of candidate extraction outputs" \
