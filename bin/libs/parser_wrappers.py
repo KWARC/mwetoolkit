@@ -469,9 +469,10 @@ class MosesInfo(FiletypeInfo):
         return MosesParser(fileobjs)
 
     def matches_header(self, fileobj, strict):
-        header = fileobj.peek(256)
+        header = fileobj.peek(512)
         first_words = header.split(b" ", 5)[:-1]
-        return all(w.count(b"|") == 3 for w in first_words)
+        return all(w.count(b"|") == 3 for w in first_words) \
+                and (not strict or len(first_words) >= 3)
 
 
 class MosesParser(AbstractTxtParser):
