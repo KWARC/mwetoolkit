@@ -425,17 +425,54 @@ class WaCParser(AbstractTxtParser):
         if not line.startswith("CURRENT URL"):
             import re
             eols = self.line_terminators
-            for m in re.finditer("([^"+eols+"]+ .(?! [a-z])|[^"+eols+"]+$) *", line):
+            for m in re.finditer(r"([^.!?]+ .|[^.!?]+$)", line):
                 words = [Word(surface) for surface in m.group(1).split(" ")]
                 handler.handle_sentence(Sentence(words, self.s_id))
                 self.s_id += 1
 
 
 
+class PlainCorpusInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for PlainCorpus format."""
+    def __init__(self):
+        super(PlainCorpusInfo, self).__init__("PlainCorpus")
+
+    def make_parser(self, fileobjs):
+        return PlainCorpusParser(fileobjs)
+
+    def matches_header(self, fileobj, strict):
+        if not strict: return True
+        return False
+
+
+class PlainCorpusParser(AbstractTxtParser):
+    r"""Instances of this class parse the PlainCorpus format,
+    calling the `handler` for each object that is parsed.
+    """
+    def __init__(self, in_files, encoding='utf-8'):
+        super(PlainCorpusParser, self).__init__(in_files, encoding)
+        self.root = "corpus"
+
+    def _parse_line(self, line, handler, info={}):
+        sentence = Sentence([], info["linenum"])
+        mwes = line.split(" ")  # each entry is an SWE/MWE
+        for mwe in mwes:
+            words = [Word(lemma) for lemma in mwe.split("_")]
+            sentence.word_list.extend(words)
+            if len(words) != 1:
+                from .base.mweoccur import MWEOccurrence
+                c = Candidate(info["linenum"], words)
+                indexes = list(xrange(len(sentence)-len(words), len(sentence)))
+                mweo = MWEOccurrence(sentence, c, indexes)
+                sentence.mweoccurs.append(mweo)
+        handler.handle_sentence(sentence)
+
+
+
 class PlainCandidatesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCandidates format."""
     def __init__(self):
-        super(PlainCandidatesInfo, self).__init__("WaC")
+        super(PlainCandidatesInfo, self).__init__("PlainCandidates")
 
     def make_parser(self, fileobjs):
         return PlainCandidatesParser(fileobjs)
@@ -620,7 +657,7 @@ class SmartParser(AbstractParser):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
         self.filetype_infos = [XMLInfo(), ConllInfo(),
-                WaCInfo(), BinaryIndexInfo(),
+                PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
                 MosesInfo(), PlainCandidatesInfo()]
 
     def parse(self, handler):
@@ -644,7 +681,7 @@ class SmartParser(AbstractParser):
             if fti.matches_header(fileobj, strict=True):
                 return fti
 
-        raise Exception("Unknown file format")
+        raise Exception("Unknown file format for " + fileobj.name)
 
 
 

@@ -1,7 +1,7 @@
 #! /bin/bash
 here="$(cd "$(dirname "$0")" && pwd)"
 
-source ../testlib.sh
+source "$HERE/../testlib.sh"
 
 usage_exit() { {
     echo "Usage: $(basename "$0") [-h]"
@@ -14,6 +14,8 @@ test "$#" -ne 0  && usage_exit
 
 ########################################
 
+
+cd "$HERE"
 
 t_testname "Diff reference vs prediction"
 t_run "colordiff reference.xml prediction.xml" || true

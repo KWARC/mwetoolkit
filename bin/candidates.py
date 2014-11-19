@@ -58,7 +58,7 @@ from libs.base.frequency import Frequency
 from libs.base.candidate import Candidate
 from libs.base.ngram import Ngram
 from libs.util import read_options, treat_options_simplest, error, verbose,\
-    interpret_ngram, parse_xml
+    interpret_ngram, parse_xml, warn
 from libs.patternlib import parse_patterns_file, build_generic_pattern
 from libs.indexlib import Index
 from libs.parser_wrappers import parse, InputHandler
@@ -84,7 +84,11 @@ python %(program)s [-n <min>:<max> | -p <patterns.xml>] OPTIONS <corpus>
 OPTIONS may be:
 
 -i OR --index
-    (Deprecated. We currently detect BinaryIndex files automatically.)
+    (Deprecated. We currently detect BinaryIndex files automatically.
+    To force detection, use --from=BinaryIndex.)
+
+--from <corpus-filetype>
+    {filetypes[input][corpus]}
 
 -d <distance> OR --match-distance <distance>
     Select the distance through which patterns will match (default: "All"):
@@ -129,11 +133,11 @@ match_distance = "All"
 non_overlapping = False
 surface_instead_lemmas = False
 print_cand_freq = False
-filetype_hint = None
 longest_pattern = 0
 shortest_pattern = float("inf")
 sentence_counter = 0
 print_source = False
+filetype_corpus_ext = None
 
 ################################################################################
        
@@ -279,10 +283,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global ignore_pos
     global surface_instead_lemmas
     global print_cand_freq
-    global filetype_hint
     global print_source
     global match_distance
     global non_overlapping
+    global filetype_corpus_ext
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
         
@@ -308,7 +312,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-f", "--freq") : 
             print_cand_freq = True
         elif o in ("-i", "--index") :
-            filetype_hint = "BinaryIndex"
+            filetype_corpus_ext = "BinaryIndex"
+            warn("Option -i is deprecated; use --from=BinaryIndex")
+        elif o in ("--from") :
+            filetype_corpus_ext = a
 
     if non_overlapping and match_distance == "All":
         # If we are taking all matches, we need to be able to overlap...
@@ -325,7 +332,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################  
 # MAIN SCRIPT
 
-longopts = [ "patterns=", "ngram=", "index", "match-distance=",
+longopts = [ "from=", "patterns=", "ngram=", "index", "match-distance=",
         "non-overlapping", "freq", "ignore-pos", "surface", "source" ]
 arg = read_options( "p:n:id:NfgsS", longopts, treat_options, -1, usage_string )
 
@@ -335,7 +342,7 @@ with tempfile.NamedTemporaryFile( prefix=TEMP_PREFIX,
 
 from contextlib import closing
 with closing(shelve.open( temp_name, 'n' )) as temp_file :
-    parse(arg, CandidatesGeneratorHandler(), filetype_hint=filetype_hint)
+    parse(arg, CandidatesGeneratorHandler(), filetype_hint=filetype_corpus_ext)
     print_candidates(arg[0])
 
 # Try to remove temp file, if the system didn't do it automatically

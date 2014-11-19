@@ -1,7 +1,7 @@
 #! /bin/bash
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-source ../testlib.sh
+source "$HERE/../testlib.sh"
 
 usage_exit() { {
     echo "Usage: $(basename "$0") [-h]"
@@ -34,7 +34,7 @@ annotate() {
 }
 
 
-
+cd "$HERE"
 rm -rf ./output
 mkdir -p ./output
 

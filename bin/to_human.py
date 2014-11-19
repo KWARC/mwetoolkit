@@ -36,6 +36,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import collections
+import os
 import sys
 
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
@@ -74,7 +75,7 @@ class PrettyPrinterHandler(InputHandler):
 
     def handle_sentence(self, sentence, info={}):
         self.handling("Corpus")
-        self.printer.add_line(sentence.to_surface())
+        self.printer.add_line(sentence.to_plaincorpus())
 
     def handle_pattern(self, pattern, info={}):
         self.handling("Patterns")
@@ -99,7 +100,11 @@ class HumanPrinter(AbstractPrinter):
 
     def add_line(self, line):
         for split_line in line.split("\n"):
-            self.add(self.counter, "| ", split_line, "\n")
+            split_line = "{}| {}".format(self.counter, split_line)
+            cols = int(os.getenv("COLUMNS", 80))
+            if len(split_line) >= cols:
+                split_line = split_line[:cols-5] + "[...]"
+            self.add(split_line, "\n")
 
     def handling(self, handled_type):
         if self.handled_type == handled_type:

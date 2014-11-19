@@ -1,7 +1,7 @@
 #! /bin/bash
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-source ../testlib.sh
+source "$HERE/../testlib.sh"
 
 usage_exit() { {
     echo "Usage: $(basename "$0") [-h]"
@@ -33,6 +33,7 @@ find_candidates() {
 
 
 
+cd "$HERE"
 rm -rf ./output
 
 

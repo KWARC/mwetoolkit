@@ -135,6 +135,7 @@ class Sentence( Ngram ) :
                 mwetags_list[ i ].append( mweoccur.candidate.id_number )
         for (mwetag_i, mwetag) in enumerate(mwetags_list) :
             if mwetag : 
+                mwetag = (unicode(index) for index in mwetag)
                 surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag)\
                               + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
         return " ".join( surface_list )

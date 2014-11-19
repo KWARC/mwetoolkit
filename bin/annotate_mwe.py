@@ -56,8 +56,14 @@ python %(program)s -c <candidates.xml> OPTIONS <corpus>
 -c <candidates.xml> OR --candidates <candidates.xml>
     The MWE candidates to annotate (mwetoolkit-candidates.dtd)
 
+--candidates-from <candidates-filetype>
+    {filetypes[input][candidates]}
+
     
 OPTIONS may be:
+
+--corpus-from <corpus-filetype>
+    {filetypes[input][corpus]}
 
 -d <method> OR --detection <method>
     Choose a method of MWE detection (default: "ContiguousLemma"):
@@ -86,6 +92,8 @@ OPTIONS may be:
 """
 detector = None
 printer_class = None
+filetype_corpus_ext = None
+filetype_candidates_ext = None
 
 ################################################################################
 
@@ -263,7 +271,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     @param arg The argument list parsed by getopts.
     @param n_arg The number of arguments expected for this script.    
     """
-
+    global filetype_corpus_ext
+    global filetype_candidates_ext
     global printer_class
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
@@ -276,25 +285,26 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     for (o, a) in opts:
         if o in ("-c", "--candidates"):
             candidates_fnames.append(a)
-        if o in ("-d", "--detector"):
+        elif o in ("-d", "--detector"):
             detector_class = detectors[a]
-        if o in ("-S", "--source"):
+        elif o in ("-S", "--source"):
             detector_class = SourceDetector
-        if o in ("-o", "--output"):
+        elif o in ("-o", "--output"):
             printer_class = printers[a]
-        if o in ("-g", "--gaps"):
+        elif o in ("-g", "--gaps"):
             n_gaps = int(a)
+        elif o in ("--corpus-from"):
+            filetype_corpus_ext = a
+        elif o in ("--candidates-from"):
+            filetype_candidates_ext = a
 
     if not candidates_fnames:
         error("No candidates file given!")
     if detector_class == SourceDetector and n_gaps is not None:
         error('Bad arguments: method "Source" with "--gaps"')
 
-    try:
-        p = parse(candidates_fnames, CandidatesHandler())
-    except Exception:
-        print("Error loading candidates file!", file=sys.stderr)
-        raise
+    p = parse(candidates_fnames, CandidatesHandler(),
+            filetype_hint=filetype_candidates_ext)
 
     global detector, printer
     printer = printer_class(root="corpus")
@@ -305,6 +315,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 
-longopts = ["candidates=", "detector=", "gaps=", "source", "output="]
+longopts = ["corpus-from=", "candidates-from=",
+        "candidates=", "detector=", "gaps=", "source", "output="]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
-parse(arg, AnnotatorHandler(printer))
+parse(arg, AnnotatorHandler(printer), filetype_hint=filetype_corpus_ext)
