@@ -40,8 +40,7 @@ import sys
 
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
-from libs.printers import printers
-from libs.parser_wrappers import parse, InputHandler
+from libs import filetype
 
 
 
@@ -91,17 +90,17 @@ OPTIONS may be:
 %(common_options)s
 """
 detector = None
-printer_class = None
 filetype_corpus_ext = None
 filetype_candidates_ext = None
+output_filetype_ext = None
 
 ################################################################################
 
 
-class AnnotatorHandler(InputHandler):
+class AnnotatorHandler(filetype.AutomaticPrinterHandler):
     r"""An InputHandler that prints the input with annotated MWEs."""
-    def __init__(self, printer):
-        self.printer = printer
+    def __init__(self):
+        self.forced_filetype_ext = output_filetype_ext
         self.sentence_counter = 0
 
     def handle_sentence(self, sentence, info={}):
@@ -118,7 +117,7 @@ class AnnotatorHandler(InputHandler):
 
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)
-        self.printer.add(sentence)
+        self.delegate.handle_sentence(sentence)
 
 
 ################################################################################
@@ -215,7 +214,7 @@ detectors = {
 ################################################################################  
 
 
-class CandidatesHandler(InputHandler):
+class CandidatesHandler(filetype.InputHandler):
     r"""Parse file and populate a CandidateInfo object."""
     def __init__(self):
         self.info = CandidateInfo()
@@ -273,12 +272,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global filetype_corpus_ext
     global filetype_candidates_ext
-    global printer_class
+    global output_filetype_ext
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
     detector_class = ContiguousLemmaDetector
-    printer_class = printers["XML"]
     candidates_fnames = []
     n_gaps = None
 
@@ -290,7 +288,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-S", "--source"):
             detector_class = SourceDetector
         elif o in ("-o", "--output"):
-            printer_class = printers[a]
+            output_filetype_ext = a
         elif o in ("-g", "--gaps"):
             n_gaps = int(a)
         elif o in ("--corpus-from"):
@@ -303,11 +301,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     if detector_class == SourceDetector and n_gaps is not None:
         error('Bad arguments: method "Source" with "--gaps"')
 
-    p = parse(candidates_fnames, CandidatesHandler(),
-            filetype_hint=filetype_candidates_ext)
+    p = filetype.parse(candidates_fnames,
+            CandidatesHandler(), filetype_candidates_ext)
 
-    global detector, printer
-    printer = printer_class(root="corpus")
+    global detector
     detector = detector_class(p.info, n_gaps)
 
         
@@ -318,4 +315,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["corpus-from=", "candidates-from=",
         "candidates=", "detector=", "gaps=", "source", "output="]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
-parse(arg, AnnotatorHandler(printer), filetype_hint=filetype_corpus_ext)
+filetype.parse(arg, AnnotatorHandler(), filetype_corpus_ext)

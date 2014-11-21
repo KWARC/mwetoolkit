@@ -42,7 +42,7 @@ import sys
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
 from libs.printers import XMLPrinter, SurfacePrinter, MosesPrinter
-from libs.parser_wrappers import parse, InputHandler, StopParsing
+from libs.filetype import parse, InputHandler, StopParsing
 from libs.printers import AbstractPrinter
 
 

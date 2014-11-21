@@ -38,11 +38,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, parse_xml,\
-    error
-from libs.parser_wrappers import parse, InputHandler, StopParsing
-from libs.printers import XMLPrinter
+from libs.util import read_options, treat_options_simplest, \
+        verbose, parse_xml, error
+from libs import filetype
 
 ################################################################################
 # GLOBALS
@@ -65,35 +63,31 @@ limit = 10
 
 ################################################################################
 
-class HeadPrinterHandler(InputHandler):
+class HeadPrinterHandler(filetype.AutomaticPrinterHandler):
+    """For each entity in the file, prints it if the limit is still not
+    achieved. No buffering as in tail, this is not necessary here.
+    """
     def __init__(self, limit):
         self.limit = limit
 
     def before_file(self, fileobj, info={}):
-        self.printer = XMLPrinter(info["root"])
+        super(HeadPrinterHandler, self).before_file(fileobj, info)
         self.counter = 0
-
-    def handle_meta(self, meta, info={}):
-        """Simply prints the meta header to the output without modifications.
-
-            @param meta The `Meta` header that is being read from the XML file.
-        """
-        self.printer.add(meta)
-
 
     def handle_entity(self, entity, info={}):
         """For each entity in the file, prints it if the limit is still not
         achieved. No buffering as in tail, this is not necessary here.
 
-            @param entity A subclass of `Ngram` that is being read from the XML.
+        @param entity: A subclass of `Ngram` that is being read from the XML.
         """
         if self.counter % 100 == 0:
             verbose( "Processing ngram number %(n)d" % { "n":self.counter } )
         if self.counter < self.limit:
-            self.printer.add(entity)
+            self.delegate.handle_by_kind(info["kind"], entity, info)
         else:
-            raise StopParsing
+            raise filetype.StopParsing
         self.counter += 1
+
 
 ################################################################################
 
@@ -125,4 +119,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 args = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
-parse(args, HeadPrinterHandler(limit))
+filetype.parse(args, HeadPrinterHandler(limit))

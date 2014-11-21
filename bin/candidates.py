@@ -61,7 +61,7 @@ from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, parse_xml, warn
 from libs.patternlib import parse_patterns_file, build_generic_pattern
 from libs.indexlib import Index
-from libs.parser_wrappers import parse, InputHandler
+from libs.filetype import parse, InputHandler
 
 ################################################################################
 # GLOBALS

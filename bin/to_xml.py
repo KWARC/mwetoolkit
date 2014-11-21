@@ -38,8 +38,7 @@ from __future__ import absolute_import
 import sys
 from libs.util import read_options, treat_options_simplest, verbose
 
-from libs.printers import XMLPrinter
-from libs.parser_wrappers import parse, InputHandler
+from libs import filetype
 from libs.util import warn_once, warn
      
 
@@ -66,10 +65,10 @@ filetype_ext = None
 
 ################################################################################
 
-class ToXMLHandler(InputHandler):
+class ToXMLHandler(filetype.InputHandler):
     r"""An InputHandler that converts input into XML."""
     def before_file(self, fileobj, info={}):
-        self.printer = XMLPrinter(info["root"])
+        self.printer = filetype.printer_class("XML")(info["root"])
         self.entity_counter = 0
 
     def handle_entity(self, entity, info={}):
@@ -112,4 +111,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = ["from="]
 args = read_options("", longopts, treat_options, -1, usage_string)
-parse(args, ToXMLHandler(), filetype_hint=filetype_ext)
+filetype.parse(args, ToXMLHandler(), filetype_hint=filetype_ext)

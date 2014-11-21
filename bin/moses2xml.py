@@ -41,7 +41,7 @@ import sys
 from libs.util import read_options, treat_options_simplest, verbose
 
 from libs.printers import XMLPrinter
-from libs.parser_wrappers import parse, InputHandler
+from libs.filetype import parse, InputHandler
 from libs.util import warn_once, warn
      
 ################################################################################     

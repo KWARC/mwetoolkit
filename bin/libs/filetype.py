@@ -6,7 +6,7 @@
 # Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
-# parser_wrappers.py is part of mwetoolkit
+# filetype.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -23,9 +23,8 @@
 #
 ################################################################################
 """
-This module provides wrapper base for parsers.
-They provide a more elegant interface to file parsers such as
-`libs.genericXMLHandler.GenericXMLHandler`.
+This module provides classes and methods for filetype detection,
+parsing and printing.
 """
 
 from __future__ import division
@@ -34,6 +33,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import io
+import collections
 import itertools
 import sys
 
@@ -55,25 +55,18 @@ class StopParsing(Exception):
     pass
 
 
-class InputHandler(object):
-    r"""Handler interface whose methods are called by the parser.
-    Parsers will also call __enter__/__exit__ at the start/end
-    of the parsing.
-
-    Attributes:
-    -- `printer`: A printer-like object (see `printers.py`).
-    May be None if no printer object should be used.
+class FiletypeOperations(collections.namedtuple("FiletypeOperations",
+        "checker_class parser_class printer_class")):
+    r"""A named triple (checker_class, parser_class, printer_class):
+    -- checker_class: A subclass of AbstractChecker.
+    -- parser_class: Either None or a subclass of AbstractParser.
+    -- printer_class: Either None or a subclass of AbstractPrinter.
     """
-    printer = None
+    pass
 
-    def __enter__(self):
-        if self.printer:
-            self.printer.__enter__()
-    
-    def __exit__(self, t, v, tb):
-        if self.printer:
-            self.printer.__exit__(t, v, tb)
 
+class InputHandler(object):
+    r"""Handler interface whose methods are called by the parser."""
     def before_file(self, fileobj, info={}):
         r"""Called before parsing file contents."""
         pass  # By default, do nothing
@@ -82,14 +75,14 @@ class InputHandler(object):
         r"""Called after parsing file contents."""
         pass  # By default, do nothing
 
+    def handle_by_kind(self, kind, obj, info={}):
+        r"""Alternative to calling `self.handle_{kind}` methods.
+        Useful as a catch-all when delegating from another InputHandler."""
+        return getattr(self, "handle_"+kind)(obj, info=info)
+
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
-        pass  # By default, we just ignore meta
-
-    def handle_entity(self, entity, info={}):
-        r"""Called to treat a generic entity."""
-        kind = info.get("kind", "entity")
-        util.warn("Ignoring " + kind)
+        pass  # By default, we just silently ignore Meta instances
 
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
@@ -106,6 +99,24 @@ class InputHandler(object):
         info["kind"] = "pattern"
         return self.handle_entity(pattern, info)
 
+    def handle_entity(self, entity, info={}):
+        r"""Called to treat a generic entity (sentence/candidate/pattern)."""
+        kind = info.get("kind", "entity")
+        util.warn("Ignoring " + kind)
+
+
+class DelegatorInputHandler(InputHandler):
+    r"""InputHandler that delegates all methods to `self.delegate`."""
+    delegate = None
+
+    def before_file(self, fileobj, info={}):
+        return self.delegate.before_file(fileobj, info)
+
+    def after_file(self, fileobj, info={}):
+        return self.delegate.after_file(fileobj, info)
+
+    def handle_entity(self, entity, info={}):
+        return self.delegate.handle_by_kind(info["kind"], entity, info)
 
 
 def parse(input_files, handler, filetype_hint=None):
@@ -124,6 +135,31 @@ def parse(input_files, handler, filetype_hint=None):
     return SmartParser(input_files, filetype_hint).parse(handler)
 
 
+def printer_class(filetype_ext):
+    r"""Return a subclass of AbstractPrinter for given filetype extension.
+    If you want a printer class that automatically handles all root types,
+    create an instance of AutomaticPrinterHandler instead.
+    """
+    try:
+        return HINT_TO_INFO[filetype_ext].operations().printer_class
+    except KeyError:
+        raise Exception("Unknown file extension: " + unicode(filetype_ext))
+
+
+class AutomaticPrinterHandler(DelegatorInputHandler):
+    r"""InputHandler that creates an appropriate printer
+    (based on either `self.forced_filetype_ext` or info["parser"])
+    and delegates to it."""
+    def __init__(self, forced_filetype_ext=None):
+        self.forced_filetype_ext = forced_filetype_ext
+
+    def before_file(self, fileobj, info={}):
+        ext = self.forced_filetype_ext \
+                or info["parser"].filetype_info.filetype_ext
+        self.delegate = printer_class(ext)(info["root"])
+        self.delegate.before_file(fileobj, info)
+
+
 
 ################################################################################
 
@@ -137,8 +173,10 @@ class AbstractParser(object):
     Constructor Arguments:
     @param input_files: A list of target file paths.
     """
+    filetype_info = None
+    valid_roots = []
+
     def __init__(self, input_files):
-        assert isinstance(input_files, list)
         self._files = list(self._open_files(input_files or ["-"]))
         self.partial_obj = None
         self.partial_fun = None
@@ -162,13 +200,12 @@ class AbstractParser(object):
         @param handler: An instance of InputHandler.
         Callback methods will be called on `handler`.
         """
-        with handler:
-            for f in self._files:
-                try:
-                    self._parse_file(f, handler)
-                except StopParsing:  # Reading only part of file
-                    pass  # Just interrupt parsing
-                self._flush_partial_callback()
+        for f in self._files:
+            try:
+                self._parse_file(f, handler)
+            except StopParsing:  # Reading only part of file
+                pass  # Just interrupt parsing
+            self._flush_partial_callback()
         self.close()
         return handler
 
@@ -179,6 +216,7 @@ class AbstractParser(object):
 
     def _open_files(self, paths):
         r"""(Yield readable file objects for all paths.)"""
+        assert isinstance(paths, list)
         for path in paths:
             yield self._open_file(path)
 
@@ -270,32 +308,51 @@ class ParsingContext(object):
 
     def __enter__(self):
         self.handler.before_file(self.fileobj, self.info)
-        return self.handler.__enter__()
     
     def __exit__(self, t, v, tb):
-        if v is None:
+        if v is None or isinstance(v, StopParsing):
             self.handler.after_file(self.fileobj, self.info)
-        return self.handler.__exit__(t, v, tb)
 
 
 class FiletypeInfo(object):
     r"""Instances of this class represent a filetype.
-    Subclasses must define `filetype_ext` and override
-    the methods `make_parser` and `matches`.
-
-    Attributes:
-    -- filetype_ext: the extension for this filetype.
-    Also used as a filetype hint.
+    Subclasses must define the attribute `filetype_ext`
+    and override the method `info`.
     """
-    def __init__(self, ext):
-        self.filetype_ext = ext
-
-    def make_parser(self, fileobjs):
-        r"""Return a parser for given file objects."""
+    @property
+    def filetype_ext(self):
+        """A string with the extension for this filetype.
+        Also used as a filetype hint."""
         raise NotImplementedError
 
-    def matches_header(self, fileobj, strict):
-        r"""Return whether the header of `fileobj`
+    def matches_filetype(self, filetype_hint):
+        r"""Return whether the binary contents
+        of `header` matches this filetype."""
+        return self.filetype_ext == filetype_hint
+
+    def operations(self):
+        r"""Return an instance of FiletypeOperations."""
+        raise NotImplementedError
+
+
+class AbstractChecker(object):
+    r"""Instances of this class can be used to peek at a file object
+    and test whether its header matches a given filetype.
+    
+    Constructor Arguments:
+    @param fileobj: The file object to be peeked.
+
+    Attributes:
+    @param filetype_info: Instance of FiletypeInfo
+    that corresponds to the underlying filetype.
+    """
+    filetype_info = None
+
+    def __init__(self, fileobj):
+        self.fileobj = fileobj
+
+    def matches_header(self, strict):
+        r"""Return whether the header of `self.fileobj`
         could be interpreted as an instance of this filetype.
 
         If `strict` is True, perform stricter checks and
@@ -305,16 +362,67 @@ class FiletypeInfo(object):
         when checking for bad matches."""
         raise NotImplementedError
 
-    def matches_filetype(self, filetype_hint):
-        r"""Return whether the binary contents
-        of `header` matches this filetype."""
-        return self.filetype_ext == filetype_hint
-
-    def check(self, fileobj):
-        r"""Check if `fileobj` belongs to this filetype
+    def check(self):
+        r"""Check if `self.fileobj` belongs to this filetype
         and raise an exception if it does not."""
-        if not self.matches_header(fileobj, strict=False):
-            raise Exception("Bad {} input".format(self.filetype_ext))
+        if not self.matches_header(strict=False):
+            raise Exception("Bad \"{}\" input".format(
+                self.filetype_info.filetype_ext))
+
+
+
+class AbstractPrinter(InputHandler):
+    r"""Base implementation of a printer-style class.
+
+    Constructor Arguments:
+    @param root The type of the output file. This value
+    must be in the subclass's `valid_roots`.
+    @param output An IO-like object, such as sys.stdout
+    or an instance of StringIO.
+    @param flush_on_add If True, calls `self.flush()` automatically
+    inside `self.add_string()`, before actually adding the element(s).
+    """
+    filetype_info = None
+    valid_roots = []
+
+    def __init__(self, root, output=None, flush_on_add=True):
+        if root not in self.valid_roots:
+            raise Exception("Bad printer: {}(root=\"{}\")"
+                    .format(type(self).__name__, root))
+        self._root = root
+        self._output = output or sys.stdout
+        self._flush_on_add = flush_on_add
+        self._waiting_objects = []
+        self._scope = 0
+
+    def after_file(self, fileobj, info={}):
+        r"""Finish processing and flush `fileobj`."""
+        self.flush()
+
+    def add_string(self, *objects):
+        r"""Queue strings to be printed."""
+        if self._flush_on_add:
+            self.flush()
+        for obj in objects:
+            obj = obj.encode('utf-8')
+            self._waiting_objects.append(obj)
+        return self  # enable call chaining
+
+    def last(self):
+        r"""Return last (non-flushed) added object."""
+        return self._waiting_objects[-1]
+
+    def flush(self):
+        r"""Eagerly print the current contents."""
+        for obj in self._waiting_objects:
+            self._write(obj)
+        del self._waiting_objects[:]
+        return self  # enable call chaining
+
+    def _write(self, bytestring, end=""):
+        r"""(Print bytestring in self._output)"""
+        assert isinstance(bytestring, bytes)
+        self._output.write(bytestring)
 
 
 
@@ -323,14 +431,16 @@ class FiletypeInfo(object):
 
 class XMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for mwetoolkit's XML."""
-    def __init__(self):
-        super(XMLInfo, self).__init__("XML")
+    filetype_ext = "XML"
+    description = "TODO TODO BLABLABLA mwetoolkit's XML format"  # TODO
 
-    def make_parser(self, fileobjs):
-        return XMLParser(fileobjs)
+    def operations(self):
+        return FiletypeOperations(XMLChecker, XMLParser, XMLPrinter)
 
-    def matches_header(self, fileobj, strict):
-        header = fileobj.peek(20)
+class XMLChecker(AbstractChecker):
+    r"""Checks whether input is in XML format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(20)
         return header.startswith(b"<?xml") or header.startswith(b"<pattern")
 
 
@@ -338,6 +448,8 @@ class XMLParser(AbstractParser):
     r"""Instances of this class parse the mwetoolkit XML format,
     calling the `handler` for each object that is parsed.
     """
+    valid_roots = ["dict", "corpus", "candidates", "patterns"]
+
     def _parse_file(self, fileobj, handler):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
         # complains if we feed it a pre-decoded stream in python2k
@@ -398,23 +510,70 @@ class XMLParser(AbstractParser):
             elem.clear()
 
 
+class XMLPrinter(AbstractPrinter):
+    """Instances can be used to print XML objects."""
+    from .base.__common import XML_HEADER, XML_FOOTER
+    valid_roots = ["dict", "corpus", "candidates", "patterns"]
+
+    def before_file(self, fileobj, info={}):
+        self.add_string(self.XML_HEADER % {"root": self._root, "ns": ""} + "\n")
+        super(XMLPrinter, self).before_file(fileobj, info)
+
+    def after_file(self, fileobj, info={}):
+        self.add_string(self.XML_FOOTER % {"root": self._root} + "\n")
+        super(XMLPrinter, self).after_file(fileobj, info)
+
+    def handle_sentence(self, sentence, info={}):
+        self.add_string(sentence.to_xml(), "\n")
+
+
+##############################
+
+
+class MosesTextInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for MosesText format."""
+    filetype_ext = "Text"
+
+    def operations(self):
+        return FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
+
+
+class MosesTextChecker(AbstractChecker):
+    r"""Checks whether input is in MosesText format."""
+    def matches_header(self, strict):
+        return not strict
+
+
+class MosesTextPrinter(AbstractPrinter):
+    """Instances can be used to print HTML format."""
+    valid_roots = ["corpus"]
+
+    def handle_sentence(self, sentence, info={}):
+        self.add_string(sentence.to_surface(), "\n")
+
+
+##############################
+
 
 class WaCInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for ukWaC format."""
-    def __init__(self):
-        super(WaCInfo, self).__init__("WaC")
+    filetype_ext = "WaC"
 
-    def make_parser(self, fileobjs):
-        return WaCParser(fileobjs)
+    def operations(self):
+        return FiletypeOperations(WaCChecker, WaCParser, None)
 
-    def matches_header(self, fileobj, strict):
-        return fileobj.peek(20).startswith(b"CURRENT URL")
+class WaCChecker(AbstractChecker):
+    r"""Checks whether input is in WaC format."""
+    def matches_header(self, strict):
+        return self.fileobj.peek(20).startswith(b"CURRENT URL")
 
 
 class WaCParser(AbstractTxtParser):
     r"""Instances of this class parse the ukWaC format,
     calling the `handler` for each object that is parsed.
     """
+    valid_roots = ["corpus"]
+
     def __init__(self, in_files, encoding='utf-8'):
         super(WaCParser,self).__init__(in_files, encoding)
         self.root = "corpus"
@@ -431,24 +590,105 @@ class WaCParser(AbstractTxtParser):
                 self.s_id += 1
 
 
+##############################
+
+
+class HTMLInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for HTML format."""
+    filetype_ext = "HTML"
+
+    def operations(self):
+        return FiletypeOperations(HTMLChecker, None, HTMLPrinter)
+
+
+class HTMLChecker(AbstractChecker):
+    r"""Checks whether input is in HTML format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(1024)
+        return "<html>" in header
+
+
+class HTMLPrinter(AbstractPrinter):
+    """Instances can be used to print HTML format."""
+    valid_roots = ["corpus"]
+
+    def before_file(self, fileobj, info={}):
+        html_header="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>MWETOOLKIT annotated corpus: %(corpusname)s</title>
+    <!--<link rel="stylesheet" href="mwetk-corpus.css" type="text/css" media="screen"/>-->
+    <style>
+    h1{margin:0}
+    p.notice{font-family:Arial;font-size:10pt;margin:0}
+    hr{margin:10px 0}
+    p.sent{margin:2px 100px 2px 0;line-height:145%%;padding:4px 2px}
+    p.sent:hover{background-color:#FFC}
+    p.sent span.sid{border:1px solid #000;border-radius:2px;padding:1px 5px}
+    p.sent:hover span.sid{background:#F22;color:#FFF}
+    p.sent:hover a.word{border-color:#03A}
+    span.mwepart a.word{border:2px solid #000}
+    span.mwe1 a.word{background-color:#F66}
+    span.mwe2 a.word{background-color:#9C0}
+    span.mwe3 a.word{background-color:#69F}
+    span.mwe4 a.word{background-color:#F90}
+    a.word{position:relative;border:1px solid #CCF;border-radius:2px;padding:1px 2px;margin:auto 0;font-family:Verdana sans-serif;text-decoration:none;color:#000}
+    a.word:hover{background-color:#03A;border-color:#000;color:#FFF}
+    a.word span.surface{font-weight:700}
+    a.word span.wid{font-size:70%%;position:relative;top:.3em;font-style:italic;padding-left:3px}
+    a.word span.lps{color:#000;padding:2px 5px;top:1em;z-index:1;height:auto;opacity:0;position:absolute;visibility:hidden;background-color:#AAA;border:1px solid #000;border-radius:2px;box-shadow:#000 2px 2px 6px}
+    a.word:hover span.lps{opacity:.95;visibility:visible}
+    a.word span.lps span.lemma{font-style:italic;display:block}
+    a.word span.lps span.pos{font-weight:700;display:block}
+    a.word span.lps span.syn{font-weight:400;display:block;font-family:Arial}
+    </style>
+</head>
+<body>
+<h1>Corpus: %(corpusname)s</h1>
+<p class="notice">Generated automatically by the <a href="http://mwetoolkit.sf.net/" target="_blank">mwetoolkit</a> </p>
+<p class="notice"> Timestamp: %(timestamp)s</p>
+<p class="notice">Source: <tt>%(filename)s</tt></p>
+<hr/>"""
+        s = fileobj.name
+        import datetime
+        self.add_string(html_header % { "timestamp": datetime.datetime.now(),
+              "corpusname": s[max(0,s.rfind("/")):], "filename": s})
+        super(HTMLPrinter, self).before_file(fileobj, info)
+
+
+    def after_file(self, fileobj, info={}):
+        self.add_string("</body>\n</html>")
+        super(HTMLPrinter, self).after_file(fileobj, info)
+
+
+    def handle_sentence(self, sentence, info={}):
+        self.add_string(sentence.to_html(), "\n")
+
+
+##############################
+
 
 class PlainCorpusInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCorpus format."""
-    def __init__(self):
-        super(PlainCorpusInfo, self).__init__("PlainCorpus")
+    filetype_ext = "PlainCorpus"
+    def operations(self):
+        return FiletypeOperations(PlainCorpusChecker, PlainCorpusParser, PlainCorpusPrinter)
 
-    def make_parser(self, fileobjs):
-        return PlainCorpusParser(fileobjs)
 
-    def matches_header(self, fileobj, strict):
-        if not strict: return True
-        return False
+class PlainCorpusChecker(AbstractChecker):
+    r"""Checks whether input is in PlainCorpus format."""
+    def matches_header(self, strict):
+        return not strict
 
 
 class PlainCorpusParser(AbstractTxtParser):
     r"""Instances of this class parse the PlainCorpus format,
     calling the `handler` for each object that is parsed.
     """
+    valid_roots = ["corpus"]
+
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCorpusParser, self).__init__(in_files, encoding)
         self.root = "corpus"
@@ -468,17 +708,27 @@ class PlainCorpusParser(AbstractTxtParser):
         handler.handle_sentence(sentence)
 
 
+class PlainCorpusPrinter(AbstractPrinter):
+    """Instances can be used to print PlainCorpus format."""
+    def handle_sentence(self, sentence, info={}):
+        self.add_string(sentence.to_plaincorpus(), "\n")
+
+
+##############################
+
 
 class PlainCandidatesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCandidates format."""
-    def __init__(self):
-        super(PlainCandidatesInfo, self).__init__("PlainCandidates")
+    filetype_ext = "PlainCandidates"
 
-    def make_parser(self, fileobjs):
-        return PlainCandidatesParser(fileobjs)
+    def operations(self):
+        return FiletypeOperations(PlainCandidatesChecker, PlainCandidatesParser, PlainCandidatesPrinter)
 
-    def matches_header(self, fileobj, strict):
-        header = fileobj.peek(1024)
+
+class PlainCandidatesChecker(AbstractChecker):
+    r"""Checks whether input is in PlainCandidates format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(1024)
         return b" " not in header and b"_" in header
 
 
@@ -486,6 +736,8 @@ class PlainCandidatesParser(AbstractTxtParser):
     r"""Instances of this class parse the PlainCandidates format,
     calling the `handler` for each object that is parsed.
     """
+    valid_roots = ["candidates"]
+
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCandidatesParser, self).__init__(in_files, encoding)
         self.root = "candidates"
@@ -496,26 +748,41 @@ class PlainCandidatesParser(AbstractTxtParser):
         handler.handle_candidate(c)
 
 
+class PlainCandidatesPrinter(AbstractPrinter):
+    """Instances can be used to print PlainCandidates format."""
+    valid_roots = ["candidates"]
+
+    def handle_candidate(self, candidate, info={}):
+        self.add_string("_".join(w.lemma_or_surface() \
+                for w in candidate.word_list), "\n")
+
+
+##############################
+
 
 class MosesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for Moses."""
-    def __init__(self):
-        super(MosesInfo, self).__init__("Moses")
+    filetype_ext = "FactoredMoses"
 
-    def make_parser(self, fileobjs):
-        return MosesParser(fileobjs)
+    def operations(self):
+        return FiletypeOperations(MosesChecker, MosesParser, MosesPrinter)
 
-    def matches_header(self, fileobj, strict):
-        header = fileobj.peek(512)
+
+class MosesChecker(AbstractChecker):
+    r"""Checks whether input is in FactoredMoses format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(512)
         first_words = header.split(b" ", 5)[:-1]
         return all(w.count(b"|") == 3 for w in first_words) \
                 and (not strict or len(first_words) >= 3)
 
 
 class MosesParser(AbstractTxtParser):
-    r"""Instances of this class parse the Moses format,
+    r"""Instances of this class parse the FactoredMoses format,
     calling the `handler` for each object that is parsed.
     """
+    valid_roots = ["corpus"]
+
     def __init__(self, in_files, encoding='utf-8'):
         super(MosesParser,self).__init__(in_files, encoding)
         self.root = "corpus"
@@ -533,19 +800,29 @@ class MosesParser(AbstractTxtParser):
         handler.handle_sentence(s)
 
 
+class MosesPrinter(AbstractPrinter):
+    """Instances can be used to print Moses factored format."""
+    def handle_sentence(self, obj):
+        self.add_string(obj.to_moses(), "\n")
+
+
+##############################
+
 
 class ConllInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for CONLL."""
-    def __init__(self):
-        super(ConllInfo, self).__init__("CONLL")
+    filetype_ext = "CONLL"
 
-    def make_parser(self, fileobjs):
-        return ConllParser(fileobjs)
+    def operations(self):
+        return FiletypeOperations(ConllChecker, ConllParser, None)
 
-    def matches_header(self, fileobj, strict):
-        header = fileobj.peek(1024)
+
+class ConllChecker(AbstractChecker):
+    r"""Checks whether input is in CONLL format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(1024)
         return len(header.split(b"\n", 1)[0].split()) \
-                == len(ConllParser.ENTRIES)
+                == len(ConllParser.entries)
 
 
 class ConllParser(AbstractTxtParser):
@@ -567,12 +844,13 @@ class ConllParser(AbstractTxtParser):
     8. PHEAD   -- (XXX currently ignored).
     9. PDEPREL -- (XXX currently ignored).
     """
-    ENTRIES = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
+    valid_roots = ["corpus"]
+    entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
             "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
-        self.name2index = {name:i for (i, name) in enumerate(self.ENTRIES)}
+        self.name2index = {name:i for (i, name) in enumerate(self.entries)}
         self.root = "corpus"
         self.s_id = 0
 
@@ -581,7 +859,7 @@ class ConllParser(AbstractTxtParser):
         if len(data) <= 1: return
         data = [(WILDCARD if d == "_" else d) for d in data]
 
-        if len(data) < len(self.ENTRIES):
+        if len(data) < len(self.entries):
             util.warn("Ignoring line {} (only {} entries)" \
                     .format(info["linenum"], len(data)))
             return
@@ -618,27 +896,34 @@ class ConllParser(AbstractTxtParser):
                     "entry: {}.".format(entry_name))
 
 
+##############################
+
 
 class BinaryIndexInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for BinaryIndex files."""
-    def __init__(self):
-        super(BinaryIndexInfo, self).__init__("BinaryIndex")
+    filetype_ext = "BinaryIndex"
 
-    def make_parser(self, fileobjs):
-        return BinaryIndexParser(fileobjs)
+    def operations(self):
+        # TODO import indexlib...  BinaryIndexPrinter
+        return FiletypeOperations(BinaryIndexChecker, BinaryIndexParser, None)
 
-    def check(self, fileobj):
-        if fileobj == sys.stdin:
+
+class BinaryIndexChecker(AbstractChecker):
+    r"""Checks whether input is in BinaryIndex format."""
+    def check(self):
+        if self.fileobj == sys.stdin:
             raise Exception("Cannot read BinaryIndex file from stdin!")
-        if not fileobj.name.endswith(".info"):
+        if not self.fileobj.name.endswith(".info"):
             raise Exception("BinaryIndex file should have extension .info!")
-        super(BinaryIndexInfo, self).check(fileobj)
+        super(BinaryIndexChecker, self).check()
 
-    def matches_header(self, fileobj, strict):
-        return fileobj.peek(20).startswith(b"corpus_size int")
+    def matches_header(self, strict):
+        return self.fileobj.peek(20).startswith(b"corpus_size int")
 
 
 class BinaryIndexParser(AbstractParser):
+    valid_roots = ["corpus"]
+
     def _parse_file(self, fileobj, handler):
         info = {"parser": self, "root": "corpus"}
         with ParsingContext(fileobj, handler, info):
@@ -650,35 +935,63 @@ class BinaryIndexParser(AbstractParser):
                 handler.handle_sentence(sentence)
 
 
+##############################
+
+
+# Instantiate FiletypeInfo singletons
+INFOS = [XMLInfo(), ConllInfo(),
+        PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
+        MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
+
+# Map filetype_hint -> filetype_info
+HINT_TO_INFO = {}
+# Map input_root -> list of filetype_infos
+INPUT_INFOS = {}
+# Map output_root -> list of filetype_infos
+OUTPUT_INFOS = {}
+
+
+for fti in INFOS:
+    checker, parser, printer = fti.operations()
+    HINT_TO_INFO[fti.filetype_ext] = fti
+    checker.filetype_info = fti
+    if parser is not None:
+        parser.filetype_info = fti
+        for root in parser.valid_roots:
+            INPUT_INFOS.setdefault(root, []).append(fti)
+    if printer is not None:
+        printer.filetype_info = fti
+        for root in printer.valid_roots:
+            OUTPUT_INFOS.setdefault(root, []).append(fti)
+
+
+
 class SmartParser(AbstractParser):
     r"""Class that detects the file format
     and delegates the work to the correct parser."""
     def __init__(self, input_files, filetype_hint=None):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
-        self.filetype_infos = [XMLInfo(), ConllInfo(),
-                PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
-                MosesInfo(), PlainCandidatesInfo()]
 
     def parse(self, handler):
-        with handler:
-            for f in self._files:
-                fti = self._detect_filetype(f, self.filetype_hint)
-                fti.check(f)
-                p = fti.make_parser([f])
-                # Delegate the whole work to parser `p`.
-                p.parse(handler)
+        for f in self._files:
+            fti = self._detect_filetype(f, self.filetype_hint)
+            checker_class, parser_class, _ = fti.operations()
+            checker_class(f).check()
+            p = parser_class([f])
+            # Delegate the whole work to parser `p`.
+            p.parse(handler)
         return handler
 
 
-    def _detect_filetype(self, fileobj, filetype_hint):
+    def _detect_filetype(self, fileobj, filetype_hint=None):
         r"""Return a FiletypeInfo instance for given fileobj."""
-        for fti in self.filetype_infos:
-            if fti.matches_filetype(filetype_hint):
-                return fti
+        if filetype_hint in HINT_TO_INFO:
+            return HINT_TO_INFO[filetype_hint]
 
-        for fti in self.filetype_infos:
-            if fti.matches_header(fileobj, strict=True):
+        for fti in INFOS:
+            checker_class = fti.operations().checker_class
+            if checker_class(fileobj).matches_header(strict=True):
                 return fti
 
         raise Exception("Unknown file format for " + fileobj.name)

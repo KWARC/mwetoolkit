@@ -39,7 +39,7 @@ from __future__ import absolute_import
 
 from libs.util import verbose, warn, error, strip_xml, treat_options_simplest, \
                  read_options
-from libs.parser_wrappers import parse, InputHandler
+from libs.filetype import parse, InputHandler
 
 ################################################################################
 # GLOBALS

@@ -25,10 +25,9 @@
 
 
 """
-    This script converts a corpus file in XML into a corresponding simple HTML.
-    The HTML can be viewed in a browser with a specific CSS stylesheet so that
-    it is easier to read the sentences and see linguistic information if 
-    required. MWE annotation is also provided.
+    This script converts between file formats.
+    By default, the output is generated in mwetoolkit's XML format,
+    but many input/output formats are available.
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -39,10 +38,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml
 from libs import filetype
-import datetime
+
      
 ################################################################################     
 # GLOBALS     
@@ -56,10 +54,34 @@ OPTIONS may be:
 
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """
+input_filetype_ext = None
+output_filetype_ext = "XML"
+
+################################################################################
+
+
+def treat_options(opts, arg, n_arg, usage_string):
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.    
+    """
+    global input_filetype_ext
+    global output_filetype_ext
+
+    treat_options_simplest(opts, arg, n_arg, usage_string)
+
+    for (o, a) in opts:
+        if o in ("--from"):
+            input_filetype_ext = a
+        if o in ("--to"):
+            output_filetype_ext = a
 
 
 ################################################################################
 # MAIN SCRIPT
 
-args = read_options( "", [], treat_options_simplest, -1, usage_string )
-filetype.parse(args, filetype.AutomaticPrinterHandler("HTML"))
+longopts = ["from=", "to="]
+args = read_options("", longopts, treat_options, -1, usage_string)
+printer = filetype.AutomaticPrinterHandler(output_filetype_ext)
+filetype.parse(args, printer, input_filetype_ext)
