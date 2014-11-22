@@ -93,9 +93,31 @@ def usage(usage_string):
         that uses this function should provide a variable containing the
         usage string.
     """
-    print(usage_string % {"program": sys.argv[0],
-                          "common_options": common_options_usage_string},
-          file=sys.stderr)
+    usage_string = usage_string % {
+        "program": sys.argv[0],
+        "common_options": common_options_usage_string
+    }
+    usage_string = usage_string.format(program=sys.argv[0],
+            common_options=common_options_usage_string,
+            descriptions=FiletypeDescriptions())
+    print(usage_string, end='', file=sys.stderr)
+
+
+class FiletypeDescriptions(object):
+    @property
+    def input(self):
+        from . import filetype
+        return self._descriptions(filetype.INPUT_INFOS)
+
+    @property
+    def output(self):
+        from . import filetype
+        return self._descriptions(filetype.OUTPUT_INFOS)
+
+    def _descriptions(self, root_to_ftis):
+        return {root: "\n    ".join("* \"{}\": {}".format(
+            fti.filetype_ext, fti.description) for fti in ftis)
+                for (root, ftis) in root_to_ftis.iteritems()}
 
 
 ################################################################################

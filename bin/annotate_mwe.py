@@ -50,19 +50,32 @@ from libs import filetype
 
 usage_string = """Usage: 
     
-python %(program)s -c <candidates.xml> OPTIONS <corpus>
+python {program} -c <candidates-file> OPTIONS <corpus>
 
--c <candidates.xml> OR --candidates <candidates.xml>
-    The MWE candidates to annotate (mwetoolkit-candidates.dtd)
+-c <candidates-file> OR --candidates <candidates-file>
+    The MWE candidates to annotate, in one of the filetype
+    formats accepted by the `--candidates-from` switch.
 
---candidates-from <candidates-filetype>
-    {filetypes[input][candidates]}
-
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--corpus-from` switch.
     
+
 OPTIONS may be:
 
+--candidates-from <candidates-filetype>
+    Force reading candidates from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
+
 --corpus-from <corpus-filetype>
-    {filetypes[input][corpus]}
+    Force reading corpus from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+
+--to <corpus-filetype>
+    Output corpus in given filetype format
+    (by default, outputs in same format as input):
+    {descriptions.output[corpus]}
 
 -d <method> OR --detection <method>
     Choose a method of MWE detection (default: "ContiguousLemma"):
@@ -77,17 +90,7 @@ OPTIONS may be:
     Annotate based on the "<sources>" tag from the candidates file.
     Same as passing the parameter "--detection=Source".
 
--o <format> OR --output <format>
-    Choose a method of output (default: "XML"):
-    * Method "XML": output corpus in XML format.
-    * Method "Text": output corpus in textual format, showing only surface forms 
-      and <mwe> XML tags surrounding MWE tokens.
-    * Method "Moses": output corpus in Moses factored format, with word factors 
-      separated by vertical bars | and <mwe> XML tags surrounding MWE tokens.
-    * Method "PlainCorpus": output corpus in PlainCorpus format, showing only
-      surface forms and joining MWE components with "_".
-
-%(common_options)s
+{common_options}
 """
 detector = None
 filetype_corpus_ext = None

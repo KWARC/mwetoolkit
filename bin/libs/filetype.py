@@ -320,6 +320,11 @@ class FiletypeInfo(object):
     and override the method `info`.
     """
     @property
+    def description(self):
+        """A small string describing this filetype."""
+        raise NotImplementedError
+
+    @property
     def filetype_ext(self):
         """A string with the extension for this filetype.
         Also used as a filetype hint."""
@@ -431,8 +436,8 @@ class AbstractPrinter(InputHandler):
 
 class XMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for mwetoolkit's XML."""
+    description = "An XML in mwetoolkit format (dtd/mwetoolkit-*.dtd)"
     filetype_ext = "XML"
-    description = "TODO TODO BLABLABLA mwetoolkit's XML format"  # TODO
 
     def operations(self):
         return FiletypeOperations(XMLChecker, XMLParser, XMLPrinter)
@@ -532,7 +537,8 @@ class XMLPrinter(AbstractPrinter):
 
 class MosesTextInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for MosesText format."""
-    filetype_ext = "Text"
+    description = "Moses textual format, with one sentence per line and <mwe> tags"
+    filetype_ext = "MosesText"
 
     def operations(self):
         return FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
@@ -557,6 +563,7 @@ class MosesTextPrinter(AbstractPrinter):
 
 class WaCInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for ukWaC format."""
+    description = "ukWac non-parsed format"
     filetype_ext = "WaC"
 
     def operations(self):
@@ -595,6 +602,7 @@ class WaCParser(AbstractTxtParser):
 
 class HTMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for HTML format."""
+    description = "[[TODO REWRITE]] Pretty html"
     filetype_ext = "HTML"
 
     def operations(self):
@@ -605,7 +613,7 @@ class HTMLChecker(AbstractChecker):
     r"""Checks whether input is in HTML format."""
     def matches_header(self, strict):
         header = self.fileobj.peek(1024)
-        return "<html>" in header
+        return b"<html>" in header
 
 
 class HTMLPrinter(AbstractPrinter):
@@ -672,6 +680,7 @@ class HTMLPrinter(AbstractPrinter):
 
 class PlainCorpusInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCorpus format."""
+    description = "One sentence per line, with multi_word_expressions"
     filetype_ext = "PlainCorpus"
     def operations(self):
         return FiletypeOperations(PlainCorpusChecker, PlainCorpusParser, PlainCorpusPrinter)
@@ -710,6 +719,8 @@ class PlainCorpusParser(AbstractTxtParser):
 
 class PlainCorpusPrinter(AbstractPrinter):
     """Instances can be used to print PlainCorpus format."""
+    valid_roots = ["corpus"]
+
     def handle_sentence(self, sentence, info={}):
         self.add_string(sentence.to_plaincorpus(), "\n")
 
@@ -719,6 +730,7 @@ class PlainCorpusPrinter(AbstractPrinter):
 
 class PlainCandidatesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCandidates format."""
+    description = "One multi_word_candidate per line"
     filetype_ext = "PlainCandidates"
 
     def operations(self):
@@ -762,6 +774,7 @@ class PlainCandidatesPrinter(AbstractPrinter):
 
 class MosesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for Moses."""
+    description = "Moses factored format (word=f1|f2|f3|f4|f5)"
     filetype_ext = "FactoredMoses"
 
     def operations(self):
@@ -802,6 +815,8 @@ class MosesParser(AbstractTxtParser):
 
 class MosesPrinter(AbstractPrinter):
     """Instances can be used to print Moses factored format."""
+    valid_roots = ["corpus"]
+
     def handle_sentence(self, obj):
         self.add_string(obj.to_moses(), "\n")
 
@@ -811,6 +826,7 @@ class MosesPrinter(AbstractPrinter):
 
 class ConllInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for CONLL."""
+    description = "CONLL tab-separated 10-entries-per-word"
     filetype_ext = "CONLL"
 
     def operations(self):
@@ -901,6 +917,7 @@ class ConllParser(AbstractTxtParser):
 
 class BinaryIndexInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for BinaryIndex files."""
+    description = "The `.info` file for binary index created by index.py"
     filetype_ext = "BinaryIndex"
 
     def operations(self):
@@ -957,10 +974,12 @@ for fti in INFOS:
     checker.filetype_info = fti
     if parser is not None:
         parser.filetype_info = fti
+        INPUT_INFOS.setdefault("ALL", []).append(fti)
         for root in parser.valid_roots:
             INPUT_INFOS.setdefault(root, []).append(fti)
     if printer is not None:
         printer.filetype_info = fti
+        OUTPUT_INFOS.setdefault("ALL", []).append(fti)
         for root in printer.valid_roots:
             OUTPUT_INFOS.setdefault(root, []).append(fti)
 
