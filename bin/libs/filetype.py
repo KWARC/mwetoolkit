@@ -141,9 +141,12 @@ def printer_class(filetype_ext):
     create an instance of AutomaticPrinterHandler instead.
     """
     try:
-        return HINT_TO_INFO[filetype_ext].operations().printer_class
+        ret = HINT_TO_INFO[filetype_ext].operations().printer_class
     except KeyError:
         raise Exception("Unknown file extension: " + unicode(filetype_ext))
+    if ret is None:
+        raise Exception("Printer not implemented for: " + unicode(filetype_ext))
+    return ret
 
 
 class AutomaticPrinterHandler(DelegatorInputHandler):

@@ -27,7 +27,7 @@ annotate() {
     t_run "$t_BIN/annotate_mwe.py --debug $args \
 -c $name_input/candidates.xml $name_input/corpus.xml >$xml_out"
 
-    t_run "$t_BIN/annotate_mwe.py --debug $args -o Text \
+    t_run "$t_BIN/annotate_mwe.py --debug $args -o MosesText \
 -c $name_input/candidates.xml $name_input/corpus.xml >$txt_out"
 
     t_compare "$txt_ref" "$txt_out"

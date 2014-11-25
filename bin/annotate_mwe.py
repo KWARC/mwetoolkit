@@ -103,7 +103,7 @@ output_filetype_ext = None
 class AnnotatorHandler(filetype.AutomaticPrinterHandler):
     r"""An InputHandler that prints the input with annotated MWEs."""
     def __init__(self):
-        self.forced_filetype_ext = output_filetype_ext
+        super(AnnotatorHandler, self).__init_(output_filetype_ext)
         self.sentence_counter = 0
 
     def handle_sentence(self, sentence, info={}):

@@ -47,18 +47,33 @@ from libs import filetype
 
 usage_string = """Usage:
 
-python %(program)s OPTIONS <files.xml>
+python %(program)s OPTIONS <input-file>
+
+The <input-file> must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
 
 -n OR --number
     Number of entities that you want to print out. Default value is 10.
 
-%(common_options)s
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[ALL]}
 
-    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[ALL]}
+
+{common_options}
+
 """
 limit = 10
+input_filetype_ext = None
+output_filetype_ext = None
 
 
 ################################################################################
@@ -68,6 +83,7 @@ class HeadPrinterHandler(filetype.AutomaticPrinterHandler):
     achieved. No buffering as in tail, this is not necessary here.
     """
     def __init__(self, limit):
+        super(HeadPrinterHandler, self).__init__(output_filetype_ext)
         self.limit = limit
 
     def before_file(self, fileobj, info={}):
@@ -102,21 +118,30 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.
     """
     global limit
+    global input_filetype_ext
+    global output_filetype_ext
     
-    treat_options_simplest( opts, arg, n_arg, usage_string )
-        
-    for ( o, a ) in opts:
-        if o in ("-n", "--number") :
-            try :
+    treat_options_simplest(opts, arg, n_arg, usage_string)
+
+    for (o, a) in opts:
+        if o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        elif o in ("-n", "--number"):
+            try:
                 limit = int( a )
-                if limit < 0 :
+                if limit < 0:
                     raise ValueError
-            except ValueError :
-                error("You must provide a positive " + \
-                                     "integer value as argument of -n option.")
+            except ValueError:
+                error("You must provide a positive " \
+                         "integer value as argument of -n option.")
+        else:
+            raise Exception("Bad arg")
 
 ################################################################################
 # MAIN SCRIPT
 
-args = read_options( "n:", [ "number=" ], treat_options, -1, usage_string )
-filetype.parse(args, HeadPrinterHandler(limit))
+longopts = ["from=", "to=", "number="]
+args = read_options("n:", longopts, treat_options, -1, usage_string)
+filetype.parse(args, HeadPrinterHandler(limit), input_filetype_ext)

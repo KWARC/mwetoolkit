@@ -132,7 +132,14 @@ def treat_options_simplest(opts, arg, n_arg, usage_string):
         
         @param n_arg The number of arguments expected for this script.
     """
-    for ( o, a ) in opts:
+    if n_arg >= 0 and len(arg) != n_arg:
+        print("You must provide %(n)s arguments to this script" \
+              % {"n": n_arg}, file=sys.stderr)
+        usage(usage_string)
+        sys.exit(2)
+
+    new_opts = []
+    for (o, a) in opts:
         if o in ("-v", "--verbose"):
             set_verbose(True)
             verbose("Verbose mode on")
@@ -141,12 +148,9 @@ def treat_options_simplest(opts, arg, n_arg, usage_string):
         elif o in ("-h", "--help"):
             usage(usage_string)
             sys.exit(0)
-
-    if n_arg >= 0 and len(arg) != n_arg:
-        print("You must provide %(n)s arguments to this script" \
-              % {"n": n_arg}, file=sys.stderr)
-        usage(usage_string)
-        sys.exit(2)
+        else:
+            new_opts.append((o, a))
+    opts[:] = new_opts
 
 
 ################################################################################

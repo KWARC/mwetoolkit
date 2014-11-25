@@ -95,12 +95,12 @@ OPTIONS may be:
     (Deprecated. We currently detect BinaryIndex files automatically.
     To force detection, use --from=BinaryIndex.)
 
---from <corpus>
+--from <input-filetype-ext>
     Force reading from given file type extension.
     (By default, file type is automatically detected):
     {descriptions.input[corpus]}
 
---to <corpus>
+--to <output-filetype-ext>
     Output extracted candidates in given filetype format:
     XXX XXX XXX THIS IS NOT WORKING (need to fix print_candidates)
     {descriptions.output[candidates]}
@@ -331,7 +331,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("--to") :
             output_filetype_ext = a
         else:
-            exit(1)
+            raise Exception("Bad flag")
 
     if non_overlapping and match_distance == "All":
         # If we are taking all matches, we need to be able to overlap...

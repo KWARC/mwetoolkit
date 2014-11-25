@@ -54,8 +54,6 @@ formats accepted by the `--from` switch.
 
 OPTIONS may be:
 
-{common_options}
-
 --from <input-filetype-ext>
     Force conversion from given filetype extension.
     (By default, file type is automatically detected):
@@ -65,7 +63,10 @@ OPTIONS may be:
     Convert input to given filetype extension.
     (By default, converts input to "XML" format):
     {descriptions.output[ALL]}
+
+{common_options}
 """
+
 input_filetype_ext = None
 output_filetype_ext = "XML"
 
