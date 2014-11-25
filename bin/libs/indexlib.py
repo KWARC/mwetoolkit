@@ -56,11 +56,12 @@ import tempfile
 import subprocess
 import struct
 
-from libs.corpusXMLHandler import CorpusXMLHandler
-from libs.base.sentence import Sentence
-from libs.util import verbose, strip_xml, warn, error
-from libs.base.word import Word, WORD_ATTRIBUTES
-from libs.base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
+from .corpusXMLHandler import CorpusXMLHandler
+from .base.sentence import Sentence
+from .util import verbose, strip_xml, warn, error
+from .base.word import Word, WORD_ATTRIBUTES
+from .base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
+from . import filetype
 
 
 NGRAM_LIMIT = 16
@@ -785,57 +786,23 @@ class Index():
 ################################################################################
 ################################################################################
 
-def index_from_corpus(corpus, basepath=None, attrs=None):
-    """
-        Generates an `Index` from a corpus file.
-    """
-    parser = xml.sax.make_parser()
-    index = Index(basepath, attrs)
-    index.fresh_arrays()
-    parser.setContentHandler(CorpusXMLHandler(index.append_sentence))
-    parser.setFeature(xml.sax.handler.feature_external_ges,
-                      False)  # IGNORE DTD!
-    parser.parse(corpus)
-    index.build_suffix_arrays()
-    index.save_main()
-    return index
+def populate_index(index, corpus_fileobjs, filetype_hint=None):
+    """Generates an `Index` from a corpus file."""
+    handler = IndexPopulatorHandler(index)
+    filetype.parse(corpus_fileobjs, handler, filetype_hint).finish()
 
 
-################################################################################
+class IndexPopulatorHandler(filetype.InputHandler):
+    def __init__(self, index):
+        self.index = index
+        self.index.fresh_arrays()
 
-def index_from_text(corpus, txtformat, basepath=None, attrs=None):
-    """
-        Generates an `Index` from a textual file in moses or CoNLL format.
-    """
-    index = Index(basepath, attrs)
-    index.fresh_arrays()
-    try:
-        text_file = open(corpus)
-        nb_words = 0
-        for line in text_file.readlines():
-            clean_sentence = strip_xml(unicode(line.strip(), "utf-8"))
-            if txtformat == "moses":
-                index.append_sentence_moses(clean_sentence)
-            elif txtformat == "conll":
-                fields = clean_sentence.split("\t")
-                if len(fields) == 10:
-                    nb_words += 1
-                    synt = fields[7].replace(":", "_") + ":" + \
-                           fields[6].replace(":", "_")
-                    index.append_word_text(fields[1], fields[2], fields[3],
-                                           synt)
-                elif len(fields) == 1 and len(fields[0]) == 0 and nb_words != 0:
-                    index.append_end_sentence(nb_words)
-                    nb_words = 0
-                else:
-                    warn("Ignored line: \"%s\"" % line)
+    def handle_sentence(self, sentence, info={}):
+        self.index.append_sentence(sentence)
 
-        text_file.close()
-    except IOError:
-        error("IO Error reading file " + corpus)
-    index.build_suffix_arrays()
-    index.save_main()
-    return index
+    def finish(self):
+        self.index.build_suffix_arrays()
+        self.index.save_main()
 
 
 ################################################################################
@@ -850,9 +817,15 @@ def standalone_main(argv):
     basepath = argv[1]
     corpus = argv[2]
 
-    index = index_from_corpus(corpus, basepath)
+    index = _index_from_corpus(corpus, basepath)
     index.save_main()
     print("Done.", file=sys.stderr)
+
+
+def _index_from_corpus(corpus, basepath=None, attrs=None):
+    index = Index(basepath, attrs)
+    populate_index(index, [corpus])
+    return index
 
 ################################################################################
 

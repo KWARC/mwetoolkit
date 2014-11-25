@@ -34,18 +34,24 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from libs.util import error, treat_options_simplest, read_options
-from libs.indexlib import index_from_corpus, index_from_text, Index
+from libs import indexlib
 
 ################################################################################
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS -i <index> <corpus.xml>
+python %(program)s OPTIONS -i <index> <corpus>
 
 -i <index> OR --index <index>
     Base name for the output index files. This is used as a prefix for all index
     files generated, such as <index>.lemma.corpus, <index>.lemma.suffix, etc.
     
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
+The -i <index> option is mandatory.
+
+
 OPTIONS may be:    
 
 -a <attrs> OR --attributes <attrs>
@@ -54,8 +60,15 @@ OPTIONS may be:
 
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
-    
+
+--from <input-filetype-ext>
+    Force reading of corpus with given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+   
+
 -m OR --moses
+    (DEPRECATED. Use --from=Moses instead).
     Uses Moses factored corpus format as input. This format must be pure text in
     UTF-8, one sentence per line, tokens separated by spaces, each token being:
     surface|lemma|POStag|deprel:head
@@ -65,6 +78,7 @@ OPTIONS may be:
     this character (e.g. %%VERTICAL_BAR%%)
     
 -c OR --conll
+    (DEPRECATED. Use --from=CONLL instead).
     Uses CoNLL shared task format as input. This format must be pure text in 
     UTF-8, one word per line, sentences separated by blank lines, each line 
     containing 10 tab-separated fields:
@@ -78,11 +92,10 @@ OPTIONS may be:
     relation. Empty fields should contain an underscore "_"
 
 %(common_options)s
-
-    The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd). The -i
-<index> option is mandatory.
 """
 use_text_format = None
+input_filetype_ext = None
+
 
 ################################################################################
 
@@ -97,21 +110,24 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         @param n_arg The number of arguments expected for this script.    
     """
     global used_attributes
-    global name
+    global basename
     global build_entry
     global use_text_format
+    global input_filetype_ext
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
     used_attributes = ["lemma", "pos", "surface", "syn"]
-    name = None
+    basename = None
     for ( o, a ) in opts:
         if o in ("-i", "--index") :
             try :
-                name = a
+                basename = a
             except IOError :        
                 error("Error opening the index.\n"
                       "Try again with another index filename.")
+        elif o == "--from":
+            input_filetype_ext = a
         elif o in ("-a", "--attributes"):
             used_attributes = a.split(":")
         elif o in ("-m", "--moses"):
@@ -119,16 +135,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-c", "--conll"):
             use_text_format = "conll"            
         elif o in ("-o", "--old"):
-            Index.use_c_indexer(False)
+            indexlib.Index.use_c_indexer(False)
             
-    if name is None:     
+    if basename is None:     
         error("You must provide a filename for the index.\n"
               "Option -i is mandatory.")
+
                             
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["index=", "attributes=", "old", "moses", "conll" ]
+longopts = ["from=", "index=", "attributes=", "old", "moses", "conll" ]
 arg = read_options( "i:a:omc", longopts, treat_options, 1, usage_string )
 
 simple_attrs = [a for a in used_attributes if '+' not in a]
@@ -139,9 +156,8 @@ for attrs in [attr.split('+') for attr in composite_attrs]:
         if attr not in simple_attrs:
             simple_attrs.append(attr)
 
-if use_text_format :
-    index = index_from_text(arg[0], use_text_format, name, simple_attrs)
-else :
-    index = index_from_corpus(arg[0], name, simple_attrs)
+
+index = indexlib.Index(basename, simple_attrs)
+indexlib.populate_index(index, arg, input_filetype_ext)
 for attr in composite_attrs:
     index.make_fused_array(attr.split('+'))
