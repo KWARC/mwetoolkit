@@ -6,7 +6,7 @@
 # Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
-# xml2html.py is part of mwetoolkit
+# convert.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.util import read_options, treat_options_simplest, parse_xml
+from libs.util import read_options, treat_options_simplest
 from libs import filetype
 
      
@@ -58,7 +58,7 @@ OPTIONS may be:
 
 --from <input-filetype-ext>
     Force conversion from given filetype extension.
-    (By default, file type is automatically detected).
+    (By default, file type is automatically detected):
     {descriptions.input[ALL]}
 
 --to <output-filetype-ext>

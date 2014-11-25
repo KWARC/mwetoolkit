@@ -528,8 +528,8 @@ class XMLPrinter(AbstractPrinter):
         self.add_string(self.XML_FOOTER % {"root": self._root} + "\n")
         super(XMLPrinter, self).after_file(fileobj, info)
 
-    def handle_sentence(self, sentence, info={}):
-        self.add_string(sentence.to_xml(), "\n")
+    def handle_entity(self, entity, info={}):
+        self.add_string(entity.to_xml(), "\n")
 
 
 ##############################
