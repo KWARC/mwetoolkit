@@ -181,20 +181,22 @@ class AbstractParser(object):
 
     def __init__(self, input_files):
         self._files = list(self._open_files(input_files or ["-"]))
-        self.partial_obj = None
         self.partial_fun = None
+        self.partial_obj = None
+        self.partial_kwargs = None
 
     def _flush_partial_callback(self):
-        r"""Finally perform the callback `self.partial_fun(self.partial_obj)`."""
-        if self.partial_obj:
-            self.partial_fun(self.partial_obj)
-        self.partial_obj = self.partial_fun = None
+        r"""Finally perform the callback `self.partial_fun(...args...)`."""
+        if self.partial_fun is not None:
+            self.partial_fun(self.partial_obj, **self.partial_kwargs)
+        self.partial_fun = self.partial_obj = self.partial_kwargs = None
 
-    def new_partial(self, new_partial_obj, partial_fun):
-        r"""Add future callback `partial_fun(self.partial_obj)`."""
+    def new_partial(self, new_partial_fun, obj, **kwargs):
+        r"""Add future callback `partial_fun(...args...)`."""
         self._flush_partial_callback()
-        self.partial_obj = new_partial_obj
-        self.partial_fun = partial_fun
+        self.partial_fun = new_partial_fun
+        self.partial_obj = obj
+        self.partial_kwargs = kwargs
 
 
     def parse(self, handler):
@@ -890,8 +892,8 @@ class ConllParser(AbstractTxtParser):
                 return WILDCARD
 
         if get("ID") == "1":
-            self.new_partial(Sentence([], self.s_id),
-                    handler.handle_sentence)
+            self.new_partial(handler.handle_sentence,
+                    Sentence([], self.s_id), info={})
             self.s_id += 1
 
         surface, lemma = get("FORM"), get("LEMMA")
@@ -913,6 +915,44 @@ class ConllParser(AbstractTxtParser):
         if entry != WILDCARD:
             util.warn_once("WARNING: unable to handle CONLL " \
                     "entry: {}.".format(entry_name))
+
+
+##############################
+
+
+class PukwacInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for pukWaC format."""
+    description = "ukWac parsed format"
+    filetype_ext = "pukWaC"
+
+    def operations(self):
+        return FiletypeOperations(PukwacChecker, PukwacParser, None)
+
+
+class PukwacChecker(AbstractChecker):
+    r"""Checks whether input is in pukWaC format."""
+    def matches_header(self, strict):
+        return self.fileobj.peek(20).startswith(b"<text id")
+
+
+class PukwacParser(ConllParser):
+    r"""Instances of this class parse the pukWaC format,
+    calling the `handler` for each object that is parsed.
+    """
+    valid_roots = ["corpus"]
+    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?"]
+
+    def __init__(self, in_files, encoding='utf-8'):
+        super(PukwacParser, self).__init__(in_files, encoding)
+
+    def _parse_line(self, line, handler, info={}):
+        if line[0] == "<" and line[-1] == ">":
+            if line == "<s>":
+                self.new_partial(handler.handle_sentence,
+                        Sentence([], self.s_id), info={})
+                self.s_id += 1
+        else:
+            super(PukwacParser, self)._parse_line(line, handler, info)
 
 
 ##############################
@@ -959,7 +999,7 @@ class BinaryIndexParser(AbstractParser):
 
 
 # Instantiate FiletypeInfo singletons
-INFOS = [XMLInfo(), ConllInfo(),
+INFOS = [XMLInfo(), ConllInfo(), PukwacInfo(),
         PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
         MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
 

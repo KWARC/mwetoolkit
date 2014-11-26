@@ -121,7 +121,11 @@ class Word :
 
     def lemma_or_surface(self):
         r"""Return lemma if it is defined; otherwise, return surface."""
-        return self.lemma if self.lemma != WILDCARD else self.surface
+        if self.lemma != WILDCARD:
+            return self.lemma
+        if self.surface != WILDCARD:
+            return self.surface
+        return None
 
 ################################################################################
 

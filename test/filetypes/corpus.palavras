@@ -1,0 +1,998 @@
+Flamengo 	[flamengo] <nat> <*> ADJ M S @PRED>  #1->6
+$, #2->0
+Fluminense 	[Fluminense] <org> <*> PROP M/F S @SUBJ>  #3->6
+e 	[e] <co-subj> KC @CO  #4->6
+Botafogo 	[Botafogo] <cjt> <civ> <*> PROP M/F S @SUBJ>  #5->6
+estão 	[estar] <cjt-head> <fmc> <mv> V PR 3P IND VFIN @FS-STA  #6->0
+fora=de 	[fora=de] <sam-> PRP @<SA  #7->6
+o 	[o] <-sam> <artd> DET M S @>N  #8->9
+Campeonato=Estadual=de=Futebol=do=Rio 	[Campeonato=Estadual=de=Futebol=do=Rio] <tit> PROP M S @P<  #9->7
+de 	[de] <np-close> PRP @N<  #10->9
+1994 	[1994] <card> NUM M/F P @P<  #11->10
+$. #12->0
+</s>
+
+A 	[o] <artd> <*> DET F S @>N  #1->2
+decisão 	[decisão] <act> N F S @SUBJ>  #2->6
+antes 	[antes] ADV @ADVL>  #3->7
+uma 	[um] <arti> DET F S @>N  #4->5
+ameaça 	[ameaça] <sit> <act-s> N F S @SUBJ>  #5->6
+foi 	[ser] <fmc> <aux> V PS 3S IND VFIN @FS-STA  #6->0
+anunciada 	[anunciar] <vH> <mv> V PCP F S @ICL-AUX<  #7->6
+ontem 	[ontem] ADV @<ADVL  #8->7
+em 	[em] PRP @<ADVL  #9->7
+reunião 	[reunião] <occ> N F S @P<  #10->9
+de 	[de] <sam-> <np-close> PRP @N<  #11->10
+a 	[o] <artd> <-sam> DET F S @>N  #12->13
+recém-fundada 	[recém-fundar] <n> <vH> <jh> V PCP F S @P<  #13->11
+Liga=Carioca 	[Liga=Carioca] <hum> <*> PROP F S @<SUBJ  #14->6
+$, #15->0
+entidade 	[entidade] <H> <np-close> N F S @N<PRED  #16->14
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #17->18
+reúne 	[reunir] <vH> <mv> <np-close> V PR 3S IND VFIN @FS-N<  #18->16
+os 	[o] <artd> DET M P @>N  #19->21
+três 	[três] <card> NUM M P @>N  #20->21
+clubes 	[clube] <newlex> N F P @<ACC  #21->18
+$. #22->0
+</s>
+
+A 	[o] <artd> <*> DET F S @>N  #1->2
+competição 	[competição] <occ> <act> N F S @SUBJ>  #2->3
+será 	[ser] <vK> <fmc> <mv> V FUT 3S IND VFIN @FS-STA  #3->0
+como 	[como] <com> <adv-rel> PRP @<SC  #4->3
+um 	[um] <arti> DET M S @>N  #5->6
+Campeonato=Paulista 	[Campeonato=Paulista] <occ> <asarg> <*> PROP M S @P<  #6->4
+sem 	[sem] <np-close> PRP @N<  #7->6
+Corinthians 	[Corinthians] <cjt-head> <org> <*> PROP M/F S @P<  #8->7
+$, #9->0
+Palmeiras 	[Palmeiras] <cjt> <hum> <*> PROP M/F S @P< @<SC  #10->8
+e 	[e] <co-prparg> KC @CO  #11->8
+Santos 	[Santos] <cjt> <hum> <*> PROP M/F S @P< @<SC  #12->8
+$. #13->0
+</s>
+
+A 	[o] <artd> <*> DET F S @>N  #1->2
+Liga 	[liga] <prop> <HH> <cord> <*> N F S @SUBJ>  #2->3
+vai 	[ir] <fmc> <aux> V PR 3S IND VFIN @FS-STA  #3->0
+organizar 	[organizar] <vH> <mv> V INF @ICL-AUX<  #4->3
+um 	[um] <arti> DET M S @>N  #5->6
+campeonato 	[campeonato] <occ> N M S @<ACC  #6->4
+paralelo 	[paralelo] <nh> <np-close> ADJ M S @N<  #7->6
+até 	[até] PRP @<ADVL  #8->4
+maio 	[maio] <cjt-head> N M S @P<  #9->8
+ou 	[ou] <co-prparg> KC @CO  #10->9
+junho 	[junho] <cjt> N M S @P< @<ACC  #11->9
+$, #12->0
+quando 	[quando] <clb> <clb-fs> <ks> <rel> ADV @ADVL>  #13->14
+começa 	[começar] <vH> <mv> <np-close> V PR 3S IND VFIN @FS-<ADVL @FS-N<  #14->4
+a 	[o] <artd> DET F S @>N  #15->16
+Copa=do=Mundo 	[Copa=do=Mundo] <occ> <*> PROP F S @<SUBJ  #16->14
+$. #17->0
+</s>
+
+Convidará 	[convidar] <*> <vH> <fmc> <mv> V FUT 3S IND VFIN @FS-STA  #1->0
+três 	[três] <card> NUM F P @>N  #2->3
+clubes 	[clube] <cjt-head> <newlex> N F P @<ACC  #3->1
+pequenos 	[pequeno] <np-close> ADJ M P @N<  #4->3
+Bonsucesso 	[Bonsucesso] <hum> <heur> <*> <np-long> PROP F S/P @N<  #5->3
+$, #6->0
+Portuguesa 	[Portuguesa] <cjt> <hum> <*> PROP M/F S @<ACC  #7->3
+e 	[e] <co-acc> KC @CO  #8->3
+Canto=do=Rio 	[Canto=do=Rio] <cjt> <tit> <*> PROP M S @<ACC  #9->3
+para 	[para] PRP @<ADVL  #10->1
+participar 	[participar] <vH> <mv> V INF @ICL-P<  #11->10
+$. #12->0
+</s>
+
+Se 	[se] <clb> <clb-fs> <*> KS @SUB  #1->3
+eles 	[eles] PERS M 3P NOM @SUBJ>  #2->3
+aceitarem 	[aceitar] <vH> <mv> V FUT 3P SUBJ VFIN @FS-ADVL>  #3->7
+$, #4->0
+o 	[o] <artd> DET M S @>N  #5->6
+torneio 	[torneio] <am> <talk> <occ> N M S @SUBJ>  #6->7
+terá 	[ter] <fmc> <mv> V FUT 3S IND VFIN @FS-STA  #7->0
+dez 	[dez] <card> NUM F P @>N  #8->9
+rodadas 	[rodada] <event> N F P @<ACC  #9->7
+$. #10->0
+</s>
+
+Hoje 	[hoje] <*> ADV @ADVL>  #1->11
+o 	[o] <artd> DET M S @>N  #2->3
+presidente 	[presidente] <Hprof> N M S @SUBJ>  #3->11
+de 	[de] <sam-> <np-close> PRP @N<  #4->3
+a 	[o] <artd> <-sam> DET F S @>N  #5->6
+Federação=de=Futebol=do=Rio 	[Federação=de=Futebol=do=Rio] <org> <*> PROP F S @P<  #6->4
+$, #7->0
+Eduardo=Viana 	[Eduardo=Viana] <hum> <*> <np-long> PROP M S @APP  #8->3
+$, #9->0
+se 	[se] <refl> PERS F 3S ACC @ACC>  #10->11
+reúne 	[reunir] <vH> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #11->0
+com 	[com] PRP @<PIV  #12->11
+os=demais 	[os=demais] DET M P @>N  #13->14
+clubes 	[clube] <newlex> N F P @P<  #14->12
+de 	[de] <sam-> <np-close> PRP @N<  #15->14
+o 	[o] <artd> <-sam> DET M S @>N  #16->17
+Campeonato=Estadual 	[Campeonato=Estadual] <occ> <*> PROP M S @P<  #17->15
+a 	[o] <artd> DET F S @>N  #18->19
+maioria 	[maioria] <HH> N F S @<SUBJ  #19->11
+de 	[de] <sam-> <np-close> PRP @N<  #20->19
+o 	[o] <artd> <-sam> DET M S @>N  #21->22
+interior 	[interior] <Ltop> N M S @P<  #22->20
+para 	[para] PRP @<ADVL  #23->11
+definir 	[definir] <vH> <mv> V INF @ICL-P<  #24->23
+a 	[o] <artd> DET F S @>N  #25->26
+tabela 	[tabela] <pict> <bar> <sem-r> N F S @<ACC  #26->24
+$. #27->0
+</s>
+
+Podem 	[poder] <*> <fmc> <aux> V PR 3P IND VFIN @FS-STA  #1->0
+ser 	[ser] <aux> V INF @ICL-AUX<  #2->1
+discutidas 	[discutir] <vH> <mv> V PCP F P @ICL-AUX<  #3->2
+punições 	[punição] <act> N F P @<SC  #4->3
+para 	[para] <np-close> PRP @N<  #5->4
+os 	[o] <artd> DET M P @>N  #6->7
+clubes 	[clube] <newlex> N F P @P<  #7->5
+$"  #8->0
+rebeldes 	[rebelde] <*2> <*1> ADJ M/F P @<PRED  #9->3
+$"  #10->0
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #11->12
+decidiram 	[decidir] <vH> <mv> <np-close> V PS/MQP 3P IND VFIN @FS-N<  #12->7
+não 	[não] ADV @<ADVL  #13->12
+participar 	[participar] <vH> <mv> V INF @ICL-<ACC  #14->12
+de 	[de] <sam-> PRP @<PIV  #15->14
+o 	[o] <artd> <-sam> DET M S @>N  #16->17
+campeonato 	[campeonato] <occ> N M S @P<  #17->15
+$. #18->0
+</s>
+
+Viana 	[Viana] <hum> <*> PROP M S @SUBJ>  #1->2
+negou- 	[negar] <hyfen> <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #2->0
+se 	[se] <obj> PERS M 3S ACC @<ACC  #3->2
+ontem 	[ontem] ADV @<ADVL  #4->2
+a 	[a] PRP @<PIV  #5->2
+atender 	[atender] <vH> <mv> V INF @ICL-P<  #6->5
+a 	[o] <artd> DET F S @>N  #7->8
+Folha 	[Folha] <media> <*> PROP F S @<ACC  #8->6
+para 	[para] PRP @<ADVL  #9->6
+falar 	[falar] <vH> <mv> V INF @ICL-P<  #10->9
+sobre 	[sobre] PRP @<PIV  #11->10
+a 	[o] <artd> DET F S @>N  #12->13
+ruptura 	[ruptura] <event> N F S @P<  #13->11
+de 	[de] <sam-> <np-close> PRP @N<  #14->13
+a 	[o] <artd> <-sam> DET F S @>N  #15->16
+Liga 	[liga] <prop> <HH> <cord> <*> N F S @P<  #16->14
+e 	[e] KC @CO  #17->16
+o 	[o] <artd> DET M S @>N  #18->19
+inquérito 	[inquérito] <occ> <activity> N M S @<ACC  #19->10
+de 	[de] <sam-> <np-close> PRP @N<  #20->19
+o 	[o] <artd> <-sam> DET M S @>N  #21->22
+Tribunal=de=Justiça=Desportiva 	[Tribunal=de=Justiça=Desportiva] <tit> PROP M S @P<  #22->20
+sobre 	[sobre] PRP @<ADVL  #23->10
+irregularidades 	[irregularidade] <percep-f> N F P @P<  #24->23
+em 	[em] <sam-> PRP @<ADVL  #25->10
+as 	[o] <artd> <-sam> DET F P @>N  #26->27
+arbitragens 	[arbitragem] <act> N F P @P<  #27->25
+$. #28->0
+</s>
+
+Prometeu 	[prometer] <*> <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #1->0
+dar 	[dar] <mv> V INF @ICL-<ACC  #2->1
+entrevista 	[entrevista] <occ> <sem-s> <talk> N F S @<ACC  #3->2
+hoje 	[hoje] ADV @<ADVL  #4->2
+depois 	[depois] ADV @<ADVL  #5->2
+de 	[de] <sam-> PRP @A<  #6->5
+a 	[o] <artd> <-sam> DET F S @>N  #7->8
+reunião 	[reunião] <occ> N F S @P<  #8->6
+com 	[com] <np-close> PRP @N<  #9->8
+os 	[o] <artd> DET M P @>N  #10->11
+clubes 	[clube] <newlex> N F P @P<  #11->9
+de 	[de] <sam-> <np-close> PRP @N<  #12->11
+o 	[o] <artd> <-sam> DET M S @>N  #13->14
+Estadual 	[estadual] <prop> <n> <nh> <*> ADJ M S @P<  #14->12
+$. #15->0
+</s>
+
+$"  #1->0
+O 	[o] <*1> <artd> <*> DET M S @>N  #2->3
+campeonato 	[campeonato] <occ> N M S @SUBJ>  #3->9
+de 	[de] <sam-> <np-close> PRP @N<  #4->3
+a 	[o] <artd> <-sam> DET F S @>N  #5->6
+Liga 	[liga] <prop> <HH> <cord> <*> N F S @P<  #6->4
+ainda 	[ainda] ADV @>A  #7->8
+não 	[não] ADV @ADVL>  #8->10
+vai 	[ir] <clb-fs> <aux> <quote> V PR 3S IND VFIN @FS-ACC>>  #9->27
+ser 	[ser] <vK> <mv> V INF @ICL-AUX<  #10->9
+o 	[o] <artd> DET M S @>N  #11->12
+ideal 	[ideal] <sem-c> N M S @<SC  #12->10
+$, #13->0
+mas 	[mas] <clb> KC @CO  #14->15
+é 	[ser] <clb-fs> <vK> <mv> <quote> V PR 3S IND VFIN @FS-ACC>>  #15->10
+um 	[um] <arti> DET M S @>N  #16->17
+passo 	[passo] <activity> <Ltop> <Lwater> <cc-r> <event> <f-q> <act-d> N M S @<SC  #17->15
+para 	[para] PRP @<ADVL  #18->15
+melhorar 	[melhorar] <mv> V INF @ICL-P<  #19->18
+o 	[o] <artd> DET M S @>N  #20->21
+futebol 	[futebol] <sport> N M S @<ACC  #21->19
+de 	[de] <sam-> <np-close> PRP @N<  #22->21
+o 	[o] <artd> <-sam> DET M S @>N  #23->24
+Rio 	[Rio] <civ> <*2> <*> PROP M S @P<  #24->22
+$"  #25->0
+$, #26->0
+afirmou 	[afirmar] <vH> <fmc> <mv> <v-quote> V PS 3S IND VFIN @FS-STA  #27->0
+o 	[o] <artd> DET M S @>N  #28->30
+novo 	[novo] <jh> ADJ M S @>N  #29->30
+presidente 	[presidente] <Hprof> N M S @<SUBJ  #30->27
+de 	[de] <sam-> <np-close> PRP @N<  #31->30
+o 	[o] <artd> <-sam> DET M S @>N  #32->33
+Botafogo 	[Botafogo] <civ> <*> PROP M S @P<  #33->31
+$, #34->0
+Carlos=Augusto=Montenegro 	[Carlos=Augusto=Montenegro] <hum> <*> <np-long> PROP M S @APP  #35->30
+$. #36->0
+</s>
+
+O 	[o] <clb> <artd> <*> DET M S @>N  #1->3
+único 	[único] <clb> ADJ M S @>N  #2->3
+clube 	[clube] <newlex> N F S @SUBJ>  #3->12
+de 	[de] <np-close> PRP @N<  #4->3
+grande 	[grande] ADJ F S @>N  #5->6
+torcida 	[torcida] <cc-light> <cord> N F S @P<  #6->4
+a 	[a] PRP @ADVL>  #7->12
+permanecer 	[permanecer] <vK> <mv> V INF @ICL-P<  #8->7
+em 	[em] <sam-> PRP @<SA  #9->8
+a 	[o] <artd> <-sam> DET F S @>N  #10->11
+federação 	[federação] <inst> N F S @P<  #11->9
+é 	[ser] <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #12->0
+o 	[o] <artd> DET M S @>N  #13->14
+Vasco=da=Gama 	[Vasco=da=Gama] <hum> <*> PROP M S @<SC  #14->12
+$. #15->0
+</s>
+
+Seu 	[seu] <*> <poss 3S> DET M S @>N  #1->2
+principal 	[principal] <Hprof> <ac-cat> N M S @SUBJ>  #2->9
+dirigente 	[dirigente] <jh> <np-close> ADJ M S @N<  #3->2
+de 	[de] <np-close> PRP @N<  #4->2
+futebol 	[futebol] <sport> N M S @P<  #5->4
+$, #6->0
+Eurico=Miranda 	[Eurico=Miranda] <hum> <*> <np-close> PROP M S @APP  #7->5
+$, #8->0
+é 	[ser] <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #9->0
+aliado 	[aliado] <H> N M S @<SC  #10->9
+de 	[de] <np-close> PRP @N<  #11->10
+Eduardo=Viana 	[Eduardo=Viana] <hum> <*> PROP M S @P<  #12->11
+$, #13->0
+presidente 	[presidente] <Hprof> <np-close> N M/F S @N<PRED  #14->12
+de 	[de] <sam-> <np-close> PRP @N<  #15->14
+a 	[o] <artd> <-sam> DET F S @>N  #16->17
+federação 	[federação] <inst> N F S @P<  #17->15
+$. #18->0
+$( #19->0
+</s>
+
+Mm 	[mm] <*> N M S/P @NPHR  #1->0
+$) #2->0
+</s>
+
+Uma 	[um] <arti> <*> DET F S @>N  #1->2
+emenda 	[emenda] <sem-r> N F S @PRED>  #2->20
+a 	[a] <sam-> <np-close> PRP @N<  #3->2
+o 	[o] <artd> <-sam> DET M S @>N  #4->5
+abaixo-assinado 	[abaixo-assinado] <sem-r> N M S @P<  #5->3
+de 	[de] <np-close> PRP @N<  #6->5
+solidariedade 	[solidariedade] <am> N F S @P<  #7->6
+a 	[a] <sam-> PRP @ADVL>  #8->20
+o 	[o] <artd> <-sam> DET M S @>N  #9->10
+ex-vice-presidente 	[ex-vice-presidente] <Htit> N M S @P<  #10->8
+de 	[de] <sam-> <np-close> PRP @N<  #11->10
+a 	[o] <artd> <-sam> DET F S @>N  #12->13
+Comissão=de=Arbitragem=da=Federação=de=Futebol 	[Comissão=de=Arbitragem=da=Federação=de=Futebol] <tit> PROP M S @P<  #13->11
+de 	[de] <sam-> <np-close> PRP @N<  #14->13
+o 	[o] <artd> <-sam> DET M S @>N  #15->16
+Rio 	[Rio] <civ> <*> PROP M S @P<  #16->14
+$, #17->0
+Wagner=Canazaro 	[Wagner=Canazaro] <hum> <*> <np-close> PROP M S @APP  #18->16
+$, #19->0
+retirou 	[retirar] <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #20->0
+ontem 	[ontem] ADV @<ADVL  #21->20
+três 	[três] <card> NUM F P @>N  #22->23
+assinaturas 	[assinatura] <ac-sign> <ac> <act> N F P @<ACC  #23->20
+de 	[de] <np-close> PRP @N<  #24->23
+juízes 	[juíz] <Hprof> N M P @P<  #25->24
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #26->28
+não 	[não] ADV @ADVL>  #27->28
+estiveram 	[estar] <mv> <np-close> V PS/MQP 3P IND VFIN @FS-N<  #28->25
+em 	[em] <sam-> PRP @<SA  #29->28
+a 	[o] <artd> <-sam> DET F S @>N  #30->31
+reunião 	[reunião] <occ> N F S @P<  #31->29
+de 	[de] <np-close> PRP @N<  #32->31
+árbitros 	[árbitro] <Hprof> N M P @P<  #33->32
+de 	[de] <sam-> <np-close> PRP @N<  #34->33
+o 	[o] <artd> <-sam> DET M S @>N  #35->36
+dia 	[dia] <dur> <per> <unit> <temp> N M S @P<  #36->34
+3 	[3] <card> <np-close> NUM M/F P @N<  #37->36
+de 	[de] <np-close> PRP @N<  #38->36
+dezembro 	[dezembro] N M S @P<  #39->38
+$, #40->0
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #41->42
+deu 	[dar] <mv> <np-close> V PS 3S IND VFIN @FS-N<  #42->39
+origem 	[origem] <f-h> <Labs> N F S @<ACC  #43->42
+a 	[a] <sam-> PRP @<PIV  #44->42
+o 	[o] <artd> <-sam> DET M S @>N  #45->46
+escândalo 	[escândalo] <sit> N M S @P<  #46->44
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #47->48
+abala 	[abalar] <mv> <np-close> V PR 3S IND VFIN @FS-N<  #48->46
+o 	[o] <artd> DET M S @>N  #49->50
+futebol 	[futebol] <sport> N M S @<ACC  #50->48
+fluminense 	[fluminense] <jh> <nat> <np-close> ADJ M S @N<  #51->50
+$. #52->0
+</s>
+
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M S @SUBJ>  #1->2
+era 	[ser] <vK> <fmc> <mv> V IMPF 3S IND VFIN @FS-STA  #2->0
+o 	[o] <artd> DET M S @>N  #3->4
+dirigente 	[dirigente] <Hattr> N M S @<SC  #4->2
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #5->6
+defendia 	[defender] <vH> <mv> <np-close> V IMPF 3S IND VFIN @FS-N<  #6->4
+entre 	[entre] PRP @<ADVL  #7->6
+os 	[o] <artd> DET M P @>N  #8->9
+juízes 	[juíz] <Hprof> N M P @P<  #9->7
+os 	[o] <artd> DET M P @>N  #10->11
+interesses 	[interesse] <am> N M P @<ACC  #11->6
+de 	[de] <sam-> PRP @<PIV  #12->6
+o 	[o] <artd> <-sam> DET M S @>N  #13->14
+presidente 	[presidente] <Hprof> N M S @P<  #14->12
+de 	[de] <sam-> <np-close> PRP @N<  #15->14
+a 	[o] <artd> <-sam> DET F S @>N  #16->17
+federação 	[federação] <inst> N F S @P<  #17->15
+$, #18->0
+Eduardo=Viana 	[Eduardo=Viana] <hum> <*> <np-close> PROP M S @APP  #19->17
+$, #20->0
+o 	[o] <artd> DET M S @>N  #21->23
+$"  #22->0
+Caixa=D'Agua 	[Caixa=D'Agua] <org> <*> <*1> <*2> <np-close> PROP M S @APP  #23->19
+$"  #24->0
+$. #25->0
+</s>
+
+A 	[o] <artd> <*> DET F S @>N  #1->2
+Folha 	[Folha] <media> <*> PROP F S @SUBJ>  #2->3
+revelou 	[revelar] <fmc> <mv> V PS 3S IND VFIN @FS-STA  #3->0
+ontem 	[ontem] ADV @<ADVL  #4->3
+que 	[que] <clb> <clb-fs> KS @SUB  #5->0
+pelo=menos 	[pelo=menos] <quant> ADV @>N  #6->7
+três 	[três] <card> NUM M/F P @SUBJ>  #7->31
+de 	[de] <sam-> <np-close> PRP @N<  #8->7
+os 	[o] <artd> <-sam> DET M P @>N  #9->11
+57 	[57] <card> NUM M P @>N  #10->11
+juízes 	[juíz] <Hprof> N M P @P<  #11->8
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #12->13
+assinaram 	[assinar] <vH> <mv> <np-close> V PS/MQP 3P IND VFIN @FS-N<  #13->11
+o 	[o] <artd> DET M S @>N  #14->15
+documento 	[documento] <cjt-head> <sem-r> N M S @<ACC  #15->13
+Jorge=Emiliano 	[Jorge=Emiliano] <tit> <*> <np-close> PROP M S @N<  #16->15
+$, #17->0
+o 	[o] <artd> DET M S @>N  #18->20
+$"  #19->0
+Margarida 	[Margarida] <cjt> <tit> <*1> <*2> <*> PROP F S @<ACC  #20->15
+$"  #21->0
+$, #22->0
+Válter=Senra 	[Válter=Senra] <hum> <*> <heur> <np-close> PROP F S @APP  #23->20
+$, #24->0
+o 	[o] <artd> DET M S @>N  #25->26
+Bianca 	[Bianca] <cjt> <hum> <newlex> <*> PROP F S @<ACC  #26->15
+$, #27->0
+e 	[e] <clb> KC @CO  #28->31
+Daniel=Pomeroy 	[Daniel=Pomeroy] <cjt> <hum> <*> PROP M S @<ACC  #29->15
+não 	[não] ADV @ADVL>  #30->31
+estavam 	[estar] <mv> V IMPF 3P IND VFIN @FS-<ACC  #31->3
+em 	[em] <sam-> PRP @<SA  #32->31
+a 	[o] <artd> <-sam> DET F S @>N  #33->34
+reunião 	[reunião] <occ> N F S @P<  #34->32
+$. #35->0
+</s>
+
+$"  #1->0
+O 	[o] <*1> <artd> <*> DET M S @>N  #2->3
+importante 	[importante] <n> <jh> ADJ M S @SUBJ>  #3->4
+é 	[ser] <clb-fs> <vK> <mv> <quote> V PR 3S IND VFIN @FS-ACC>>  #4->14
+a 	[o] <artd> DET F S @>N  #5->6
+solidariedade 	[solidariedade] <am> N F S @<SC  #6->4
+$, #7->0
+não 	[não] ADV @<ADVL  #8->4
+se 	[se] <clb> <clb-fs> KS @SUB  #9->10
+estavam 	[estar] <mv> V IMPF 3P IND VFIN @FS-<ADVL  #10->4
+lá 	[lá] <*2> ADV @<SA  #11->10
+$"  #12->0
+$, #13->0
+afirmou 	[afirmar] <vH> <fmc> <mv> <v-quote> V PS 3S IND VFIN @FS-STA  #14->0
+ontem 	[ontem] ADV @<ADVL  #15->14
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @<SUBJ  #16->14
+$. #17->0
+</s>
+
+$"  #1->0
+Se 	[se] <clb> <clb-fs> <*1> <*> KS @SUB  #2->5
+minha 	[meu] <poss 1S> DET F S @>N  #3->4
+mãe 	[mãe] <Hfam> N F S @SUBJ>  #4->5
+assinasse 	[assinar] <vH> <mv> V IMPF 3S SUBJ VFIN @FS-ADVL>  #5->7
+$, #6->0
+valeria 	[valer] <fmc> <mv> V COND 3S VFIN @FS-STA  #7->0
+$. #8->0
+$"  #9->0
+</s>
+
+Em 	[em] <sam-> <*> PRP @ADVL>  #1->33
+o 	[o] <artd> <-sam> DET M S @>N  #2->4
+primeiro 	[primeiro] <NUM-ord> ADJ M S @>N  #3->4
+dia 	[dia] <dur> <per> <unit> <temp> N M S @P<  #4->1
+de 	[de] <np-close> PRP @N<  #5->4
+depoimentos 	[depoimento] <talk> <sem-s> N M P @P<  #6->5
+em 	[em] <sam-> <np-close> PRP @N<  #7->6
+o 	[o] <artd> <-sam> DET M S @>N  #8->9
+inquérito 	[inquérito] <occ> <activity> N M S @P<  #9->7
+de 	[de] <sam-> <np-close> PRP @N<  #10->9
+o 	[o] <artd> <-sam> DET M S @>N  #11->12
+Tribunal=de=Justiça=Desportiva 	[Tribunal=de=Justiça=Desportiva] <tit> PROP M S @P<  #12->10
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #13->14
+apura 	[apurar] <mv> <np-close> V PR 3S IND VFIN @FS-N<  #14->12
+a 	[o] <artd> DET F S @>N  #15->16
+denúncia 	[denúncia] <act> N F S @<ACC  #16->14
+de 	[de] <np-close> PRP @N<  #17->16
+$"  #18->0
+armação 	[armação] <*2> <act> <*1> N F S @P<  #19->17
+$"  #20->0
+de 	[de] <np-close> PRP @N<  #21->19
+resultados 	[resultado] <ac> N M P @P<  #22->21
+em 	[em] <sam-> PRP @<ADVL  #23->14
+o 	[o] <artd> <-sam> DET M S @>N  #24->25
+futebol 	[futebol] <sport> N M S @P<  #25->23
+de 	[de] <sam-> <np-close> PRP @N<  #26->25
+o 	[o] <artd> <-sam> DET M S @>N  #27->28
+Rio 	[Rio] <civ> <*> PROP M S @P<  #28->26
+$, #29->0
+o 	[o] <artd> DET M S @>N  #30->31
+juiz 	[juiz] <Hprof> N M S @SUBJ>  #31->33
+Cláudio=Cerdeira 	[Cláudio=Cerdeira] <hum> <*> <np-close> PROP M S @N<  #32->31
+reafirmou 	[reafirmar] <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #33->0
+que 	[que] <clb> <clb-fs> KS @SUB  #34->36
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @SUBJ>  #35->36
+orientou 	[orientar] <vH> <mv> V PS 3S IND VFIN @FS-<ACC  #36->33
+os 	[o] <artd> DET M P @>N  #37->38
+juízes 	[juíz] <Hprof> N M P @<ACC  #38->36
+para 	[para] PRP @<PIV  #39->36
+$"  #40->0
+arrumarem 	[arrumar] <*2> <vH> <*1> <mv> V INF 3P @ICL-P<  #41->39
+$"  #42->0
+resultados 	[resultado] <ac> N M P @<ACC  #43->41
+de=acordo 	[de=acordo] <pp> ADV @<ADVL  #44->41
+com 	[com] PRP @A<  #45->44
+o 	[o] <artd> DET M S @>N  #46->47
+interesse 	[interesse] <am> N M S @P<  #47->45
+político 	[político] <np-close> ADJ M S @N<  #48->47
+de 	[de] <sam-> <np-close> PRP @N<  #49->47
+a 	[o] <artd> <-sam> DET F S @>N  #50->51
+federação 	[federação] <inst> N F S @P<  #51->49
+$. #52->0
+</s>
+
+Em 	[em] <sam-> <*> PRP @ADVL>  #1->15
+o 	[o] <artd> <-sam> DET M S @>N  #2->4
+seu 	[seu] <si> <poss 3S> DET M S @>N  #3->4
+depoimento 	[depoimento] <talk> <sem-s> N M S @P<  #4->1
+previsto 	[prever] <vH> <jh> <np-close> V PCP M S @N<  #5->4
+para 	[para] <np-long> PRP @N<  #6->4
+o 	[o] <artd> DET M S @>N  #7->8
+começo 	[começo] <temp> N M S @P<  #8->6
+de 	[de] <sam-> <np-close> PRP @N<  #9->8
+a 	[o] <artd> <-sam> DET F S @>N  #10->11
+noite 	[noite] <temp> <per> N F S @P<  #11->9
+$, #12->0
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @SUBJ>  #13->14
+iria 	[ir] <fmc> <aux> V COND 3S VFIN @FS-STA  #14->0
+apresentar 	[apresentar] <vH> <mv> V INF @ICL-AUX<  #15->14
+o 	[o] <artd> DET M S @>N  #16->17
+abaixo-assinado 	[abaixo-assinado] <sem-r> N M S @<ACC  #17->15
+de 	[de] <sam-> <np-close> PRP @N<  #18->17
+os 	[o] <artd> <-sam> DET M P @>N  #19->20
+juízes 	[juíz] <Hprof> N M P @P<  #20->18
+agora 	[agora] <kc> ADV @<ADVL  #21->15
+$, #22->0
+sem 	[sem] <np-close> PRP @N<PRED @<ADVL  #23->15
+a 	[o] <artd> DET F S @>N  #24->25
+fraude 	[fraude] <act-trick> N F S @P<  #25->23
+com 	[com] PRP @<PRED @<ADVL  #26->15
+assinaturas 	[assinatura] <ac-sign> <ac> <act> N F P @P<  #27->26
+de 	[de] <np-close> PRP @N<  #28->27
+três 	[três] <card> NUM M/F P @>N  #29->30
+ausentes 	[ausente] <n> <jh> ADJ M/F P @P<  #30->28
+$. #31->0
+</s>
+
+$"  #1->0
+Talvez 	[talvez] <*1> <*> ADV @ADVL>  #2->4
+nem 	[nem] ADV @ADVL>  #3->4
+entregue 	[entregar] <nosubj> <cjt-head> <vH> <fmc> <mv> V PR 1/3S SUBJ VFIN @FS-STA  #4->0
+a 	[o] <artd> DET F S @>N  #5->6
+carta 	[carta] <sem-r> N F S @<ACC  #6->4
+a 	[a] <sam-> <np-close> PRP @N<  #7->6
+a 	[o] <artd> <-sam> DET F S @>N  #8->9
+parte 	[parte] <amount> <L> <HH> <sem-l> <ac> <part> N F S @P<  #9->7
+esclarecendo 	[esclarecer] <mv> V GER @ICL-<ADVL  #10->4
+que 	[que] <clb> <interr> SPEC M S @NPHR  #11->16
+os 	[o] <artd> DET M P @>N  #12->14
+três 	[três] <card> NUM M P @>N  #13->14
+juízes 	[juíz] <Hprof> N M P @SUBJ>  #14->16
+não 	[não] ADV @ADVL>  #15->16
+estavam 	[estar] <cjt> <mv> V IMPF 3P IND VFIN @FS-STA  #16->4
+lá 	[lá] ADV @<SA  #17->16
+$. #18->0
+$"  #19->0
+</s>
+
+O 	[o] <artd> <*> DET M S @>N  #1->2
+abaixo-assinado 	[abaixo-assinado] <sem-r> N M S @SUBJ>  #2->3
+é 	[ser] <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #3->0
+o 	[o] <artd> DET M S @>N  #4->6
+principal 	[principal] <SUP> ADJ M S @>N  #5->6
+instrumento 	[instrumento] <tool> <tool-mus> N M S @<SC  #6->3
+de 	[de] <sam-> <np-close> PRP @N<  #7->6
+a 	[o] <artd> <-sam> DET F S @>N  #8->9
+defesa 	[defesa] <anzo> <HH> <act-s> <act> N F S @P<  #9->7
+de 	[de] <np-close> PRP @N<  #10->9
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @P<  #11->10
+$. #12->0
+</s>
+
+Os 	[o] <artd> <*> DET M P @>N  #1->2
+juízes 	[juíz] <Hprof> N M P @SUBJ>  #2->6
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #3->5
+o 	[ele] PERS M 3S ACC @ACC>  #4->5
+assinam 	[assinar] <vH> <mv> <np-close> V PR 3P IND VFIN @FS-N<  #5->2
+afirmam 	[afirmar] <vH> <fmc> <mv> V PR 3P IND VFIN @FS-STA  #6->0
+que 	[que] <clb> <clb-fs> KS @SUB  #7->8
+houve 	[haver] <mv> V PS 3S IND VFIN @FS-<ACC  #8->6
+$"  #9->0
+interpretação 	[interpretação] <act> <sem-c> <*1> N F S @<ACC  #10->8
+errônea 	[errôneo] <nh> <*2> <np-close> ADJ F S @N<  #11->10
+$"  #12->0
+de 	[de] <sam-> <np-close> PRP @N<  #13->10
+os 	[o] <artd> <-sam> DET M P @>N  #14->15
+árbitros 	[árbitro] <Hprof> N M P @P<  #15->13
+Cerdeira 	[cerdeira] <cjt-head> <prop> <Btree> <*> <np-close> N F S @N<  #16->15
+e 	[e] <co-postnom> KC @CO  #17->16
+Cláudio=Garcia 	[Cláudio=Garcia] <cjt> <hum> <*> <np-close> PROP M S @N< @<ACC  #18->16
+sobre 	[sobre] PRP @<PIV @<ADVL  #19->8
+o 	[o] <dem> DET M S @P<  #20->19
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @ACC>  #21->23
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @SUBJ>  #22->23
+falou 	[falar] <vH> <mv> <np-close> V PS 3S IND VFIN @FS-N<  #23->20
+$. #24->0
+</s>
+
+Em 	[em] <sam-> <*> PRP @ADVL>  #1->8
+a 	[o] <artd> <-sam> DET F S @>N  #2->3
+reunião 	[reunião] <occ> N F S @P<  #3->1
+de 	[de] <sam-> <np-close> PRP @N<  #4->3
+o 	[o] <artd> <-sam> DET M S @>N  #5->6
+dia 	[dia] <dur> <per> <unit> <temp> N M S @P<  #6->4
+3 	[3] <card> <np-close> NUM M/F P @N<  #7->6
+havia 	[haver] <fmc> <mv> V IMPF 1/3S IND VFIN @FS-STA  #8->0
+cerca=de 	[cerca=de] ADV @>A  #9->10
+70 	[70] <card> NUM M P @>N  #10->11
+juízes 	[juíz] <Hprof> N M P @<ACC  #11->8
+$. #12->0
+</s>
+
+Foi 	[ser] <*> <vK> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #1->0
+o 	[o] <artd> DET M S @>N  #2->3
+presidente 	[presidente] <Hprof> N M S @<SC  #3->1
+de 	[de] <sam-> <np-close> PRP @N<  #4->3
+a 	[o] <artd> <-sam> DET F S @>N  #5->6
+Federação=de=Futebol=do=Rio 	[Federação=de=Futebol=do=Rio] <org> <*> PROP F S @P<  #6->4
+$, #7->0
+Eduardo=Viana 	[Eduardo=Viana] <hum> <*> <np-long> PROP M S @APP  #8->3
+$, #9->0
+quem 	[quem] <clb> <clb-fs> <rel> SPEC M/F S @SUBJ>  #10->11
+sugeriu 	[sugerir] <vH> <mv> <np-close> V PS 3S IND VFIN @FS-N<  #11->8
+o 	[o] <artd> DET M S @>N  #12->13
+abaixo-assinado 	[abaixo-assinado] <sem-r> N M S @<ACC  #13->11
+de 	[de] <np-close> PRP @N<  #14->13
+juízes 	[juíz] <Hprof> N M P @P<  #15->14
+em 	[em] PRP @<ADVL  #16->11
+defesa 	[defesa] <Hprof> N M S @P<  #17->16
+de 	[de] <sam-> <np-close> PRP @N<  #18->17
+o 	[o] <artd> <-sam> DET M S @>N  #19->20
+ex-vice-presidente 	[ex-vice-presidente] <Htit> N M S @P<  #20->18
+de 	[de] <sam-> <np-close> PRP @N<  #21->20
+a 	[o] <artd> <-sam> DET F S @>N  #22->23
+Comissão=de=Arbitragem 	[Comissão=de=Arbitragem] <org> <*> PROP F S @P<  #23->21
+$, #24->0
+Wagner=Canazaro 	[Wagner=Canazaro] <hum> <*> <np-long> PROP M S @APP  #25->20
+$. #26->0
+</s>
+
+A 	[o] <artd> <*> DET F S @>N  #1->2
+afirmação 	[afirmação] <act-s> N F S @SUBJ>  #2->3
+é 	[ser] <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #3->0
+de 	[de] PRP @<SC  #4->3
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @P<  #5->4
+$, #6->0
+em 	[em] PRP @<ADVL  #7->3
+entrevista 	[entrevista] <occ> <sem-s> <talk> N F S @P<  #8->7
+a 	[a] <sam-> PRP @<ADVL  #9->3
+a 	[o] <artd> <-sam> DET F S @>N  #10->11
+Folha 	[Folha] <media> <*> PROP F S @P<  #11->9
+$. #12->0
+</s>
+
+Ele 	[ele] <*> PERS M 3S NOM @SUBJ>  #1->2
+disse 	[dizer] <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #2->0
+não 	[não] ADV @<ADVL  #3->2
+ser 	[ser] <vK> <mv> V INF @ICL-<ACC  #4->2
+$"  #5->0
+burro 	[burro] <*2> <Azo> <*1> N M S @<SC  #6->4
+$"  #7->0
+para 	[para] PRP @<ADVL  #8->4
+falar 	[falar] <vH> <mv> V INF @ICL-P<  #9->8
+em 	[em] PRP @<PIV  #10->9
+$"  #11->0
+armação 	[armação] <*2> <act> <*1> N F S @P<  #12->10
+$"  #13->0
+de 	[de] <np-close> PRP @N<  #14->12
+resultados 	[resultado] <ac> N M P @P<  #15->14
+diante=de 	[diante=de] <np-close> PRP @N< @<ADVL  #16->9
+70 	[70] <card> NUM M P @>N  #17->18
+juízes 	[juíz] <Hprof> N M P @P<  #18->16
+$. #19->0
+</s>
+
+$"  #1->0
+É 	[ser] <*> <*1> <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #2->0
+uma 	[um] <arti> DET F S @>N  #3->4
+ofensa 	[ofensa] <act-d> N F S @<SC  #4->2
+achar 	[achar] <vH> <mv> V INF @ICL-<SUBJ  #5->2
+que 	[que] <clb> <clb-fs> KS @SUB  #6->8
+eu 	[eu] PERS M/F 1S NOM @SUBJ>  #7->8
+poderia 	[poder] <aux> V COND 1S VFIN @FS-<ACC  #8->5
+fazer 	[fazer] <mv> V INF @ICL-AUX<  #9->8
+uma 	[um] <arti> DET F S @>N  #10->11
+coisa 	[coisa] <ac> <cc> N F S @<ACC  #11->9
+de 	[de] <sam-> <np-close> PRP @N<  #12->11
+essas 	[esse] <dem> <-sam> DET F P @P<  #13->12
+$. #14->0
+</s>
+
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M S @SUBJ>  #1->5
+$, #2->0
+39 	[39] <card> NUM M/F P @>N  #3->6
+$, #4->0
+é 	[ser] <vK> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #5->0
+dono 	[dono] <H> N M S @<SC  #6->5
+de 	[de] <np-close> PRP @N<  #7->6
+uma 	[um] <arti> DET F S @>N  #8->9
+indústria 	[indústria] <am> <HH> N F S @P<  #9->7
+metalúrgica 	[metalúrgico] <nh> <np-close> ADJ F S @N<  #10->9
+de 	[de] <np-close> PRP @N<  #11->9
+60 	[60] <card> NUM M P @>N  #12->13
+funcionários 	[funcionário] <Hprof> N M P @P<  #13->11
+$. #14->0
+</s>
+
+Foi 	[ser] <*> <fmc> <aux> V PS 3S IND VFIN @FS-STA  #1->0
+afastado 	[afastar] <vH> <mv> V PCP M S @ICL-AUX<  #2->1
+de 	[de] <sam-> PRP @<ADVL  #3->2
+a 	[o] <artd> <-sam> DET F S @>N  #4->5
+Comissão=de=Arbitragem 	[Comissão=de=Arbitragem] <org> <*> PROP F S @P<  #5->3
+$. #6->0
+</s>
+
+Folha 	[folha] <anbo> <sem-r> <tool-cut> <*> N F S @NPHR  #1->0
+$TRAVESSAO  #2->0
+Por=que 	[por=que] <clb> <interr> <*> ADV @ADVL>  #3->6
+o 	[o] <artd> DET M S @>N  #4->5
+senhor 	[senhor] <Htit> N M S @SUBJ>  #5->6
+incluiu 	[incluir] <fmc> <mv> V PS 3S IND VFIN @FS-QUE  #6->1
+em 	[em] <sam-> PRP @<ADVL  #7->6
+o 	[o] <artd> <-sam> DET M S @>N  #8->9
+abaixo-assinado 	[abaixo-assinado] <sem-r> N M S @P<  #9->7
+assinaturas 	[assinatura] <ac-sign> <ac> <act> N F P @<ACC  #10->6
+de 	[de] <np-close> PRP @N<  #11->10
+juízes 	[juíz] <Hprof> N M P @P<  #12->11
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #13->15
+não 	[não] ADV @ADVL>  #14->15
+estiveram 	[estar] <mv> <np-close> V PS/MQP 3P IND VFIN @FS-N<  #15->12
+em 	[em] <sam-> PRP @<SA  #16->15
+a 	[o] <artd> <-sam> DET F S @>N  #17->18
+reunião 	[reunião] <occ> N F S @P<  #18->16
+de 	[de] <sam-> <np-close> PRP @N<  #19->18
+o 	[o] <artd> <-sam> DET M S @>N  #20->21
+dia 	[dia] <dur> <per> <unit> <temp> N M S @P<  #21->19
+3 	[3] <card> <np-close> NUM M/F P @N<  #22->21
+$? #23->0
+</s>
+
+Wagner=Canazaro 	[Wagner=Canazaro] <hum> <*> PROP M S @NPHR  #1->0
+$TRAVESSAO  #2->0
+Porque 	[porque] <clb> <clb-fs> <*> KS @SUB  #3->5
+isso 	[isso] <dem> SPEC M S @SUBJ>  #4->5
+é 	[ser] <vK> <mv> V PR 3S IND VFIN @FS-ADVL  #5->1
+secundário 	[secundário] <nh> ADJ M S @<SC  #6->5
+$. #7->0
+</s>
+
+Eles 	[eles] <*> PERS M 3P NOM @SUBJ>  #1->2
+ouviram 	[ouvir] <vH> <fmc> <mv> V PS/MQP 3P IND VFIN @FS-STA  #2->0
+por 	[por] PRP @<ADVL  #3->2
+colegas 	[colega] <Hfam> N M/F P @P<  #4->3
+que 	[que] <clb> <clb-fs> KS @SUB  #5->8
+eu 	[eu] PERS M/F 1S NOM @SUBJ>  #6->8
+não 	[não] ADV @ADVL>  #7->8
+falei 	[falar] <vH> <mv> V PS 1S IND VFIN @FS-<ACC  #8->2
+nada=do=que 	[nada=do=que] <clb> <clb-fs> <rel> SPEC M S @ACC>  #9->11
+estão 	[estar] <aux> V PR 3P IND VFIN @FS-<ACC  #10->8
+dizendo 	[dizer] <vH> <mv> V GER @ICL-AUX<  #11->10
+$. #12->0
+</s>
+
+Folha 	[folha] <anbo> <sem-r> <tool-cut> <*> N F S @NPHR  #1->0
+$TRAVESSAO  #2->0
+Como 	[como] <clb> <clb-fs> <rel> <ks> <*> ADV @ADVL>  #3->6
+eles 	[eles] PERS M 3P NOM @SUBJ>  #4->5
+poderiam 	[poder] <aux> <np-close> V COND 3P VFIN @FS-N<  #5->1
+falar 	[falar] <vH> <mv> V INF @ICL-AUX<  #6->5
+em 	[em] PRP @<PIV  #7->6
+$"  #8->0
+interpretação 	[interpretação] <act> <sem-c> <*1> N F S @P<  #9->7
+errônea 	[errôneo] <nh> <*2> <np-close> ADJ F S @N<  #10->9
+$"  #11->0
+se 	[se] <clb> <clb-fs> KS @SUB  #12->14
+não 	[não] ADV @ADVL>  #13->14
+ouviram 	[ouvir] <vH> <mv> V PS/MQP 3P IND VFIN @FS-<ACC @FS-<ADVL  #14->6
+suas 	[seu] <si> <poss 3S> DET F P @>N  #15->16
+palavras 	[palavra] <act-s> <ac-cat> N F P @<ACC  #16->14
+$? #17->0
+</s>
+
+Canazaro 	[Canazaro] <cjt-head> <hum> <heur> <*> PROP M/F S @NPHR  #1->0
+$TRAVESSAO  #2->0
+O 	[o] <cjt> <dem> <*> DET M S @NPHR  #3->1
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @ACC>  #4->6
+vale 	[vale] <cc-r> <Ltop> N M S @SUBJ>  #5->6
+é 	[ser] <vK> <mv> <np-close> V PR 3S IND VFIN @FS-N<  #6->1
+a 	[o] <artd> DET F S @>N  #7->8
+solidariedade 	[solidariedade] <am> N F S @<SC  #8->6
+$. #9->0
+</s>
+
+Folha 	[Folha] <media> <*> PROP F S @SUBJ> 	[Folha] <newlex> <*> PROP F S @SUBJ>  #1->3
+$TRAVESSAO  #2->0
+Há 	[haver] <*> <fmc> <mv> V PR 3S IND VFIN @FS-QUE  #3->0
+corrupção 	[corrupção] <am> N F S @<ACC  #4->3
+em 	[em] <sam-> PRP @<ADVL  #5->3
+a 	[o] <artd> <-sam> DET F S @>N  #6->7
+arbitragem 	[arbitragem] <act> N F S @P<  #7->5
+de 	[de] <sam-> <np-close> PRP @N<  #8->7
+o 	[o] <artd> <-sam> DET M S @>N  #9->10
+Rio 	[Rio] <civ> <*> PROP M S @P<  #10->8
+$? #11->0
+</s>
+
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M S @SUBJ>  #1->4
+$TRAVESSAO  #2->0
+Eu 	[eu] <*> PERS M 1S NOM @SUBJ>  #3->4
+fico 	[ficar] <vK> <fmc> <mv> V PR 1S IND VFIN @FS-STA  #4->0
+furioso 	[furioso] <jh> ADJ M S @<SC  #5->4
+com 	[com] PRP @<ADVL  #6->4
+essa 	[esse] <dem> DET F S @>N  #7->8
+história 	[história] <domain> <sem-r> <per> N F S @P<  #8->6
+$. #9->0
+</s>
+
+Eu 	[eu] <*> PERS M/F 1S NOM @SUBJ>  #1->2
+posso 	[poder] <fmc> <aux> V PR 1S IND VFIN @FS-STA  #2->0
+garantir 	[garantir] <vH> <mv> V INF @ICL-AUX<  #3->2
+a 	[a] PRP @<ADVL  #4->3
+você 	[você] PERS M/F 3S NOM/PIV @P<  #5->4
+que 	[que] <clb> <clb-fs> KS @SUB  #6->8
+nunca 	[nunca] ADV @ADVL>  #7->8
+soube 	[saber] <mv> V PS 1/3S IND VFIN @FS-<ACC  #8->3
+de 	[de] PRP @<PIV  #9->8
+nada 	[nada] <quant> SPEC M S @P<  #10->9
+sobre 	[sobre] PRP @<ADVL  #11->8
+isso 	[isso] <dem> SPEC M S @P<  #12->11
+$. #13->0
+$( #14->0
+</s>
+
+Mm 	[mm] <*> N M S/P @NPHR  #1->0
+$) #2->0
+</s>
+
+O 	[o] <artd> <*> DET M S @>N  #1->2
+relator 	[relator] <H> N M S @SUBJ>  #2->22
+de 	[de] <sam-> <np-close> PRP @N<  #3->2
+o 	[o] <artd> <-sam> DET M S @>N  #4->5
+inquérito 	[inquérito] <occ> <activity> N M S @P<  #5->3
+de 	[de] <sam-> <np-close> PRP @N<  #6->5
+o 	[o] <artd> <-sam> DET M S @>N  #7->8
+Tribunal=de=Justiça=Desportiva 	[Tribunal=de=Justiça=Desportiva] <tit> PROP M S @P<  #8->6
+$( #9->0
+TJD 	[TJD] <org> <*> <np-close> PROP M/F S @N<PRED  #10->8
+$) #11->0
+sobre 	[sobre] PRP @ADVL>  #12->22
+o 	[o] <artd> DET M S @>N  #13->14
+escândalo 	[escândalo] <sit> N M S @P<  #14->12
+de 	[de] <sam-> <np-close> PRP @N<  #15->14
+a 	[o] <artd> <-sam> DET F S @>N  #16->17
+arbitragem 	[arbitragem] <act> N F S @P<  #17->15
+$, #18->0
+João=José=Galindo 	[João=José=Galindo] <hum> <*> <np-close> PROP M S @APP  #19->17
+$, #20->0
+não 	[não] ADV @ADVL>  #21->22
+acredita 	[acreditar] <vH> <fmc> <mv> V PR 3S IND VFIN @FS-STA  #22->0
+que 	[que] <clb> <clb-fs> KS @SUB  #23->28
+em 	[em] <sam-> PRP @ADVL>  #24->29
+o 	[o] <artd> <-sam> DET M S @>N  #25->27
+seu 	[seu] <si> <poss 3S> DET M S @>N  #26->27
+relatório 	[relatório] <sem-r> N M S @P<  #27->24
+vá 	[ir] <aux> V PR 3S SUBJ VFIN @FS-<ACC  #28->22
+propor 	[propor] <vH> <mv> V INF @ICL-AUX<  #29->28
+punição 	[punição] <act> N F S @<ACC  #30->29
+a 	[a] PRP @<ADVL  #31->29
+Wagner=Canazaro 	[Wagner=Canazaro] <hum> <*> PROP M S @P<  #32->31
+$. #33->0
+</s>
+
+$"  #1->0
+Denúncia 	[denúncia] <*1> <act> <*> N F S @SUBJ>  #2->7
+sobre 	[sobre] <np-close> PRP @N<  #3->2
+suborno 	[suborno] <act> N M S @P<  #4->3
+de 	[de] <np-close> PRP @N<  #5->4
+árbitro 	[árbitro] <Hprof> N M S @P<  #6->5
+é 	[ser] <clb-fs> <mv> <quote> V PR 3S IND VFIN @FS-ACC>>  #7->24
+como 	[como] <com> <adv-rel> PRP @<SC  #8->7
+adultério 	[adultério] <asarg> <act> N M S @P<  #9->8
+: 	[:] N M S @SUBJ>  #10->13
+às=vezes 	[às=vezes] ADV @ADVL>  #11->0
+se 	[se] <clb> <clb-fs> KS @SUB  #12->13
+sabe 	[saber] <mv> V PR 3S IND VFIN @FS-ADVL>  #13->0
+que 	[que] <clb> <clb-fs> KS @SUB  #14->15
+existe 	[existir] <mv> V PR 3S IND VFIN @FS-<ACC  #15->13
+$, #16->0
+mas 	[mas] <clb> KC @CO  #17->19
+não 	[não] ADV @ADVL>  #18->19
+há 	[haver] <clb-fs> <mv> <quote> V PR 3S IND VFIN @FS-ACC>>  #19->7
+como 	[como] <clb> <rel> ADV @ADVL>  #20->24
+provar 	[provar] <vH> <*2> <mv> V INF @ICL-<ACC  #21->19
+$"  #22->0
+$, #23->0
+disse 	[dizer] <vH> <fmc> <mv> <v-quote> V PS 3S IND VFIN @FS-STA  #24->0
+Galindo 	[Galindo] <hum> <heur> <*> PROP M/F S @<SUBJ  #25->24
+$. #26->0
+</s>
+
+No=máximo 	[no=máximo] <*> ADV @ADVL>  #1->7
+em 	[em] PRP @ADVL>  #2->7
+29 	[29] <card> NUM M P @>N  #3->4
+dias 	[dia] <dur> <per> <unit> <temp> N M P @P<  #4->2
+ele 	[ele] PERS M 3S NOM @SUBJ>  #5->6
+vai 	[ir] <fmc> <aux> V PR 3S IND VFIN @FS-STA  #6->0
+apresentar 	[apresentar] <vH> <mv> V INF @ICL-AUX<  #7->6
+seu 	[seu] <si> <poss 3S> DET M S @>N  #8->9
+relatório 	[relatório] <sem-r> N M S @<ACC  #9->7
+$. #10->0
+</s>
+
+Se 	[se] <*> PERS M/F 3S/P ACC @SUBJ>  #1->18
+sugerir 	[sugerir] <vH> <mv> V INF 3S @ICL-ACC>  #2->18
+punição 	[punição] <act> N F S @<ACC  #3->2
+restrita 	[restringir] <vH> <np-close> V PCP F S @N<  #4->3
+a 	[a] <sam-> PRP @<ADVL  #5->2
+a 	[o] <artd> <-sam> DET F S @>N  #6->7
+área 	[área] <Lh> <L> N F S @P<  #7->5
+desportiva 	[desportivo] <np-close> ADJ F S @N<  #8->7
+a 	[a] <np-long> PRP @N<  #9->7
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @P<  #10->9
+$, #11->0
+os 	[o] <artd> DET M P @>N  #12->14
+11 	[11] <card> NUM M P @>N  #13->14
+integrantes 	[integrante] <n> <nh> ADJ M P @SUBJ>  #14->18
+de 	[de] <sam-> <np-close> PRP @N<  #15->14
+o 	[o] <artd> <-sam> DET M S @>N  #16->17
+TJD 	[TJD] <inst> <*> PROP M S @P<  #17->15
+decidem 	[decidir] <vH> <fmc> <mv> V PR 3P IND VFIN @FS-STA  #18->0
+$. #19->0
+</s>
+
+Todos 	[todo] <quant> <*> DET M P @SUBJ>  #1->2
+são 	[ser] <fmc> <aux> V PR 3P IND VFIN @FS-STA  #2->0
+ligados 	[ligar] <mv> V PCP M P @ICL-AUX<  #3->2
+a 	[a] <sam-> PRP @<PIV  #4->3
+o 	[o] <artd> <-sam> DET M S @>N  #5->6
+presidente 	[presidente] <Hprof> N M S @P<  #6->4
+de 	[de] <sam-> <np-close> PRP @N<  #7->6
+a 	[o] <artd> <-sam> DET F S @>N  #8->9
+federação 	[federação] <inst> N F S @P<  #9->7
+$, #10->0
+Eduardo=Viana 	[Eduardo=Viana] <hum> <*> <np-close> PROP M S @APP  #11->9
+$, #12->0
+aliado 	[aliar] <vH> <jh> <np-close> V PCP M S @N<PRED  #13->11
+de 	[de] <np-close> PRP @N<PRED  #14->13
+Canazaro 	[Canazaro] <hum> <heur> <*> PROP M/F S @P<  #15->14
+$. #16->0
+</s>
+
+Hoje 	[hoje] <*> ADV @ADVL>  #1->17
+os 	[o] <artd> DET M P @>N  #2->3
+juízes 	[juíz] <Hprof> N M P @SUBJ>  #3->16
+Cláudio=Cerdeira 	[Cláudio=Cerdeira] <cjt-head> <hum> <*> <np-close> PROP M S @N<  #4->3
+e 	[e] <co-postnom> KC @CO  #5->4
+Cláudio=Garcia 	[Cláudio=Garcia] <cjt> <hum> <*> <np-close> PROP M S @N<  #6->4
+que 	[que] <clb> <clb-fs> <rel> SPEC M S @SUBJ>  #7->8
+denunciaram 	[denunciar] <vH> <mv> <np-close> V PS/MQP 3P IND VFIN @FS-N<  #8->3
+a 	[o] <artd> DET F S @>N  #9->10
+orientação 	[orientação] <percep-f> <act> N F S @<ACC  #10->8
+para 	[para] PRP @<ADVL  #11->8
+influenciar 	[influenciar] <mv> V INF @ICL-P<  #12->11
+resultados 	[resultado] <ac> N M P @<ACC  #13->12
+de 	[de] <np-close> PRP @N<  #14->13
+jogos 	[jogo] <occ> <cc-h> <game> <activity> N M P @P<  #15->14
+vão 	[ir] <fmc> <aux> V PR 3P IND VFIN @FS-STA  #16->0
+depor 	[depor] <vH> <mv> V INF @ICL-AUX<  #17->16
+em 	[em] <sam-> PRP @<ADVL  #18->17
+a 	[o] <artd> <-sam> DET F S @>N  #19->20
+Polícia=Interestadual 	[Polícia=Interestadual] <org> <*> PROP F S @P<  #20->18
+$. #21->0
+</s>
+
+Ontem 	[ontem] <*> ADV @ADVL>  #1->9
+o 	[o] <artd> DET M S @>N  #2->3
+deputado 	[deputado] <Hprof> N M S @SUBJ>  #3->9
+estadual 	[estadual] <nh> <np-close> ADJ M S @N<  #4->3
+Sérgio=Cabral=Filho 	[Sérgio=Cabral=Filho] <hum> <*> <np-close> PROP M S @N<  #5->3
+$( #6->0
+PSDB 	[PSDB] <party> <*> <np-close> PROP M S @N<PRED  #7->5
+$) #8->0
+afirmou 	[afirmar] <vH> <fmc> <mv> V PS 3S IND VFIN @FS-STA  #9->0
+que 	[que] <clb> <clb-fs> KS @SUB  #10->11
+é 	[ser] <vK> <mv> V PR 3S IND VFIN @FS-<ACC  #11->9
+possível 	[possível] <nh> ADJ M S @<SC  #12->11
+que 	[que] <clb> <clb-fs> KS @SUB  #13->18
+a 	[o] <artd> DET F S @>N  #14->15
+Assembléia=Legislativa 	[Assembléia=Legislativa] <org> <*> <newlex> PROP F S @SUBJ>  #15->18
+não 	[não] ADV @ADVL>  #16->18
+se 	[se] PERS M/F 3S ACC @ACC>-PASS  #17->18
+reúna 	[reunir] <vH> <mv> V PR 3S SUBJ VFIN @FS-<SUBJ  #18->11
+em 	[em] PRP @<ADVL  #19->18
+sessão 	[sessão] <occ> N F S @P<  #20->19
+extraordinária 	[extraordinário] <jh> <np-close> ADJ F S @N<  #21->20
+em 	[em] <np-long> PRP @N<  #22->20
+janeiro 	[janeiro] N M S @P<  #23->22
+$. #24->0
+</s>
+
+Assim 	[assim] <kc> <*> ADV @ADVL>  #1->3
+$, #2->0
+ficaria 	[ficar] <vK> <fmc> <mv> V COND 3S VFIN @FS-STA  #3->0
+adiada 	[adiar] <vH> <mv> V PCP F S @ICL-<SC  #4->3
+pelo=menos 	[pelo=menos] <quant> ADV @>P  #5->6
+até 	[até] PRP @<ADVL  #6->4
+fevereiro 	[fevereiro] N M S @P<  #7->6
+a 	[o] <artd> DET F S @>N  #8->9
+votação 	[votação] <act> N F S @<SUBJ  #9->3
+sobre 	[sobre] PRP @<ADVL  #10->4
+a 	[o] <artd> DET F S @>N  #11->12
+criação 	[criação] <act> N F S @P<  #12->10
+de 	[de] <sam-> <np-close> PRP @N<  #13->12
+a 	[o] <artd> <-sam> DET F S @>N  #14->16
+$"  #15->0
+CPI=do=Apito 	[CPI=do=Apito] <tit> <*> <*1> <*2> PROP F S @P<  #16->13
+$"  #17->0
+$, #18->0
+também 	[também] ADV @>P  #19->20
+sobre 	[sobre] PRP @<ADVL  #20->4
+suborno 	[suborno] <act> N M S @P<  #21->20
+de 	[de] <np-close> PRP @N<  #22->21
+juízes 	[juíz] <Hprof> N M P @P<  #23->22
+$. #24->0
+$( #25->0
+</s>

@@ -34,7 +34,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.ngram import Ngram
+from .ngram import Ngram
 
 ################################################################################
 
@@ -104,7 +104,8 @@ class Sentence( Ngram ) :
         """Returns this Sentence as a PlainCorpus line, consisting of
         space-separated Word surfaces.  MWEs are separated by "_"s.
         """
-        surface_list = [w.surface for w in self.word_list]
+        surface_list = [w.lemma_or_surface() or "<?>" \
+                for w in self.word_list]
 
         mwe_parts = set()
         for mweoccur in self.mweoccurs:
