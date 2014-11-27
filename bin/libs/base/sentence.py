@@ -34,6 +34,8 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
+from collections import defaultdict
+
 from .ngram import Ngram
 
 ################################################################################
@@ -107,13 +109,13 @@ class Sentence( Ngram ) :
         surface_list = [w.lemma_or_surface() or "<?>" \
                 for w in self.word_list]
 
-        mwe_parts = set()
+        mwe_parts = defaultdict(set)  # index -> mwes
         for mweoccur in self.mweoccurs:
             for i in mweoccur.indexes:
-                mwe_parts.add(i)
+                mwe_parts[i].add(mweoccur)
 
         for i in xrange(len(surface_list)-1):
-            if i in mwe_parts and i+1 in mwe_parts:
+            if mwe_parts[i] & mwe_parts[i+1]:
                 surface_list[i] += "_"
             else:
                 surface_list[i] += " "

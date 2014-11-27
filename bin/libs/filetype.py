@@ -822,7 +822,7 @@ class MosesPrinter(AbstractPrinter):
     """Instances can be used to print Moses factored format."""
     valid_roots = ["corpus"]
 
-    def handle_sentence(self, obj):
+    def handle_sentence(self, obj, info={}):
         self.add_string(obj.to_moses(), "\n")
 
 
@@ -885,6 +885,10 @@ class ConllParser(AbstractTxtParser):
                     .format(info["linenum"], len(data)))
             return
 
+        if len(data) > len(self.entries):
+            util.warn("Ignoring extra entries in line {}" \
+                    .format(info["linenum"]))
+
         def get(attribute):
             try:
                 return data[self.name2index[attribute]]
@@ -940,7 +944,7 @@ class PukwacParser(ConllParser):
     calling the `handler` for each object that is parsed.
     """
     valid_roots = ["corpus"]
-    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?"]
+    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?", "?"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PukwacParser, self).__init__(in_files, encoding)
@@ -1056,7 +1060,7 @@ class SmartParser(AbstractParser):
             if checker_class(fileobj).matches_header(strict=True):
                 return fti
 
-        raise Exception("Unknown file format for " + fileobj.name)
+        raise Exception("Unknown file format for: " + fileobj.name)
 
 
 
