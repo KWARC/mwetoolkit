@@ -22,9 +22,8 @@
 # 
 ################################################################################
 """
-   Simplifies the POS tags of the words from various kinds of formats to simple tags
-
-
+Converts the POS tags of the words from various kinds of formats to
+simpler tags.  By default, convert from Penn Treebank tag format.
 """
 
 from __future__ import division
@@ -36,8 +35,8 @@ import sys
 import xml.sax
 
 from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, warn, \
-    parse_xml, parse_txt
+from libs.util import read_options, treat_options_simplest, verbose, warn
+from libs import filetype
 
 
 
@@ -46,21 +45,23 @@ from libs.util import read_options, treat_options_simplest, verbose, warn, \
 
 usage_string = """Usage:
 
-python %(program)s OPTIONS <corpus.xml>
+python {program} OPTIONS <corpus>
+
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
 
--x OR --text
-    Instead of traditional corpus in XML, takes as input a textual list with 
-    one sentence per line, words separated by spaces and POS appended to words 
-    separated by a special character, defined by option --fs below (default 
-    slash "/")
-    
--F OR --fs
-    Defines a field separator for the word and the POS. Can only be used in 
-    conjunction with option --text above. The default field separator is a 
-    simple slash "/". CAREFUL: This special character must be escaped in the 
-    corpus!
+--from <input-filetype-ext>
+    Force reading from given file type extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+
+--to <output-filetype-ext>
+    Output extracted candidates in given filetype format.
+    (By default, output filetype is the same as the input):
+    {descriptions.output[corpus]}
 
 -p OR --palavras
     Convert from Palavras tags instead of Penn Tree Bank tags.
@@ -69,9 +70,8 @@ OPTIONS may be:
     Convert from Genia tags instead of Penn Tree Bank tags.
 
 %(common_options)s
-
-    The <corpus.xml> file must be valid XML (dtd/mwetoolkit-corpus.dtd).
 """
+
 sentence_counter = 0
 # This table contains mainly exceptions that need special treatment
 ptb_table = { "MD": "V",    # modal verb is a verb
@@ -90,37 +90,20 @@ ptb_table = { "MD": "V",    # modal verb is a verb
                "''": "PCT",  # Quotes are a punctuation sign
                "SENT":"PCT", # Sentence delimiter is a punctuation sign
                "UH":"UH",  } # Interjection stays interjectio
-text_input = False
-field_sep = "/"
 simplify = None
 
-################################################################################
+output_filetype_ext = None
+input_filetype_ext = None
 
-def treat_meta( meta ) :
-    """
-        Simply prints the meta header to the output without modifications.
-
-        @param meta The `Meta` header that is being read from the XML file.
-    """
-
-    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
 
-def treat_entity( entity ) :
-    """
-        For each sentence in the corpus, simplify the POS tags using simple
-        heuristics.
+class PosTagSimplifierPrinter(filetype.AutomaticPrinterHandler):
+    def handle_sentence(self, sentence, info={}):
+        for w in sentence:
+            w.pos = simplify(w.pos)
+        super(PosTagSimplifierPrinter, self).handle_sentence(sentence, info)
 
-        @param entity A `Sentence` that is being read from the XML file.
-    """
-    global sentence_counter
-    if sentence_counter % 100 == 0 :
-        verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
-    for w in entity :
-        w.pos = simplify( w.pos )        
-    print(entity.to_xml().encode( 'utf-8' ))
-    sentence_counter += 1
 
 ################################################################################
 
@@ -228,30 +211,6 @@ genia_table = { "NNPS": "N", "NNP": "N", "NNS": "N", "NN": "N", "NPS": "N",
 def simplify_genia(pos):
     return genia_table.get(pos, pos)
 
-################################################################################
-
-def treat_text( line ):
-    """
-        Treats a text file by simplifying the POS of the lines. Useful for 
-        treating a text file containing one sentence per line.
-        
-        @param stream File or stdin from which the lines (sentences) are read.
-    """
-    global field_sep
-    sentence = line.strip()
-    newsent = ""
-    #pdb.set_trace()
-    for word in sentence.split( " " ) :
-        newword = ""
-        partlist = word.split( field_sep )
-        for partindex in range( len( partlist ) ) :
-            part = partlist[ partindex ]
-            if partindex == len( partlist ) - 1 :
-                part = simplify( part )
-            newword = newword + part + field_sep
-        newword = newword[ : len(newword)-len(field_sep) ]                
-        newsent = newsent + newword + " "
-    print(newsent.strip())
 
 ################################################################################
 
@@ -265,36 +224,32 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global text_input
-    global field_sep
     global simplify
+    global input_filetype_ext
+    global output_filetype_ext
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
     simplify = simplify_ptb
 
     for ( o, a ) in opts:
-        if o in ("-x", "--text" ) : 
-            text_input = True
-        elif o in ("-p", "--palavras" ) : 
+        if o in ("-p", "--palavras"):
             simplify = simplify_palavras
         elif o in ("-G", "--genia"):
             simplify = simplify_genia
-        elif o in ("-F", "--fs" ) : 
-            field_sep = a               
+        elif o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
             
+
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["text", "fs=", "palavras", "genia" ]
-arg = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
+longopts = ["from=", "to=", "palavras", "genia" ]
+args = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
 
-
-if text_input :
-    parse_txt( treat_text, args )
-else :
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                             	 treat_entity=treat_entity,
-	                             gen_xml=True )
-    parse_xml(handler, arg)
-    print(handler.footer)
+printer = PosTagSimplifierPrinter(output_filetype_ext)
+filetype.parse(args, printer, input_filetype_ext)

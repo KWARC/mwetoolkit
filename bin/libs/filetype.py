@@ -215,6 +215,14 @@ class AbstractParser(object):
         return handler
 
 
+    def unescape(self, bytestring):
+        r"""Return an unescaped version of `bytestring`, using
+        `self.filetype_info.escape_pairs` and whatever else is needed."""
+        for escaped, unescaped in self.filetype_info.escape_pairs:
+            bytestring = bytestring.replace(escaped, unescaped)
+        return bytestring
+
+
     def _parse_file(self, fileobj, handler):
         r"""(Called to parse file `fileobj`)"""
         raise NotImplementedError
@@ -324,6 +332,9 @@ class FiletypeInfo(object):
     Subclasses must define the attribute `filetype_ext`
     and override the method `info`.
     """
+    escape_pairs = {}
+    """Pairs of (escaped, unescaped) `bytes` instances."""
+
     @property
     def description(self):
         """A small string describing this filetype."""
@@ -409,14 +420,21 @@ class AbstractPrinter(InputHandler):
         r"""Finish processing and flush `fileobj`."""
         self.flush()
 
-    def add_string(self, *objects):
+    def add_string(self, *strings):
         r"""Queue strings to be printed."""
         if self._flush_on_add:
             self.flush()
-        for obj in objects:
-            obj = obj.encode('utf-8')
-            self._waiting_objects.append(obj)
+        for string in strings:
+            bytestring = self.escape(string.encode('utf-8'))
+            self._waiting_objects.append(bytestring)
         return self  # enable call chaining
+
+    def escape(self, bytestring):
+        r"""Return an escaped version of `bytestring`, using
+        `self.filetype_info.escape_pairs` and whatever else is needed."""
+        for escaped, unescaped in self.filetype_info.escape_pairs:
+            bytestring = bytestring.replace(unescaped, escaped)
+        return bytestring
 
     def last(self):
         r"""Return last (non-flushed) added object."""
@@ -532,6 +550,9 @@ class XMLPrinter(AbstractPrinter):
     def after_file(self, fileobj, info={}):
         self.add_string(self.XML_FOOTER % {"root": self._root} + "\n")
         super(XMLPrinter, self).after_file(fileobj, info)
+
+    def handle_meta(self, meta_obj, info={}):
+        self.add_string(meta_obj.to_xml(), "\n")
 
     def handle_entity(self, entity, info={}):
         self.add_string(entity.to_xml(), "\n")

@@ -290,14 +290,16 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             detector_class = detectors[a]
         elif o in ("-S", "--source"):
             detector_class = SourceDetector
-        elif o in ("-o", "--output"):
-            output_filetype_ext = a
         elif o in ("-g", "--gaps"):
             n_gaps = int(a)
         elif o in ("--corpus-from"):
             filetype_corpus_ext = a
         elif o in ("--candidates-from"):
             filetype_candidates_ext = a
+        elif o in ("-o", "--output"):
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
     if not candidates_fnames:
         error("No candidates file given!")

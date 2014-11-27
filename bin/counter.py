@@ -48,22 +48,23 @@ from libs.base.frequency import Frequency
 from libs.base.googleFreq import GoogleFreq
 from libs.base.googleFreqUniv import GoogleFreqUniv
 from libs.base.corpus_size import CorpusSize
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error, warn
+from libs.util import read_options, treat_options_simplest, \
+        verbose, error, warn
 from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
 from libs.base.__common import DEFAULT_LANG
+from libs import filetype
 
 ################################################################################
 # GLOBALS    
 
 usage_string = """Usage: 
     
-python %(program)s [-w | -u <id> | -T <dir> | -i <corpus.index>] OPTIONS <candidates.xml>
+python {program} [-w | -u <id> | -T <dir> | -i <index-corpus>] OPTIONS <candidates>
 
--i <index> OR --index <index>
-    Base name for the index files, as created by "index.py -i <index>".
-    These files are used to calculate the frequencies of individual words
-    in the corpus.
+-i <index-corpus> OR --index <index-corpus>
+    Calculate frequencies of individual words in given corpus.
+    The corpus must be given as the path to the `.info` file
+    in a BinaryIndex instance.
 
 -y OR --yahoo
     Search for frequencies in the Web using Yahoo Web Search as approximator for
@@ -83,8 +84,30 @@ python %(program)s [-w | -u <id> | -T <dir> | -i <corpus.index>] OPTIONS <candid
     Use Google's Web 1T 5-gram corpus. <dir> is the a directory containing the
     union of the contents of the data/ directories of each corpus CD as
     distributed by Google.
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--candidates-from` switch.
+
+You must choose exactly one of -u, -w or -i
+(more than one is not allowed at the same time).
+
     
 OPTIONS may be:
+
+--candidates-from <candidates-filetype>
+    Force reading candidates from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
+
+--corpus-from <corpus-filetype>
+    Only works if the `--corpus` switch has been given as well.
+    Force reading corpus from given filetype extension.
+    XXX Currently, only "BinaryIndex" is accepted.
+
+--to <corpus-filetype>
+    Output candidates in given filetype format
+    (by default, outputs in "XML" file format):
+    {descriptions.output[candidates]}
 
 -g OR --ignore-pos
      Ignores Part-Of-Speech when counting candidate occurences. This means, for
@@ -121,11 +144,7 @@ OPTIONS may be:
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
     
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
-You must choose exactly one of -u, -w or -i. More than one is not allowed at
-the same time. 
+{common_options}
 """
 
 index = None  # Index()
@@ -135,7 +154,6 @@ get_freq_function = None
 freq_name = "?"
 web_freq = None
 the_corpus_size = -1
-entity_counter = 0
 low_limit = -1
 up_limit = -1
 text_input = False
@@ -144,19 +162,52 @@ count_joint_frequency = True
 count_bigrams = False
 language = DEFAULT_LANG
 
+filetype_corpus_ext = "BinaryIndex"
+filetype_candidates_ext = None
+output_filetype_ext = "XML"
+
+
 ################################################################################
 
-def treat_meta(meta):
-    """
-        Adds a `CorpusSize` meta-information to the header and prints the 
+class CounterPrinter(filetype.AutomaticPrinterHandler):
+    r"""Adds info and outputs the result."""
+    def before_file(self, fileobj, info={}):
+        super(CounterPrinter, self).before_file(fileobj, info)
+        self.entity_counter = 0
+
+    def handle_meta(self, meta, info={}):
+        """Adds a `CorpusSize` meta-information to the header and prints the 
         header. The corpus size is important to allow the calculation of 
         statistical Association Measures by the `feat_association.py` script.
         
         @param meta The `Meta` header that is being read from the XML file.        
-    """
-    global freq_name, the_corpus_size
-    meta.add_corpus_size(CorpusSize(name=freq_name, value=the_corpus_size))
-    print(meta.to_xml())
+        """
+        global freq_name, the_corpus_size
+        meta.add_corpus_size(CorpusSize(name=freq_name, value=the_corpus_size))
+        self.delegate.handle_meta(meta, info)
+
+    def handle_candidate(self, candidate, info={}):
+        """For each candidate, searches for the individual word frequencies of the
+        base ngram. The corresponding function, for a corpus index or for yahoo,
+        will be called, depending on the -i or -w/-u options. The frequencies 
+        are added as a child element of the word and then the candidate is 
+        printed.
+        
+        @param candidate The `Candidate` that is being read from the XML file.
+        """
+        global low_limit, up_limit
+        global count_vars
+        if self.entity_counter % 100 == 0:
+            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
+        if ( self.entity_counter >= low_limit or low_limit < 0 ) and \
+                ( self.entity_counter <= up_limit or up_limit < 0 ):
+            if count_vars:
+                for var in candidate.vars:
+                    append_counters(var)
+            else:
+                append_counters(candidate)
+        self.delegate.handle_candidate(candidate, info)
+        self.entity_counter += 1
 
 
 ################################################################################
@@ -194,34 +245,6 @@ def append_counters(ngram):
                                            c_lemmas[i:i + 2], c_pos[i:i + 2])
             i = i + 1
             ngram.add_bigram(Frequency(freq_name, freq_value))
-
-
-################################################################################
-
-def treat_entity(entity):
-    """
-        For each entity, searches for the individual word frequencies of the
-        base ngram. The corresponding function, for a corpus index or for yahoo,
-        will be called, depending on the -i or -w/-u options. The frequencies 
-        are added as a child element of the word and then the candidate is 
-        printed.
-        
-        @param entity The `Candidate` that is being read from the XML file.
-    """
-    global entity_counter
-    global low_limit, up_limit
-    global count_vars
-    if entity_counter % 100 == 0:
-        verbose("Processing ngram number %(n)d" % {"n": entity_counter})
-    if ( entity_counter >= low_limit or low_limit < 0 ) and \
-            ( entity_counter <= up_limit or up_limit < 0 ):
-        if count_vars:
-            for var in entity.vars:
-                append_counters(var)
-        else:
-            append_counters(entity)
-    print(entity.to_xml().encode('utf-8'))
-    entity_counter += 1
 
 
 ################################################################################
@@ -363,12 +386,13 @@ def get_freq_web1t(surfaces, lemmas, pos):
 
 def open_index(prefix):
     """
-        Open the index files (valid index created by the `index3.py` script). 
-                
-        @param prefix The string name of the index file.
+    Open the index files (valid index created by the `index.py` script). 
+    @param prefix The string name of the index file.
     """
     global freq_name, the_corpus_size
     global index, suffix_array
+    assert prefix.endswith(".info")
+    prefix = prefix[:-len(".info")]
     try:
         verbose("Loading index files... this may take some time.")
         index = Index(prefix)
@@ -417,6 +441,10 @@ def treat_options(opts, arg, n_arg, usage_string):
     global count_joint_frequency
     global count_bigrams
     global web1t_data_path
+    global filetype_corpus_ext
+    global filetype_candidates_ext
+    global output_filetype_ext
+
     surface_flag = False
     ignorepos_flag = False
     mode = []
@@ -491,6 +519,14 @@ def treat_options(opts, arg, n_arg, usage_string):
             count_bigrams = True
         elif o in ("-o", "--old"):
             Index.use_c_indexer(False)
+        elif o in ("--corpus-from"):
+            filetype_corpus_ext = a
+        elif o in ("--candidates-from"):
+            filetype_candidates_ext = a
+        elif o in ("-o", "--output"):
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
     if mode == ["index"]:
         if surface_flag and ignorepos_flag:
@@ -519,38 +555,21 @@ def treat_options(opts, arg, n_arg, usage_string):
     elif text_input and web_freq is None:
         error("-x option MUST be used with either -u or -w")
 
-################################################################################
-
-def reset_entity_counter(filename):
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
 
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["yahoo", "google", "index=", "ignore-pos", "surface", "old",
+longopts = ["candidates-from=", "corpus-from=", "to=",
+            "yahoo", "google", "index=", "ignore-pos", "surface", "old",
             "from=", "to=", "text", "vars", "lang=", "no-joint", "bigrams",
             "univ=", "web1t="]
-arg = read_options("ywi:gsof:t:xal:Jbu:T:", longopts, treat_options, -1,
-                   usage_string)
+args = read_options("ywi:gsof:t:xal:Jbu:T:", longopts,
+        treat_options, -1, usage_string)
 
 try:
     verbose("Counting ngrams in candidates file")
-    if text_input:
-        parse_txt(treat_text, arg)        
-    else:
-        handler = GenericXMLHandler(treat_meta=treat_meta,
-                                    treat_entity=treat_entity,
-                                    gen_xml=True)
-        parse_xml(handler, arg, reset_entity_counter)
-        print(handler.footer)
-
+    printer = CounterPrinter(filetype_candidates_ext)
+    filetype.parse(args, printer, output_filetype_ext)
 finally:
     if web_freq:
         web_freq.flush_cache()  # VERY IMPORTANT!

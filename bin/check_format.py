@@ -28,8 +28,9 @@
     
     INCOMPLETE - ONLY WORKS FOR MOSES FACTORED
     TODO:
-      - Support to CONLL format
-      - Support to mwetoolkit custom XML formats - DTD (cands, corpus, patterns)
+      - Use libs.filetype.checker_class to get a filetype checker
+      - Implement stronger checking (maybe have a `strong_check()`
+        method in AbstractChecker that, by default, delegates to `check()`).
 """
 
 from __future__ import division
@@ -46,13 +47,14 @@ from libs.filetype import parse, InputHandler
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <file>
+python {program} OPTIONS <file>
 
 -i <format> OR --input <format>
     Format of the input file to check:
     * Moses : Moses factored file format, one sentence per line, 
     space-separated tokens, factors separated by vertical bar |
     * OTHER FORMATS NOT IMPLEMENTED YET
+    * TODO: refactor
     
 -s OR --syntax
     Check the format of the syntactic element (e.g. \"type1:head1,type2:head2\")
@@ -63,7 +65,7 @@ python %(program)s OPTIONS <file>
 -f OR --first
     Stop verifying at first error (default False, checks the whole file)
 
-%(common_options)s
+{common_options}
 
     In case of format problem, the script will warn the user on stderr.
 """

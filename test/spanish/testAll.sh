@@ -61,7 +61,7 @@ main() {
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -v -p "$DIR/patterns.xml" corpus.info >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
@@ -73,7 +73,7 @@ main() {
 		true
 
 	dotest "Individual word frequency counting" \
-		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
+		'run counter.py -v -i corpus.info candidates-from-index.xml >candidates-counted.xml' \
 		true
 
 	dotest "Association measures" \

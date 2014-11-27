@@ -65,10 +65,8 @@ test_parser  pukWaC "corpus.pukwac" "xml-ref/corpus.pukwac.xml"
 #test_printer pukWaC "corpus.pukwac" "xml-ref/corpus.pukwac.xml"
 
 t_testname "Check PlainCandidates format"
-test_parser  PlainCandidates "candidates.PlainCandidates" \
-                    "xml-ref/candidates.PlainCandidates.xml"
-test_printer PlainCandidates "candidates.PlainCandidates" \
-                    "xml-ref/candidates.PlainCandidates.xml"
+test_parser  PlainCandidates "candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
+test_printer PlainCandidates "candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
 
 
 # TODO

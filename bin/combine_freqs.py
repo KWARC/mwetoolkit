@@ -36,12 +36,10 @@ import sys
 import xml.sax
 import math
 
-from bin.libs.candidatesXMLHandler import CandidatesXMLHandler
+from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.base.frequency import Frequency
 from libs.base.corpus_size import CorpusSize
-from bin.libs.util import usage, read_options, treat_options_simplest, verbose
-
-
+from libs.util import usage, read_options, treat_options_simplest, verbose
 
 
 
@@ -50,7 +48,10 @@ from bin.libs.util import usage, read_options, treat_options_simplest, verbose
      
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <candidates.xml>
+python {program} OPTIONS <candidates.xml>
+
+The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+
 
 OPTIONS may be:
 
@@ -72,9 +73,7 @@ OPTIONS may be:
     counts. In this case, you MUST define the original count source and it must
     be a valid name described through a <corpussize> element in the meta header.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+{common_options}
 """
 supported_combination = [ "uniform", "inverse", "backoff" ]
 corpussize_dict = {}
