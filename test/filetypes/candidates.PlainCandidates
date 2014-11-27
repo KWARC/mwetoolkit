@@ -43,7 +43,7 @@ write_up
 political_campaign
 nursing_home
 rest_home
-musical_accompaniment
+snake${underscore}case_variable
 insurance_policy
 business_firm
 government_issue

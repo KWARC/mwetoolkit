@@ -102,49 +102,6 @@ class Sentence( Ngram ) :
             
 ################################################################################        
         
-    def to_plaincorpus( self ) :
-        """Returns this Sentence as a PlainCorpus line, consisting of
-        space-separated Word surfaces.  MWEs are separated by "_"s.
-        """
-        surface_list = [w.lemma_or_surface() or "<?>" \
-                for w in self.word_list]
-
-        mwe_parts = defaultdict(set)  # index -> mwes
-        for mweoccur in self.mweoccurs:
-            for i in mweoccur.indexes:
-                mwe_parts[i].add(mweoccur)
-
-        for i in xrange(len(surface_list)-1):
-            if mwe_parts[i] & mwe_parts[i+1]:
-                surface_list[i] += "_"
-            else:
-                surface_list[i] += " "
-        return "".join(surface_list)
-            
-################################################################################        
-        
-    def to_surface( self ) :
-        """
-            Returns a simple readable string where the surface forms of the 
-            current sentence are concatenated and separated by a single space.
-            
-            @return A string with the surface form of the sentence, 
-            space-separated.
-        """
-        surface_list = [w.surface for w in self.word_list]
-        mwetags_list = [[] for i in range(len(surface_list))]
-        for mweoccur in self.mweoccurs :
-            for i in mweoccur.indexes :
-                mwetags_list[ i ].append( mweoccur.candidate.id_number )
-        for (mwetag_i, mwetag) in enumerate(mwetags_list) :
-            if mwetag : 
-                mwetag = (unicode(index) for index in mwetag)
-                surface_list[ mwetag_i ] = "<mwepart id=\"" + ",".join(mwetag)\
-                              + "\" >" + surface_list[ mwetag_i ] + "</mwepart>"
-        return " ".join( surface_list )
-
-################################################################################
-
     def add_mwe_tags_html( self, tokens ) :
         """
             Given a list of tokens (words represented somehow), adds <span>
@@ -186,20 +143,6 @@ class Sentence( Ngram ) :
         list = map(lambda (i, w): w.to_html( i + 1 ), enumerate(self.word_list))
         return templ % {"sent": "\n".join(self.add_mwe_tags_html(list)),
                         "sid": self.id_number}
-
-################################################################################
-
-    def to_moses( self ) :
-        """
-            Returns a simple Moses-factored string where words are separated by 
-            a single space and each word part (surface, lemma, POS, syntax) is 
-            separated from the next using a vertical bar |
-            
-            @return A string with the Moses factored form of the sentence
-        """
-        moses_list = map( lambda x: x.to_moses(), self.word_list )
-        tagged_list = self.add_mwe_tags( moses_list )        
-        return " ".join( tagged_list )
 
 ################################################################################
         

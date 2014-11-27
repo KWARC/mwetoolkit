@@ -91,6 +91,7 @@ def treat_entity(entity) :
         print("")
 
     for i,w in enumerate(entity):
+        # TODO escape this output
         FORM = w.surface
         LEMMA = handle_wildcard(w.lemma)
         CPOSTAG = handle_wildcard(w.pos)

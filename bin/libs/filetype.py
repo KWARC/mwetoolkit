@@ -215,12 +215,12 @@ class AbstractParser(object):
         return handler
 
 
-    def unescape(self, bytestring):
-        r"""Return an unescaped version of `bytestring`, using
+    def unescape(self, string):
+        r"""Return an unescaped version of `string`, using
         `self.filetype_info.escape_pairs` and whatever else is needed."""
-        for escaped, unescaped in self.filetype_info.escape_pairs:
-            bytestring = bytestring.replace(escaped, unescaped)
-        return bytestring
+        for unescaped, escaped in self.filetype_info.escape_pairs:
+            string = string.replace(escaped, unescaped)
+        return string
 
 
     def _parse_file(self, fileobj, handler):
@@ -332,9 +332,6 @@ class FiletypeInfo(object):
     Subclasses must define the attribute `filetype_ext`
     and override the method `info`.
     """
-    escape_pairs = {}
-    """Pairs of (escaped, unescaped) `bytes` instances."""
-
     @property
     def description(self):
         """A small string describing this filetype."""
@@ -344,6 +341,12 @@ class FiletypeInfo(object):
     def filetype_ext(self):
         """A string with the extension for this filetype.
         Also used as a filetype hint."""
+        raise NotImplementedError
+
+    @property
+    def escape_pairs(self):
+        """List of pairs with (unescaped, escaped) `unicode` instances.
+        The first entry MUST be the pair for the escaping character itself."""
         raise NotImplementedError
 
     def matches_filetype(self, filetype_hint):
@@ -425,16 +428,16 @@ class AbstractPrinter(InputHandler):
         if self._flush_on_add:
             self.flush()
         for string in strings:
-            bytestring = self.escape(string.encode('utf-8'))
+            bytestring = string.encode('utf-8')
             self._waiting_objects.append(bytestring)
         return self  # enable call chaining
 
-    def escape(self, bytestring):
-        r"""Return an escaped version of `bytestring`, using
+    def escape(self, string):
+        r"""Return an escaped version of `unicode`, using
         `self.filetype_info.escape_pairs` and whatever else is needed."""
-        for escaped, unescaped in self.filetype_info.escape_pairs:
-            bytestring = bytestring.replace(unescaped, escaped)
-        return bytestring
+        for unescaped, escaped in self.filetype_info.escape_pairs:
+            string = string.replace(unescaped, escaped)
+        return string
 
     def last(self):
         r"""Return last (non-flushed) added object."""
@@ -461,6 +464,8 @@ class XMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for mwetoolkit's XML."""
     description = "An XML in mwetoolkit format (dtd/mwetoolkit-*.dtd)"
     filetype_ext = "XML"
+
+    # TODO use escape_pairs here... how?
 
     def operations(self):
         return FiletypeOperations(XMLChecker, XMLParser, XMLPrinter)
@@ -566,6 +571,8 @@ class MosesTextInfo(FiletypeInfo):
     description = "Moses textual format, with one sentence per line and <mwe> tags"
     filetype_ext = "MosesText"
 
+    escape_pairs = [("%%", "%%PERCENTS%%"), ("|", "%%UNDERSCORE%%")]
+
     def operations(self):
         return FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
 
@@ -581,16 +588,35 @@ class MosesTextPrinter(AbstractPrinter):
     valid_roots = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
-        self.add_string(sentence.to_surface(), "\n")
+        """Print a simple readable string where the surface forms of the 
+        current sentence are concatenated and separated by a single space.
+            
+        @return A string with the surface form of the sentence,
+        space-separated.
+        """
+        surface_list = [self.escape(w.surface) for w in sentence.word_list]
+        mwetags_list = [[] for i in range(len(surface_list))]
+        for mweoccur in sentence.mweoccurs:
+            for i in mweoccur.indexes:
+                mwetags_list[i].append( mweoccur.candidate.id_number)
+        for (mwetag_i, mwetag) in enumerate(mwetags_list):
+            if mwetag:
+                mwetag = (unicode(index) for index in mwetag)
+                surface_list[mwetag_i] = "<mwepart id=\"" + ",".join(mwetag) \
+                              + "\" >" + surface_list[mwetag_i] + "</mwepart>"
+        line = " ".join(surface_list)
+        self.add_string(line, "\n")
 
 
 ##############################
 
 
 class WaCInfo(FiletypeInfo):
-    r"""FiletypeInfo subclass for ukWaC format."""
-    description = "ukWac non-parsed format"
+    r"""FiletypeInfo subclass for tokenized WaC format."""
+    description = "Wac non-parsed tokenized format"
     filetype_ext = "WaC"
+
+    escape_pairs = []
 
     def operations(self):
         return FiletypeOperations(WaCChecker, WaCParser, None)
@@ -618,7 +644,8 @@ class WaCParser(AbstractTxtParser):
             import re
             eols = self.line_terminators
             for m in re.finditer(r"([^.!?]+ .|[^.!?]+$)", line):
-                words = [Word(surface) for surface in m.group(1).split(" ")]
+                words = [Word(self.unescape(surface)) for surface \
+                        in m.group(1).split(" ")]
                 handler.handle_sentence(Sentence(words, self.s_id))
                 self.s_id += 1
 
@@ -708,6 +735,10 @@ class PlainCorpusInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCorpus format."""
     description = "One sentence per line, with multi_word_expressions"
     filetype_ext = "PlainCorpus"
+
+    escape_pairs = [("$", "${dollar}"),
+            ("_", "${underscore}"), ("#", "${hash}")]
+
     def operations(self):
         return FiletypeOperations(PlainCorpusChecker, PlainCorpusParser, PlainCorpusPrinter)
 
@@ -732,7 +763,7 @@ class PlainCorpusParser(AbstractTxtParser):
         sentence = Sentence([], info["linenum"])
         mwes = line.split(" ")  # each entry is an SWE/MWE
         for mwe in mwes:
-            words = [Word(lemma) for lemma in mwe.split("_")]
+            words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]
             sentence.word_list.extend(words)
             if len(words) != 1:
                 from .base.mweoccur import MWEOccurrence
@@ -748,7 +779,25 @@ class PlainCorpusPrinter(AbstractPrinter):
     valid_roots = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
-        self.add_string(sentence.to_plaincorpus(), "\n")
+        """Handle sentence as a PlainCorpus line, consisting of
+        space-separated Word surfaces.  MWEs are separated by "_"s.
+        """
+        surface_list = [self.escape(w.lemma_or_surface() or "<?>") \
+                for w in sentence.word_list]
+
+        from collections import defaultdict
+        mwe_parts = defaultdict(set)  # index -> set(mwe)
+        for mweoccur in sentence.mweoccurs:
+            for i in mweoccur.indexes:
+                mwe_parts[i].add(mweoccur)
+
+        for i in xrange(len(surface_list)-1):
+            if mwe_parts[i] & mwe_parts[i+1]:
+                surface_list[i] += "_"
+            else:
+                surface_list[i] += " "
+        line = "".join(surface_list)
+        self.add_string(line, "\n")
 
 
 ##############################
@@ -759,8 +808,11 @@ class PlainCandidatesInfo(FiletypeInfo):
     description = "One multi_word_candidate per line"
     filetype_ext = "PlainCandidates"
 
+    escape_pairs = PlainCorpusInfo.escape_pairs
+
     def operations(self):
-        return FiletypeOperations(PlainCandidatesChecker, PlainCandidatesParser, PlainCandidatesPrinter)
+        return FiletypeOperations(PlainCandidatesChecker,
+                PlainCandidatesParser, PlainCandidatesPrinter)
 
 
 class PlainCandidatesChecker(AbstractChecker):
@@ -781,7 +833,7 @@ class PlainCandidatesParser(AbstractTxtParser):
         self.root = "candidates"
 
     def _parse_line(self, line, handler, info={}):
-        words = [Word(lemma) for lemma in line.split("_")]
+        words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
         c = Candidate(info["linenum"], words)
         handler.handle_candidate(c)
 
@@ -791,7 +843,7 @@ class PlainCandidatesPrinter(AbstractPrinter):
     valid_roots = ["candidates"]
 
     def handle_candidate(self, candidate, info={}):
-        self.add_string("_".join(w.lemma_or_surface() \
+        self.add_string("_".join(self.escape(w.lemma_or_surface()) \
                 for w in candidate.word_list), "\n")
 
 
@@ -802,6 +854,8 @@ class MosesInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for Moses."""
     description = "Moses factored format (word=f1|f2|f3|f4|f5)"
     filetype_ext = "FactoredMoses"
+
+    escape_pairs = [("@@", "@@AT_SIGNS@@"), ("|", "@@VERTICAL_BAR@@")]
 
     def operations(self):
         return FiletypeOperations(MosesChecker, MosesParser, MosesPrinter)
@@ -831,7 +885,8 @@ class MosesParser(AbstractTxtParser):
         words = line.split(" ")
         for w in words:
             try:
-                surface, lemma, pos, syntax = w.split("|")
+                surface, lemma, pos, syntax = \
+                        (self.unescape(x) for x in w.split("|"))
                 s.append(Word(surface, lemma, pos, syntax))
             except Exception as e:
                 util.warn("Ignored token " + repr(w))
@@ -843,9 +898,28 @@ class MosesPrinter(AbstractPrinter):
     """Instances can be used to print Moses factored format."""
     valid_roots = ["corpus"]
 
-    def handle_sentence(self, obj, info={}):
-        self.add_string(obj.to_moses(), "\n")
+    def handle_sentence(self, sentence, info={}):
+        """Prints a simple Moses-factored string where words are separated by 
+        a single space and each word part (surface, lemma, POS, syntax) is 
+        separated from the next using a vertical bar "|".
+        
+        @return A string with the Moses factored form of the sentence
+        """
+        moses_list = [self.word_to_moses(w) for w in sentence.word_list]
+        tagged_list = sentence.add_mwe_tags(moses_list)
+        line = " ".join(tagged_list)
+        self.add_string(line, "\n")
 
+    def word_to_moses(self, word) :
+        """Converts word to a string representation where word parts are
+        separated from each other by "|" character, as in Moses' factored
+        translation format.
+            
+        @return A string with Moses factored representation of a word.
+        """
+        args = (word.surface, word.lemma, word.pos, word.syn)
+        return "|".join(self.escape(w) if w != WILDCARD else "" for w in args)
+        
 
 ##############################
 
@@ -854,6 +928,9 @@ class ConllInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for CONLL."""
     description = "CONLL tab-separated 10-entries-per-word"
     filetype_ext = "CONLL"
+
+    escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
+            (" ", "${space}"), ("\t", "${tab}")]
 
     def operations(self):
         return FiletypeOperations(ConllChecker, ConllParser, None)
@@ -912,7 +989,7 @@ class ConllParser(AbstractTxtParser):
 
         def get(attribute):
             try:
-                return data[self.name2index[attribute]]
+                return self.unescape(data[self.name2index[attribute]])
             except KeyError:
                 return WILDCARD
 
@@ -945,30 +1022,32 @@ class ConllParser(AbstractTxtParser):
 ##############################
 
 
-class PukwacInfo(FiletypeInfo):
-    r"""FiletypeInfo subclass for pukWaC format."""
-    description = "ukWac parsed format"
-    filetype_ext = "pukWaC"
+class PWaCInfo(FiletypeInfo):
+    r"""FiletypeInfo subclass for pWaC format."""
+    description = "Wac parsed format"
+    filetype_ext = "pWaC"
+
+    escape_pairs = ConllInfo.escape_pairs
 
     def operations(self):
-        return FiletypeOperations(PukwacChecker, PukwacParser, None)
+        return FiletypeOperations(PWaCChecker, PWaCParser, None)
 
 
-class PukwacChecker(AbstractChecker):
-    r"""Checks whether input is in pukWaC format."""
+class PWaCChecker(AbstractChecker):
+    r"""Checks whether input is in pWaC format."""
     def matches_header(self, strict):
         return self.fileobj.peek(20).startswith(b"<text id")
 
 
-class PukwacParser(ConllParser):
-    r"""Instances of this class parse the pukWaC format,
+class PWaCParser(ConllParser):
+    r"""Instances of this class parse the pWaC format,
     calling the `handler` for each object that is parsed.
     """
     valid_roots = ["corpus"]
     entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?", "?"]
 
     def __init__(self, in_files, encoding='utf-8'):
-        super(PukwacParser, self).__init__(in_files, encoding)
+        super(PWaCParser, self).__init__(in_files, encoding)
 
     def _parse_line(self, line, handler, info={}):
         if line[0] == "<" and line[-1] == ">":
@@ -977,7 +1056,7 @@ class PukwacParser(ConllParser):
                         Sentence([], self.s_id), info={})
                 self.s_id += 1
         else:
-            super(PukwacParser, self)._parse_line(line, handler, info)
+            super(PWaCParser, self)._parse_line(line, handler, info)
 
 
 ##############################
@@ -1024,7 +1103,7 @@ class BinaryIndexParser(AbstractParser):
 
 
 # Instantiate FiletypeInfo singletons
-INFOS = [XMLInfo(), ConllInfo(), PukwacInfo(),
+INFOS = [XMLInfo(), ConllInfo(), PWaCInfo(),
         PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
         MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
 
@@ -1078,6 +1157,9 @@ class SmartParser(AbstractParser):
 
         for fti in INFOS:
             checker_class = fti.operations().checker_class
+            if checker_class is None:
+                raise Exception("Parser not implemented for: " \
+                        + unicode(fti.filetype_ext))
             if checker_class(fileobj).matches_header(strict=True):
                 return fti
 

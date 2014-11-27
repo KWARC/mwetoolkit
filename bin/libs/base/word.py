@@ -158,20 +158,6 @@ class Word :
                 
 ################################################################################
             
-    def to_moses( self ) :
-        """
-            Converts this word to a string representation where word parts are
-            separated from each other by "|" character, as in Moses' factored
-            translation format.
-            
-            @return A string with Moses factored representation of a word.
-        """
-        return "|".join( map( lambda x : x.replace("|","@@VERTICAL_BAR@@") \
-                         if x != WILDCARD else "", [ self.surface, self.lemma,
-                         self.pos, self.syn ] ) )       
-        
-######################################################################         
-        
     def from_string( self, s ) :
         """ 
             Instanciates the current word by converting to an object 
