@@ -137,7 +137,7 @@
     <entry entryid="45">    <ngram><w surface="rest" /> <w surface="home" /> </ngram></entry>
 </cand>
 <cand candid="46">
-    <entry entryid="46">    <ngram><w surface="musical" /> <w surface="accompaniment" /> </ngram></entry>
+    <entry entryid="46">    <ngram><w surface="snake_case" /> <w surface="variable" /> </ngram></entry>
 </cand>
 <cand candid="47">
     <entry entryid="47">    <ngram><w surface="insurance" /> <w surface="policy" /> </ngram></entry>
