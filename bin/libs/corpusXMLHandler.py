@@ -135,11 +135,11 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
      
 ################################################################################
 
-    def characters(self, content ):
-        """
-            Deals with textual content in the XML file. Useful for mweoccurs.
-
-        @param content:  The text found in the XML file
-        """
-        if content.strip() and self.sentence.mweoccurs :
-            self.sentence.mweoccurs[-1].candidate.append( Word(lemma=content) )
+    #def characters(self, content ):
+    #    """
+    #        Deals with textual content in the XML file. Useful for mweoccurs.#
+#
+#        @param content:  The text found in the XML file
+#        """
+#        if content.strip() and self.sentence.mweoccurs :
+#            self.sentence.mweoccurs[-1].candidate.append( Word(lemma=content) )
