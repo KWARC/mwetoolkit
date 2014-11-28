@@ -80,9 +80,17 @@ class InputHandler(object):
         Useful as a catch-all when delegating from another InputHandler."""
         return getattr(self, "handle_"+kind)(obj, info=info)
 
+    def handle_comment(self, comment, info={}):
+        r"""Called when parsing a comment."""
+        info["kind"] = "comment"
+        return self.handle_entity(comment, info)
+
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
         pass  # By default, we just silently ignore Meta instances
+        info["kind"] = "meta"   # XXX 2014-11-27 experimental (checking if too
+                                # many warnings would be generated...)
+        return self.handle_entity(meta_obj, info)
 
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
@@ -308,9 +316,14 @@ class AbstractTxtParser(AbstractParser):
         with ParsingContext(fileobj, handler, info):
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
-                self._parse_line(
-                        line.decode(self.encoding, self.encoding_errors),
-                        handler, {"fileobj": fileobj, "linenum": i+1})
+                for c in self.filetype_info.comment_prefixes:
+                    if line.startswith(c):
+                        comment = line[len(c):].strip()
+                        handler.handle_comment(comment)
+                else:
+                    self._parse_line(
+                            line.decode(self.encoding, self.encoding_errors),
+                            handler, {"fileobj": fileobj, "linenum": i+1})
 
     def _parse_line(self, line, handler, info={}):
         r"""Called to parse a line of the TXT file.
@@ -345,6 +358,11 @@ class FiletypeInfo(object):
     def filetype_ext(self):
         """A string with the extension for this filetype.
         Also used as a filetype hint."""
+        raise NotImplementedError
+
+    @property
+    def comment_prefixes(self):
+        """List of strings that precede a commentary for this filetype."""
         raise NotImplementedError
 
     @property
@@ -472,11 +490,7 @@ class XMLInfo(FiletypeInfo):
     filetype_ext = "XML"
 
     # TODO use escape_pairs here... how?
-    #cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
-    #cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
-    #cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
-    #cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
-    #cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
+    escape_pairs = []
 
     def operations(self):
         return FiletypeOperations(XMLChecker, XMLParser, XMLPrinter)
@@ -566,6 +580,9 @@ class XMLPrinter(AbstractPrinter):
     def after_file(self, fileobj, info={}):
         self.add_string(self.XML_FOOTER % {"root": self._root} + "\n")
         super(XMLPrinter, self).after_file(fileobj, info)
+
+    def handle_comment(self, comment, info={}):
+        self.add_string("<-- ", self.escape(comment), " -->\n")
 
     def handle_meta(self, meta_obj, info={}):
         self.add_string(meta_obj.to_xml(), "\n")
@@ -898,6 +915,7 @@ class ConllInfo(FiletypeInfo):
     description = "CONLL tab-separated 10-entries-per-word"
     filetype_ext = "CONLL"
 
+    comment_prefixes = ["#"]
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
             (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
 
@@ -909,8 +927,11 @@ class ConllChecker(AbstractChecker):
     r"""Checks whether input is in CONLL format."""
     def matches_header(self, strict):
         header = self.fileobj.peek(1024)
-        return len(header.split(b"\n", 1)[0].split()) \
-                == len(ConllParser.entries)
+        for line in header.split(b"\n"):
+            if line and not any(line.startswith(c) \
+                    for c in self.filetype_info.comment_prefixes):
+                return len(line.split("\t")) == len(ConllParser.entries)
+        return strict
 
 
 class ConllParser(AbstractTxtParser):
@@ -943,7 +964,7 @@ class ConllParser(AbstractTxtParser):
         self.s_id = 0
 
     def _parse_line(self, line, handler, info={}):
-        data = line.split()
+        data = line.split("\t")
         if len(data) <= 1: return
         data = [(WILDCARD if d == "_" else d) for d in data]
 
