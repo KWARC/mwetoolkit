@@ -472,6 +472,11 @@ class XMLInfo(FiletypeInfo):
     filetype_ext = "XML"
 
     # TODO use escape_pairs here... how?
+    #cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
+    #cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
+    #cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
+    #cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
+    #cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
 
     def operations(self):
         return FiletypeOperations(XMLChecker, XMLParser, XMLPrinter)
@@ -577,7 +582,8 @@ class MosesTextInfo(FiletypeInfo):
     description = "Moses textual format, with one sentence per line and <mwe> tags"
     filetype_ext = "MosesText"
 
-    escape_pairs = [("%%", "%%PERCENTS%%"), ("|", "%%UNDERSCORE%%")]
+    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
+                    (" ", "${space}"), ("\t", "${tab}")]
 
     def operations(self):
         return FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
@@ -613,55 +619,12 @@ class MosesTextPrinter(AbstractPrinter):
         line = " ".join(surface_list)
         self.add_string(line, "\n")
 
-
-##############################
-
-
-class WaCInfo(FiletypeInfo):
-    r"""FiletypeInfo subclass for tokenized WaC format."""
-    description = "Wac non-parsed tokenized format"
-    filetype_ext = "WaC"
-
-    escape_pairs = []
-
-    def operations(self):
-        return FiletypeOperations(WaCChecker, WaCParser, None)
-
-class WaCChecker(AbstractChecker):
-    r"""Checks whether input is in WaC format."""
-    def matches_header(self, strict):
-        return self.fileobj.peek(20).startswith(b"CURRENT URL")
-
-
-class WaCParser(AbstractTxtParser):
-    r"""Instances of this class parse the ukWaC format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_roots = ["corpus"]
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(WaCParser,self).__init__(in_files, encoding)
-        self.root = "corpus"
-        self.line_terminators = ".!?"
-        self.s_id = 1
-
-    def _parse_line(self, line, handler, info={}):
-        if not line.startswith("CURRENT URL"):
-            import re
-            eols = self.line_terminators
-            for m in re.finditer(r"([^.!?]+ .|[^.!?]+$)", line):
-                words = [Word(self.unescape(surface)) for surface \
-                        in m.group(1).split(" ")]
-                handler.handle_sentence(Sentence(words, self.s_id))
-                self.s_id += 1
-
-
 ##############################
 
 
 class HTMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for HTML format."""
-    description = "[[TODO REWRITE]] Pretty html"
+    description = "Pretty html for in-browser visualisation"
     filetype_ext = "HTML"
 
     def operations(self):
@@ -742,7 +705,7 @@ class PlainCorpusInfo(FiletypeInfo):
     description = "One sentence per line, with multi_word_expressions"
     filetype_ext = "PlainCorpus"
 
-    escape_pairs = [("$", "${dollar}"),
+    escape_pairs = [("$", "${dollar}"), (" ", "${space}"), ("\t", "${tab}"),
             ("_", "${underscore}"), ("#", "${hash}")]
 
     def operations(self):
@@ -767,7 +730,7 @@ class PlainCorpusParser(AbstractTxtParser):
 
     def _parse_line(self, line, handler, info={}):
         sentence = Sentence([], info["linenum"])
-        mwes = line.split(" ")  # each entry is an SWE/MWE
+        mwes = line.split()  # each entry is an SWE/MWE
         for mwe in mwes:
             words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]
             sentence.word_list.extend(words)
@@ -861,8 +824,8 @@ class MosesInfo(FiletypeInfo):
     description = "Moses factored format (word=f1|f2|f3|f4|f5)"
     filetype_ext = "FactoredMoses"
 
-    escape_pairs = [("@@", "@@AT_SIGNS@@"), ("|", "@@VERTICAL_BAR@@")]
-
+    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
+                    (" ", "${space}"), ("\t", "${tab}")]
     def operations(self):
         return FiletypeOperations(MosesChecker, MosesParser, MosesPrinter)
 
@@ -936,7 +899,7 @@ class ConllInfo(FiletypeInfo):
     filetype_ext = "CONLL"
 
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-            (" ", "${space}"), ("\t", "${tab}")]
+            (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
 
     def operations(self):
         return FiletypeOperations(ConllChecker, ConllParser, None)
@@ -1033,7 +996,9 @@ class PWaCInfo(FiletypeInfo):
     description = "Wac parsed format"
     filetype_ext = "pWaC"
 
-    escape_pairs = ConllInfo.escape_pairs
+    escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
+                    ("<", "${lt}"), (">", "${gt}"),
+            (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
 
     def operations(self):
         return FiletypeOperations(PWaCChecker, PWaCParser, None)
@@ -1110,7 +1075,7 @@ class BinaryIndexParser(AbstractParser):
 
 # Instantiate FiletypeInfo singletons
 INFOS = [XMLInfo(), ConllInfo(), PWaCInfo(),
-        PlainCorpusInfo(), WaCInfo(), BinaryIndexInfo(),
+        PlainCorpusInfo(), BinaryIndexInfo(),
         MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
 
 # Map filetype_hint -> filetype_info
