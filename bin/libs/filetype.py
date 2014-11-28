@@ -218,7 +218,11 @@ class AbstractParser(object):
     def unescape(self, string):
         r"""Return an unescaped version of `string`, using
         `self.filetype_info.escape_pairs` and whatever else is needed."""
-        for unescaped, escaped in self.filetype_info.escape_pairs:
+        # The escaper character must be the last to be unescaped
+        # Example: in XML, you should replace &amp; by & as the last operation,
+        # otherwise the sequence &amp;quot; will be wrongly unescaped as simple
+        # quote " instead of &quot;
+        for unescaped, escaped in reversed(self.filetype_info.escape_pairs):
             string = string.replace(escaped, unescaped)
         return string
 
@@ -435,6 +439,8 @@ class AbstractPrinter(InputHandler):
     def escape(self, string):
         r"""Return an escaped version of `unicode`, using
         `self.filetype_info.escape_pairs` and whatever else is needed."""
+        # NEVER change the order in which you go through the list. The first
+        # character to escape must always be the escaper itself.
         for unescaped, escaped in self.filetype_info.escape_pairs:
             string = string.replace(unescaped, escaped)
         return string
