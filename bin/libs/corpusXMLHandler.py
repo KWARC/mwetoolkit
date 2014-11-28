@@ -135,6 +135,9 @@ class CorpusXMLHandler( xml.sax.ContentHandler ) :
      
 ################################################################################
 
+
+    # TODO: add a treat comment in the new version that uses ElementTree
+
     #def characters(self, content ):
     #    """
     #        Deals with textual content in the XML file. Useful for mweoccurs.#
