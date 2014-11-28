@@ -117,11 +117,6 @@ OPTIONS may be:
 
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
-
--x OR --text
-    Instead of traditional candidates in XML, takes as input a textual list with 
-    one query per line. The output will have the query followed by the number of 
-    web occurrences. MUST be used with -u or -w option.
    
 -a OR --vars
     Instead of counting the candidate, counts the variances in the <vars> 
@@ -141,11 +136,17 @@ OPTIONS may be:
 -B OR --bigrams
    Count bigrams frequencies in each ngram.
 
+--lower OR --upper
+
 -o OR --old
     Use the old (slower) Python indexer, even when the C indexer is available.
     
 {common_options}
 """
+
+# TODO: Add --attributes <attrs>
+    #Generate indices only for the specified attributes. <attrs> is a
+    #colon-separated list of attributes (e.g. lemma:pos:lemma+pos).
 
 index = None  # Index()
 suffix_array = None  # SuffixArray()
@@ -156,7 +157,6 @@ web_freq = None
 the_corpus_size = -1
 low_limit = -1
 up_limit = -1
-text_input = False
 count_vars = False
 count_joint_frequency = True
 count_bigrams = False
@@ -419,7 +419,6 @@ def treat_text( line ):
     count = str(web_freq.search_frequency(query))
     print(query + "\t" + count)
 
-
 ################################################################################
 
 def treat_options(opts, arg, n_arg, usage_string):
@@ -435,7 +434,7 @@ def treat_options(opts, arg, n_arg, usage_string):
     global cache_file, get_freq_function, build_entry, web_freq
     global the_corpus_size, freq_name
     global low_limit, up_limit
-    global text_input, count_vars
+    global count_vars
     global language
     global suffix_array
     global count_joint_frequency
@@ -490,12 +489,12 @@ def treat_options(opts, arg, n_arg, usage_string):
             surface_flag = True
         elif o in ("-g", "--ignore-pos"):
             ignorepos_flag = True
-        elif o in ("-f", "--from", "-t", "--to" ):
+        elif o in ("--lower", "--upper" ):
             try:
                 limit = int(a)
                 if limit < 0:
                     raise ValueError, "Argument of " + o + " must be positive"
-                if o in ( "-f", "--from" ):
+                if o == "--lower" :
                     if up_limit == -1 or up_limit >= limit:
                         low_limit = limit
                     else:
@@ -507,8 +506,6 @@ def treat_options(opts, arg, n_arg, usage_string):
                         raise ValueError, "Argument of -t <= argument of -t"
             except ValueError as message:
                 error( str(message) + "\nArgument of " + o + " must be integer")
-        elif o in ("-x", "--text" ):
-            text_input = True
         elif o in ("-a", "--vars" ):
             count_vars = True
         elif o in ("-l", "--lang" ):
@@ -519,11 +516,11 @@ def treat_options(opts, arg, n_arg, usage_string):
             count_bigrams = True
         elif o in ("-o", "--old"):
             Index.use_c_indexer(False)
-        elif o in ("--corpus-from"):
+        elif o == "--corpus-from":
             filetype_corpus_ext = a
-        elif o in ("--candidates-from"):
+        elif o == "--candidates-from":
             filetype_candidates_ext = a
-        elif o in ("-o", "--output"):
+        elif o == "--to":
             output_filetype_ext = a
         else:
             raise Exception("Bad arg: " + o)
@@ -552,8 +549,8 @@ def treat_options(opts, arg, n_arg, usage_string):
 
     if len(mode) != 1:
         error("Exactly one option -u, -w or -i, must be provided")
-    elif text_input and web_freq is None:
-        error("-x option MUST be used with either -u or -w")
+    #elif text_input and web_freq is None:
+    #    warn("-x option is recommended for web queries, not textual indices")
 
 
 ################################################################################
@@ -561,15 +558,15 @@ def treat_options(opts, arg, n_arg, usage_string):
 
 longopts = ["candidates-from=", "corpus-from=", "to=",
             "yahoo", "google", "index=", "ignore-pos", "surface", "old",
-            "from=", "to=", "text", "vars", "lang=", "no-joint", "bigrams",
+            "lower=", "upper=", "vars", "lang=", "no-joint", "bigrams",
             "univ=", "web1t="]
-args = read_options("ywi:gsof:t:xal:Jbu:T:", longopts,
+args = read_options("ywi:gsoal:Jbu:T:", longopts,
         treat_options, -1, usage_string)
 
 try:
     verbose("Counting ngrams in candidates file")
-    printer = CounterPrinter(filetype_candidates_ext)
-    filetype.parse(args, printer, output_filetype_ext)
+    printer = CounterPrinter(output_filetype_ext)
+    filetype.parse(args, printer, filetype_candidates_ext)
 finally:
     if web_freq:
         web_freq.flush_cache()  # VERY IMPORTANT!
