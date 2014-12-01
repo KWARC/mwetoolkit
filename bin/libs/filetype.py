@@ -35,6 +35,7 @@ from __future__ import absolute_import
 import io
 import collections
 import itertools
+import re
 import sys
 
 from xml.etree import ElementTree
@@ -67,6 +68,10 @@ class FiletypeOperations(collections.namedtuple("FiletypeOperations",
 
 class InputHandler(object):
     r"""Handler interface whose methods are called by the parser."""
+    def flush(self):
+        r"""May be called to flush outputs."""
+        pass  # By default, do nothing
+
     def before_file(self, fileobj, info={}):
         r"""Called before parsing file contents."""
         pass  # By default, do nothing
@@ -79,11 +84,6 @@ class InputHandler(object):
         r"""Alternative to calling `self.handle_{kind}` methods.
         Useful as a catch-all when delegating from another InputHandler."""
         return getattr(self, "handle_"+kind)(obj, info=info)
-
-    def handle_comment(self, comment, info={}):
-        r"""Called when parsing a comment."""
-        info["kind"] = "comment"
-        return self.handle_entity(comment, info)
 
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
@@ -107,15 +107,46 @@ class InputHandler(object):
         info["kind"] = "pattern"
         return self.handle_entity(pattern, info)
 
+    def handle_comment(self, comment, info={}):
+        r"""Called when parsing a comment."""
+        info["kind"] = "comment"
+        return self.handle_entity(comment, info)
+
+    def handle_directive(self, directive, info={}):
+        r"""Called when parsing a directive."""
+        info["kind"] = "directive"
+        return self.handle_entity(directive, info)
+
     def handle_entity(self, entity, info={}):
         r"""Called to treat a generic entity (sentence/candidate/pattern)."""
         kind = info.get("kind", "entity")
         util.warn("Ignoring " + kind)
 
 
+class Directive(object):
+    RE_PATTERN = m = re.compile(
+            r' *MWETOOLKIT: *(\w+)="(.*?)" *$', re.MULTILINE)
+    def __init__(self, key, value):
+        self.key, self.value = key, value
+        assert not "\"" in value
+
+    def __str__(self):
+        return "MWETOOLKIT: {}=\"{}\"".format(self.key, self.value)
+
+    @staticmethod
+    def from_string(string, on_error=lambda: None):
+        r"""Return an instance of Directive or None."""
+        m = Directive.RE_PATTERN.match(string)
+        if m is None: return None
+        return Directive(*m.groups())
+
+
 class DelegatorInputHandler(InputHandler):
     r"""InputHandler that delegates all methods to `self.delegate`."""
     delegate = None
+
+    def flush(self):
+        self.delegate.flush()
 
     def before_file(self, fileobj, info={}):
         return self.delegate.before_file(fileobj, info)
@@ -193,7 +224,7 @@ class AbstractParser(object):
         self.partial_obj = None
         self.partial_kwargs = None
 
-    def _flush_partial_callback(self):
+    def flush_partial_callback(self):
         r"""Finally perform the callback `self.partial_fun(...args...)`."""
         if self.partial_fun is not None:
             self.partial_fun(self.partial_obj, **self.partial_kwargs)
@@ -201,7 +232,7 @@ class AbstractParser(object):
 
     def new_partial(self, new_partial_fun, obj, **kwargs):
         r"""Add future callback `partial_fun(...args...)`."""
-        self._flush_partial_callback()
+        self.flush_partial_callback()
         self.partial_fun = new_partial_fun
         self.partial_obj = obj
         self.partial_kwargs = kwargs
@@ -218,9 +249,20 @@ class AbstractParser(object):
                 self._parse_file(f, handler)
             except StopParsing:  # Reading only part of file
                 pass  # Just interrupt parsing
-            self._flush_partial_callback()
         self.close()
         return handler
+
+
+    def _parse_comment(self, handler, comment, info):
+        r"""Parse contents of comment string and delegate to 
+        `handler.handle_{directive,comment}` accordingly.
+        """
+        comment = comment.strip()
+        directive = Directive.from_string(comment)
+        if directive:
+            handler.handle_directive(directive, info)
+        else:
+            handler.handle_comment(comment)
 
 
     def unescape(self, string):
@@ -305,6 +347,8 @@ class AbstractTxtParser(AbstractParser):
     """
     def __init__(self, input_files, encoding):
         super(AbstractTxtParser, self).__init__(input_files)
+        cp = re.escape(self.filetype_info.comment_prefix)
+        self.comment_pattern = re.compile("^ *" + cp + " *(?P<contents>.*?) $")
         self.encoding = encoding
         self.encoding_errors = "replace"
         self.root = "<unknown-root>"
@@ -316,10 +360,9 @@ class AbstractTxtParser(AbstractParser):
         with ParsingContext(fileobj, handler, info):
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
-                for c in self.filetype_info.comment_prefixes:
-                    if line.startswith(c):
-                        comment = line[len(c):].strip()
-                        handler.handle_comment(comment)
+                if line.startswith(self.filetype_info.comment_prefix):
+                    comment = line[len(self.filetype_info.comment_prefix):]
+                    self._parse_comment(handler, comment, {})
                 else:
                     self._parse_line(
                             line.decode(self.encoding, self.encoding_errors),
@@ -341,6 +384,7 @@ class ParsingContext(object):
     
     def __exit__(self, t, v, tb):
         if v is None or isinstance(v, StopParsing):
+            self.info["parser"].flush_partial_callback()
             self.handler.after_file(self.fileobj, self.info)
 
 
@@ -361,8 +405,8 @@ class FiletypeInfo(object):
         raise NotImplementedError
 
     @property
-    def comment_prefixes(self):
-        """List of strings that precede a commentary for this filetype."""
+    def comment_prefix(self):
+        """String that precedes a commentary for this filetype."""
         raise NotImplementedError
 
     @property
@@ -441,9 +485,17 @@ class AbstractPrinter(InputHandler):
         self._waiting_objects = []
         self._scope = 0
 
-    def after_file(self, fileobj, info={}):
-        r"""Finish processing and flush `fileobj`."""
-        self.flush()
+    def before_file(self, fileobj, info={}):
+        r"""Begin processing by printing filetype."""
+        directive = Directive("filetype",
+                self.filetype_info.filetype_ext)
+        self.handle_comment(unicode(directive), info)
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        r"""Flush outputs after execution."""
+        if exc_type is None:
+            self.flush()
+
 
     def add_string(self, *strings):
         r"""Queue strings to be printed."""
@@ -478,6 +530,21 @@ class AbstractPrinter(InputHandler):
         r"""(Print bytestring in self._output)"""
         assert isinstance(bytestring, bytes)
         self._output.write(bytestring)
+
+    def handle_comment(self, comment, info={}):
+        r"""Default implementation to output comment."""
+        for c in comment.split("\n"):
+            self.add_string(self.filetype_info.comment_prefix + " " + c + "\n")
+
+    def handle_directive(self, directive, info={}):
+        r"""Default implementation when seeing a directive."""
+        if directive.key == "filetype":
+            # We don't care about input filetype. Just keep
+            # some information about the conversion.
+            if directive.value != self.filetype_info.filetype_ext:
+                self.handle_comment("[Converted from " + directive.value + "]")
+        else:
+            util.warn_once("Unknown directive: " + directive.key)
 
 
 
@@ -574,15 +641,13 @@ class XMLPrinter(AbstractPrinter):
     valid_roots = ["dict", "corpus", "candidates", "patterns"]
 
     def before_file(self, fileobj, info={}):
-        self.add_string(self.XML_HEADER % {"root": self._root, "ns": ""} + "\n")
-        super(XMLPrinter, self).before_file(fileobj, info)
+        self.add_string(self.XML_HEADER % {"root": self._root, "ns": ""}, "\n")
 
     def after_file(self, fileobj, info={}):
         self.add_string(self.XML_FOOTER % {"root": self._root} + "\n")
-        super(XMLPrinter, self).after_file(fileobj, info)
 
     def handle_comment(self, comment, info={}):
-        self.add_string("<-- ", self.escape(comment), " -->\n")
+        self.add_string("<!-- ", self.escape(comment), " -->\n")
 
     def handle_meta(self, meta_obj, info={}):
         self.add_string(meta_obj.to_xml(), "\n")
@@ -598,7 +663,8 @@ class MosesTextInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for MosesText format."""
     description = "Moses textual format, with one sentence per line and <mwe> tags"
     filetype_ext = "MosesText"
-
+  
+    comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
                     (" ", "${space}"), ("\t", "${tab}")]
 
@@ -643,6 +709,9 @@ class HTMLInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for HTML format."""
     description = "Pretty html for in-browser visualisation"
     filetype_ext = "HTML"
+
+    # TODO use python-based HTML escape
+    escape_pairs = []
 
     def operations(self):
         return FiletypeOperations(HTMLChecker, None, HTMLPrinter)
@@ -702,13 +771,14 @@ class HTMLPrinter(AbstractPrinter):
         import datetime
         self.add_string(html_header % { "timestamp": datetime.datetime.now(),
               "corpusname": s[max(0,s.rfind("/")):], "filename": s})
-        super(HTMLPrinter, self).before_file(fileobj, info)
 
 
     def after_file(self, fileobj, info={}):
         self.add_string("</body>\n</html>")
-        super(HTMLPrinter, self).after_file(fileobj, info)
 
+
+    def handle_comment(self, comment, info={}):
+        self.add_string("<!-- ", self.escape(comment), " -->\n")
 
     def handle_sentence(self, sentence, info={}):
         self.add_string(sentence.to_html(), "\n")
@@ -721,7 +791,8 @@ class PlainCorpusInfo(FiletypeInfo):
     r"""FiletypeInfo subclass for PlainCorpus format."""
     description = "One sentence per line, with multi_word_expressions"
     filetype_ext = "PlainCorpus"
-
+ 
+    comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), (" ", "${space}"), ("\t", "${tab}"),
             ("_", "${underscore}"), ("#", "${hash}")]
 
@@ -794,6 +865,7 @@ class PlainCandidatesInfo(FiletypeInfo):
     description = "One multi_word_candidate per line"
     filetype_ext = "PlainCandidates"
 
+    comment_prefix = "#"
     escape_pairs = PlainCorpusInfo.escape_pairs
 
     def operations(self):
@@ -841,8 +913,10 @@ class MosesInfo(FiletypeInfo):
     description = "Moses factored format (word=f1|f2|f3|f4|f5)"
     filetype_ext = "FactoredMoses"
 
+    comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
                     (" ", "${space}"), ("\t", "${tab}")]
+
     def operations(self):
         return FiletypeOperations(MosesChecker, MosesParser, MosesPrinter)
 
@@ -915,7 +989,7 @@ class ConllInfo(FiletypeInfo):
     description = "CONLL tab-separated 10-entries-per-word"
     filetype_ext = "CONLL"
 
-    comment_prefixes = ["#"]
+    comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
             (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
 
@@ -928,8 +1002,7 @@ class ConllChecker(AbstractChecker):
     def matches_header(self, strict):
         header = self.fileobj.peek(1024)
         for line in header.split(b"\n"):
-            if line and not any(line.startswith(c) \
-                    for c in self.filetype_info.comment_prefixes):
+            if line and not line.startswith(self.filetype_info.comment_prefix):
                 return len(line.split("\t")) == len(ConllParser.entries)
         return strict
 
@@ -1017,9 +1090,10 @@ class PWaCInfo(FiletypeInfo):
     description = "Wac parsed format"
     filetype_ext = "pWaC"
 
+    comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-                    ("<", "${lt}"), (">", "${gt}"),
-            (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
+                    ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
+                    ("\t", "${tab}"), ("#", "${hash}")]
 
     def operations(self):
         return FiletypeOperations(PWaCChecker, PWaCParser, None)
@@ -1125,8 +1199,9 @@ for fti in INFOS:
 
 
 class SmartParser(AbstractParser):
-    r"""Class that detects the file format
-    and delegates the work to the correct parser."""
+    r"""Class that detects input file formats
+    and delegates the work to the correct parser.
+    """
     def __init__(self, input_files, filetype_hint=None):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
@@ -1139,6 +1214,7 @@ class SmartParser(AbstractParser):
             p = parser_class([f])
             # Delegate the whole work to parser `p`.
             p.parse(handler)
+        handler.flush()
         return handler
 
 
@@ -1146,6 +1222,11 @@ class SmartParser(AbstractParser):
         r"""Return a FiletypeInfo instance for given fileobj."""
         if filetype_hint in HINT_TO_INFO:
             return HINT_TO_INFO[filetype_hint]
+
+        header = fileobj.peek(1024)
+        for m in Directive.RE_PATTERN.finditer(header):
+            if m.group(1) == "filetype":
+                return HINT_TO_INFO[Directive(*m.groups()).value]
 
         for fti in INFOS:
             checker_class = fti.operations().checker_class

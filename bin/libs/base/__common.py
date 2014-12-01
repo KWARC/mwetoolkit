@@ -117,6 +117,7 @@ UNKNOWN_FEAT_VALUE = "?"
 """
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE %(root)s SYSTEM "dtd/mwetoolkit-%(root)s.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
 <%(root)s %(ns)s>"""
 
 """
