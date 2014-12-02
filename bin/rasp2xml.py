@@ -327,4 +327,3 @@ else :
                
 if not generate_text :
     print( XML_FOOTER % { "root": "corpus" } )
-

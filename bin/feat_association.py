@@ -46,11 +46,11 @@ from __future__ import absolute_import
 
 import math
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
 from libs.util import read_options, treat_options_simplest, \
                  verbose, parse_xml, warn, error
+from libs import filetype
 
 
 
@@ -60,9 +60,23 @@ from libs.util import read_options, treat_options_simplest, \
      
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <candidates.xml>
+python {program} OPTIONS <candidates>
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
+
+--from <input-filetype-ext>
+    Force reading from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
+
+--to <output-filetype-ext>
+    Write output in given filetype extension.
+    (By default, keeps original input format):
+    {descriptions.output[candidates]}
 
 -m <meas> OR --measures <meas>
     The name of the measures that will be calculated. If this option is not
@@ -88,10 +102,11 @@ OPTIONS may be:
     the simple raw frequency of the n-gram. Both, normalized and unnormalized
     MLE are rank-equivalent.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+{common_options}
 """
+input_filetype_ext = None
+output_filetype_ext = None
+
 supported_measures = [ "mle", "t", "pmi", "dice", "ll" ]
 corpussize_dict = {}
 measures = supported_measures
@@ -100,72 +115,73 @@ heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
 entity_counter = 0
 not_normalize_mle=False
 warn_ll_bigram_only = True
+
      
 ################################################################################     
-       
-def treat_meta( meta ) :
-    """
-        Adds new meta-features corresponding to the AM features that we add to
+
+class FeatureAdderPrinter(filetype.AutomaticPrinterHandler):
+    def handle_meta(self, meta, info={}):
+        """Adds new meta-features corresponding to the AM features that we add to
         each candidate. The meta-features define the type of the features, which
         is a real number for each of the 4 AMs in each corpus.
         
         @param meta The `Meta` header that is being read from the XML file.       
-    """
-    global corpussize_dict
-    global measures
-    for corpus_size in meta.corpus_sizes :
-        corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
-    for corpus_size in meta.corpus_sizes :
-        for meas in measures :
-            meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
-    print(meta.to_xml().encode( 'utf-8' ))
-       
-################################################################################     
-       
-def treat_candidate( candidate ) :
-    """
-        For each candidate and for each `CorpusSize` read from the `Meta` 
+        """
+        global corpussize_dict
+        global measures
+        for corpus_size in meta.corpus_sizes :
+            corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
+        for corpus_size in meta.corpus_sizes :
+            for meas in measures :
+                meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
+        super(FeatureAdderPrinter, self).handle_meta(meta, info)
+
+
+    def handle_candidate(self, candidate, info={}):
+        """For each candidate and for each `CorpusSize` read from the `Meta` 
         header, generates four features that correspond to the Association
         Measures described above.
         
         @param candidate The `Candidate` that is being read from the XML file.    
-    """
-    global corpussize_dict, main_freq, entity_counter
-    if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        """
+        global corpussize_dict, main_freq, entity_counter
+        if entity_counter % 100 == 0:
+            verbose("Processing candidate number %(n)d" % {"n":entity_counter})
 
-    joint_freq = {}
-    singleword_freq = {}
-    backed_off = False
-    # Convert all these integers to floats...
-    for freq in candidate.freqs :
-        joint_freq[ freq.name ] = ( float(abs( freq.value ) ) )
-        singleword_freq[ freq.name ] = []
-        if freq.value < 0 :
-            backed_off = True
-    for word in candidate :
-        for freq in word.freqs :
-            singleword_freq[ freq.name ].append( abs( float(freq.value) ) )
-            # Little trick: negative counts indicate backed-off counts
+        joint_freq = {}
+        singleword_freq = {}
+        backed_off = False
+        # Convert all these integers to floats...
+        for freq in candidate.freqs :
+            joint_freq[ freq.name ] = ( float(abs( freq.value ) ) )
+            singleword_freq[ freq.name ] = []
             if freq.value < 0 :
                 backed_off = True
-    
-    for freq in candidate.freqs :
-        corpus_name = freq.name
-        if not backed_off and corpus_name == "backoff" :
-            N = corpussize_dict[ main_freq ]
-        else :
-            N = corpussize_dict[ corpus_name ]
-        try :
-            feats = calculate_ams( joint_freq[ corpus_name ],
-                    singleword_freq[ corpus_name ],
-                    N, corpus_name )
-            for feat in feats :
-                candidate.add_feat( feat )
-        except Exception :
-            error( "This should never be printed. The end of the world is here")
-    print(candidate.to_xml().encode( 'utf-8' ))
-    entity_counter = entity_counter + 1
+        for word in candidate :
+            for freq in word.freqs :
+                singleword_freq[ freq.name ].append( abs( float(freq.value) ) )
+                # Little trick: negative counts indicate backed-off counts
+                if freq.value < 0 :
+                    backed_off = True
+        
+        for freq in candidate.freqs :
+            corpus_name = freq.name
+            if not backed_off and corpus_name == "backoff" :
+                N = corpussize_dict[ main_freq ]
+            else :
+                N = corpussize_dict[ corpus_name ]
+            try :
+                feats = calculate_ams( joint_freq[ corpus_name ],
+                        singleword_freq[ corpus_name ],
+                        N, corpus_name )
+                for feat in feats :
+                    candidate.add_feat( feat )
+            except Exception :
+                error( "This should never be printed. The end of the world is here")
+
+        super(FeatureAdderPrinter, self).handle_candidate(candidate, info)
+        entity_counter = entity_counter + 1
+
 
 ################################################################################     
 
@@ -414,6 +430,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             main_freq = a
         elif o in ( "-u", "--unnorm-mle" ) :
             not_normalize_mle = True
+        elif o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
 ################################################################################
 
@@ -431,10 +453,7 @@ def reset_entity_counter( filename ) :
 # MAIN SCRIPT
 
 longopts = ["measures=", "original=", "unnorm-mle"]
-arg = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
+args = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
 
-handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                treat_candidate=treat_candidate,
-                                gen_xml="candidates" )
-parse_xml( handler, arg, reset_entity_counter )
-print(handler.footer)
+printer = FeatureAdderPrinter(output_filetype_ext)
+filetype.parse(args, printer, input_filetype_ext)

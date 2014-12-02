@@ -51,7 +51,6 @@ import shelve
 import os
 import tempfile
 
-from libs.corpusXMLHandler import CorpusXMLHandler
 from libs.base.__common import WILDCARD, TEMP_PREFIX, TEMP_FOLDER, XML_HEADER, \
     XML_FOOTER
 from libs.base.frequency import Frequency
@@ -59,8 +58,8 @@ from libs.base.candidate import Candidate
 from libs.base.ngram import Ngram
 from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, parse_xml, warn
-from libs.patternlib import parse_patterns_file, build_generic_pattern
-from libs.indexlib import Index
+from libs.filetype.patternlib import parse_patterns_file, build_generic_pattern
+from libs.filetype.indexlib import Index
 from libs.filetype import parse, InputHandler
 
 ################################################################################

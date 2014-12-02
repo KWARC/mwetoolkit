@@ -151,4 +151,3 @@ arg = read_options( "n:", longopts, treat_options, -1, usage_string )
 handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
                                 gen_xml=False )
 parse_xml( handler, arg, print_histogram )
-        

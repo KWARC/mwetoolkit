@@ -56,12 +56,11 @@ import tempfile
 import subprocess
 import struct
 
-from .corpusXMLHandler import CorpusXMLHandler
-from .base.sentence import Sentence
-from .util import verbose, strip_xml, warn, error
-from .base.word import Word, WORD_ATTRIBUTES
-from .base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
-from . import filetype
+from ..base.sentence import Sentence
+from ..util import verbose, strip_xml, warn, error
+from ..base.word import Word, WORD_ATTRIBUTES
+from ..base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
+from .. import filetype
 
 
 NGRAM_LIMIT = 16

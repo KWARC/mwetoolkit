@@ -181,6 +181,3 @@ class DictXMLHandler( xml.sax.ContentHandler ) :
                 # makes it necessary a temporary buffer for the footer. Not really a
                 # perfect solution but it will do for now
                 self.footer = XML_FOOTER % { "root" : self.gen_xml }
-
-     
-################################################################################

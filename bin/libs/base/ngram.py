@@ -500,4 +500,3 @@ class NgramIter() :
             raise StopIteration
         else :
             return self.ngram[ self.current ]
-

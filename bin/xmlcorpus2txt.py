@@ -128,5 +128,3 @@ def reset_entity_counter( filename ) :
 longopts = ["atttibutes="]
 arg = read_options("a:", longopts, treat_options, -1, usage_string)
 parse_xml( CorpusXMLHandler(print_sentence), arg, reset_entity_counter )
-
-

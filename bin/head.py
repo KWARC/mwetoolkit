@@ -99,7 +99,7 @@ class HeadPrinterHandler(filetype.AutomaticPrinterHandler):
         if self.counter % 100 == 0:
             verbose( "Processing ngram number %(n)d" % { "n":self.counter } )
         if self.counter < self.limit:
-            self.delegate.handle_by_kind(info["kind"], entity, info)
+            self.chain.handle_by_kind(info["kind"], entity, info)
         else:
             raise filetype.StopParsing
         self.counter += 1

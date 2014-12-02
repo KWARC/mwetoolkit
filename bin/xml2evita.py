@@ -85,4 +85,3 @@ def treat_candidate(candidate):
 
 arg = read_options("", [], treat_options_simplest, -1, usage_string)
 parse_xml(CandidatesXMLHandler(treat_candidate=treat_candidate), arg)
-

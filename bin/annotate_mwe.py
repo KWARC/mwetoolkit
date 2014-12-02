@@ -120,7 +120,7 @@ class AnnotatorHandler(filetype.AutomaticPrinterHandler):
 
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)
-        self.delegate.handle_sentence(sentence)
+        self.chain.handle_sentence(sentence)
 
 
 ################################################################################

@@ -228,5 +228,3 @@ class WebFreq( object ) :
         cache_file = open( self.cache_filename, "w" )
         cPickle.dump( self.cache, cache_file )
         cache_file.close()
-
-################################################################################

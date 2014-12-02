@@ -66,5 +66,3 @@ class MetaTPClass( Feature ) :
         """
         return "<metatpclass name=\"" + self.name + \
                "\" type=\"" + str(self.value) + "\" />"
-        
-######################################################################

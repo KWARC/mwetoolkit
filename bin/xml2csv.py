@@ -37,7 +37,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
+from libs.filetype.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml
 from libs.base.__common import WILDCARD
 from libs.util import verbose

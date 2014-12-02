@@ -124,4 +124,3 @@ XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
     Default XML footer
 """
 XML_FOOTER = """</%(root)s>"""
-

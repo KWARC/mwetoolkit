@@ -454,4 +454,3 @@ if __name__ == '__main__':
         getMeta(file)
         getCand(file)
         print(XML_FOOTER % { "root":"candidates" })
-    

@@ -39,8 +39,7 @@ from __future__ import absolute_import
 import sys
 from libs.util import read_options, treat_options_simplest, verbose
 
-from libs.printers import XMLPrinter
-from libs.filetype import parse, InputHandler
+from libs import filetype
 from libs.util import warn_once, warn
      
 
@@ -48,6 +47,8 @@ from libs.util import warn_once, warn
 # GLOBALS     
      
 usage_string = """Usage: 
+
+[DEPRECATED: Use convert.py instead]
     
 python %(program)s OPTIONS <files.xml>
 
@@ -60,10 +61,10 @@ OPTIONS:
 
 ################################################################################
 
-class ConllToXMLHandler(InputHandler):
+class ConllToXMLHandler(filetype.ChainedInputHandler):
     r"""An InputHandler that converts CONLL into XML."""
     def before_file(self, fileobj, info={}):
-        self.printer = XMLPrinter(info["root"])
+        super(ConllToXMLHandler, self).before_file(fileobj, info)
         self.sentence_counter = 0
 
     def handle_sentence(self, sentence, info={}):
@@ -76,7 +77,7 @@ class ConllToXMLHandler(InputHandler):
             verbose("Processing sentence number %(n)d"
                     % {"n": self.sentence_counter})
 
-        self.printer.add(sentence)
+        self.chain.handle_sentence(sentence)
 
 ################################################################################     
        
@@ -101,4 +102,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = []
 args = read_options("", longopts, treat_options, -1, usage_string)
-parse(args, ConllToXMLHandler(), "CONLL")
+filetype.parse(args, ConllToXMLHandler(), "CONLL")

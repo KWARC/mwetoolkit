@@ -60,5 +60,3 @@ class MetaFeat( Feature ) :
         """
         return "<metafeat name=\"" + self.name + \
                "\" type=\"" + str(self.value) + "\" />"
-        
-################################################################################

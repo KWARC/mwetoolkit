@@ -101,4 +101,3 @@ def print_counters( filename ) :
 arg = read_options( "", [], treat_options_simplest, -1, usage_string )
 handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )
 parse_xml( handler, arg, print_counters )
-

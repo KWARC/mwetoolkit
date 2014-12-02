@@ -233,5 +233,3 @@ class Candidate ( Entry ) :
             if tpclass.name == tpclass_name :
                 return tpclass.value
         return UNKNOWN_FEAT_VALUE
-
-################################################################################

@@ -55,4 +55,3 @@ temp_fh.write( result )
 subprocess.call( [BROWSER, temp_name] )
 temp_fh.close()
 #os.remove( temp_name )
-

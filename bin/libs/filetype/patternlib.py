@@ -32,9 +32,9 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from xml.etree import ElementTree
-from .base.word import Word, WORD_ATTRIBUTES
-from .base.ngram import Ngram
-from .base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
+from ..base.word import Word, WORD_ATTRIBUTES
+from ..base.ngram import Ngram
+from ..base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 import re
 import sys
 

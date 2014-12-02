@@ -350,4 +350,3 @@ handler = GenericXMLHandler( treat_meta=treat_meta,
                              gen_xml=True )
 parse_xml( handler, arg, reset_entity_counter )
 print(handler.footer)
-

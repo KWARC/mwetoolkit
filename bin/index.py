@@ -34,7 +34,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from libs.util import error, treat_options_simplest, read_options
-from libs import indexlib
+from libs.filetype import indexlib
 
 ################################################################################
 

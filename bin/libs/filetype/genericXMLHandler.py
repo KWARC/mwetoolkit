@@ -36,9 +36,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
-from libs.corpusXMLHandler import CorpusXMLHandler
-from libs.dictXMLHandler import DictXMLHandler
+from .candidatesXMLHandler import CandidatesXMLHandler
+from .corpusXMLHandler import CorpusXMLHandler
+from .dictXMLHandler import DictXMLHandler
 import xml.sax
 
 
@@ -139,5 +139,3 @@ class GenericXMLHandler( xml.sax.ContentHandler ) :
         @param content: The text found in the XML file
         """
         self.handler.characters(content)
-
-################################################################################

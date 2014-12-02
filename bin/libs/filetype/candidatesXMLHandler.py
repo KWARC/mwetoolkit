@@ -235,6 +235,3 @@ class CandidatesXMLHandler( xml.sax.ContentHandler ) :
             self.inoccurs = False
         elif name == "vars" :
             self.invars = False
-  
-
-################################################################################

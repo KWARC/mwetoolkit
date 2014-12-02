@@ -43,16 +43,15 @@ import sys
 import re
 import subprocess
 
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.base.frequency import Frequency
 from libs.base.googleFreq import GoogleFreq
 from libs.base.googleFreqUniv import GoogleFreqUniv
 from libs.base.corpus_size import CorpusSize
 from libs.util import read_options, treat_options_simplest, \
         verbose, error, warn
-from libs.indexlib import Index, ATTRIBUTE_SEPARATOR
 from libs.base.__common import DEFAULT_LANG
 from libs import filetype
+from libs.filetype.indexlib import Index, ATTRIBUTE_SEPARATOR
 
 ################################################################################
 # GLOBALS    
@@ -184,7 +183,7 @@ class CounterPrinter(filetype.AutomaticPrinterHandler):
         """
         global freq_name, the_corpus_size
         meta.add_corpus_size(CorpusSize(name=freq_name, value=the_corpus_size))
-        self.delegate.handle_meta(meta, info)
+        self.chain.handle_meta(meta, info)
 
     def handle_candidate(self, candidate, info={}):
         """For each candidate, searches for the individual word frequencies of the
@@ -206,7 +205,7 @@ class CounterPrinter(filetype.AutomaticPrinterHandler):
                     append_counters(var)
             else:
                 append_counters(candidate)
-        self.delegate.handle_candidate(candidate, info)
+        self.chain.handle_candidate(candidate, info)
         self.entity_counter += 1
 
 

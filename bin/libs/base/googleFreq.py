@@ -115,5 +115,3 @@ class GoogleFreq( webFreq.WebFreq ) :
             pages in the World Wide Web.
         """
         return 52000000000 # AROUND 52 BILLION PAGES 24/Feb/2012
-             
-################################################################################
