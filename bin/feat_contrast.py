@@ -36,14 +36,14 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-import xml.sax
 import math
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
 from libs.util import read_options, treat_options_simplest, \
-                 verbose, parse_xml, error
+                 verbose, error
+from libs import filetype
+
 
 ################################################################################     
 # GLOBALS     
@@ -86,112 +86,118 @@ totals_dict = {}
 measures = supported_measures
 # TODO: Parametrable combine function
 # heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
-entity_counter = 0
 join_all_contrastive=False
 main_freq_name = None
-     
-################################################################################     
-       
-def add_metafeatures( meta ) :
-    """
-        Adds new meta-features corresponding to the features that we add to
-        each candidate. The meta-features define the type of the features, which
-        is a real number for each of the contrastive measures in each corpus.
-        
-        @param meta The `Meta` header that is being read from the XML file.       
-    """
-    global corpussize_dict
-    global measures
-    global main_freq_name
-    for corpus_size in meta.corpus_sizes :
-        corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
-    for corpus_size in meta.corpus_sizes :
-        if corpus_size.name != main_freq_name :
-            for meas in measures :
-                meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
-    print(meta.to_xml().encode( 'utf-8' ))
+
 
 ################################################################################     
 
-def initialise_totals( meta ) :
-    """
-        Reads the `corpus_size` meta header and initializes a global counter
-        dictionary with zero for each corpus. This dict will contain the total
-        number of candidate frequencies summed up, as in the csmwe original
-        formulation.
-    
-        @param meta The `Meta` header that is being read from the XML file.          
-    """
-    global totals_dict, main_freq_name
-    main_freq_valid = False    
-    for corpus_size in meta.corpus_sizes :
-        totals_dict[ corpus_size.name ] = 0
-        if corpus_size.name == main_freq_name :
-            main_freq_valid = True    
-    if not main_freq_valid :
-        error("main frequency must be a valid freq. name\nPossible values: " +
-              str( totals_dict.keys() ))
-          
-################################################################################     
+class MeasureCalculatorHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, None)
+        self.entity_counter = 0
 
-def calculate_totals( candidate ) :
-    """
-        For each candidate and for each `CorpusSize` read from the `Meta` 
-        header, generates four features that correspond to the Association
-        Measures described above.
+    def handle_meta(self, meta, info={}) :
+        """
+            Adds new meta-features corresponding to the features that we add to
+            each candidate. The meta-features define the type of the features, which
+            is a real number for each of the contrastive measures in each corpus.
+            
+            @param meta The `Meta` header that is being read from the XML file.       
+        """
+        global corpussize_dict
+        global measures
+        global main_freq_name
+        for corpus_size in meta.corpus_sizes :
+            corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
+        for corpus_size in meta.corpus_sizes :
+            if corpus_size.name != main_freq_name :
+                for meas in measures :
+                    meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
+        self.chain.handle_meta(meta)
+
+
+    def handle_candidate(self, candidate, info={}) :
+        """
+            For each candidate and for each `CorpusSize` read from the `Meta` 
+            header, generates features that correspond to the Contrastive
+            Measures described above.
+            
+            @param candidate The `Candidate` that is being read from the XML file.    
+        """
+        global corpussize_dict
+        global totals_dict
+        global main_freq_name
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing candidate number %(n)d" % { "n":self.entity_counter } )
+        # get the original corpus freq, store the others in contrastive corpus dict
+        # We use plus one smoothing to avoid dealing with zero freqs    
+        contrast_freqs = {}
+        if join_all_contrastive :
+            contrast_freqs[ "all" ] = 1
+        main_freq = None
+        for freq in candidate.freqs :
+            if freq.name == main_freq_name :
+                main_freq = float( freq.value ) + 1 
+            elif join_all_contrastive :
+                contrast_freqs[ "all" ] += float( freq.value )
+            else :
+                contrast_freqs[ freq.name ] = float( freq.value ) + 1
         
-        @param candidate The `Candidate` that is being read from the XML file.    
-    """
-    global totals_dict
-    for freq in candidate.freqs :
-        totals_dict[ freq.name ] += freq.value
-           
-################################################################################     
-       
-def calculate_measures( candidate ) :
-    """
-        For each candidate and for each `CorpusSize` read from the `Meta` 
-        header, generates features that correspond to the Contrastive
-        Measures described above.
-        
-        @param candidate The `Candidate` that is being read from the XML file.    
-    """
-    global corpussize_dict
-    global totals_dict
-    global main_freq_name
-    global entity_counter
-    if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
-    # get the original corpus freq, store the others in contrastive corpus dict
-    # We use plus one smoothing to avoid dealing with zero freqs    
-    contrast_freqs = {}
-    if join_all_contrastive :
-        contrast_freqs[ "all" ] = 1
-    main_freq = None
-    for freq in candidate.freqs :
-        if freq.name == main_freq_name :
-            main_freq = float( freq.value ) + 1 
-        elif join_all_contrastive :
-            contrast_freqs[ "all" ] += float( freq.value )
-        else :
-            contrast_freqs[ freq.name ] = float( freq.value ) + 1
-    
-    for contrast_name in contrast_freqs.keys() :                    
-        try :            
-            feats = calculate_indiv( corpussize_dict[ main_freq_name ],
-                                     corpussize_dict[ contrast_name ],
-                                     main_freq, 
-                                     contrast_freqs[ contrast_name ], 
-                                     totals_dict[ contrast_name ],                                      
-                                     contrast_name )
-            for feat in feats :
-                candidate.add_feat( feat )
-        except Exception :
-            error("Error in calculating the measures.")
-    print(candidate.to_xml().encode( 'utf-8' ))
-    entity_counter = entity_counter + 1
+        for contrast_name in contrast_freqs.keys() :                    
+            try :            
+                feats = calculate_indiv( corpussize_dict[ main_freq_name ],
+                                         corpussize_dict[ contrast_name ],
+                                         main_freq, 
+                                         contrast_freqs[ contrast_name ], 
+                                         totals_dict[ contrast_name ],                                      
+                                         contrast_name )
+                for feat in feats :
+                    candidate.add_feat( feat )
+            except Exception :
+                error("Error in calculating the measures.")
+        self.chain.handle_candidate(candidate, info)
+        self.entity_counter += 1
+
 
 ################################################################################
+
+class TotalCalculatorHandler(filetype.InputHandler):
+    def handle_meta(self, meta, info={}) :
+        """
+            Reads the `corpus_size` meta header and initializes a global counter
+            dictionary with zero for each corpus. This dict will contain the total
+            number of candidate frequencies summed up, as in the csmwe original
+            formulation.
+        
+            @param meta The `Meta` header that is being read from the XML file.          
+        """
+        global totals_dict, main_freq_name
+        main_freq_valid = False    
+        for corpus_size in meta.corpus_sizes :
+            totals_dict[ corpus_size.name ] = 0
+            if corpus_size.name == main_freq_name :
+                main_freq_valid = True    
+        if not main_freq_valid :
+            error("main frequency must be a valid freq. name\nPossible values: " +
+                  str( totals_dict.keys() ))
+          
+
+    def handle_candidate(self, candidate, info={}) :
+        """
+            For each candidate and for each `CorpusSize` read from the `Meta` 
+            header, generates four features that correspond to the Association
+            Measures described above.
+            
+            @param candidate The `Candidate` that is being read from the XML file.    
+        """
+        global totals_dict
+        for freq in candidate.freqs :
+            totals_dict[ freq.name ] += freq.value
+               
+################################################################################     
+       
 
 def calculate_indiv( n_main, n_cont, main_freq, 
                      contrast_freq, total_freq, corpus_name ) :
@@ -277,26 +283,17 @@ def reset_entity_counter( filename ) :
     """
     global entity_counter
     entity_counter = 0  
-    
+
+
 ################################################################################
 # MAIN SCRIPT
 
 longopts = ["measures=", "original=", "all"]
-arg = read_options( "m:o:a", longopts, treat_options, 1, usage_string )
+args = read_options( "m:o:a", longopts, treat_options, 1, usage_string )
 
-parser = xml.sax.make_parser()
-
-totalcalculator = CandidatesXMLHandler( treat_meta=initialise_totals,
-                                        treat_candidate=calculate_totals,
-                                        gen_xml=False )
-handler = CandidatesXMLHandler( treat_meta=add_metafeatures,
-                                treat_candidate=calculate_measures,
-                                gen_xml="candidates" )
-
-for a in arg :
+for a in args :
     verbose( "Pass 1 for " + a )
-    parse_xml( totalcalculator, [a] )
+    filetype.parse([a], TotalCalculatorHandler())
     # First calculate Nc for each contrastive corpus        
     verbose( "Pass 2 for " + a )    
-    parse_xml( handler, [a], reset_entity_counter )
-print(handler.footer)
+    filetype.parse([a], MeasureCalculatorHandler())

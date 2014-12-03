@@ -292,11 +292,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             detector_class = SourceDetector
         elif o in ("-g", "--gaps"):
             n_gaps = int(a)
-        elif o in ("--corpus-from"):
+        elif o == "--corpus-from":
             filetype_corpus_ext = a
-        elif o in ("--candidates-from"):
+        elif o == "--candidates-from":
             filetype_candidates_ext = a
-        elif o in ("-o", "--output"):
+        elif o == "--to":
             output_filetype_ext = a
         else:
             raise Exception("Bad arg: " + o)
@@ -317,7 +317,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 
-longopts = ["corpus-from=", "candidates-from=",
-        "candidates=", "detector=", "gaps=", "source", "output="]
+longopts = ["corpus-from=", "candidates-from=", "to=",
+        "candidates=", "detector=", "gaps=", "source"]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
 filetype.parse(arg, AnnotatorHandler(), filetype_corpus_ext)

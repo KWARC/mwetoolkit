@@ -38,107 +38,116 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error
+from libs.util import read_options, treat_options_simplest, verbose, error
+from libs import filetype
+
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <files.xml>
+python {program} OPTIONS <input-file>
 
-OPTIONS may be:    
-    
+The <input-file> must be in one of the filetype
+formats accepted by the `--from` switch.
+
+
+OPTIONS may be:
+
 -n OR --number
     Number of entities that you want to print out. Default value is 10.
 
-%(common_options)s
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[ALL]}
 
-    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[ALL]}
+
+{common_options}
 """
 limit = 10
-entity_counter = 0
-entity_buffer = [None] * limit
-
-################################################################################
-
-def treat_meta(meta):
-    """
-        Simply prints the meta header to the output without modifications.
-
-        @param meta The `Meta` header that is being read from the XML file.
-    """
-
-    print(meta.to_xml().encode('utf-8'))
+input_filetype_ext = None
+output_filetype_ext = None
 
 
 ################################################################################
 
-def treat_entity(entity):
+class TailPrinterHandler(filetype.ChainedInputHandler):
+    """For each entity in the file, prints it if the limit is still not
+    achieved. No buffering as in tail, this is not necessary here.
     """
-        For each entity in the corpus, puts it in a circular buffer. This is
+    def __init__(self, limit):
+        self.limit = limit
+        self.entity_counter = 0
+        self.entity_buffer = [None] * limit
+
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
+        self.counter = 0
+
+    def handle_entity(self, entity, info={}):
+        """For each entity in the corpus, puts it in a circular buffer. This is
         necessary because we do not know the total number of lines, so we always
         keep the last n lines in the global buffer.
         
         @param entity A subclass of `Ngram` that is being read from the XM.
-    """
-    global entity_counter, entity_buffer, limit
-    if entity_counter % 100 == 0:
-        verbose("Processing ngram number %(n)d" % {"n": entity_counter})
-    if limit > 0:
-        entity_buffer[entity_counter % limit] = entity
-        entity_counter += 1
+        """
+        if self.entity_counter % 100 == 0:
+            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
+        if self.limit > 0:
+            self.entity_buffer[self.entity_counter % self.limit] = (entity, info)
+            self.entity_counter += 1
 
 
-################################################################################    
-
-def print_entities(filename):
-    """
-        After we read all the XML file, we can finally be sure about which lines
+    def after_file(self, fileobj, info={}):
+        """After we read all the XML file, we can finally be sure about which lines
         need to be printed. Those correspond exactly to the N last lines added
         to the buffer.
-        
-        @param filename Dummy parameter containing the filename. Not used but
-        must be present to respect format of postprocessing function
-    """
-    global entity_buffer, entity_counter, handler
-    for i in range(min(limit, entity_counter)):
-        #pdb.set_trace()
-        # entity_buffer is a circular buffer. In order to print the entities in
-        # the correct order, we go from the cell imediately after the last one
-        # stored in the buffer (position entity_counter) until the until the
-        # last one stored in the buffer (position entity_counter-1). If there
-        # are less entities in the file than the limit, this padding is not
-        # needed and we simply go from 0 until entity_counter-1
-        index = ( entity_counter + i ) % min(limit, entity_counter)
-        if entity_buffer[index] != None:
-            print(entity_buffer[index].to_xml().encode('utf-8'))
-        else:
-            break
-    entity_counter = 0
+        """
+        for i in range(min(self.limit, self.entity_counter)):
+            #pdb.set_trace()
+            # entity_buffer is a circular buffer. In order to print the entities in
+            # the correct order, we go from the cell immediately after the last one
+            # stored in the buffer (position entity_counter) until the until the
+            # last one stored in the buffer (position entity_counter-1). If there
+            # are less entities in the file than the limit, this padding is not
+            # needed and we simply go from 0 until entity_counter-1
+            index = (self.entity_counter + i) % min(self.limit, self.entity_counter)
+            if self.entity_buffer[index] != None:
+                entity, info = self.entity_buffer[index]
+                self.chain.handle_by_kind(info["kind"], entity, info)
+            else:
+                break
+        self.chain.after_file(fileobj, info)
 
 
 ################################################################################  
 
 def treat_options(opts, arg, n_arg, usage_string):
-    """
-        Callback function that handles the command line options of this script.
-        
-        @param opts The options parsed by getopts. Ignored.
-        
-        @param arg The argument list parsed by getopts.
-        
-        @param n_arg The number of arguments expected for this script.    
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.    
     """
     global limit
     global entity_buffer
+    global input_filetype_ext
+    global output_filetype_ext
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
     for ( o, a ) in opts:
-        if o in ("-n", "--number"):
+        if o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        elif o in ("-n", "--number"):
             try:
                 limit = int(a)
                 entity_buffer = [None] * limit
@@ -147,14 +156,12 @@ def treat_options(opts, arg, n_arg, usage_string):
             except ValueError:
                 error("You must provide a positive " + \
                       "integer value as argument of -n option.")
+        else:
+            raise Exception("Bad arg: " + o)
+
 
 ################################################################################
-
 # MAIN SCRIPT
 
-arg = read_options("n:", ["number="], treat_options, -1, usage_string)
-handler = GenericXMLHandler(treat_meta=treat_meta,
-                            treat_entity=treat_entity,
-                            gen_xml=True)
-parse_xml(handler, arg, print_entities)
-print(handler.footer)
+args = read_options("n:", ["from=", "to=", "number="], treat_options, -1, usage_string)
+filetype.parse(args, TailPrinterHandler(limit), input_filetype_ext)

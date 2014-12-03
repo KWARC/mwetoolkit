@@ -40,64 +40,87 @@ from __future__ import absolute_import
 
 import sys
 
-from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, parse_xml
-     
+from libs.util import read_options, treat_options_simplest, verbose
+from libs import filetype
+
+
 ################################################################################     
 # GLOBALS     
      
 usage_string = """Usage: 
-    
-python %(program)s OPTIONS <files.xml>
+
+python {program} OPTIONS <input-file>
+
+The <input-file> must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
 
-%(common_options)s
-
-    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[ALL]}
 """    
-char_counter = 0
-word_counter = 0
-entity_counter = 0
- 
-################################################################################     
-       
-def treat_entity( entity ) :
-    """
-        For each candidate/sentence, counts the number of occurrences, the 
-        number of words and the number of characters (except spaces and XML).
-        
-        @param entity A subclass of `Ngram` that is being read from the XML.
-    """
-    global char_counter, word_counter, entity_counter
-    
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+input_filetype_ext = None
 
-    for word in entity :
-        word_counter += 1
-        char_counter += len( word )
-    entity_counter += 1
+
+################################################################################     
+
+class CounterHandler(filetype.InputHandler):
+    def before_file(self, fileobj, info={}):
+        self.entity_counter = self.word_counter = self.char_counter = 0
+
+    def handle_meta(self, meta, info={}):
+        pass  # Skip information on Meta
+
+    def handle_entity(self, entity, info={}) :
+        """For each candidate/sentence, counts the number of occurrences, the 
+        number of words and the number of characters (except spaces and XML).
+        @param entity A subclass of `Ngram` that is being read from the XML.
+        """
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
+
+        for word in entity:
+            self.word_counter += 1
+            self.char_counter += len( word )
+        self.entity_counter += 1
+
+
+    def after_file(self, fileobj, info={}) :
+        """Prints the entity, word and character counters on stderr. The
+        filename is only used to print the stats. All counters are reset
+        after a call to this function.
+        """
+        filename = fileobj.name
+        print(unicode(self.entity_counter) + " entities in " + filename,file=sys.stderr)
+        print(unicode(self.word_counter) + " words in " + filename,file=sys.stderr)
+        print(unicode(self.char_counter) + " characters in " + filename,file=sys.stderr)
+
 
 ################################################################################
 
-def print_counters( filename ) :
-        """
-            Prints the entity, word and character counters on stderr. The
-            filename is only used to print the stats. All counters are reset
-            after a call to this function.
-        """
-        global entity_counter, word_counter, char_counter
-        print(str(entity_counter) + " entities in " + filename,file=sys.stderr)
-        print(str(word_counter) + " words in " + filename,file=sys.stderr)
-        print(str(char_counter) + " characters in " + filename,file=sys.stderr)
-        entity_counter = 0 
-        word_counter = 0
-        char_counter = 0
+def treat_options( opts, arg, n_arg, usage_string ) :
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.
+    """
+    global input_filetype_ext
+    
+    treat_options_simplest(opts, arg, n_arg, usage_string)
 
-################################################################################     
+    for (o, a) in opts:
+        if o == "--from":
+            input_filetype_ext = a
+        else:
+            raise Exception("Bad arg")
+
+
+################################################################################
 # MAIN SCRIPT
 
-arg = read_options( "", [], treat_options_simplest, -1, usage_string )
-handler = GenericXMLHandler( treat_entity=treat_entity, gen_xml=False )
-parse_xml( handler, arg, print_counters )
+longopts = ["from="]
+args = read_options("", longopts, treat_options, -1, usage_string)
+filetype.parse(args, CounterHandler(), input_filetype_ext)

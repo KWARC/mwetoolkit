@@ -40,29 +40,42 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 import sys
 import re
-import xml.sax
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
-from libs.dictXMLHandler import DictXMLHandler
 from libs.base.tpclass import TPClass
 from libs.base.candidate import Candidate
 from libs.base.word import Word
 from libs.base.meta_tpclass import MetaTPClass
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error
+from libs.util import read_options, treat_options_simplest, verbose, error
 from libs.base.__common import WILDCARD, WORD_SEPARATOR
+from libs import filetype
+
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage:
 
-python %(program)s -r <reference.xml> OPTIONS <ccandidates.xml>
+python %(program)s -r <reference.xml> OPTIONS <candidates>
 
--r <reference.xml> OR --reference <patterns.xml>
-    The reference list or gold standard, valid XML (dtd/mwetoolkit-patterns.dtd).
+-r <reference> OR --reference <patterns>
+    The reference list or gold standard, in one of the filetype
+    formats accepted by the `--reference-from` switch.
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--input-from` switch.
+    
 
 OPTIONS may be:
+
+--input-from <input-filetype-ext>
+    Force reading input candidates from given file type extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
+
+--reference-from <reference-filetype-ext>
+    Force reading reference candidates from given file type extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[dict]}
 
 -c OR --case
     Make matching of a candidate against a dictionary entry case-sensitive
@@ -95,128 +108,112 @@ entity_counter = 0
 tp_counter = 0
 ref_counter = 0
 
+input_filetype_ext = None
+reference_filetype_ext = None
+
+
 ################################################################################
 
-def treat_meta( meta ) :
-    """
-        Adds new meta-TP class corresponding to the evaluation of the candidate
+class EvaluatorHandler(filetype.AutomaticPrinterHandler):
+    def handle_meta(self, meta, info={}) :
+        """Adds new meta-TP class corresponding to the evaluation of the candidate
         list according to a reference gold standard. Automatic evaluation is
         2-class only, the class values are "True" and "False" for true and
         false positives.
 
         @param meta The `Meta` header that is being read from the XML file.
-    """
-    global gs_name
-    meta.add_meta_tpclass( MetaTPClass( gs_name, "{True,False}" ) )
-    print(meta.to_xml().encode( 'utf-8' ))
+        """
+        global gs_name
+        meta.add_meta_tpclass( MetaTPClass( gs_name, "{True,False}" ) )
+        self.chain.handle_meta(meta)
 
-################################################################################
 
-def treat_candidate( candidate_i ) :
-    """
-        For each candidate, verifies whether it is contained in the reference
+    def handle_candidate(self, candidate_i, info={}) :
+        """For each candidate, verifies whether it is contained in the reference
         list (in which case it is a *True* positive) or else, it is not in the
         reference list (in which case it is a *False* positive, i.e. a random
         ngram that does not constitute a MWE).
 
         @param candidate_i The `Candidate` that is being read from the XML file.
-    """
-    global ignore_pos
-    global gs_name
-    global ignore_case
-    global entity_counter
-    global tp_counter
-    global pre_gs
-    global lemma_or_surface
-    global fuzzy_pre_gs
+        """
+        global ignore_pos
+        global gs_name
+        global ignore_case
+        global entity_counter
+        global tp_counter
+        global pre_gs
+        global lemma_or_surface
+        global fuzzy_pre_gs
 
-    if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
-    true_positive = False
-    #pdb.set_trace()
-    candidate = Candidate( 0, [], [], [], [], [] )
-    for w in candidate_i :
-        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
-        candidate.append( copy_w )    
-    
-    if ignore_pos :
-        candidate.set_all( pos=WILDCARD )     # reference has type Pattern
-    pre_gs_key = candidate.to_string()
-    if ignore_case :
-        pre_gs_key = pre_gs_key.lower()
-    entries_to_check = pre_gs.get( pre_gs_key, [] )
+        if entity_counter % 100 == 0 :
+            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        true_positive = False
+        #pdb.set_trace()
+        candidate = Candidate( 0, [], [], [], [], [] )
+        for w in candidate_i :
+            copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
+            candidate.append( copy_w )    
+        
+        if ignore_pos :
+            candidate.set_all( pos=WILDCARD )     # reference has type Pattern
+        pre_gs_key = candidate.to_string()
+        if ignore_case :
+            pre_gs_key = pre_gs_key.lower()
+        entries_to_check = pre_gs.get( pre_gs_key, [] )
 
-    if lemma_or_surface:
-        entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.lemma for w in candidate]), [])
-        entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.surface for w in candidate]), [])
+        if lemma_or_surface:
+            entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.lemma for w in candidate]), [])
+            entries_to_check += fuzzy_pre_gs.get(WORD_SEPARATOR.join([w.surface for w in candidate]), [])
 
-    for gold_entry in entries_to_check :
-        if gold_entry.match( candidate, ignore_case=ignore_case, lemma_or_surface=lemma_or_surface ) :
-            true_positive = True
-            break # Stop at first positive match
+        for gold_entry in entries_to_check :
+            if gold_entry.match( candidate, ignore_case=ignore_case, lemma_or_surface=lemma_or_surface ) :
+                true_positive = True
+                break # Stop at first positive match
 
-    if true_positive :
-        candidate_i.add_tpclass( TPClass( gs_name, "True" ) )
-        tp_counter = tp_counter + 1
-    else :
-        candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
-    print(candidate_i.to_xml().encode( 'utf-8' ))
-    entity_counter += 1
+        if true_positive :
+            candidate_i.add_tpclass( TPClass( gs_name, "True" ) )
+            tp_counter = tp_counter + 1
+        else :
+            candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
+        self.chain.handle_candidate(candidate_i)
+        entity_counter += 1
+
 
 ################################################################################
 
-def treat_reference( reference ) :
-    """
-        For each entry in the reference Gold Standard, store it in main memory
+class ReferenceReaderHandler(filetype.InputHandler):
+    def handle_candidate(self, reference, info={}):
+        """For each entry in the reference Gold Standard, store it in main memory
         in the `pre_gs` global list. We hope that the GS is not too big. Future
         implementation should consider to use "shelve" for this.
 
         @param reference A `Pattern` contained in the reference Gold Standard.
-    """
-    global ignore_pos
-    global ref_counter
-    global ignore_case
-    global pre_gs
-    global lemma_or_surface
-    global fuzzy_pre_gs
-    if ignore_pos :
-        reference.set_all( pos=WILDCARD )     # reference has type Pattern
-    pre_gs_key = reference.to_string()
-    if ignore_case :
-        pre_gs_key = pre_gs_key.lower()
+        """
+        global ignore_pos
+        global ref_counter
+        global ignore_case
+        global pre_gs
+        global lemma_or_surface
+        global fuzzy_pre_gs
+        if ignore_pos :
+            reference.set_all( pos=WILDCARD )     # reference has type Pattern
+        pre_gs_key = reference.to_string()
+        if ignore_case :
+            pre_gs_key = pre_gs_key.lower()
 
-    pre_gs_entry = pre_gs.get( pre_gs_key, [] )
-    pre_gs_entry.append( reference )
-    pre_gs[ pre_gs_key ] = pre_gs_entry
+        pre_gs_entry = pre_gs.get( pre_gs_key, [] )
+        pre_gs_entry.append( reference )
+        pre_gs[ pre_gs_key ] = pre_gs_entry
 
-    if lemma_or_surface:
-        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
-            [w.lemma for w in reference]), []).append(reference)
-        fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
-            [w.surface for w in reference]), []).append(reference)
+        if lemma_or_surface:
+            fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
+                [w.lemma for w in reference]), []).append(reference)
+            fuzzy_pre_gs.setdefault(WORD_SEPARATOR.join(
+                [w.surface for w in reference]), []).append(reference)
 
-    #gs.append( reference )
-    ref_counter = ref_counter + 1
+        #gs.append( reference )
+        ref_counter = ref_counter + 1
 
-################################################################################
-
-def open_gs( gs_filename ) :
-    """
-        Reads the reference list from a file that is XML according to
-        mwetoolkit-dict.dtd. The Gold Standard (GS) reference is stored in
-        the global variable gs.
-
-        @param gs_filename The file name containing the Gold Standard reference
-        in valid XML (dtd/mwetoolkit-dict.dtd).
-    """
-    try :
-        parse_xml( DictXMLHandler( treat_entry=treat_reference ), [ gs_filename] )
-    except IOError as err:
-        error(str(err))
-    except Exception as err :
-        error(str(err)+"\nYou probably provided an invalid reference file, "
-                       "please validate it against the DTD (mwetoolkit-"
-                       "patterns.dtd)")
 
 ################################################################################
 
@@ -235,6 +232,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global gs_name
     global ignore_case
     global lemma_or_surface
+    global input_filetype_ext
+    global reference_filetype_ext
     ref_name = None
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
@@ -248,28 +247,33 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             ignore_case = False
         elif o in ("-L", "--lemma-or-surface"):
             lemma_or_surface = True
+        elif o == "--input-from":
+            input_filetype_ext = a
+        elif o == "--reference-from":
+            reference_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
             
     # The reference list needs to be opened after all the options are read,
     # since options such as -g and -c modify the way the list is represented
     if ref_name :
-        open_gs( ref_name )
+        filetype.parse([ref_name], ReferenceReaderHandler(), reference_filetype_ext)
         gs_name = re.sub( ".*/", "", re.sub( "\.xml", "", ref_name ) )
     # There's no reference list... Oh oh cannot evaluate :-(
     if not pre_gs :
         error("You MUST provide a non-empty reference list!")
 
+
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["reference=", "ignore-pos", "case", "lemma-or-surface"]
-arg = read_options( "r:gcL", longopts, treat_options, -1, usage_string )
+longopts = ["input-from=", "reference-from=",
+        "reference=", "ignore-pos", "case", "lemma-or-surface"]
+args = read_options( "r:gcL", longopts, treat_options, -1, usage_string )
 
-handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                             treat_candidate=treat_candidate,
-                             gen_xml="candidates" )
-parse_xml( handler, arg )
-print(handler.footer)
+filetype.parse(args, EvaluatorHandler(), input_filetype_ext)
         
+
 precision = float( tp_counter ) / float( entity_counter )
 recall = float( tp_counter ) / float( ref_counter )
 if precision + recall > 0 :

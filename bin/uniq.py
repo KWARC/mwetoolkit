@@ -6,7 +6,7 @@
 # Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
-# tail.py is part of mwetoolkit
+# uniq.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -38,10 +38,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-import xml.sax
-
 from libs.base.frequency import Frequency
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.base.ngram import Ngram
 from libs.base.word import Word
 from libs.base.entry import Entry
@@ -49,6 +46,8 @@ from libs.base.sentence import Sentence
 from libs.base.candidate import Candidate
 from libs.base.__common import WILDCARD
 from libs.util import read_options, treat_options_simplest, verbose, parse_xml
+from libs import filetype
+
 
 ################################################################################
 # GLOBALS
@@ -83,18 +82,85 @@ entity_counter = 0
 entity_buffer = {}
 split_characters = "/-"
 
-################################################################################
+input_filetype_ext = None
+output_filetype_ext = None
 
-def treat_meta( meta ) :
-    """
-        Simply prints the meta header to the output without modifications.
-
-        @param meta The `Meta` header that is being read from the XML file.
-    """
-
-    print(meta.to_xml().encode( 'utf-8' ))
 
 ################################################################################
+
+
+class UniqerHandler(filetype.AutomaticPrinterHandler):
+    def __init__(self):
+        super(UniqerHandler, self).__init__(output_filetype_ext)
+
+    def handle_meta(self, meta, info={}):
+        r"""Just pass it on to be handled by printer."""
+        self.chain.handle_meta(meta, info)
+
+    def handle_entity(self, entity, info={}) :
+        """Add each entity to the entity buffer, after pre-processing it. This
+        buffer is used to keep track of repeated items, so that only a copy
+        of an item is saved.
+
+        @param entity A subclass of `Ngram` that is being read from the XM.
+        """
+        global entity_counter, entity_buffer
+        global perform_retokenisation, ignore_pos, surface_instead_lemmas
+
+        if entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+        # TODO: improve the "copy" method
+        copy_ngram = create_instance( entity )
+        for w in entity :
+            copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
+            copy_ngram.append( copy_w )
+            
+        if perform_retokenisation :
+            copy_ngram = retokenise( copy_ngram )
+            
+        if ignore_pos :
+            copy_ngram.set_all( pos=WILDCARD )
+            
+        if surface_instead_lemmas :
+            copy_ngram.set_all( lemma=WILDCARD )        
+        else :
+            copy_ngram.set_all( surface=WILDCARD )
+            
+        internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
+        #pdb.set_trace()
+        
+
+        if isinstance( entity, Candidate ) :
+            # TODO: Generalise this!
+            old_entry = entity_buffer.get( internal_key, None )
+            if old_entry :
+                #pdb.set_trace()
+                copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
+                #copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
+                copy_ngram.features = uniq_features(old_entry.features, entity.features)
+                copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
+                #copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
+                unify_freqs = {}
+                for f in list( set( old_entry.freqs ) | set( entity.freqs ) ) :
+                    unify_freqs[ f.name ] = unify_freqs.get( f.name, 0 ) + f.value
+                for ( k, v ) in unify_freqs.items() :
+                    copy_ngram.add_frequency( Frequency( k, v ) )
+            else :
+                copy_ngram.occurs = entity.occurs
+                copy_ngram.features = entity.features
+                copy_ngram.tpclasses = entity.tpclasses
+                copy_ngram.freqs = entity.freqs
+        elif isinstance( entity, Entry ) :
+            pass
+        elif isinstance( entity, Sentence ) :
+            pass
+        #entity_buffer[ internal_key ] = old_entry
+
+        entity_buffer[ internal_key ] = copy_ngram
+        entity_counter += 1
+    
+################################################################################    
+
 
 def create_instance( entity ) :
     """
@@ -108,6 +174,7 @@ def create_instance( entity ) :
         return Sentence( [], 0 )
     else :
         return Ngram( [], [] )
+
 ################################################################################    
 
 def retokenise( ngram ) :
@@ -145,71 +212,6 @@ def retokenise( ngram ) :
             
     
 ################################################################################
-       
-def treat_entity( entity ) :
-    """
-        Add each entity to the entity buffer, after pre-processing it. This
-        buffer is used to keep track of repeated items, so that only a copy
-        of an item is saved.
-
-        @param entity A subclass of `Ngram` that is being read from the XM.
-    """
-    global entity_counter, entity_buffer
-    global perform_retokenisation, ignore_pos, surface_instead_lemmas
-
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    # TODO: improve the "copy" method
-    copy_ngram = create_instance( entity )
-    for w in entity :
-        copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
-        copy_ngram.append( copy_w )
-        
-    if perform_retokenisation :
-        copy_ngram = retokenise( copy_ngram )
-        
-    if ignore_pos :
-        copy_ngram.set_all( pos=WILDCARD )
-        
-    if surface_instead_lemmas :
-        copy_ngram.set_all( lemma=WILDCARD )        
-    else :
-        copy_ngram.set_all( surface=WILDCARD )
-        
-    internal_key = unicode( copy_ngram.to_string() ).encode('utf-8')
-    #pdb.set_trace()
-    
-
-    if isinstance( entity, Candidate ) :
-        # TODO: Generalise this!
-        old_entry = entity_buffer.get( internal_key, None )
-        if old_entry :
-            #pdb.set_trace()
-            copy_ngram.occurs = list( set( old_entry.occurs ) | set( entity.occurs ) )
-            #copy_ngram.features = list( set( old_entry.features ) | set( entity.features ) )
-            copy_ngram.features = uniq_features(old_entry.features, entity.features)
-            copy_ngram.tpclasses = list( set( old_entry.tpclasses ) | set( entity.tpclasses ) )
-            #copy_ngram.freqs = list( set( old_entry.freqs ) | set( entity.freqs ) )
-            unify_freqs = {}
-            for f in list( set( old_entry.freqs ) | set( entity.freqs ) ) :
-                unify_freqs[ f.name ] = unify_freqs.get( f.name, 0 ) + f.value
-            for ( k, v ) in unify_freqs.items() :
-                copy_ngram.add_frequency( Frequency( k, v ) )
-        else :
-            copy_ngram.occurs = entity.occurs
-            copy_ngram.features = entity.features
-            copy_ngram.tpclasses = entity.tpclasses
-            copy_ngram.freqs = entity.freqs
-    elif isinstance( entity, Entry ) :
-        pass
-    elif isinstance( entity, Sentence ) :
-        pass
-    #entity_buffer[ internal_key ] = old_entry
-
-    entity_buffer[ internal_key ] = copy_ngram
-    entity_counter += 1
-    
-################################################################################    
 
 
 def position(item, list, key=lambda x: x):
@@ -295,15 +297,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global perform_retokenisation
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
-    
+
     for ( o, a ) in opts:
+        if o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
         if o in ("-g", "--ignore-pos") :
             ignore_pos = True
         elif o in ("-s", "--surface") :
             surface_instead_lemmas = True
         elif o in ("-t", "--retokenise") :
             perform_retokenisation = True            
-            
+        else:
+            raise Exception("Bad arg: " + o)
+
 ################################################################################
 
 def reset_entity_counter( filename ) :
@@ -317,16 +325,12 @@ def reset_entity_counter( filename ) :
     entity_counter = 0 
     verbose( "Output the unified ngrams..." )
     print_entities()
+
                 
 ################################################################################    
 # MAIN SCRIPT
 
 longopts = [ "ignore-pos", "surface", "retokenise" ]
-arg = read_options( "gst", longopts, treat_options, -1, usage_string )
+args = read_options( "gst", longopts, treat_options, -1, usage_string )
 
-parser = xml.sax.make_parser()
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=treat_entity,
-                             gen_xml=True )
-parse_xml( handler, arg, reset_entity_counter )
-print(handler.footer)
+filetype.parse(args, UniqerHandler(), input_filetype_ext)

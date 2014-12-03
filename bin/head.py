@@ -47,7 +47,7 @@ from libs import filetype
 
 usage_string = """Usage:
 
-python %(program)s OPTIONS <input-file>
+python {program} OPTIONS <input-file>
 
 The <input-file> must be in one of the filetype
 formats accepted by the `--from` switch.
@@ -69,7 +69,6 @@ OPTIONS may be:
     {descriptions.output[ALL]}
 
 {common_options}
-
 """
 limit = 10
 input_filetype_ext = None
@@ -78,16 +77,16 @@ output_filetype_ext = None
 
 ################################################################################
 
-class HeadPrinterHandler(filetype.AutomaticPrinterHandler):
+class HeadPrinterHandler(filetype.ChainedInputHandler):
     """For each entity in the file, prints it if the limit is still not
     achieved. No buffering as in tail, this is not necessary here.
     """
     def __init__(self, limit):
-        super(HeadPrinterHandler, self).__init__(output_filetype_ext)
         self.limit = limit
 
     def before_file(self, fileobj, info={}):
-        super(HeadPrinterHandler, self).before_file(fileobj, info)
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
         self.counter = 0
 
     def handle_entity(self, entity, info={}):
@@ -108,14 +107,10 @@ class HeadPrinterHandler(filetype.AutomaticPrinterHandler):
 ################################################################################
 
 def treat_options( opts, arg, n_arg, usage_string ) :
-    """
-        Callback function that handles the command line options of this script.
-
-        @param opts The options parsed by getopts. Ignored.
-
-        @param arg The argument list parsed by getopts.
-
-        @param n_arg The number of arguments expected for this script.
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.
     """
     global limit
     global input_filetype_ext

@@ -42,10 +42,10 @@ from __future__ import absolute_import
 import tempfile
 import shelve
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml, \
     error, warn
 from libs.base.__common import TEMP_PREFIX, TEMP_FOLDER
+from libs import filetype
 
 
 ################################################################################     
@@ -80,81 +80,84 @@ temp_file = None
 feat_to_order = []
 ascending = False
 
+
 ################################################################################     
 
-def treat_meta(meta):
-    """
-        Treats the meta information of the file. Besides of printing the meta
-        header out, it also keeps track of all the meta-features. The list of
-        `all_feats` will be used in order to verify that all key features have a
-        valid meta-feature. This is important because we need to determine the
-        correct type of the feature value, since it might influence sorting 
-        order (e.g. integers 1 < 2 < 10 but strings "1" < "10" < "2")
-        
-        @param meta The `Meta` header that is being read from the XML file.         
-    """
-    global all_feats
-    for meta_feat in meta.meta_feats:
-        all_feats.append(meta_feat.name)
-    print(meta.to_xml().encode('utf-8'))
+class SorterHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, None)
+
+    def handle_meta(self, meta, info={}):
+        """
+            Treats the meta information of the file. Besides of printing the meta
+            header out, it also keeps track of all the meta-features. The list of
+            `all_feats` will be used in order to verify that all key features have a
+            valid meta-feature. This is important because we need to determine the
+            correct type of the feature value, since it might influence sorting 
+            order (e.g. integers 1 < 2 < 10 but strings "1" < "10" < "2")
+            
+            @param meta The `Meta` header that is being read from the XML file.         
+        """
+        global all_feats
+        for meta_feat in meta.meta_feats:
+            all_feats.append(meta_feat.name)
+        self.chain.handle_meta(meta, info)
 
 
-################################################################################         
+    def handle_candidate(self, candidate, info={}):
+        """
+            For each candidate, stores it in a temporary Database (so that it can be
+            retrieved later) and also creates a tuple containing the sorting key
+            feature values and the candidate ID. All the tuples are stored in a
+            global list, that will be sorted once all candidates are read and stored
+            into the temporary DB.
+            
+            @param candidate The `Candidate` that is being read from the XML file.
+        """
+        global feat_list, all_feats, feat_list_ok, feat_to_order
+        # First, verifies if all the features defined as sorting keys are real 
+        # features, by matching them against the meta-features of the header. This
+        # is only performed once, before the first candidate is processed
+        if not feat_list_ok:
+            for feat_name in feat_list:
+                if feat_name not in all_feats:
+                    error("%(feat)s is not a valid feature\n" + \
+                          "Please chose features from the list below\n" + \
+                          "%(list)s" % {"feat": feat_name,
+                                        "list": "\n".join(
+                                            map(lambda x: "* " + x, all_feats))})
+            feat_list_ok = True
 
-def treat_candidate(candidate):
-    """
-        For each candidate, stores it in a temporary Database (so that it can be
-        retrieved later) and also creates a tuple containing the sorting key
-        feature values and the candidate ID. All the tuples are stored in a
-        global list, that will be sorted once all candidates are read and stored
-        into the temporary DB.
-        
-        @param candidate The `Candidate` that is being read from the XML file.
-    """
-    global feat_list, all_feats, feat_list_ok, feat_to_order
-    # First, verifies if all the features defined as sorting keys are real 
-    # features, by matching them against the meta-features of the header. This
-    # is only performed once, before the first candidate is processed
-    if not feat_list_ok:
+        # Store the whole candidate in a temporary database
+        temp_file[str(candidate.id_number)] = candidate
+        # Create a tuple to be added to a list. The tuple contains the sorting key
+        # values and...
+        one_tuple = ()
         for feat_name in feat_list:
-            if feat_name not in all_feats:
-                error("%(feat)s is not a valid feature\n" + \
-                      "Please chose features from the list below\n" + \
-                      "%(list)s" % {"feat": feat_name,
-                                    "list": "\n".join(
-                                        map(lambda x: "* " + x, all_feats))})
-        feat_list_ok = True
-
-    # Store the whole candidate in a temporary database
-    temp_file[str(candidate.id_number)] = candidate
-    # Create a tuple to be added to a list. The tuple contains the sorting key
-    # values and...
-    one_tuple = ()
-    for feat_name in feat_list:
-        one_tuple = one_tuple + ( candidate.get_feat_value(feat_name), )
-    # ... the candidate ID. The former are used to sort the candidates, the 
-    # latter is used to retrieve a candidate from the temporary DB
-    one_tuple = one_tuple + ( candidate.id_number, )
-    feat_to_order.append(one_tuple)
+            one_tuple = one_tuple + ( candidate.get_feat_value(feat_name), )
+        # ... the candidate ID. The former are used to sort the candidates, the 
+        # latter is used to retrieve a candidate from the temporary DB
+        one_tuple = one_tuple + ( candidate.id_number, )
+        feat_to_order.append(one_tuple)
 
 
-################################################################################
-
-def sort_and_print():
-    """
-        Sorts the tuple list `feat_to_order` and then retrieves the candidates
-        from the temporary DB in order to print them out.
-    """
-    global feat_to_order, ascending, temp_file
-    # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
-    # If I didn't ignore the last entry, algorithm wouldn't be stable
-    # If the user didn't ask "-a" explicitely, sorting is reversed (descending)
-    feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
-    # Now print sorted candidates. A candidate is retrieved from temp DB through
-    # its ID
-    for feat_entry in feat_to_order:
-        candidate = temp_file[str(feat_entry[len(feat_entry) - 1])]
-        print(candidate.to_xml().encode('utf-8'))
+    def after_file(self, fileobj, info={}):
+        """
+            Sorts the tuple list `feat_to_order` and then retrieves the candidates
+            from the temporary DB in order to print them out.
+        """
+        global feat_to_order, ascending, temp_file
+        # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
+        # If I didn't ignore the last entry, algorithm wouldn't be stable
+        # If the user didn't ask "-a" explicitely, sorting is reversed (descending)
+        feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
+        # Now print sorted candidates. A candidate is retrieved from temp DB through
+        # its ID
+        for feat_entry in feat_to_order:
+            candidate = temp_file[unicode(feat_entry[len(feat_entry) - 1])]
+            self.chain.handle_candidate(candidate)
+        self.chain.after_file(fileobj, info)
 
 
 ################################################################################
@@ -211,7 +214,7 @@ def treat_options(opts, arg, n_arg, usage_string):
 # MAIN SCRIPT
 
 longopts = ["feat=", "asc", "desc"]
-arg = read_options("f:ad", longopts, treat_options, -1, usage_string)
+args = read_options("f:ad", longopts, treat_options, -1, usage_string)
 
 try:
     temp_fh = tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX,
@@ -223,12 +226,7 @@ except IOError as err:
     error("Error opening temporary file.\n" + \
           "Please verify __common.py configuration")
 
-handler = CandidatesXMLHandler(treat_meta=treat_meta,
-                               treat_candidate=treat_candidate,
-                               gen_xml="candidates")
-parse_xml(handler, arg)
-sort_and_print()
-print(handler.footer)
+filetype.parse(args, SorterHandler())
 
 try:
     temp_file.close()

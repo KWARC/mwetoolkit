@@ -53,12 +53,23 @@ from .. import util
 
 class FiletypeInfo(object):
     r"""Instances of this class represent a filetype.
-    Subclasses must define the attribute `filetype_ext`
-    and override the method `info`.
+
+    Subclasses must define the attributes:
+    -- `description`
+    -- `filetype_ext`
+    -- `comment_prefix`  (unless `handle_comment` is overridden).
+    Subclasses must also override the method `operations`.
+
+    If the associated Parser/Printer will call `escape`/`unescape`,
+    the attribute `escape_pairs` must also be defined.
     """
     @property
     def description(self):
         """A small string describing this filetype."""
+        raise NotImplementedError
+
+    def operations(self):
+        r"""Return an instance of FiletypeOperations."""
         raise NotImplementedError
 
     @property
@@ -83,26 +94,22 @@ class FiletypeInfo(object):
         of `header` matches this filetype."""
         return self.filetype_ext == filetype_hint
 
-    def operations(self):
-        r"""Return an instance of FiletypeOperations."""
-        raise NotImplementedError
-
     @property
     def checker_class(self):
         """A subclass of AbstractChecker for this filetype.
-        (Subclasses should override `operations`)."""
+        (Exactly equivalent to calling `self.operations().checker_class`)."""
         return self.operations().checker_class
 
     @property
     def parser_class(self):
         """A subclass of AbstractParser for this filetype.
-        (Subclasses should override `operations`)."""
+        (Exactly equivalent to calling `self.operations().parser_class`)."""
         return self.operations().parser_class
 
     @property
     def printer_class(self):
         """A subclass of AbstractPrinter for this filetype.
-        (Subclasses should override `operations`)."""
+        (Exactly equivalent to calling `self.operations().printer_class`)."""
         return self.operations().printer_class
 
 
@@ -299,8 +306,9 @@ class AbstractTxtParser(AbstractParser):
         with ParsingContext(fileobj, handler, info):
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
-                if line.startswith(self.filetype_info.comment_prefix):
-                    comment = line[len(self.filetype_info.comment_prefix):]
+                cp = bytes(self.filetype_info.comment_prefix)
+                if line.startswith(cp):
+                    comment = line[len(cp):]
                     self._parse_comment(handler, comment, {})
                 else:
                     self._parse_line(
@@ -420,7 +428,7 @@ class InputHandler(object):
 
 
 class ChainedInputHandler(InputHandler):
-    r"""InputHandler that chains all methods to `self.chain`.
+    r"""InputHandler that delegates all methods to `self.chain`.
     """
     chain = NotImplemented
 
@@ -436,21 +444,31 @@ class ChainedInputHandler(InputHandler):
     def handle_entity(self, entity, info={}):
         return self.chain.handle_by_kind(info["kind"], entity, info)
 
+    def printer_before_file(self, fileobj, info, forced_filetype_ext):
+        r"""Create a printer, call its `before_file(...)` and return it.
+        The returned printer should be assigned to `self.chain`.
+
+        The printer is created based on either
+        the value of `forced_filetype_ext` or info["parser"].
+        """
+        from .. import filetype
+        ext = forced_filetype_ext \
+                or info["parser"].filetype_info.filetype_ext
+        chain = filetype.printer_class(ext)(info["root"])
+        chain.before_file(fileobj, info)
+        return chain
+
 
 class AutomaticPrinterHandler(ChainedInputHandler):
-    r"""ChainedInputHandler that creates an appropriate printer
-    (based on either `self.forced_filetype_ext` or info["parser"])
-    and chains all method calls to it.
+    r"""DEPRECATED:
+    Use ChainedInputHandler and set `self.chain = self.printer_before_file(...)`
+    inside `before_file`.
     """
     def __init__(self, forced_filetype_ext=None):
         self.forced_filetype_ext = forced_filetype_ext
 
     def before_file(self, fileobj, info={}):
-        from .. import filetype
-        ext = self.forced_filetype_ext \
-                or info["parser"].filetype_info.filetype_ext
-        self.chain = filetype.printer_class(ext)(info["root"])
-        self.chain.before_file(fileobj, info)
+        self.chain = self.printer_before_file(fileobj, info, self.forced_filetype_ext)
 
 
 
@@ -546,10 +564,10 @@ class AbstractPrinter(InputHandler):
     def handle_directive(self, directive, info={}):
         r"""Default implementation when seeing a directive."""
         if directive.key == "filetype":
-            # We don't care about input filetype. Just keep
-            # some information about the conversion.
-            if directive.value != self.filetype_info.filetype_ext:
-                self.handle_comment("[Converted from " + directive.value + "]")
+            # We don't care about the input filetype directive,
+            # as we will generate an output filetype directive regardless.
+            #self.handle_comment("[Converted from " + directive.value + "]")
+            pass
         else:
             util.warn_once("Unknown directive: " + directive.key)
 

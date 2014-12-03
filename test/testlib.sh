@@ -5,9 +5,14 @@ set -o errexit    # Exit on error, do not continue quietly
 exec </dev/null   # Don't hang if a script tries to read from stdin
 export LC_ALL=C
 
+# Path to mwetoolkit root
 t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
+# Path to mwetoolkit binary dir
 t_BIN="$t_TOOLKIT/bin"
+# Path to shared data
 t_SHARED="$t_TOOLKIT/test/input-corpora"
+# Limit number of tests to run
+t_N_TESTS_LIMIT=999999
 
 
 # t_echo_bold <txt>
@@ -39,6 +44,11 @@ t_testname() {
     _THIS_TEST_NAME="$1"
     _THIS_TEST_NUM="$((${_THIS_TEST_NUM:-}+1))"
     test "$_THIS_TEST_NUM" -ne 1  && echo ""
+
+    if test "$_THIS_TEST_NUM" -ge "$t_N_TESTS_LIMIT"; then
+        t_echo_bold "[Stopping after $t_N_TESTS_LIMIT tests]"
+        exit 0
+    fi
     t_echo_bold "$_THIS_TEST_NUM: $_THIS_TEST_NAME"
 }
 
@@ -139,3 +149,5 @@ trap 'on_error ERR' ERR
 # inside `on_error` when called for SIGINT
 # (also happens on `trap ... EXIT` -- may be a bash bug)
 trap 'on_error INT' SIGINT
+
+trap 'on_error EXIT' EXIT

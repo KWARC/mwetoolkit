@@ -42,10 +42,9 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
-from libs.patternlib import parse_patterns_file, match_pattern
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error, warn
+from libs.util import read_options, treat_options_simplest, verbose, error, warn
+from libs import filetype
+
      
 ################################################################################     
 # GLOBALS     
@@ -104,23 +103,26 @@ longest_pattern = 0
 shortest_pattern = float("inf")
 maxlength = float("inf")
 minlength = 0
-     
-################################################################################
-       
-def treat_meta( meta ) :
-    """
-        Simply prints the meta header to the output without modifications.
-        
-        @param meta The `Meta` header that is being read from the XML file.        
-    """   
-    
-    print(meta.to_xml().encode( 'utf-8' ))
+
+input_filetype_ext = None
+output_filetype_ext = None
+
 
 ################################################################################
-       
-def treat_entity( entity ) :
-    """
-        For each candidate, verifies whether its number of occurrences in a 
+
+class FilterHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(fileobj, info, output_filetype_ext)
+
+    def handle_meta(self, meta_obj, info={}) :
+        """Simply prints the meta header to the output without modifications.
+        @param meta The `Meta` header that is being read from the XML file.        
+        """   
+        self.chain.handle_meta(meta_obj)
+
+
+    def handle_entity(self, entity, info={}) :
+        """For each candidate, verifies whether its number of occurrences in a 
         given source corpus is superior or equal to the threshold. If no source
         corpus was provided (thresh_source is None), then all the corpora will
         be considered when verifying the threshold constraint. A candidate is
@@ -128,70 +130,71 @@ def treat_entity( entity ) :
         corpus names thresh_source.
         
         @param entity: The `Ngram` that is being read from the XML file.
-    """
-    global thresh_source
-    global thresh_value
-    global equals_name
-    global equals_value
-    global entity_counter
-    global reverse
-    global patterns
-    global maxlength
-    global minlength
+        """
+        global thresh_source
+        global thresh_value
+        global equals_name
+        global equals_value
+        global entity_counter
+        global reverse
+        global patterns
+        global maxlength
+        global minlength
 
-    if entity_counter % 100 == 0 :
-        verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
+        if entity_counter % 100 == 0 :
+            verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
 
-    print_it = True
-    ngram_to_print = entity
+        print_it = True
+        ngram_to_print = entity
 
-    # Threshold test
-    if entity.freqs :
-        for freq in entity.freqs :
-            if thresh_source :
-                if ( thresh_source == freq.name or
-                     thresh_source == freq.name + ".xml" ) and \
-                     freq.value < thresh_value :
-                    print_it = False
-            else :
-                if freq.value < thresh_value :
-                    print_it = False
+        # Threshold test
+        if entity.freqs :
+            for freq in entity.freqs :
+                if thresh_source :
+                    if ( thresh_source == freq.name or
+                         thresh_source == freq.name + ".xml" ) and \
+                         freq.value < thresh_value :
+                        print_it = False
+                else :
+                    if freq.value < thresh_value :
+                        print_it = False
 
-    # Equality test
-    if print_it and equals_name :
-        print_it = False
-        for feat in entity.features :
-            if feat.name == equals_name and feat.value == equals_value :
-                print_it = True
+        # Equality test
+        if print_it and equals_name :
+            print_it = False
+            for feat in entity.features :
+                if feat.name == equals_name and feat.value == equals_value :
+                    print_it = True
 
 
-    # NOTE: Different patterns may match the same ngram, with different
-    # results, when the 'ignore' pattern attribute is involved. Currently,
-    # we are only printing the first such match.
-    if print_it and patterns :
-        print_it = False
-        words = entity
-        for pattern in patterns :
-            for (match_ngram, wordnums) in match_pattern(pattern, words) :
-                print_it = True
-                ngram_to_print = match_ngram
-                break
-            if print_it :
-                break
+        # NOTE: Different patterns may match the same ngram, with different
+        # results, when the 'ignore' pattern attribute is involved. Currently,
+        # we are only printing the first such match.
+        if print_it and patterns :
+            print_it = False
+            words = entity
+            for pattern in patterns :
+                for (match_ngram, wordnums) in pattern.matches(words):
+                    print_it = True
+                    ngram_to_print = match_ngram
+                    break
+                if print_it :
+                    break
 
-    # Filter out too long or too short elements
-    lenentity = len(entity)
-    if lenentity < minlength or lenentity > maxlength :
-        print_it = False
-        verbose("Filtered out: %d tokens" % lenentity)
+        # Filter out too long or too short elements
+        lenentity = len(entity)
+        if lenentity < minlength or lenentity > maxlength :
+            print_it = False
+            verbose("Filtered out: %d tokens" % lenentity)
 
-    if reverse :
-        print_it = not print_it
+        if reverse :
+            print_it = not print_it
 
-    if print_it :   
-        print(ngram_to_print.to_xml().encode( 'utf-8' ))
-    entity_counter += 1
-    
+        if print_it :   
+            print(ngram_to_print.to_xml().encode( 'utf-8' ))
+        entity_counter += 1
+
+
 ################################################################################
 
 def interpret_threshold( a ) :
@@ -252,7 +255,7 @@ def read_patterns_file( filename ) :
     global patterns
 
     try:
-        patterns = parse_patterns_file(filename, anchored=True)
+        patterns = filetype.patternlib.parse_patterns_file(filename, anchored=True)
     except IOError as err:
         error(str(err))
 
@@ -324,29 +327,21 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             minlength = interpret_length( a, "minimum" )
         elif o in ("-a", "--maxlength") :
             maxlength = interpret_length( a, "maximum" )
+        elif o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
+
     if minlength > maxlength:
         warn( "ATTENTION : minlength should be <= maxlength")
             
-################################################################################
 
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
-    
 ################################################################################
 # MAIN SCRIPT
 
 longopts = [ "threshold=", "equals=", "patterns=", "reverse", "maxlength=",
-             "minlength=" ]
-arg = read_options( "t:e:p:ra:i:", longopts, treat_options, -1, usage_string )
-handler = GenericXMLHandler( treat_meta=treat_meta,
-                             treat_entity=treat_entity,
-                             gen_xml=True )
-parse_xml( handler, arg, reset_entity_counter )
-print(handler.footer)
+             "minlength=", "from=", "to=" ]
+args = read_options( "t:e:p:ra:i:", longopts, treat_options, -1, usage_string )
+filetype.parse(args, FilterHandler(), input_filetype_ext)

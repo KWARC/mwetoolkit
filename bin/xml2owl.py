@@ -26,7 +26,7 @@
 
 """
     This script converts a candidates file in XML (mwetoolkit-candidates.dtd)
-    into a corresponding representation in owl. In the current implementation,
+    into a corresponding representation in OWL. In the current implementation,
     the only information output is the base form of the candidate.
     
     For more information, call the script with no parameter and read the
@@ -38,9 +38,11 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml
 from libs.base.__common import XML_HEADER, XML_FOOTER
+from libs import filetype
+from libs.filetype import ft_xml
+
      
 ################################################################################     
 # GLOBALS     
@@ -58,7 +60,9 @@ python %(program)s [OPTIONS] <file.xml>
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """     
 surface_instead_lemmas = False
-OWL_HEADER = XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(root)s.dtd\"", """[
+
+
+OWL_HEADER = ft_xml.XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(root)s.dtd\"", """[
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
@@ -72,46 +76,62 @@ OWL_HEADER = XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(root)s.dtd\"", """[
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" """ }
 
-OWL_FOOTER = XML_FOOTER % { "root" : "rdf:RDF" }
+OWL_FOOTER = ft_xml.XML_FOOTER % { "root" : "rdf:RDF" }
             
+
 ################################################################################     
-       
-def treat_entity( entry ) :
-    """
-        For each `Candidate`, print the candidate as if it was a class in the
+
+class OwlInfo(filetype.common.FiletypeInfo):
+    description = "OWL filetype format"
+    filetype_ext = "OWL"
+
+    escape_pairs = ft_xml.INFO.escape_pairs + []
+
+    def operations(self):
+        return filetype.common.FiletypeOperations(None, None, OwlPrinter)
+
+
+INFO = OwlInfo()
+
+
+class OwlPrinter(ft_xml.XMLPrinter):
+    filetype_info = INFO
+    valid_roots = ["candidates"]
+    
+    def before_file(self, fileobj, info={}):
+        self.add_string(OWL_HEADER, "\n")
+
+    def after_file(self, fileobj, info={}):
+        self.add_string(OWL_FOOTER, "\n")
+
+
+    def handle_candidate(self, entry, info={}):
+        """For each `Candidate`, print the candidate as if it was a class in the
         artificial ontology.
         
         @param candidate The `Entry` that is being read from the XML file.
-    """
-    global surface_instead_lemmas
-    owl_cand = "<owl:Class rdf:about=\"#"
-    for word in entry :
-        if surface_instead_lemmas :
-            form = word.surface
-        else :
-            form = word.lemma
-        # Special symbols can break the ontology systems, better avoid them
-        # TODO: check!
-        form = form.replace( "&quot;", "QUOTSYMBOL" )
-        form = form.replace( "&amp;", "ANDSYMBOL" )
-        form = form.replace( "&gt;", "GTSYMBOL" )
-        form = form.replace( "&lt;", "LTSYMBOL" )
-        owl_cand += form + "_"
-    owl_cand = owl_cand[:len(owl_cand)-1] + "\"/>" # remove extra underline char
-    
-    print(owl_cand.encode( 'utf-8' ))
+        """
+        global surface_instead_lemmas
+        owl_cand = ["<owl:Class rdf:about=\"#"]
+        for word in entry :
+            form = word.surface if surface_instead_lemmas else word.lemma
+            form = self.escape(form)
+            # Special symbols can break the ontology systems, better avoid them
+            # TODO: check!
+            form = form.replace( "&quot;", "QUOTSYMBOL" )
+            form = form.replace( "&amp;", "ANDSYMBOL" )
+            form = form.replace( "&gt;", "GTSYMBOL" )
+            form = form.replace( "&lt;", "LTSYMBOL" )
+            owl_cand.append(form)
+        owl_cand = "_".join(owl_cand) + "\"/>\n"
+        self.add_string(owl_cand)
 
-################################################################################     
 
 def treat_options( opts, arg, n_arg, usage_string ) :
-    """
-        Callback function that handles the command line options of this script.
-        
-        @param opts The options parsed by getopts. Ignored.
-        
-        @param arg The argument list parsed by getopts.
-        
-        @param n_arg The number of arguments expected for this script.    
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.    
     """
     global surface_instead_lemmas
     
@@ -122,13 +142,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True
 
+
 ################################################################################     
 # MAIN SCRIPT
 
 longopts = [ "surface" ]
-arg = read_options( "s", longopts, treat_options, -1, usage_string ) 
-handler = GenericXMLHandler( treat_entity=treat_entity,
-                             gen_xml=False )
-print(OWL_HEADER)
-parse_xml( handler, arg )
-print(OWL_FOOTER)
+args = read_options( "s", longopts, treat_options, -1, usage_string ) 
+filetype.parse(args, OwlPrinter("candidates"))

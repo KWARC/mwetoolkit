@@ -44,9 +44,10 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.util import read_options, treat_options_simplest, parse_xml
 from libs.base.__common import SEPARATOR, WORD_SEPARATOR
+from libs import filetype
+
 
 ################################################################################     
 # GLOBALS     
@@ -61,27 +62,42 @@ python %(program)s <candidates.xml>
 
 ################################################################################     
 
-def treat_candidate(candidate):
-    """
-        For each `Candidate`, print the candidate ID, its POS pattern and the 
+class EvitaInfo(filetype.common.FiletypeInfo):
+    description = "Evita Linardaki's filetype format"
+    filetype_ext = "Evita"
+    comment_prefix = "#"
+
+    def operations(self):
+        return filetype.common.FiletypeOperations(None, None, EvitaPrinter)
+
+
+INFO = EvitaInfo()
+
+
+class EvitaPrinter(filetype.common.AbstractPrinter):
+    filetype_info = INFO
+    valid_roots = ["candidates"]
+
+    def handle_candidate(self, candidate, info={}):
+        """For each `Candidate`, print the candidate ID, its POS pattern and the 
         list of occurrences one per line
         
         @param candidate The `Candidate` that is being read from the XML file.
-    """
-    pos = candidate.get_pos_pattern()
-    pos = pos.replace(SEPARATOR, " ")
-    print("candid=%(id)s pos=\"%(pos)s\"" % {"id": candidate.id_number,
-                                             "pos": pos})
-    for form in candidate.occurs:
-        form.set_all(lemma="", pos="")
-        occur = form.to_string()
-        occur = occur.replace(SEPARATOR, "")
-        occur = occur.replace(WORD_SEPARATOR, " ")
-        print(("\"%(occur)s\"" % {"occur": occur}).encode('utf-8'))
-    print()
+        """
+        pos = candidate.get_pos_pattern()
+        pos = pos.replace(SEPARATOR, " ")
+        self.add_string("candid=%(id)s pos=\"%(pos)s\"\n" % \
+                {"id": candidate.id_number, "pos": pos})
+        for form in candidate.occurs:
+            form.set_all(lemma="", pos="")
+            occur = form.to_string()
+            occur = occur.replace(SEPARATOR, "")
+            occur = occur.replace(WORD_SEPARATOR, " ")
+            self.add_string(("\"%(occur)s\"\n" % {"occur": occur}).encode('utf-8'))
+        self.add_string("\n")
 
 ################################################################################     
 # MAIN SCRIPT
 
-arg = read_options("", [], treat_options_simplest, -1, usage_string)
-parse_xml(CandidatesXMLHandler(treat_candidate=treat_candidate), arg)
+args = read_options("", [], treat_options_simplest, -1, usage_string)
+filetype.parse(args, EvitaPrinter("candidates"))

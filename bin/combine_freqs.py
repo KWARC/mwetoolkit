@@ -33,13 +33,12 @@
 """
 
 import sys
-import xml.sax
 import math
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.base.frequency import Frequency
 from libs.base.corpus_size import CorpusSize
 from libs.util import usage, read_options, treat_options_simplest, verbose
+from libs import filetype
 
 
 
@@ -168,71 +167,76 @@ def combine( method, freqs ):
                     backed_off = False
                     return ( freq, backed_off )
 
-################################################################################     
-       
-def treat_meta( meta ) :
-    """
-        Adds new meta-features corresponding to the new frequency sources that
-        are being added to the corpus. The new corpus sizes are calculated based
-        on the combination heuristics.
-        
-        @param meta The `Meta` header that is being read from the XML file.       
-    """
-    global corpussize_dict, combination
-    for corpus_size in meta.corpus_sizes :
-        corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
-    for comb in combination :        
-        if comb == "backoff" :
-            w_freqs = web_freqs( corpussize_dict )
-            combined = int( combine( "uniform", w_freqs )[ 0 ] )
-            meta.add_corpus_size( CorpusSize( comb, combined ) )
-        else :
-            combined = int( combine( comb, corpussize_dict )[ 0 ] )
-            meta.add_corpus_size( CorpusSize( comb, combined ) )
-    print meta.to_xml().encode( 'utf-8' )
-       
-################################################################################     
-       
-def treat_candidate( candidate ) :
-    """
-        For each candidate in the file, add the combined frequencies both for 
-        the whole n-gram and for the individual words. The resulting candidate
-        contains both the original counts from the original frequency sources
-        and the new combined counts calculated based on the original counts.
-        
-        @param candidate The `Candidate` that is being read from the XML file.    
-    """
-    global corpussize_dict
-    global combination
-    global main_freq
-    global entity_counter
-    joint_freq = {}    
-    backed_off = False    
-    if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
-    # Convert all these integers to floats...
-    for freq in candidate.freqs :
-        joint_freq[ freq.name ] = float( freq.value )
 
-    for comb in combination :
-        (combined, bo) = combine( comb,joint_freq )
-        if bo :
-            backed_off = True
-        candidate.add_frequency( Frequency( comb, int( combined ) ) )
+################################################################################     
 
-    for word in candidate :
-        singleword_freq = {}
-        for freq in word.freqs :
-            singleword_freq[ freq.name ] = float( freq.value )
+class FreqCombinerHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, None)
+
+    def handle_meta(self, meta, info={}) :
+        """
+            Adds new meta-features corresponding to the new frequency sources that
+            are being added to the corpus. The new corpus sizes are calculated based
+            on the combination heuristics.
+            
+            @param meta The `Meta` header that is being read from the XML file.       
+        """
+        global corpussize_dict, combination
+        for corpus_size in meta.corpus_sizes :
+            corpussize_dict[ corpus_size.name ] = float(corpus_size.value)
+        for comb in combination :        
+            if comb == "backoff" :
+                w_freqs = web_freqs( corpussize_dict )
+                combined = int( combine( "uniform", w_freqs )[ 0 ] )
+                meta.add_corpus_size( CorpusSize( comb, combined ) )
+            else :
+                combined = int( combine( comb, corpussize_dict )[ 0 ] )
+                meta.add_corpus_size( CorpusSize( comb, combined ) )
+        self.chain.handle_meta(meta)
+
+
+    def handle_candidate(self, candidate, info={}) :
+        """
+            For each candidate in the file, add the combined frequencies both for 
+            the whole n-gram and for the individual words. The resulting candidate
+            contains both the original counts from the original frequency sources
+            and the new combined counts calculated based on the original counts.
+            
+            @param candidate The `Candidate` that is being read from the XML file.    
+        """
+        global corpussize_dict
+        global combination
+        global main_freq
+        global entity_counter
+        joint_freq = {}    
+        backed_off = False    
+        if entity_counter % 100 == 0 :
+            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        # Convert all these integers to floats...
+        for freq in candidate.freqs :
+            joint_freq[ freq.name ] = float( freq.value )
+
         for comb in combination :
-            # Force backing off individual words if the whole n-gram was backed
-            # off.
-            if comb == "backoff" and backed_off :
-                singleword_freq[ main_freq ] = 0.0 # Forces to backoff
-                combined = int( combine( comb, singleword_freq )[ 0 ] )
-            word.add_frequency(Frequency(comb,combined))
-    
-    print candidate.to_xml().encode( 'utf-8' )
+            (combined, bo) = combine( comb,joint_freq )
+            if bo :
+                backed_off = True
+            candidate.add_frequency( Frequency( comb, int( combined ) ) )
+
+        for word in candidate :
+            singleword_freq = {}
+            for freq in word.freqs :
+                singleword_freq[ freq.name ] = float( freq.value )
+            for comb in combination :
+                # Force backing off individual words if the whole n-gram was backed
+                # off.
+                if comb == "backoff" and backed_off :
+                    singleword_freq[ main_freq ] = 0.0 # Forces to backoff
+                    combined = int( combine( comb, singleword_freq )[ 0 ] )
+                word.add_frequency(Frequency(comb,combined))
+        self.chain.handle_candidate(candidate, info)
+
 
 ################################################################################
 
@@ -297,22 +301,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "combination=", "original=" ]
-arg = read_options( "c:o:", longopts, treat_options, -1, usage_string )
+args = read_options( "c:o:", longopts, treat_options, -1, usage_string )
 
-parser = xml.sax.make_parser()
-handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                treat_candidate=treat_candidate,
-                                gen_xml="candidates" )
-parser.setContentHandler( handler )
-if len( arg ) == 0 :
-    parser.parse( sys.stdin )
-    print handler.footer
-else :
-    for a in arg :
-        input_file = open( a )
-        parser.parse( input_file )
-        footer = handler.footer
-        handler.gen_xml = False
-        input_file.close()
-        entity_counter = 0
-    print footer
+filetype.parse(args, FreqCombinerHandler())

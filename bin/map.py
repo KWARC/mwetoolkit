@@ -37,17 +37,17 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
-from libs.util import read_options, treat_options_simplest, warn, verbose, \
-    parse_xml, error
+from libs.util import read_options, treat_options_simplest, warn, verbose, error
 from libs.base.__common import UNKNOWN_FEAT_VALUE
+from libs import filetype
+
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage:
 
-python %(program)s [OPTIONS] -f <feats> <candidates.xml>
+python {program} [OPTIONS] -f <feats> <candidates>
 
 -f <feats> OR --feat <feats>
     The name of the features that will be used to calculate Mean Average
@@ -55,7 +55,18 @@ python %(program)s [OPTIONS] -f <feats> <candidates.xml>
     the meta header of the file. Feature names should be separated by colon ":"
     The script ignores candidates whose feature is not present
 
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+Additionally, each candidate must contain at least one boolean
+tpclass using default "True" and "False" annotation.
+
+
 OPTIONS may be:
+
+--from <input-filetype-ext>
+    Force reading from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
 
 -a OR --asc
     Sort in ascending order. By default, classification is descending.
@@ -68,11 +79,7 @@ OPTIONS may be:
     Print the precisions at each recall level, for each feature. This is useful
     to generate precision/recall curves. Default false.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-    Additionally, each candidate must contain at least one boolean tpclass using
-    default "True" and "False" annotation.
+{common_options}
 """
 feat_list = []
 all_feats = []
@@ -81,13 +88,14 @@ feat_to_order = {}
 ascending = False
 print_precs = False
 entity_counter = 0
+input_filetype_ext = None
+
 
 ################################################################################
 
-
-def treat_meta( meta ) :
-    """
-        Treats the meta information of the file. Besides of printing the meta
+class StatsCollectorHandler(filetype.InputHandler):
+    def handle_meta(self, meta, info={}) :
+        """Treats the meta information of the file. Besides of printing the meta
         header out, it also keeps track of all the meta-features. The list of
         `all_feats` will be used in order to verify that all key features have a
         valid meta-feature. This is important because we need to determine the
@@ -95,58 +103,58 @@ def treat_meta( meta ) :
         order (e.g. integers 1 < 2 < 10 but strings "1" < "10" < "2")
 
         @param meta The `Meta` header that is being read from the XML file.
-    """
-    global all_feats, usage_string, feat_to_order
-    for meta_feat in meta.meta_feats :
-        if meta_feat.value == "integer" or meta_feat.value == "real" :
-            all_feats.append( meta_feat.name )
-    tp_classes_ok = False
-    for meta_tp in meta.meta_tpclasses :
-        if meta_tp.value == "{True,False}" :
-            tp_classes_ok = True
-            feat_to_order[ meta_tp.name ] = {}
-            for feat_name in all_feats :
-                feat_to_order[ meta_tp.name ][ feat_name ] = []
-    if not tp_classes_ok :
-        error("You must define a boolean TP class")
+        """
+        global all_feats, usage_string, feat_to_order
+        for meta_feat in meta.meta_feats :
+            if meta_feat.value == "integer" or meta_feat.value == "real" :
+                all_feats.append( meta_feat.name )
+        tp_classes_ok = False
+        for meta_tp in meta.meta_tpclasses :
+            if meta_tp.value == "{True,False}" :
+                tp_classes_ok = True
+                feat_to_order[ meta_tp.name ] = {}
+                for feat_name in all_feats :
+                    feat_to_order[ meta_tp.name ][ feat_name ] = []
+        if not tp_classes_ok :
+            error("You must define a boolean TP class")
 
-################################################################################
 
-def treat_candidate( candidate ) :
-    """
-        For each candidate, stores it in a temporary Database (so that it can be
+    def handle_candidate(self, candidate, info={}) :
+        """For each candidate, stores it in a temporary Database (so that it can be
         retrieved later) and also creates a tuple containing the sorting key
         feature values and the candidate ID. All the tuples are stored in a
         global list, that will be sorted once all candidates are read and stored
         into the temporary DB.
 
         @param candidate The `Candidate` that is being read from the XML file.
-    """
-    global feat_list, all_feats, feat_list_ok, feat_to_order, entity_counter
-    if entity_counter % 100 == 0 :
-        verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
-    # First, verifies if all the features defined as sorting keys are real
-    # features, by matching them against the meta-features of the header. This
-    # is only performed once, before the first candidate is processed
-    if not feat_list_ok :
-        for feat_name in feat_list :
-            if feat_name not in all_feats :
-                error("%(feat)s is not a valid feature\n" + \
-                      "Please chose features from the list below\n" + \
-                      "%(list)s" % {"feat": feat_name,
-                                    "list": "\n".join(
-                                        map(lambda x: "* " + x, all_feats))})
-        feat_list_ok = True
+        """
+        global feat_list, all_feats, feat_list_ok, feat_to_order, entity_counter
+        if entity_counter % 100 == 0 :
+            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        # First, verifies if all the features defined as sorting keys are real
+        # features, by matching them against the meta-features of the header. This
+        # is only performed once, before the first candidate is processed
+        if not feat_list_ok :
+            for feat_name in feat_list :
+                if feat_name not in all_feats :
+                    error("%(feat)s is not a valid feature\n" + \
+                          "Please chose features from the list below\n" + \
+                          "%(list)s" % {"feat": feat_name,
+                                        "list": "\n".join(
+                                            map(lambda x: "* " + x, all_feats))})
+            feat_list_ok = True
 
-    for tp_class in candidate.tpclasses :
-        for feat_name in feat_list :
-            feat_value = candidate.get_feat_value( feat_name )
-            tp_value = candidate.get_tpclass_value( tp_class.name )
-            if feat_value != UNKNOWN_FEAT_VALUE and \
-               tp_value != UNKNOWN_FEAT_VALUE :
-                tuple = ( float( feat_value ), tp_value == "True" )
-                feat_to_order[ tp_class.name ][ feat_name ].append( tuple )
-    entity_counter = entity_counter + 1
+        for tp_class in candidate.tpclasses :
+            for feat_name in feat_list :
+                feat_value = candidate.get_feat_value( feat_name )
+                tp_value = candidate.get_tpclass_value( tp_class.name )
+                if feat_value != UNKNOWN_FEAT_VALUE and \
+                   tp_value != UNKNOWN_FEAT_VALUE :
+                    tuple = ( float( feat_value ), tp_value == "True" )
+                    feat_to_order[ tp_class.name ][ feat_name ].append( tuple )
+        entity_counter = entity_counter + 1
+
+
 ################################################################################
 
 def calculate_map( values ):
@@ -273,6 +281,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             a_or_d.append( "d" )
         elif o in ("-p", "--precs") :
             print_precs = True
+        elif o == "--from":
+            input_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
     if len( a_or_d ) > 1 :
         warn("you should provide only one option, -a OR -d. Only the last one"+\
@@ -284,9 +296,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "feat=", "asc", "desc", "precs" ]
-arg = read_options( "f:adp", longopts, treat_options, 1, usage_string )
-handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
-                                treat_meta=treat_meta,
-                                gen_xml=False )                                
-parse_xml( handler, arg )
+args = read_options( "f:adp", longopts, treat_options, 1, usage_string )
+filetype.parse(args, StatsCollectorHandler(), input_filetype_ext)
 print_stats()    
