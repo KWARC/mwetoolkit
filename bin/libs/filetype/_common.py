@@ -330,8 +330,14 @@ class ParsingContext(object):
         self.handler.before_file(self.fileobj, self.info)
     
     def __exit__(self, t, v, tb):
-        if v is None or isinstance(v, StopParsing):
+        if v is None:
+            # If StopParsing was raised, we don't want
+            # to append even more stuff in the output
+            # (Especially since that would re-raise StopParsing
+            # from inside __exit__, which will make a mess)
             self.info["parser"].flush_partial_callback()
+
+        if v is None or isinstance(v, StopParsing):
             self.handler.after_file(self.fileobj, self.info)
 
 
@@ -384,18 +390,6 @@ class InputHandler(object):
         r"""Called after parsing file contents."""
         pass  # By default, do nothing
 
-    def handle_by_kind(self, kind, obj, info={}):
-        r"""Alternative to calling `self.handle_{kind}` methods.
-        Useful as a catch-all when delegating from another InputHandler."""
-        return getattr(self, "handle_"+kind)(obj, info=info)
-
-    def handle_meta(self, meta_obj, info={}):
-        r"""Called to treat a Meta object."""
-        pass  # By default, we just silently ignore Meta instances
-        info["kind"] = "meta"   # XXX 2014-11-27 experimental (checking if too
-                                # many warnings would be generated...)
-        return self.handle_entity(meta_obj, info)
-
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
         info["kind"] = "sentence"
@@ -411,20 +405,53 @@ class InputHandler(object):
         info["kind"] = "pattern"
         return self.handle_entity(pattern, info)
 
+    def handle_entity(self, entity, info={}):
+        r"""Called to treat a generic entity (sentence/candidate/pattern)."""
+        self.fallback(entity, info)
+
+    def handle_meta(self, meta_obj, info={}):
+        r"""Called to treat a Meta object."""
+        pass  # By default, we just silently ignore Meta instances
+        info["kind"] = "meta"   # XXX 2014-11-27 experimental (checking if too
+                                # many warnings would be generated...)
+        return self.fallback(meta_obj, info)
+
     def handle_comment(self, comment, info={}):
         r"""Called when parsing a comment."""
-        info["kind"] = "comment"
-        return self.handle_entity(comment, info)
+        info.setdefault("kind", "comment")
+        return self.fallback(comment, info)
 
     def handle_directive(self, directive, info={}):
         r"""Called when parsing a directive."""
         info["kind"] = "directive"
-        return self.handle_entity(directive, info)
+        return self.fallback(directive, info)
 
-    def handle_entity(self, entity, info={}):
-        r"""Called to treat a generic entity (sentence/candidate/pattern)."""
-        kind = info.get("kind", "entity")
-        util.warn("Ignoring " + kind)
+
+    def handle(self, obj, info):
+        r"""Alternative to calling `self.handle_{kind}` methods.
+        Useful as a catch-all when delegating from another InputHandler."""
+        kind = info["kind"]
+        return getattr(self, "handle_"+kind)(obj, info=info)
+
+    def fallback(self, obj, info):
+        r"""Called to handle anything that hasn't been handled explicitly."""
+        util.warn("Ignoring " + info["kind"])
+
+
+    def printer_before_file(self, fileobj, info, forced_filetype_ext):
+        r"""Create a printer, call its `before_file(...)` and return it.
+        In the case of ChainedInputHandler's, the returned printer
+        should be assigned to `self.chain`.
+
+        The printer is created based on either
+        the value of `forced_filetype_ext` or info["parser"].
+        """
+        from .. import filetype
+        ext = forced_filetype_ext \
+                or info["parser"].filetype_info.filetype_ext
+        chain = filetype.printer_class(ext)(info["root"])
+        chain.before_file(fileobj, info)
+        return chain
 
 
 class ChainedInputHandler(InputHandler):
@@ -441,22 +468,8 @@ class ChainedInputHandler(InputHandler):
     def after_file(self, fileobj, info={}):
         return self.chain.after_file(fileobj, info)
 
-    def handle_entity(self, entity, info={}):
-        return self.chain.handle_by_kind(info["kind"], entity, info)
-
-    def printer_before_file(self, fileobj, info, forced_filetype_ext):
-        r"""Create a printer, call its `before_file(...)` and return it.
-        The returned printer should be assigned to `self.chain`.
-
-        The printer is created based on either
-        the value of `forced_filetype_ext` or info["parser"].
-        """
-        from .. import filetype
-        ext = forced_filetype_ext \
-                or info["parser"].filetype_info.filetype_ext
-        chain = filetype.printer_class(ext)(info["root"])
-        chain.before_file(fileobj, info)
-        return chain
+    def fallback(self, entity, info={}):
+        return self.chain.handle(entity, info)
 
 
 class AutomaticPrinterHandler(ChainedInputHandler):

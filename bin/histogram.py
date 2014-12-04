@@ -41,9 +41,8 @@ from __future__ import absolute_import
 
 import math
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error
+from libs.util import read_options, treat_options_simplest, verbose, error
+from libs import filetype
 
 
 
@@ -68,55 +67,58 @@ hist = {}
 entity_counter = 0
 limit = None
 
-################################################################################         
-
-def treat_candidate( candidate ) :
-    """
-        Treats each `Candidate`, adding it to the proper histogram bin.
-        
-        @param candidate The current candidate being read from the xml file
-    """
-    global hist
-    global entity_counter
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )    
-    for f in candidate.freqs :
-        # Build one histogram per frequency source
-        one_freq_hist = hist.get( f.name, {} )
-        one_freq_hist[ f.value ] = one_freq_hist.get( f.value, 0 ) + 1
-        hist[ f.name ] = one_freq_hist
-    entity_counter += 1
 
 ################################################################################         
-       
-def print_histogram( filename ) :
-    """
-        Prints to standard output the histogram calculated based on the 
-        candidates file and stored in the global variable hist.
-    """
-    global hist
-    global limit
-    global entity_counter
-    for fname in hist.keys() :
-        print("FREQUENCY SOURCE : %(source)s" % { "source" : fname })
-        print("Number of candidates : %(n)d" % { "n" : entity_counter })
-        print()
-        h = hist[ fname ]
-        entropy = 0
-        #entropy_delta = 0
-        counter = 0
-        for f in sorted( h.keys() ) :        
-            p = float( h[ f ] ) / entity_counter
-            entropy -= p * math.log( p, 2 )
-            #entropy_delta -= p_delta * math.log( p_delta, 2 )
-            counter = counter + 1
-            if limit is None or counter <= limit :
-                print("%(f)d : %(c)d (%(p)f)" % { "f": f, "c": h[f], "p": p })
 
-        print("Entropy : %(e)f" % { "e" : entropy })
-    hist = {}
-    entity_counter = 0
-        
+class HistogramGeneratorHandler(filetype.InputHandler):
+
+    def handle_candidate(self, candidate, info={}):
+        """
+            Treats each `Candidate`, adding it to the proper histogram bin.
+            
+            @param candidate The current candidate being read from the xml file
+        """
+        global hist
+        global entity_counter
+        if entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )    
+        for f in candidate.freqs :
+            # Build one histogram per frequency source
+            one_freq_hist = hist.get( f.name, {} )
+            one_freq_hist[ f.value ] = one_freq_hist.get( f.value, 0 ) + 1
+            hist[ f.name ] = one_freq_hist
+        entity_counter += 1
+
+
+    def after_file(self, fileobj, info={}):
+        """
+            Prints to standard output the histogram calculated based on the 
+            candidates file and stored in the global variable hist.
+        """
+        global hist
+        global limit
+        global entity_counter
+        for fname in hist.keys() :
+            print("FREQUENCY SOURCE : %(source)s" % { "source" : fname })
+            print("Number of candidates : %(n)d" % { "n" : entity_counter })
+            print()
+            h = hist[ fname ]
+            entropy = 0
+            #entropy_delta = 0
+            counter = 0
+            for f in sorted( h.keys() ) :        
+                p = float( h[ f ] ) / entity_counter
+                entropy -= p * math.log( p, 2 )
+                #entropy_delta -= p_delta * math.log( p_delta, 2 )
+                counter = counter + 1
+                if limit is None or counter <= limit :
+                    print("%(f)d : %(c)d (%(p)f)" % { "f": f, "c": h[f], "p": p })
+
+            print("Entropy : %(e)f" % { "e" : entropy })
+        hist = {}
+        entity_counter = 0
+
+
 ################################################################################           
   
 def treat_options( opts, arg, n_arg, usage_string ) :
@@ -147,7 +149,5 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "number=" ]
-arg = read_options( "n:", longopts, treat_options, -1, usage_string )
-handler = CandidatesXMLHandler( treat_candidate=treat_candidate,
-                                gen_xml=False )
-parse_xml( handler, arg, print_histogram )
+args = read_options( "n:", longopts, treat_options, -1, usage_string )
+filetype.parse(args, HistogramGeneratorHandler())

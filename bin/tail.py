@@ -121,7 +121,7 @@ class TailPrinterHandler(filetype.ChainedInputHandler):
             index = (self.entity_counter + i) % min(self.limit, self.entity_counter)
             if self.entity_buffer[index] != None:
                 entity, info = self.entity_buffer[index]
-                self.chain.handle_by_kind(info["kind"], entity, info)
+                self.chain.handle(entity, info)
             else:
                 break
         self.chain.after_file(fileobj, info)

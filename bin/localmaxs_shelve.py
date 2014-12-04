@@ -43,11 +43,9 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import os
-import xml.sax
 import shelve
 import tempfile
 
-from libs.corpusXMLHandler import CorpusXMLHandler
 from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER, WORD_SEPARATOR
 from libs.base.feature import Feature
 from libs.base.meta import Meta
@@ -58,15 +56,25 @@ from libs.base.candidate import Candidate
 from libs.base.word import Word
 from libs.util import read_options, treat_options_simplest, verbose, warn, \
     error, interpret_ngram
-from libs.indexlib import Index
+from libs import filetype
+
 
 ################################################################################
 
 usage_string = """Usage:
 
-python %(program)s OPTIONS <corpus>
+python {program} OPTIONS <corpus>
+
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
+
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
 
 -n <min>:<max> OR --ngram <min>:<max>
     The length of ngrams to extract. For instance, "-n 3:5" extracts ngrams 
@@ -77,7 +85,9 @@ OPTIONS may be:
     3-grams, 4-grams and 5-grams. Default "2:8".
 
 -i OR --index
-     Read the corpus from an index instead of an XML file. Default false.
+     Read the corpus from an index.
+     DEPRECATED: Use --from=BinaryIndex or let
+     the mwetoolkit automatically detect the filetype.
 
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
@@ -92,11 +102,7 @@ OPTIONS may be:
     Use a shelve (disk storage) rather than an in-memory data structure for
     storing candidate counts. Uses less memory, but is slower.
 
-%(common_options)s
-
-    By default, <corpus> must be a valid XML file (mwetoolkit-corpus.dtd). If
-the -i option is specified, <corpus> must be the basepath for an index generated
-by index.py.
+{common_options}
 """
 
 
@@ -104,6 +110,8 @@ ngram_counts = {}
 selected_candidates = {}
 corpus_size = 0
 sentence_count = 0
+input_filetype_ext = None
+
 
 ################################################################################
 
@@ -124,63 +132,97 @@ def unkey(str):
 
 ################################################################################
 
-def treat_sentence(sentence):
-    """
-        Count all ngrams being considered in the sentence.
-    """
-    global corpus_size, sentence_count
 
-    # 'shelve' does not speak Unicode; we must convert Unicode strings back to
-    # plain bytestrings to use them as keys.
-    words = [getattr(w, base_attr).encode('utf-8') for w in sentence]
+class NGramCounterHandler(filetype.InputHandler):
+    def handle_sentence(self, sentence, info={}):
+        """Count all ngrams being considered in the sentence."""
+        global corpus_size, sentence_count
 
-    sentence_count += 1
-    if sentence_count % 100 == 0:
-        verbose("Processing sentence %d" % sentence_count)
+        # 'shelve' does not speak Unicode; we must convert Unicode strings back to
+        # plain bytestrings to use them as keys.
+        words = [getattr(w, base_attr).encode('utf-8') for w in sentence]
 
-    for ngram_size in range(1, max_ngram + 2):
-        for i in range(len(words) - ngram_size + 1):
-            ngram = words[i : i+ngram_size]
-            ngram_key = key(ngram)
-            count = ngram_counts.get(ngram_key, 0)
-            ngram_counts[ngram_key] = count + 1
-            selected_candidates[ngram_key] = True
+        sentence_count += 1
+        if sentence_count % 100 == 0:
+            verbose("Processing sentence %d" % sentence_count)
 
-    corpus_size += len(words)
+        for ngram_size in range(1, max_ngram + 2):
+            for i in range(len(words) - ngram_size + 1):
+                ngram = words[i : i+ngram_size]
+                ngram_key = key(ngram)
+                count = ngram_counts.get(ngram_key, 0)
+                ngram_counts[ngram_key] = count + 1
+                selected_candidates[ngram_key] = True
+
+        corpus_size += len(words)
+
     
-################################################################################
+    def before_file(self, fileobj, info={}):
+        pass  # Do not chain it right now
 
-def localmaxs():
-    """
-        The LocalMaxs algorithm. Check whether each of the extracted ngrams
-        is a local maximum in terms of glue value.
-    """
-    for ngram_key in ngram_counts:
+    def after_file(self, fileobj, info={}):
+        global corpus_size_f
+        corpus_size_f = float(corpus_size)
+        verbose("Selecting ngrams through LocalMaxs...")
+        self.localmaxs()
+        verbose("Outputting candidates file...")
+        self.chain = self.printer_before_file(fileobj, info, None)
+        self.chain.handle_meta(
+                Meta([CorpusSize("corpus", corpus_size)],
+                        [MetaFeat("glue", "real")], []))
+
+        cand_id = 0
+        for ngram_key in selected_candidates:
+            if selected_candidates[ngram_key] and ngram_counts[ngram_key] >= min_frequency:
+                self.dump_ngram(ngram_key, cand_id)
+                cand_id += 1
+        self.chain.after_file(fileobj, info)
+
+
+    def localmaxs(self):
+        """The LocalMaxs algorithm. Check whether each of the extracted
+        ngrams is a local maximum in terms of glue value.
+        """
+        for ngram_key in ngram_counts:
+            ngram = unkey(ngram_key)
+            if len(ngram) >= min_ngram and len(ngram) <= max_ngram + 1:
+                left = ngram[:-1]
+                right = ngram[1:]
+                this_glue = glue(ngram)
+
+                for subgram in [left, right]:
+                    subglue = glue(subgram)
+                    subkey = key(subgram)
+                    if this_glue < subglue:
+                        selected_candidates[ngram_key] = False
+                    elif subglue < this_glue:
+                        selected_candidates[subkey] = False
+            else:
+                selected_candidates[ngram_key] = False
+
+
+    def dump_ngram(self, ngram_key, id):
+        """Print an ngram as XML."""
         ngram = unkey(ngram_key)
-        if len(ngram) >= min_ngram and len(ngram) <= max_ngram + 1:
-            left = ngram[:-1]
-            right = ngram[1:]
-            this_glue = glue(ngram)
+        cand = Candidate(id, [], [], [], [], [])
+        for value in ngram:
+            word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
+            setattr(word, base_attr, value.decode('utf-8'))
+            cand.append(word)
+        freq = Frequency('corpus', ngram_counts[ngram_key])
+        cand.add_frequency(freq)
+        cand.add_feat(Feature('glue', glue(ngram)))
+        self.chain.handle_candidate(cand)
 
-            for subgram in [left, right]:
-                subglue = glue(subgram)
-                subkey = key(subgram)
-                if this_glue < subglue:
-                    selected_candidates[ngram_key] = False
-                elif subglue < this_glue:
-                    selected_candidates[subkey] = False
-        else:
-            selected_candidates[ngram_key] = False
-            
+
 ################################################################################
 
-def main():
+def main(corpus_paths):
     """
         Main function.
     """
-    global corpus_size_f
     global use_shelve, ngram_counts, selected_candidates
-    # Dummy file initialisation to avoid warnings in PyCharm
+    # Dummy file initialization to avoid warnings in PyCharm
     ngram_counts_tmpfile = selected_candidates_tmpfile = None
     if use_shelve:
         verbose("Making temporary file...")
@@ -188,63 +230,13 @@ def main():
         (selected_candidates, selected_candidates_tmpfile) = make_shelve()
 
     verbose("Counting ngrams...")
-    if corpus_from_index:
-        index = Index(corpus_path)
-        index.load_main()
-        for sentence in index.iterate_sentences():
-            treat_sentence(sentence)
-    else:
-        input_file = open(corpus_path)    
-        parser = xml.sax.make_parser()
-        parser.setContentHandler( CorpusXMLHandler( treat_sentence ) ) 
-        parser.parse( input_file )
-        input_file.close()
-
-    corpus_size_f = float(corpus_size)
-
-    verbose("Selecting ngrams through LocalMaxs...")
-    localmaxs()
-
-    verbose("Outputting candidates file...")
-    print(XML_HEADER % { "root": "candidates", "ns": "" })
-    
-
-    meta = Meta([CorpusSize("corpus", corpus_size)],
-                [MetaFeat("glue", "real")], [])
-    print(meta.to_xml().encode('utf-8'))
-
-    id = 0
-
-    for ngram_key in selected_candidates:
-        if selected_candidates[ngram_key] and ngram_counts[ngram_key] >= min_frequency:
-            dump_ngram(ngram_key, id)
-            id += 1
-
-    print(XML_FOOTER % { "root": "candidates" })
+    filetype.parse(corpus_paths, NGramCounterHandler(), input_filetype_ext)
 
     if use_shelve:
         verbose("Removing temporary files...")
         destroy_shelve(ngram_counts, ngram_counts_tmpfile)
         destroy_shelve(selected_candidates, selected_candidates_tmpfile)
         
-################################################################################
-
-def dump_ngram(ngram_key, id):
-    """
-        Print an ngram as XML.
-    """
-    ngram = unkey(ngram_key)
-    cand = Candidate(id, [], [], [], [], [])
-    for value in ngram:
-        word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
-        setattr(word, base_attr, value.decode('utf-8'))
-        cand.append(word)
-    freq = Frequency('corpus', ngram_counts[ngram_key])
-    cand.add_frequency(freq)
-    cand.add_feat(Feature('glue', glue(ngram)))
-
-    print(cand.to_xml().encode('utf-8'))
-
 ################################################################################
 
 def prob(ngram):
@@ -287,7 +279,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global surface_instead_lemmas
     global glue
-    global corpus_from_index
     global base_attr
     global min_ngram
     global max_ngram
@@ -295,6 +286,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global ngram_counts
     global selected_candidates
     global use_shelve
+    global input_filetype_ext
 
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
@@ -307,8 +299,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             min_frequency = int(a)
         elif o in ("-n", "--ngram") :
             (min_ngram, max_ngram) = interpret_ngram(a)
-        elif o in ("-i", "--index") :
-            corpus_from_index = True
         elif o in ("-G", "--glue"):
             if a == "scp":
                 glue = scp_glue
@@ -316,6 +306,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 error("Unknown glue function '%s'" % a)
         elif o in ("-h", "--shelve"):
             use_shelve = True
+        elif o == "--from":
+            input_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
+
 
 ################################################################################
 
@@ -344,7 +339,6 @@ def destroy_shelve(shlv, path):
 
 ################################################################################
 
-corpus_from_index = False
 base_attr = 'lemma'
 glue = scp_glue
 min_ngram = 2
@@ -352,8 +346,6 @@ max_ngram = 8
 min_frequency = 2
 use_shelve = False
 
-longopts = ["surface", "glue=", "ngram=", "freq=", "index", "shelve"]
-arg = read_options("sG:n:f:ih", longopts, treat_options, 1, usage_string)
-corpus_path = arg[0]
-
-main()
+longopts = ["from=", "surface", "glue=", "ngram=", "freq=", "shelve"]
+args = read_options("sG:n:f:ih", longopts, treat_options, 1, usage_string)
+main(args)

@@ -1,9 +1,9 @@
 # MWETOOLKIT: filetype="CONLL"
-
+#
 # Using CoNLL-X Shared Task format
 # (Comments and escape codes have been
 # added for further generality)
-
+#
 1	Cathy	Cathy	N	N	_	2	su	_	_
 2	zag	zie	V	V	_	0	ROOT	_	_
 3	hen	hen	Pron	Pron	_	2	obj1	_	_

@@ -93,10 +93,6 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
     def __init__(self):
         super(UniqerHandler, self).__init__(output_filetype_ext)
 
-    def handle_meta(self, meta, info={}):
-        r"""Just pass it on to be handled by printer."""
-        self.chain.handle_meta(meta, info)
-
     def handle_entity(self, entity, info={}) :
         """Add each entity to the entity buffer, after pre-processing it. This
         buffer is used to keep track of repeated items, so that only a copy

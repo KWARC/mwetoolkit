@@ -50,7 +50,7 @@ test_parser  XML "xml-ref/corpus.conll.xml" "xml-ref/corpus.conll.xml"
 
 t_testname "Check CONLL format"
 test_parser  CONLL "corpus.conll" "xml-ref/corpus.conll.xml"
-#test_printer CONLL "corpus.conll" "xml-ref/corpus.conll.xml"
+test_printer CONLL "corpus.conll" "xml-ref/corpus.conll.xml"
 
 t_testname "Check FactoredMoses format"
 test_parser  FactoredMoses "corpus.moses" "xml-ref/corpus.moses.xml"

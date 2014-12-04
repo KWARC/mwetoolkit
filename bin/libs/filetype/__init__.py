@@ -424,8 +424,23 @@ class ConllInfo(common.FiletypeInfo):
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
             (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
 
+    entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
+            "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
+
     def operations(self):
-        return common.FiletypeOperations(ConllChecker, ConllParser, None)
+        return common.FiletypeOperations(ConllChecker, ConllParser,
+                ConllPrinter)
+
+
+class ConllChecker(common.AbstractChecker):
+    r"""Checks whether input is in CONLL format."""
+    def matches_header(self, strict):
+        header = self.fileobj.peek(1024)
+        for line in header.split(b"\n"):
+            if line and not line.startswith(
+                    bytes(self.filetype_info.comment_prefix)):
+                return len(line.split(b"\t")) == len(self.filetype_info.entries)
+        return strict
 
 
 class ConllParser(common.AbstractTxtParser):
@@ -448,12 +463,11 @@ class ConllParser(common.AbstractTxtParser):
     9. PDEPREL -- (XXX currently ignored).
     """
     valid_roots = ["corpus"]
-    entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
-            "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
-        self.name2index = {name:i for (i, name) in enumerate(self.entries)}
+        self.name2index = {name:i for (i, name) in
+                enumerate(self.filetype_info.entries)}
         self.root = "corpus"
         self.s_id = 0
 
@@ -462,12 +476,12 @@ class ConllParser(common.AbstractTxtParser):
         if len(data) <= 1: return
         data = [(WILDCARD if d == "_" else d) for d in data]
 
-        if len(data) < len(self.entries):
+        if len(data) < len(self.filetype_info.entries):
             util.warn("Ignoring line {} (only {} entries)" \
                     .format(info["linenum"], len(data)))
             return
 
-        if len(data) > len(self.entries):
+        if len(data) > len(self.filetype_info.entries):
             util.warn("Ignoring extra entries in line {}" \
                     .format(info["linenum"]))
 
@@ -503,15 +517,40 @@ class ConllParser(common.AbstractTxtParser):
                     "entry: {}.".format(entry_name))
 
 
-class ConllChecker(common.AbstractChecker):
-    r"""Checks whether input is in CONLL format."""
-    def matches_header(self, strict):
-        header = self.fileobj.peek(1024)
-        for line in header.split(b"\n"):
-            if line and not line.startswith(
-                    bytes(self.filetype_info.comment_prefix)):
-                return len(line.split(b"\t")) == len(ConllParser.entries)
-        return strict
+class ConllPrinter(common.AbstractPrinter):
+    valid_roots = ["corpus"]
+    def __init__(self, *args, **kwargs):
+        super(ConllPrinter, self).__init__(*args, **kwargs)
+        self.count_sentences = 0
+
+
+    def handle_sentence(self, sentence, info={}):
+        if self.count_sentences != 0:
+            self.add_string("\n")
+
+        for i, word in enumerate(sentence):
+            data = {
+                "ID": unicode(i + 1),
+                "FORM": word.surface,
+                "LEMMA": word.lemma,
+                "CPOSTAG": word.pos,
+                "POSTAG": word.pos,
+                "DEPREL": word.syn.split(":")[0],
+                "HEAD": word.syn.split(":")[1] if ":" in word.syn else "_",
+            }
+            line = "\t".join(self.handle_wildcard(data.get(entry_name, "_")) \
+                    for entry_name in self.filetype_info.entries)
+            self.add_string(line, "\n")
+            self.count_sentences += 1
+
+
+    def handle_wildcard(self, argument):
+        r"""Transform WILDCARD into CONLL "_"."""
+        if argument == WILDCARD:
+            return "_"
+        return argument
+
+
 
 
 ##############################
