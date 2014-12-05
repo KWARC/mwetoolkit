@@ -269,7 +269,8 @@ class PlainCorpusPrinter(common.AbstractPrinter):
         """Handle sentence as a PlainCorpus line, consisting of
         space-separated Word surfaces. MWEs are separated by "_"s.
         """
-        surface_list = [self.escape(w.lemma_or_surface() or "<?>") \
+        surface_list = [self.escape(w.surface
+                if w.surface != WILDCARD else "<?>") \
                 for w in sentence.word_list]
 
         from collections import defaultdict

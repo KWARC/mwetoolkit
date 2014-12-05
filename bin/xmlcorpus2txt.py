@@ -43,10 +43,10 @@ from __future__ import absolute_import
 
 import sys
 
-from libs.corpusXMLHandler import CorpusXMLHandler
 from libs.base.__common import ATTRIBUTE_SEPARATOR
 from libs.base.word import WORD_ATTRIBUTES
 from libs.util import usage, read_options, treat_options_simplest, verbose, parse_xml, error
+from libs import filetype
 
 
 usage_string = """Usage:
@@ -63,22 +63,24 @@ python %(program)s -a <attributes> <corpus.xml>
 """
 
 attributes = None
-entity_counter = 0
 
 ################################################################################
 
-def print_sentence(sentence):
-    """
-        TODO: doc
-    """
-    global attributes, entity_counter
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    for word in sentence:
-        vals = [getattr(word, attr) for attr in attributes]
-        print(ATTRIBUTE_SEPARATOR.join(vals),end="")
-    print("")
-    entity_counter = entity_counter + 1
+class TxtGeneratorHandler(filetype.InputHandler):
+    def __init__(self):
+        self.entity_counter = 0
+
+    def handle_sentence(self, sentence, info={}):
+        """TODO: doc"""
+        global attributes
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
+        for word in sentence:
+            vals = [getattr(word, attr) for attr in attributes]
+            print(ATTRIBUTE_SEPARATOR.join(vals),end="")
+        print("")
+        self.entity_counter += 1
+
 
 ################################################################################
 
@@ -110,21 +112,10 @@ def treat_options(opts, arg, n_arg, usage_string):
         usage(usage_string)
         sys.exit(2)
 
-################################################################################
 
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
-    
 ################################################################################
 # MAIN SCRIPT    
 
 longopts = ["atttibutes="]
 arg = read_options("a:", longopts, treat_options, -1, usage_string)
-parse_xml( CorpusXMLHandler(print_sentence), arg, reset_entity_counter )
+filetype.parse(arg, TxtGeneratorHandler())

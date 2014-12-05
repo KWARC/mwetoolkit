@@ -34,7 +34,6 @@ from __future__ import absolute_import
 import sys
 import xml.sax
 
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.util import read_options, treat_options_simplest, verbose, warn
 from libs import filetype
 

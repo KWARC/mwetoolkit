@@ -39,11 +39,10 @@ from __future__ import absolute_import
 import math
 import operator
 
-from libs.candidatesXMLHandler import CandidatesXMLHandler
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
 from libs.util import read_options, treat_options_simplest, parse_xml
-
+from libs import filetype
 
 
 
@@ -59,26 +58,10 @@ python %(program)s <candidates.xml>
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 """     
 all_patterns = {}
+
      
 ################################################################################
        
-def treat_meta( meta ) :
-    """
-        Adds two new meta-features corresponding to the features that we add to
-        each candidate. The meta-features define the type of the features, which
-        is an enumeration of all possible POS patterns for the POS pattern and
-        an integer number for the size n of the candidate.
-        
-        @param meta The `Meta` header that is being read from the XML file.        
-    """
-    global all_patterns
-    pattern_feat_values = "{"
-    for corpus_size in meta.corpus_sizes :
-        meta.add_meta_feat( MetaFeat( "entropy_" + corpus_size.name, "real" ) )        
-    print(meta.to_xml())
-
-################################################################################
-
 def entropy( probabilities ) :
     """
         Given a list of probabilities, calculates the entropy as -sum(p*log(p))
@@ -138,70 +121,88 @@ def append_list_dict( dictionary, key, value ) :
     a_list.append( value )
     dictionary[ key ] = a_list        
 
+
 ################################################################################
 
-def treat_candidate( candidate ) :
-    """
-        For each candidate, generates two new features that correspond to the
-        POS pattern and to the number of words in the candidate. Then, prints
-        the new candidate with the two extra features.
-        
-        @param candidate The `Candidate` that is being read from the XML file.
-    """
-    pattern = candidate.get_pos_pattern()
-    #pdb.set_trace()
-    freq_table = {}
-    verb_table = {} # verb fixed, compl varies
-    compl_table = {} # compl fixed, verb varies
-    #pdb.set_trace()
-    # Workaround to count both determiners
-    f_a = candidate[ 1 ].get_freq_value( "bnc" ) + 1
-    f_the = candidate[ 2 ].get_freq_value( "bnc" ) + 1
-    f_det = f_a + f_the
-    verb = candidate[ 0 ].lemma
-    compl = candidate[ 3 ].lemma
-    for variation in candidate.vars :
-        for freq in variation.freqs :
-            var_verb = variation[ 0 ].lemma            
-            freq_verb = variation[ 0 ].get_freq_value("bnc") + 1
-            var_compl = variation[ 2 ].lemma
-            freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
-            f_entry = (freq.value, freq_verb, f_det, freq_compl )
-            append_list_dict( freq_table, freq.name, f_entry )
-            if verb == var_verb :
-                append_list_dict( verb_table, freq.name, f_entry )
-            if compl == var_compl :
-                append_list_dict( compl_table, freq.name, f_entry )                   
+class FeatGeneratorHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(fileobj, info, None)
 
-    verb_table[ "google" ].sort( key=operator.itemgetter(3), reverse=True )
-    verb_table["google"] = verb_table["google"][ 0:5 ]
-    compl_table[ "google" ].sort( key=operator.itemgetter(1), reverse=True )
-    compl_table["google"] = compl_table["google"][ 0:5 ]
-    ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0),
-                   freq_table["google"] ) ) )
-    ent_w = entropy( probs_weighted( map( operator.itemgetter(0),
-                     freq_table["google"] ), map( operator.itemgetter(1,2,3),
-                     freq_table["google"] ) ) )
-    ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0),
-                          compl_table["google"] ),
-                          map( operator.itemgetter(1,2,3),
-                          compl_table["google"] ) ) )
-    ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0),
-                           verb_table["google"] ),
-                           map( operator.itemgetter(1,2,3),
-                           verb_table["google"] ) ) )    
-    candidate.add_feat( Feature( "entropy_google", str( ent ) ) )
-    candidate.add_feat( Feature( "entropy_w_google", str( ent_w ) ) )
-    candidate.add_feat( Feature( "entropy_w_verb_google", str( ent_w_verb ) ) )    
-    candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl )))    
-    print(candidate.to_xml().encode( 'utf-8' ))
+    def handle_meta(self, meta, info={}):
+        """
+            Adds two new meta-features corresponding to the features that we add to
+            each candidate. The meta-features define the type of the features, which
+            is an enumeration of all possible POS patterns for the POS pattern and
+            an integer number for the size n of the candidate.
+            
+            @param meta The `Meta` header that is being read from the XML file.        
+        """
+        global all_patterns
+        pattern_feat_values = "{"
+        for corpus_size in meta.corpus_sizes :
+            meta.add_meta_feat( MetaFeat( "entropy_" + corpus_size.name, "real" ) )        
+        self.chain.handle_meta(meta, info)
+
+
+    def handle_candidate(self, candidate, info={}) :
+        """
+            For each candidate, generates two new features that correspond to the
+            POS pattern and to the number of words in the candidate. Then, prints
+            the new candidate with the two extra features.
+            
+            @param candidate The `Candidate` that is being read from the XML file.
+        """
+        pattern = candidate.get_pos_pattern()
+        #pdb.set_trace()
+        freq_table = {}
+        verb_table = {} # verb fixed, compl varies
+        compl_table = {} # compl fixed, verb varies
+        #pdb.set_trace()
+        # Workaround to count both determiners
+        f_a = candidate[ 1 ].get_freq_value( "bnc" ) + 1
+        f_the = candidate[ 2 ].get_freq_value( "bnc" ) + 1
+        f_det = f_a + f_the
+        verb = candidate[ 0 ].lemma
+        compl = candidate[ 3 ].lemma
+        for variation in candidate.vars :
+            for freq in variation.freqs :
+                var_verb = variation[ 0 ].lemma            
+                freq_verb = variation[ 0 ].get_freq_value("bnc") + 1
+                var_compl = variation[ 2 ].lemma
+                freq_compl = variation[ 2 ].get_freq_value("bnc") + 1
+                f_entry = (freq.value, freq_verb, f_det, freq_compl )
+                append_list_dict( freq_table, freq.name, f_entry )
+                if verb == var_verb :
+                    append_list_dict( verb_table, freq.name, f_entry )
+                if compl == var_compl :
+                    append_list_dict( compl_table, freq.name, f_entry )                   
+
+        verb_table[ "google" ].sort( key=operator.itemgetter(3), reverse=True )
+        verb_table["google"] = verb_table["google"][ 0:5 ]
+        compl_table[ "google" ].sort( key=operator.itemgetter(1), reverse=True )
+        compl_table["google"] = compl_table["google"][ 0:5 ]
+        ent = entropy( probs_from_varfreqs( map( operator.itemgetter(0),
+                       freq_table["google"] ) ) )
+        ent_w = entropy( probs_weighted( map( operator.itemgetter(0),
+                         freq_table["google"] ), map( operator.itemgetter(1,2,3),
+                         freq_table["google"] ) ) )
+        ent_w_verb = entropy( probs_weighted( map( operator.itemgetter(0),
+                              compl_table["google"] ),
+                              map( operator.itemgetter(1,2,3),
+                              compl_table["google"] ) ) )
+        ent_w_compl = entropy( probs_weighted( map( operator.itemgetter(0),
+                               verb_table["google"] ),
+                               map( operator.itemgetter(1,2,3),
+                               verb_table["google"] ) ) )    
+        candidate.add_feat( Feature( "entropy_google", str( ent ) ) )
+        candidate.add_feat( Feature( "entropy_w_google", str( ent_w ) ) )
+        candidate.add_feat( Feature( "entropy_w_verb_google", str( ent_w_verb ) ) )    
+        candidate.add_feat( Feature( "entropy_w__compl_google", str( ent_w_compl )))    
+        self.chain.handle_candidate(candidate, info)
+
 
 ################################################################################
 # MAIN SCRIPT
 longopts = []
-arg = read_options( "", longopts, treat_options_simplest, -1, usage_string )
-handler = CandidatesXMLHandler( treat_meta=treat_meta,
-                                treat_candidate=treat_candidate,
-                                gen_xml="candidates")
-parse_xml( handler, arg )
-print(handler.footer)
+args = read_options( "", longopts, treat_options_simplest, -1, usage_string )
+filetype.parse(args, FeatGeneratorHandler())

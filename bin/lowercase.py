@@ -31,7 +31,7 @@
    Some fuzzy thresholds are hardcoded and were fixed based on empirical 
    observation of the Genia corpus. Since you are supposed to perform 
    lowercasing before any linguistic processing, this script operates on surface 
-   forms. Any lemma information will be ignored during lowercasing, except you
+   forms. Any lemma information will be ignored during lowercasing, unless you
    use -l option.
 """
 
@@ -42,282 +42,226 @@ from __future__ import absolute_import
 
 import re
 
-from libs.genericXMLHandler import GenericXMLHandler
 from libs.base.word import Word
-from libs.util import read_options, treat_options_simplest, verbose, \
-                 parse_xml, parse_txt, warn, error
+from libs.util import read_options, treat_options_simplest, \
+        verbose, warn, error
+from libs import filetype
+
 
 ################################################################################
 # GLOBALS
 
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <file.xml>
+python {program} OPTIONS <corpus>
 
-    OPTIONS may be:    
-    
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
+
+OPTIONS may be:
+
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[corpus]}
+
 -a OR --algorithm
-    The name of the lowercaisng algorithm used to convert majuscule to 
-    minuscule characters. Supported algorithms are:
-    * simple (default): lowercases everything, regardless of acronyms, proper 
-    names, dates, etc.
-    * complex: keeps the case of words that do not present a preferred form, 
-    i.e. words that might occur uppercased even if they are not at the beginning 
-    of a sentence. Some fuzzy thresholds are hardcoded and were fixed based on
-    empirical observation of the Genia corpus.
-    * aggressive: lowercases all words that do not occur more than 90% of the
-    time in upper/mixed case. For instance, if a word never appears in lowercase,
-    it will be kept. Words that occur in various cases will be lowercased.
-    
--x OR --text
-    Use as input a text file instead of XML file. One sentence per line, 
-    tokenised with spaces. Output will be text as well.
-    
--m OR --moses
-    Uses Moses factored corpus format as input. This format must be pure text,
-    one sentence per line, tokens separated by spaces, each token being:
-    surface|lemma|POS|syntrelation:synthead
-    Which are equivalent to the xml fields. Empty fields should be left blank,
-    but every token must have 3 vertical bars. The actual character for vertical
-    bars must be escabed and replaced by a placeholder that does not contain
-    this character (e.g. %%VERTICAL_BAR%%)
-    
+    The name of the lowercasing algorithm used to convert from upper to 
+    lowercase characters. Supported algorithms are:
+    * "simple" (default): lowercases everything, regardless of acronyms, proper 
+      names, dates, etc.
+    * "complex": keeps the case of words that do not present a preferred form, 
+      i.e. words that might occur uppercased even if they are not at the beginning 
+      of a sentence. Some fuzzy thresholds are hardcoded and were fixed based on
+      empirical observation of the Genia corpus.
+    * "aggressive": lowercases all words that do not occur more than 90% of the
+      time in upper/mixed case. For instance, if a word never appears in lowercase,
+      it will be kept. Words that occur in various cases will be lowercased.
+
 -l OR --lemmas
     Lowercase lemmas instead of surface forms. Might be useful when dealing with
     corpora which were accidentally parsed before lowercasing, and the parser
     doesn't lowercase lemmas (as it is the case in RASP 2, for instance)
 
-%(common_options)s
+-x OR --text
+    DEPRECATED: Use --from=PlainCorpus instead.
 
-    IMPORTANT: you are supposed to perform lowercasing before any linguistic
-    processing. Therefore, this algorithm operates on surface forms by default. 
-    Except if you specify the -l option, lemmas will be ignored during 
-    lowercasing.
+-m OR --moses
+    DEPRECATED: Use --from=Moses instead.
 
-    The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+{common_options}
+
+IMPORTANT: you are supposed to perform lowercasing before any linguistic
+processing. Therefore, this algorithm operates on surface forms by default. 
+Except if you specify the -l option, lemmas will be ignored during 
+lowercasing.
 """
-algorithm = None
+
+algoname = "simple"
 vocab = {}
-entity_counter = 0
 # In complex algorithm, a Firstupper form occurring 80% of the time or more 
 # at the beginning of a sentence is systematically lowercased.
 START_THRESHOLD=0.8
-text_version=False
-moses_version=False
 lower_attr="surface"
 
+input_filetype_ext = None
+output_filetype_ext = None
+
+
 ################################################################################
 
-def treat_meta( meta ) :
-    """
-        Simply prints the meta header to the output without modifications.
-
-        @param meta The `Meta` header that is being read from the XML file.
-    """
-
-    print(meta.to_xml().encode( 'utf-8' ))
-    
-################################################################################
-
-def treat_sentence_simple( sentence ) :
-    """
-        For each sentence in the corpus, lowercases its words in a dummy stupid
-        way.
-        
-        @param sentence A `Sentence` that is being read from the XML file.    
-    """
-    global entity_counter
-    global text_version
-    global moses_version
-    global lower_attr
-    
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    new_sent = []
-    for w in sentence :
-        if text_version :
-            new_sent.append( w.lower() )
-        elif moses_version :
-            word = w.split( "|" )
-            if lower_attr == "lemma" : # option --lemmas passed
-                word[1] = word[1].lower()
-            else :
-                word[0] = word[0].lower()
-            new_sent.append( "|".join( word ) )
+class LowercaserHandler(filetype.ChainedInputHandler):
+    def __init__(self):
+        global algoname
+        self.entity_counter = 0
+        if algoname == "simple" : 
+            self.handle_sentence = self.handle_sentence_simple # Redundant, kept for clarity
+        elif algoname == "complex" :
+            self.handle_sentence = self.handle_sentence_complex
+        elif algoname == "aggressive" :
+            self.handle_sentence = self.handle_sentence_aggressive # Redundant, kept for clarity                
         else :
-            setattr(w, lower_attr, getattr(w, lower_attr).lower() )
-    if text_version or moses_version :
-        print(" ".join( new_sent ).encode('utf-8'))
-    else :
-        print(sentence.to_xml().encode( "utf-8" ))
-    entity_counter += 1
+            error("%s is not a valid algorithm\nYou must provide a valid "+\
+                  "algorithm (e.g. \"complex\", \"simple\")." % algoname)
 
-################################################################################
 
-def treat_sentence_complex( sentence ) :
-    """
-        For each sentence in the corpus, lowercases its words based on the most
-        frequent form in the vocabulary.
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
+
+
+    def handle_sentence_simple(self, sentence, info={}):
+        """For each sentence in the corpus, lowercases
+        its words in a dummy stupid way.
+        """
+        global text_version
+        global moses_version
+        global lower_attr
         
-        @param sentence A `Sentence` that is being read from the XML file.    
-    """    
-    global vocab
-    global entity_counter
-    global START_THRESHOLD    
-    global text_version
-    global moses_version
-    global lower_attr
-    
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
+        for w in sentence :
+            setattr(w, lower_attr, getattr(w, lower_attr).lower())
+        self.chain.handle_sentence(sentence, info)
+        self.entity_counter += 1
 
-    for w_i in range(len(sentence)) :
-        if text_version :
-            sentence[ w_i ] = Word( surface=sentence[ w_i ] )
-        elif moses_version :
-            parts = sentence[ w_i ].split("|")
-            if len(parts) != 4 :
-                warn("malformed token %(a)s\nIgnoring sentence %(s)d" %
-                     {"a":sentence[ w_i ],"s":entity_counter})
 
-                return
-            sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
-        w = sentence[ w_i ]
-        case_class = w.get_case_class()
-        # Does nothing if it's aready lowercase or if it's not alphabetic
+    def handle_sentence_complex(self, sentence, info={}):
+        """For each sentence in the corpus, lowercases its words
+        based on the most frequent form in the vocabulary.
+        """    
+        global vocab
+        global START_THRESHOLD    
+        global lower_attr
         
-        if case_class != "lowercase" and case_class != "?" :
-            low_key = getattr( w, lower_attr).lower()            
-            token_stats = vocab[ low_key ]
-            percents = get_percents( token_stats )
-            pref_form = get_preferred_form( percents )
-            if case_class == "UPPERCASE" or case_class == "MiXeD" :
-                if pref_form :
-                    setattr( w, lower_attr, pref_form ) 
-                    # If the word is UPPERCASE or MiXed and does not have a 
-                    # preferred form, what do you expect me to do about it? 
-                    # Nothing, I just ignore it, it's a freaky weird creature!   
-            elif case_class == "Firstupper" :
-                occurs = token_stats[ getattr( w, lower_attr) ]
-                if ( w_i == 0 or
-                   re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) ) and \
-                   float(occurs[ 1 ]) / float(occurs[ 0 ]) >= START_THRESHOLD :
-                    setattr( w, lower_attr, getattr( w, lower_attr ).lower() )  
-                elif pref_form :
-                    setattr( w, lower_attr, pref_form )
-                    # Else, don't modify case, since we cannot know whether it
-                    # is a proper noun, a sentence start, a title word, a spell 
-                    # error, etc.
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
 
-    if text_version :
-        outs = " ".join(map(lambda x : getattr(x, lower_attr), sentence))
-    elif moses_version :
-        outs = " ".join(map( lambda x : x.to_moses(), sentence ))
-    else :
-        outs = sentence.to_xml()
-    print(outs.encode( 'utf-8' ))
-    entity_counter += 1
+        for w_i, w in enumerate(sentence):
+            case_class = w.get_case_class()
+            # Does nothing if it's already lowercase or if it's not alphabetic
 
-################################################################################
+            if case_class != "lowercase" and case_class != "?":
+                low_key = getattr(w, lower_attr).lower()
+                token_stats = vocab[ low_key ]
+                percents = get_percents( token_stats )
+                pref_form = get_preferred_form( percents )
 
-def treat_sentence_aggressive( sentence ) :
-    """
-        For each sentence in the corpus, lowercases its words except if it 
+                if case_class == "UPPERCASE" or case_class == "MiXeD" :
+                    if pref_form :
+                        setattr( w, lower_attr, pref_form ) 
+                        # If the word is UPPERCASE or MiXed and does not have a 
+                        # preferred form, what do you expect me to do about it? 
+                        # Nothing, I just ignore it, it's a freaky weird creature!   
+
+                elif case_class == "Firstupper" :
+                    occurs = token_stats[ getattr( w, lower_attr) ]
+                    if ( w_i == 0 or
+                       re.match( "[:\.\?!;]", sentence[ w_i - 1 ].surface ) ) and \
+                       float(occurs[ 1 ]) / float(occurs[ 0 ]) >= START_THRESHOLD :
+                        setattr( w, lower_attr, getattr( w, lower_attr ).lower() )  
+                    elif pref_form :
+                        setattr( w, lower_attr, pref_form )
+                        # Else, don't modify case, since we cannot know whether it
+                        # is a proper noun, a sentence start, a title word, a spell 
+                        # error, etc.
+
+        self.chain.handle_sentence(sentence)
+        self.entity_counter += 1
+
+
+    def handle_sentence_aggressive(self, sentence, info={}):
+        """For each sentence in the corpus, lowercases its words except if it 
         occurs in uppercase in 90% of the occurrences.
+        """    
+        global vocab
+        global lower_attr
         
-        @param sentence A `Sentence` that is being read from the XML file.    
-    """    
-    global vocab
-    global entity_counter
-    global text_version
-    global moses_version
-    global lower_attr
-    
-    AGG_THRESH = .9
-    
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-
-    for w_i in range(len(sentence)) :
-        if text_version :
-            sentence[ w_i ] = Word( sentence[ w_i ], None, None, None, None )
-        elif moses_version :
-            parts = sentence[ w_i ].split("|")
-            if len(parts) != 4 :
-                warn("malformed token %(a)s\nIgnoring sentence %(s)d" %
-                     {"a":sentence[ w_i ],"s":entity_counter})
-                return
-            sentence[ w_i ] = Word(parts[0], parts[1], parts[2], parts[3], None)
-        w = sentence[ w_i ]
-        case_class = w.get_case_class( s_or_l=lower_attr )
-        # Does nothing if it's aready lowercase or if it's not alphabetic
+        AGG_THRESH = .9
         
-        if case_class != "lowercase" and case_class != "?" :
-            current_form = getattr( w, lower_attr ) 
-            #if current_form == "Advance" or current_form == "Abstract" :
-            #    pdb.set_trace()
-            token_stats = vocab[ current_form.lower() ]
-            percents = get_percents( token_stats )
-            if percents[ current_form ] < AGG_THRESH :
-                setattr( w, lower_attr, current_form.lower() )          
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
 
-    if text_version :
-        print(" ".join( map( lambda x : getattr( x, lower_attr), sentence ) ))
-    elif moses_version :
-        print(" ".join( map( lambda x : x.to_moses(), sentence ) ))
-    else :
-        print(sentence.to_xml().encode( 'utf-8' ))
-    entity_counter += 1
+        for w_i, w in enumerate(sentence):
+            case_class = w.get_case_class(s_or_l=lower_attr)
+            # Does nothing if it's aready lowercase or if it's not alphabetic
+
+            if case_class != "lowercase" and case_class != "?" :
+                current_form = getattr( w, lower_attr ) 
+                #if current_form == "Advance" or current_form == "Abstract" :
+                #    pdb.set_trace()
+                token_stats = vocab[ current_form.lower() ]
+                percents = get_percents( token_stats )
+                if percents[ current_form ] < AGG_THRESH :
+                    setattr( w, lower_attr, current_form.lower() )          
+
+        self.chain.handle_sentence(sentence, info)
+        self.entity_counter += 1
+
 
 ################################################################################
-       
-def build_vocab( sentence ) :
-    """
-        For each sentence in the corpus, add it to the vocabulary. The vocab is
-        a global dictionary that contains, for each lowercased surface form, a
-        dictionary that associate the case configurations to occurrence counters
-        both general and start-of-sentence (see below).
-        
-        @param sentence A `Sentence` that is being read from the XML file. If
-        text_version, then it is simply a list of string tokens    
-    """
-    global vocab
-    global entity_counter
-    global text_version
-    global moses_version
-    global lower_attr
-    if entity_counter % 100 == 0 :
-        verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-    prev_key = ""
-    for w_i in range(len(sentence)) :
-        if text_version :
-            key = sentence[ w_i ]
-        elif moses_version :
-            fields = sentence[ w_i ].split( "|" )
-            if lower_attr == "surface" :
-                key = fields[0]
-            elif lower_attr == "lemma" :
-                key = fields[1]
-            else : # Will never occur
-                error("unkown attrbute %s" % lower_attr)
-        else :
-            key = getattr( sentence[ w_i ], lower_attr )
-        low_key = key.lower()
-        forms = vocab.get( low_key, {} )
-        form_entry = forms.get( key, [ 0, 0 ] )
-        # a form entry has two counters, one for the occurrences and one for
-        # the number of times it occurred at the beginning of a sentence. 
-        # Therefore, form_entry[0] >= form_entry[1]
-        form_entry[ 0 ] = form_entry[ 0 ] + 1  
-        # This form occurrs at the first position of the sentence or after a
-        # period (semicolon, colon, exclamation or question mark). Count it
-        if w_i == 0 or re.match( "[:\.\?!;]", prev_key ) :
-            form_entry[ 1 ] = form_entry[ 1 ] + 1 
-        forms[ key ] = form_entry
-        vocab[ low_key ] = forms
-        prev_key = key
-    entity_counter += 1
-    
+
+class VocabReaderHandler(filetype.InputHandler):
+    def __init__(self):
+        self.entity_counter = 0
+
+    def handle_sentence(self, sentence, info={}):
+        """
+            For each sentence in the corpus, add it to the vocabulary. The vocab is
+            a global dictionary that contains, for each lowercased surface form, a
+            dictionary that associate the case configurations to occurrence counters
+            both general and start-of-sentence (see below).
+        """
+        global vocab
+        global lower_attr
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
+        prev_key = ""
+        for w_i, w in enumerate(sentence):
+            key = getattr(w, lower_attr)
+            low_key = key.lower()
+            forms = vocab.get( low_key, {} )
+            form_entry = forms.get( key, [ 0, 0 ] )
+            # a form entry has two counters, one for the occurrences and one for
+            # the number of times it occurred at the beginning of a sentence. 
+            # Therefore, form_entry[0] >= form_entry[1]
+            form_entry[ 0 ] = form_entry[ 0 ] + 1  
+            # This form occurrs at the first position of the sentence or after a
+            # period (semicolon, colon, exclamation or question mark). Count it
+            if w_i == 0 or re.match( "[:\.\?!;]", prev_key ) :
+                form_entry[ 1 ] = form_entry[ 1 ] + 1 
+            forms[ key ] = form_entry
+            vocab[ low_key ] = forms
+            prev_key = key
+        self.entity_counter += 1
+
+
 ################################################################################
 
 def get_percents( token_stats ) :
@@ -399,51 +343,35 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         
         @param n_arg The number of arguments expected for this script.    
     """
-    global algorithm
-    global text_version
-    global moses_version
+    global algoname
     global lower_attr
-    algorithm = treat_sentence_simple # Default value
+    global input_filetype_ext
+    global output_filetype_ext
+
     treat_options_simplest( opts, arg, n_arg, usage_string )        
+
     for ( o, a ) in opts:
-        if o in ("-x", "--text" ) :
-            text_version = True
-        elif o in ("-m", "--moses" ) :       
-            moses_version = True    
+        if o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
         elif o in ("-l","--lemmas" ) :
             lower_attr = "lemma"
         elif o in ("-a", "--algorithm"):
             algoname = a.lower()
-            if algoname == "complex" :
-                algorithm = treat_sentence_complex
-            elif algoname == "simple" : 
-                algorithm = treat_sentence_simple # Redundant, kept for clarity
-            elif algoname == "aggressive" :
-                algorithm = treat_sentence_aggressive # Redundant, kept for clarity                
-            else :
-                error("%s is not a valid algorithm\nYou must provide a valid "+\
-                      "algorithm (e.g. \"complex\", \"simple\")." % algoname)
+        else:
+            raise Exception("Bad arg: " + o)
+
  
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "algorithm=", "text", "moses", "lemmas" ]
-arg = read_options( "a:xml", longopts, treat_options, 1, usage_string )
+longopts = [ "from=", "to=", "algorithm=", "lemmas" ]
+args = read_options( "a:xml", longopts, treat_options, 1, usage_string )
 
-if algorithm != treat_sentence_simple :
+if algoname != "simple" :
     verbose( "Pass 1: Reading vocabulary from file... please wait" )
-    if text_version or moses_version :
-        parse_txt( build_vocab, arg )
-    else :
-        parse_xml( GenericXMLHandler( treat_entity=build_vocab ), arg )
-    entity_counter = 0
-    
+    filetype.parse(args, VocabReaderHandler(), input_filetype_ext)
+
 verbose( "Pass 2: Lowercasing the words in the file" )
-if text_version or moses_version :
-    parse_txt( algorithm, arg )
-else :
-    handler = GenericXMLHandler( treat_meta=treat_meta,
-                                 treat_entity=algorithm,
-                                 gen_xml=True )
-    parse_xml( handler, arg )
-    print(handler.footer)
+filetype.parse(args, LowercaserHandler(), input_filetype_ext)

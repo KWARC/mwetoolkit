@@ -33,12 +33,13 @@ from __future__ import absolute_import
 
 import math
 
-from libs.genericXMLHandler import GenericXMLHandler
-from libs.util import read_options, treat_options_simplest, verbose, \
-    parse_xml, error
+from libs.util import read_options, treat_options_simplest, verbose, error
 from libs.base.yahooFreq import YahooFreq
 from libs.base.googleFreq import GoogleFreq
 from libs.base.__common import DEFAULT_LANG
+from libs import filetype
+
+
 
 ################################################################################
 # GLOBALS
@@ -63,25 +64,33 @@ OPTIONS may be:
 """
 web_freq = GoogleFreq()
 lang = DEFAULT_LANG
-entity_counter = 0
 
-################################################################################
-
-def treat_meta(meta):
-    """
-        Simply prints the meta header to the output without modifications.
-
-        @param meta The `Meta` header that is being read from the XML file.
-    """
-
-    print(meta.to_xml().encode('utf-8'))
 
 
 ################################################################################
 
-def lemmatise_en(w):
-    """
-        Heuristic singularisation of English nouns is done as follows:
+class LemmatiserHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(fileobj, info, None)
+        self.entity_counter = 0
+
+
+    def handle_entity(self, entity, info={}):
+        """For each sentence in the corpus, lemmatise its words.
+        @param entity A subclass of `Ngram`.
+        """
+        global lang
+        if self.entity_counter % 100 == 0:
+            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
+        for w in entity:
+            if lang == "en":
+                w.lemma = self.lemmatise_en(w)
+        self.chain.handle_entity(entity, info)
+        self.entity_counter += 1
+
+
+    def lemmatise_en(self, w):
+        """Heuristic singularisation of English nouns is done as follows:
 
         Remark: we assume regular plurals. Special cases like men, people or
         children are ignored.
@@ -89,83 +98,65 @@ def lemmatise_en(w):
         Examples that work nicely: virus, analyses, access, abnormalities,
         heroes, days, airways...
         """
-    MAX_RATIO = 6  # Maximum number of times a plural must occur more than a
-    # singular to avoid lemmatisation
-    surf = w.surface
-    # Nouns finishing with "s"
-    if surf.endswith("s") and w.pos == "N" and len(surf) > 2:
-        # avoid problems with "access" "weakness" "analysis" "virus" "bolus"
-        if surf.endswith("ss") or surf.endswith("is") or \
-                surf.endswith("us"):
-            return surf
-        elif surf.endswith("ies"):  # body - bodies
-            s_form = surf[0: len(surf) - 3] + "y"
-        elif w.surface.endswith("oes"):  # hero - heroes
-            s_form = surf[0: len(surf) - 2]
-        else:
-            s_form = surf[0: len(surf) - 1]
-        freq_plural = web_freq.search_frequency(w.surface)
-        freq_singular = web_freq.search_frequency(s_form)
-        if freq_singular > MAX_RATIO * freq_plural:
-            return s_form
-        else:
-            if s_form.endswith("xe") or s_form.endswith("che") or \
-                    s_form.endswith("she"):
-                ses_form = s_form[0: len(s_form) - 1]
-                freq_ses = web_freq.search_frequency(ses_form)
-                if freq_ses > freq_singular:
-                    return ses_form
-                else:
-                    return surf
-            elif s_form.endswith("se"):
-                ses_form = s_form[0: len(s_form) - 1]
-                # Case for analysis and similars
-                sis_form = s_form[0: len(s_form) - 1] + "is"
-                freq_ses = web_freq.search_frequency(ses_form)
-                freq_sis = web_freq.search_frequency(sis_form)
-                if ( freq_sis > freq_ses and freq_ses >= freq_singular ) or \
-                        ( freq_sis > freq_singular and
-                                         freq_singular >= freq_ses ):
-                    return sis_form
-                elif ( freq_ses > freq_sis and freq_sis >= freq_singular ) or \
-                        ( freq_ses > freq_singular and
-                                         freq_singular >= freq_sis ):
-                    return ses_form
-                else:
-                    return s_form
+        MAX_RATIO = 6  # Maximum number of times a plural must occur more than a
+        # singular to avoid lemmatisation
+        surf = w.surface
+        # Nouns finishing with "s"
+        if surf.endswith("s") and w.pos == "N" and len(surf) > 2:
+            # avoid problems with "access" "weakness" "analysis" "virus" "bolus"
+            if surf.endswith("ss") or surf.endswith("is") or \
+                    surf.endswith("us"):
+                return surf
+            elif surf.endswith("ies"):  # body - bodies
+                s_form = surf[0: len(surf) - 3] + "y"
+            elif w.surface.endswith("oes"):  # hero - heroes
+                s_form = surf[0: len(surf) - 2]
             else:
-                # I.e. the plural form is highly predominant
-                # The term log(freq_singular) was added because it adds a
-                # lot of value to singular forms with high frequencies. Ex.
-                # f(circumstances) is 376000000
-                # f(circumstance) is 46400000
-                if freq_singular != 0 \
-                        and freq_plural > MAX_RATIO * math.log(
-                                freq_singular) * freq_singular:
-                    return surf
+                s_form = surf[0: len(surf) - 1]
+            freq_plural = web_freq.search_frequency(w.surface)
+            freq_singular = web_freq.search_frequency(s_form)
+            if freq_singular > MAX_RATIO * freq_plural:
+                return s_form
+            else:
+                if s_form.endswith("xe") or s_form.endswith("che") or \
+                        s_form.endswith("she"):
+                    ses_form = s_form[0: len(s_form) - 1]
+                    freq_ses = web_freq.search_frequency(ses_form)
+                    if freq_ses > freq_singular:
+                        return ses_form
+                    else:
+                        return surf
+                elif s_form.endswith("se"):
+                    ses_form = s_form[0: len(s_form) - 1]
+                    # Case for analysis and similars
+                    sis_form = s_form[0: len(s_form) - 1] + "is"
+                    freq_ses = web_freq.search_frequency(ses_form)
+                    freq_sis = web_freq.search_frequency(sis_form)
+                    if ( freq_sis > freq_ses and freq_ses >= freq_singular ) or \
+                            ( freq_sis > freq_singular and
+                                             freq_singular >= freq_ses ):
+                        return sis_form
+                    elif ( freq_ses > freq_sis and freq_sis >= freq_singular ) or \
+                            ( freq_ses > freq_singular and
+                                             freq_singular >= freq_sis ):
+                        return ses_form
+                    else:
+                        return s_form
                 else:
-                    return s_form
-    else:  # TODO: treat other types of words, not only nouns (or use a real
-        # lemmatiser!)
-        return w.surface
-
-
-################################################################################
-
-def treat_entity(entity):
-    """
-        For each sentence in the corpus, lemmatise its words.
-
-        @param entity A subclass of `Ngram` that is being read from the XML file
-    """
-    global lang, entity_counter
-    if entity_counter % 100 == 0:
-        verbose("Processing ngram number %(n)d" % {"n": entity_counter})
-    for w in entity:
-        if lang == "en":
-            w.lemma = lemmatise_en(w)
-    print(entity.to_xml().encode('utf-8'))
-    entity_counter += 1
+                    # I.e. the plural form is highly predominant
+                    # The term log(freq_singular) was added because it adds a
+                    # lot of value to singular forms with high frequencies. Ex.
+                    # f(circumstances) is 376000000
+                    # f(circumstance) is 46400000
+                    if freq_singular != 0 \
+                            and freq_plural > MAX_RATIO * math.log(
+                                    freq_singular) * freq_singular:
+                        return surf
+                    else:
+                        return s_form
+        else:  # TODO: treat other types of words, not only nouns (or use a real
+            # lemmatiser!)
+            return w.surface
 
 
 ################################################################################
@@ -198,30 +189,13 @@ def treat_options(opts, arg, n_arg, usage_string):
 
 
 ################################################################################
-
-def reset_entity_counter(filename):
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
-
-################################################################################
 # MAIN SCRIPT
 
 longopts = ["google", "yahoo"]
-arg = read_options("wy", longopts, treat_options, -1, usage_string)
+args = read_options("wy", longopts, treat_options, -1, usage_string)
 
 try:
-
-    handler = GenericXMLHandler(treat_meta=treat_meta,
-                                treat_entity=treat_entity,
-                                gen_xml=True)
-    parse_xml(handler, arg, reset_entity_counter)
-    print(handler.footer)
+    filetype.parse(args, LemmatiserHandler())
 finally:
     if web_freq:
         web_freq.flush_cache()
