@@ -20,14 +20,13 @@ find_candidates() {
     local out_fname="$2"
 
     mkdir -p "$DIR_OUT/txt"
-    local xml_out="$DIR_OUT/${out_fname}.xml"
-    local txt_out="$DIR_OUT/txt/${out_fname}.txt"
+    local txt_out="$DIR_OUT/${out_fname}.txt"
     local txt_ref="$DIR_REF/${out_fname}.txt"
 
-    t_run "python $t_BIN/candidates.py --debug -s -v $args \
--p $DIR_IN/patterns.xml $DIR_IN/corpus.xml >$xml_out"
+    t_run "$t_BIN/candidates.py --debug -s -v $args \
+-p $DIR_IN/patterns.xml --to=PlainCandidates \
+$DIR_IN/corpus.xml | tail -n +2 | sort >$txt_out"
 
-    quiet=1 t_xml_to_sorted_txt "$xml_out" "$txt_out"
     t_compare "$txt_ref" "$txt_out"
 }
 

@@ -388,7 +388,7 @@ class InputHandler(object):
 
     def after_file(self, fileobj, info={}):
         r"""Called after parsing file contents."""
-        pass  # By default, do nothing
+        self.flush()  # By default, just flush whatever is in
 
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
@@ -444,7 +444,8 @@ class InputHandler(object):
         should be assigned to `self.chain`.
 
         The printer is created based on either
-        the value of `forced_filetype_ext` or info["parser"].
+        the value of `forced_filetype_ext` or info["parser"],
+        and uses the "root" value from info["root"].
         """
         from .. import filetype
         ext = forced_filetype_ext \
@@ -463,13 +464,14 @@ class ChainedInputHandler(InputHandler):
         self.chain.flush()
 
     def before_file(self, fileobj, info={}):
-        return self.chain.before_file(fileobj, info)
+        self.chain.before_file(fileobj, info)
 
     def after_file(self, fileobj, info={}):
-        return self.chain.after_file(fileobj, info)
+        self.chain.after_file(fileobj, info)
+        self.flush()
 
     def fallback(self, entity, info={}):
-        return self.chain.handle(entity, info)
+        self.chain.handle(entity, info)
 
 
 class AutomaticPrinterHandler(ChainedInputHandler):
@@ -529,10 +531,9 @@ class AbstractPrinter(InputHandler):
                 self.filetype_info.filetype_ext)
         self.handle_comment(unicode(directive), info)
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def after_file(self, fileobj, info={}):
         r"""Flush outputs after execution."""
-        if exc_type is None:
-            self.flush()
+        self.flush()
 
 
     def add_string(self, *strings):

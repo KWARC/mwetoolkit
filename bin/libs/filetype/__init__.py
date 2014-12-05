@@ -205,6 +205,7 @@ class HTMLPrinter(common.AbstractPrinter):
 
     def after_file(self, fileobj, info={}):
         self.add_string("</body>\n</html>")
+        self.flush()
 
 
     def handle_comment(self, comment, info={}):
@@ -307,6 +308,7 @@ class PlainCandidatesInfo(common.FiletypeInfo):
 class PlainCandidatesChecker(common.AbstractChecker):
     r"""Checks whether input is in PlainCandidates format."""
     def matches_header(self, strict):
+        if not strict: return True
         header = self.fileobj.peek(1024)
         return b" " not in header and b"_" in header
 

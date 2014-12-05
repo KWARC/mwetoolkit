@@ -97,12 +97,10 @@ class XMLPrinter(common.AbstractPrinter):
 
     def after_file(self, fileobj, info={}):
         self.add_string(XML_FOOTER % {"root": self._root} + "\n")
+        self.flush()
 
     def handle_comment(self, comment, info={}):
         self.add_string("<!-- ", self.escape(comment), " -->\n")
-
-    def handle_meta(self, meta_obj, info={}):
-        self.add_string(meta_obj.to_xml(), "\n")
 
     def fallback(self, entity, info={}):
         self.add_string(entity.to_xml(), "\n")

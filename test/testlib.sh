@@ -149,5 +149,3 @@ trap 'on_error ERR' ERR
 # inside `on_error` when called for SIGINT
 # (also happens on `trap ... EXIT` -- may be a bash bug)
 trap 'on_error INT' SIGINT
-
-trap 'on_error EXIT' EXIT
