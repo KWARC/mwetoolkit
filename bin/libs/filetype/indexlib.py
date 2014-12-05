@@ -674,20 +674,6 @@ class Index():
 
 ################################################################################
 
-    def append_sentence_moses(self, sentence):
-        """
-            Adds a moses sentence (a line in the text file) to the index.
-        """
-        nb_words = 0
-        for word_str in sentence.split():
-            if word_str.count("|") != 3:
-                warn("Ignoring token : " + word_str)
-            else:
-                self.append_word_text(*word_str.split("|"))
-            nb_words = nb_words + 1
-        self.append_end_sentence(nb_words)
-
-################################################################################
 
     def append_end_sentence(self, nb_words):
         for attr in self.used_word_attributes:
@@ -697,23 +683,7 @@ class Index():
         self.sentence_count += 1
         if self.sentence_count % 100 == 0:
             verbose("Processing sentence %d" % self.sentence_count)
-
-################################################################################
-
-    def append_word_text(self, surface, lemma, pos, syn):
-        for attr in self.used_word_attributes:
-            if attr == "surface":
-                value = surface
-            elif attr == "lemma":
-                value = lemma
-            elif attr == "pos":
-                value = pos
-            elif attr == "syn":
-                value = syn
-            else:
-                raise ValueError("Unknown attribute name : " + attr)
-            self.arrays[attr].append_word(value)
-
+    
 ################################################################################
 
     def append_sentence(self, sentence):
