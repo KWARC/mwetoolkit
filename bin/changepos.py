@@ -97,11 +97,14 @@ input_filetype_ext = None
 
 ################################################################################
 
-class PosTagSimplifierPrinter(filetype.AutomaticPrinterHandler):
+class FilterHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(fileobj, info, output_filetype_ext)
+
     def handle_sentence(self, sentence, info={}):
         for w in sentence:
             w.pos = simplify(w.pos)
-        super(PosTagSimplifierPrinter, self).handle_sentence(sentence, info)
+        self.chain.handle_sentence(sentence, info)
 
 
 ################################################################################
@@ -250,5 +253,5 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 longopts = ["from=", "to=", "palavras", "genia" ]
 args = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
 
-printer = PosTagSimplifierPrinter(output_filetype_ext)
+printer = FilterHandler(output_filetype_ext)
 filetype.parse(args, printer, input_filetype_ext)

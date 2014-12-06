@@ -191,7 +191,7 @@ class FilterHandler(filetype.ChainedInputHandler):
             print_it = not print_it
 
         if print_it :   
-            print(ngram_to_print.to_xml().encode( 'utf-8' ))
+            self.chain.handle_entity(ngram_to_print, info)
         entity_counter += 1
 
 

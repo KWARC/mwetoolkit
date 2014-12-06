@@ -245,10 +245,12 @@ class PlainCorpusParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCorpusParser, self).__init__(in_files, encoding)
+        self.sentence_count = 0
         self.root = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        sentence = Sentence([], info["linenum"])
+        self.sentence_count += 1
+        sentence = Sentence([], self.sentence_count)
         mwes = line.split()  # each entry is an SWE/MWE
         for mwe in mwes:
             words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]
@@ -321,11 +323,13 @@ class PlainCandidatesParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCandidatesParser, self).__init__(in_files, encoding)
+        self.candidate_count = 0
         self.root = "candidates"
 
     def _parse_line(self, line, handler, info={}):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
-        c = Candidate(info["linenum"], words)
+        self.candidate_count += 1
+        c = Candidate(self.candidate_count, words)
         handler.handle_candidate(c)
 
 
@@ -358,9 +362,10 @@ class MosesChecker(common.AbstractChecker):
     r"""Checks whether input is in FactoredMoses format."""
     def matches_header(self, strict):
         header = self.fileobj.peek(512)
-        first_words = header.split(b" ", 5)[:-1]
-        return all(w.count(b"|") == 3 for w in first_words) \
-                and (not strict or len(first_words) >= 3)
+        for line in header.split(b"\n"):
+            if not line.startswith(bytes(self.filetype_info.comment_prefix)):
+                return all(w.count(b"|") == 3 for w in line.split(b" ") if w)
+        return not strict
 
 
 class MosesParser(common.AbstractTxtParser):
@@ -371,10 +376,12 @@ class MosesParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(MosesParser,self).__init__(in_files, encoding)
+        self.sentence_count = 0
         self.root = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        s = Sentence([], info["linenum"])
+        self.sentence_count += 1
+        s = Sentence([], self.sentence_count)
         words = line.split(" ")
         for w in words:
             try:
@@ -564,6 +571,8 @@ class PWaCInfo(common.FiletypeInfo):
     description = "Wac parsed format"
     filetype_ext = "pWaC"
 
+    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?", "?"]
+
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
                     ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
@@ -584,7 +593,6 @@ class PWaCParser(ConllParser):
     calling the `handler` for each object that is parsed.
     """
     valid_roots = ["corpus"]
-    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?", "?"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PWaCParser, self).__init__(in_files, encoding)

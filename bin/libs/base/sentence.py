@@ -157,7 +157,7 @@ class Sentence( Ngram ) :
         """
         result = "<s"
         if( self.id_number >= 0 ) :
-            result += " s_id=\"" + str( self.id_number ) + "\">"
+            result += " s_id=\"" + unicode( self.id_number ) + "\">"
         else :
             result += ">"
         for word in self.word_list :

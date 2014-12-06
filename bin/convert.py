@@ -70,7 +70,13 @@ OPTIONS may be:
 input_filetype_ext = None
 output_filetype_ext = "XML"
 
+
 ################################################################################
+
+class ConverterHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
 
 
 def treat_options(opts, arg, n_arg, usage_string):
@@ -87,8 +93,10 @@ def treat_options(opts, arg, n_arg, usage_string):
     for (o, a) in opts:
         if o in ("--from"):
             input_filetype_ext = a
-        if o in ("--to"):
+        elif o in ("--to"):
             output_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
 
 ################################################################################
@@ -96,5 +104,4 @@ def treat_options(opts, arg, n_arg, usage_string):
 
 longopts = ["from=", "to="]
 args = read_options("", longopts, treat_options, -1, usage_string)
-printer = filetype.AutomaticPrinterHandler(output_filetype_ext)
-filetype.parse(args, printer, input_filetype_ext)
+filetype.parse(args, ConverterHandler(), input_filetype_ext)

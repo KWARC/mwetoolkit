@@ -304,16 +304,26 @@ class AbstractTxtParser(AbstractParser):
             raise Exception("Subclass should have set `self.root`")
         info = {"parser": self, "root": self.root}
         with ParsingContext(fileobj, handler, info):
+            just_saw_a_comment = False
+
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
                 cp = bytes(self.filetype_info.comment_prefix)
+
                 if line.startswith(cp):
                     comment = line[len(cp):]
                     self._parse_comment(handler, comment, {})
+                    just_saw_a_comment = True
+
+                elif line == b"" and just_saw_a_comment:
+                    self._parse_comment(handler, "", {})
+                    just_saw_a_comment = False
+
                 else:
                     self._parse_line(
                             line.decode(self.encoding, self.encoding_errors),
                             handler, {"fileobj": fileobj, "linenum": i+1})
+                    just_saw_a_comment = False
 
     def _parse_line(self, line, handler, info={}):
         r"""Called to parse a line of the TXT file.
@@ -573,7 +583,10 @@ class AbstractPrinter(InputHandler):
     def handle_comment(self, comment, info={}):
         r"""Default implementation to output comment."""
         for c in comment.split("\n"):
-            self.add_string(self.filetype_info.comment_prefix + " " + c + "\n")
+            if c == "":
+                self.add_string("\n")
+            else:
+                self.add_string(self.filetype_info.comment_prefix + " " + c + "\n")
 
     def handle_directive(self, directive, info={}):
         r"""Default implementation when seeing a directive."""

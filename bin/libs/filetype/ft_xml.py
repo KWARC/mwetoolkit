@@ -118,11 +118,15 @@ class XMLParser(common.AbstractParser):
     def _parse_file(self, fileobj, handler):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
         # complains if we feed it a pre-decoded stream in python2k
-        outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"])
+        parser = CommentHandlingParser()
+        outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"], parser)
 
         for event, elem in outer_iterator:
             inner_iterator = itertools.chain(
                     [(event, elem)], outer_iterator)
+
+            if elem.tag == ElementTree.Comment:
+                continue  # Skip comments
 
             if event == "end":
                 raise Exception("Unexpected end-tag!")
@@ -146,10 +150,7 @@ class XMLParser(common.AbstractParser):
                     # Delegate all the work to "candidates" handler
                     with common.ParsingContext(fileobj, handler, info):
                         self.parse_candidates(inner_iterator, handler, info)
-                        #XXX from .old.candidatesXMLHandler import CandidatesXMLHandler
-                        #XXX self._handle(inner_iterator, CandidatesXMLHandler(
-                        #XXX         treat_meta=handler.handle_meta,
-                        #XXX         treat_candidate=handler.handle_candidate))
+
                 elif elem.tag == "patterns":
                     with common.ParsingContext(fileobj, handler, info):
                         # Delegate all the work to "patterns" handler
@@ -182,6 +183,8 @@ class XMLParser(common.AbstractParser):
 
         for event, elem in inner_iterator:
             if event == "start":
+                if elem.tag == ElementTree.Comment:
+                    handler.handle_comment(elem.text.strip())
 
                 if elem.tag == "s" :
                     if "s_id" in elem.attrib:
@@ -343,3 +346,15 @@ class XMLParser(common.AbstractParser):
                     in_occurs = False
                 elif elem.tag == "vars":
                     in_vars = False
+
+
+class CommentHandlingParser(ElementTree.XMLParser):
+    def __init__(self, **kwargs):
+        super(CommentHandlingParser, self).__init__(self, **kwargs)
+        self._parser.CommentHandler = self.handle_comment
+        self._names[ElementTree.Comment] = ElementTree.Comment
+
+    def handle_comment(self, data):
+        self.parser.StartElementHandler(ElementTree.Comment, {})
+        self.target.data(data)
+        self.parser.EndElementHandler(ElementTree.Comment)

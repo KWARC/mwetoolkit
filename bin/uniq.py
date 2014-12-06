@@ -78,7 +78,6 @@ OPTIONS may be:
 ignore_pos = False
 surface_instead_lemmas = False
 perform_retokenisation = False
-entity_counter = 0
 entity_buffer = {}
 split_characters = "/-"
 
@@ -92,6 +91,8 @@ output_filetype_ext = None
 class UniqerHandler(filetype.AutomaticPrinterHandler):
     def __init__(self):
         super(UniqerHandler, self).__init__(output_filetype_ext)
+        self.entity_counter = 0
+
 
     def handle_entity(self, entity, info={}) :
         """Add each entity to the entity buffer, after pre-processing it. This
@@ -100,11 +101,11 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
 
         @param entity A subclass of `Ngram` that is being read from the XM.
         """
-        global entity_counter, entity_buffer
+        global entity_buffer
         global perform_retokenisation, ignore_pos, surface_instead_lemmas
 
-        if entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
+        if self.entity_counter % 100 == 0 :
+            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
         # TODO: improve the "copy" method
         copy_ngram = create_instance( entity )
         for w in entity :
@@ -153,10 +154,44 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
         #entity_buffer[ internal_key ] = old_entry
 
         entity_buffer[ internal_key ] = copy_ngram
-        entity_counter += 1
+        self.entity_counter += 1
+
+
+    def after_file(self, fileobj, info={}):
+        """
+            After we read all the XML file, we can finally be sure about which lines
+            need to be printed. Those correspond exactly to the unique lines added
+            to the buffer.
+        """
+        global entity_buffer
+        verbose( "Output the unified ngrams..." )
+        uniq_counter = 0
+        for entity in entity_buffer.values() :
+            entity.id_number = uniq_counter
+            if isinstance( entity, Candidate ) :
+                # WARNING: This is sort of specific for the VERBS 2010 paper. This
+                # whole script should actually be redefined and documented. But for
+                # the moment it's useful and I have no time to be a good programmer
+                # -Carlos
+                freq_sum = {}
+                for freq in entity.freqs :
+                    freq_entry = freq_sum.get( freq.name, 0 )
+                    freq_entry += int( freq.value )
+                    freq_sum[ freq.name ] = freq_entry
+                entity.freqs = []
+                for ( name, value ) in freq_sum.items() :
+                    entity.add_frequency( Frequency( name, value ) )
+            elif isinstance( entity, Entry ) :
+                pass
+            elif isinstance( entity, Sentence ) :
+                pass          
+            print(entity.to_xml().encode( 'utf-8' ))
+            uniq_counter += 1
+        verbose("%(n)d entities, %(u)d unique entities" % { "n":self.entity_counter, \
+                                                             "u":uniq_counter } )
+
     
 ################################################################################    
-
 
 def create_instance( entity ) :
     """
@@ -244,40 +279,6 @@ def uniq_features(*featlists):
 
 ################################################################################    
 
-def print_entities() :
-    """
-        After we read all the XML file, we can finally be sure about which lines
-        need to be printed. Those correspond exactly to the unique lines added
-        to the buffer.
-    """
-    global entity_buffer, entity_counter
-    uniq_counter = 0
-    for entity in entity_buffer.values() :
-        entity.id_number = uniq_counter
-        if isinstance( entity, Candidate ) :
-            # WARNING: This is sort of specific for the VERBS 2010 paper. This
-            # whole script should actually be redefined and documented. But for
-            # the moment it's useful and I have no time to be a good programmer
-            # -Carlos
-            freq_sum = {}
-            for freq in entity.freqs :
-                freq_entry = freq_sum.get( freq.name, 0 )
-                freq_entry += int( freq.value )
-                freq_sum[ freq.name ] = freq_entry
-            entity.freqs = []
-            for ( name, value ) in freq_sum.items() :
-                entity.add_frequency( Frequency( name, value ) )
-        elif isinstance( entity, Entry ) :
-            pass
-        elif isinstance( entity, Sentence ) :
-            pass          
-        print(entity.to_xml().encode( 'utf-8' ))
-        uniq_counter += 1
-    verbose( "%(n)d entities, %(u)d unique entities" % { "n":entity_counter, \
-                                                         "u":uniq_counter } )
-    
-################################################################################  
-
 def treat_options( opts, arg, n_arg, usage_string ) :
     """
         Callback function that handles the command line options of this script.
@@ -308,19 +309,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         else:
             raise Exception("Bad arg: " + o)
 
-################################################################################
-
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0 
-    verbose( "Output the unified ngrams..." )
-    print_entities()
 
                 
 ################################################################################    

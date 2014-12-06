@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
 <candidates >
 <cand candid="1">
     <entry entryid="1">    <ngram><w surface="group" /> <w surface="a" /> </ngram></entry>

@@ -119,8 +119,6 @@ class Candidate ( Entry ) :
 
         # Unicode support          
         base_string = super( Candidate, self ).to_xml()
-        if isinstance( base_string, str ) :
-            base_string = unicode( base_string, 'utf-8')
         result = result + "    " + base_string + "\n"        
 
         if self.bigrams :
@@ -128,8 +126,6 @@ class Candidate ( Entry ) :
             for bigram in self.bigrams :
                 # Unicode support
                 bigram_string = bigram.to_xml()
-                if isinstance( bigram_string, str ) :
-                    bigram_string = unicode( bigram_string, 'utf-8')
                 result = result + "    " + bigram_string +"\n"
             result = result + "    </bigram>\n"
 
@@ -138,8 +134,6 @@ class Candidate ( Entry ) :
             for occur in self.occurs :
                 # Unicode support
                 occur_string = occur.to_xml()
-                if isinstance( occur_string, str ) :
-                    occur_string = unicode( occur_string, 'utf-8')
                 result = result + "    " + occur_string +"\n"
             result = result + "    </occurs>\n"
 
@@ -148,8 +142,6 @@ class Candidate ( Entry ) :
             for var in self.vars :
                 # Unicode support
                 var_string = var.to_xml()
-                if isinstance( var_string, str ) :
-                    var_string = unicode( var_string, 'utf-8')
                 result = result + "    " + var_string +"\n"
             result = result + "    </vars>\n"
 
@@ -158,6 +150,7 @@ class Candidate ( Entry ) :
             for feat in self.features :
                 result = result + "        " + feat.to_xml() + "\n"
             result = result + "    </features>\n" 
+
         if self.tpclasses :
             for tpclass in self.tpclasses :
                 result = result + "    " + tpclass.to_xml() + "\n"                         
