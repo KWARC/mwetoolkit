@@ -300,10 +300,10 @@ class AbstractTxtParser(AbstractParser):
         self.root = "<unknown-root>"
 
     def _parse_file(self, fileobj, handler):
-        if self.root == "<unknown-root>":
-            raise Exception("Subclass should have set `self.root`")
         info = {"parser": self, "root": self.root}
         with ParsingContext(fileobj, handler, info):
+            if self.root == "<unknown-root>":
+                raise Exception("Subclass should have set `self.root`")
             just_saw_a_comment = False
 
             for i, line in enumerate(fileobj):

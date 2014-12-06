@@ -96,7 +96,8 @@ class MosesTextInfo(common.FiletypeInfo):
   
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
-                    (" ", "${space}"), ("\t", "${tab}")]
+                    ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
+                    ("\t", "${tab}")]
 
     def operations(self):
         return common.FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
@@ -383,14 +384,14 @@ class MosesParser(common.AbstractTxtParser):
         self.sentence_count += 1
         s = Sentence([], self.sentence_count)
         words = line.split(" ")
-        for w in words:
-            try:
-                surface, lemma, pos, syntax = \
-                        (self.unescape(x) for x in w.split("|"))
-                s.append(Word(surface, lemma, pos, syntax))
-            except Exception as e:
-                util.warn("Ignored token " + repr(w))
-                util.warn(unicode(type(e)))
+        for i, w in enumerate(words):
+            token = [self.unescape(x) for x in w.split("|")]
+            if len(token) == 4:
+                surface, lemma, pos, syn = token
+                s.append(Word(surface, lemma, pos, syn))
+            else:
+                util.warn("Ignoring bad token (line {}, token {})" \
+                        .format(info["linenum"], i+1))
         handler.handle_sentence(s)
 
 
@@ -450,7 +451,7 @@ class ConllChecker(common.AbstractChecker):
             if line and not line.startswith(
                     bytes(self.filetype_info.comment_prefix)):
                 return len(line.split(b"\t")) == len(self.filetype_info.entries)
-        return strict
+        return not strict
 
 
 class ConllParser(common.AbstractTxtParser):
