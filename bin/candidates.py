@@ -58,6 +58,7 @@ from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, warn
 from libs.filetype.patternlib import parse_patterns_file, build_generic_pattern
 from libs.filetype.indexlib import Index
+from libs.base.meta import Meta
 from libs import filetype
 
 
@@ -206,6 +207,7 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
         ext = output_filetype_ext or "XML"
         chain = filetype.printer_class(ext)("candidates")
         chain.before_file(fileobj, info)
+        chain.handle_meta(Meta([],[],[]), info)
         self.print_candidates(chain, fileobj.name, info)
         chain.after_file(fileobj, info)
 

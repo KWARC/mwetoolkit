@@ -119,7 +119,11 @@ warn_ll_bigram_only = True
      
 ################################################################################     
 
-class FeatureAdderPrinter(filetype.AutomaticPrinterHandler):
+class FeatureAdderPrinter(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
+
     def handle_meta(self, meta, info={}):
         """Adds new meta-features corresponding to the AM features that we add to
         each candidate. The meta-features define the type of the features, which
@@ -134,7 +138,7 @@ class FeatureAdderPrinter(filetype.AutomaticPrinterHandler):
         for corpus_size in meta.corpus_sizes :
             for meas in measures :
                 meta.add_meta_feat(MetaFeat( meas+ "_" +corpus_size.name, "real" ))
-        super(FeatureAdderPrinter, self).handle_meta(meta, info)
+        self.chain.handle_meta(meta, info)
 
 
     def handle_candidate(self, candidate, info={}):
@@ -455,5 +459,5 @@ def reset_entity_counter( filename ) :
 longopts = ["measures=", "original=", "unnorm-mle"]
 args = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
 
-printer = FeatureAdderPrinter(output_filetype_ext)
+printer = FeatureAdderPrinter()
 filetype.parse(args, printer, input_filetype_ext)

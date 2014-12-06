@@ -168,10 +168,11 @@ output_filetype_ext = "XML"
 
 ################################################################################
 
-class CounterPrinter(filetype.AutomaticPrinterHandler):
+class CounterPrinter(filetype.ChainedInputHandler):
     r"""Adds info and outputs the result."""
     def before_file(self, fileobj, info={}):
-        super(CounterPrinter, self).before_file(fileobj, info)
+        self.chain = self.printer_before_file(
+                fileobj, info, output_filetype_ext)
         self.entity_counter = 0
 
     def handle_meta(self, meta, info={}):
@@ -564,8 +565,7 @@ args = read_options("ywi:gsoal:Jbu:T:", longopts,
 
 try:
     verbose("Counting ngrams in candidates file")
-    printer = CounterPrinter(output_filetype_ext)
-    filetype.parse(args, printer, filetype_candidates_ext)
+    filetype.parse(args, CounterPrinter(), filetype_candidates_ext)
 finally:
     if web_freq:
         web_freq.flush_cache()  # VERY IMPORTANT!

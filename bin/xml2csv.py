@@ -206,4 +206,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = [ "surface", "lemmapos" ]
 args = read_options( "sp", longopts, treat_options, -1, usage_string )
-filetype.parse(args, CSVPrinter())
+filetype.parse(args, CSVPrinter("candidates"))

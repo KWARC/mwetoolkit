@@ -44,6 +44,7 @@ from ..base.__common import WILDCARD
 from ..base.word import Word
 from ..base.sentence import Sentence
 from ..base.candidate import Candidate
+from ..base.entry import Entry
 from ..base.mweoccur import MWEOccurrence
 from ..base.ngram import Ngram
 from ..base.frequency import Frequency
@@ -135,45 +136,25 @@ class XMLParser(common.AbstractParser):
                 info = {"parser": self, "root": elem.tag}
 
                 if elem.tag == "dict":
-                    # Delegate all the work to "dict" handler
                     with common.ParsingContext(fileobj, handler, info):
-                        from .old.dictXMLHandler import DictXMLHandler
-                        self._handle(inner_iterator, DictXMLHandler(
-                                treat_meta=handler.handle_meta,
-                                treat_entry=handler.handle_candidate))
+                        self.parse_dict(inner_iterator, handler, info)
+
                 elif elem.tag == "corpus":
-                    # Delegate all the work to "corpus" handler
                     with common.ParsingContext(fileobj, handler, info):
                         self.parse_corpus(inner_iterator, handler, info)
 
                 elif elem.tag == "candidates":
-                    # Delegate all the work to "candidates" handler
                     with common.ParsingContext(fileobj, handler, info):
                         self.parse_candidates(inner_iterator, handler, info)
 
                 elif elem.tag == "patterns":
                     with common.ParsingContext(fileobj, handler, info):
-                        # Delegate all the work to "patterns" handler
                         from .patternlib import iterparse_patterns
                         for pattern in iterparse_patterns(inner_iterator):
                             handler.handle_pattern(pattern)
                 else:
                     raise Exception("Bad outer tag in XML filetype: " + repr(elem.tag))
 
-
-    def _handle(self, iterator, xmlhandler):
-        r"""Call startElement/endElement on handler for all sub-elements."""
-        depth = 0
-        for event, elem in iterator:
-            if event == "start":
-                xmlhandler.startElement(elem.tag, elem.attrib)
-                depth += 1
-            elif event == "end":
-                xmlhandler.endElement(elem.tag)
-                depth -= 1
-                if depth == 0:
-                    return
-            elem.clear()
 
 
     #######################################################
@@ -262,20 +243,20 @@ class XMLParser(common.AbstractParser):
                     lemma = get("lemma")
                     pos = get("pos")
                     syn = get("syn")
-                    word = Word(surface, lemma, pos, WILDCARD, [])
+                    word = Word(surface, lemma, pos, syn, [])
                     # Add the word to the ngram that is on the stack
                     ngram.append(word)
 
                 elif elem.tag == "freq":
-                    self.freq = Frequency(self.unescape(elem.get("name")),
+                    freq = Frequency(self.unescape(elem.get("name")),
                             int(self.unescape(elem.get("value"))))
                     # If <freq> is inside a word element, then it's the word's
                     # frequency, otherwise it corresponds to the frequency of
                     # the ngram that is being read
                     if word is not None:
-                        word.add_frequency( self.freq )            
+                        word.add_frequency(freq)            
                     else:
-                        ngram.add_frequency( self.freq )
+                        ngram.add_frequency(freq)
 
                 elif elem.tag == "sources":
                     ngram.add_sources(elem.get("ids").split(';'))
@@ -283,7 +264,7 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "feat":
                     feat_name = self.unescape(elem.get("name"))
                     feat_value = self.unescape(elem.get("value"))
-                    feat_type = meta.get_feat_type( feat_name )
+                    feat_type = meta.get_feat_type(feat_name)
                     if feat_type == "integer":
                         feat_value = int(feat_value)
                     elif feat_type == "real":
@@ -302,7 +283,7 @@ class XMLParser(common.AbstractParser):
                 # to the info in the candidates (e.g. meta-feature has the 
                 # same elem.tag as actual feature)      
                 elif elem.tag == "meta":
-                    self.meta = Meta([], [], [])
+                    meta = Meta([], [], [])
                 elif elem.tag == "corpussize":
                     cs = CorpusSize(elem.get("name"), elem.get("value"))
                     meta.add_corpus_size(cs)
@@ -310,7 +291,7 @@ class XMLParser(common.AbstractParser):
                     mf = MetaFeat(elem.get("name"), elem.get("type"))
                     meta.add_meta_feat(mf)  
                 elif elem.tag == "metatpclass" :    
-                    mtp = MetaTPClass(elem.get("name", elem.get("type")))
+                    mtp = MetaTPClass(elem.get("name"), elem.get("type"))
                     meta.add_meta_tpclass(mtp)
 
 
@@ -348,7 +329,90 @@ class XMLParser(common.AbstractParser):
                     in_vars = False
 
 
+    #######################################################
+    def parse_dict(self, inner_iterator, handler, info):
+        id_number_counter = 0
+        entry = None
+        word = None
+        meta = None
+
+        for event, elem in inner_iterator:
+            if event == "start":
+
+                if elem.tag == "entry":
+                    # Get the candidate ID or else create a new ID for it
+                    if "entryid" in elem.attrib:
+                        id_number = self.unescape(elem.get("entryid"))
+                    else:
+                        id_number = id_number_counter
+                        id_number_counter += 1
+                    # Instantiates an empty dict entry that will be treated
+                    # when the <entry> tag is closed
+                    entry = Entry(id_number, [], [], [])
+
+                elif elem.tag == "w":
+                    def get(name):
+                        if name not in elem.attrib: return WILDCARD
+                        return self.unescape(elem.get(name))
+
+                    surface = get("surface")
+                    lemma = get("lemma")
+                    pos = get("pos")
+                    syn = get("syn")
+                    word = Word(surface, lemma, pos, syn, [])
+                    entry.append(word)
+
+                elif elem.tag == "freq":
+                    freq = Frequency(self.unescape(elem.get("name")),
+                            int(self.unescape(elem.get("value"))))
+                    # If <freq> is inside a word element, then it's the word's
+                    # frequency, otherwise it corresponds to the frequency of
+                    # the ngram that is being read
+                    if word is not None:
+                        word.add_frequency(freq)
+                    else:
+                        entry.add_frequency(freq)
+
+                elif elem.tag == "feat":
+                    feat_name = self.unescape(elem.get("name"))
+                    feat_value = self.unescape(elem.get("value"))
+                    feat_type = meta.get_feat_type(feat_name)
+                    if feat_type == "integer":
+                        feat_value = int(feat_value)
+                    elif feat_type == "real":
+                        feat_value = float(feat_value)
+                    f = Feature(feat_name, feat_value)
+                    entry.add_feat(f)
+
+                # Meta section and elements, correspond to meta-info about the
+                # reference lists. Meta-info are important for generating
+                # features and converting to arff files, and must correspond
+                # to the info in the dictionary (e.g. meta-feature has the
+                # same name as actual feature)
+                elif elem.tag == "meta":
+                    meta = Meta([], [], [])
+                elif elem.tag == "corpussize":
+                    cs = CorpusSize(elem.get("name"), elem.get("value"))
+                    meta.add_corpus_size(cs)
+                elif elem.tag == "metafeat" :      
+                    mf = MetaFeat(elem.get("name"), elem.get("type"))
+                    meta.add_meta_feat(mf)  
+
+            if event == "end":
+
+                if elem.tag == "entry":
+                    handler.handle_candidate(entry)
+                    entry = None
+                elif elem.tag == "w":
+                    word = None
+                elif elem.tag == "meta":
+                    # Finished reading the meta header, call callback 
+                    handler.handle_meta(meta)
+
+
+
 class CommentHandlingParser(ElementTree.XMLParser):
+    r"""Force XMLParser to handle XML comments."""
     def __init__(self, **kwargs):
         super(CommentHandlingParser, self).__init__(self, **kwargs)
         self._parser.CommentHandler = self.handle_comment
