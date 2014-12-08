@@ -66,7 +66,7 @@ class ArffChecker(common.AbstractChecker):
 
 class ArffPrinter(common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["corpus"]
+    valid_roots = ["candidates"]
 
     def __init__(self, root, relation_name="UNKNOWN_RELATION", **kwargs):
         super(ArffPrinter, self).__init__(root, **kwargs)
@@ -74,14 +74,15 @@ class ArffPrinter(common.AbstractPrinter):
         self.all_feats = []
 
     def handle_meta(self, meta, info={}):
-        """When the `Meta` header is read, this function generates a corresponding
-        header for the ARFF file. The header includes the name of the relation
-        and a description of the attributes. This description is based on the
-        `MetaFeat' and `MetaTPClass` entries of the header. If you provided
-        invalid types for the features or the TP base, the generated ARFF
-        file will not be recognized by WEKA. If necessary, correct it manually.
+        """When the `Meta` header is read, this function generates a
+        corresponding header for the ARFF file. The header includes the name of
+        the relation and a description of the attributes. This description is
+        based on the `MetaFeat' and `MetaTPClass` entries of the header. If you
+        provided invalid types for the features or the TP base, the generated
+        ARFF file will not be recognized by WEKA. If necessary, correct it
+        manually.
         
-        @param meta The `Meta` header that is being read from the XML file.
+        @param meta The `Meta` header that is being read from the file.
         """
         self.add_string("@relation {}\n".format(self.relation_name))
         for meta_feat in meta.meta_feats:
