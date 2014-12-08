@@ -52,12 +52,13 @@ class CSVInfo(common.FiletypeInfo):
 
 INFO = CSVInfo()
 
+
 class CSVPrinter(common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates", "corpus"]
+    valid_categories = ["candidates", "corpus"]
 
-    def __init__(self, root, sep="\t", surfaces=False, lemmapos=False, **kwargs):
-        super(CSVPrinter, self).__init__(root, **kwargs)
+    def __init__(self, category, sep="\t", surfaces=False, lemmapos=False, **kwargs):
+        super(CSVPrinter, self).__init__(category, **kwargs)
         self.sep = sep
         self.surfaces = surfaces
         self.lemmapos = lemmapos
@@ -78,12 +79,7 @@ class CSVPrinter(common.AbstractPrinter):
         headers.extend(self.escape(cs.name) for cs in meta.meta_feats)
         self.add_string(self.sep.join(headers), "\n")
 
-    def handle_candidate(self, entity, info={}):
-        """
-            For each `Candidate`,
-
-            @param entity: The `Candidate` that is being read from the XML file.
-        """
+    def handle_entity(self, entity, info={}):
         values = [str(entity.id_number)]
         ngram_list = map(lambda x: self.escape("%s/%s" % (x.lemma, x.pos))
                                 if self.lemmapos else
@@ -105,4 +101,3 @@ class CSVPrinter(common.AbstractPrinter):
             values.extend(str(feat.value) for feat in entity.features)
 
         self.add_string(self.sep.join(values), "\n")
-

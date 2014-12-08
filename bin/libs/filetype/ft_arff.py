@@ -66,10 +66,10 @@ class ArffChecker(common.AbstractChecker):
 
 class ArffPrinter(common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates"]
+    valid_categories = ["corpus"]
 
-    def __init__(self, root, relation_name="UNKNOWN_RELATION", **kwargs):
-        super(ArffPrinter, self).__init__(root, **kwargs)
+    def __init__(self, category, relation_name="UNKNOWN_RELATION", **kwargs):
+        super(ArffPrinter, self).__init__(category, **kwargs)
         self.relation_name = relation_name
         self.all_feats = []
 

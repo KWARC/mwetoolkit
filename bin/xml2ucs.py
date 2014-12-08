@@ -110,7 +110,7 @@ INFO = UCSInfo()
 
 class UCSPrinter(filetype.common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
 
     def handle_meta(self, meta, info={}):
         """Print the header for the UCS dataset file,

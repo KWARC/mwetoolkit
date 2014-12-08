@@ -111,16 +111,3 @@ CORPUS_SIZE_KEY = "___corpus_size___"
     format
 """
 UNKNOWN_FEAT_VALUE = "?"
-
-""" 
-    Default XML header used for all files 
-"""
-XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE %(root)s SYSTEM "dtd/mwetoolkit-%(root)s.dtd">
-<!-- MWETOOLKIT: filetype="XML" -->
-<%(root)s %(ns)s>"""
-
-"""
-    Default XML footer
-"""
-XML_FOOTER = """</%(root)s>"""

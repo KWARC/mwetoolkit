@@ -158,7 +158,7 @@ def main():
 
 
     verbose("Outputting candidates file...")
-    print(XML_HEADER % { "root": "candidates", "ns": "" })
+    print(XML_HEADER % { "category": "candidates", "ns": "" })
     
 
     meta = Meta([CorpusSize("corpus", corpus_size)],
@@ -173,7 +173,7 @@ def main():
                 dump_ngram(ngram, id)
                 id += 1
 
-    print(XML_FOOTER % { "root": "candidates" })
+    print(XML_FOOTER % { "category": "candidates" })
 
 ################################################################################
 

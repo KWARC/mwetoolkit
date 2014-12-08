@@ -83,7 +83,7 @@ INFO = CSVInfo()
 
 class CSVPrinter(filetype.common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
 
     def handle_meta(self, meta, info={}):
         string_cand = "id\tngram\tpos\t"

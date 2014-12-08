@@ -188,7 +188,7 @@ class AbstractParser(object):
     @param input_files: A list of target file paths.
     """
     filetype_info = None
-    valid_roots = []
+    valid_categories = []
 
     def __init__(self, input_files):
         self._files = list(self._open_files(input_files or ["-"]))
@@ -297,13 +297,13 @@ class AbstractTxtParser(AbstractParser):
         self.comment_pattern = re.compile("^ *" + cp + " *(?P<contents>.*?) $")
         self.encoding = encoding
         self.encoding_errors = "replace"
-        self.root = "<unknown-root>"
+        self.category = "<unknown-category>"
 
     def _parse_file(self, fileobj, handler):
-        info = {"parser": self, "root": self.root}
+        info = {"parser": self, "category": self.category}
         with ParsingContext(fileobj, handler, info):
-            if self.root == "<unknown-root>":
-                raise Exception("Subclass should have set `self.root`")
+            if self.category == "<unknown-category>":
+                raise Exception("Subclass should have set `self.category`")
             just_saw_a_comment = False
 
             for i, line in enumerate(fileobj):
@@ -455,12 +455,12 @@ class InputHandler(object):
 
         The printer is created based on either
         the value of `forced_filetype_ext` or info["parser"],
-        and uses the "root" value from info["root"].
+        and uses the category from info["category"].
         """
         from .. import filetype
         ext = forced_filetype_ext \
                 or info["parser"].filetype_info.filetype_ext
-        chain = filetype.printer_class(ext)(info["root"])
+        chain = filetype.printer_class(ext)(info["category"])
         chain.before_file(fileobj, info)
         return chain
 
@@ -507,8 +507,8 @@ class AbstractPrinter(InputHandler):
     r"""Base implementation of a printer-style class.
 
     Required Constructor Arguments:
-    @param root The type of the output file. This value
-    must be in the subclass's `valid_roots`.
+    @param category The category of the output file. This value
+    must be in the subclass's `valid_categories
 
     Optional Constructor Arguments:
     @param output An IO-like object, such as sys.stdout
@@ -516,7 +516,7 @@ class AbstractPrinter(InputHandler):
     @param flush_on_add If True, calls `self.flush()` automatically
     inside `self.add_string()`, before actually adding the element(s).
     """
-    valid_roots = []
+    valid_categories = []
 
     @property
     def filetype_info(self):
@@ -525,11 +525,11 @@ class AbstractPrinter(InputHandler):
         raise NotImplementedError
 
 
-    def __init__(self, root, output=None, flush_on_add=True):
-        if root not in self.valid_roots:
-            raise Exception("Bad printer: {}(root=\"{}\")"
-                    .format(type(self).__name__, root))
-        self._root = root
+    def __init__(self, category, output=None, flush_on_add=True):
+        if category not in self.valid_categories:
+            raise Exception("Bad printer: {}(category=\"{}\")"
+                    .format(type(self).__name__, category))
+        self._category = category
         self._output = output or sys.stdout
         self._flush_on_add = flush_on_add
         self._waiting_objects = []

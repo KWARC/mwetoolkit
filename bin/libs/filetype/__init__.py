@@ -73,7 +73,7 @@ def parse(input_files, handler, filetype_hint=None):
 
 def printer_class(filetype_ext):
     r"""Return a subclass of AbstractPrinter for given filetype extension.
-    If you want a printer class that automatically handles all root types,
+    If you want a printer class that automatically handles all categories,
     create an instance of AutomaticPrinterHandler instead.
     """
     try:
@@ -111,7 +111,7 @@ class MosesTextChecker(common.AbstractChecker):
 
 class MosesTextPrinter(common.AbstractPrinter):
     """Instances can be used to print HTML format."""
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
         """Print a simple readable string where the surface forms of the 
@@ -157,7 +157,7 @@ class HTMLChecker(common.AbstractChecker):
 
 class HTMLPrinter(common.AbstractPrinter):
     """Instances can be used to print HTML format."""
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def before_file(self, fileobj, info={}):
         html_header="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -242,12 +242,12 @@ class PlainCorpusParser(common.AbstractTxtParser):
     r"""Instances of this class parse the PlainCorpus format,
     calling the `handler` for each object that is parsed.
     """
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCorpusParser, self).__init__(in_files, encoding)
         self.sentence_count = 0
-        self.root = "corpus"
+        self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
         self.sentence_count += 1
@@ -267,7 +267,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
 
 class PlainCorpusPrinter(common.AbstractPrinter):
     """Instances can be used to print PlainCorpus format."""
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
         """Handle sentence as a PlainCorpus line, consisting of
@@ -320,12 +320,12 @@ class PlainCandidatesParser(common.AbstractTxtParser):
     r"""Instances of this class parse the PlainCandidates format,
     calling the `handler` for each object that is parsed.
     """
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCandidatesParser, self).__init__(in_files, encoding)
         self.candidate_count = 0
-        self.root = "candidates"
+        self.category = "candidates"
 
     def _parse_line(self, line, handler, info={}):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
@@ -336,7 +336,7 @@ class PlainCandidatesParser(common.AbstractTxtParser):
 
 class PlainCandidatesPrinter(common.AbstractPrinter):
     """Instances can be used to print PlainCandidates format."""
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
 
     def handle_candidate(self, candidate, info={}):
         self.add_string("_".join(self.escape(w.lemma_or_surface()) \
@@ -373,12 +373,12 @@ class MosesParser(common.AbstractTxtParser):
     r"""Instances of this class parse the FactoredMoses format,
     calling the `handler` for each object that is parsed.
     """
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(MosesParser,self).__init__(in_files, encoding)
         self.sentence_count = 0
-        self.root = "corpus"
+        self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
         self.sentence_count += 1
@@ -397,7 +397,7 @@ class MosesParser(common.AbstractTxtParser):
 
 class MosesPrinter(common.AbstractPrinter):
     """Instances can be used to print Moses factored format."""
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
         """Prints a simple Moses-factored string where words are separated by 
@@ -455,31 +455,16 @@ class ConllChecker(common.AbstractChecker):
 
 
 class ConllParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the CONLL format,
+    r"""Instances of this class parse the CONLL-X format,
     calling the `handler` for each object that is parsed.
-
-    Each line should have these entries:
-    0. ID      -- word index in sentence (starting at 1).
-    1. FORM    -- equivalent to `surface` in XML.
-    2. LEMMA   -- equivalent to `lemma` in XML.
-    3. CPOSTAG -- equivalent to `pos` in XML.
-    4. POSTAG  -- simplified version of `pos` in XML.
-                  (XXX currently ignored).
-    5. FEATS   -- (XXX currently ignored).
-    6. HEAD    -- equivalent to second part of `syn` in XML
-                  (that is, the parent of this word)
-    7. DEPREL  -- equivalent to the first part of `syn` in XML
-                  (that is, the relation between this word and HEAD).
-    8. PHEAD   -- (XXX currently ignored).
-    9. PDEPREL -- (XXX currently ignored).
     """
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
         self.name2index = {name:i for (i, name) in
                 enumerate(self.filetype_info.entries)}
-        self.root = "corpus"
+        self.category = "corpus"
         self.s_id = 0
 
     def _parse_line(self, line, handler, info={}):
@@ -529,7 +514,7 @@ class ConllParser(common.AbstractTxtParser):
 
 
 class ConllPrinter(common.AbstractPrinter):
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
     def __init__(self, *args, **kwargs):
         super(ConllPrinter, self).__init__(*args, **kwargs)
         self.count_sentences = 0
@@ -593,7 +578,7 @@ class PWaCParser(ConllParser):
     r"""Instances of this class parse the pWaC format,
     calling the `handler` for each object that is parsed.
     """
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PWaCParser, self).__init__(in_files, encoding)
@@ -635,10 +620,10 @@ class BinaryIndexChecker(common.AbstractChecker):
 
 
 class BinaryIndexParser(common.AbstractParser):
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def _parse_file(self, fileobj, handler):
-        info = {"parser": self, "root": "corpus"}
+        info = {"parser": self, "category": "corpus"}
         with common.ParsingContext(fileobj, handler, info):
             from .indexlib import Index
             assert fileobj.name.endswith(".info")
@@ -653,34 +638,36 @@ class BinaryIndexParser(common.AbstractParser):
 
 from . import ft_arff
 from . import ft_xml
+from . import ft_csv
 
 # Instantiate FiletypeInfo singletons
-INFOS = [ft_arff.INFO, ft_xml.INFO, ConllInfo(), PWaCInfo(),
+INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ConllInfo(), PWaCInfo(),
         PlainCorpusInfo(), BinaryIndexInfo(),
         MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
 
 # Map filetype_hint -> filetype_info
 HINT_TO_INFO = {}
-# Map input_root -> list of filetype_infos
+# Map input_category -> list of filetype_infos
 INPUT_INFOS = {}
-# Map output_root -> list of filetype_infos
+# Map output_category -> list of filetype_infos
 OUTPUT_INFOS = {}
 
 
 for fti in INFOS:
     checker, parser, printer = fti.operations()
     HINT_TO_INFO[fti.filetype_ext] = fti
-    checker.filetype_info = fti
+    if checker is not None:
+        checker.filetype_info = fti
     if parser is not None:
         parser.filetype_info = fti
         INPUT_INFOS.setdefault("ALL", []).append(fti)
-        for root in parser.valid_roots:
-            INPUT_INFOS.setdefault(root, []).append(fti)
+        for category in parser.valid_categories:
+            INPUT_INFOS.setdefault(category, []).append(fti)
     if printer is not None:
         printer.filetype_info = fti
         OUTPUT_INFOS.setdefault("ALL", []).append(fti)
-        for root in printer.valid_roots:
-            OUTPUT_INFOS.setdefault(root, []).append(fti)
+        for category in printer.valid_categories:
+            OUTPUT_INFOS.setdefault(category, []).append(fti)
 
 
 

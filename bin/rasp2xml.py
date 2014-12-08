@@ -312,7 +312,7 @@ longopts = ["morphg=", "moses"]
 arg = read_options( "m:x", longopts, treat_options, -1, usage_string )
 
 if not generate_text :
-    print( XML_HEADER % { "root": "corpus", "ns": "" } )
+    print( XML_HEADER % { "category": "corpus", "ns": "" } )
 
 if len( arg ) == 0 :
     transform_format( sys.stdin )
@@ -326,4 +326,4 @@ else :
         input_file.close()    
                
 if not generate_text :
-    print( XML_FOOTER % { "root": "corpus" } )
+    print( XML_FOOTER % { "category": "corpus" } )

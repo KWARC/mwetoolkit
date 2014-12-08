@@ -62,13 +62,13 @@ python %(program)s [OPTIONS] <file.xml>
 surface_instead_lemmas = False
 
 
-OWL_HEADER = ft_xml.XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(root)s.dtd\"", """[
+OWL_HEADER = ft_xml.XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(category)s.dtd\"", """[
     <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
     <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
     <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
     <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >] 
 """ ) % \
-             { "root" : "rdf:RDF", \
+             { "category" : "rdf:RDF", \
                "ns" : """xmlns="http://www.mwetoolkiteval.org/.owl#"
     xml:base="http://www.mwetoolkiteval.org/ontologies/2010/2/Ontology1269282494031.owl"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
@@ -76,7 +76,7 @@ OWL_HEADER = ft_xml.XML_HEADER.replace( "SYSTEM \"dtd/mwetoolkit-%(root)s.dtd\""
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" """ }
 
-OWL_FOOTER = ft_xml.XML_FOOTER % { "root" : "rdf:RDF" }
+OWL_FOOTER = ft_xml.XML_FOOTER % { "category" : "rdf:RDF" }
             
 
 ################################################################################     
@@ -96,7 +96,7 @@ INFO = OwlInfo()
 
 class OwlPrinter(ft_xml.XMLPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
     
     def before_file(self, fileobj, info={}):
         self.add_string(OWL_HEADER, "\n")

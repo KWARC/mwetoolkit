@@ -109,11 +109,11 @@ class TreeTaggerParser(filetype.common.AbstractTxtParser):
     Optional sentence separators "</s>" may also constitute a word on a line.
     """
     filetype_info = INFO
-    valid_roots = ["corpus"]
+    valid_categories = ["corpus"]
 
     def __init__(self, *args):
         super(TreeTaggerParser, self).__init__(*args)
-        self.root = "corpus"
+        self.category = "corpus"
         self.words = []
         self.s_id = 0
 

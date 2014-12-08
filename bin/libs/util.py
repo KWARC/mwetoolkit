@@ -114,10 +114,10 @@ class FiletypeDescriptions(object):
         from . import filetype
         return self._descriptions(filetype.OUTPUT_INFOS)
 
-    def _descriptions(self, root_to_ftis):
-        return {root: "\n    ".join("* \"{}\": {}".format(
+    def _descriptions(self, category2ftis):
+        return {category: "\n    ".join("* \"{}\": {}".format(
             fti.filetype_ext, fti.description) for fti in ftis)
-                for (root, ftis) in root_to_ftis.iteritems()}
+                for (category, ftis) in category2ftis.iteritems()}
 
 
 ################################################################################

@@ -39,7 +39,6 @@ from xml.etree import ElementTree
 
 from . import _common as common
 
-from ..base.__common import XML_HEADER, XML_FOOTER
 from ..base.__common import WILDCARD
 from ..base.word import Word
 from ..base.sentence import Sentence
@@ -89,15 +88,23 @@ class XMLChecker(common.AbstractChecker):
 
 ################################################################################
 
+XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE %(category)s SYSTEM "dtd/mwetoolkit-%(category)s.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<%(category)s %(ns)s>"""
+
+XML_FOOTER = """</%(category)s>"""
+
+
 class XMLPrinter(common.AbstractPrinter):
     """Instances can be used to print XML objects."""
-    valid_roots = ["dict", "corpus", "candidates", "patterns"]
+    valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
     def before_file(self, fileobj, info={}):
-        self.add_string(XML_HEADER % {"root": self._root, "ns": ""}, "\n")
+        self.add_string(XML_HEADER % {"category": self._category, "ns": ""}, "\n")
 
     def after_file(self, fileobj, info={}):
-        self.add_string(XML_FOOTER % {"root": self._root} + "\n")
+        self.add_string(XML_FOOTER % {"category": self._category} + "\n")
         self.flush()
 
     def handle_comment(self, comment, info={}):
@@ -114,7 +121,7 @@ class XMLParser(common.AbstractParser):
     r"""Instances of this class parse the mwetoolkit XML format,
     calling the `handler` for each object that is parsed.
     """
-    valid_roots = ["dict", "corpus", "candidates", "patterns"]
+    valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
     def _parse_file(self, fileobj, handler):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
@@ -133,7 +140,7 @@ class XMLParser(common.AbstractParser):
                 raise Exception("Unexpected end-tag!")
 
             elif event == "start":
-                info = {"parser": self, "root": elem.tag}
+                info = {"parser": self, "category": elem.tag}
 
                 if elem.tag == "dict":
                     with common.ParsingContext(fileobj, handler, info):

@@ -76,7 +76,7 @@ INFO = EvitaInfo()
 
 class EvitaPrinter(filetype.common.AbstractPrinter):
     filetype_info = INFO
-    valid_roots = ["candidates"]
+    valid_categories = ["candidates"]
 
     def handle_candidate(self, candidate, info={}):
         """For each `Candidate`, print the candidate ID, its POS pattern and the 
