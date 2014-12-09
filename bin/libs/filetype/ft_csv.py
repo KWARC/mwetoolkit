@@ -48,14 +48,20 @@ class CSVInfo(common.FiletypeInfo):
                     (" ", "${space}"), (";", "${semicolon}")]
 
     def operations(self):
-        return common.FiletypeOperations(None, None, CSVPrinter)
+        return common.FiletypeOperations(CSVChecker, None, CSVPrinter)
 
 INFO = CSVInfo()
+r"""Singleton instance of CSVInfo."""
 
+class CSVChecker(common.AbstractChecker):
+    r"""Checks whether input is in CSV format."""
+    filetype_info = INFO
+    def matches_header(self, strict):
+        return not strict
 
 class CSVPrinter(common.AbstractPrinter):
     filetype_info = INFO
-    valid_categories = ["candidates", "corpus"]
+    valid_categories = ["candidates"]
 
     def __init__(self, category, sep="\t", surfaces=False, lemmapos=False, **kwargs):
         super(CSVPrinter, self).__init__(category, **kwargs)
@@ -74,30 +80,29 @@ class CSVPrinter(common.AbstractPrinter):
         """
         headers = ["id", "ngram", "pos"]
         headers.extend(self.escape(cs.name) for cs in meta.corpus_sizes)
-        headers.append("occurs", "sources")
-        headers.extend(self.escape(cs.name) for cs in meta.tpclasses)
+        headers.extend(["occurs", "sources"])
+        headers.extend(self.escape(cs.name) for cs in meta.meta_tpclasses)
         headers.extend(self.escape(cs.name) for cs in meta.meta_feats)
         self.add_string(self.sep.join(headers), "\n")
 
-    def handle_entity(self, entity, info={}):
-        values = [str(entity.id_number)]
+    def handle_candidate(self, candidate, info={}):
+        """
+            For each `Candidate`,
+
+            @param entity: `Candidate` being read from the file
+        """
+        values = [str(candidate.id_number)]
         ngram_list = map(lambda x: self.escape("%s/%s" % (x.lemma, x.pos))
                                 if self.lemmapos else
                                 self.escape(x.surface)
                                 if self.surfaces or common.WILDCARD == x.lemma
                                 else self.escape(x.lemma),
-                         entity)
+                         candidate)
         values.append(" ".join(ngram_list))
-        values.append("" if self.lemmapos else " ".join(map(lambda x: x.pos, entity)))
-        if getattr(entity,"freqs"):
-            values.extend(str(freq.value) for freq in entity.freqs)
-        if getattr(entity,"tpclasses"):
-            values.extend(str(tpclass.value) for tpclass in entity.tpclasses)
-        if getattr(entity,"occurs"):
-            values.append(";".join(map(lambda x:" ".join(
-                          w.surface for w in x.occur), entity.occurs)))
-            values.append(";".join(map(lambda x:x.source,entity.occurs)))
-        if getattr(entity,"features"):
-            values.extend(str(feat.value) for feat in entity.features)
-
+        values.append("" if self.lemmapos else " ".join(map(lambda x: x.pos, candidate)))
+        values.extend(str(freq.value) for freq in candidate.freqs)
+        values.extend(str(tpclass.value) for tpclass in candidate.tpclasses)
+        values.append(";".join(map(lambda x:" ".join(map(lambda y:y.surface,x)),candidate.occurs)))
+        values.append(";".join(map(lambda o:";".join(map(str,o.sources)),candidate.occurs)))
+        values.extend(str(feat.value) for feat in candidate.features)
         self.add_string(self.sep.join(values), "\n")
