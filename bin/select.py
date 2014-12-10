@@ -69,7 +69,7 @@ OPTIONS may be:
 --keep-empty-words
     Keep words without lemma/surface in output.
 
---word-lemmas-or-surfaces
+--word-lemmas
     Keep word lemmas (or surface if no lemma is available).
 
 --word-lemmas-matching <regex>
@@ -91,7 +91,7 @@ input_filetype_ext = None
 output_filetype_ext = None
 
 keep_empty_words = False
-lemma_or_surface = False
+take_lemma = False
 regex_word_lemma = "(?!)"
 regex_word_surface = "(?!)"
 regex_word_pos = "(?!)"
@@ -104,12 +104,13 @@ regex_word_syn = "(?!)"
 class SelectorPrinterHandler(filetype.AutomaticPrinterHandler):
     def handle_sentence(self, sentence, info={}):
         for word in sentence.word_list:
-            if not re.search(regex_word_lemma, word.lemma):
-                if not lemma_or_surface:
-                    word.lemma = WILDCARD
             if not re.search(regex_word_surface, word.surface):
-                if not lemma_or_surface or word.lemma != WILDCARD:
-                    word.surface = WILDCARD
+                word.surface = WILDCARD
+            if take_lemma or word.surface == WILDCARD:
+                word.surface = word.lemma
+
+            if not re.search(regex_word_lemma, word.lemma):
+                word.lemma = WILDCARD
 
             if not re.search(regex_word_pos, word.pos):
                 word.pos = WILDCARD
@@ -133,7 +134,7 @@ def treat_options(opts, arg, n_arg, usage_string):
     global regex_word_surface
     global regex_word_pos
     global regex_word_syn
-    global lemma_or_surface
+    global take_lemma
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
@@ -144,8 +145,8 @@ def treat_options(opts, arg, n_arg, usage_string):
             output_filetype_ext = a
         elif o == "--keep-empty-words":
             keep_empty_words = True
-        elif o == "--word-lemmas-or-surfaces":
-            lemma_or_surface = True
+        elif o == "--word-lemmas":
+            take_lemma = True
         elif o == "--word-lemmas-matching":
             regex_word_lemma = a
         elif o == "--word-surfaces-matching":
@@ -162,8 +163,7 @@ def treat_options(opts, arg, n_arg, usage_string):
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["from=", "to=", "keep-empty-words",
-        "word-lemmas-or-surfaces",
+longopts = ["from=", "to=", "keep-empty-words", "word-lemmas",
         "word-lemmas-matching=", "word-surfaces-matching=",
         "word-pos-matching=", "word-syn-matching="]
 args = read_options("", longopts, treat_options, -1, usage_string)
