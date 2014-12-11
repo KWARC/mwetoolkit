@@ -49,24 +49,24 @@ test_parser  XML "xml-ref/corpus.conll.xml" "xml-ref/corpus.conll.xml"
 # (For XML, test_parser will end up automatically testing printer)
 
 t_testname "Check CONLL format"
-test_parser  CONLL "corpus.conll" "xml-ref/corpus.conll.xml"
-test_printer CONLL "corpus.conll" "xml-ref/corpus.conll.xml"
+test_parser  CONLL "sample/corpus.conll" "xml-ref/corpus.conll.xml"
+test_printer CONLL "sample/corpus.conll" "xml-ref/corpus.conll.xml"
 
 t_testname "Check FactoredMoses format"
-test_parser  FactoredMoses "corpus.moses" "xml-ref/corpus.moses.xml"
-test_printer FactoredMoses "corpus.moses" "xml-ref/corpus.moses.xml"
+test_parser  FactoredMoses "sample/corpus.moses" "xml-ref/corpus.moses.xml"
+test_printer FactoredMoses "sample/corpus.moses" "xml-ref/corpus.moses.xml"
 
 t_testname "Check PlainCorpus format"
-test_parser  PlainCorpus "corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
-test_printer PlainCorpus "corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
+test_parser  PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
+test_printer PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
 
 t_testname "Check pWaC format"
-test_parser  pWaC "corpus.pukwac" "xml-ref/corpus.pukwac.xml"
-#test_printer pWaC "corpus.pukwac" "xml-ref/corpus.pukwac.xml"
+test_parser  pWaC "sample/corpus.pukwac" "xml-ref/corpus.pukwac.xml"
+#test_printer pWaC "sample/corpus.pukwac" "xml-ref/corpus.pukwac.xml"
 
 t_testname "Check PlainCandidates format"
-test_parser  PlainCandidates "candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
-test_printer PlainCandidates "candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
+test_parser  PlainCandidates "sample/candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
+test_printer PlainCandidates "sample/candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
 
 
 # TODO
