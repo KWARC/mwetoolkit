@@ -97,7 +97,7 @@ class MosesTextInfo(common.FiletypeInfo):
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
                     ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}")]
+                    ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
         return common.FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
@@ -225,7 +225,7 @@ class PlainCorpusInfo(common.FiletypeInfo):
  
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), (" ", "${space}"), ("\t", "${tab}"),
-            ("_", "${underscore}"), ("#", "${hash}")]
+            ("_", "${underscore}"), ("#", "${hash}"), ("\n", "${newline}")]
 
     def operations(self):
         return common.FiletypeOperations(PlainCorpusChecker,
@@ -352,7 +352,7 @@ class MosesInfo(common.FiletypeInfo):
 
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
-                    (" ", "${space}"), ("\t", "${tab}")]
+                    (" ", "${space}"), ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
         return common.FiletypeOperations(MosesChecker,
@@ -433,7 +433,8 @@ class ConllInfo(common.FiletypeInfo):
 
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-            (" ", "${space}"), ("\t", "${tab}"), ("#", "${hash}")]
+            (" ", "${space}"), ("#", "${hash}")
+            ("\t", "${tab}"), ("\n", "${newline}")]
 
     entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
             "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
@@ -562,7 +563,7 @@ class PWaCInfo(common.FiletypeInfo):
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
                     ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}"), ("#", "${hash}")]
+                    ("#", "${hash}"), ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
         return common.FiletypeOperations(PWaCChecker, PWaCParser, None)

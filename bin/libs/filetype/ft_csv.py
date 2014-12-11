@@ -44,8 +44,9 @@ class CSVInfo(common.FiletypeInfo):
     description = "Tab-separated CSV filetype format, one field per column"
     filetype_ext = "CSV"
     comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("\t", "${tab}"), ("/", "${slash}"),
-                    (" ", "${space}"), (";", "${semicolon}")]
+    escape_pairs = [("$", "${dollar}"), ("/", "${slash}"),
+                    (" ", "${space}"), (";", "${semicolon}"),
+                    ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
         return common.FiletypeOperations(CSVChecker, None, CSVPrinter)
