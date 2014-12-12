@@ -97,7 +97,6 @@ thresh_source = None
 thresh_value = 0
 equals_name = None
 equals_value = None
-entity_counter = 0
 patterns = []
 longest_pattern = 0
 shortest_pattern = float("inf")
@@ -112,7 +111,9 @@ output_filetype_ext = None
 
 class FilterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta_obj, info={}) :
         """Simply prints the meta header to the output without modifications.
@@ -135,14 +136,10 @@ class FilterHandler(filetype.ChainedInputHandler):
         global thresh_value
         global equals_name
         global equals_value
-        global entity_counter
         global reverse
         global patterns
         global maxlength
         global minlength
-
-        if entity_counter % 100 == 0 :
-            verbose( "Processing entity number %(n)d" % { "n":entity_counter } )
 
         print_it = True
         ngram_to_print = entity
@@ -192,7 +189,6 @@ class FilterHandler(filetype.ChainedInputHandler):
 
         if print_it :   
             self.chain.handle_entity(ngram_to_print, info)
-        entity_counter += 1
 
 
 ################################################################################

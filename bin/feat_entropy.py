@@ -126,7 +126,9 @@ def append_list_dict( dictionary, key, value ) :
 
 class FeatGeneratorHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(fileobj, info, None)
+        if not self.chain:
+            self.chain = self.make_printer(info, None)
+        self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}):
         """

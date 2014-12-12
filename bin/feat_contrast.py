@@ -94,9 +94,9 @@ main_freq_name = None
 
 class MeasureCalculatorHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, None)
-        self.entity_counter = 0
+        if not self.chain:
+            self.chain = self.make_printer(info, None)
+        self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}) :
         """
@@ -129,8 +129,6 @@ class MeasureCalculatorHandler(filetype.ChainedInputHandler):
         global corpussize_dict
         global totals_dict
         global main_freq_name
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing candidate number %(n)d" % { "n":self.entity_counter } )
         # get the original corpus freq, store the others in contrastive corpus dict
         # We use plus one smoothing to avoid dealing with zero freqs    
         contrast_freqs = {}
@@ -158,7 +156,6 @@ class MeasureCalculatorHandler(filetype.ChainedInputHandler):
             except Exception :
                 error("Error in calculating the measures.")
         self.chain.handle_candidate(candidate, info)
-        self.entity_counter += 1
 
 
 ################################################################################
@@ -271,18 +268,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     
     if not main_freq_name :
         error( "Option -o is mandatory")
-
-################################################################################
-
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0  
 
 
 ################################################################################

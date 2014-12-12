@@ -119,7 +119,6 @@ output_filetype_ext = None
 class LowercaserHandler(filetype.ChainedInputHandler):
     def __init__(self):
         global algoname
-        self.entity_counter = 0
         if algoname == "simple" : 
             self.handle_sentence = self.handle_sentence_simple # Redundant, kept for clarity
         elif algoname == "complex" :
@@ -132,8 +131,9 @@ class LowercaserHandler(filetype.ChainedInputHandler):
 
 
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
 
     def handle_sentence_simple(self, sentence, info={}):
@@ -144,12 +144,9 @@ class LowercaserHandler(filetype.ChainedInputHandler):
         global moses_version
         global lower_attr
         
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
         for w in sentence :
             setattr(w, lower_attr, getattr(w, lower_attr).lower())
         self.chain.handle_sentence(sentence, info)
-        self.entity_counter += 1
 
 
     def handle_sentence_complex(self, sentence, info={}):
@@ -160,9 +157,6 @@ class LowercaserHandler(filetype.ChainedInputHandler):
         global START_THRESHOLD    
         global lower_attr
         
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
-
         for w_i, w in enumerate(sentence):
             case_class = w.get_case_class()
             # Does nothing if it's already lowercase or if it's not alphabetic
@@ -193,7 +187,6 @@ class LowercaserHandler(filetype.ChainedInputHandler):
                         # error, etc.
 
         self.chain.handle_sentence(sentence)
-        self.entity_counter += 1
 
 
     def handle_sentence_aggressive(self, sentence, info={}):
@@ -205,9 +198,6 @@ class LowercaserHandler(filetype.ChainedInputHandler):
         
         AGG_THRESH = .9
         
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
-
         for w_i, w in enumerate(sentence):
             case_class = w.get_case_class(s_or_l=lower_attr)
             # Does nothing if it's aready lowercase or if it's not alphabetic
@@ -222,15 +212,11 @@ class LowercaserHandler(filetype.ChainedInputHandler):
                     setattr( w, lower_attr, current_form.lower() )          
 
         self.chain.handle_sentence(sentence, info)
-        self.entity_counter += 1
 
 
 ################################################################################
 
 class VocabReaderHandler(filetype.InputHandler):
-    def __init__(self):
-        self.entity_counter = 0
-
     def handle_sentence(self, sentence, info={}):
         """
             For each sentence in the corpus, add it to the vocabulary. The vocab is
@@ -240,8 +226,6 @@ class VocabReaderHandler(filetype.InputHandler):
         """
         global vocab
         global lower_attr
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
         prev_key = ""
         for w_i, w in enumerate(sentence):
             key = getattr(w, lower_attr)
@@ -259,7 +243,6 @@ class VocabReaderHandler(filetype.InputHandler):
             forms[ key ] = form_entry
             vocab[ low_key ] = forms
             prev_key = key
-        self.entity_counter += 1
 
 
 ################################################################################

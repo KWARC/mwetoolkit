@@ -448,8 +448,8 @@ class InputHandler(object):
         util.warn("Ignoring " + info["kind"])
 
 
-    def printer_before_file(self, fileobj, info, forced_filetype_ext):
-        r"""Create a printer, call its `before_file(...)` and return it.
+    def make_printer(self, info, forced_filetype_ext):
+        r"""Create and return a printer.
         In the case of ChainedInputHandler's, the returned printer
         should be assigned to `self.chain`.
 
@@ -460,15 +460,13 @@ class InputHandler(object):
         from .. import filetype
         ext = forced_filetype_ext \
                 or info["parser"].filetype_info.filetype_ext
-        chain = filetype.printer_class(ext)(info["category"])
-        chain.before_file(fileobj, info)
-        return chain
+        return filetype.printer_class(ext)(info["category"])
 
 
 class ChainedInputHandler(InputHandler):
     r"""InputHandler that delegates all methods to `self.chain`.
     """
-    chain = NotImplemented
+    chain = None
 
     def flush(self):
         self.chain.flush()
@@ -484,16 +482,44 @@ class ChainedInputHandler(InputHandler):
         self.chain.handle(entity, info)
 
 
+class LoudHandler(ChainedInputHandler):
+    r"""InputHandler wrapper that warns the
+    user about what has already been processed.
+    """
+    def __init__(self, chain):
+        self.chain = chain
+        self.kind = None
+        self.count = 0
+
+    def handle_entity(self, entity, info={}):
+        entity_kind = info["kind"]
+        if self.kind is None:
+            self.kind = entity_kind
+        if self.kind != entity_kind:
+            self.kind = "entity"
+        self.count += 1
+
+        self.print_progress()
+        self.chain.handle(entity, info)
+
+    def print_progress(self):
+        if self.count % 100 == 0:
+            util.verbose("~~> Processing {kind} number {n}"
+                    .format(kind=self.kind, n=self.count))
+
+
 class AutomaticPrinterHandler(ChainedInputHandler):
     r"""DEPRECATED:
-    Use ChainedInputHandler and set `self.chain = self.printer_before_file(...)`
-    inside `before_file`.
+    Implement (copy-paste) the `before_file` below explicitly.
+    It's much more legible, even at the small cost of code duplication.
     """
     def __init__(self, forced_filetype_ext=None):
         self.forced_filetype_ext = forced_filetype_ext
 
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(fileobj, info, self.forced_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, self.forced_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
 
 
@@ -529,6 +555,7 @@ class AbstractPrinter(InputHandler):
         if category not in self.valid_categories:
             raise Exception("Bad printer: {}(category=\"{}\")"
                     .format(type(self).__name__, category))
+        self._printed_filetype_directive = False
         self._category = category
         self._output = output or sys.stdout
         self._flush_on_add = flush_on_add
@@ -537,9 +564,11 @@ class AbstractPrinter(InputHandler):
 
     def before_file(self, fileobj, info={}):
         r"""Begin processing by printing filetype."""
-        directive = Directive("filetype",
-                self.filetype_info.filetype_ext)
-        self.handle_comment(unicode(directive), info)
+        if not self._printed_filetype_directive:
+            directive = Directive("filetype",
+                    self.filetype_info.filetype_ext)
+            self.handle_comment(unicode(directive), info)
+            self._printed_filetype_directive = True
 
     def after_file(self, fileobj, info={}):
         r"""Flush outputs after execution."""

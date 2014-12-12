@@ -171,8 +171,9 @@ output_filetype_ext = "XML"
 class CounterPrinter(filetype.ChainedInputHandler):
     r"""Adds info and outputs the result."""
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
         self.entity_counter = 0
 
     def handle_meta(self, meta, info={}):
@@ -197,8 +198,6 @@ class CounterPrinter(filetype.ChainedInputHandler):
         """
         global low_limit, up_limit
         global count_vars
-        if self.entity_counter % 100 == 0:
-            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
         if ( self.entity_counter >= low_limit or low_limit < 0 ) and \
                 ( self.entity_counter <= up_limit or up_limit < 0 ):
             if count_vars:

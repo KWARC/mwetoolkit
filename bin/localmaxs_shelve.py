@@ -109,7 +109,6 @@ OPTIONS may be:
 ngram_counts = {}
 selected_candidates = {}
 corpus_size = 0
-sentence_count = 0
 input_filetype_ext = None
 
 
@@ -136,15 +135,11 @@ def unkey(str):
 class NGramCounterHandler(filetype.InputHandler):
     def handle_sentence(self, sentence, info={}):
         """Count all ngrams being considered in the sentence."""
-        global corpus_size, sentence_count
+        global corpus_size
 
         # 'shelve' does not speak Unicode; we must convert Unicode strings back to
         # plain bytestrings to use them as keys.
         words = [getattr(w, base_attr).encode('utf-8') for w in sentence]
-
-        sentence_count += 1
-        if sentence_count % 100 == 0:
-            verbose("Processing sentence %d" % sentence_count)
 
         for ngram_size in range(1, max_ngram + 2):
             for i in range(len(words) - ngram_size + 1):
@@ -166,7 +161,8 @@ class NGramCounterHandler(filetype.InputHandler):
         verbose("Selecting ngrams through LocalMaxs...")
         self.localmaxs()
         verbose("Outputting candidates file...")
-        self.chain = self.printer_before_file(fileobj, info, None)
+        self.chain = self.make_printer(info, None)
+        self.chain.before_file(fileobj, info)
         self.chain.handle_meta(
                 Meta([CorpusSize("corpus", corpus_size)],
                         [MetaFeat("glue", "real")], []))

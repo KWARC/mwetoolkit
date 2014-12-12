@@ -85,9 +85,10 @@ class HeadPrinterHandler(filetype.ChainedInputHandler):
         self.limit = limit
 
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
-        self.counter = 0
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
+        self.entity_counter = 0
 
     def handle_entity(self, entity, info={}):
         """For each entity in the file, prints it if the limit is still not
@@ -95,13 +96,11 @@ class HeadPrinterHandler(filetype.ChainedInputHandler):
 
         @param entity: A subclass of `Ngram` that is being read from the XML.
         """
-        if self.counter % 100 == 0:
-            verbose( "Processing ngram number %(n)d" % { "n":self.counter } )
-        if self.counter < self.limit:
+        if self.entity_counter < self.limit:
             self.chain.handle(entity, info)
         else:
             raise filetype.StopParsing
-        self.counter += 1
+        self.entity_counter += 1
 
 
 ################################################################################

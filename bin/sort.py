@@ -53,12 +53,16 @@ from libs import filetype
 
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] -f <feat> <candidates.xml>
+python {program} [OPTIONS] -f <feat> <candidates>
 
 -f <feat> OR --feat <feat>    
     The name of the feature that will be used to sort the candidates. For 
     candidates whose sorting feature is not present, the script assumes the 
     default UNKNOWN_FEAT_VALUE, which is represented by a question mark "?".
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
 
@@ -66,12 +70,19 @@ OPTIONS may be:
     Sort in ascending order. By default, classification is descending.
 
 -d OR --desc
-    Sort in descending order. By default, classification is descending, so that
-    this flag can also be ommitted.
+    Sort in descending order (default).
 
-%(common_options)s
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
 
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[candidates]}
+
+{common_options}
 """
 feat_list = []
 all_feats = []
@@ -80,13 +91,17 @@ temp_file = None
 feat_to_order = []
 ascending = False
 
+input_filetype_ext = None
+output_filetype_ext = None
+
 
 ################################################################################     
 
 class SorterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, None)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}):
         """
@@ -122,11 +137,10 @@ class SorterHandler(filetype.ChainedInputHandler):
         if not feat_list_ok:
             for feat_name in feat_list:
                 if feat_name not in all_feats:
-                    error("%(feat)s is not a valid feature\n" + \
-                          "Please chose features from the list below\n" + \
-                          "%(list)s" % {"feat": feat_name,
-                                        "list": "\n".join(
-                                            map(lambda x: "* " + x, all_feats))})
+                    error("{feat} is not a valid feature\n" \
+                            "Please chose features from the list below:\n" \
+                            "{list}".format(feat=feat_name, list="\n".join(
+                                    "* " + feat for feat in all_feats)))
             feat_list_ok = True
 
         # Store the whole candidate in a temporary database
@@ -190,6 +204,8 @@ def treat_options(opts, arg, n_arg, usage_string):
     """
     global feat_list
     global ascending
+    global input_filetype_ext
+    global output_filetype_ext
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
@@ -203,6 +219,12 @@ def treat_options(opts, arg, n_arg, usage_string):
         elif o in ("-d", "--desc"):
             ascending = False
             a_or_d.append("d")
+        elif o == "--from":
+            input_filetype_ext = a
+        elif o == "--to":
+            output_filetype_ext = a
+        else:
+            raise Exception("Bad arg")
 
     if len(a_or_d) > 1:
         warn("you must provide only one option, -a OR -d. Only the last one" + \
@@ -210,10 +232,12 @@ def treat_options(opts, arg, n_arg, usage_string):
     if not feat_list:
         error("You MUST provide at least one sorting key with -f")
 
+
+
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = ["feat=", "asc", "desc"]
+longopts = ["from=", "to=", "feat=", "asc", "desc"]
 args = read_options("f:ad", longopts, treat_options, -1, usage_string)
 
 try:
@@ -226,7 +250,7 @@ except IOError as err:
     error("Error opening temporary file.\n" + \
           "Please verify __common.py configuration")
 
-filetype.parse(args, SorterHandler())
+filetype.parse(args, SorterHandler(), input_filetype_ext)
 
 try:
     temp_file.close()

@@ -71,8 +71,9 @@ lang = DEFAULT_LANG
 
 class LemmatiserHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(fileobj, info, None)
-        self.entity_counter = 0
+        if not self.chain:
+            self.chain = self.make_printer(info, None)
+        self.chain.before_file(fileobj, info)
 
 
     def handle_entity(self, entity, info={}):
@@ -80,13 +81,10 @@ class LemmatiserHandler(filetype.ChainedInputHandler):
         @param entity A subclass of `Ngram`.
         """
         global lang
-        if self.entity_counter % 100 == 0:
-            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
         for w in entity:
             if lang == "en":
                 w.lemma = self.lemmatise_en(w)
         self.chain.handle_entity(entity, info)
-        self.entity_counter += 1
 
 
     def lemmatise_en(self, w):

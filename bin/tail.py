@@ -87,9 +87,10 @@ class TailPrinterHandler(filetype.ChainedInputHandler):
         self.entity_buffer = [None] * limit
 
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
-        self.counter = 0
+        if self.chain is None:
+            self.chain = self.make_printer(info, output_filetype_ext)
+            self.counter = 0
+        self.chain.before_file(fileobj, info)
 
     def handle_entity(self, entity, info={}):
         """For each entity in the corpus, puts it in a circular buffer. This is

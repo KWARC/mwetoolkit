@@ -112,7 +112,6 @@ corpussize_dict = {}
 measures = supported_measures
 # TODO: Parametrable combine function
 heuristic_combine = lambda l : sum( l ) / len( l ) # Arithmetic mean
-entity_counter = 0
 not_normalize_mle=False
 warn_ll_bigram_only = True
 
@@ -121,8 +120,9 @@ warn_ll_bigram_only = True
 
 class FeatureAdderPrinter(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}):
         """Adds new meta-features corresponding to the AM features that we add to
@@ -148,9 +148,7 @@ class FeatureAdderPrinter(filetype.ChainedInputHandler):
         
         @param candidate The `Candidate` that is being read from the XML file.    
         """
-        global corpussize_dict, main_freq, entity_counter
-        if entity_counter % 100 == 0:
-            verbose("Processing candidate number %(n)d" % {"n":entity_counter})
+        global corpussize_dict, main_freq
 
         joint_freq = {}
         singleword_freq = {}
@@ -184,7 +182,6 @@ class FeatureAdderPrinter(filetype.ChainedInputHandler):
                 error( "This should never be printed. The end of the world is here")
 
         super(FeatureAdderPrinter, self).handle_candidate(candidate, info)
-        entity_counter = entity_counter + 1
 
 
 ################################################################################     
@@ -441,17 +438,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         else:
             raise Exception("Bad arg: " + o)
 
-################################################################################
-
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
 
 ################################################################################
 # MAIN SCRIPT

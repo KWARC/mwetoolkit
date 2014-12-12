@@ -75,8 +75,9 @@ output_filetype_ext = "XML"
 
 class ConverterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(
-                fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
 
 def treat_options(opts, arg, n_arg, usage_string):

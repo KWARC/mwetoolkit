@@ -51,8 +51,8 @@ from . import _common as common
 
 # Leak very common stuff into this namespace
 from ._common import StopParsing, InputHandler, \
-        ChainedInputHandler, AutomaticPrinterHandler, \
-        Directive
+        ChainedInputHandler, LoudHandler, Directive, \
+        AutomaticPrinterHandler
 
 
 def parse(input_files, handler, filetype_hint=None):
@@ -68,6 +68,7 @@ def parse(input_files, handler, filetype_hint=None):
     @param filetype_hint: either None or a valid
     filetype_ext string.
     """
+    handler = common.LoudHandler(handler)
     return SmartParser(input_files, filetype_hint).parse(handler)
 
 
@@ -433,7 +434,7 @@ class ConllInfo(common.FiletypeInfo):
 
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-            (" ", "${space}"), ("#", "${hash}")
+            (" ", "${space}"), ("#", "${hash}"),
             ("\t", "${tab}"), ("\n", "${newline}")]
 
     entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",

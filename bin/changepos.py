@@ -99,7 +99,9 @@ input_filetype_ext = None
 
 class FilterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
-        self.chain = self.printer_before_file(fileobj, info, output_filetype_ext)
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
     def handle_sentence(self, sentence, info={}):
         for w in sentence:
