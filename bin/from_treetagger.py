@@ -179,4 +179,4 @@ def treat_options(opts, arg, n_arg, usage_string):
 longopts = ["sentence=", "to="]
 args = read_options("s:", longopts, treat_options, -1, usage_string)
 printer = filetype.AutomaticPrinterHandler(output_filetype_ext)
-TreeTaggerParser(args, "utf-8").parse(printer)
+TreeTaggerParser(args, "utf-8").parse(filetype.LoudHandler(printer))

@@ -88,10 +88,11 @@ output_filetype_ext = None
 ################################################################################
 
 
-class UniqerHandler(filetype.AutomaticPrinterHandler):
-    def __init__(self):
-        super(UniqerHandler, self).__init__(output_filetype_ext)
-        self.entity_counter = 0
+class UniqerHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
 
     def handle_entity(self, entity, info={}) :
@@ -104,8 +105,6 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
         global entity_buffer
         global perform_retokenisation, ignore_pos, surface_instead_lemmas
 
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
         # TODO: improve the "copy" method
         copy_ngram = create_instance( entity )
         for w in entity :
@@ -154,7 +153,6 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
         #entity_buffer[ internal_key ] = old_entry
 
         entity_buffer[ internal_key ] = copy_ngram
-        self.entity_counter += 1
 
 
     def after_file(self, fileobj, info={}):
@@ -165,8 +163,7 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
         """
         global entity_buffer
         verbose( "Output the unified ngrams..." )
-        uniq_counter = 0
-        for entity in entity_buffer.values() :
+        for uniq_counter, entity in enumerate(entity_buffer.values()):
             entity.id_number = uniq_counter
             if isinstance( entity, Candidate ) :
                 # WARNING: This is sort of specific for the VERBS 2010 paper. This
@@ -185,10 +182,8 @@ class UniqerHandler(filetype.AutomaticPrinterHandler):
                 pass
             elif isinstance( entity, Sentence ) :
                 pass          
-            print(entity.to_xml().encode( 'utf-8' ))
-            uniq_counter += 1
-        verbose("%(n)d entities, %(u)d unique entities" % { "n":self.entity_counter, \
-                                                             "u":uniq_counter } )
+            self.chain.handle_entity(entity, info)
+        self.chain.after_file(fileobj, info)
 
     
 ################################################################################    

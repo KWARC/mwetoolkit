@@ -51,8 +51,7 @@ from . import _common as common
 
 # Leak very common stuff into this namespace
 from ._common import StopParsing, InputHandler, \
-        ChainedInputHandler, LoudHandler, Directive, \
-        AutomaticPrinterHandler
+        ChainedInputHandler, Directive
 
 
 def parse(input_files, handler, filetype_hint=None):
@@ -68,7 +67,7 @@ def parse(input_files, handler, filetype_hint=None):
     @param filetype_hint: either None or a valid
     filetype_ext string.
     """
-    handler = common.LoudHandler(handler)
+    handler = LoudHandler(handler)
     return SmartParser(input_files, filetype_hint).parse(handler)
 
 
@@ -84,6 +83,46 @@ def printer_class(filetype_ext):
     if ret is None:
         raise Exception("Printer not implemented for: " + unicode(filetype_ext))
     return ret
+
+
+class LoudHandler(ChainedInputHandler):
+    r"""InputHandler wrapper that warns the
+    user about what has already been processed.
+    """
+    def __init__(self, chain):
+        self.chain = chain
+        self.kind = None
+        self.count = 0
+
+    def handle_entity(self, entity, info={}):
+        entity_kind = info["kind"]
+        if self.kind is None:
+            self.kind = entity_kind
+        if self.kind != entity_kind:
+            self.kind = "entity"
+        self.count += 1
+
+        self.print_progress()
+        self.chain.handle(entity, info)
+
+    def print_progress(self):
+        if self.count % 100 == 0:
+            util.verbose("~~> Processing {kind} number {n}"
+                    .format(kind=self.kind, n=self.count))
+
+
+class AutomaticPrinterHandler(ChainedInputHandler):
+    r"""Utility subclass of ChainedInputHandler that automatically
+    creates an appropriate printer by calling `make_printer` with
+    information from the first input file.
+    """
+    def __init__(self, forced_filetype_ext):
+        self.forced_filetype_ext = forced_filetype_ext
+
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            self.chain = self.make_printer(info, self.forced_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
 
 

@@ -114,7 +114,12 @@ reference_filetype_ext = None
 
 ################################################################################
 
-class EvaluatorHandler(filetype.AutomaticPrinterHandler):
+class EvaluatorHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            self.chain = self.make_printer(info, None)
+        self.chain.before_file(fileobj, info)
+
     def handle_meta(self, meta, info={}) :
         """Adds new meta-TP class corresponding to the evaluation of the candidate
         list according to a reference gold standard. Automatic evaluation is
@@ -145,8 +150,6 @@ class EvaluatorHandler(filetype.AutomaticPrinterHandler):
         global lemma_or_surface
         global fuzzy_pre_gs
 
-        if entity_counter % 100 == 0 :
-            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
         true_positive = False
         #pdb.set_trace()
         candidate = Candidate( 0, [], [], [], [], [] )

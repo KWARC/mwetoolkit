@@ -100,11 +100,12 @@ output_filetype_ext = None
 ################################################################################
 
 
-class AnnotatorHandler(filetype.AutomaticPrinterHandler):
+class AnnotatorHandler(filetype.ChainedInputHandler):
     r"""An InputHandler that prints the input with annotated MWEs."""
-    def __init__(self):
-        super(AnnotatorHandler, self).__init__(output_filetype_ext)
-        self.sentence_counter = 0
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
 
     def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, detect MWEs and append
@@ -113,11 +114,6 @@ class AnnotatorHandler(filetype.AutomaticPrinterHandler):
         @param sentence: A `Sentence` that is being read from the XML file.    
         @param info: A dictionary with info regarding `sentence`.
         """
-        self.sentence_counter += 1
-        if self.sentence_counter % 100 == 0:
-            verbose("Processing sentence number %(n)d"
-                    % {"n": self.sentence_counter})
-
         for mwe_occurrence in detector.detect(sentence):
             sentence.mweoccurs.append(mwe_occurrence)
         self.chain.handle_sentence(sentence)

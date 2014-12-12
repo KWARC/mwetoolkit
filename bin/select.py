@@ -101,7 +101,12 @@ regex_word_syn = "(?!)"
 ################################################################################
 
 
-class SelectorPrinterHandler(filetype.AutomaticPrinterHandler):
+class SelectorPrinterHandler(filetype.ChainedInputHandler):
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            self.chain = self.make_printer(info, output_filetype_ext)
+        self.chain.before_file(fileobj, info)
+
     def handle_sentence(self, sentence, info={}):
         for word in sentence.word_list:
             if not re.search(regex_word_surface, word.surface):
