@@ -89,7 +89,6 @@ class TailPrinterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if self.chain is None:
             self.chain = self.make_printer(info, output_filetype_ext)
-            self.counter = 0
         self.chain.before_file(fileobj, info)
 
     def handle_entity(self, entity, info={}):
@@ -99,8 +98,6 @@ class TailPrinterHandler(filetype.ChainedInputHandler):
         
         @param entity A subclass of `Ngram` that is being read from the XM.
         """
-        if self.entity_counter % 100 == 0:
-            verbose("Processing ngram number %(n)d" % {"n": self.entity_counter})
         if self.limit > 0:
             self.entity_buffer[self.entity_counter % self.limit] = (entity, info)
             self.entity_counter += 1

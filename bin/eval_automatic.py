@@ -55,7 +55,7 @@ from libs import filetype
 
 usage_string = """Usage:
 
-python %(program)s -r <reference.xml> OPTIONS <candidates>
+python {program} -r <reference.xml> OPTIONS <candidates>
 
 -r <reference> OR --reference <patterns>
     The reference list or gold standard, in one of the filetype
@@ -63,7 +63,7 @@ python %(program)s -r <reference.xml> OPTIONS <candidates>
 
 The <candidates> input file must be in one of the filetype
 formats accepted by the `--input-from` switch.
-    
+
 
 OPTIONS may be:
 
@@ -91,11 +91,7 @@ OPTIONS may be:
     of references. If either of the four comparisons is successful, the match
     is successful. Wildcards in references are not considered.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
-    The reference list or gold standard must be valid XML
-    (dtd/mwetoolkit-dict.dtd).
+{common_options}
 """
 #gs = []
 pre_gs = {}

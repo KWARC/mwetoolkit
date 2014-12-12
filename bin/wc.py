@@ -61,6 +61,8 @@ OPTIONS may be:
     Force conversion from given filetype extension.
     (By default, file type is automatically detected):
     {descriptions.input[ALL]}
+
+{common_options}
 """    
 input_filetype_ext = None
 
@@ -76,9 +78,6 @@ class CounterHandler(filetype.InputHandler):
         number of words and the number of characters (except spaces and XML).
         @param entity A subclass of `Ngram` that is being read from the XML.
         """
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
-
         for word in entity:
             self.word_counter += 1
             self.char_counter += len( word )

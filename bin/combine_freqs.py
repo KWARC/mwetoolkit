@@ -77,7 +77,6 @@ OPTIONS may be:
 supported_combination = [ "uniform", "inverse", "backoff" ]
 corpussize_dict = {}
 combination = supported_combination
-entity_counter = 0
 
 ################################################################################
 
@@ -210,11 +209,8 @@ class FreqCombinerHandler(filetype.ChainedInputHandler):
         global corpussize_dict
         global combination
         global main_freq
-        global entity_counter
         joint_freq = {}    
         backed_off = False    
-        if entity_counter % 100 == 0 :
-            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
         # Convert all these integers to floats...
         for freq in candidate.freqs :
             joint_freq[ freq.name ] = float( freq.value )

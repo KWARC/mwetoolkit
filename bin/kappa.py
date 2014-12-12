@@ -47,7 +47,14 @@ from libs.util import read_options, treat_options_simplest, verbose, warn, error
 # GLOBALS     
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <file.txt>
+python {program} OPTIONS <file.txt>
+
+The <file.txt> file is a tab-separated file with the data annotation, one
+item per row, one rater/annotator per column. Categories are treated as
+enumerations, where each class is a string. If the file includes a header row 
+for identifying the raters and/or a first column to identify the items, 
+please specify the appropriate options --r and/or -i above.
+
 
 OPTIONS may be:
 
@@ -88,13 +95,7 @@ OPTIONS may be:
     for instance, from 0.0 to 1.0, from 1 to 10, etc. Undefined distances will
     be assigned the maximum distance value by default.
     
-%(common_options)s
-
-    The <file.txt> file is a tab-separated file with the data annotation, one
-    item per row, one rater/annotator per column. Categories are treated as
-    eumerations, where each class is a string. If the file includes a header row 
-    for identifying the raters and/or a first column to identify the items, 
-    please specify the appropriate options --r and/or -i above.
+{common_options}
 """   
 
 first_header = False

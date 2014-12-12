@@ -40,7 +40,7 @@ from libs.filetype import indexlib
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS -i <index> <corpus>
+python {program} OPTIONS -i <index> <corpus>
 
 -i <index> OR --index <index>
     Base name for the output index files. This is used as a prefix for all index
@@ -91,7 +91,7 @@ OPTIONS may be:
     current token depends syntactically, and deprel is the type of syntactic 
     relation. Empty fields should contain an underscore "_"
 
-%(common_options)s
+{common_options}
 """
 use_text_format = None
 input_filetype_ext = None

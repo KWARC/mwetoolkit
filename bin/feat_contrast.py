@@ -50,7 +50,7 @@ from libs import filetype
      
 usage_string = """Usage: 
     
-python %(program)s -o <name> OPTIONS <candidates.xml>
+python {program} -o <name> OPTIONS <candidates.xml>
 
 -o <name> OR --original <name>
     The name of the frequency source from which the candidates were extracted
@@ -58,6 +58,9 @@ python %(program)s -o <name> OPTIONS <candidates.xml>
     be considered as contrastive corpora. You may choose if you'd like to have 
     one feature per contrastive corpus or a single feature for all the 
     contrastive corpora as in the original formulation of the measure.
+
+The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+
 
 OPTIONS may be:
 
@@ -76,9 +79,7 @@ OPTIONS may be:
     behaviour of this script is to calculate one contrastive score per
     contrastive corpora.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+{common_options}
 """
 supported_measures = [ "csmwe", "simplediff", "simplecsmwe" ]
 corpussize_dict = {}

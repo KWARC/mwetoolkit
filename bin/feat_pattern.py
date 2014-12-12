@@ -49,11 +49,14 @@ from libs import filetype
      
 usage_string = """Usage: 
     
-python %(program)s <candidates.xml>
+python {program} <candidates.xml>
 
-%(common_options)s
+The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 
-    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
+
+OPTIONS:
+
+{common_options}
 """     
 all_patterns = {}
 
@@ -79,7 +82,7 @@ class RecovererHandler(filetype.InputHandler):
 class FeatGeneratorHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if not self.chain:
-            self.chain = self.make_printer(info, None)
+            self.chain = self.make_printer(info, "XML")
         self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}) :

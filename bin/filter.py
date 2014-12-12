@@ -51,9 +51,23 @@ from libs import filetype
      
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <candidates.xml>
+python {program} [OPTIONS] <candidates.xml>
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
+
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[ALL]}
+
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[ALL]}
 
 -p <patterns.xml> OR --patterns <patterns.xml>
     The patterns to keep in the file, valid XML (mwetoolkit-dict.dtd)
@@ -88,9 +102,7 @@ OPTIONS may be:
     the same time, but the maximum cannot be inferior to the minimum, e.g. 
     -a 10 -i 11 will return an empty list.    
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
+{common_options}
 """
 reverse = False
 thresh_source = None
@@ -114,12 +126,6 @@ class FilterHandler(filetype.ChainedInputHandler):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
         self.chain.before_file(fileobj, info)
-
-    def handle_meta(self, meta_obj, info={}) :
-        """Simply prints the meta header to the output without modifications.
-        @param meta The `Meta` header that is being read from the XML file.        
-        """   
-        self.chain.handle_meta(meta_obj)
 
 
     def handle_entity(self, entity, info={}) :

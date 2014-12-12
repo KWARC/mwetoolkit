@@ -47,7 +47,10 @@ from libs import filetype
 # GLOBALS     
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <candidates.xml>
+python {program} OPTIONS <candidates.xml>
+
+The <candidates.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+
 
 OPTIONS may be:
 
@@ -58,9 +61,7 @@ OPTIONS may be:
     Outputs the corpus in lemma/pos format. Replaces slashes by "@SLASH@". 
     Default false.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+{common_options}
 """   
 surface_instead_lemmas = False  
 lemmapos = False

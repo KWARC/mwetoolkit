@@ -51,7 +51,10 @@ from libs import filetype
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <candidates.xml>
+python {program} OPTIONS <candidates.xml>
+
+The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd). 
+
 
 OPTIONS may be:    
 
@@ -59,9 +62,7 @@ OPTIONS may be:
     Limits the histogram to the first <limit> most frequent lines. This avoids
     printing out the long tail. It must be a positive integer.
 
-%(common_options)s
-
-    The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd). 
+{common_options}
 """
 hist = {}
 entity_counter = 0

@@ -72,7 +72,10 @@ frequency_dict     = []
 
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] [FILE]
+python {program} [OPTIONS] <candidates.csv>
+
+The <candidates> input file must be in the "CSV" filetype.
+            
 
 OPTIONS:
     -F <separator character>
@@ -83,12 +86,7 @@ OPTIONS:
         Enables the option to assign the words in a ngram to the
         surface    item. The default is to assign it to the lemma item.
 
-%(common_options)s
-            
-FILE:
-    <filename>
-        The text file to be processed.
-            
+{common_options}
 """
 
 ################################################################################
