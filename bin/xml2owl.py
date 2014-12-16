@@ -39,7 +39,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from libs.util import read_options, treat_options_simplest
-from libs.base.__common import XML_HEADER, XML_FOOTER
+from libs.base.__common import WILDCARD
 from libs import filetype
 from libs.filetype import ft_xml
 
@@ -84,8 +84,12 @@ OWL_FOOTER = ft_xml.XML_FOOTER % { "category" : "rdf:RDF" }
 class OwlInfo(filetype.common.FiletypeInfo):
     description = "OWL filetype format"
     filetype_ext = "OWL"
-
-    escape_pairs = ft_xml.INFO.escape_pairs + []
+    # The comment below was misteriously found in the original xml2owl script
+    # We're still wondering what it means CR 2014-12-16
+    # Special symbols can break the ontology systems, better avoid them
+    escape_pairs = ft_xml.INFO.escape_pairs + [ ("$", "${dollar}"),
+                   ("&amp;","${amp}"), ("&quot;","${quot}"), ("&lt;","${lt}"),
+                   ("&gt;","${gt}") ]
 
     def operations(self):
         return filetype.common.FiletypeOperations(None, None, OwlPrinter)
@@ -109,19 +113,14 @@ class OwlPrinter(ft_xml.XMLPrinter):
         """For each `Candidate`, print the candidate as if it was a class in the
         artificial ontology.
         
-        @param candidate The `Entry` that is being read from the XML file.
-        """
-        global surface_instead_lemmas
+        @param candidate The `Entry` that is being read from the XML file.        """
+
         owl_cand = ["<owl:Class rdf:about=\"#"]
         for word in entry :
-            form = word.surface if surface_instead_lemmas else word.lemma
+            form = word.surface if word.lemma == WILDCARD else word.lemma
             form = self.escape(form)
-            # Special symbols can break the ontology systems, better avoid them
-            # TODO: check!
-            form = form.replace( "&quot;", "QUOTSYMBOL" )
-            form = form.replace( "&amp;", "ANDSYMBOL" )
-            form = form.replace( "&gt;", "GTSYMBOL" )
-            form = form.replace( "&lt;", "LTSYMBOL" )
+
+
             owl_cand.append(form)
         owl_cand = "_".join(owl_cand) + "\"/>\n"
         self.add_string(owl_cand)

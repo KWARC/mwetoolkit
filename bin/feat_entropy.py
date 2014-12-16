@@ -148,9 +148,7 @@ class FeatGeneratorHandler(filetype.ChainedInputHandler):
 
     def handle_candidate(self, candidate, info={}) :
         """
-            For each candidate, generates two new features that correspond to the
-            POS pattern and to the number of words in the candidate. Then, prints
-            the new candidate with the two extra features.
+            XXX
             
             @param candidate The `Candidate` that is being read from the XML file.
         """

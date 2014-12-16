@@ -65,13 +65,15 @@ OPTIONS may be:
 {common_options}
 """
 hist = {}
-entity_counter = 0
 limit = None
 
 
 ################################################################################         
 
 class HistogramGeneratorHandler(filetype.InputHandler):
+
+    def __init__(self):
+        self.entity_counter = 0
 
     def handle_candidate(self, candidate, info={}):
         """
@@ -80,15 +82,12 @@ class HistogramGeneratorHandler(filetype.InputHandler):
             @param candidate The current candidate being read from the xml file
         """
         global hist
-        global entity_counter
-        if entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )    
         for f in candidate.freqs :
             # Build one histogram per frequency source
             one_freq_hist = hist.get( f.name, {} )
             one_freq_hist[ f.value ] = one_freq_hist.get( f.value, 0 ) + 1
             hist[ f.name ] = one_freq_hist
-        entity_counter += 1
+        self.entity_counter += 1
 
 
     def after_file(self, fileobj, info={}):
@@ -98,17 +97,16 @@ class HistogramGeneratorHandler(filetype.InputHandler):
         """
         global hist
         global limit
-        global entity_counter
         for fname in hist.keys() :
-            print("FREQUENCY SOURCE : %(source)s" % { "source" : fname })
-            print("Number of candidates : %(n)d" % { "n" : entity_counter })
+            print("FREQUENCY SOURCE : {source}".format(source=fname))
+            print("Number of candidates : {n}".format(n=self.entity_counter))
             print()
             h = hist[ fname ]
             entropy = 0
             #entropy_delta = 0
             counter = 0
             for f in sorted( h.keys() ) :        
-                p = float( h[ f ] ) / entity_counter
+                p = float( h[ f ] ) / self.entity_counter
                 entropy -= p * math.log( p, 2 )
                 #entropy_delta -= p_delta * math.log( p_delta, 2 )
                 counter = counter + 1
@@ -117,7 +115,7 @@ class HistogramGeneratorHandler(filetype.InputHandler):
 
             print("Entropy : %(e)f" % { "e" : entropy })
         hist = {}
-        entity_counter = 0
+        self.entity_counter = 0
 
 
 ################################################################################           

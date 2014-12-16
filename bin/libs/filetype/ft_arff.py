@@ -68,7 +68,7 @@ class ArffPrinter(common.AbstractPrinter):
     filetype_info = INFO
     valid_categories = ["corpus"]
 
-    def __init__(self, category, relation_name="UNKNOWN_RELATION", **kwargs):
+    def __init__(self, category, relation_name="MWETOOLKIT_RELATION", **kwargs):
         super(ArffPrinter, self).__init__(category, **kwargs)
         self.relation_name = relation_name
         self.all_feats = []

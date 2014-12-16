@@ -143,7 +143,6 @@ surface_instead_lemmas = False
 print_cand_freq = False
 longest_pattern = 0
 shortest_pattern = float("inf")
-sentence_counter = 0
 print_source = False
 
 input_filetype_ext = None
@@ -166,9 +165,7 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
         @param sentence A `Sentence` that is being read from the XML file.    
         """
         global patterns, temp_file, ignore_pos, surface_instead_lemmas, \
-               longest_pattern, shortest_pattern, sentence_counter
-        if sentence_counter % 100 == 0 :
-            verbose( "Processing sentence number %(n)d" % { "n":sentence_counter } )
+               longest_pattern, shortest_pattern
 
         already_matched = set()
 
@@ -199,8 +196,6 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
                 source_sent_id = str( sentence.id_number ) + ":" + wordnums_string
                 surfaces_dict[ internal_key ].append( source_sent_id )
                 temp_file[ key ] = ( surfaces_dict, total_freq + 1 )
-
-        sentence_counter += 1
 
 
     def after_file(self, fileobj, info={}):

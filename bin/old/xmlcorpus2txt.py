@@ -67,19 +67,14 @@ attributes = None
 ################################################################################
 
 class TxtGeneratorHandler(filetype.InputHandler):
-    def __init__(self):
-        self.entity_counter = 0
 
     def handle_sentence(self, sentence, info={}):
         """TODO: doc"""
         global attributes
-        if self.entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":self.entity_counter } )
         for word in sentence:
             vals = [getattr(word, attr) for attr in attributes]
             print(ATTRIBUTE_SEPARATOR.join(vals),end="")
         print("")
-        self.entity_counter += 1
 
 
 ################################################################################

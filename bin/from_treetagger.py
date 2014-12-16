@@ -87,7 +87,7 @@ output_filetype_ext = "XML"
 
 class TreeTaggerInfo(filetype.common.FiletypeInfo):
     r"""FiletypeInfo subclass for TreeTagger format."""
-    description = "?????????????????"
+    description = "3-field tab-separated format output by TreeTagger"
     filetype_ext = "TreeTagger"
   
     comment_prefix = "#"

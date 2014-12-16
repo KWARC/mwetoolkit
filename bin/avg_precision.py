@@ -6,7 +6,7 @@
 # Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 # 
-# map.py is part of mwetoolkit
+# avg_precision.py is part of mwetoolkit
 # 
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -87,7 +87,6 @@ feat_list_ok = False
 feat_to_order = {}
 ascending = False
 print_precs = False
-entity_counter = 0
 input_filetype_ext = None
 
 
@@ -128,9 +127,7 @@ class StatsCollectorHandler(filetype.InputHandler):
 
         @param candidate The `Candidate` that is being read from the XML file.
         """
-        global feat_list, all_feats, feat_list_ok, feat_to_order, entity_counter
-        if entity_counter % 100 == 0 :
-            verbose( "Processing candidate number %(n)d" % { "n":entity_counter } )
+        global feat_list, all_feats, feat_list_ok, feat_to_order
         # First, verifies if all the features defined as sorting keys are real
         # features, by matching them against the meta-features of the header. This
         # is only performed once, before the first candidate is processed
@@ -152,7 +149,6 @@ class StatsCollectorHandler(filetype.InputHandler):
                    tp_value != UNKNOWN_FEAT_VALUE :
                     tuple = ( float( feat_value ), tp_value == "True" )
                     feat_to_order[ tp_class.name ][ feat_name ].append( tuple )
-        entity_counter = entity_counter + 1
 
 
 ################################################################################

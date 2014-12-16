@@ -124,7 +124,7 @@ class SelectorPrinterHandler(filetype.ChainedInputHandler):
 
         sentence.word_list = [word for word in sentence.word_list
                 if not (word.lemma == word.surface == WILDCARD)]
-        super(SelectorPrinterHandler, self).handle_sentence(sentence, info)
+        self.chain.handle_sentence(sentence, info)
 
 
 def treat_options(opts, arg, n_arg, usage_string):
@@ -172,5 +172,5 @@ longopts = ["from=", "to=", "keep-empty-words", "word-lemmas",
         "word-lemmas-matching=", "word-surfaces-matching=",
         "word-pos-matching=", "word-syn-matching="]
 args = read_options("", longopts, treat_options, -1, usage_string)
-printer = SelectorPrinterHandler(output_filetype_ext)
+printer = SelectorPrinterHandler()
 filetype.parse(args, printer, input_filetype_ext)

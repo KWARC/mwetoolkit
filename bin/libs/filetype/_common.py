@@ -308,20 +308,21 @@ class AbstractTxtParser(AbstractParser):
 
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
-                cp = bytes(self.filetype_info.comment_prefix)
+                line = line.decode(self.encoding, self.encoding_errors)
+                cp = self.filetype_info.comment_prefix
 
                 if line.startswith(cp):
                     comment = line[len(cp):]
                     self._parse_comment(handler, comment, {})
                     just_saw_a_comment = True
 
-                elif line == b"" and just_saw_a_comment:
+                elif line == "" and just_saw_a_comment:
                     self._parse_comment(handler, "", {})
                     just_saw_a_comment = False
 
                 else:
                     self._parse_line(
-                            line.decode(self.encoding, self.encoding_errors),
+                            line,
                             handler, {"fileobj": fileobj, "linenum": i+1})
                     just_saw_a_comment = False
 

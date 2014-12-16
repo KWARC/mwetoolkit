@@ -54,7 +54,11 @@ from libs import filetype
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <files.xml>
+python {program} OPTIONS <candidates>
+
+The <candidates> input file must be in one of the filetype
+formats accepted by the `--from` switch.
+
 
 OPTIONS may be:
 
@@ -71,9 +75,17 @@ OPTIONS may be:
     dashes. For example, "gel assay" and "gel-assay" will be uniqued into a 
     single candidate.
 
-%(common_options)s
+--from <input-filetype-ext>
+    Force conversion from given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[candidates]}
 
-    The <files.xml> file(s) must be valid XML (dtd/mwetoolkit-*.dtd).
+--to <output-filetype-ext>
+    Convert input to given filetype extension.
+    (By default, keeps input in original format):
+    {descriptions.output[candidates]}
+
+{common_options}
 """
 ignore_pos = False
 surface_instead_lemmas = False

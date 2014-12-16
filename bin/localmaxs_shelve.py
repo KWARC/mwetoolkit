@@ -46,7 +46,7 @@ import os
 import shelve
 import tempfile
 
-from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER, WORD_SEPARATOR
+from libs.base.__common import WILDCARD, WORD_SEPARATOR
 from libs.base.feature import Feature
 from libs.base.meta import Meta
 from libs.base.meta_feat import MetaFeat
@@ -98,7 +98,7 @@ OPTIONS may be:
 -f <freq> OR --freq <freq>
     Output only candidates with a frequency of at least <freq>. Default 2.
 
--h OR --shelve
+-S OR --shelve
     Use a shelve (disk storage) rather than an in-memory data structure for
     storing candidate counts. Uses less memory, but is slower.
 
@@ -300,7 +300,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 glue = scp_glue
             else:
                 error("Unknown glue function '%s'" % a)
-        elif o in ("-h", "--shelve"):
+        elif o in ("-S", "--shelve"):
             use_shelve = True
         elif o == "--from":
             input_filetype_ext = a
@@ -343,5 +343,5 @@ min_frequency = 2
 use_shelve = False
 
 longopts = ["from=", "surface", "glue=", "ngram=", "freq=", "shelve"]
-args = read_options("sG:n:f:ih", longopts, treat_options, 1, usage_string)
+args = read_options("sG:n:f:iS", longopts, treat_options, 1, usage_string)
 main(args)

@@ -75,7 +75,6 @@ lemmapos = False
 xml_meta = None
 freq_source = None
 corpus_size_string = None
-entity_counter = 0
 
 
 ################################################################################           
@@ -137,11 +136,7 @@ class UCSPrinter(filetype.common.AbstractPrinter):
         """
         global surface_instead_lemmas
         global lemmapos
-        global entity_counter
-        
-        if entity_counter % 100 == 0 :
-            verbose( "Processing ngram number %(n)d" % { "n":entity_counter } )
-        entity_counter = entity_counter + 1
+
         string_cand = ""
         if entity.id_number >= 0 :
             string_cand += unicode( entity.id_number )
@@ -195,18 +190,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             freq_source = a
 
 ################################################################################
-
-def reset_entity_counter( filename ) :
-    """
-        After processing each file, simply reset the entity_counter to zero.
-        
-        @param filename Dummy parameter to respect the format of postprocessing
-        function
-    """
-    global entity_counter
-    entity_counter = 0
-
-################################################################################     
 # MAIN SCRIPT
 
 longopts = [ "surface", "lemmapos", "freq-source" ]
