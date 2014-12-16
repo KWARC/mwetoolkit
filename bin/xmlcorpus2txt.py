@@ -45,7 +45,7 @@ import sys
 
 from libs.base.__common import ATTRIBUTE_SEPARATOR
 from libs.base.word import WORD_ATTRIBUTES
-from libs.util import usage, read_options, treat_options_simplest, verbose, parse_xml, error
+from libs.util import usage, read_options, treat_options_simplest, verbose, error
 from libs import filetype
 
 

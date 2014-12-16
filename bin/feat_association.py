@@ -49,7 +49,7 @@ import math
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
 from libs.util import read_options, treat_options_simplest, \
-                 verbose, parse_xml, warn, error
+                 verbose, warn, error
 from libs import filetype
 
 

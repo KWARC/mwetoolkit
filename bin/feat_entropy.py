@@ -41,7 +41,7 @@ import operator
 
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
-from libs.util import read_options, treat_options_simplest, parse_xml
+from libs.util import read_options, treat_options_simplest
 from libs import filetype
 
 

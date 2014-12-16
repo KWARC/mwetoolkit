@@ -42,7 +42,7 @@ from __future__ import absolute_import
 import tempfile
 import shelve
 
-from libs.util import read_options, treat_options_simplest, parse_xml, \
+from libs.util import read_options, treat_options_simplest, \
     error, warn
 from libs.base.__common import TEMP_PREFIX, TEMP_FOLDER
 from libs import filetype

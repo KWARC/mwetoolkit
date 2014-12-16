@@ -39,7 +39,7 @@ from __future__ import absolute_import
 
 from libs.base.feature import Feature
 from libs.base.meta_feat import MetaFeat
-from libs.util import read_options, treat_options_simplest, verbose, parse_xml
+from libs.util import read_options, treat_options_simplest, verbose
 from libs.base.__common import SEPARATOR
 from libs import filetype
 

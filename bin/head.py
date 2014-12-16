@@ -39,7 +39,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from libs.util import read_options, treat_options_simplest, \
-        verbose, parse_xml, error
+        verbose, error
 from libs import filetype
 
 ################################################################################

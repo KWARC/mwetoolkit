@@ -45,7 +45,7 @@ from libs.base.entry import Entry
 from libs.base.sentence import Sentence
 from libs.base.candidate import Candidate
 from libs.base.__common import WILDCARD
-from libs.util import read_options, treat_options_simplest, verbose, parse_xml
+from libs.util import read_options, treat_options_simplest, verbose
 from libs import filetype
 
 
