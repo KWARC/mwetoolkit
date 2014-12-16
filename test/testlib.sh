@@ -10,7 +10,7 @@ t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
 # Path to mwetoolkit binary dir
 t_BIN="$t_TOOLKIT/bin"
 # Path to shared data
-t_SHARED="$t_TOOLKIT/test/input-corpora"
+t_INPUT="$t_TOOLKIT/test/inputs"
 # Limit number of tests to run
 t_N_TESTS_LIMIT=999999
 

@@ -14,14 +14,13 @@ test "$#" -ne 0  && usage_exit
 
 ########################################
 
-
 # test_parser <filetype> <original-file> <xml-file>
 #   Converts <original-file> to XML and compare to <xml-file>.
 test_parser() {
     local filetype="$1"; shift
-    local file_path_original="$1"; shift
-    local file_path_xml_ref="$1"; shift
-    local file_path_output="./output/$(basename "$file_path_original").xml"
+    local file_path_original="$HERE/$1"; shift
+    local file_path_xml_ref="$HERE/$1"; shift
+    local file_path_output="$HERE/output/$(basename "$file_path_original").xml"
 
     t_run "$t_BIN/convert.py --from=$filetype --to=XML $file_path_original >$file_path_output"
     t_compare "$file_path_output" "$file_path_xml_ref"
@@ -31,9 +30,9 @@ test_parser() {
 #   Converts <xml-file> to <filetype> and compare to <original-file>.
 test_printer() {
     local filetype="$1"; shift
-    local file_path_original="$1"; shift
-    local file_path_xml_ref="$1"; shift
-    local file_path_output="./output/$(basename "$file_path_original")"
+    local file_path_original="$HERE/$1"; shift
+    local file_path_xml_ref="$HERE/$1"; shift
+    local file_path_output="$HERE/output/$(basename "$file_path_original")"
 
     t_run "$t_BIN/convert.py --to=$filetype --from=XML $file_path_xml_ref >$file_path_output"
     t_compare "$file_path_output" "$file_path_original"
@@ -61,7 +60,7 @@ test_parser  PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus
 test_printer PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
 
 t_testname "Check pWaC format"
-test_parser  pWaC "sample/corpus.pukwac" "xml-ref/corpus.pukwac.xml"
+test_parser  pWaC "sample/corpus.pwac" "xml-ref/corpus.pukwac.xml"
 #test_printer pWaC "sample/corpus.pukwac" "xml-ref/corpus.pukwac.xml"
 
 t_testname "Check PlainCandidates format"

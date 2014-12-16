@@ -24,11 +24,11 @@ annotate() {
     local txt_out="./output/${name_output}.txt"
     local txt_ref="./reference/${name_output}.txt"
 
-    t_run "$t_BIN/annotate_mwe.py --debug $args \
--c $name_input/candidates.xml $name_input/corpus.xml >$xml_out"
+    t_run "$t_BIN/annotate_mwe.py -v --debug $args \
+-c ${HERE}/$name_input/candidates.xml ${HERE}/$name_input/corpus.xml >$xml_out"
 
-    t_run "$t_BIN/annotate_mwe.py --debug $args --to=MosesText \
--c $name_input/candidates.xml $name_input/corpus.xml >$txt_out"
+    t_run "$t_BIN/annotate_mwe.py -v --debug $args --to=MosesText \
+-c ${HERE}/$name_input/candidates.xml ${HERE}/$name_input/corpus.xml >$txt_out"
 
     t_compare "$txt_ref" "$txt_out"
 }
