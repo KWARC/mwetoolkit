@@ -84,9 +84,10 @@ OWL_FOOTER = ft_xml.XML_FOOTER % { "category" : "rdf:RDF" }
 class OwlInfo(filetype.common.FiletypeInfo):
     description = "OWL filetype format"
     filetype_ext = "OWL"
-    # The comment below was misteriously found in the original xml2owl script
+
+    # The comment below was mysteriously found in the original xml2owl script
     # We're still wondering what it means CR 2014-12-16
-    # Special symbols can break the ontology systems, better avoid them
+    # "Special symbols can break the ontology systems, better avoid them"
     escape_pairs = ft_xml.INFO.escape_pairs + [ ("$", "${dollar}"),
                    ("&amp;","${amp}"), ("&quot;","${quot}"), ("&lt;","${lt}"),
                    ("&gt;","${gt}") ]
