@@ -301,12 +301,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         error("No candidates file given!")
     if detector_class == SourceDetector and n_gaps is not None:
         error('Bad arguments: method "Source" with "--gaps"')
-
-    p = filetype.parse(candidates_fnames,
-            CandidatesHandler(), filetype_candidates_ext)
+    c = CandidatesHandler()
+    filetype.parse(candidates_fnames,
+            c, filetype_candidates_ext)
 
     global detector
-    detector = detector_class(p.info, n_gaps)
+    detector = detector_class(c.info, n_gaps)
 
         
 ################################################################################  
