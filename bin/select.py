@@ -6,7 +6,7 @@
 # Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
-# convert.py is part of mwetoolkit
+# select.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
