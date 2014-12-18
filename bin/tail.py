@@ -91,7 +91,7 @@ class TailPrinterHandler(filetype.ChainedInputHandler):
             self.chain = self.make_printer(info, output_filetype_ext)
         self.chain.before_file(fileobj, info)
 
-    def handle_entity(self, entity, info={}):
+    def _fallback_entity(self, entity, info={}):
         """For each entity in the corpus, puts it in a circular buffer. This is
         necessary because we do not know the total number of lines, so we always
         keep the last n lines in the global buffer.

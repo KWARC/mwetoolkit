@@ -107,7 +107,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
         self.chain.before_file(fileobj, info)
 
 
-    def handle_entity(self, entity, info={}) :
+    def _fallback_entity(self, entity, info={}) :
         """Add each entity to the entity buffer, after pre-processing it. This
         buffer is used to keep track of repeated items, so that only a copy
         of an item is saved.
@@ -194,7 +194,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
                 pass
             elif isinstance( entity, Sentence ) :
                 pass          
-            self.chain.handle_entity(entity, info)
+            self.chain.handle(entity, info)
         self.chain.after_file(fileobj, info)
 
     

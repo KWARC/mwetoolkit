@@ -404,38 +404,34 @@ class InputHandler(object):
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
         info["kind"] = "sentence"
-        return self.handle_entity(sentence, info)
+        return self._fallback_entity(sentence, info)
 
     def handle_candidate(self, candidate, info={}):
         r"""Called to treat a Candidate object."""
         info["kind"] = "candidate"
-        return self.handle_entity(candidate, info)
+        return self._fallback_entity(candidate, info)
 
     def handle_pattern(self, pattern, info={}):
         r"""Called to treat a ParsedPattern object."""
         info["kind"] = "pattern"
-        return self.handle_entity(pattern, info)
-
-    def handle_entity(self, entity, info={}):
-        r"""Called to treat a generic entity (sentence/candidate/pattern)."""
-        self.fallback(entity, info)
+        return self._fallback_entity(pattern, info)
 
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
         pass  # By default, we just silently ignore Meta instances
         info["kind"] = "meta"   # XXX 2014-11-27 experimental (checking if too
                                 # many warnings would be generated...)
-        return self.fallback(meta_obj, info)
+        return self._fallback(meta_obj, info)
 
     def handle_comment(self, comment, info={}):
         r"""Called when parsing a comment."""
         info.setdefault("kind", "comment")
-        return self.fallback(comment, info)
+        return self._fallback(comment, info)
 
     def handle_directive(self, directive, info={}):
         r"""Called when parsing a directive."""
         info["kind"] = "directive"
-        return self.fallback(directive, info)
+        return self._fallback(directive, info)
 
 
     def handle(self, obj, info):
@@ -444,7 +440,12 @@ class InputHandler(object):
         kind = info["kind"]
         return getattr(self, "handle_"+kind)(obj, info=info)
 
-    def fallback(self, obj, info):
+    def _fallback_entity(self, entity, info={}):
+        r"""Called to treat a generic entity (sentence/candidate/pattern).
+        Should not be called explicitly from outside."""
+        self._fallback(entity, info)
+
+    def _fallback(self, obj, info):
         r"""Called to handle anything that hasn't been handled explicitly."""
         util.warn("Ignoring " + info["kind"])
 
@@ -479,7 +480,7 @@ class ChainedInputHandler(InputHandler):
         self.chain.after_file(fileobj, info)
         self.flush()
 
-    def fallback(self, entity, info={}):
+    def _fallback(self, entity, info={}):
         self.chain.handle(entity, info)
 
 

@@ -73,7 +73,7 @@ class CounterHandler(filetype.InputHandler):
     def before_file(self, fileobj, info={}):
         self.entity_counter = self.word_counter = self.char_counter = 0
 
-    def handle_entity(self, entity, info={}) :
+    def _fallback_entity(self, entity, info={}) :
         """For each candidate/sentence, counts the number of occurrences, the 
         number of words and the number of characters (except spaces and XML).
         @param entity A subclass of `Ngram` that is being read from the XML.

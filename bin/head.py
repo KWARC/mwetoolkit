@@ -90,7 +90,7 @@ class HeadPrinterHandler(filetype.ChainedInputHandler):
         self.chain.before_file(fileobj, info)
         self.entity_counter = 0
 
-    def handle_entity(self, entity, info={}):
+    def _fallback_entity(self, entity, info={}):
         """For each entity in the file, prints it if the limit is still not
         achieved. No buffering as in tail, this is not necessary here.
 

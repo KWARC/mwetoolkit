@@ -128,7 +128,7 @@ class FilterHandler(filetype.ChainedInputHandler):
         self.chain.before_file(fileobj, info)
 
 
-    def handle_entity(self, entity, info={}) :
+    def _fallback_entity(self, entity, info={}) :
         """For each candidate, verifies whether its number of occurrences in a 
         given source corpus is superior or equal to the threshold. If no source
         corpus was provided (thresh_source is None), then all the corpora will

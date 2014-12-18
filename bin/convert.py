@@ -79,9 +79,6 @@ class ConverterHandler(filetype.ChainedInputHandler):
             self.chain = self.make_printer(info, output_filetype_ext)
         self.chain.before_file(fileobj, info)
 
-    def handle_entity(self):
-        pass
-
 
 def treat_options(opts, arg, n_arg, usage_string):
     """Callback function that handles the command line options of this script.

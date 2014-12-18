@@ -94,7 +94,7 @@ class LoudHandler(ChainedInputHandler):
         self.kind = None
         self.count = 0
 
-    def handle_entity(self, entity, info={}):
+    def _fallback_entity(self, entity, info={}):
         entity_kind = info["kind"]
         if self.kind is None:
             self.kind = entity_kind
