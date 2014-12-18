@@ -78,6 +78,20 @@ class Sentence( Ngram ) :
         self.freqs = None
         self.mweoccurs = []
         
+
+################################################################################
+
+    def xwe_indexes(self):
+        r"""Yields lists of indexes, one per SingleWE/MultiWE."""
+        ret = [[i] for i in xrange(len(self.word_list))]
+        for mweo in self.mweoccurs:
+            first = min(mweo.indexes)
+            for i in mweo.indexes:
+                if i != first:
+                    ret[first].extend(ret[i])
+                    del ret[i][:]
+        return [x for x in ret if x]
+        
 ################################################################################
 
     def add_mwe_tags( self, tokens ) :

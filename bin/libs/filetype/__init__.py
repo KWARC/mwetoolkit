@@ -495,6 +495,15 @@ class ConllChecker(common.AbstractChecker):
         return not strict
 
 
+def getitem(a_list, index, default=None):
+    r"""Obvious implementation for a function
+    that should already exist."""
+    try:
+        return a_list[index]
+    except IndexError:
+        return default
+
+
 class ConllParser(common.AbstractTxtParser):
     r"""Instances of this class parse the CONLL-X format,
     calling the `handler` for each object that is parsed.
@@ -511,20 +520,32 @@ class ConllParser(common.AbstractTxtParser):
     def _parse_line(self, line, handler, info={}):
         data = line.split("\t")
         if len(data) <= 1: return
-        data = [(WILDCARD if d == "_" else d) for d in data]
+        data = [d.split(" ") for d in data]  # split MWEs
+        for mwe_i in xrange(len(data[0])):
+            word_data = [getitem(d, mwe_i, "_") for d in data]
+            word_data = [(WILDCARD if d == ["_"] else d) for d in word_data]
+            self._parse_word(word_data, handler, info)
+        if len(data[0]) != 1:
+            from ..base.mweoccur import MWEOccurrence
+            mwe_words = []  # XXX do we use surface or lemma?
+            c = Candidate(info["linenum"], [])
+            indexes = [int(x)-1 for x in data[0]]
+            mweo = MWEOccurrence(self.partial_obj, c, indexes)
+            self.partial_obj.mweoccurs.append(mweo)
 
-        if len(data) < len(self.filetype_info.entries):
+    def _parse_word(self, word_data, handler, info={}):
+        if len(word_data) < len(self.filetype_info.entries):
             util.warn("Ignoring line {} (only {} entries)" \
-                    .format(info["linenum"], len(data)))
+                    .format(info["linenum"], len(word_data)))
             return
 
-        if len(data) > len(self.filetype_info.entries):
+        if len(word_data) > len(self.filetype_info.entries):
             util.warn("Ignoring extra entries in line {}" \
                     .format(info["linenum"]))
 
         def get(attribute):
             try:
-                return self.unescape(data[self.name2index[attribute]])
+                return self.unescape(word_data[self.name2index[attribute]])
             except KeyError:
                 return WILDCARD
 
@@ -556,29 +577,36 @@ class ConllParser(common.AbstractTxtParser):
 
 class ConllPrinter(common.AbstractPrinter):
     valid_categories = ["corpus"]
-    def __init__(self, *args, **kwargs):
-        super(ConllPrinter, self).__init__(*args, **kwargs)
+    def __init__(self, category, **kwargs):
+        super(ConllPrinter, self).__init__(category, **kwargs)
         self.count_sentences = 0
 
 
     def handle_sentence(self, sentence, info={}):
         if self.count_sentences != 0:
             self.add_string("\n")
+        self.count_sentences += 1
 
-        for i, word in enumerate(sentence):
-            data = {
-                "ID": unicode(i + 1),
-                "FORM": word.surface,
-                "LEMMA": word.lemma,
-                "CPOSTAG": word.pos,
-                "POSTAG": word.pos,
-                "DEPREL": word.syn.split(":")[0],
-                "HEAD": word.syn.split(":")[1] if ":" in word.syn else "_",
-            }
-            line = "\t".join(self.handle_wildcard(data.get(entry_name, "_")) \
-                    for entry_name in self.filetype_info.entries)
+        for indexes in sentence.xwe_indexes():
+            entries = []  # [[entries for word 1], [entries for 2], ...]
+            for i in indexes:
+                word = sentence[i]
+                data = {
+                    "ID": unicode(i + 1),
+                    "FORM": word.surface,
+                    "LEMMA": word.lemma,
+                    "CPOSTAG": word.pos,
+                    "POSTAG": word.pos,
+                    "DEPREL": word.syn.split(":")[0],
+                    "HEAD": word.syn.split(":")[1] if ":" in word.syn else "_",
+                }
+                entry = [self.handle_wildcard(data.get(entry_name, "_")) \
+                        for entry_name in self.filetype_info.entries]
+                entries.append(entry)
+
+            line = zip(*entries)  # [[entries A for all], [entries B], ...]
+            line = "\t".join(" ".join(entries_n) for entries_n in line)
             self.add_string(line, "\n")
-            self.count_sentences += 1
 
 
     def handle_wildcard(self, argument):
@@ -606,7 +634,7 @@ class PWaCInfo(common.FiletypeInfo):
                     ("#", "${hash}"), ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
-        return common.FiletypeOperations(PWaCChecker, PWaCParser, None)
+        return common.FiletypeOperations(PWaCChecker, PWaCParser, PWaCPrinter)
 
 
 class PWaCChecker(common.AbstractChecker):
@@ -632,6 +660,19 @@ class PWaCParser(ConllParser):
                 self.s_id += 1
         else:
             super(PWaCParser, self)._parse_line(line, handler, info)
+
+
+class PWaCPrinter(ConllPrinter):
+    def before_file(self, fileobj, info={}):
+        self.add_string('<text id="mwetoolkit">\n')
+
+    def after_file(self, fileobj, info={}):
+        self.add_string('</text>\n')
+
+    def handle_sentence(self, sentence, info={}):
+        self.add_string('<s>\n')
+        super(PWaCPrinter, self).handle_sentence(sentence, info)
+        self.add_string('</s>\n')
 
 
 ##############################
