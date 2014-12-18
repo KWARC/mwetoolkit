@@ -110,6 +110,9 @@ class XMLPrinter(common.AbstractPrinter):
     def handle_comment(self, comment, info={}):
         self.add_string("<!-- ", self.escape(comment), " -->\n")
 
+    def handle_pattern(self, pattern, info={}):
+        self.add_string(ElementTree.tostring(pattern.node))
+
     def _fallback(self, entity, info={}):
         self.add_string(entity.to_xml(), "\n")
 

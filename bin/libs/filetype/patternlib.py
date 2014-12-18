@@ -131,7 +131,9 @@ class ParsedPattern(object):
         self.compiled_pattern = re.compile(self.pattern)
 
     def _do_parse(self, node):
-        if node.tag == "pat":
+        if node.tag == ElementTree.Comment:
+            pass  # We ignore it :p
+        elif node.tag == "pat":
             self._parse_pat(node)
         elif node.tag == "either":
             self._parse_either(node)
