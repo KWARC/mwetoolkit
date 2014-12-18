@@ -521,58 +521,62 @@ class ConllParser(common.AbstractTxtParser):
         data = line.split("\t")
         if len(data) <= 1: return
         data = [d.split(" ") for d in data]  # split MWEs
+        indexes = []
         for mwe_i in xrange(len(data[0])):
             word_data = [getitem(d, mwe_i, "_") for d in data]
-            word_data = [(WILDCARD if d == ["_"] else d) for d in word_data]
-            self._parse_word(word_data, handler, info)
+            self._word_data = [(WILDCARD if d == ["_"] else d) for d in word_data]
+            indexes.append(int(self.get("ID", len(self.partial_obj.word_list))))
+            if len(self._word_data) < len(self.filetype_info.entries):
+                util.warn("Ignoring line {} (only {} entries)" \
+                        .format(info["linenum"], len(self._word_data)))
+            else:
+                word = self._parse_word(handler, info)
+                self.partial_obj.append(word)
+
         if len(data[0]) != 1:
             from ..base.mweoccur import MWEOccurrence
             mwe_words = []  # XXX do we use surface or lemma?
-            c = Candidate(info["linenum"], [])
-            indexes = [int(x)-1 for x in data[0]]
+            c = Candidate(info["linenum"], mwe_words)
             mweo = MWEOccurrence(self.partial_obj, c, indexes)
             self.partial_obj.mweoccurs.append(mweo)
 
-    def _parse_word(self, word_data, handler, info={}):
-        if len(word_data) < len(self.filetype_info.entries):
-            util.warn("Ignoring line {} (only {} entries)" \
-                    .format(info["linenum"], len(word_data)))
-            return
+    def get(self, attribute, default=WILDCARD):
+        r"""Return CONLL data with given attribute
+        (ID, FORM, LEMMA...) name."""
+        try:
+            return self.unescape(self._word_data[
+                    self.name2index[attribute]])
+        except KeyError:
+            return default
 
-        if len(word_data) > len(self.filetype_info.entries):
+    def _parse_word(self, handler, info={}):
+        if len(self._word_data) > len(self.filetype_info.entries):
             util.warn("Ignoring extra entries in line {}" \
                     .format(info["linenum"]))
 
-        def get(attribute):
-            try:
-                return self.unescape(word_data[self.name2index[attribute]])
-            except KeyError:
-                return WILDCARD
-
-        if get("ID") == "1":
+        if self.get("ID") == "1":
             self.new_partial(handler.handle_sentence,
                     Sentence([], self.s_id), info={})
             self.s_id += 1
 
-        surface, lemma = get("FORM"), get("LEMMA")
-        pos, syn = get("CPOSTAG"), get("DEPREL")
+        surface, lemma = self.get("FORM"), self.get("LEMMA")
+        pos, syn = self.get("CPOSTAG"), self.get("DEPREL")
 
-        if get("POSTAG") != get("CPOSTAG"):
-            self.maybe_warn(get("POSTAG"), "POSTAG != CPOSTAG")
-        self.maybe_warn(get("FEATS"), "found FEATS")
-        self.maybe_warn(get("PHEAD"), "found PHEAD")
-        self.maybe_warn(get("PDEPREL"), "found PDEPREL")
+        if self.get("POSTAG") != self.get("CPOSTAG"):
+            self.maybe_warn(self.get("POSTAG"), "POSTAG != CPOSTAG")
+        self.maybe_warn(self.get("FEATS"), "found FEATS")
+        self.maybe_warn(self.get("PHEAD"), "found PHEAD")
+        self.maybe_warn(self.get("PDEPREL"), "found PDEPREL")
 
-        if get("HEAD") != WILDCARD:
-            syn = syn + ":" + unicode(get("HEAD"))
-        objectWord = Word(surface, lemma, pos, syn)
-        self.partial_obj.append(objectWord)
+        if self.get("HEAD") != WILDCARD:
+            syn = syn + ":" + unicode(self.get("HEAD"))
+        return Word(surface, lemma, pos, syn)
 
 
     def maybe_warn(self, entry, entry_name):
         if entry != WILDCARD:
-            util.warn_once("WARNING: unable to handle CONLL " \
-                    "entry: {}.".format(entry_name))
+            util.warn_once("WARNING: unable to handle {} entry: {}." \
+                    .format(self.filetype_info.filetype_ext, entry_name))
 
 
 class ConllPrinter(common.AbstractPrinter):
