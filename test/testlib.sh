@@ -65,14 +65,6 @@ t_run() {
 }
 
 
-# t_xml_to_sorted_txt <xml_in> <txt_out>
-# Convert XML into TXT with sorted sentences.
-t_xml_to_sorted_txt() {
-    local _INPUT="$1"; local _OUTPUT="$2"
-    t_run "python $t_BIN/xml2csv.py $_INPUT | cut -f 2 | tail -n +2 | sort >$_OUTPUT"
-}
-
-
 # t_diff [diff_args...] <text_a> <text_b>
 # Diff between text_a and text_b.
 # Uses wdiff if available.

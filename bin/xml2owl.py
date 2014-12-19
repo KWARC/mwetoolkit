@@ -48,14 +48,15 @@ from libs.filetype import ft_xml
 # GLOBALS     
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <file.xml>
+python {program} [OPTIONS] <file.xml>
 
-    OPTIONS may be:    
+
+OPTIONS may be:    
     
 -s OR --surface
     Counts surface forms instead of lemmas. Default false.
 
-%(common_options)s
+{common_options}
 
     The <file.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 """     
@@ -139,6 +140,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     for ( o, a ) in opts:
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True
+        else:
+            raise Exception("Bad arg: " + o)
 
 
 ################################################################################     

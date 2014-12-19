@@ -51,13 +51,27 @@ from libs.filetype import parse, InputHandler
 
 usage_string = """Usage:
     
-python %(program)s -r <reference.xml> OPTIONS <corpus.xml>
+python {program} -r <reference> OPTIONS <corpus>
 
--r <reference.xml> OR --reference <reference.xml>
-    An XML corpus with annotated MWE occurrences (mwetoolkit-corpus.dtd)
+-r <reference> OR --reference <reference>
+    A gold-standard corpus with annotated MWE occurrences, in one
+    of the filetype formats accepted by the `--reference-from` switch.
+
+The <corpus> input file must be in one of the filetype
+formats accepted by the `--corpus-from` switch.
 
     
 OPTIONS may be:
+
+--corpus-from <input-filetype-ext>
+    Force reading corpus from given file type extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+
+--reference-from <reference-filetype-ext>
+    Force reading gold-standard from given file type extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
 
 -e <evaluator> OR --evaluator <evaluator>
     The MWE evaluation algorithm.
@@ -71,11 +85,13 @@ OPTIONS may be:
     * Aligner "Naive": aligns (0, 0), (1, 1) ... (N, N).
       The only currently supported aligner.
       
-%(common_options)s
+{common_options}
 """
 
 reference_fname = None
 mwe_evaluator = None
+corpus_filetype_ext = None
+reference_filetype_ext = None
 
 
 ################################################################################
@@ -321,6 +337,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global reference_fname
     global mwe_evaluator
+    global corpus_filetype_ext
+    global reference_filetype_ext
 
     sentence_aligner_class = NaiveSentenceAligner
     mwe_evaluator_class = ExactMatchMWEEvaluator
@@ -330,10 +348,16 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     for (o, a) in opts:
         if o in ("-r", "--reference"):
             reference_fname = a
-        if o in ("--sentence-aligner"):
+        elif o in ("--sentence-aligner"):
             sentence_aligner_class = SENTENCE_ALIGNERS[a]
-        if o in ("-e", "--evaluator"):
+        elif o in ("-e", "--evaluator"):
             mwe_evaluator_class = MWE_EVALUATORS[a]
+        elif o == "--corpus-from":
+            corpus_filetype_ext = a
+        elif o == "--reference-from":
+            reference_filetype_ext = a
+        else:
+            raise Exception("Bad arg: " + o)
 
     if not reference_fname:
         error("No reference file given!")
@@ -349,9 +373,11 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 if __name__ == "__main__":
     longopts = ["reference=", "sentence-aligner=", "evaluator="]
-    arg = read_options("r:e:", longopts, treat_options, -1, usage_string)
-    reference = parse([reference_fname], SentenceExtractorHandler()).sentences
-    prediction = parse(arg, SentenceExtractorHandler()).sentences
+    args = read_options("r:e:", longopts, treat_options, -1, usage_string)
+    reference = parse([reference_fname], SentenceExtractorHandler(),
+            filetype_hint=reference_filetype_ext).sentences
+    prediction = parse(args, SentenceExtractorHandler(),
+            filetype_hint=corpus_filetype_ext).sentences
     results = mwe_evaluator.compare_sentence_lists(reference, prediction)
     print("DEBUG:", results)
     print("Precision:", results.precision())

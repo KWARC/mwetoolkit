@@ -279,9 +279,9 @@ if precision + recall > 0 :
     fmeas =  ( 2 * precision * recall) / ( precision + recall )
 else :
     fmeas = 0.0
-print("Nb. of true positives: %(tp)d" % {"tp" : tp_counter }, file=sys.stderr)
-print("Nb. of candidates: %(ca)d" % {"ca" : entity_counter }, file=sys.stderr)
-print("Nb. of references: %(refs)d" % {"refs" : ref_counter }, file=sys.stderr)
-print("Precision: %(p)f" % {"p" : precision }, file=sys.stderr)
-print("Recall: %(r)f" % {"r" : recall }, file=sys.stderr)
-print("F-measure: %(f)f" % {"f" : fmeas }, file=sys.stderr)
+print("Nb. of true positives: {tp}".format(tp=tp_counter), file=sys.stderr)
+print("Nb. of candidates: {ca}".format(ca=entity_counter), file=sys.stderr)
+print("Nb. of references: {refs}".format(refs=ref_counter), file=sys.stderr)
+print("Precision: {p}".format(p=precision), file=sys.stderr)
+print("Recall: {r}".format(r=recall), file=sys.stderr)
+print("F-measure: {f}".format(f=fmeas), file=sys.stderr)

@@ -51,9 +51,12 @@ from libs import filetype
      
 usage_string = """Usage: 
     
-python %(program)s <candidates.xml>
+python {program} OPTIONS <candidates.xml>
 
-%(common_options)s
+
+OPTIONS may be:
+
+{common_options}
 
     The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 """     

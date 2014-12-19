@@ -68,7 +68,7 @@ hist = {}
 limit = None
 
 
-################################################################################         
+################################################################################
 
 class HistogramGeneratorHandler(filetype.InputHandler):
 
@@ -76,10 +76,8 @@ class HistogramGeneratorHandler(filetype.InputHandler):
         self.entity_counter = 0
 
     def handle_candidate(self, candidate, info={}):
-        """
-            Treats each `Candidate`, adding it to the proper histogram bin.
-            
-            @param candidate The current candidate being read from the xml file
+        """Treats each `Candidate`, adding it to the proper histogram bin.
+        @param candidate The current candidate being read from the xml file
         """
         global hist
         for f in candidate.freqs :
@@ -91,9 +89,8 @@ class HistogramGeneratorHandler(filetype.InputHandler):
 
 
     def after_file(self, fileobj, info={}):
-        """
-            Prints to standard output the histogram calculated based on the 
-            candidates file and stored in the global variable hist.
+        """Prints to standard output the histogram calculated based on the 
+        candidates file and stored in the global variable hist.
         """
         global hist
         global limit
@@ -111,9 +108,9 @@ class HistogramGeneratorHandler(filetype.InputHandler):
                 #entropy_delta -= p_delta * math.log( p_delta, 2 )
                 counter = counter + 1
                 if limit is None or counter <= limit :
-                    print("%(f)d : %(c)d (%(p)f)" % { "f": f, "c": h[f], "p": p })
+                    print("{f} : {c} ({p})".format(f=f, c=h[f], p=p))
+            print("Entropy : {e}".format(e=entropy))
 
-            print("Entropy : %(e)f" % { "e" : entropy })
         hist = {}
         self.entity_counter = 0
 
@@ -121,14 +118,10 @@ class HistogramGeneratorHandler(filetype.InputHandler):
 ################################################################################           
   
 def treat_options( opts, arg, n_arg, usage_string ) :
-    """
-        Callback function that handles the command line options of this script.
-
-        @param opts The options parsed by getopts. Ignored.
-
-        @param arg The argument list parsed by getopts.
-
-        @param n_arg The number of arguments expected for this script.
+    """Callback function that handles the command line options of this script.
+    @param opts The options parsed by getopts. Ignored.
+    @param arg The argument list parsed by getopts.
+    @param n_arg The number of arguments expected for this script.
     """
     global limit
     

@@ -51,14 +51,14 @@ from libs import filetype
 
 usage_string = """Usage: 
     
-python %(program)s OPTIONS <corpus.TreeTagger>
+python {program} OPTIONS <corpus.TreeTagger>
 
 The TreeTagger input must have a "</s>" line at the end of each
 sentence. This tag will be used to discover the original sentence splitting. 
 This behavior is particularly useful when dealing with parallel corpora in 
 which the sentence alignment cannot be messed up by the tagger.
 
-WARNING: If you do not have a "</s>"-delimited input file, you must
+IMPORTANT: If you do not have a "</s>"-delimited input file, you must
 use the `--sentence` option to select the POS-tag that indicates the
 sentence splitting character, otherwise, the result may look like a
 corpus with a single (very long) line.

@@ -72,19 +72,20 @@ frequency_dict     = []
 
 usage_string = """Usage: 
     
-python {program} [OPTIONS] <candidates.csv>
+python {program} OPTIONS <candidates.csv>
 
-The <candidates> input file must be in the "CSV" filetype.
+The <candidates.csv> input file must be in the "CSV" filetype.
             
 
-OPTIONS:
-    -F <separator character>
-        Sets the field separator character to one defined by the 
-        user. If not specified, the default is the tab character.
-                
-    -s
-        Enables the option to assign the words in a ngram to the
-        surface    item. The default is to assign it to the lemma item.
+OPTIONS may be:
+
+-F <separator character>
+    Sets the field separator character to one defined by the 
+    user. If not specified, the default is the tab character.
+            
+-s
+    Enables the option to assign the words in a ngram to the
+    surface item. The default is to assign it to the lemma item.
 
 {common_options}
 """

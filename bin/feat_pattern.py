@@ -54,7 +54,7 @@ python {program} <candidates.xml>
 The <candidates.xml> file must be valid XML (mwetoolkit-candidates.dtd).
 
 
-OPTIONS:
+OPTIONS may be:
 
 {common_options}
 """     

@@ -31,28 +31,31 @@ from __future__ import absolute_import
 __author__ = 'Neni'
 
 """
-	This contributed utility script was developed by Venera Arnaoudova as a
-	simple command-line interface to manually validate a list of MWE candidates
-	in XML format and save the result in CSV format. It the CSV file already 
-	exists, annotation continues from the last annotated line.
+    This contributed utility script was developed by Venera Arnaoudova as a
+    simple command-line interface to manually validate a list of MWE candidates
+    in XML format and save the result in CSV format. It the CSV file already 
+    exists, annotation continues from the last annotated line.
     
     For more information, call the script with no parameter and read the
-    usage instructions.	
+    usage instructions. 
 """
 
 import os
 from lxml import etree
 
-from bin.libs.util import read_options, treat_options_simplest
+from libs.util import read_options, treat_options_simplest
 
 
 ################################################################################     
 # GLOBALS     
 usage_string = """Usage: 
     
-python %(program)s [OPTIONS] <candidates.xml> <output.csv>
+python {program} OPTIONS <candidates.xml> <output.csv>
 
-%(common_options)s
+
+OPTIONS may be:
+
+{common_options}
 
     The <candidates.xml> file must be valid XML (dtd/mwetoolkit-candidates.dtd).
 """
@@ -61,10 +64,9 @@ python %(program)s [OPTIONS] <candidates.xml> <output.csv>
 ################################################################################   
 
 def annotate_candidates():
+    """Main function, opens both files (candidates and output), looks for the 
+    next MWE to annotate and launches annotation interface.
     """
-		Main function, opens both files (candidates and output), looks for the 
-		next MWE to annotate and launches annotation interface.
-	"""
     global candidates_filename
     global output_filename
     parser = etree.HTMLParser(remove_blank_text=True)
@@ -126,10 +128,10 @@ def annotate_candidates():
 
     validatedMWEfile.close()
 
-################################################################################   	
+################################################################################
 # MAIN SCRIPT
 
-arg = read_options("", [], treat_options_simplest, 2, usage_string)
-candidates_filename = arg[0]
-output_filename = arg[1]
+args = read_options("", [], treat_options_simplest, 2, usage_string)
+candidates_filename = args[0]
+output_filename = args[1]
 annotate_candidates()

@@ -205,49 +205,54 @@ class HTMLPrinter(common.AbstractPrinter):
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>MWETOOLKIT annotated corpus: %(corpusname)s</title>
+    <title>MWETOOLKIT annotated corpus: {corpusname}</title>
     <!--<link rel="stylesheet" href="mwetk-corpus.css" type="text/css" media="screen"/>-->
     <style>
-    h1{margin:0}
-    p.notice{font-family:Arial;font-size:10pt;margin:0}
-    hr{margin:10px 0}
-    p.sent{margin:2px 100px 2px 0;line-height:145%%;padding:4px 2px}
-    p.sent:hover{background-color:#FFC}
-    p.sent span.sid{border:1px solid #000;border-radius:2px;padding:1px 5px}
-    p.sent:hover span.sid{background:#F22;color:#FFF}
-    p.sent:hover a.word{border-color:#03A}
-    span.mwepart a.word{border:2px solid #000}
-    span.mwe1 a.word{background-color:#F66}
-    span.mwe2 a.word{background-color:#9C0}
-    span.mwe3 a.word{background-color:#69F}
-    span.mwe4 a.word{background-color:#F90}
-    a.word{position:relative;border:1px solid #CCF;border-radius:2px;padding:1px 2px;margin:auto 0;font-family:Verdana sans-serif;text-decoration:none;color:#000}
-    a.word:hover{background-color:#03A;border-color:#000;color:#FFF}
-    a.word span.surface{font-weight:700}
-    a.word span.wid{font-size:70%%;position:relative;top:.3em;font-style:italic;padding-left:3px}
-    a.word span.lps{color:#000;padding:2px 5px;top:1em;z-index:1;height:auto;opacity:0;position:absolute;visibility:hidden;background-color:#AAA;border:1px solid #000;border-radius:2px;box-shadow:#000 2px 2px 6px}
-    a.word:hover span.lps{opacity:.95;visibility:visible}
-    a.word span.lps span.lemma{font-style:italic;display:block}
-    a.word span.lps span.pos{font-weight:700;display:block}
-    a.word span.lps span.syn{font-weight:400;display:block;font-family:Arial}
+    h1{{margin:0}}
+    p.notice{{font-family:Arial;font-size:10pt;margin:0}}
+    hr{{margin:10px 0}}
+    p.sent{{margin:2px 100px 2px 0;line-height:145%%;padding:4px 2px}}
+    p.sent:hover{{background-color:#FFC}}
+    p.sent span.sid{{border:1px solid #000;border-radius:2px;padding:1px 5px}}
+    p.sent:hover span.sid{{background:#F22;color:#FFF}}
+    p.sent:hover a.word{{border-color:#03A}}
+    span.mwepart a.word{{border:2px solid #000}}
+    span.mwe1 a.word{{background-color:#F66}}
+    span.mwe2 a.word{{background-color:#9C0}}
+    span.mwe3 a.word{{background-color:#69F}}
+    span.mwe4 a.word{{background-color:#F90}}
+    a.word{{position:relative;border:1px solid #CCF;border-radius:2px;padding:1px 2px;margin:auto 0;font-family:Verdana sans-serif;text-decoration:none;color:#000}}
+    a.word:hover{{background-color:#03A;border-color:#000;color:#FFF}}
+    a.word span.surface{{font-weight:700}}
+    a.word span.wid{{font-size:70%%;position:relative;top:.3em;font-style:italic;padding-left:3px}}
+    a.word span.lps{{color:#000;padding:2px 5px;top:1em;z-index:1;height:auto;opacity:0;position:absolute;visibility:hidden;background-color:#AAA;border:1px solid #000;border-radius:2px;box-shadow:#000 2px 2px 6px}}
+    a.word:hover span.lps{{opacity:.95;visibility:visible}}
+    a.word span.lps span.lemma{{font-style:italic;display:block}}
+    a.word span.lps span.pos{{font-weight:700;display:block}}
+    a.word span.lps span.syn{{font-weight:400;display:block;font-family:Arial}}
     </style>
 </head>
 <body>
-<h1>Corpus: %(corpusname)s</h1>
+<h1>Corpus: {corpusname}</h1>
 <p class="notice">Generated automatically by the <a href="http://mwetoolkit.sf.net/" target="_blank">mwetoolkit</a> </p>
-<p class="notice"> Timestamp: %(timestamp)s</p>
-<p class="notice">Source: <tt>%(filename)s</tt></p>
+<p class="notice"> Timestamp: {timestamp}</p>
+<p class="notice">Source: <tt>{filename}</tt></p>
 <hr/>"""
         s = fileobj.name
-        import datetime
-        self.add_string(html_header % { "timestamp": datetime.datetime.now(),
-              "corpusname": s[max(0,s.rfind("/")):], "filename": s})
+        import os, datetime
+        # XXX escape these parameters
+        self.add_string(html_header.format(
+                timestamp=datetime.datetime.now(),
+                corpusname=s[s.rfind("/")+1:],
+                filename=os.path.abspath(s)))
 
 
     def after_file(self, fileobj, info={}):
         self.add_string("</body>\n</html>")
         self.flush()
 
+    def escape(self, text):
+        return text  # XXX use a python native html escaper
 
     def handle_comment(self, comment, info={}):
         self.add_string("<!-- ", self.escape(comment), " -->\n")

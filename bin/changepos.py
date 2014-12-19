@@ -68,7 +68,7 @@ OPTIONS may be:
 -G or --genia
     Convert from Genia tags instead of Penn Tree Bank tags.
 
-%(common_options)s
+{common_options}
 """
 
 sentence_counter = 0
