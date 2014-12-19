@@ -89,11 +89,11 @@ class XMLChecker(common.AbstractChecker):
 ################################################################################
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE %(category)s SYSTEM "dtd/mwetoolkit-%(category)s.dtd">
+<!DOCTYPE {category} SYSTEM "dtd/mwetoolkit-{category}.dtd">
 <!-- MWETOOLKIT: filetype="XML" -->
-<%(category)s %(ns)s>"""
+<{category} {ns}>"""
 
-XML_FOOTER = """</%(category)s>"""
+XML_FOOTER = """</{category}>"""
 
 
 class XMLPrinter(common.AbstractPrinter):
@@ -101,10 +101,10 @@ class XMLPrinter(common.AbstractPrinter):
     valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
     def before_file(self, fileobj, info={}):
-        self.add_string(XML_HEADER % {"category": self._category, "ns": ""}, "\n")
+        self.add_string(XML_HEADER.format(category=self._category, ns=""), "\n")
 
     def after_file(self, fileobj, info={}):
-        self.add_string(XML_FOOTER % {"category": self._category} + "\n")
+        self.add_string(XML_FOOTER.format(category=self._category), "\n")
         self.flush()
 
     def handle_comment(self, comment, info={}):
