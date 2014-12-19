@@ -419,8 +419,7 @@ class InputHandler(object):
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
         pass  # By default, we just silently ignore Meta instances
-        info["kind"] = "meta"   # XXX 2014-11-27 experimental (checking if too
-                                # many warnings would be generated...)
+        info["kind"] = "meta"
         return self._fallback(meta_obj, info)
 
     def handle_comment(self, comment, info={}):
@@ -429,9 +428,14 @@ class InputHandler(object):
         return self._fallback(comment, info)
 
     def handle_directive(self, directive, info={}):
-        r"""Called when parsing a directive."""
-        info["kind"] = "directive"
-        return self._fallback(directive, info)
+        r"""Default implementation when seeing a directive."""
+        if directive.key == "filetype":
+            # We don't care about the input filetype directive,
+            # as we will generate an output filetype directive regardless.
+            #self.handle_comment("[Converted from " + directive.value + "]")
+            pass
+        else:
+            util.warn_once("Unknown directive: " + directive.key)
 
 
     def handle(self, obj, info):
@@ -441,8 +445,7 @@ class InputHandler(object):
         return getattr(self, "handle_"+kind)(obj, info=info)
 
     def _fallback_entity(self, entity, info={}):
-        r"""Called to treat a generic entity (sentence/candidate/pattern).
-        Should not be called explicitly from outside."""
+        r"""Called to treat a generic entity (sentence/candidate/pattern)."""
         self._fallback(entity, info)
 
     def _fallback(self, obj, info):
@@ -479,6 +482,10 @@ class ChainedInputHandler(InputHandler):
     def after_file(self, fileobj, info={}):
         self.chain.after_file(fileobj, info)
         self.flush()
+
+    def handle_directive(self, directive, info={}):
+        info.setdefault("kind", "directive")
+        return self._fallback(directive, info)
 
     def _fallback(self, entity, info={}):
         self.chain.handle(entity, info)
@@ -578,16 +585,6 @@ class AbstractPrinter(InputHandler):
                 self.add_string("\n")
             else:
                 self.add_string(self.filetype_info.comment_prefix + " " + c + "\n")
-
-    def handle_directive(self, directive, info={}):
-        r"""Default implementation when seeing a directive."""
-        if directive.key == "filetype":
-            # We don't care about the input filetype directive,
-            # as we will generate an output filetype directive regardless.
-            #self.handle_comment("[Converted from " + directive.value + "]")
-            pass
-        else:
-            util.warn_once("Unknown directive: " + directive.key)
 
 
 
