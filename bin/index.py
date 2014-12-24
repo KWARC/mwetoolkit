@@ -118,14 +118,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     treat_options_simplest( opts, arg, n_arg, usage_string )
 
     used_attributes = ["lemma", "pos", "surface", "syn"]
-    basename = None
     for ( o, a ) in opts:
         if o in ("-i", "--index") :
-            try :
-                basename = a
-            except IOError :        
-                error("Error opening the index.\n"
-                      "Try again with another index filename.")
+            basename = a
         elif o == "--from":
             input_filetype_ext = a
         elif o in ("-a", "--attributes"):
@@ -161,3 +156,5 @@ index = indexlib.Index(basename, simple_attrs)
 indexlib.populate_index(index, arg, input_filetype_ext)
 for attr in composite_attrs:
     index.make_fused_array(attr.split('+'))
+index.build_suffix_arrays()
+index.save_main()
