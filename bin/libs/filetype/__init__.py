@@ -530,7 +530,10 @@ class ConllParser(common.AbstractTxtParser):
         for mwe_i in xrange(len(data[0])):
             word_data = [getitem(d, mwe_i, "_") for d in data]
             self._word_data = [(WILDCARD if d == ["_"] else d) for d in word_data]
-            indexes.append(int(self.get("ID", len(self.partial_obj.word_list))))
+            self._id = self.get("ID", None) or ("1" \
+                    if self.partial_obj is None
+                    else len(self.partial_obj.word_list))
+            indexes.append(int(self._id))
             if len(self._word_data) < len(self.filetype_info.entries):
                 util.warn("Ignoring line {} (only {} entries)" \
                         .format(info["linenum"], len(self._word_data)))
@@ -559,7 +562,7 @@ class ConllParser(common.AbstractTxtParser):
             util.warn("Ignoring extra entries in line {}" \
                     .format(info["linenum"]))
 
-        if self.get("ID") == "1":
+        if self._id == "1":
             self.new_partial(handler.handle_sentence,
                     Sentence([], self.s_id), info={})
             self.s_id += 1
@@ -585,6 +588,7 @@ class ConllParser(common.AbstractTxtParser):
 
 
 class ConllPrinter(common.AbstractPrinter):
+    BETWEEN_SENTENCES = "\n"
     valid_categories = ["corpus"]
     def __init__(self, category, **kwargs):
         super(ConllPrinter, self).__init__(category, **kwargs)
@@ -593,7 +597,7 @@ class ConllPrinter(common.AbstractPrinter):
 
     def handle_sentence(self, sentence, info={}):
         if self.count_sentences != 0:
-            self.add_string("\n")
+            self.add_string(self.BETWEEN_SENTENCES)
         self.count_sentences += 1
 
         for indexes in sentence.xwe_indexes():
@@ -635,7 +639,7 @@ class PWaCInfo(common.FiletypeInfo):
     description = "Wac parsed format"
     filetype_ext = "pWaC"
 
-    entries = ["FORM", "LEMMA", "CPOSTAG", "?", "?", "?"]
+    entries = ["FORM", "LEMMA", "CPOSTAG", "ID", "HEAD", "DEPREL"]
 
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
@@ -663,15 +667,15 @@ class PWaCParser(ConllParser):
 
     def _parse_line(self, line, handler, info={}):
         if line[0] == "<" and line[-1] == ">":
-            if line == "<s>":
-                self.new_partial(handler.handle_sentence,
-                        Sentence([], self.s_id), info={})
-                self.s_id += 1
+            # We just ignore <text id>, <s> and </s>
+            # `new_partial` will be called when seeing ID "1"
+            pass
         else:
             super(PWaCParser, self)._parse_line(line, handler, info)
 
 
 class PWaCPrinter(ConllPrinter):
+    BETWEEN_SENTENCES = ""
     def before_file(self, fileobj, info={}):
         self.add_string('<text id="mwetoolkit">\n')
 
