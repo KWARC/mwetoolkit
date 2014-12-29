@@ -533,7 +533,7 @@ class ConllParser(common.AbstractTxtParser):
             self._id = self.get("ID", None) or ("1" \
                     if self.partial_obj is None
                     else len(self.partial_obj.word_list))
-            indexes.append(int(self._id))
+            indexes.append(int(self._id) - 1)
             if len(self._word_data) < len(self.filetype_info.entries):
                 util.warn("Ignoring line {} (only {} entries)" \
                         .format(info["linenum"], len(self._word_data)))
