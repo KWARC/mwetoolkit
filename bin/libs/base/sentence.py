@@ -136,10 +136,11 @@ class Sentence( Ngram ) :
         for i, mweoccur in enumerate(self.mweoccurs):
             candids[mweoccur.candidate] = "mwe" + str(i + 1)
         for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
-            mwetag_new = map(lambda x: candids[x], mwetag)
-            templ =  "<span class=\"mwepart %(ids)s\">%(w)s</span>"
-            result[mwetag_i] = templ % {"ids":" ".join(mwetag_new),
-                                        "w":result[mwetag_i]}
+            if mwetag:
+                mwetag_new = map(lambda x: candids[x], mwetag)
+                templ =  "<span class=\"mwepart %(ids)s\">%(w)s</span>"
+                result[mwetag_i] = templ % {"ids":" ".join(mwetag_new),
+                                            "w":result[mwetag_i]}
         return result
 
 
