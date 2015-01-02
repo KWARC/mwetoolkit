@@ -130,17 +130,16 @@ class Sentence( Ngram ) :
         result = list( tokens )
         for mweoccur in self.mweoccurs :
             for i in mweoccur.indexes :
-                candids[ mweoccur.candidate.id_number ] = "X" # Check, no repet
-                mwetags_list[ i ].append( mweoccur.candidate.id_number )
+                candids[ mweoccur.candidate ] = "X" # Check, no repet
+                mwetags_list[ i ].append( mweoccur.candidate )
         # Number the mwes in a sequence, 1, 2, 3...
-        for (i,candid) in enumerate(candids.keys()):
-            candids[candid] = "mwe" + str(i + 1)
+        for i, mweoccur in enumerate(self.mweoccurs):
+            candids[mweoccur.candidate] = "mwe" + str(i + 1)
         for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
-            if mwetag :
-                mwetag_new = map(lambda x: candids[x], mwetag)
-                templ =  "<span class=\"mwepart %(ids)s\">%(w)s</span>"
-                result[mwetag_i] = templ % {"ids":" ".join(mwetag_new),
-                                            "w":result[mwetag_i]}
+            mwetag_new = map(lambda x: candids[x], mwetag)
+            templ =  "<span class=\"mwepart %(ids)s\">%(w)s</span>"
+            result[mwetag_i] = templ % {"ids":" ".join(mwetag_new),
+                                        "w":result[mwetag_i]}
         return result
 
 
