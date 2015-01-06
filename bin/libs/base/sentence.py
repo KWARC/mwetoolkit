@@ -81,6 +81,24 @@ class Sentence( Ngram ) :
 
 ################################################################################
 
+    def sub_sentence(self, indexes):
+        r"""Return a Sentence instance with only the given indexes."""
+        old2new_i = {old:new for (new, old) in enumerate(indexes)}
+        ret = Sentence([self[i] for i in indexes], self.id_number)
+        for mweo in self.mweoccurs:
+            from .mweoccur import MWEOccurrence
+            try:
+                new_i = [old2new_i[old_i] for old_i in mweo.indexes]
+            except KeyError:
+                pass  # One of the indexes was removed; remove whole MWE info
+            else:
+                mweo2 = MWEOccurrence(ret, mweo.candidate, new_i)
+                ret.mweoccurs.append(mweo2)
+        return ret
+        
+
+################################################################################
+
     def xwe_indexes(self):
         r"""Yields lists of indexes, one per SingleWE/MultiWE."""
         ret = [[i] for i in xrange(len(self.word_list))]
