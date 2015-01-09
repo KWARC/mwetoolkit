@@ -321,13 +321,15 @@ class AbstractTxtParser(AbstractParser):
                     just_saw_a_comment = False
 
                 else:
-                    self._parse_line(
-                            line,
+                    self._parse_line(line,
                             handler, {"fileobj": fileobj, "linenum": i+1})
                     just_saw_a_comment = False
 
     def _parse_line(self, line, handler, info={}):
         r"""Called to parse a line of the TXT file.
+        Not called for comments and SOMETIMES not called
+        for empty lines.
+
         Subclasses may override."""
         raise NotImplementedError
 

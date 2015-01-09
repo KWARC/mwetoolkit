@@ -82,9 +82,17 @@ class Sentence( Ngram ) :
 ################################################################################
 
     def sub_sentence(self, indexes):
-        r"""Return a Sentence instance with only the given indexes."""
+        r"""Return a Sentence instance with only the words in given indexes.
+        If an element of `indexes` is an instance of `Word` it will be inserted
+        in the appropriate position instead.
+
+        @param indexes: A list of elements who are either
+        -- integers (indexes of `self.word_list`); or
+        -- instances of `Word`, to be inserted directly.
+        """
         old2new_i = {old:new for (new, old) in enumerate(indexes)}
-        ret = Sentence([self[i] for i in indexes], self.id_number)
+        ret = Sentence([self[x] if isinstance(x, int) else x
+                for x in indexes], self.id_number)
         for mweo in self.mweoccurs:
             from .mweoccur import MWEOccurrence
             try:

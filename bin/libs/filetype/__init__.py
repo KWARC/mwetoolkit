@@ -666,7 +666,9 @@ class PWaCParser(ConllParser):
         super(PWaCParser, self).__init__(in_files, encoding)
 
     def _parse_line(self, line, handler, info={}):
-        if line[0] == "<" and line[-1] == ">":
+        if line == "":
+            pass  # Ignore empty lines
+        elif line[0] == "<" and line[-1] == ">":
             # We just ignore <text id>, <s> and </s>
             # `new_partial` will be called when seeing ID "1"
             pass

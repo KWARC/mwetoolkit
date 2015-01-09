@@ -51,9 +51,9 @@ from libs import filetype
      
 usage_string = """Usage: 
     
-python {program} [OPTIONS] <candidates.xml>
+python {program} [OPTIONS] <input-file>
 
-The <candidates> input file must be in one of the filetype
+The <input-file> must be in one of the filetype
 formats accepted by the `--from` switch.
 
 
@@ -92,7 +92,7 @@ OPTIONS may be:
 
 -r OR --reverse
     Reverses the filtering mechanism, in order to print out only those 
-    candidates that do NOT obbey the criteria.
+    candidates that do NOT obey the criteria.
     
 -a OR --maxlength
 -i OR --minlength
@@ -102,6 +102,12 @@ OPTIONS may be:
     the same time, but the maximum cannot be inferior to the minimum, e.g. 
     -a 10 -i 11 will return an empty list.    
 
+--min-mweoccurs <n>
+--max-mweoccurs <n>
+    Defines the minimum/maximum number of MWE occurrences for a sentence
+    in a corpus.  Note that other types of entity do not have MWE occurrences,
+    so this flag will be ignored if applied on anything other than a corpus.
+
 {common_options}
 """
 reverse = False
@@ -110,10 +116,10 @@ thresh_value = 0
 equals_name = None
 equals_value = None
 patterns = []
-longest_pattern = 0
-shortest_pattern = float("inf")
-maxlength = float("inf")
 minlength = 0
+maxlength = float("inf")
+min_mweoccurs = 0
+max_mweoccurs = float("inf")
 
 input_filetype_ext = None
 output_filetype_ext = None
@@ -190,11 +196,17 @@ class FilterHandler(filetype.ChainedInputHandler):
             print_it = False
             verbose("Filtered out: %d tokens" % lenentity)
 
+        # Filter out sentences with too few/too many MWE candidates
+        if info["kind"] == "sentence":
+            n = len(entity.mweoccurs)
+            if not (min_mweoccurs <= n <= max_mweoccurs):
+                print_it = False
+
         if reverse :
             print_it = not print_it
 
         if print_it :   
-            self.chain.handle_entity(ngram_to_print, info)
+            self.chain.handle(ngram_to_print, info)
 
 
 ################################################################################
@@ -278,7 +290,7 @@ def interpret_length( l, maxormin ):
         verbose( "%s length: %d" % (maxormin, result) )
         return result
     except ValueError:
-        error("Argument of -i must be positive integer")
+        error("Argument of must be non-negative integer, got " + repr(l))
 
 ################################################################################
 
@@ -299,6 +311,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global reverse
     global minlength
     global maxlength
+    global min_mweoccurs
+    global max_mweoccurs
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
@@ -319,16 +333,22 @@ def treat_options( opts, arg, n_arg, usage_string ) :
                 error( "The format of the -e argument must be <name>:"
                        "<value>\n<name> must be a valid feat name and "
                        "<value> must be a non-empty string")
+
         elif o in ("-p", "--patterns") :
             verbose( "Reading patterns file" )
             read_patterns_file( a )
         elif o in ("-r", "--reverse") :
             reverse = True
-            verbose( "Option REVERSE active")
+            verbose("Option REVERSE active")
+
         elif o in ("-i", "--minlength") :
             minlength = interpret_length( a, "minimum" )
         elif o in ("-a", "--maxlength") :
             maxlength = interpret_length( a, "maximum" )
+        elif o == "--min-mweoccurs":
+            min_mweoccurs = interpret_length(a, "minimum")
+        elif o == "--max-mweoccurs":
+            max_mweoccurs = interpret_length(a, "maximum")
         elif o == "--from":
             input_filetype_ext = a
         elif o == "--to":
@@ -337,13 +357,15 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             raise Exception("Bad arg: " + o)
 
     if minlength > maxlength:
-        warn( "ATTENTION : minlength should be <= maxlength")
+        warn("minlength should be <= maxlength")
+    if min_mweoccurs > max_mweoccurs:
+        warn("min-mweoccurs should be <= max-mweoccurs")
             
 
 ################################################################################
 # MAIN SCRIPT
 
 longopts = [ "threshold=", "equals=", "patterns=", "reverse", "maxlength=",
-             "minlength=", "from=", "to=" ]
+             "minlength=", "min-mweoccurs=", "max-mweoccurs=", "from=", "to=" ]
 args = read_options( "t:e:p:ra:i:", longopts, treat_options, -1, usage_string )
 filetype.parse(args, FilterHandler(), input_filetype_ext)
