@@ -68,7 +68,21 @@ def parse(input_files, handler, filetype_hint=None):
     filetype_ext string.
     """
     handler = LoudHandler(handler)
-    return SmartParser(input_files, filetype_hint).parse(handler)
+    SmartParser(input_files, filetype_hint).parse(handler)
+
+
+def parse_entities(input_files, filetype_hint=None):
+    r"""For each input file, detect its file format and parse it,
+    returning a list of all parsed entities.
+    
+    @param input_files: a list of file objects
+    whose contents should be parsed.
+    @param filetype_hint: either None or a valid
+    filetype_ext string.
+    """
+    handler = EntityCollectorHandler()
+    parse(input_files, handler, filetype_hint)
+    return handler.entities
 
 
 def printer_class(filetype_ext):
@@ -83,6 +97,20 @@ def printer_class(filetype_ext):
     if ret is None:
         util.error("Printer not implemented for: " + unicode(filetype_ext))
     return ret
+
+
+################################################################################
+
+
+class EntityCollectorHandler(InputHandler):
+    r"""InputHandler that collects all entities
+    in `self.entities`. Will fail with an out-of-memory
+    error if used on huge inputs."""
+    def __init__(self):
+        self.entities = []
+
+    def _fallback_entity(self, entity, info={}):
+        self.entities.append(entity)
 
 
 class LoudHandler(ChainedInputHandler):

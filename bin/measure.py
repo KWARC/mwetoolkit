@@ -41,7 +41,7 @@ import sys
 
 from libs.base.mweoccur import MWEOccurrenceBuilder, MWEOccurrence
 from libs.util import read_options, treat_options_simplest, verbose, error
-from libs.filetype import parse, InputHandler
+from libs.filetype import parse_entities
 
 
 
@@ -302,22 +302,6 @@ class LinkBasedMWEEvaluator(AbstractMWEEvaluator):
 ###########################################################
 
 
-class SentenceExtractorHandler(InputHandler):
-    def __init__(self):
-        self.sentences = []
-
-    def handle_sentence(self, sentence, info={}):
-        """For each sentence in the corpus, puts its `mweoccurs`
-        at the back of `self.annotation`.
-
-        @param sentence A `Sentence` that is being read from the XML file.    
-        """
-        self.sentences.append(sentence)
-
-
-###########################################################
-
-
 SENTENCE_ALIGNERS = {
     "Naive": NaiveSentenceAligner,
 }
@@ -374,10 +358,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 if __name__ == "__main__":
     longopts = ["reference=", "sentence-aligner=", "evaluator="]
     args = read_options("r:e:", longopts, treat_options, -1, usage_string)
-    reference = parse([reference_fname], SentenceExtractorHandler(),
-            filetype_hint=reference_filetype_ext).sentences
-    prediction = parse(args, SentenceExtractorHandler(),
-            filetype_hint=corpus_filetype_ext).sentences
+    reference = parse_entities([reference_fname], reference_filetype_ext)
+    prediction = parse_entities(args, corpus_filetype_ext)
     results = mwe_evaluator.compare_sentence_lists(reference, prediction)
     print("DEBUG:", results)
     print("Precision:", results.precision())

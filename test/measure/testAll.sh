@@ -1,5 +1,5 @@
 #! /bin/bash
-here="$(cd "$(dirname "$0")" && pwd)"
+HERE="$(cd "$(dirname "$0")" && pwd)"
 
 source "$HERE/../testlib.sh"
 

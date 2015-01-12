@@ -1,3 +1,16 @@
+# Last update: 2015-01-12
+# CONLL files may have data that we currently do not represent in
+# the internal format.  This file has an example of such data:
+# 
+# * The columns FEATS, PHEAD and PDEPREL are being ignored, and thus
+#   will be deleted from output if you run::
+#
+#   convert.py --from=CONLL --to=CONLL IgnoredFields.conll
+#
+# * The column POSTAG is being ignored as well, but a value identical
+#   to CPOSTAG is being used in its place when converting to CONLL,
+#   so that may not always be perceivable.
+
 1   Cathy             Cathy             N     N     eigen|ev|neut                    2   su      _  _
 2   zag               zie               V     V     trans|ovt|1of2of3|ev             0   ROOT    _  _
 3   hen               hen               Pron  Pron  per|3|mv|datofacc                2   obj1    _  _

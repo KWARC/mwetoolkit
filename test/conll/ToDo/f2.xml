@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
-<corpus >
-<s s_id="0"><w surface="Cathy" lemma="Cathy" pos="N" syn="su:2" /> <w surface="zag" lemma="zie" pos="V" syn="ROOT:0" /> <w surface="hen" lemma="hen" pos="Pron" syn="obj1:2" /> <w surface="wild" lemma="wild" pos="Adj" syn="mod:5" /> <w surface="zwaaien" lemma="zwaai" pos="N" syn="vc:2" /> <w surface="." lemma="." pos="Punc" syn="punct:5" /> </s>
-</corpus>
