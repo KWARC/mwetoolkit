@@ -277,25 +277,38 @@ def interpret_ngram(argument):
 
 ################################################################################
 
-def error(message):
+class MWEToolkitInputError(Exception):
+    r"""Raised when the MWE Toolkit detects a bad user input.
+
+    Full stack traces will not be usually provided for these errors,
+    as they are NOT supposed to be internal errors in the toolkit.
+    For internal errors, use any other exception class.
     """
-        Utility function to show error message and quit
-    """
-    print("ERROR:", message, file=sys.stderr)
-    sys.exit(-1)
+    def __init__(self, message, depth=0, **extra_info):
+        super(MWEToolkitInputError, self).__init__(message)
+        self.depth = depth
+        self.extra_info = extra_info
+
+
+def error(message, depth=0, **extra_info):
+    """Utility function to show error message and quit."""
+    raise MWEToolkitInputError(message, depth=depth+1, **extra_info)
 
 
 ################################################################################
 
 def warn(message):
-    """
-        Utility function to show warning message
-    """
+    """Utility function to show warning message."""
+    if debug_mode:
+        print("-" * 40)
+        traceback.print_stack()
     print("WARNING:", message, file=sys.stderr)
 
 
+################################################################################
+
 def warn_once(message):
-    r"""Same as `warn(message)`, but only warns once."""
+    r"""Same as `warn(message)`, but only warns once per error message."""
     # (Maybe we should use a bloom filter, just in case?)
     if message not in _warned:
         _warned.add(message)
@@ -307,36 +320,28 @@ _warned = set()
 ################################################################################
 
 def default_exception_handler(type, value, trace):
+    """The default exception handler. This replaces Python's standard behavior
+    of printing a stack trace and exiting. We don't print a stack trace on some
+    user input errors, unless 'debug_mode' is on.
     """
-       The default exception handler. This replaces Python's standard behaviour
-       of printing a stack trace and exiting. We print a stack trace only if
-       'debug_mode' is on.
-    """
-
     global debug_mode
 
-    if debug_mode:
-        traceback.print_exception(type, value, trace)
-
-    else:
-        if type == KeyboardInterrupt:
-            print("\nInterrupted!", file=sys.stderr)
-            sys.exit(130)  # 128 + SIGINT; Unix standard
-
+    if type == MWEToolkitInputError and not debug_mode:
         import os
-
         here = os.path.dirname(__file__)
-        tb = traceback.extract_tb(trace)[-1]
+        tb = traceback.extract_tb(trace)[-1-value.depth]
         fname, lineno, func, text = tb
         fname = os.path.relpath(fname, '.')
-        print("Error in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)
-        print("  %s:" % type.__name__, value, file=sys.stderr)
-        print("For more information, run with --debug.", file=sys.stderr)
+        print("ERROR:")
+        print("=>", value, file=sys.stderr)
+        print("Detected in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)
+        print("For a full traceback, run with --debug.", file=sys.stderr)
 
-    if type != IOError:
-        print("You probably provided an invalid XML file, please "
-              "validate it against the DTD.", file=sys.stderr)
+    else:
+        traceback.print_exception(type, value, trace)
 
+    if type == KeyboardInterrupt:
+        sys.exit(130)  # 128 + SIGINT; Unix standard
     sys.exit(1)
 
 

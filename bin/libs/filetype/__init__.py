@@ -79,9 +79,9 @@ def printer_class(filetype_ext):
     try:
         ret = HINT_TO_INFO[filetype_ext].operations().printer_class
     except KeyError:
-        raise Exception("Unknown file extension: " + unicode(filetype_ext))
+        util.error("Unknown file extension: " + unicode(filetype_ext))
     if ret is None:
-        raise Exception("Printer not implemented for: " + unicode(filetype_ext))
+        util.error("Printer not implemented for: " + unicode(filetype_ext))
     return ret
 
 
@@ -707,9 +707,9 @@ class BinaryIndexChecker(common.AbstractChecker):
     r"""Checks whether input is in BinaryIndex format."""
     def check(self):
         if self.fileobj == sys.stdin:
-            raise Exception("Cannot read BinaryIndex file from stdin!")
+            util.error("Cannot read BinaryIndex file from stdin!")
         if not self.fileobj.name.endswith(".info"):
-            raise Exception("BinaryIndex file should have extension .info!")
+            util.error("BinaryIndex file should have extension .info!")
         super(BinaryIndexChecker, self).check()
 
     def matches_header(self, strict):
@@ -803,11 +803,11 @@ class SmartParser(common.AbstractParser):
             if checker_class(fileobj).matches_header(strict=True):
                 parser_class = fti.operations().parser_class
                 if parser_class is None:
-                    raise Exception("Parser not implemented for: " \
+                    util.error("Parser not implemented for: " \
                             + unicode(fti.filetype_ext))
                 return fti
 
-        raise Exception("Unknown file format for: " + fileobj.name)
+        util.error("Unknown file format for: " + fileobj.name)
 
 
 
