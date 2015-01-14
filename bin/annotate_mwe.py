@@ -90,12 +90,19 @@ OPTIONS may be:
     Annotate based on the "<sources>" tag from the candidates file.
     Same as passing the parameter "--detection=Source".
 
+--filter
+    Only outputs sentences that matched with MWEs.
+    (Does not annotate the MWE candidates).
+
 {common_options}
 """
 detector = None
 filetype_corpus_ext = None
 filetype_candidates_ext = None
 output_filetype_ext = None
+
+action_annotate = True
+action_filter = False
 
 ################################################################################
 
@@ -114,9 +121,14 @@ class AnnotatorHandler(filetype.ChainedInputHandler):
         @param sentence: A `Sentence` that is being read from the XML file.    
         @param info: A dictionary with info regarding `sentence`.
         """
+        found_occurrence = False
         for mwe_occurrence in detector.detect(sentence):
-            sentence.mweoccurs.append(mwe_occurrence)
-        self.chain.handle_sentence(sentence)
+            found_occurrence = True
+            if action_annotate:
+                sentence.mweoccurs.append(mwe_occurrence)
+
+        if found_occurrence or not action_filter:
+            self.chain.handle_sentence(sentence)
 
 
 ################################################################################
@@ -272,6 +284,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global filetype_corpus_ext
     global filetype_candidates_ext
     global output_filetype_ext
+    global action_annotate
+    global action_filter
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
@@ -294,6 +308,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             filetype_candidates_ext = a
         elif o == "--to":
             output_filetype_ext = a
+        elif o == "--filter":
+            action_annotate = False
+            action_filter = True
         else:
             raise Exception("Bad arg: " + o)
 
@@ -314,6 +331,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 
 longopts = ["corpus-from=", "candidates-from=", "to=",
-        "candidates=", "detector=", "gaps=", "source"]
+        "candidates=", "detector=", "gaps=", "source", "filter"]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
 filetype.parse(arg, AnnotatorHandler(), filetype_corpus_ext)
