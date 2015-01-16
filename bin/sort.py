@@ -25,7 +25,7 @@
 """
     This script sorts the candidate list according to the value of a feature (or
     the values of some features) that is/are called key feature(s). The key is
-    used to sort the candidates in descending order (except if explicitely asked
+    used to sort the candidates in descending order (except if explicitly asked
     to sort in ascending order). Sorting is stable, i.e. if two candidates have 
     the same key feature values, their relative order will be preserved in the 
     output.
@@ -56,9 +56,15 @@ usage_string = """Usage:
 python {program} [OPTIONS] -f <feat> <candidates>
 
 -f <feat> OR --feat <feat>    
-    The name of the feature that will be used to sort the candidates. For 
-    candidates whose sorting feature is not present, the script assumes the 
-    default UNKNOWN_FEAT_VALUE, which is represented by a question mark "?".
+    A colon-separated list of features that will be used to sort the
+    candidates.  For candidates whose sorting feature is not present, the
+    script assumes the default UNKNOWN_FEAT_VALUE, which is represented by a
+    question mark "?".
+
+    Pseudo-features:
+    * "$LEMMA": Lexicographic sort based on word lemmas.
+    * "$SURFACE": Lexicographic sort based on word surfaces.
+    By default, if no features are defined, "$SURFACE" is used.
 
 The <candidates> input file must be in one of the filetype
 formats accepted by the `--from` switch.
@@ -84,11 +90,11 @@ OPTIONS may be:
 
 {common_options}
 """
-feat_list = []
-all_feats = []
-feat_list_ok = False
+
+PSEUDO_FEATS = ["$LEMMA", "$SURFACE"]
+
+feat_list = ["$SURFACE"]
 temp_file = None
-feat_to_order = []
 ascending = False
 
 input_filetype_ext = None
@@ -102,6 +108,9 @@ class SorterHandler(filetype.ChainedInputHandler):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
         self.chain.before_file(fileobj, info)
+        self.feat_list_ok = False
+        self.all_feats = list(PSEUDO_FEATS)
+        self.feat_to_order = []
 
     def handle_meta(self, meta, info={}):
         """
@@ -114,63 +123,70 @@ class SorterHandler(filetype.ChainedInputHandler):
             
             @param meta The `Meta` header that is being read from the XML file.         
         """
-        global all_feats
         for meta_feat in meta.meta_feats:
-            all_feats.append(meta_feat.name)
+            self.all_feats.append(meta_feat.name)
         self.chain.handle_meta(meta, info)
 
 
-    def handle_candidate(self, candidate, info={}):
+    def _fallback_entity(self, entity, info={}):
         """
-            For each candidate, stores it in a temporary Database (so that it can be
+            For each entity, stores it in a temporary Database (so that it can be
             retrieved later) and also creates a tuple containing the sorting key
-            feature values and the candidate ID. All the tuples are stored in a
+            feature values and the entity ID. All the tuples are stored in a
             global list, that will be sorted once all candidates are read and stored
             into the temporary DB.
-            
-            @param candidate The `Candidate` that is being read from the XML file.
         """
-        global feat_list, all_feats, feat_list_ok, feat_to_order
+        global feat_list
         # First, verifies if all the features defined as sorting keys are real 
         # features, by matching them against the meta-features of the header. This
-        # is only performed once, before the first candidate is processed
-        if not feat_list_ok:
+        # is only performed once, before the first entity is processed
+        if not self.feat_list_ok:
             for feat_name in feat_list:
-                if feat_name not in all_feats:
-                    error("{feat} is not a valid feature\n" \
+                if feat_name not in self.all_feats:
+                    error("\"{feat}\" is not a valid feature\n" \
                             "Please chose features from the list below:\n" \
                             "{list}".format(feat=feat_name, list="\n".join(
-                                    "* " + feat for feat in all_feats)))
-            feat_list_ok = True
+                                    "* " + feat for feat in self.all_feats)))
+            self.feat_list_ok = True
 
-        # Store the whole candidate in a temporary database
-        temp_file[str(candidate.id_number)] = candidate
-        # Create a tuple to be added to a list. The tuple contains the sorting key
-        # values and...
-        one_tuple = ()
+        # Store the whole entity in a temporary database
+        temp_file[unicode(entity.id_number).encode('utf8')] = (entity, info)
+        # Build up a tuple to be added to a list.
+        one_tuple = []
         for feat_name in feat_list:
-            one_tuple = one_tuple + ( candidate.get_feat_value(feat_name), )
-        # ... the candidate ID. The former are used to sort the candidates, the 
-        # latter is used to retrieve a candidate from the temporary DB
-        one_tuple = one_tuple + ( candidate.id_number, )
-        feat_to_order.append(one_tuple)
+            one_tuple.append(self.feat_value(entity, feat_name))
+        # The tuple will contain the sorting key values and the
+        # entity ID. The former are used to sort the candidates, the 
+        # latter is used to retrieve a entity from the temporary DB
+        one_tuple.append(entity.id_number)
+        self.feat_to_order.append(tuple(one_tuple))
+
+
+    def feat_value(self, entity, feat_name):
+        r"""Return value for given feature name."""
+        if feat_name.startswith("$"):
+            if feat_name == "$SURFACE":
+                return tuple(w.surface for w in entity)
+            elif feat_name == "$LEMMA":
+                return tuple(w.lemma for w in entity)
+            error("Bad pseudo-feature name", feat_name=feat_name)
+        return entity.get_feat_value(feat_name)
 
 
     def after_file(self, fileobj, info={}):
-        """
-            Sorts the tuple list `feat_to_order` and then retrieves the candidates
-            from the temporary DB in order to print them out.
-        """
-        global feat_to_order, ascending, temp_file
+        """Sorts the tuple list `self.feat_to_order` and then retrieves the
+        candidates from the temporary DB in order to print them out."""
+        global ascending, temp_file
         # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
-        # If I didn't ignore the last entry, algorithm wouldn't be stable
-        # If the user didn't ask "-a" explicitely, sorting is reversed (descending)
-        feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
+        # If I didn't ignore the last entry, the algorithm wouldn't be stable.
+        # If the user didn't ask "-a" explicitly, sorting is reversed (descending)
+        self.feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
         # Now print sorted candidates. A candidate is retrieved from temp DB through
         # its ID
-        for feat_entry in feat_to_order:
-            candidate = temp_file[unicode(feat_entry[len(feat_entry) - 1])]
-            self.chain.handle_candidate(candidate)
+        for feat_entry in self.feat_to_order:
+            x = feat_entry[len(feat_entry) - 1]
+            entity, sub_info = temp_file[unicode(x).encode('utf8')]
+            self.chain.handle(entity, sub_info)
         self.chain.after_file(fileobj, info)
 
 
@@ -187,6 +203,8 @@ def treat_feat_list(feat_string):
         
         @return A list of strings containing the (unverified) key feature names.
     """
+    if feat_string == "":
+        return ""  # Python splits as [""]... ¬¬
     return feat_string.split(":")
 
 
@@ -229,8 +247,6 @@ def treat_options(opts, arg, n_arg, usage_string):
     if len(a_or_d) > 1:
         warn("you must provide only one option, -a OR -d. Only the last one" + \
              " will be considered.")
-    if not feat_list:
-        error("You MUST provide at least one sorting key with -f")
 
 
 

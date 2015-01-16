@@ -334,6 +334,7 @@ def default_exception_handler(type, value, trace):
         fname = os.path.relpath(fname, '.')
         print("ERROR:")
         print("=>", value, file=sys.stderr)
+        print("-" * 40)
         print("Detected in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)
         print("For a full traceback, run with --debug.", file=sys.stderr)
 
