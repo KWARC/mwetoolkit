@@ -113,6 +113,7 @@ class AnnotatorHandler(filetype.ChainedInputHandler):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
         self.chain.before_file(fileobj, info)
+        verbose("Annotating corpus with MWEs found in list")
 
     def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, detect MWEs and append
@@ -230,6 +231,9 @@ class CandidatesHandler(filetype.InputHandler):
     def __init__(self):
         self.info = CandidateInfo()
 
+    def handle_meta(self, meta, info={}):
+        pass # Removes warning. This handler is supposed to ignore meta
+
     def handle_candidate(self, candidate, info={}):
         self.info.add(candidate)
 
@@ -319,9 +323,10 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     if detector_class == SourceDetector and n_gaps is not None:
         error('Bad arguments: method "Source" with "--gaps"')
     c = CandidatesHandler()
+    verbose("Reading MWE list from candidates file")
     filetype.parse(candidates_fnames,
             c, filetype_candidates_ext)
-
+    verbose("MWE list loaded in memory successfully")
     global detector
     detector = detector_class(c.info, n_gaps)
 
