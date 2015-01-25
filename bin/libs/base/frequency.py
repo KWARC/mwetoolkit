@@ -34,6 +34,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from libs.base.feature import Feature
+from xml.sax.saxutils import quoteattr
 
 ################################################################################
 
@@ -56,8 +57,8 @@ class Frequency( Feature ) :
             @return A string containing the XML element <freq> with its 
             attributes, according to mwetoolkit-candidates.dtd.
         """
-        return "<freq name=\"" + self.name + \
-               "\" value=\"" + str(self.value) + "\" />"
+        return "<freq name=" + quoteattr(self.name) + \
+               " value=" + quoteattr(str(self.value)) + " />"
         
 ################################################################################
         
