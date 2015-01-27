@@ -181,7 +181,7 @@ class FeatureAdderPrinter(filetype.ChainedInputHandler):
             except Exception :
                 error( "This should never be printed. The end of the world is here")
 
-        super(FeatureAdderPrinter, self).handle_candidate(candidate, info)
+        self.chain.handle_candidate(candidate, info)
 
 
 ################################################################################     
@@ -416,6 +416,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global supported_measures
     global main_freq
     global not_normalize_mle
+    global input_filetype_ext
+    global output_filetype_ext
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
         
@@ -442,7 +444,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["measures=", "original=", "unnorm-mle"]
+longopts = ["from=", "to=", "measures=", "original=", "unnorm-mle"]
 args = read_options( "m:o:u", longopts, treat_options, -1, usage_string )
 
 printer = FeatureAdderPrinter()

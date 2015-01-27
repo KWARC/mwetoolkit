@@ -291,7 +291,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################
 # MAIN SCRIPT
 
-longopts = [ "feat=", "asc", "desc", "precs" ]
+longopts = [ "from=", "feat=", "asc", "desc", "precs" ]
 args = read_options( "f:adp", longopts, treat_options, 1, usage_string )
 filetype.parse(args, StatsCollectorHandler(), input_filetype_ext)
 print_stats()    
