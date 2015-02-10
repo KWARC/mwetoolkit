@@ -513,7 +513,6 @@ class Index():
                  use_c_indexer=None):
         self.arrays = {}
         self.metadata = {"corpus_size": 0}
-        self.sentence_count = 0
 
         Index.use_c_indexer(use_c_indexer)
 
@@ -680,9 +679,6 @@ class Index():
             # '' (symbol 0)  means end-of-sentence
             self.arrays[attr].append_word('')
         self.metadata["corpus_size"] += nb_words
-        self.sentence_count += 1
-        if self.sentence_count % 100 == 0:
-            verbose("Processing sentence %d" % self.sentence_count)
     
 ################################################################################
 
