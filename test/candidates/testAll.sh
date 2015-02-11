@@ -34,7 +34,9 @@ $DIR_IN/corpus.xml | tail -n +2 | sort >$txt_out"
 
 cd "$HERE"
 rm -rf ./output
-ln -s "$t_INPUT/ted500.xml" VerbParticle/corpus.xml
+if [ -ne VerbParticle/corpus.xml ]; then
+	ln -s "$t_INPUT/ted500.xml" VerbParticle/corpus.xml
+fi
 
 
 for DATADIR in NounCompound VerbParticle; do
