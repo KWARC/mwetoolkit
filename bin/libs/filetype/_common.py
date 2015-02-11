@@ -420,7 +420,7 @@ class InputHandler(object):
 
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
-        pass  # By default, we just silently ignore Meta instances
+        #pass  # By default, we just silently ignore Meta instances        
         info["kind"] = "meta"
         return self._fallback(meta_obj, info)
 
@@ -521,7 +521,12 @@ class AbstractPrinter(InputHandler):
         for this printer's file type. Must be overridden."""
         raise NotImplementedError
 
-
+    def handle_meta(self, meta_obj, info={}):
+        """
+	        Dummy function to ignore meta -> removes annoying warning
+        """        
+        pass
+    
     def __init__(self, category, output=None, flush_on_add=True):
         if category not in self.valid_categories:
             raise Exception("Bad printer: {}(category=\"{}\")"
