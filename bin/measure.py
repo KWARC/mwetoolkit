@@ -356,7 +356,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 
 if __name__ == "__main__":
-    longopts = ["reference=", "sentence-aligner=", "evaluator="]
+    longopts = ["reference=", "sentence-aligner=", "evaluator=", "reference-from=", "corpus-from="]
     args = read_options("r:e:", longopts, treat_options, -1, usage_string)
     reference = parse_entities([reference_fname], reference_filetype_ext)
     prediction = parse_entities(args, corpus_filetype_ext)
