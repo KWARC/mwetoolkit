@@ -202,6 +202,8 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
         ext = output_filetype_ext or "XML"
         chain = filetype.printer_class(ext)("candidates")
         chain.before_file(fileobj, info)
+        #import pdb
+        #pdb.set_trace()
         chain.handle_meta(Meta([],[],[]), info)
         self.print_candidates(chain, fileobj.name, info)
         chain.after_file(fileobj, info)
@@ -221,6 +223,7 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
         global print_cand_freq, print_source, temp_file
         corpus_name = re.sub( ".*/", "", re.sub( "\.(xml|info)", "", filename ) )
         verbose("Outputting candidates file...")
+        #chain.handle_meta(Meta([],[],[]))
         id_number = 0        
         for base_string in temp_file.keys() :
             (surface_dict, total_freq) = temp_file[ base_string ]

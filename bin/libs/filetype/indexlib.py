@@ -228,7 +228,7 @@ def fuse_suffix_arrays(array1, array2):
 ################################################################################
 ################################################################################
 
-class SymbolTable():
+class SymbolTable(object):
     """
         Handles the conversion between word strings and numbers.
     """
@@ -255,7 +255,7 @@ class SymbolTable():
 ################################################################################
 ################################################################################
 
-class SuffixArray():
+class SuffixArray(object):
     """
         Class containing the corpus and suffix arrays and the symbol table
         for one attribute of a corpus.
@@ -462,7 +462,7 @@ class CSuffixArray(SuffixArray):
 ################################################################################
 ################################################################################
 
-class Index():
+class Index(object):
     """
         This class holds the `SuffixArray`s for all attributes of a corpus,
         plus metadata which is common for all attributes.
@@ -754,8 +754,10 @@ class Index():
 def populate_index(index, corpus_fileobjs, filetype_hint=None):
     """Generates an `Index` from a corpus file."""
     handler = IndexPopulatorHandler(index)
-    filetype.parse(corpus_fileobjs, handler, filetype_hint).flush()
+    filetype.parse(corpus_fileobjs, handler, filetype_hint)
+    handler.flush()
 
+################################################################################
 
 class IndexPopulatorHandler(filetype.InputHandler):
     def __init__(self, index):

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >] 
+>
+<rdf:RDF xmlns="http://www.mwetoolkiteval.org/.owl#"
+    xml:base="http://www.mwetoolkiteval.org/ontologies/2010/2/Ontology1269282494031.owl"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+<owl:Class rdf:about="#come_in"/>
+<owl:Class rdf:about="#cover_up"/>
+<owl:Class rdf:about="#go_out"/>
+<owl:Class rdf:about="#go_on"/>
+<owl:Class rdf:about="#go_up"/>
+<owl:Class rdf:about="#hold_on"/>
+<owl:Class rdf:about="#kneel_down"/>
+<owl:Class rdf:about="#leave_in"/>
+<owl:Class rdf:about="#put_on"/>
+<owl:Class rdf:about="#put_up"/>
+<owl:Class rdf:about="#sit_down"/>
+<owl:Class rdf:about="#throw_over"/>
+<owl:Class rdf:about="#wash_out"/>
+<owl:Class rdf:about="#come_in"/>
+<owl:Class rdf:about="#come_on"/>
+<owl:Class rdf:about="#come_off"/>
+<owl:Class rdf:about="#fall_down"/>
+<owl:Class rdf:about="#get_off"/>
+<owl:Class rdf:about="#go_ahead"/>
+<owl:Class rdf:about="#go_on"/>
+<owl:Class rdf:about="#go_through"/>
+<owl:Class rdf:about="#lie_down"/>
+<owl:Class rdf:about="#push_on"/>
+<owl:Class rdf:about="#stick_out"/>
+<owl:Class rdf:about="#take_out"/>
+<owl:Class rdf:about="#want_off"/>
+</rdf:RDF>

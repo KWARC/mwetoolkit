@@ -1,15 +1,21 @@
 #!/bin/bash
-set -e           # Exit on errors...
-exec </dev/null  # Don't hang if a script tries to read from stdin.
 
-# Use GNU readlink on Mac OS.
-if which greadlink >/dev/null 2>&1; then
-	readlink() { greadlink "$@"; }
-fi
+HERE="$(cd "$(dirname "$0")" && pwd)"
+
+source "$HERE/../../../testlib.sh"
+
+usage_exit() { {
+    echo "Usage: $(basename "$0") [-h]"
+    echo "Test MWE candidate extraction"
+    exit 1
+} 1>&2;
+}
+
+test "$#" -ne 0  && usage_exit
 
 DIR="$(readlink -f "$(dirname "$0")")"
 
-TOOLKITDIR="$DIR/../.."
+TOOLKITDIR="$DIR/../../../.."
 OUTDIR="$DIR/output"
 
 run() {
@@ -30,7 +36,6 @@ dotest() {
 	if eval time "$run" && eval "$test"; then
 		printf "\e[1;32mOK\e[0m\n"
 	else
-		source "$DIR/../testlib.sh"
 		t_backtrace
 		printf "\e[1;31mTest $testnum FAILED!\e[0m\n"
 		exit 1
@@ -59,7 +64,7 @@ main() {
 	done
 
 	dotest "Conversion from TreeTagger to XML" \
-		'run treetagger2xml.py -v "$DIR/corpus-treetagger.txt" >corpus-ptb-tags.xml' \
+		'run from_treetagger.py -v "$DIR/corpus-treetagger.txt" >corpus-ptb-tags.xml' \
 		true
 
 	dotest "POS tag simplification" \

@@ -65,9 +65,10 @@ class Entry( Ngram ) :
             @return A string containing the XML element <entry> with its
             internal structure, according to mwetoolkit-dict.dtd.
         """
-        result = "<entry"
-        if self.id_number >= 0 :
-            result = result + " entryid=\"" + str(self.id_number) + "\">"#+"\n"
+        result = ""        
+        #result = "<entry"
+        #if self.id_number >= 0 :
+        #    result = result + " entryid=\"" + str(self.id_number) + "\">"#+"\n"
 
         # Unicode support
         base_string = super( Entry, self ).to_xml()
@@ -79,7 +80,8 @@ class Entry( Ngram ) :
             for feat in self.features :
                 result = result + "        " + feat.to_xml() + "\n"
             result = result + "    </features>\n"
-        return result + "</entry>"
+        #return result + "</entry>"
+        return result
 
 ################################################################################
 

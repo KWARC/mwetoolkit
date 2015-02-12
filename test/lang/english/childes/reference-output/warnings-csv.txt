@@ -1,0 +1,3 @@
+Debug mode on
+Verbose mode on
+Processing sentence number 0

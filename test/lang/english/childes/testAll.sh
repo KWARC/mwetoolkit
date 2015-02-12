@@ -1,7 +1,7 @@
 #! /bin/bash
 HERE="$(cd "$(dirname "$0")" && pwd)"
 
-source "$HERE/../testlib.sh"
+source "$HERE/../../../testlib.sh"
 
 usage_exit() { {
     echo "Usage: $(basename "$0") [-h] [-s]"
@@ -52,7 +52,8 @@ main() {
 
     t_testname "Extraction from index"
     t_run "$t_BIN/candidates.py -f -v -p $DIR/patterns.xml corpus.info >candidates-from-index.xml"
-
+    t_diff "candidates-from-index.xml" "../reference-output/candidates-from-index.xml"
+    
     t_testname "Extraction from XML"
     t_run "$t_BIN/candidates.py -f -v -p $DIR/patterns.xml corpus.xml >candidates-from-corpus.xml"
 
@@ -69,12 +70,12 @@ main() {
     t_run "$t_BIN/eval_automatic.py -v -r $DIR/reference.xml -g candidates-featureful.xml >eval.xml 2>eval-stats.txt"
 
     t_testname "Mean Average Precision"
-    t_run "$t_BIN/map.py -v -f mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus eval.xml >map.txt"
+    t_run "$t_BIN/avg_precision.py -v -f mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus eval.xml >map.txt"
 
-    for format in csv arff evita owl ucs; do
-        t_testname "Conversion from XML to $format"
-        t_run "$t_BIN/xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt"
-    done
+    #for format in csv arff evita owl ucs; do
+    #    t_testname "Conversion from XML to $format"
+    #    t_run "$t_BIN/xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt"
+    #done
 
     t_testname "Take first 50 candidates"
     t_run "$t_BIN/head.py -v -n 50 candidates-featureful.xml >candidates-featureful-head.xml"
@@ -104,8 +105,8 @@ main() {
     t_testname "Filtering out candidates occurring less than twice"
     t_run "$t_BIN/filter.py -t 2 candidates-featureful.xml >candidates-twice.xml"
 
-    t_testname "Comparison against reference output"
-    compare-to-reference
+    #t_testname "Comparison against reference output"
+    #compare-to-reference
 }
 
 
@@ -124,7 +125,7 @@ compare() {
 
 
 compare-to-reference() {
-    tar -C .. -xvf ../reference-output.tar.bz2
+    #tar -C .. -xvf ../reference-output.tar.bz2
     countfail=0
     errorreport="`pwd`/../error-report.log"
     printf "" > $errorreport

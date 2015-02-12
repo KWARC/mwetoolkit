@@ -130,8 +130,24 @@ class LoudHandler(ChainedInputHandler):
             self.kind = "entity"
         self.count += 1
 
-        self.print_progress()
+        self.print_progress()        
         self.chain.handle(entity, info)
+        
+    def handle_candidate(self,candidate,info={}):
+        self.handle_meta_if_absent() 
+        self.chain.handle_candidate(candidate,info)
+    
+    def handle_meta(self,meta,info={}):
+        self._meta_handled = True
+        self.chain.handle_meta(meta,info)
+
+    def handle_meta_if_absent(self):
+        """
+            Calls handle_meta if Meta was not found up to now. Can be called
+            before handle_candidate, will only be executed once for a file.
+        """
+        if not self._meta_handled :
+            self.handle_meta(Meta([],[],[]),info={})    
 
     def print_progress(self):
         if self.count % 100 == 0:
@@ -393,7 +409,7 @@ class PlainCandidatesParser(common.AbstractTxtParser):
     r"""Instances of this class parse the PlainCandidates format,
     calling the `handler` for each object that is parsed.
     """
-    valid_categories = ["candidates"]
+    valid_categories = ["candidates"]    
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCandidatesParser, self).__init__(in_files, encoding)
@@ -404,6 +420,7 @@ class PlainCandidatesParser(common.AbstractTxtParser):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
         self.candidate_count += 1
         c = Candidate(self.candidate_count, words)
+        self.handle_meta_if_absent(handler)
         handler.handle_candidate(c)
 
 

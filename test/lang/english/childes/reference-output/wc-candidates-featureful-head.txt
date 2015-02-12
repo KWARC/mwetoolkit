@@ -1,0 +1,4 @@
+Debug mode on
+26 entities in candidates-featureful-head.xml
+52 words in candidates-featureful-head.xml
+169 characters in candidates-featureful-head.xml

@@ -154,7 +154,7 @@ class XMLParser(common.AbstractParser):
                         self.parse_corpus(inner_iterator, handler, info)
 
                 elif elem.tag == "candidates":
-                    with common.ParsingContext(fileobj, handler, info):
+                    with common.ParsingContext(fileobj, handler, info):                             
                         self.parse_candidates(inner_iterator, handler, info)
 
                 elif elem.tag == "patterns":

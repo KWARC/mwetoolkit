@@ -42,6 +42,7 @@ from ..base.__common import WILDCARD
 from ..base.candidate import Candidate
 from ..base.sentence import Sentence
 from ..base.word import Word
+from ..base.meta import Meta
 from .. import util
 
 
@@ -195,6 +196,7 @@ class AbstractParser(object):
         self.partial_fun = None
         self.partial_obj = None
         self.partial_kwargs = None
+        self._meta_handled = False
 
     def flush_partial_callback(self):
         r"""Finally perform the callback `self.partial_fun(...args...)`."""
@@ -278,7 +280,8 @@ class AbstractParser(object):
                 if f != sys.stdin:  # XXX 2014-11-07 broken by Python2kFileWrapper
                     f.close()
         self._files = []
-
+    
+################################################################################
 
 class AbstractTxtParser(AbstractParser):
     r"""Base class for plaintext-file parsing objects.
@@ -469,6 +472,7 @@ class InputHandler(object):
                 or info["parser"].filetype_info.filetype_ext
         return filetype.printer_class(ext)(info["category"])
 
+################################################################################
 
 class ChainedInputHandler(InputHandler):
     r"""InputHandler that delegates all methods to `self.chain`.
@@ -520,12 +524,6 @@ class AbstractPrinter(InputHandler):
         r"""The singleton instance of FiletypeInfo
         for this printer's file type. Must be overridden."""
         raise NotImplementedError
-
-    def handle_meta(self, meta_obj, info={}):
-        """
-	        Dummy function to ignore meta -> removes annoying warning
-        """        
-        pass
     
     def __init__(self, category, output=None, flush_on_add=True):
         if category not in self.valid_categories:

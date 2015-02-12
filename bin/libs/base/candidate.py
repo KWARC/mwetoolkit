@@ -94,7 +94,7 @@ class Candidate ( Entry ) :
         self.occurs = occurs if occurs else []             # Ngram list
         self.tpclasses = tpclasses if tpclasses else []        # TPClass list
         self.freqs = []
-        self.features = features if features else []
+        self.features = features if features else [] # TODO: redundant with Entry features, which are useless
         self.vars = vars if vars else []
         
 ################################################################################

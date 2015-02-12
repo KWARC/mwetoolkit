@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<candidates >
+<meta>
+    <corpussize name="corpus" value="2570" />
+    <metafeat name="mle_corpus" type="real" />
+    <metafeat name="pmi_corpus" type="real" />
+    <metafeat name="t_corpus" type="real" />
+    <metafeat name="dice_corpus" type="real" />
+    <metafeat name="ll_corpus" type="real" />
+</meta>
+<cand candid="14">
+    <ngram><w lemma="come" pos="VV0" ><freq name="corpus" value="8" /></w> <w lemma="on" pos="RP" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="come" lemma="come" pos="VV0" /> <w surface="on" lemma="on" pos="RP" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.0011673151751" />
+        <feat name="pmi_corpus" value="7.10572169193" />
+        <feat name="t_corpus" value="1.71947530769" />
+        <feat name="dice_corpus" value="0.4" />
+        <feat name="ll_corpus" value="13.1945463995" />
+    </features>
+</cand>
+</candidates>

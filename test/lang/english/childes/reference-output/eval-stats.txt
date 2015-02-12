@@ -1,0 +1,9 @@
+Debug mode on
+Verbose mode on
+Processing candidate number 0
+Nb. of true positives: 20
+Nb. of candidates: 26
+Nb. of references: 1846
+Precision: 0.769231
+Recall: 0.010834
+F-measure: 0.021368

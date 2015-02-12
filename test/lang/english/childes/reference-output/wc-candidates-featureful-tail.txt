@@ -1,0 +1,4 @@
+Debug mode on
+26 entities in candidates-featureful-tail.xml
+52 words in candidates-featureful-tail.xml
+169 characters in candidates-featureful-tail.xml
