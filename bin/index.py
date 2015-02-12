@@ -141,7 +141,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = ["from=", "index=", "attributes=", "old", "moses", "conll" ]
-arg = read_options( "i:a:omc", longopts, treat_options, 0, usage_string )
+arg = read_options( "i:a:omc", longopts, treat_options, -1, usage_string )
 
 simple_attrs = [a for a in used_attributes if '+' not in a]
 composite_attrs = [a for a in used_attributes if '+' in a]
