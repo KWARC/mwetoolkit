@@ -557,7 +557,7 @@ class ConllParser(common.AbstractTxtParser):
         indexes = []
         for mwe_i in xrange(len(data[0])):
             word_data = [getitem(d, mwe_i, "_") for d in data]
-            self._word_data = [(WILDCARD if d == ["_"] else d) for d in word_data]
+            self._word_data = [(WILDCARD if d == "_" else d) for d in word_data]
             self._id = self.get("ID", None) or ("1" \
                     if self.partial_obj is None
                     else len(self.partial_obj.word_list))

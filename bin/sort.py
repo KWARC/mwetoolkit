@@ -165,9 +165,9 @@ class SorterHandler(filetype.ChainedInputHandler):
     def feat_value(self, entity, feat_name):
         r"""Return value for given feature name."""
         if feat_name.startswith("$"):
-            if feat_name == "$SURFACE":
+            if feat_name == "@SURFACE":
                 return tuple(w.surface for w in entity)
-            elif feat_name == "$LEMMA":
+            elif feat_name == "@LEMMA":
                 return tuple(w.lemma for w in entity)
             error("Bad pseudo-feature name", feat_name=feat_name)
         return entity.get_feat_value(feat_name)

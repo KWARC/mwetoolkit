@@ -60,8 +60,8 @@ test_parser  PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus
 test_printer PlainCorpus "sample/corpus.PlainCorpus" "xml-ref/corpus.PlainCorpus.xml"
 
 t_testname "Check pWaC format"
-test_parser  pWaC "sample/corpus.pwac" "xml-ref/corpus.pukwac.xml"
-#test_printer pWaC "sample/corpus.pukwac" "xml-ref/corpus.pukwac.xml"
+test_parser  pWaC "sample/corpus.pwac" "xml-ref/corpus.pwac.xml"
+#test_printer pWaC "sample/corpus.pwac" "xml-ref/corpus.pwac.xml"
 
 t_testname "Check PlainCandidates format"
 test_parser  PlainCandidates "sample/candidates.PlainCandidates" "xml-ref/candidates.PlainCandidates.xml"
