@@ -60,7 +60,7 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 }
 
 int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
-	int limit = suf->used;
+	size_t limit = suf->used;
 	symbolnumber_t *corpus = suf->corpus;
 	int first = 1;
 
@@ -86,7 +86,7 @@ int suffixarray_compare_global(const void *ptr1, const void *ptr2) {
 }
 
 void suffixarray_sort(suffixarray_t *suf) {
-	int i;
+	size_t i;
 	current_suffix_array = suf;
 	for (i=0; i < suf->used; i++)
 		suf->suffix[i] = i;
@@ -94,7 +94,7 @@ void suffixarray_sort(suffixarray_t *suf) {
 }
 
 void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
-	int nread1;//nread2;
+	size_t nread1;//nread2;
 	while (1) {
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 		resize_alloc(suf->corpus, suf->allocated, symbolnumber_t);

@@ -24,6 +24,11 @@
 #include "rbtree.h"
 #include "readline.h"
 
+// For the moment, we keep symbolnumber_t as an int because we consider that
+// the symbol table will never contain more than 2^31-1 different symbols.
+// If we were to make it a size_t table, we would double its size in memory
+// Considering that we already have 2 potentially very large vectors in memory,
+// we won't do this for now. CR-SC 20150212
 typedef int symbolnumber_t;
 typedef char *symbolname_t;
 

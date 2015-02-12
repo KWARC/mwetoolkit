@@ -27,6 +27,12 @@
 #include <string.h>
 #include "base.h"
 
+
+// For the moment, we keep rbvalue_t as an int because we consider that
+// the symbol table will never contain more than 2^31-1 different symbols.
+// If we were to make it a size_t table, we would double its size in memory
+// Considering that we already have 2 potentially very large vectors in memory,
+// we won't do this for now. CR-SC 20150212
 typedef char *rbkey_t;
 typedef int rbvalue_t;
 

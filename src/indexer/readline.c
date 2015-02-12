@@ -39,7 +39,7 @@ char *readline(FILE *stream) {
 }
 
 char *copystring(char *str) {
-	int length = strlen(str);
+	size_t length = strlen(str);
 	char *new = alloc(length+1, char);
 	strcpy(new, str);
 	return new;
