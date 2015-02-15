@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -e           # Exit on errors..
+set -e           # Exit on errors...
 exec </dev/null  # Don't hang if a script tries to read from stdin.
 
 # Use GNU readlink on Mac OS.
@@ -15,14 +14,15 @@ OUTDIR="$DIR/output"
 
 run() {
 	local script="$1"; shift
-	eval python "$TOOLKITDIR/bin/$script" "$@"
+	eval python "${TOOLKITDIR}/bin/${script}" "$@"
+
 }
 
 dotest() {
 	[[ $# -eq 3 ]] || { echo "dotest: Invalid arguments: $*" >&2; exit 2; }
 	local name="$1" run="$2" verify="$3"
 
-	((testnum++ < tests_to_skip)) && return 0		
+	((testnum++ < tests_to_skip)) && return 0
 
 	printf "\e[1m%d. %s\e[0m\n" "$testnum" "$name"
 	printf "\e[1;33m%s\e[0m\n" "$run"
@@ -30,7 +30,9 @@ dotest() {
 	if eval time "$run" && eval "$test"; then
 		printf "\e[1;32mOK\e[0m\n"
 	else
-		printf "\e[1;31mFAILED!\e[0m\n"
+		source "$DIR/../testlib.sh"
+		t_backtrace
+		printf "\e[1;31mTest $testnum FAILED!\e[0m\n"
 		exit 1
 	fi
 }
@@ -44,7 +46,6 @@ main() {
 	[[ -d $OUTDIR ]] || mkdir "$OUTDIR"
 
 	cd "$OUTDIR"
-	[[ -e corpus.xml ]] || cp ../corpus.xml .
 
 	testnum=0
 	tests_to_skip=0
@@ -57,16 +58,32 @@ main() {
 		shift
 	done
 
+	dotest "Conversion from TreeTagger to XML" \
+		'run treetagger2xml.py -v "$DIR/corpus-treetagger.txt" >corpus-ptb-tags.xml' \
+		true
+
+	dotest "POS tag simplification" \
+		'run changepos.py -v corpus-ptb-tags.xml >corpus.xml' \
+		true
+
 	dotest "Corpus indexing" \
 		'run index.py -v -i corpus "corpus.xml"' \
 		'true'
 
 	dotest "Extraction from index" \
-		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
+		'run candidates.py -sD -v -p "$DIR/patterns.xml" -i corpus.info >candidates-from-index.xml' \
 		true
 
 	dotest "Extraction from XML" \
-		'run candidates.py -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
+		'run candidates.py -s -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
+		true
+
+	dotest "Extraction with Longest match-distance" \
+		'run candidates.py --match-distance=Longest -s -v -p "$DIR/patterns.xml" "corpus.xml" >long-candidates.xml' \
+		true
+
+	dotest "Extraction with Non-Overlapping Longest match-distance" \
+		'run candidates.py --match-distance=Longest --non-overlapping -s -v -p "$DIR/patterns.xml" "corpus.xml" >long-candidates-nonoverlap.xml' \
 		true
 
 	dotest "Comparison of candidate extraction outputs" \
@@ -74,7 +91,7 @@ main() {
 		true
 
 	dotest "Individual word frequency counting" \
-		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
+		'run counter.py -s -v -i corpus.info candidates-from-index.xml >candidates-counted.xml' \
 		true
 
 	dotest "Association measures" \
@@ -130,7 +147,7 @@ main() {
 	dotest "Filtering out candidates occurring less than twice" \
 		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
 		true
-		
+
 	dotest "Comparison against reference output" \
 		compare-to-reference \
 		true
@@ -167,5 +184,6 @@ compare-to-reference() {
 		printf "Please consult the detailed error report in $errorreport\n"
 	fi
 }
+
 
 main "$@"

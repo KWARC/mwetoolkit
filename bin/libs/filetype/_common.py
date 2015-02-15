@@ -35,6 +35,7 @@ from __future__ import absolute_import
 import io
 import collections
 import itertools
+import os
 import re
 import sys
 
@@ -179,6 +180,57 @@ class StopParsing(Exception):
     pass
 
 
+class FileList(object):
+    r"""A FileList represents a list of files to be read.
+
+    IMPORTANT: The `starting_positions` list should have an extra
+    last element indicating the size of it all."""
+    def __init__(self, list_of_files, starting_positions):
+        assert isinstance(list_of_files, list), list_of_files
+        self._list = list_of_files
+        self.starting_positions = starting_positions
+
+    def sublists(self):
+        r"""Yield a FileList instance for each file."""
+        size = self.starting_positions[-1]
+        for f, cl in zip(self._list, self.starting_positions):
+            yield FileList([f], [cl, size])
+
+    def only(self):
+        r"""Return the only file in this FileList.
+        If the list has more than one file, raise an error."""
+        if len(self._list) != 1:
+            raise Exception("BUG: Expected 1 file, got " + self._list)
+        return self._list[0]
+
+    @staticmethod
+    def make_from(list_of_files):
+        r"""Return a FileList for given list_of_files."""
+        if isinstance(list_of_files, FileList):
+            return list_of_files
+
+        #XXX list_of_files = list_of_files or ["-"]
+        files = [FileList._open_file(f) for f in list_of_files]
+
+        starting_positions = [0]
+        for f in files:
+            last = starting_positions[-1]
+            starting_positions.append(last + os.fstat(f.fileno()).st_size)
+        return FileList(files, starting_positions)
+
+    @staticmethod
+    def _open_file(path):
+        r"""(Return buffered file object for given path)"""
+        if isinstance(path, io.BufferedReader):
+            return path
+        if path == "-":
+            path = sys.stdin
+        if isinstance(path, basestring):
+            path = open(path, "rb")
+        f = Python2kFileWrapper(path)
+        return io.BufferedReader(f)
+
+
 class AbstractParser(object):
     r"""Base class for file parsing objects.
 
@@ -186,13 +238,14 @@ class AbstractParser(object):
     calling the appropriate `handler` methods.
 
     Constructor Arguments:
-    @param input_files: A list of target file paths.
+    @param input_files: A list of target file paths,
+    or an instance of FileList.
     """
     filetype_info = None
     valid_categories = []
 
     def __init__(self, input_files):
-        self._files = list(self._open_files(input_files or ["-"]))
+        self.filelist = FileList.make_from(input_files)
         self.partial_fun = None
         self.partial_obj = None
         self.partial_kwargs = None
@@ -218,7 +271,7 @@ class AbstractParser(object):
         @param handler: An instance of InputHandler.
         Callback methods will be called on `handler`.
         """
-        for f in self._files:
+        for f in self.filelist._list:
             try:
                 self._parse_file(f, handler)
             except StopParsing:  # Reading only part of file
@@ -255,31 +308,14 @@ class AbstractParser(object):
         r"""(Called to parse file `fileobj`)"""
         raise NotImplementedError
 
-    def _open_files(self, paths):
-        r"""(Yield readable file objects for all paths.)"""
-        assert isinstance(paths, list)
-        for path in paths:
-            yield self._open_file(path)
-
-    def _open_file(self, path):
-        r"""(Return buffered file object for given path)"""
-        if isinstance(path, io.BufferedReader):
-            return path
-        if path == "-":
-            path = sys.stdin
-        if isinstance(path, basestring):
-            path = open(path, "rb")
-        f = Python2kFileWrapper(path)
-        return io.BufferedReader(f)
-
 
     def close(self):
         r"""Close all files opened by this parser."""
-        for f in self._files:
+        for f in self.filelist._list:
             if hasattr(f, "close"):
                 if f != sys.stdin:  # XXX 2014-11-07 broken by Python2kFileWrapper
                     f.close()
-        self._files = []
+        self.filelist = FileList([], [0])
     
 ################################################################################
 
@@ -324,8 +360,10 @@ class AbstractTxtParser(AbstractParser):
                     just_saw_a_comment = False
 
                 else:
-                    self._parse_line(line,
-                            handler, {"fileobj": fileobj, "linenum": i+1})
+                    progr = (self.filelist.starting_positions[0] + fileobj.tell(),
+                            self.filelist.starting_positions[-1])
+                    self._parse_line(line, handler, {"fileobj": fileobj,
+                            "linenum": i+1, "progress": progr})
                     just_saw_a_comment = False
 
     def _parse_line(self, line, handler, info={}):

@@ -130,6 +130,7 @@ class XMLParser(common.AbstractParser):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
         # complains if we feed it a pre-decoded stream in python2k
         parser = CommentHandlingParser()
+        self.current_fileobj = fileobj
         outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"], parser)
 
         for event, elem in outer_iterator:
@@ -205,7 +206,17 @@ class XMLParser(common.AbstractParser):
             elif event == "end":
                 if elem.tag == "s":
                     # A complete sentence was read, call the callback function
-                    handler.handle_sentence(sentence)
+                    info = {"fileobj": self.current_fileobj}
+
+                    try:
+                        progr = (self.filelist.starting_positions[0] \
+                                        + self.current_fileobj.tell(),
+                                self.filelist.starting_positions[-1])
+                    except IOError:
+                        pass  # Just do not generate progress info, then
+                    else:
+                        info["progress"] = progr
+                    handler.handle_sentence(sentence, info)
 
 
     #######################################################

@@ -14,7 +14,7 @@ OUTDIR="$DIR/output"
 
 run() {
 	local script="$1"; shift
-	eval python "$TOOLKITDIR/bin/$script" --debug "$@"
+	eval python "$TOOLKITDIR/bin/$script" "$@"
 }
 
 dotest() {

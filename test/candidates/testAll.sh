@@ -23,7 +23,7 @@ find_candidates() {
     local txt_out="$DIR_OUT/${out_fname}.txt"
     local txt_ref="$DIR_REF/${out_fname}.txt"
 
-    t_run "$t_BIN/candidates.py --debug -s -v $args \
+    t_run "$t_BIN/candidates.py -s -v $args \
 -p $DIR_IN/patterns.xml --to=PlainCandidates \
 $DIR_IN/corpus.xml | tail -n +2 | sort >$txt_out"
 
@@ -34,9 +34,7 @@ $DIR_IN/corpus.xml | tail -n +2 | sort >$txt_out"
 
 cd "$HERE"
 rm -rf ./output
-if [ ! -e VerbParticle/corpus.xml ]; then
-	ln -s "$t_INPUT/ted500.xml" VerbParticle/corpus.xml
-fi
+ln -sf "$t_INPUT/ted500.xml" VerbParticle/corpus.xml
 
 
 for DATADIR in NounCompound VerbParticle; do

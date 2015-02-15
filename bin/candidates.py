@@ -338,10 +338,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     if len(mode) != 1 :
         error("Exactly one option, -p or -n, must be provided")
     if "patterns" in mode:
-        try:
-            read_patterns_file( patterns_file )
-        except Exception:
-            error("Error loading patterns file!")
+        read_patterns_file( patterns_file )
 
 ################################################################################  
 # MAIN SCRIPT

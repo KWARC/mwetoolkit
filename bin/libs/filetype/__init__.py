@@ -67,7 +67,7 @@ def parse(input_files, handler, filetype_hint=None):
     @param filetype_hint: either None or a valid
     filetype_ext string.
     """
-    handler = LoudHandler(handler)
+    handler = FirstInputHandler(handler)
     SmartParser(input_files, filetype_hint).parse(handler)
 
 
@@ -113,14 +113,22 @@ class EntityCollectorHandler(InputHandler):
         self.entities.append(entity)
 
 
-class LoudHandler(ChainedInputHandler):
-    r"""InputHandler wrapper that warns the
-    user about what has already been processed.
+class FirstInputHandler(ChainedInputHandler):
+    r"""First instance of InputHandler in a chain.
+    This InputHandler does some general processing before
+    passing the arguments over to the actual handlers.
+    
+    Tasks that are performed here:
+    -- print_progress: warning the user about what
+    has already been processed.
+    -- handle_meta_if_absent: guarantee that `handle_meta`
+    has been called when handling entities.
     """
     def __init__(self, chain):
         self.chain = chain
         self.kind = None
         self.count = 0
+        self._meta_handled = False
 
     def _fallback_entity(self, entity, info={}):
         entity_kind = info["kind"]
@@ -130,29 +138,30 @@ class LoudHandler(ChainedInputHandler):
             self.kind = "entity"
         self.count += 1
 
-        self.print_progress()        
+        self.print_progress(info)
         self.chain.handle(entity, info)
         
-    def handle_candidate(self,candidate,info={}):
-        self.handle_meta_if_absent() 
+    def handle_candidate(self, candidate, info={}):
+        self.handle_meta_if_absent()
         self.chain.handle_candidate(candidate,info)
     
-    def handle_meta(self,meta,info={}):
+    def handle_meta(self, meta, info={}):
         self._meta_handled = True
         self.chain.handle_meta(meta,info)
 
     def handle_meta_if_absent(self):
-        """
-            Calls handle_meta if Meta was not found up to now. Can be called
-            before handle_candidate, will only be executed once for a file.
-        """
-        if not self._meta_handled :
-            self.handle_meta(Meta([],[],[]),info={})    
+        if not self._meta_handled:
+            from ..base.meta import Meta
+            self.handle_meta(Meta([], [], []), info={})
 
-    def print_progress(self):
+    def print_progress(self, info):
         if self.count % 100 == 0:
-            util.verbose("~~> Processing {kind} number {n}"
-                    .format(kind=self.kind, n=self.count))
+            percent = float("NAN")
+            if "progress" in info:
+                a, b = info["progress"]
+                percent = 100 * (a/b)
+            util.verbose("~~> Processing {kind} number {n} ({percent:2.0f}%)"
+                    .format(kind=self.kind, n=self.count, percent=percent))
 
 
 class AutomaticPrinterHandler(ChainedInputHandler):
@@ -420,7 +429,6 @@ class PlainCandidatesParser(common.AbstractTxtParser):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
         self.candidate_count += 1
         c = Candidate(self.candidate_count, words)
-        self.handle_meta_if_absent(handler)
         handler.handle_candidate(c)
 
 
@@ -609,7 +617,7 @@ class ConllParser(common.AbstractTxtParser):
 
         if self._id == "1":
             self.new_partial(handler.handle_sentence,
-                    Sentence([], self.s_id), info={})
+                    Sentence([], self.s_id), info=info)
             self.s_id += 1
 
         surface, lemma = self.get("FORM"), self.get("LEMMA")
@@ -822,11 +830,11 @@ class SmartParser(common.AbstractParser):
         self.filetype_hint = filetype_hint
 
     def parse(self, handler):
-        for f in self._files:
-            fti = self._detect_filetype(f, self.filetype_hint)
+        for sub_filelist in self.filelist.sublists():
+            fti = self._detect_filetype(sub_filelist.only(), self.filetype_hint)
             checker_class, parser_class, _ = fti.operations()
-            checker_class(f).check()
-            p = parser_class([f])
+            checker_class(sub_filelist.only()).check()
+            p = parser_class(sub_filelist)
             # Delegate the whole work to parser `p`.
             p.parse(handler)
         handler.flush()
