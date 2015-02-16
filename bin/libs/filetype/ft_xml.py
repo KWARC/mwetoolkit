@@ -81,7 +81,9 @@ r"""Singleton instance of XMLInfo."""
 class XMLChecker(common.AbstractChecker):
     r"""Checks whether input is in XML format."""
     def matches_header(self, strict):
-        header = self.fileobj.peek(20)
+        header = self.fileobj.peek(30)
+        if header.startswith(b"\xef\xbb\xbf"):
+            header = header[3:]  # remove BOM
         return header.startswith(b"<?xml") or header.startswith(b"<pattern")
 
 
@@ -111,6 +113,7 @@ class XMLPrinter(common.AbstractPrinter):
         self.add_string("<!-- ", self.escape(comment), " -->\n")
 
     def handle_pattern(self, pattern, info={}):
+        # TODO Currently copying node XML from input. This should change in the future...
         self.add_string(ElementTree.tostring(pattern.node))
 
     def _fallback(self, entity, info={}):
@@ -433,7 +436,7 @@ class XMLParser(common.AbstractParser):
 
 
 class CommentHandlingParser(ElementTree.XMLParser):
-    r"""Force XMLParser to handle XML comments."""
+    r"""Force XMLParser to handle XML comments and generate sourceline."""
     def __init__(self, **kwargs):
         super(CommentHandlingParser, self).__init__(self, **kwargs)
         self._parser.CommentHandler = self.handle_comment
@@ -443,3 +446,8 @@ class CommentHandlingParser(ElementTree.XMLParser):
         self.parser.StartElementHandler(ElementTree.Comment, {})
         self.target.data(data)
         self.parser.EndElementHandler(ElementTree.Comment)
+
+    def _start_list(self, *args, **kwargs):
+        element = super(self.__class__, self)._start_list(*args, **kwargs)
+        element.sourceline = self._parser.CurrentLineNumber
+        return element

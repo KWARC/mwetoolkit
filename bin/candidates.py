@@ -56,7 +56,7 @@ from libs.base.candidate import Candidate
 from libs.base.ngram import Ngram
 from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, warn
-from libs.filetype.patternlib import parse_patterns_file, build_generic_pattern
+from libs.filetype.patternlib import build_generic_pattern
 from libs.filetype.indexlib import Index
 from libs.base.meta import Meta
 from libs import filetype
@@ -245,16 +245,6 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
                 cand.add_occur( occur_form )
             chain.handle_candidate(cand, info)
 
-
-################################################################################  
-
-def read_patterns_file( filename ) :
-    global patterns
-
-    try:
-        patterns = list(parse_patterns_file(filename))
-    except IOError as err:
-        error(str(err))
         
 ################################################################################  
 
@@ -338,7 +328,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     if len(mode) != 1 :
         error("Exactly one option, -p or -n, must be provided")
     if "patterns" in mode:
-        read_patterns_file( patterns_file )
+        global patterns
+        patterns = filetype.parse_entities([patterns_file])
 
 ################################################################################  
 # MAIN SCRIPT

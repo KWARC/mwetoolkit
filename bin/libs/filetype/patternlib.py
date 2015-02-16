@@ -35,24 +35,14 @@ from xml.etree import ElementTree
 from ..base.word import Word, WORD_ATTRIBUTES
 from ..base.ngram import Ngram
 from ..base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
+from .. import util
 import re
 import sys
 
 
 
 def parse_patterns_file(path, anchored=False):
-    """Returns an iterator that yields precompiled regular expressions,
-    one for each pattern in file at `path`.
-
-    @param `path` The path for a patterns XML file (mwetoolkit-patterns.dtd).
-    """
-    with open(path, "r") as fileobj:
-        iterator = ElementTree.iterparse(fileobj, ["start", "end"])
-        while True:
-            for pattern in iterparse_patterns(iterator):
-                yield pattern
-            else:
-                return
+    raise Exception("DEPRECATED: Use `filetype.parse_entities` instead, anchoring with matches()")
 
 
 ########################################
@@ -218,12 +208,18 @@ class ParsedPattern(object):
     def _neg_children(self, node, only_attr):
         for subnode in node:
             if subnode.tag != "neg":
-                raise Exception("<w> only accepts subnode <neg>")
+                util.warn_once("<w> only accepts subnode <neg>")
             for attr,val in subnode.items():
                 if attr == only_attr:
                     yield "(?!" + re.escape(val) + ")"
 
     def _parse_w(self, node):
+        valid_attrs = set(WORD_ATTRIBUTES + ["id", "neg"])
+        for attr, value in node.items():
+            if attr not in valid_attrs:
+                util.warn("Ignoring bad word attr (line {}): {!r}"
+                        .format(node.sourceline, attr))
+
         negated = set(node.get("neg", "").split(":"))
         attrs = { "wordnum": self.ATTRIBUTE_WILDCARD }
         id = node.get("id", "")
@@ -290,7 +286,8 @@ class ParsedPattern(object):
     #    self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
 
 
-    def matches(self, words, match_distance="All", overlapping=True):
+    def matches(self, words, match_distance="All", overlapping=True,
+                anchor_begin=False, anchor_end=False):
         """Returns an iterator over all matches of this pattern in the word list.
         Each iteration yields a pair `(ngram, match_indexes)`.
         """
@@ -309,7 +306,7 @@ class ParsedPattern(object):
         i = 0
         while i < len(positions):
             matches_here = list(self._matches_at(words, wordstring,
-                    positions[i], len(wordstring), positions))
+                    positions[i], len(wordstring), positions, anchor_end))
 
             increment = 1
             if match_distance == "All":
@@ -331,9 +328,11 @@ class ParsedPattern(object):
                 raise Exception("Bad match_distance: " + match_distance)
 
             i += increment
+            if anchor_begin: return
 
 
-    def _matches_at(self, words, wordstring, current_start, limit, positions):
+    def _matches_at(self, words, wordstring,
+                current_start, limit, positions, anchor_end):
         current_end = limit
         matches_here = []
         while True:
@@ -354,11 +353,12 @@ class ParsedPattern(object):
                 if positions[i] >= start and positions[i] < end:
                     while ignore_spans and ignore_spans[0][1] <= positions[i]:
                         # If the ignore-end is before this point, we don't need it anymore.
-                        ignore_spans = ignore_spans[1:] # Inefficient?
+                        ignore_spans = ignore_spans[1:] # Inefficient!!
                     if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
                         ngram.append(words[i])
                         wordnums.append(i+1)
             yield (Ngram(copy_word_list(ngram), []), wordnums)
+            if anchor_end: return
 
 
     def printable_pattern(self):

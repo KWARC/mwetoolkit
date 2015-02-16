@@ -183,7 +183,8 @@ class FilterHandler(filetype.ChainedInputHandler):
             print_it = False
             words = entity
             for pattern in patterns :
-                for (match_ngram, wordnums) in pattern.matches(words):
+                for (match_ngram, wordnums) in pattern.matches(words,
+                        anchored_begin=True, anchored_end=True):
                     print_it = True
                     ngram_to_print = match_ngram
                     break
@@ -259,22 +260,6 @@ def interpret_equals( a ) :
 
 ################################################################################
 
-def read_patterns_file( filename ) :
-    """
-        NEW:
-        Opens the patterns XML file and parses it using patternlib.
-
-        @param filename The string name of the patterns file.
-    """
-    global patterns
-
-    try:
-        patterns = filetype.patternlib.parse_patterns_file(filename, anchored=True)
-    except IOError as err:
-        error(str(err))
-
-################################################################################
-
 def interpret_length( l, maxormin ):
     """
     Transform argument given to -a or -i options into integer + error checks.
@@ -336,7 +321,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
         elif o in ("-p", "--patterns") :
             verbose( "Reading patterns file" )
-            read_patterns_file( a )
+            global patterns
+            patterns = filetype.parse_entities([a])
         elif o in ("-r", "--reverse") :
             reverse = True
             verbose("Option REVERSE active")

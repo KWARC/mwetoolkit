@@ -461,7 +461,6 @@ class InputHandler(object):
 
     def handle_meta(self, meta_obj, info={}):
         r"""Called to treat a Meta object."""
-        #pass  # By default, we just silently ignore Meta instances        
         info["kind"] = "meta"
         return self._fallback(meta_obj, info)
 
