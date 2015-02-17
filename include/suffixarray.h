@@ -7,10 +7,10 @@
 
 typedef struct suffixarray_t {
 	symbolnumber_t *corpus;
-	symbolnumber_t *suffix;
+	size_t *suffix;
 	symboltable_t *symboltable;
-	int allocated;
-	int used;
+	size_t allocated;
+	size_t used;
 } suffixarray_t;
 
 suffixarray_t* make_suffixarray();
@@ -19,7 +19,7 @@ void free_suffixarray(suffixarray_t *suf);
 
 void suffixarray_append_word(suffixarray_t *suf, symbolname_t word);
 
-int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2);
+int suffixarray_compare(suffixarray_t *suf, size_t pos1, size_t pos2);
 
 int suffixarray_compare_global(const void *ptr1, const void *ptr2);
 

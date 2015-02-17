@@ -49,7 +49,7 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 		             symbolnumber_t);
 		resize_alloc(suf->suffix,
 		             suf->allocated + SUFFIX_ARRAY_ALLOC_CHUNK,
-		             symbolnumber_t);
+		             size_t);
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 	}
 
@@ -59,7 +59,7 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 	suf->used++;
 }
 
-int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
+int suffixarray_compare(suffixarray_t *suf, size_t pos1, size_t pos2) {
 	size_t limit = suf->used;
 	symbolnumber_t *corpus = suf->corpus;
 	int first = 1;
@@ -82,7 +82,7 @@ int suffixarray_compare(suffixarray_t *suf, int pos1, int pos2) {
 
 
 int suffixarray_compare_global(const void *ptr1, const void *ptr2) {
-	return suffixarray_compare(current_suffix_array, *(int *)ptr1, *(int *)ptr2);
+	return suffixarray_compare(current_suffix_array, *(size_t *)ptr1, *(size_t *)ptr2);
 }
 
 void suffixarray_sort(suffixarray_t *suf) {
@@ -98,9 +98,9 @@ void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
 	while (1) {
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 		resize_alloc(suf->corpus, suf->allocated, symbolnumber_t);
-		resize_alloc(suf->suffix, suf->allocated, symbolnumber_t);
+		resize_alloc(suf->suffix, suf->allocated, size_t);
 		nread1 = fread(corpusfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, corpusfile);
-		         fread(suffixfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
+		         fread(suffixfile, sizeof(size_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
 		suf->used += nread1;
 		if (nread1 < SUFFIX_ARRAY_ALLOC_CHUNK)
 			break;
@@ -109,7 +109,7 @@ void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
 
 void write_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
 	fwrite(suf->corpus, sizeof(symbolnumber_t), suf->used, corpusfile);
-	fwrite(suf->suffix, sizeof(symbolnumber_t), suf->used, suffixfile);
+	fwrite(suf->suffix, sizeof(size_t), suf->used, suffixfile);
 }
 
 void load_suffix_array(suffixarray_t *suf, char *basepath) {
