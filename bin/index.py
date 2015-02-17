@@ -95,6 +95,7 @@ OPTIONS may be:
 """
 use_text_format = None
 input_filetype_ext = None
+basename = None
 
 
 ################################################################################
