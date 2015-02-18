@@ -209,7 +209,7 @@ class FileList(object):
         if isinstance(list_of_files, FileList):
             return list_of_files
 
-        #XXX list_of_files = list_of_files or ["-"]
+        list_of_files = list_of_files or ["-"]
         files = [FileList._open_file(f) for f in list_of_files]
 
         starting_positions = [0]
@@ -419,6 +419,12 @@ class Python2kFileWrapper(object):
             return self._wrapped.readinto(b)
         except AttributeError:
             b[:] = self._wrapped.read(len(b))
+            
+    def tell(self):
+        try:
+            return self._wrapped.tell()
+        except IOError:
+            return 0
  
 
 

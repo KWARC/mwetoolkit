@@ -159,7 +159,8 @@ class FirstInputHandler(ChainedInputHandler):
             percent = float("NAN")
             if "progress" in info:
                 a, b = info["progress"]
-                percent = 100 * (a/b)
+                if b != 0 :
+                    percent = 100 * (a/b)                    
             util.verbose("~~> Processing {kind} number {n} ({percent:2.0f}%)"
                     .format(kind=self.kind, n=self.count, percent=percent))
 
@@ -829,13 +830,13 @@ class SmartParser(common.AbstractParser):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
 
-    def parse(self, handler):
+    def parse(self, handler):    
         for sub_filelist in self.filelist.sublists():
             fti = self._detect_filetype(sub_filelist.only(), self.filetype_hint)
             checker_class, parser_class, _ = fti.operations()
             checker_class(sub_filelist.only()).check()
             p = parser_class(sub_filelist)
-            # Delegate the whole work to parser `p`.
+            # Delegate the whole work to parser `p`.                   
             p.parse(handler)
         handler.flush()
         return handler

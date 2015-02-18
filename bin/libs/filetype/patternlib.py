@@ -214,7 +214,7 @@ class ParsedPattern(object):
                     yield "(?!" + re.escape(val) + ")"
 
     def _parse_w(self, node):
-        valid_attrs = set(WORD_ATTRIBUTES + ["id", "neg"])
+        valid_attrs = set(WORD_ATTRIBUTES + ["id", "neg", "syndep"])
         for attr, value in node.items():
             if attr not in valid_attrs:
                 util.warn("Ignoring bad word attr (line {}): {!r}"
