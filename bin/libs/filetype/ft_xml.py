@@ -53,6 +53,7 @@ from ..base.meta import Meta
 from ..base.corpus_size import CorpusSize
 from ..base.meta_feat import MetaFeat
 from ..base.meta_tpclass import MetaTPClass
+from .. import util
 
 
 
@@ -129,6 +130,7 @@ class XMLParser(common.AbstractParser):
     """
     valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
+
     def _parse_file(self, fileobj, handler):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
         # complains if we feed it a pre-decoded stream in python2k
@@ -163,11 +165,17 @@ class XMLParser(common.AbstractParser):
 
                 elif elem.tag == "patterns":
                     with common.ParsingContext(fileobj, handler, info):
-                        from .patternlib import iterparse_patterns
-                        for pattern in iterparse_patterns(inner_iterator):
-                            handler.handle_pattern(pattern)
+                        self.parse_patterns(inner_iterator, handler, info)
                 else:
-                    raise Exception("Bad outer tag in XML filetype: " + repr(elem.tag))
+                    util.error("Bad outer tag in XML filetype" \
+                            " (line {}): {!r}".format(
+                            elem.sourceline, elem.tag))
+
+
+    def bad_elem(self, elem):
+        r"""Complain about unknown XML element."""
+        util.warn("Ignoring unknown XML tag (line {}): {!r}".format(
+                elem.sourceline, elem.tag))
 
 
 
@@ -206,6 +214,9 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "mwepart":
                     sentence.mweoccurs[-1].indexes.append(int(elem.get("index"))-1)
 
+                else:
+                    self.bad_elem(elem)
+
             elif event == "end":
                 if elem.tag == "s":
                     # A complete sentence was read, call the callback function
@@ -220,6 +231,32 @@ class XMLParser(common.AbstractParser):
                     else:
                         info["progress"] = progr
                     handler.handle_sentence(sentence, info)
+
+
+    #######################################################
+    def parse_patterns(self, inner_iterator, handler, info):
+        # TODO: move code from ParsedPattern to here and build to build an
+        # internal Pattern object (independent from XML)
+        from . import patternlib
+        depth = 0
+        for event, elem in inner_iterator:
+            assert depth >= 0, "Not seeing `start` events?"
+            if event == "start":
+                depth += 1
+            elif event == "end":
+                depth -= 1
+                if depth == 1:
+                    # Just closed an element
+                    if elem.tag == ElementTree.Comment:
+                        handler.handle_comment(elem.text.strip())
+                    elif elem.tag == "pat":
+                        handler.handle_pattern(patternlib.parse_pattern(elem))
+                    else:
+                        self.bad_elem(elem)
+                    elem.clear()
+                elif depth == 0:
+                    # Just closed </patterns>
+                    return
 
 
     #######################################################
@@ -317,6 +354,9 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "metatpclass" :    
                     mtp = MetaTPClass(elem.get("name"), elem.get("type"))
                     meta.add_meta_tpclass(mtp)
+
+                else:
+                    self.bad_elem(elem)
 
 
             elif event == "end":
@@ -421,6 +461,9 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "metafeat" :      
                     mf = MetaFeat(elem.get("name"), elem.get("type"))
                     meta.add_meta_feat(mf)  
+
+                else:
+                    self.bad_elem(elem)
 
             if event == "end":
 

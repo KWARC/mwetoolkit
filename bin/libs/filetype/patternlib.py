@@ -47,29 +47,6 @@ def parse_patterns_file(path, anchored=False):
 
 ########################################
 
-def iterparse_patterns(elementtree_iterator):
-    """Yields ParsedPattern objects representing precompiled
-    regular expressions based on an XML pattern description.
-
-    @param elementtree_iterator: An iterator following the
-    interface of `xml.etree.iterparse`. Reported events
-    MUST be ["start", "end"].
-    """
-    depth = 0
-    for event, elem in elementtree_iterator:
-        assert depth >= 0, "Not seeing `start` events?"
-        if event == "start":
-            depth += 1
-        elif event == "end":
-            depth -= 1
-            if depth == 1:
-                # Just closed an outermost </pat>
-                yield parse_pattern(elem)
-                elem.clear()
-            elif depth == 0:
-                # Just closed </patterns>
-                return
-
 def parse_pattern(node):
     """Generates a ParsedPattern object, with an internal
     precompiled regular expression following a pattern description.
