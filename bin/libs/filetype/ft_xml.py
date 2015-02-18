@@ -142,13 +142,7 @@ class XMLParser(common.AbstractParser):
             inner_iterator = itertools.chain(
                     [(event, elem)], outer_iterator)
 
-            if elem.tag == ElementTree.Comment:
-                continue  # Skip comments
-
-            if event == "end":
-                raise Exception("Unexpected end-tag!")
-
-            elif event == "start":
+            if event == "start":
                 info = {"parser": self, "category": elem.tag}
 
                 if elem.tag == "dict":
@@ -166,17 +160,19 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "patterns":
                     with common.ParsingContext(fileobj, handler, info):
                         self.parse_patterns(inner_iterator, handler, info)
-                else:
-                    util.error("Bad outer tag in XML filetype" \
-                            " (line {}): {!r}".format(
-                            elem.sourceline, elem.tag))
+
+            elif event == "end":
+                self.unknown_end_elem(handler, elem)
 
 
-    def bad_elem(self, elem):
+
+    def unknown_end_elem(self, handler, elem):
         r"""Complain about unknown XML element."""
-        util.warn("Ignoring unknown XML tag (line {}): {!r}".format(
-                elem.sourceline, elem.tag))
-
+        if elem.tag == ElementTree.Comment:
+            handler.handle_comment(elem.text.strip())
+        else:
+            util.warn("Ignoring unknown XML elem (ending on line {}): {!r}".format(
+                    elem.sourceline, elem.tag))
 
 
     #######################################################
@@ -186,13 +182,25 @@ class XMLParser(common.AbstractParser):
 
         for event, elem in inner_iterator:
             if event == "start":
-                if elem.tag == ElementTree.Comment:
-                    handler.handle_comment(elem.text.strip())
-
                 if elem.tag == "s" :
                     if "s_id" in elem.attrib:
                         s_id = int(self.unescape(elem.get("s_id")))
                     sentence = Sentence([], s_id)
+
+            elif event == "end":
+                if elem.tag == "s":
+                    # A complete sentence was read, call the callback function
+                    info = {"fileobj": self.current_fileobj}
+
+                    try:
+                        progr = (self.filelist.starting_positions[0] \
+                                        + self.current_fileobj.tell(),
+                                self.filelist.starting_positions[-1])
+                    except IOError:
+                        pass  # Just do not generate progress info, then
+                    else:
+                        info["progress"] = progr
+                    handler.handle_sentence(sentence, info)
 
                 elif elem.tag == "w":
                     def get(name):
@@ -214,23 +222,12 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "mwepart":
                     sentence.mweoccurs[-1].indexes.append(int(elem.get("index"))-1)
 
+                elif elem.tag == "corpus":
+                    return  # Finished processing
                 else:
-                    self.bad_elem(elem)
+                    self.unknown_end_elem(handler, elem)
+                elem.clear()
 
-            elif event == "end":
-                if elem.tag == "s":
-                    # A complete sentence was read, call the callback function
-                    info = {"fileobj": self.current_fileobj}
-
-                    try:
-                        progr = (self.filelist.starting_positions[0] \
-                                        + self.current_fileobj.tell(),
-                                self.filelist.starting_positions[-1])
-                    except IOError:
-                        pass  # Just do not generate progress info, then
-                    else:
-                        info["progress"] = progr
-                    handler.handle_sentence(sentence, info)
 
 
     #######################################################
@@ -247,12 +244,10 @@ class XMLParser(common.AbstractParser):
                 depth -= 1
                 if depth == 1:
                     # Just closed an element
-                    if elem.tag == ElementTree.Comment:
-                        handler.handle_comment(elem.text.strip())
-                    elif elem.tag == "pat":
+                    if elem.tag == "pat":
                         handler.handle_pattern(patternlib.parse_pattern(elem))
                     else:
-                        self.bad_elem(elem)
+                        self.unknown_end_elem(handler, elem)
                     elem.clear()
                 elif depth == 0:
                     # Just closed </patterns>
@@ -308,36 +303,6 @@ class XMLParser(common.AbstractParser):
                     # Add the word to the ngram that is on the stack
                     ngram.append(word)
 
-                elif elem.tag == "freq":
-                    freq = Frequency(self.unescape(elem.get("name")),
-                            int(self.unescape(elem.get("value"))))
-                    # If <freq> is inside a word element, then it's the word's
-                    # frequency, otherwise it corresponds to the frequency of
-                    # the ngram that is being read
-                    if word is not None:
-                        word.add_frequency(freq)            
-                    else:
-                        ngram.add_frequency(freq)
-
-                elif elem.tag == "sources":
-                    ngram.add_sources(elem.get("ids").split(';'))
-
-                elif elem.tag == "feat":
-                    feat_name = self.unescape(elem.get("name"))
-                    feat_value = self.unescape(elem.get("value"))
-                    feat_type = meta.get_feat_type(feat_name)
-                    if feat_type == "integer":
-                        feat_value = int(feat_value)
-                    elif feat_type == "real":
-                        feat_value = float(feat_value)                
-                    f = Feature(feat_name, feat_value)
-                    candidate.add_feat(f) 
-
-                elif elem.tag == "tpclass" :
-                    tp = TPClass(self.unescape(elem.get("name")), 
-                                  self.unescape(elem.get("value")))
-                    candidate.add_tpclass(tp)
-                    
                 # Meta section and elements, correspond to meta-info about the
                 # candidates lists. Meta-info are important for generating
                 # features and converting to arff files, and must correspond
@@ -345,18 +310,6 @@ class XMLParser(common.AbstractParser):
                 # same elem.tag as actual feature)      
                 elif elem.tag == "meta":
                     meta = Meta([], [], [])
-                elif elem.tag == "corpussize":
-                    cs = CorpusSize(elem.get("name"), elem.get("value"))
-                    meta.add_corpus_size(cs)
-                elif elem.tag == "metafeat" :      
-                    mf = MetaFeat(elem.get("name"), elem.get("type"))
-                    meta.add_meta_feat(mf)  
-                elif elem.tag == "metatpclass" :    
-                    mtp = MetaTPClass(elem.get("name"), elem.get("type"))
-                    meta.add_meta_tpclass(mtp)
-
-                else:
-                    self.bad_elem(elem)
 
 
             elif event == "end":
@@ -393,6 +346,53 @@ class XMLParser(common.AbstractParser):
                     in_vars = False
 
 
+                elif elem.tag == "freq":
+                    freq = Frequency(self.unescape(elem.get("name")),
+                            int(self.unescape(elem.get("value"))))
+                    # If <freq> is inside a word element, then it's the word's
+                    # frequency, otherwise it corresponds to the frequency of
+                    # the ngram that is being read
+                    if word is not None:
+                        word.add_frequency(freq)            
+                    else:
+                        ngram.add_frequency(freq)
+
+                elif elem.tag == "sources":
+                    ngram.add_sources(elem.get("ids").split(';'))
+
+                elif elem.tag == "feat":
+                    feat_name = self.unescape(elem.get("name"))
+                    feat_value = self.unescape(elem.get("value"))
+                    feat_type = meta.get_feat_type(feat_name)
+                    if feat_type == "integer":
+                        feat_value = int(feat_value)
+                    elif feat_type == "real":
+                        feat_value = float(feat_value)                
+                    f = Feature(feat_name, feat_value)
+                    candidate.add_feat(f) 
+
+                elif elem.tag == "tpclass" :
+                    tp = TPClass(self.unescape(elem.get("name")), 
+                                  self.unescape(elem.get("value")))
+                    candidate.add_tpclass(tp)
+                    
+                elif elem.tag == "corpussize":
+                    cs = CorpusSize(elem.get("name"), elem.get("value"))
+                    meta.add_corpus_size(cs)
+                elif elem.tag == "metafeat" :      
+                    mf = MetaFeat(elem.get("name"), elem.get("type"))
+                    meta.add_meta_feat(mf)  
+                elif elem.tag == "metatpclass" :    
+                    mtp = MetaTPClass(elem.get("name"), elem.get("type"))
+                    meta.add_meta_tpclass(mtp)
+
+                elif elem.tag == "candidates":
+                    return  # Finished processing
+                else:
+                    self.unknown_end_elem(handler, elem)
+                elem.clear()
+
+
     #######################################################
     def parse_dict(self, inner_iterator, handler, info):
         id_number_counter = 0
@@ -426,6 +426,25 @@ class XMLParser(common.AbstractParser):
                     word = Word(surface, lemma, pos, syn, [])
                     entry.append(word)
 
+                # Meta section and elements, correspond to meta-info about the
+                # reference lists. Meta-info are important for generating
+                # features and converting to arff files, and must correspond
+                # to the info in the dictionary (e.g. meta-feature has the
+                # same name as actual feature)
+                elif elem.tag == "meta":
+                    meta = Meta([], [], [])
+
+            if event == "end":
+
+                if elem.tag == "entry":
+                    handler.handle_candidate(entry)
+                    entry = None
+                elif elem.tag == "w":
+                    word = None
+                elif elem.tag == "meta":
+                    # Finished reading the meta header, call callback 
+                    handler.handle_meta(meta)
+
                 elif elem.tag == "freq":
                     freq = Frequency(self.unescape(elem.get("name")),
                             int(self.unescape(elem.get("value"))))
@@ -448,13 +467,6 @@ class XMLParser(common.AbstractParser):
                     f = Feature(feat_name, feat_value)
                     entry.add_feat(f)
 
-                # Meta section and elements, correspond to meta-info about the
-                # reference lists. Meta-info are important for generating
-                # features and converting to arff files, and must correspond
-                # to the info in the dictionary (e.g. meta-feature has the
-                # same name as actual feature)
-                elif elem.tag == "meta":
-                    meta = Meta([], [], [])
                 elif elem.tag == "corpussize":
                     cs = CorpusSize(elem.get("name"), elem.get("value"))
                     meta.add_corpus_size(cs)
@@ -462,19 +474,10 @@ class XMLParser(common.AbstractParser):
                     mf = MetaFeat(elem.get("name"), elem.get("type"))
                     meta.add_meta_feat(mf)  
 
+                elif elem.tag == "dict":
+                    return  # Finished processing
                 else:
-                    self.bad_elem(elem)
-
-            if event == "end":
-
-                if elem.tag == "entry":
-                    handler.handle_candidate(entry)
-                    entry = None
-                elif elem.tag == "w":
-                    word = None
-                elif elem.tag == "meta":
-                    # Finished reading the meta header, call callback 
-                    handler.handle_meta(meta)
+                    self.unknown_end_elem(handler, elem)
 
 
 
