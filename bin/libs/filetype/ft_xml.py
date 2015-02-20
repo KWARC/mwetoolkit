@@ -142,9 +142,8 @@ class XMLParser(common.AbstractParser):
 
         for event, elem in categ_finder_iter:
             if event == "start":
-                if elem.tag == ElementTree.Comment:
-                    already_seen.append((event,elem))
-                else:
+                already_seen.append((event,elem))
+                if elem.tag != ElementTree.Comment:
                     if elem.tag == "dict":
                         delegate = self.parse_dict
                     elif elem.tag == "corpus":
