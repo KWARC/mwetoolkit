@@ -2,154 +2,156 @@
 <!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
 <!-- MWETOOLKIT: filetype="XML" -->
 <candidates >
+<meta>
+</meta>
 <cand candid="1">
-    <entry entryid="1">    <ngram><w surface="group" /> <w surface="a" /> </ngram></entry>
+    <ngram><w surface="group" /> <w surface="a" /> </ngram>
 </cand>
 <cand candid="2">
-    <entry entryid="2">    <ngram><w surface="type" /> <w surface="a" /> </ngram></entry>
+    <ngram><w surface="type" /> <w surface="a" /> </ngram>
 </cand>
 <cand candid="3">
-    <entry entryid="3">    <ngram><w surface="rich" /> <w surface="person" /> </ngram></entry>
+    <ngram><w surface="rich" /> <w surface="person" /> </ngram>
 </cand>
 <cand candid="4">
-    <entry entryid="4">    <ngram><w surface="wealthy" /> <w surface="person" /> </ngram></entry>
+    <ngram><w surface="wealthy" /> <w surface="person" /> </ngram>
 </cand>
 <cand candid="5">
-    <entry entryid="5">    <ngram><w surface="body" /> <w surface="of" /> <w surface="work" /> </ngram></entry>
+    <ngram><w surface="body" /> <w surface="of" /> <w surface="work" /> </ngram>
 </cand>
 <cand candid="6">
-    <entry entryid="6">    <ngram><w surface="prison" /> <w surface="term" /> </ngram></entry>
+    <ngram><w surface="prison" /> <w surface="term" /> </ngram>
 </cand>
 <cand candid="7">
-    <entry entryid="7">    <ngram><w surface="number" /> <w surface="1" /> </ngram></entry>
+    <ngram><w surface="number" /> <w surface="1" /> </ngram>
 </cand>
 <cand candid="8">
-    <entry entryid="8">    <ngram><w surface="trade" /> <w surface="good" /> </ngram></entry>
+    <ngram><w surface="trade" /> <w surface="good" /> </ngram>
 </cand>
 <cand candid="9">
-    <entry entryid="9">    <ngram><w surface="selective" /> <w surface="information" /> </ngram></entry>
+    <ngram><w surface="selective" /> <w surface="information" /> </ngram>
 </cand>
 <cand candid="10">
-    <entry entryid="10">    <ngram><w surface="written" /> <w surface="report" /> </ngram></entry>
+    <ngram><w surface="written" /> <w surface="report" /> </ngram>
 </cand>
 <cand candid="11">
-    <entry entryid="11">    <ngram><w surface="elbow" /> <w surface="room" /> </ngram></entry>
+    <ngram><w surface="elbow" /> <w surface="room" /> </ngram>
 </cand>
 <cand candid="12">
-    <entry entryid="12">    <ngram><w surface="inspection" /> <w surface="and" /> <w surface="repair" /> </ngram></entry>
+    <ngram><w surface="inspection" /> <w surface="and" /> <w surface="repair" /> </ngram>
 </cand>
 <cand candid="13">
-    <entry entryid="13">    <ngram><w surface="service" /> <w surface="of" /> <w surface="process" /> </ngram></entry>
+    <ngram><w surface="service" /> <w surface="of" /> <w surface="process" /> </ngram>
 </cand>
 <cand candid="14">
-    <entry entryid="14">    <ngram><w surface="armed" /> <w surface="service" /> </ngram></entry>
+    <ngram><w surface="armed" /> <w surface="service" /> </ngram>
 </cand>
 <cand candid="15">
-    <entry entryid="15">    <ngram><w surface="military" /> <w surface="service" /> </ngram></entry>
+    <ngram><w surface="military" /> <w surface="service" /> </ngram>
 </cand>
 <cand candid="16">
-    <entry entryid="16">    <ngram><w surface="divine" /> <w surface="service" /> </ngram></entry>
+    <ngram><w surface="divine" /> <w surface="service" /> </ngram>
 </cand>
 <cand candid="17">
-    <entry entryid="17">    <ngram><w surface="religious" /> <w surface="service" /> </ngram></entry>
+    <ngram><w surface="religious" /> <w surface="service" /> </ngram>
 </cand>
 <cand candid="18">
-    <entry entryid="18">    <ngram><w surface="first" /> <w surface="gear" /> </ngram></entry>
+    <ngram><w surface="first" /> <w surface="gear" /> </ngram>
 </cand>
 <cand candid="19">
-    <entry entryid="19">    <ngram><w surface="low" /> <w surface="gear" /> </ngram></entry>
+    <ngram><w surface="low" /> <w surface="gear" /> </ngram>
 </cand>
 <cand candid="20">
-    <entry entryid="20">    <ngram><w surface="business" /> <w surface="enterprise" /> </ngram></entry>
+    <ngram><w surface="business" /> <w surface="enterprise" /> </ngram>
 </cand>
 <cand candid="21">
-    <entry entryid="21">    <ngram><w surface="right" /> <w surface="field" /> </ngram></entry>
+    <ngram><w surface="right" /> <w surface="field" /> </ngram>
 </cand>
 <cand candid="22">
-    <entry entryid="22">    <ngram><w surface="blank" /> <w surface="space" /> </ngram></entry>
+    <ngram><w surface="blank" /> <w surface="space" /> </ngram>
 </cand>
 <cand candid="23">
-    <entry entryid="23">    <ngram><w surface="record" /> <w surface="book" /> </ngram></entry>
+    <ngram><w surface="record" /> <w surface="book" /> </ngram>
 </cand>
 <cand candid="24">
-    <entry entryid="24">    <ngram><w surface="guinea" /> <w surface="pig" /> </ngram></entry>
+    <ngram><w surface="guinea" /> <w surface="pig" /> </ngram>
 </cand>
 <cand candid="25">
-    <entry entryid="25">    <ngram><w surface="book" /> <w surface="binding" /> </ngram></entry>
+    <ngram><w surface="book" /> <w surface="binding" /> </ngram>
 </cand>
 <cand candid="26">
-    <entry entryid="26">    <ngram><w surface="chemical" /> <w surface="group" /> </ngram></entry>
+    <ngram><w surface="chemical" /> <w surface="group" /> </ngram>
 </cand>
 <cand candid="27">
-    <entry entryid="27">    <ngram><w surface="surface" /> <w surface="area" /> </ngram></entry>
+    <ngram><w surface="surface" /> <w surface="area" /> </ngram>
 </cand>
 <cand candid="28">
-    <entry entryid="28">    <ngram><w surface="line" /> <w surface="of" /> <w surface="work" /> </ngram></entry>
+    <ngram><w surface="line" /> <w surface="of" /> <w surface="work" /> </ngram>
 </cand>
 <cand candid="29">
-    <entry entryid="29">    <ngram><w surface="phone" /> <w surface="number" /> </ngram></entry>
+    <ngram><w surface="phone" /> <w surface="number" /> </ngram>
 </cand>
 <cand candid="30">
-    <entry entryid="30">    <ngram><w surface="telephone" /> <w surface="number" /> </ngram></entry>
+    <ngram><w surface="telephone" /> <w surface="number" /> </ngram>
 </cand>
 <cand candid="31">
-    <entry entryid="31">    <ngram><w surface="monetary" /> <w surface="value" /> </ngram></entry>
+    <ngram><w surface="monetary" /> <w surface="value" /> </ngram>
 </cand>
 <cand candid="32">
-    <entry entryid="32">    <ngram><w surface="facial" /> <w surface="expression" /> </ngram></entry>
+    <ngram><w surface="facial" /> <w surface="expression" /> </ngram>
 </cand>
 <cand candid="33">
-    <entry entryid="33">    <ngram><w surface="theatrical" /> <w surface="role" /> </ngram></entry>
+    <ngram><w surface="theatrical" /> <w surface="role" /> </ngram>
 </cand>
 <cand candid="34">
-    <entry entryid="34">    <ngram><w surface="hoi" /> <w surface="polloi" /> </ngram></entry>
+    <ngram><w surface="hoi" /> <w surface="polloi" /> </ngram>
 </cand>
 <cand candid="35">
-    <entry entryid="35">    <ngram><w surface="the" /> <w surface="great" /> <w surface="unwashed" /> </ngram></entry>
+    <ngram><w surface="the" /> <w surface="great" /> <w surface="unwashed" /> </ngram>
 </cand>
 <cand candid="36">
-    <entry entryid="36">    <ngram><w surface="great" /> <w surface="britain" /> </ngram></entry>
+    <ngram><w surface="great" /> <w surface="britain" /> </ngram>
 </cand>
 <cand candid="37">
-    <entry entryid="37">    <ngram><w surface="course" /> <w surface="of" /> <w surface="instruction" /> </ngram></entry>
+    <ngram><w surface="course" /> <w surface="of" /> <w surface="instruction" /> </ngram>
 </cand>
 <cand candid="38">
-    <entry entryid="38">    <ngram><w surface="course" /> <w surface="of" /> <w surface="study" /> </ngram></entry>
+    <ngram><w surface="course" /> <w surface="of" /> <w surface="study" /> </ngram>
 </cand>
 <cand candid="39">
-    <entry entryid="39">    <ngram><w surface="public" /> <w surface="figure" /> </ngram></entry>
+    <ngram><w surface="public" /> <w surface="figure" /> </ngram>
 </cand>
 <cand candid="40">
-    <entry entryid="40">    <ngram><w surface="stage" /> <w surface="business" /> </ngram></entry>
+    <ngram><w surface="stage" /> <w surface="business" /> </ngram>
 </cand>
 <cand candid="41">
-    <entry entryid="41">    <ngram><w surface="news" /> <w surface="report" /> </ngram></entry>
+    <ngram><w surface="news" /> <w surface="report" /> </ngram>
 </cand>
 <cand candid="42">
-    <entry entryid="42">    <ngram><w surface="write" /> <w surface="up" /> </ngram></entry>
+    <ngram><w surface="write" /> <w surface="up" /> </ngram>
 </cand>
 <cand candid="43">
-    <entry entryid="43">    <ngram><w surface="political" /> <w surface="campaign" /> </ngram></entry>
+    <ngram><w surface="political" /> <w surface="campaign" /> </ngram>
 </cand>
 <cand candid="44">
-    <entry entryid="44">    <ngram><w surface="nursing" /> <w surface="home" /> </ngram></entry>
+    <ngram><w surface="nursing" /> <w surface="home" /> </ngram>
 </cand>
 <cand candid="45">
-    <entry entryid="45">    <ngram><w surface="rest" /> <w surface="home" /> </ngram></entry>
+    <ngram><w surface="rest" /> <w surface="home" /> </ngram>
 </cand>
 <cand candid="46">
-    <entry entryid="46">    <ngram><w surface="snake_case" /> <w surface="variable" /> </ngram></entry>
+    <ngram><w surface="snake_case" /> <w surface="variable" /> </ngram>
 </cand>
 <cand candid="47">
-    <entry entryid="47">    <ngram><w surface="insurance" /> <w surface="policy" /> </ngram></entry>
+    <ngram><w surface="insurance" /> <w surface="policy" /> </ngram>
 </cand>
 <cand candid="48">
-    <entry entryid="48">    <ngram><w surface="business" /> <w surface="firm" /> </ngram></entry>
+    <ngram><w surface="business" /> <w surface="firm" /> </ngram>
 </cand>
 <cand candid="49">
-    <entry entryid="49">    <ngram><w surface="government" /> <w surface="issue" /> </ngram></entry>
+    <ngram><w surface="government" /> <w surface="issue" /> </ngram>
 </cand>
 <cand candid="50">
-    <entry entryid="50">    <ngram><w surface="military" /> <w surface="issue" /> </ngram></entry>
+    <ngram><w surface="military" /> <w surface="issue" /> </ngram>
 </cand>
 </candidates>

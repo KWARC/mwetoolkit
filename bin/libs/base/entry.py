@@ -74,7 +74,7 @@ class Entry( Ngram ) :
         base_string = super( Entry, self ).to_xml()
         if isinstance( base_string, str ) :
             base_string = unicode( base_string, 'utf-8')
-        result = result + "    " + base_string #+ "\n"
+        result = result + base_string #+ "\n"
         if self.features :
             result = result + "    <features>\n"
             for feat in self.features :

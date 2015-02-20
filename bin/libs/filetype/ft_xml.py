@@ -136,33 +136,31 @@ class XMLParser(common.AbstractParser):
         # complains if we feed it a pre-decoded stream in python2k
         parser = CommentHandlingParser()
         self.current_fileobj = fileobj
-        outer_iterator = ElementTree.iterparse(fileobj, ["start", "end"], parser)
+        categ_finder_iter = ElementTree.iterparse(
+                fileobj, ["start", "end"], parser)
+        already_seen = []
 
-        for event, elem in outer_iterator:
-            inner_iterator = itertools.chain(
-                    [(event, elem)], outer_iterator)
-
+        for event, elem in categ_finder_iter:
             if event == "start":
-                info = {"parser": self, "category": elem.tag}
+                if elem.tag == ElementTree.Comment:
+                    already_seen.append((event,elem))
+                else:
+                    if elem.tag == "dict":
+                        delegate = self.parse_dict
+                    elif elem.tag == "corpus":
+                        delegate = self.parse_corpus
+                    elif elem.tag == "candidates":
+                        delegate = self.parse_candidates
+                    elif elem.tag == "patterns":
+                        delegate = self.parse_patterns
+                    else:
+                        util.error("Bad top-level XML elem (line {}): {!r}" \
+                                .format(elem.sourceline, elem.tag))
 
-                if elem.tag == "dict":
+                    info = {"parser": self, "category": elem.tag}
                     with common.ParsingContext(fileobj, handler, info):
-                        self.parse_dict(inner_iterator, handler, info)
-
-                elif elem.tag == "corpus":
-                    with common.ParsingContext(fileobj, handler, info):
-                        self.parse_corpus(inner_iterator, handler, info)
-
-                elif elem.tag == "candidates":
-                    with common.ParsingContext(fileobj, handler, info):                             
-                        self.parse_candidates(inner_iterator, handler, info)
-
-                elif elem.tag == "patterns":
-                    with common.ParsingContext(fileobj, handler, info):
-                        self.parse_patterns(inner_iterator, handler, info)
-
-            elif event == "end":
-                self.unknown_end_elem(handler, elem)
+                        it = itertools.chain(already_seen, categ_finder_iter)
+                        delegate(it, handler, info)
 
 
 
@@ -186,6 +184,11 @@ class XMLParser(common.AbstractParser):
                     if "s_id" in elem.attrib:
                         s_id = int(self.unescape(elem.get("s_id")))
                     sentence = Sentence([], s_id)
+
+                elif elem.tag == "mweoccur":
+                    occur_cand = Candidate(int(elem.get("candid")))
+                    new_occur = MWEOccurrence(sentence, occur_cand, [])
+                    sentence.mweoccurs.append(new_occur)
 
             elif event == "end":
                 if elem.tag == "s":
@@ -214,10 +217,10 @@ class XMLParser(common.AbstractParser):
                     # Add word to the sentence that is currently being read
                     sentence.append(Word(surface, lemma, pos, syn, []))
 
+                elif elem.tag == "mweoccurs":
+                    pass  # This tag is just a wrapper around `mweoccur` tags
                 elif elem.tag == "mweoccur":
-                    occur_cand = Candidate(int(elem.get("candid")))
-                    new_occur = MWEOccurrence(sentence, occur_cand, [])
-                    sentence.mweoccurs.append(new_occur)
+                    pass  # Already created MWEOccurrence on `start` event
 
                 elif elem.tag == "mwepart":
                     sentence.mweoccurs[-1].indexes.append(int(elem.get("index"))-1)

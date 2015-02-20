@@ -68,6 +68,15 @@ class Meta :
 
 ################################################################################
         
+    def is_dummy( self ) :
+        """
+            Return True iff this is an empty Meta object.
+        """
+        return 0 == len(self.corpus_sizes) == len(self.meta_feats) \
+                 == len(self.meta_tpclasses)
+
+################################################################################
+        
     def add_corpus_size( self, corpus_size ) :
         """
             Add a corpus size information to the list of corpora sizes of the 

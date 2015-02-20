@@ -498,6 +498,8 @@ class InputHandler(object):
 
     def _fallback(self, obj, info):
         r"""Called to handle anything that hasn't been handled explicitly."""
+        if info["kind"] == "meta" and obj.is_dummy():
+            return  # We don't want to complain about dummy metas
         util.warn("Ignoring " + info["kind"])
 
 
