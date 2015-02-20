@@ -57,7 +57,7 @@ from libs.base.ngram import Ngram
 from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, warn
 from libs.filetype.patternlib import build_generic_pattern
-from libs.filetype.indexlib import Index
+#from libs.filetype.indexlib import Index
 from libs.base.meta import Meta
 from libs import filetype
 
