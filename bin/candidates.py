@@ -113,6 +113,11 @@ OPTIONS may be:
 -N OR --non-overlapping
     Do not output overlapping word matches.
     This option should not be used if match-distance is "All".
+
+--id-order <list-of-ids>
+    Output tokens in the pattern ID order given by the
+    colon-separated <list-of-ids>.  The special ID "*" can be used
+    to represent "all remaining IDs". Default: "*".
      
 -f OR --freq     
     Output the count of the candidate. This counter will merge the candidates if
@@ -144,6 +149,7 @@ print_cand_freq = False
 longest_pattern = 0
 shortest_pattern = float("inf")
 print_source = False
+id_order = ["*"]
 
 input_filetype_ext = None
 output_filetype_ext = None
@@ -171,7 +177,8 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
 
         for pattern in patterns:
             for (match_ngram, wordnums) in pattern.matches(sentence,
-                    match_distance, overlapping=not non_overlapping):
+                    match_distance=match_distance, id_order=id_order,
+                    overlapping=not non_overlapping):
                 wordnums_string = ",".join( map( str, wordnums ) )
                 if wordnums_string in already_matched:
                     continue
@@ -287,6 +294,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global non_overlapping
     global input_filetype_ext
     global output_filetype_ext
+    global id_order
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
         
@@ -314,6 +322,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o in ("-i", "--index") :
             input_filetype_ext = "BinaryIndex"
             warn("Option -i is deprecated; use --from=BinaryIndex")
+        elif o == "--id-order":
+            id_order = a.split(":")
         elif o == "--from" :
             input_filetype_ext = a
         elif o == "--to" :
@@ -335,7 +345,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "from=", "to=", "patterns=", "ngram=", "index", "match-distance=",
-        "non-overlapping", "freq", "ignore-pos", "surface", "source" ]
+        "non-overlapping", "freq", "ignore-pos", "surface", "source",
+        "id-order=" ]
 arg = read_options( "p:n:id:NfgsS", longopts, treat_options, -1, usage_string )
 
 with tempfile.NamedTemporaryFile(

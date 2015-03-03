@@ -154,7 +154,7 @@ class XMLParser(common.AbstractParser):
                         delegate = self.parse_patterns
                     else:
                         util.error("Bad top-level XML elem (line {}): {!r}" \
-                                .format(elem.sourceline, elem.tag))
+                                .format(elem.source_line, elem.tag))
 
                     info = {"parser": self, "category": elem.tag}
                     with common.ParsingContext(fileobj, handler, info):
@@ -169,7 +169,7 @@ class XMLParser(common.AbstractParser):
             handler.handle_comment(elem.text.strip())
         else:
             util.warn("Ignoring unknown XML elem (ending on line {}): {!r}".format(
-                    elem.sourceline, elem.tag))
+                    elem.source_line, elem.tag))
 
 
     #######################################################
@@ -484,7 +484,7 @@ class XMLParser(common.AbstractParser):
 
 
 class CommentHandlingParser(ElementTree.XMLParser):
-    r"""Force XMLParser to handle XML comments and generate sourceline."""
+    r"""Force XMLParser to handle XML comments and generate source_{line,col}."""
     def __init__(self, **kwargs):
         super(CommentHandlingParser, self).__init__(self, **kwargs)
         self._parser.CommentHandler = self.handle_comment
@@ -497,5 +497,6 @@ class CommentHandlingParser(ElementTree.XMLParser):
 
     def _start_list(self, *args, **kwargs):
         element = super(self.__class__, self)._start_list(*args, **kwargs)
-        element.sourceline = self._parser.CurrentLineNumber
+        element.source_line = self._parser.CurrentLineNumber
+        element.source_col = self._parser.CurrentColumnNumber + 1
         return element

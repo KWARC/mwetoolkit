@@ -119,6 +119,13 @@ class Word :
 
 ################################################################################
 
+    def dup(self):
+        r"""Return a copy of this Word."""
+        return Word(self.surface, self.lemma,
+                self.pos, self.syn, list(self.freqs))
+
+################################################################################
+
     def lemma_or_surface(self):
         r"""Return lemma if it is defined; otherwise, return surface."""
         if self.lemma != WILDCARD:

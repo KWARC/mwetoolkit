@@ -285,7 +285,7 @@ class MWEToolkitInputError(Exception):
     For internal errors, use any other exception class.
     """
     def __init__(self, message, depth=0, **extra_info):
-        super(MWEToolkitInputError, self).__init__(message)
+        super(MWEToolkitInputError, self).__init__(message.format(**extra_info))
         self.depth = depth
         self.extra_info = extra_info
 
@@ -297,24 +297,25 @@ def error(message, depth=0, **extra_info):
 
 ################################################################################
 
-def warn(message):
+_warned = set()
+
+def warn(message, only_once=False, **extra_info):
     """Utility function to show warning message."""
+    formatted_message = message.format(**extra_info)
+    if only_once:
+        # (Maybe we should use a bloom filter, just in case?)
+        if formatted_message in _warned: return
+        _warned.add(formatted_message)
+
     if debug_mode:
         print("-" * 40)
         traceback.print_stack()
-    print("WARNING:", message, file=sys.stderr)
+    print("WARNING:", formatted_message, file=sys.stderr)
 
 
-################################################################################
-
-def warn_once(message):
-    r"""Same as `warn(message)`, but only warns once per error message."""
-    # (Maybe we should use a bloom filter, just in case?)
-    if message not in _warned:
-        _warned.add(message)
-        warn(message)
-
-_warned = set()
+def warn_once(message, **extra_info):
+    r"""Same as `warn(message, only_once=True)`. Warns only once per error message."""
+    warn(message, only_once=True, **extra_info)
 
 
 ################################################################################

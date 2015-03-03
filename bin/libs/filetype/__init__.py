@@ -112,6 +112,9 @@ class EntityCollectorHandler(InputHandler):
     def _fallback_entity(self, entity, info={}):
         self.entities.append(entity)
 
+    def handle_comment(self, comment, info={}):
+        pass  # Just ignore them
+
 
 class FirstInputHandler(ChainedInputHandler):
     r"""First instance of InputHandler in a chain.

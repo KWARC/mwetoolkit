@@ -54,7 +54,7 @@ def parse_pattern(node):
     @param node: An `xml.etree.Element` from the patterns
     file representing a single pattern.
     """
-    return ParsedPattern()._parse(node)
+    return ParsedPattern(node.source_line)._parse(node)
 
 
 def match_pattern(pattern, words):
@@ -66,7 +66,7 @@ def match_pattern(pattern, words):
 def build_generic_pattern(min, max):
     """Returns a pattern matching any ngram of size min~max."""
     # TODO make this implementation less hack-ish
-    p = ParsedPattern()
+    p = ParsedPattern("???")
     p.pattern = p.WORD_SEPARATOR + "(?:[^%s]*" % p.WORD_SEPARATOR + \
               p.WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
     p._post_parsing()
@@ -81,44 +81,59 @@ class ParsedPattern(object):
     # WORD_FORMAT: Internal Regex format to match a word with its attributes.
     WORD_FORMAT = ATTRIBUTE_SEPARATOR.join("%("+s+")s" for s in (["wordnum"] + WORD_ATTRIBUTES))
 
-    def __init__(self):
+    def __init__(self, source_line):
+        self.source_line = source_line
         self.temp_id = 0
-        self.defined_ids = []
+        self.defined_w_ids = []
         self.forepattern_ids = {}
         self.WORD_SEPARATOR = WORD_SEPARATOR
 
     def _parse(self, node):
         self.node = node
         self.pattern = self.WORD_SEPARATOR
-        self._do_parse(node)
+        self._do_parse(node, None)
         self._post_parsing()
         return self
 
     def _post_parsing(self):
         self.compiled_pattern = re.compile(self.pattern)
+        self._strid_to_numid = {"id_*": 0}
+        self._strid_to_numid.update(self.compiled_pattern.groupindex)
+        self.ignored_numids = set(numid for (strid, numid) in
+                self.compiled_pattern.groupindex.items() if
+                strid.startswith("ignore_"))
 
-    def _do_parse(self, node):
+    def _do_parse(self, node, scope_repeat):
         if node.tag == ElementTree.Comment:
             pass  # We ignore it :p
         elif node.tag == "pat":
-            self._parse_pat(node)
+            self._parse_pat(node, scope_repeat)
         elif node.tag == "either":
-            self._parse_either(node)
+            self._parse_either(node, scope_repeat)
 
         elif node.tag == "backpat": 
             id = node.get("id", "")
             self.pattern += "(?P=%s)" % id
 
         elif node.tag == "w":
-            self._parse_w(node)
+            self._parse_w(node, scope_repeat)
         #elif node.tag == "backw":
             # Obsolete. Use "back:id.attribute" syntax instead.
         #    self._parse_backw(node)
         else:
-            raise Exception("Invalid node name '%s'" % node.tag)
+            util.error("Invalid node name {name!r}", name=node.tag)
 
 
-    def _parse_pat(self, node):
+    def check_scope_repeat(self, scope_repeat, node):
+        if scope_repeat is not None:
+            util.error("Elem cannot have `id` or `ignore` under a `repeat`" \
+                    " scope (line {line}, col {col}; `repeat` in line {line_super}," \
+                    " col {col_super})", line=node.source_line,
+                    col=node.source_col, line_super=scope_repeat.source_line,
+                    col_super=scope_repeat.source_col)
+
+
+    def _parse_pat(self, node, scope_repeat):
         id = node.get("id", "")
         repeat = node.get("repeat", "")
         ignore = node.get("ignore", "")
@@ -133,18 +148,23 @@ class ParsedPattern(object):
                                   "supported in non-nested <pat> elements.")
 
         if ignore:
+            self.check_scope_repeat(scope_repeat, node)
             self.pattern += "(?P<ignore_%d>" % self.temp_id
             self.temp_id += 1
 
         if id:
-            self.pattern += "(?P<%s>" % id
-        elif repeat:
+            self.check_scope_repeat(scope_repeat, node)
+            assert "_" not in id, id
+            self.pattern += "(?P<id_%s>" % id
+        if repeat:
             self.pattern += "(?:"
 
+        if not scope_repeat and repeat != "":
+            scope_repeat = node
         for subnode in node:
-            self._do_parse(subnode)
+            self._do_parse(subnode, scope_repeat)
 
-        if id or repeat:
+        if repeat:
             self.pattern += ")"
         if repeat:
             if repeat != "*" and repeat != "?" and repeat != "+" and \
@@ -153,6 +173,9 @@ class ParsedPattern(object):
                 print(warningrepeat, file=sys.stderr)
             self.pattern += repeat
 
+        if id:
+            self.pattern += ")"
+
         if ignore:
             self.pattern += ")"
 
@@ -160,13 +183,19 @@ class ParsedPattern(object):
             self.pattern += "$"
 
 
-    def _parse_either(self, node):
+    def _parse_either(self, node, scope_repeat):
         id = node.get("id", "")
         repeat = node.get("repeat", "")
+
         if id:
-            self.pattern += "(?P<%s>" % id
+            self.check_scope_repeat(scope_repeat, node)
+            assert "_" not in id, id
+            self.pattern += "(?P<id_{}>".format(id)
         else:
             self.pattern += "(?:"
+
+        if not scope_repeat and repeat != "":
+            scope_repeat = node
 
         first_pattern = True
         for subnode in node:
@@ -175,7 +204,7 @@ class ParsedPattern(object):
             else:
                 self.pattern += "|"
 
-            self._do_parse(subnode)
+            self._do_parse(subnode, scope_repeat)
 
         self.pattern += ")"
         if repeat:
@@ -185,17 +214,19 @@ class ParsedPattern(object):
     def _neg_children(self, node, only_attr):
         for subnode in node:
             if subnode.tag != "neg":
-                util.warn_once("<w> only accepts subnode <neg>")
+                util.error("Elem <w> only accepts subelem <neg>; got " \
+                        "<{bad_subelem}> (line {line})",
+                        bad_subelem=subnode.tag, line=node.source_line)
             for attr,val in subnode.items():
                 if attr == only_attr:
                     yield "(?!" + re.escape(val) + ")"
 
-    def _parse_w(self, node):
+    def _parse_w(self, node, scope_repeat):
         valid_attrs = set(WORD_ATTRIBUTES + ["id", "neg", "syndep"])
         for attr, value in node.items():
             if attr not in valid_attrs:
                 util.warn("Ignoring bad word attr (line {}): {!r}"
-                        .format(node.sourceline, attr))
+                        .format(node.source_line, attr))
 
         negated = set(node.get("neg", "").split(":"))
         attrs = { "wordnum": self.ATTRIBUTE_WILDCARD }
@@ -210,6 +241,7 @@ class ParsedPattern(object):
             else:
                 val = self.ATTRIBUTE_WILDCARD
 
+            # XXX DEPRECATED: remove this in the future (now we use <neg>)
             if attr in negated:
                 if val != self.ATTRIBUTE_WILDCARD:
                     val = "(?!" + val + ")" + self.ATTRIBUTE_WILDCARD
@@ -223,18 +255,20 @@ class ParsedPattern(object):
 
         
         if id:
+            self.check_scope_repeat(scope_repeat, node)
             if id in self.forepattern_ids:
                 attrs["wordnum"] = "(?P=%s)" % self.forepattern_ids[id]
-            for attr in attrs:
-                attrs[attr] = "(?P<%s_%s>%s)" % (id, attr, attrs[attr])
-            if id in self.defined_ids:
+            # 2015-02-24 silvioricardoc: commenting out, because this looks useless
+            #for attr in attrs:
+            #    attrs[attr] = "(?P<wid_%s_%s>%s)" % (id, attr, attrs[attr])
+            if id in self.defined_w_ids:
                 raise Exception("Id '%s' defined twice" % id)
-            self.defined_ids.append(id)
+            self.defined_w_ids.append(id)
 
         syndep = node.get("syndep", "")
         if syndep:
             (deptype, depref) = syndep.split(":")
-            if depref in self.defined_ids:
+            if depref in self.defined_w_ids:
                 # Backreference.
                 attrs["syn"] = (self.ATTRIBUTE_WILDCARD +
                                ";%s:(?P=%s_wordnum);" % (deptype, depref) +
@@ -246,10 +280,13 @@ class ParsedPattern(object):
                 self.forepattern_ids[depref] = foredep
 
                 attrs["syn"] = (self.ATTRIBUTE_WILDCARD +
-                                ";%s:(?P<%s>[0-9]*);" % (deptype, foredep) +
+                                ";%s:(?P<idsyn_%s>[0-9]*);" % (deptype, foredep) +
                                 self.ATTRIBUTE_WILDCARD)
 
-        self.pattern += self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
+        w_pat = self.WORD_FORMAT % attrs + self.WORD_SEPARATOR
+        if id:
+            w_pat = "(?P<id_{}>{})".format(id, w_pat)
+        self.pattern += w_pat
 
 
     #def _parse_backw(self, node):
@@ -264,10 +301,11 @@ class ParsedPattern(object):
 
 
     def matches(self, words, match_distance="All", overlapping=True,
-                anchor_begin=False, anchor_end=False):
+                id_order=["*"], anchor_begin=False, anchor_end=False):
         """Returns an iterator over all matches of this pattern in the word list.
         Each iteration yields a pair `(ngram, match_indexes)`.
         """
+        numid_order = [self.strid_to_numid(strid) for strid in id_order]
         wordstring = self.WORD_SEPARATOR
         positions = []
         wordnum = 1
@@ -283,7 +321,8 @@ class ParsedPattern(object):
         i = 0
         while i < len(positions):
             matches_here = list(self._matches_at(words, wordstring,
-                    positions[i], len(wordstring), positions, anchor_end))
+                    positions[i], len(wordstring), positions, numid_order,
+                    anchor_end))
 
             increment = 1
             if match_distance == "All":
@@ -308,34 +347,70 @@ class ParsedPattern(object):
             if anchor_begin: return
 
 
-    def _matches_at(self, words, wordstring,
-                current_start, limit, positions, anchor_end):
+    def _matches_at(self, words, wordstring, current_start,
+            limit, positions, numid_order, anchor_end):
         current_end = limit
         matches_here = []
         while True:
             result = self.compiled_pattern.match(wordstring, current_start - 1, current_end)
             if not result: return
 
-            # Beware: [x for x ...] exposes the variable x to the surrounding environment.
-            #pdb.set_trace()
-            ignore_ids = [id for id in result.groupdict().keys() if id.startswith("ignore_")]
-            ignore_spans = [result.span(id) for id in ignore_ids]
-
             start = result.start()
             end = result.end()
             current_end = end - 1
             ngram = []
             wordnums = []
-            for i in xrange(len(words)):
-                if positions[i] >= start and positions[i] < end:
-                    while ignore_spans and ignore_spans[0][1] <= positions[i]:
-                        # If the ignore-end is before this point, we don't need it anymore.
-                        ignore_spans = ignore_spans[1:] # Inefficient!!
-                    if not (ignore_spans and positions[i] >= ignore_spans[0][0]):
-                        ngram.append(words[i])
-                        wordnums.append(i+1)
+
+            n_groups = self.compiled_pattern.groups
+            spans = [(numid, result.span(numid)) for numid in xrange(n_groups+1)]
+            words_by_numid = [[] for _ in xrange(n_groups+1)]
+            nums_by_numid = [[] for _ in xrange(n_groups+1)]
+
+            def get_numid(pos):
+                for numid, (beg, end) in reversed(spans):
+                    if beg <= pos < end:
+                        if numid in numid_order:
+                            return numid
+                        return 0
+                assert False, "Not even in ID==0?!?!"
+
+            for num, (pos, word) in enumerate(zip(positions, words)):
+                if start <= pos < end:
+                    numid = get_numid(pos)
+                    if numid not in self.ignored_numids:
+                        words_by_numid[numid].append(word)
+                        nums_by_numid[numid].append(num)
+
+            self.debug_id_order(words_by_numid)
+            for numid in numid_order:
+                ngram.extend(words_by_numid[numid])
+                wordnums.extend(nums_by_numid[numid])
+
             yield (Ngram(copy_word_list(ngram), []), wordnums)
             if anchor_end: return
+
+
+    def strid_to_numid(self, str_id):
+        try:
+            return self._strid_to_numid["id_" + str_id]
+        except KeyError:
+            util.warn_once('Pattern does not define id ' \
+                    '"{str_id}" (line {linenum})', str_id=str_id,
+                    linenum=self.source_line)
+            return 0
+
+
+    def debug_id_order(self, words_by_numid):
+        r"""Generate a "{"-separated ngram output.
+        Much easier to spot id_order bugs."""
+        if util.debug_mode:
+            for wbn in words_by_numid:
+                if not wbn:
+                    wbn.append(Word("", ""))
+                wbn[0] = wbn[0].dup()
+                wbn[-1] = wbn[-1].dup()
+                wbn[0].lemma = "{" + wbn[0].lemma
+                wbn[-1].lemma += "}"
 
 
     def printable_pattern(self):
@@ -350,13 +425,10 @@ class ParsedPattern(object):
 
 
 
-def copy_word(w):
-    return Word(w.surface, w.lemma, w.pos, w.syn, [])
-
 # XXX Do we actually need to copy it?
 # In this case isn't it better to use `copy.deepcopy()`?
 def copy_word_list(ws):
-    return map(copy_word, ws)
+    return [w.dup() for w in ws]
 
 
 
