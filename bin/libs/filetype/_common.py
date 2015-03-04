@@ -215,8 +215,30 @@ class FileList(object):
         starting_positions = [0]
         for f in files:
             last = starting_positions[-1]
-            starting_positions.append(last + os.fstat(f.fileno()).st_size)
+            starting_positions.append(last + FileList._sizeof(f))
         return FileList(files, starting_positions)
+
+    @staticmethod
+    def _sizeof(fileobj):
+        r"""(Quick'n'dirty way of measuring file size; 0 if unknown)."""
+        try:
+            return os.fstat(fileobj.fileno()).st_size
+        except (AttributeError, io.UnsupportedOperation):
+            return 0
+
+    @staticmethod
+    def _uncompressing(fileobj):
+        header = fileobj.peek(20)
+        if header.startswith(b"\x50\x4b\x03\x04"):  # ZIP?
+            from .uncompress import ZipWrapper
+            fileobj = io.BufferedReader(ZipWrapper(fileobj))
+        if header.startswith(b"\x42\x5a\x68"):  # BZ2?
+            from .uncompress import Bz2Wrapper
+            fileobj = io.BufferedReader(Bz2Wrapper(fileobj))
+        if header.startswith(b"\x1f\x8b\x08"):  # GZIP?
+            from .uncompress import GzipWrapper
+            fileobj = io.BufferedReader(GzipWrapper(fileobj))
+        return fileobj
 
     @staticmethod
     def _open_file(path):
@@ -225,10 +247,11 @@ class FileList(object):
             return path
         if path == "-":
             path = sys.stdin
-        if isinstance(path, basestring):
+        elif isinstance(path, basestring):
             path = open(path, "rb")
         f = Python2kFileWrapper(path)
-        return io.BufferedReader(f)
+        f = io.BufferedReader(f)
+        return FileList._uncompressing(f)
 
 
 class AbstractParser(object):
