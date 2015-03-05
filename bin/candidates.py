@@ -193,7 +193,10 @@ class CandidatesGeneratorHandler(filetype.InputHandler):
                 if( surface_instead_lemmas ) :
                     match_ngram.set_all( lemma=WILDCARD )
                 else :
-                    match_ngram.set_all( surface=WILDCARD )                    
+                    for word in match_ngram:
+                        # (Still uses surface if lemma is unavailable)
+                        if word.lemma != WILDCARD:
+                            word.surface = WILDCARD
                 key = unicode( match_ngram.to_string() ).encode('utf-8')
                 ( surfaces_dict, total_freq ) = temp_file.get( key, ( {}, 0 ) )
                 freq_surface = surfaces_dict.setdefault( internal_key, [] )

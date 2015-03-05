@@ -363,13 +363,14 @@ class ParsedPattern(object):
 
             n_groups = self.compiled_pattern.groups
             spans = [(numid, result.span(numid)) for numid in xrange(n_groups+1)]
+            interesting_numids = set(numid_order) | self.ignored_numids
             words_by_numid = [[] for _ in xrange(n_groups+1)]
             nums_by_numid = [[] for _ in xrange(n_groups+1)]
 
             def get_numid(pos):
                 for numid, (beg, end) in reversed(spans):
                     if beg <= pos < end:
-                        if numid in numid_order:
+                        if numid in interesting_numids:
                             return numid
                         return 0
                 assert False, "Not even in ID==0?!?!"
