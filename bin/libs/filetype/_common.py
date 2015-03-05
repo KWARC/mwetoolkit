@@ -471,6 +471,10 @@ class InputHandler(object):
 
     def after_file(self, fileobj, info={}):
         r"""Called after parsing file contents."""
+        pass  # By default, do nothing
+
+    def finish(self):
+        r"""Called after parsing all files."""
         self.flush()  # By default, just flush whatever is in
 
     def handle_sentence(self, sentence, info={}):
@@ -555,7 +559,9 @@ class ChainedInputHandler(InputHandler):
 
     def after_file(self, fileobj, info={}):
         self.chain.after_file(fileobj, info)
-        self.flush()
+
+    def finish(self):
+        self.chain.finish()
 
     def handle_directive(self, directive, info={}):
         info.setdefault("kind", "directive")
@@ -611,10 +617,6 @@ class AbstractPrinter(InputHandler):
                     self.filetype_info.filetype_ext)
             self.handle_comment(unicode(directive), info)
             self._printed_filetype_directive = True
-
-    def after_file(self, fileobj, info={}):
-        r"""Flush outputs after execution."""
-        self.flush()
 
 
     def add_string(self, *strings):

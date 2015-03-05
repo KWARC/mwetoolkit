@@ -36,6 +36,7 @@ from ..base.word import Word, WORD_ATTRIBUTES
 from ..base.ngram import Ngram
 from ..base.__common import ATTRIBUTE_SEPARATOR, WORD_SEPARATOR
 from .. import util
+import os
 import re
 import sys
 
@@ -404,7 +405,7 @@ class ParsedPattern(object):
     def debug_id_order(self, words_by_numid):
         r"""Generate a "{"-separated ngram output.
         Much easier to spot id_order bugs."""
-        if util.debug_mode:
+        if "MWETOOLKIT_DEBUG_ID_ORDER" in os.environ:
             for wbn in words_by_numid:
                 if not wbn:
                     wbn.append(Word("", ""))

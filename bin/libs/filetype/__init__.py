@@ -69,6 +69,7 @@ def parse(input_files, handler, filetype_hint=None):
     """
     handler = FirstInputHandler(handler)
     SmartParser(input_files, filetype_hint).parse(handler)
+    handler.finish()
 
 
 def parse_entities(input_files, filetype_hint=None):
