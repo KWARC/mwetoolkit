@@ -361,21 +361,21 @@ class AbstractTxtParser(AbstractParser):
         self.category = "<unknown-category>"
 
     def _parse_file(self, fileobj, handler):
-        info = {"parser": self, "category": self.category}
+        info = {"parser": self, "fileobj": fileobj, "category": self.category}
         with ParsingContext(fileobj, handler, info):
             assert self.category != "<unknown-category>", \
                     "Subclass should have set `self.category`"
             just_saw_a_comment = False
 
             for i, line in enumerate(fileobj):
+                info["linenum"] = i + 1
+                info["progress"] = (self.filelist.starting_positions[0] + \
+                        fileobj.tell(), self.filelist.starting_positions[-1])
+
                 line = line.rstrip()
                 line = line.decode(self.encoding, self.encoding_errors)
-                progress = (self.filelist.starting_positions[0] + fileobj.tell(),
-                        self.filelist.starting_positions[-1])
-                info.update({"fileobj": fileobj,
-                        "linenum": i+1, "progress": progress})
-
                 cp = self.filetype_info.comment_prefix
+
                 if line.startswith(cp):
                     comment = line[len(cp):]
                     self._parse_comment(handler, comment, info)
@@ -407,6 +407,11 @@ class ParsingContext(object):
         self.handler.before_file(self.fileobj, self.info)
     
     def __exit__(self, t, v, tb):
+        if not (v is None or isinstance(v, util.MWEToolkitInputError)):
+            print("UNEXPECTED ERROR when parsing input line {linenum}" \
+                    .format(linenum=self.info.get("linenum", "<unknown>")),
+                    file=sys.stderr)
+
         if v is None:
             # If StopParsing was raised, we don't want
             # to append even more stuff in the output

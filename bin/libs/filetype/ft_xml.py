@@ -178,6 +178,7 @@ class XMLParser(common.AbstractParser):
         s_id = -1
 
         for event, elem in inner_iterator:
+            info["linenum"] = elem.source_line
             if event == "start":
                 if elem.tag == "s" :
                     if "s_id" in elem.attrib:
@@ -192,7 +193,7 @@ class XMLParser(common.AbstractParser):
             elif event == "end":
                 if elem.tag == "s":
                     # A complete sentence was read, call the callback function
-                    info = {"fileobj": self.current_fileobj}
+                    info["fileobj"] = self.current_fileobj
 
                     try:
                         progr = (self.filelist.starting_positions[0] \
@@ -239,6 +240,7 @@ class XMLParser(common.AbstractParser):
         from . import patternlib
         depth = 0
         for event, elem in inner_iterator:
+            info["linenum"] = elem.source_line
             assert depth >= 0, "Not seeing `start` events?"
             if event == "start":
                 depth += 1
@@ -268,6 +270,7 @@ class XMLParser(common.AbstractParser):
         meta = None
 
         for event, elem in inner_iterator:
+            info["linenum"] = elem.source_line
             if event == "start":
 
                 if elem.tag == "cand":
@@ -403,6 +406,7 @@ class XMLParser(common.AbstractParser):
         meta = None
 
         for event, elem in inner_iterator:
+            info["linenum"] = elem.source_line
             if event == "start":
 
                 if elem.tag == "entry":
