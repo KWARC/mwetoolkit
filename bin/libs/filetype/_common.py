@@ -356,7 +356,6 @@ class AbstractTxtParser(AbstractParser):
     def __init__(self, input_files, encoding):
         super(AbstractTxtParser, self).__init__(input_files)
         cp = re.escape(self.filetype_info.comment_prefix)
-        self.comment_pattern = re.compile("^ *" + cp + " *(?P<contents>.*?) $")
         self.encoding = encoding
         self.encoding_errors = "replace"
         self.category = "<unknown-category>"
@@ -364,29 +363,30 @@ class AbstractTxtParser(AbstractParser):
     def _parse_file(self, fileobj, handler):
         info = {"parser": self, "category": self.category}
         with ParsingContext(fileobj, handler, info):
-            if self.category == "<unknown-category>":
-                raise Exception("Subclass should have set `self.category`")
+            assert self.category != "<unknown-category>", \
+                    "Subclass should have set `self.category`"
             just_saw_a_comment = False
 
             for i, line in enumerate(fileobj):
                 line = line.rstrip()
                 line = line.decode(self.encoding, self.encoding_errors)
-                cp = self.filetype_info.comment_prefix
+                progress = (self.filelist.starting_positions[0] + fileobj.tell(),
+                        self.filelist.starting_positions[-1])
+                info.update({"fileobj": fileobj,
+                        "linenum": i+1, "progress": progress})
 
+                cp = self.filetype_info.comment_prefix
                 if line.startswith(cp):
                     comment = line[len(cp):]
-                    self._parse_comment(handler, comment, {})
+                    self._parse_comment(handler, comment, info)
                     just_saw_a_comment = True
 
                 elif line == "" and just_saw_a_comment:
-                    self._parse_comment(handler, "", {})
+                    self._parse_comment(handler, "", info)
                     just_saw_a_comment = False
 
                 else:
-                    progr = (self.filelist.starting_positions[0] + fileobj.tell(),
-                            self.filelist.starting_positions[-1])
-                    self._parse_line(line, handler, {"fileobj": fileobj,
-                            "linenum": i+1, "progress": progr})
+                    self._parse_line(line, handler, info)
                     just_saw_a_comment = False
 
     def _parse_line(self, line, handler, info={}):

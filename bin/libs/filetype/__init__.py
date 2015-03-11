@@ -577,6 +577,8 @@ class ConllParser(common.AbstractTxtParser):
         super(ConllParser,self).__init__(in_files, encoding)
         self.name2index = {name:i for (i, name) in
                 enumerate(self.filetype_info.entries)}
+        self.ignoring_cur_sent = False
+        self.id_index = self.name2index["ID"]
         self.category = "corpus"
         self.s_id = 0
 
@@ -585,21 +587,36 @@ class ConllParser(common.AbstractTxtParser):
         if len(data) <= 1: return
         data = [d.split(" ") for d in data]  # split MWEs
         indexes = []
-        for mwe_i in xrange(len(data[0])):
+        for mwe_i, wid in enumerate(data[self.id_index]):
             word_data = [getitem(d, mwe_i, "_") for d in data]
             self._word_data = [(WILDCARD if d == "_" else d) for d in word_data]
-            self._id = self.get("ID", None) or ("1" \
-                    if self.partial_obj is None
-                    else len(self.partial_obj.word_list))
-            indexes.append(int(self._id) - 1)
-            if len(self._word_data) < len(self.filetype_info.entries):
-                util.warn("Ignoring line {} (only {} entries)" \
-                        .format(info["linenum"], len(self._word_data)))
-            else:
-                word = self._parse_word(handler, info)
-                self.partial_obj.append(word)
 
-        if len(data[0]) != 1:
+            if len(self._word_data) != len(self.filetype_info.entries):
+                util.warn("Expected {n_expected} entries, got {n_gotten}" \
+                        " (at line {linenum})", linenum=info["linenum"],
+                        n_expected=len(self.filetype_info.entries),
+                        n_gotten=len(self._word_data))
+                self.ignoring_cur_sent = True
+            else:
+                try:
+                    wid = int(wid)
+                except ValueError:
+                    util.warn("Bad word ID at field {field_idx}: {wid!r} (at line {linenum})",
+                            field_idx=self.id_index, wid=wid, linenum=info["linenum"])
+                    self.ignoring_cur_sent = True
+                else:
+                    if wid == 1:
+                        self.new_partial(handler.handle_sentence,
+                                Sentence([], self.s_id), info=info)
+                        self.ignoring_cur_sent = False
+                        self.s_id += 1
+
+                    if not self.ignoring_cur_sent:
+                        indexes.append(wid - 1)
+                        word = self._parse_word(handler, info)
+                        self.partial_obj.append(word)
+
+        if len(data[self.id_index]) != 1:
             from ..base.mweoccur import MWEOccurrence
             mwe_words = []  # XXX do we use surface or lemma?
             c = Candidate(info["linenum"], mwe_words)
@@ -616,15 +633,6 @@ class ConllParser(common.AbstractTxtParser):
             return default
 
     def _parse_word(self, handler, info={}):
-        if len(self._word_data) > len(self.filetype_info.entries):
-            util.warn("Ignoring extra entries in line {}" \
-                    .format(info["linenum"]))
-
-        if self._id == "1":
-            self.new_partial(handler.handle_sentence,
-                    Sentence([], self.s_id), info=info)
-            self.s_id += 1
-
         surface, lemma = self.get("FORM"), self.get("LEMMA")
         pos, syn = self.get("CPOSTAG"), self.get("DEPREL")
 
