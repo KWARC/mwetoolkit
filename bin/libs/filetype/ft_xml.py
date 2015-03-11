@@ -390,7 +390,8 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "metatpclass" :    
                     mtp = MetaTPClass(elem.get("name"), elem.get("type"))
                     meta.add_meta_tpclass(mtp)
-
+                elif elem.tag == "features":
+                	pass # nothing to do, but don't WARNING user
                 elif elem.tag == "candidates":
                     return  # Finished processing
                 else:
