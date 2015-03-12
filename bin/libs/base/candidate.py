@@ -118,7 +118,7 @@ class Candidate ( Entry ) :
             result = result + " candid=\"" + str(self.id_number) + "\">\n"
 
         # Unicode support          
-        base_string = super( Candidate, self ).to_xml()
+        base_string = super( Entry, self ).to_xml()
         result = result + "    " + base_string + "\n"        
 
         if self.bigrams :
