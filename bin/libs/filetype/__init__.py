@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Copyright 2010-2015 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
 # filetype.py is part of mwetoolkit
@@ -45,13 +45,13 @@ from .. import util
 
 from . import _common as common
 
-
 ################################################################################
-
 
 # Leak very common stuff into this namespace
 from ._common import StopParsing, InputHandler, \
         ChainedInputHandler, Directive
+
+#############################
 
 
 def parse(input_files, handler, filetype_hint=None):
@@ -71,6 +71,8 @@ def parse(input_files, handler, filetype_hint=None):
     SmartParser(input_files, filetype_hint).parse(handler)
     handler.finish()
 
+#############################
+
 
 def parse_entities(input_files, filetype_hint=None):
     r"""For each input file, detect its file format and parse it,
@@ -84,6 +86,8 @@ def parse_entities(input_files, filetype_hint=None):
     handler = EntityCollectorHandler()
     parse(input_files, handler, filetype_hint)
     return handler.entities
+
+#############################
 
 
 def printer_class(filetype_ext):
@@ -115,6 +119,8 @@ class EntityCollectorHandler(InputHandler):
 
     def handle_comment(self, comment, info={}):
         pass  # Just ignore them
+
+################################################################################
 
 
 class FirstInputHandler(ChainedInputHandler):
@@ -168,6 +174,8 @@ class FirstInputHandler(ChainedInputHandler):
             util.verbose("~~> Processing {kind} number {n} ({percent:2.0f}%)"
                     .format(kind=self.kind, n=self.count, percent=percent))
 
+################################################################################
+
 
 class AutomaticPrinterHandler(ChainedInputHandler):
     r"""Utility subclass of ChainedInputHandler that automatically
@@ -187,626 +195,24 @@ class AutomaticPrinterHandler(ChainedInputHandler):
 ################################################################################
 
 
-class MosesTextInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for MosesText format."""
-    description = "Moses textual format, with one sentence per line and <mwe> tags"
-    filetype_ext = "MosesText"
-  
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
-                    ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}"), ("\n", "${newline}")]
-
-    def operations(self):
-        return common.FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
-
-
-class MosesTextChecker(common.AbstractChecker):
-    r"""Checks whether input is in MosesText format."""
-    def matches_header(self, strict):
-        return not strict
-
-
-class MosesTextPrinter(common.AbstractPrinter):
-    """Instances can be used to print HTML format."""
-    valid_categories = ["corpus"]
-
-    def handle_sentence(self, sentence, info={}):
-        """Print a simple readable string where the surface forms of the 
-        current sentence are concatenated and separated by a single space.
-            
-        @return A string with the surface form of the sentence,
-        space-separated.
-        """
-        surface_list = [self.escape(w.surface) for w in sentence.word_list]
-        mwetags_list = [[] for i in range(len(surface_list))]
-        for mweoccur in sentence.mweoccurs:
-            for i in mweoccur.indexes:
-                mwetags_list[i].append( mweoccur.candidate.id_number)
-        for (mwetag_i, mwetag) in enumerate(mwetags_list):
-            if mwetag:
-                mwetag = (unicode(index) for index in mwetag)
-                surface_list[mwetag_i] = "<mwepart id=\"" + ",".join(mwetag) \
-                              + "\" >" + surface_list[mwetag_i] + "</mwepart>"
-        line = " ".join(surface_list)
-        self.add_string(line, "\n")
-
-
-##############################
-
-class HTMLInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for HTML format."""
-    description = "Pretty HTML for in-browser visualization"
-    filetype_ext = "HTML"
-
-    # TODO use python-based HTML escape
-    escape_pairs = []
-
-    def operations(self):
-        return common.FiletypeOperations(HTMLChecker, None, HTMLPrinter)
-
-
-class HTMLChecker(common.AbstractChecker):
-    r"""Checks whether input is in HTML format."""
-    def matches_header(self, strict):
-        header = self.fileobj.peek(1024)
-        return b"<html>" in header
-
-
-class HTMLPrinter(common.AbstractPrinter):
-    """Instances can be used to print HTML format."""
-    valid_categories = ["corpus"]
-
-    def before_file(self, fileobj, info={}):
-        html_header="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>MWETOOLKIT annotated corpus: {corpusname}</title>
-    <!--<link rel="stylesheet" href="mwetk-corpus.css" type="text/css" media="screen"/>-->
-    <style>
-    h1{{margin:0}}
-    p.notice{{font-family:Arial;font-size:10pt;margin:0}}
-    hr{{margin:10px 0}}
-    p.sent{{margin:2px 100px 2px 0;line-height:145%%;padding:4px 2px}}
-    p.sent:hover{{background-color:#FFC}}
-    p.sent span.sid{{border:1px solid #000;border-radius:2px;padding:1px 5px}}
-    p.sent:hover span.sid{{background:#F22;color:#FFF}}
-    p.sent:hover a.word{{border-color:#03A}}
-    span.mwepart a.word{{border:2px solid #000}}
-    span.mwe1 a.word{{background-color:#F66}}
-    span.mwe2 a.word{{background-color:#9C0}}
-    span.mwe3 a.word{{background-color:#69F}}
-    span.mwe4 a.word{{background-color:#F90}}
-    a.word{{position:relative;border:1px solid #CCF;border-radius:2px;padding:1px 2px;margin:auto 0;font-family:Verdana sans-serif;text-decoration:none;color:#000}}
-    a.word:hover{{background-color:#03A;border-color:#000;color:#FFF}}
-    a.word span.surface{{font-weight:700}}
-    a.word span.wid{{font-size:70%%;position:relative;top:.3em;font-style:italic;padding-left:3px}}
-    a.word span.lps{{color:#000;padding:2px 5px;top:1em;z-index:1;height:auto;opacity:0;position:absolute;visibility:hidden;background-color:#AAA;border:1px solid #000;border-radius:2px;box-shadow:#000 2px 2px 6px}}
-    a.word:hover span.lps{{opacity:.95;visibility:visible}}
-    a.word span.lps span.lemma{{font-style:italic;display:block}}
-    a.word span.lps span.pos{{font-weight:700;display:block}}
-    a.word span.lps span.syn{{font-weight:400;display:block;font-family:Arial}}
-    </style>
-</head>
-<body>
-<h1>Corpus: {corpusname}</h1>
-<p class="notice">Generated automatically by the <a href="http://mwetoolkit.sf.net/" target="_blank">mwetoolkit</a> </p>
-<p class="notice"> Timestamp: {timestamp}</p>
-<p class="notice">Source: <tt>{filename}</tt></p>
-<hr/>"""
-        s = fileobj.name
-        import os, datetime
-        # XXX escape these parameters
-        self.add_string(html_header.format(
-                timestamp=datetime.datetime.now(),
-                corpusname=s[s.rfind("/")+1:],
-                filename=os.path.abspath(s)))
-
-
-    def after_file(self, fileobj, info={}):
-        self.add_string("</body>\n</html>")
-        self.flush()
-
-    def escape(self, text):
-        return text  # XXX use a python native html escaper
-
-    def handle_comment(self, comment, info={}):
-        self.add_string("<!-- ", self.escape(comment), " -->\n")
-
-    def handle_sentence(self, sentence, info={}):
-        self.add_string(sentence.to_html(), "\n")
-
-
-##############################
-
-class PlainCorpusInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for PlainCorpus format."""
-    description = "One sentence per line, with multi_word_expressions"
-    filetype_ext = "PlainCorpus"
- 
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), (" ", "${space}"), ("\t", "${tab}"),
-            ("_", "${underscore}"), ("#", "${hash}"), ("\n", "${newline}")]
-
-    def operations(self):
-        return common.FiletypeOperations(PlainCorpusChecker,
-                PlainCorpusParser, PlainCorpusPrinter)
-
-
-class PlainCorpusChecker(common.AbstractChecker):
-    r"""Checks whether input is in PlainCorpus format."""
-    def matches_header(self, strict):
-        return not strict
-
-
-class PlainCorpusParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the PlainCorpus format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_categories = ["corpus"]
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PlainCorpusParser, self).__init__(in_files, encoding)
-        self.sentence_count = 0
-        self.category = "corpus"
-
-    def _parse_line(self, line, handler, info={}):
-        self.sentence_count += 1
-        sentence = Sentence([], self.sentence_count)
-        mwes = line.split()  # each entry is an SWE/MWE
-        for mwe in mwes:
-            words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]
-            sentence.word_list.extend(words)
-            if len(words) != 1:
-                from ..base.mweoccur import MWEOccurrence
-                c = Candidate(info["linenum"], words)
-                indexes = list(xrange(len(sentence)-len(words), len(sentence)))
-                mweo = MWEOccurrence(sentence, c, indexes)
-                sentence.mweoccurs.append(mweo)
-        handler.handle_sentence(sentence)
-
-
-class PlainCorpusPrinter(common.AbstractPrinter):
-    """Instances can be used to print PlainCorpus format."""
-    valid_categories = ["corpus"]
-
-    def handle_sentence(self, sentence, info={}):
-        """Handle sentence as a PlainCorpus line, consisting of
-        space-separated Word surfaces. MWEs are separated by "_"s.
-        """
-        surface_list = [self.escape(w.surface
-                if w.surface != WILDCARD else "<?>") \
-                for w in sentence.word_list]
-
-        from collections import defaultdict
-        mwe_parts = defaultdict(set)  # index -> set(mwe)
-        for mweoccur in sentence.mweoccurs:
-            for i in mweoccur.indexes:
-                mwe_parts[i].add(mweoccur)
-
-        for i in xrange(len(surface_list)-1):
-            if mwe_parts[i] & mwe_parts[i+1]:
-                surface_list[i] += "_"
-            else:
-                surface_list[i] += " "
-        line = "".join(surface_list)
-        self.add_string(line, "\n")
-
-
-##############################
-
-
-class PlainCandidatesInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for PlainCandidates format."""
-    description = "One multi_word_candidate per line"
-    filetype_ext = "PlainCandidates"
-
-    comment_prefix = "#"
-    escape_pairs = PlainCorpusInfo.escape_pairs
-
-    def operations(self):
-        return common.FiletypeOperations(PlainCandidatesChecker,
-                PlainCandidatesParser, PlainCandidatesPrinter)
-
-
-class PlainCandidatesChecker(common.AbstractChecker):
-    r"""Checks whether input is in PlainCandidates format."""
-    def matches_header(self, strict):
-        if not strict: return True
-        header = self.fileobj.peek(1024)
-        return b" " not in header and b"_" in header
-
-
-class PlainCandidatesParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the PlainCandidates format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_categories = ["candidates"]    
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PlainCandidatesParser, self).__init__(in_files, encoding)
-        self.candidate_count = 0
-        self.category = "candidates"
-
-    def _parse_line(self, line, handler, info={}):
-        words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
-        self.candidate_count += 1
-        c = Candidate(self.candidate_count, words)
-        handler.handle_candidate(c)
-
-
-class PlainCandidatesPrinter(common.AbstractPrinter):
-    """Instances can be used to print PlainCandidates format."""
-    valid_categories = ["candidates"]
-
-    def handle_candidate(self, candidate, info={}):
-        self.add_string("_".join(self.escape(w.lemma_or_surface()) \
-                for w in candidate.word_list), "\n")
-
-
-##############################
-
-class MosesInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for Moses."""
-    description = "Moses factored format (word=f1|f2|f3|f4|f5)"
-    filetype_ext = "FactoredMoses"
-
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
-                    (" ", "${space}"), ("\t", "${tab}"), ("\n", "${newline}")]
-
-    def operations(self):
-        return common.FiletypeOperations(MosesChecker,
-                MosesParser, MosesPrinter)
-
-
-class MosesChecker(common.AbstractChecker):
-    r"""Checks whether input is in FactoredMoses format."""
-    def matches_header(self, strict):
-        header = self.fileobj.peek(512)
-        for line in header.split(b"\n"):
-            if not line.startswith(bytes(self.filetype_info.comment_prefix)):
-                return all(w.count(b"|") == 3 for w in line.split(b" ") if w)
-        return not strict
-
-
-class MosesParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the FactoredMoses format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_categories = ["corpus"]
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(MosesParser,self).__init__(in_files, encoding)
-        self.sentence_count = 0
-        self.category = "corpus"
-
-    def _parse_line(self, line, handler, info={}):
-        self.sentence_count += 1
-        s = Sentence([], self.sentence_count)
-        words = line.split(" ")
-        for i, w in enumerate(words):
-            token = [self.unescape(x) for x in w.split("|")]
-            if len(token) == 4:
-                surface, lemma, pos, syn = token
-                s.append(Word(surface, lemma, pos, syn))
-            else:
-                util.warn("Ignoring bad token (line {}, token {})" \
-                        .format(info["linenum"], i+1))
-        handler.handle_sentence(s)
-
-
-class MosesPrinter(common.AbstractPrinter):
-    """Instances can be used to print Moses factored format."""
-    valid_categories = ["corpus"]
-
-    def handle_sentence(self, sentence, info={}):
-        """Prints a simple Moses-factored string where words are separated by 
-        a single space and each word part (surface, lemma, POS, syntax) is 
-        separated from the next using a vertical bar "|".
-        
-        @return A string with the Moses factored form of the sentence
-        """
-        moses_list = [self.word_to_moses(w) for w in sentence.word_list]
-        tagged_list = sentence.add_mwe_tags(moses_list)
-        line = " ".join(tagged_list)
-        self.add_string(line, "\n")
-
-    def word_to_moses(self, word) :
-        """Converts word to a string representation where word parts are
-        separated from each other by "|" character, as in Moses' factored
-        translation format.
-            
-        @return A string with Moses factored representation of a word.
-        """
-        args = (word.surface, word.lemma, word.pos, word.syn)
-        return "|".join(self.escape(w) if w != WILDCARD else "" for w in args)
-
-
-
-##############################
-
-
-class ConllInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for CONLL."""
-    description = "CONLL tab-separated 10-entries-per-word"
-    filetype_ext = "CONLL"
-
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-            (" ", "${space}"), ("#", "${hash}"),
-            ("\t", "${tab}"), ("\n", "${newline}")]
-
-    entries = ["ID", "FORM", "LEMMA", "CPOSTAG", "POSTAG",
-            "FEATS", "HEAD", "DEPREL", "PHREAD", "PDEPREL"]
-
-    def operations(self):
-        return common.FiletypeOperations(ConllChecker, ConllParser,
-                ConllPrinter)
-
-
-class ConllChecker(common.AbstractChecker):
-    r"""Checks whether input is in CONLL format."""
-    def matches_header(self, strict):
-        header = self.fileobj.peek(1024)
-        for line in header.split(b"\n"):
-            if line and not line.startswith(
-                    bytes(self.filetype_info.comment_prefix)):
-                return len(line.split(b"\t")) == len(self.filetype_info.entries)
-        return not strict
-
-
-def getitem(a_list, index, default=None):
-    r"""Obvious implementation for a function
-    that should already exist."""
-    try:
-        return a_list[index]
-    except IndexError:
-        return default
-
-
-class ConllParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the CONLL-X format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_categories = ["corpus"]
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(ConllParser,self).__init__(in_files, encoding)
-        self.name2index = {name:i for (i, name) in
-                enumerate(self.filetype_info.entries)}
-        self.ignoring_cur_sent = False
-        self.id_index = self.name2index["ID"]
-        self.category = "corpus"
-        self.s_id = 0
-
-    def _parse_line(self, line, handler, info={}):
-        data = line.split("\t")
-        if len(data) <= 1: return
-        data = [d.split(" ") for d in data]  # split MWEs
-        indexes = []
-        for mwe_i, wid in enumerate(data[self.id_index]):
-            word_data = [getitem(d, mwe_i, "_") for d in data]
-            self._word_data = [(WILDCARD if d == "_" else d) for d in word_data]
-
-            if len(self._word_data) != len(self.filetype_info.entries):
-                util.warn("Expected {n_expected} entries, got {n_gotten}" \
-                        " (at line {linenum})", linenum=info["linenum"],
-                        n_expected=len(self.filetype_info.entries),
-                        n_gotten=len(self._word_data))
-                self.ignoring_cur_sent = True
-            else:
-                try:
-                    wid = int(wid)
-                except ValueError:
-                    util.warn("Bad word ID at field {field_idx}: {wid!r} (at line {linenum})",
-                            field_idx=self.id_index, wid=wid, linenum=info["linenum"])
-                    self.ignoring_cur_sent = True
-                else:
-                    if wid == 1:
-                        self.new_partial(handler.handle_sentence,
-                                Sentence([], self.s_id), info=info)
-                        self.ignoring_cur_sent = False
-                        self.s_id += 1
-
-                    if not self.ignoring_cur_sent:
-                        indexes.append(wid - 1)
-                        word = self._parse_word(handler, info)
-                        self.partial_obj.append(word)
-
-        if len(data[self.id_index]) != 1:
-            from ..base.mweoccur import MWEOccurrence
-            mwe_words = []  # XXX do we use surface or lemma?
-            c = Candidate(info["linenum"], mwe_words)
-            mweo = MWEOccurrence(self.partial_obj, c, indexes)
-            self.partial_obj.mweoccurs.append(mweo)
-
-    def get(self, attribute, default=WILDCARD):
-        r"""Return CONLL data with given attribute
-        (ID, FORM, LEMMA...) name."""
-        try:
-            return self.unescape(self._word_data[
-                    self.name2index[attribute]])
-        except KeyError:
-            return default
-
-    def _parse_word(self, handler, info={}):
-        surface, lemma = self.get("FORM"), self.get("LEMMA")
-        pos, syn = self.get("CPOSTAG"), self.get("DEPREL")
-
-        if self.get("POSTAG") != self.get("CPOSTAG"):
-            self.maybe_warn(self.get("POSTAG"), "POSTAG != CPOSTAG")
-        self.maybe_warn(self.get("FEATS"), "found FEATS")
-        self.maybe_warn(self.get("PHEAD"), "found PHEAD")
-        self.maybe_warn(self.get("PDEPREL"), "found PDEPREL")
-
-        if self.get("HEAD") != WILDCARD:
-            syn = syn + ":" + unicode(self.get("HEAD"))
-        return Word(surface, lemma, pos, syn)
-
-
-    def maybe_warn(self, entry, entry_name):
-        if entry != WILDCARD:
-            util.warn_once("WARNING: unable to handle {} entry: {}." \
-                    .format(self.filetype_info.filetype_ext, entry_name))
-
-
-class ConllPrinter(common.AbstractPrinter):
-    BETWEEN_SENTENCES = "\n"
-    valid_categories = ["corpus"]
-    def __init__(self, category, **kwargs):
-        super(ConllPrinter, self).__init__(category, **kwargs)
-        self.count_sentences = 0
-
-
-    def handle_sentence(self, sentence, info={}):
-        if self.count_sentences != 0:
-            self.add_string(self.BETWEEN_SENTENCES)
-        self.count_sentences += 1
-
-        for indexes in sentence.xwe_indexes():
-            entries = []  # [[entries for word 1], [entries for 2], ...]
-            for i in indexes:
-                word = sentence[i]
-                data = {
-                    "ID": unicode(i + 1),
-                    "FORM": word.surface,
-                    "LEMMA": word.lemma,
-                    "CPOSTAG": word.pos,
-                    "POSTAG": word.pos,
-                    "DEPREL": word.syn.split(":")[0],
-                    "HEAD": word.syn.split(":")[1] if ":" in word.syn else "_",
-                }
-                entry = [self.handle_wildcard(data.get(entry_name, "_")) \
-                        for entry_name in self.filetype_info.entries]
-                entries.append(entry)
-
-            line = zip(*entries)  # [[entries A for all], [entries B], ...]
-            line = "\t".join(" ".join(entries_n) for entries_n in line)
-            self.add_string(line, "\n")
-
-
-    def handle_wildcard(self, argument):
-        r"""Transform WILDCARD into CONLL "_"."""
-        if argument == WILDCARD:
-            return "_"
-        return argument
-
-
-
-
-##############################
-
-
-class PWaCInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for pWaC format."""
-    description = "Wac parsed format"
-    filetype_ext = "pWaC"
-
-    entries = ["FORM", "LEMMA", "CPOSTAG", "ID", "HEAD", "DEPREL"]
-
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("_", "${underscore}"),
-                    ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("#", "${hash}"), ("\t", "${tab}"), ("\n", "${newline}")]
-
-    def operations(self):
-        return common.FiletypeOperations(PWaCChecker, PWaCParser, PWaCPrinter)
-
-
-class PWaCChecker(common.AbstractChecker):
-    r"""Checks whether input is in pWaC format."""
-    def matches_header(self, strict):
-        return self.fileobj.peek(20).startswith(b"<text id")
-
-
-class PWaCParser(ConllParser):
-    r"""Instances of this class parse the pWaC format,
-    calling the `handler` for each object that is parsed.
-    """
-    valid_categories = ["corpus"]
-
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PWaCParser, self).__init__(in_files, encoding)
-
-    def _parse_line(self, line, handler, info={}):
-        if line == "":
-            pass  # Ignore empty lines
-        elif line[0] == "<" and line[-1] == ">":
-            # We just ignore <text id>, <s> and </s>
-            # `new_partial` will be called when seeing ID "1"
-            pass
-        else:
-            super(PWaCParser, self)._parse_line(line, handler, info)
-
-
-class PWaCPrinter(ConllPrinter):
-    BETWEEN_SENTENCES = ""
-    def before_file(self, fileobj, info={}):
-        self.add_string('<text id="mwetoolkit">\n')
-
-    def after_file(self, fileobj, info={}):
-        self.add_string('</text>\n')
-
-    def handle_sentence(self, sentence, info={}):
-        self.add_string('<s>\n')
-        super(PWaCPrinter, self).handle_sentence(sentence, info)
-        self.add_string('</s>\n')
-
-
-##############################
-
-
-class BinaryIndexInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for BinaryIndex files."""
-    description = "The `.info` file for binary index created by index.py"
-    filetype_ext = "BinaryIndex"
-
-    def operations(self):
-        # TODO import indexlib...  BinaryIndexPrinter
-        return common.FiletypeOperations(BinaryIndexChecker, BinaryIndexParser, None)
-
-
-class BinaryIndexChecker(common.AbstractChecker):
-    r"""Checks whether input is in BinaryIndex format."""
-    def check(self):
-        if self.fileobj == sys.stdin:
-            util.error("Cannot read BinaryIndex file from stdin!")
-        if not self.fileobj.name.endswith(".info"):
-            util.error("BinaryIndex file should have extension .info!")
-        super(BinaryIndexChecker, self).check()
-
-    def matches_header(self, strict):
-        return self.fileobj.peek(20).startswith(b"corpus_size int")
-
-
-class BinaryIndexParser(common.AbstractParser):
-    valid_categories = ["corpus"]
-
-    def _parse_file(self, fileobj, handler):
-        info = {"parser": self, "category": "corpus"}
-        with common.ParsingContext(fileobj, handler, info):
-            from .indexlib import Index
-            assert fileobj.name.endswith(".info")
-            index = Index(fileobj.name[:-len(".info")])
-            index.load_main()
-            for sentence in index.iterate_sentences():
-                handler.handle_sentence(sentence)
-
-
-###############################################################################
-
-
 from . import ft_arff
 from . import ft_xml
 from . import ft_csv
+from . import ft_moses
+from . import ft_conll
+from . import ft_pwac
+from . import ft_binaryindex
+from . import ft_plaincorpus
+from . import ft_plaincandidates
+from . import ft_html
+from . import ft_mosestext
 
 # Instantiate FiletypeInfo singletons
-INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ConllInfo(), PWaCInfo(),
-        PlainCorpusInfo(), BinaryIndexInfo(),
-        MosesInfo(), PlainCandidatesInfo(), HTMLInfo(), MosesTextInfo()]
+INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ft_conll.ConllInfo(), 
+         ft_pwac.PWaCInfo(), ft_plaincorpus.PlainCorpusInfo(), 
+         ft_binaryindex.BinaryIndexInfo(), ft_moses.MosesInfo(), 
+         ft_plaincandidates.PlainCandidatesInfo(), ft_html.HTMLInfo(), 
+         ft_mosestext.MosesTextInfo()]
 
 # Map filetype_hint -> filetype_info
 HINT_TO_INFO = {}
@@ -832,6 +238,7 @@ for fti in INFOS:
         for category in printer.valid_categories:
             OUTPUT_INFOS.setdefault(category, []).append(fti)
 
+################################################################################
 
 
 class SmartParser(common.AbstractParser):
@@ -874,8 +281,6 @@ class SmartParser(common.AbstractParser):
                 return fti
 
         util.error("Unknown file format for: " + fileobj.name)
-
-
 
 ################################################################################
         

@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Copyright 2010-2015 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
 # ft_csv.py is part of mwetoolkit
