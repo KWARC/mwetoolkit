@@ -342,6 +342,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             lower_attr = "lemma"
         elif o in ("-a", "--algorithm"):
             algoname = a.lower()
+        elif o in ("-m", "-x"):
+        	error( "Deprecated options -x and -m. Run with -h for details" )
         else:
             raise Exception("Bad arg: " + o)
 
