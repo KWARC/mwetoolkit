@@ -155,7 +155,7 @@ class ConverterHandler(filetype.ChainedInputHandler):
             ---------------------------------------
         """
         if word.pos in self.PLACEHOLD:
-            word.lemma = word.surface = "${placehold_" + word.pos + "}"
+            word.lemma = word.surface = "placehold" + word.pos + ""
         if word.pos != WILDCARD:
             pos_to_append = ""
             if self.append_pos_tag == "coarse":
