@@ -3,7 +3,7 @@
 
 ################################################################################
 #
-# Copyright 2010-2014 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
+# Copyright 2010-2015 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
 # ft_xml.py is part of mwetoolkit
@@ -343,7 +343,7 @@ class XMLParser(common.AbstractParser):
                     # Finished reading the meta header, call callback        
                     handler.handle_meta(meta, info)
 
-                elif elem.tag == "bigram":
+                elif elem.tag == "bigrams":
                     in_bigram = False
                 elif elem.tag == "occurs":
                     in_occurs = False
