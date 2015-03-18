@@ -25,7 +25,8 @@
 
 
 """
-    This script filters the input and leaves only content words.
+    This script filters the input and leaves only content words using the 
+    tagset of pUKWaC.
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -36,10 +37,13 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.util import read_options, treat_options_simplest
+import re
+
+from libs.util import read_options, treat_options_simplest, error
 from libs.base.sentence import Sentence
 from libs.base.__common import WILDCARD
 from libs import filetype
+
 
      
 ################################################################################     
@@ -64,19 +68,33 @@ OPTIONS may be:
     (By default, keeps output in same format as input):
     {descriptions.output[ALL]}
 
---append-pos-tag
-    Append POS-tags to output.
+--append-pos-tag <mode>
+    Append POS-tags to output. The <mode> is one of the following:
+    * "coarse": only append the first letter of POS tag
+    * "fine": append the whole POS tag, regardless of its level of detail
+    
+--clean-special
+    Remove words whose lemma contains special characters, keeping
+    only those that respect the regexp [a-zA-Z]+(-_ [a-zA-Z]+)*
 
 {common_options}
 """
 
 input_filetype_ext = None
 output_filetype_ext = None
+clean_special = False
+append_pos_tag = None
 
 
 ################################################################################
 
 class ConverterHandler(filetype.ChainedInputHandler):
+
+    def __init__(self, append_pos_tag=None, clean_special=False):
+        super(filetype.ChainedInputHandler, self)
+        self.append_pos_tag = append_pos_tag
+        self.clean_special = clean_special
+        
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
@@ -94,6 +112,7 @@ class ConverterHandler(filetype.ChainedInputHandler):
         sentence.word_list = [self.change(w) for w in sentence]
         self.chain.handle_sentence(sentence, info)
 
+    NOSPECIAL = "[a-zA-Z]+(-_ [a-zA-Z]+)*"
 
     PLACEHOLD = set(["CD", "NP", "NPS"])
 
@@ -123,7 +142,8 @@ class ConverterHandler(filetype.ChainedInputHandler):
             RP      particle                         give up
             ------------------------------------------------
         """
-        return word.pos in self.GOOD
+        return word.pos in self.GOOD and \
+                (not self.clean_special or re.match(self.NOSPECIAL, word.lemma))
 
 
     def change(self, word):
@@ -137,8 +157,13 @@ class ConverterHandler(filetype.ChainedInputHandler):
         if word.pos in self.PLACEHOLD:
             word.lemma = word.surface = "${placehold_" + word.pos + "}"
         if word.pos != WILDCARD:
+            pos_to_append = ""
+            if self.append_pos_tag == "coarse":
+                pos_to_append = "/" + word.pos[0]
+            elif self.append_pos_tag == "fine":
+                pos_to_append = "/" + word.pos
             word.lemma = word.surface = \
-                    word.lemma_or_surface() + "/" + word.pos
+                    word.lemma_or_surface() + pos_to_append
         return word
 
 
@@ -151,6 +176,7 @@ def treat_options(opts, arg, n_arg, usage_string):
     global input_filetype_ext
     global output_filetype_ext
     global append_pos_tag
+    global clean_special
 
     treat_options_simplest(opts, arg, n_arg, usage_string)
 
@@ -160,7 +186,12 @@ def treat_options(opts, arg, n_arg, usage_string):
         elif o == ("--to"):
             output_filetype_ext = a
         elif o == "--append-pos-tag":
-            append_pos_tag = True
+        	if a in ("coarse","fine"):
+	            append_pos_tag = a
+	        else:
+	        	error("Expected \"coarse\" or \"fine\", found " + a)
+        elif o == "--clean-special":
+        	clean_special = True
         else:
             raise Exception("Bad arg: " + o)
 
@@ -168,6 +199,7 @@ def treat_options(opts, arg, n_arg, usage_string):
 ################################################################################
 # MAIN SCRIPT
 
-longopts = ["from=", "to=", "append-pos-tag="]
+longopts = ["from=", "to=", "append-pos-tag=", "clean-special"]
 args = read_options("", longopts, treat_options, -1, usage_string)
-filetype.parse(args, ConverterHandler(), input_filetype_ext)
+handler = ConverterHandler(append_pos_tag, clean_special)
+filetype.parse(args, handler, input_filetype_ext)
