@@ -43,6 +43,7 @@ from __future__ import absolute_import
 from libs.util import read_options, treat_options_simplest, warn
 from libs.base.word import Word
 from libs.base.sentence import Sentence
+from libs.filetype import ft_treetagger
 from libs import filetype
 
 
@@ -69,7 +70,8 @@ OPTIONS may be:
 -s <sent> OR --sentence <sent>
     Name of the POS tag that the TreeTagger uses to separate sentences. Please,
     specify this if you're not using the "</s>" segmentation. For example,
-    when parsing English texts, one should indicate `--sentence="SENT"`.
+    when parsing English texts, one should indicate `--sentence="SENT"`. The 
+    default value is "SENT".
 
 --to <output-filetype-ext>
     Convert input to given filetype extension.
@@ -78,74 +80,8 @@ OPTIONS may be:
 
 {common_options}
 """
-sent_split = None
+sent_split = "SENT"
 output_filetype_ext = "XML"
-
-
-################################################################################     
-
-
-class TreeTaggerInfo(filetype.common.FiletypeInfo):
-    r"""FiletypeInfo subclass for TreeTagger format."""
-    description = "3-field tab-separated format output by TreeTagger"
-    filetype_ext = "TreeTagger"
-  
-    comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
-                    ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}")]
-
-    def operations(self):
-        return filetype.common.FiletypeOperations(
-                None, None, TreeTaggerParser)
-
-
-INFO = TreeTaggerInfo()
-
-
-class TreeTaggerParser(filetype.common.AbstractTxtParser):
-    r"""Parse file in TreeTagger TAB-separated format:
-    One word per line, each word is in format "surface\tpos\tlemma".
-    Optional sentence separators "</s>" may also constitute a word on a line.
-    """
-    filetype_info = INFO
-    valid_categories = ["corpus"]
-
-    def __init__(self, *args):
-        super(TreeTaggerParser, self).__init__(*args)
-        self.category = "corpus"
-        self.words = []
-        self.s_id = 0
-
-    def _parse_line(self, line, handler, info={}):
-        global sent_split
-        sentence = None
-
-        if not self.words:
-            self.new_partial(self.finish_sentence, handler)
-
-        if line == "</s>":
-            self.flush_partial_callback()
-
-        else:
-            fields = line.split("\t")
-            if len(fields) != 3:
-                warn("Ignoring line {} (it has {} entries)" \
-                        .format(info["linenum"], len(fields)))
-                return
-
-            surface, pos, lemma = fields
-            word = Word(surface, lemma, pos)
-            self.words.append(word)
-
-            if pos == sent_split:
-                self.flush_partial_callback()
-
-    def finish_sentence(self, handler):
-        r"""Finish building sentence and call handler."""
-        handler.handle_sentence(Sentence(self.words, self.s_id), {})
-        self.s_id += 1
-        self.words = []
 
 
 ################################################################################
@@ -179,4 +115,5 @@ def treat_options(opts, arg, n_arg, usage_string):
 longopts = ["sentence=", "to="]
 args = read_options("s:", longopts, treat_options, -1, usage_string)
 printer = filetype.AutomaticPrinterHandler(output_filetype_ext)
-TreeTaggerParser(args, "utf-8").parse(filetype.FirstInputHandler(printer))
+parser = ft_treetagger.TreeTaggerParser(sent_split, args, "utf-8")
+parser.parse(filetype.FirstInputHandler(printer))

@@ -206,13 +206,14 @@ from . import ft_plaincorpus
 from . import ft_plaincandidates
 from . import ft_html
 from . import ft_mosestext
+from . import ft_treetagger
 
 # Instantiate FiletypeInfo singletons
 INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ft_conll.ConllInfo(), 
          ft_pwac.PWaCInfo(), ft_plaincorpus.PlainCorpusInfo(), 
          ft_binaryindex.BinaryIndexInfo(), ft_moses.MosesInfo(), 
          ft_plaincandidates.PlainCandidatesInfo(), ft_html.HTMLInfo(), 
-         ft_mosestext.MosesTextInfo()]
+         ft_mosestext.MosesTextInfo(), ft_treetagger.TreeTaggerInfo()]
 
 # Map filetype_hint -> filetype_info
 HINT_TO_INFO = {}
