@@ -112,7 +112,7 @@ class ConverterHandler(filetype.ChainedInputHandler):
         sentence.word_list = [self.change(w) for w in sentence]
         self.chain.handle_sentence(sentence, info)
 
-    NOSPECIAL = "[a-zA-Z]+(-_ [a-zA-Z]+)*"
+    NOSPECIAL = "^[a-zA-Z]+([-_' ][a-zA-Z]+)*$"
 
     PLACEHOLD = set(["CD", "NP", "NPS"])
 
