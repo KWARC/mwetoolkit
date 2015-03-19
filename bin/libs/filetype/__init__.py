@@ -58,23 +58,38 @@ def parse(input_files, handler, filetype_hint=None):
     r"""For each input file, detect its file format,
     parse it and call the appropriate handler methods.
     
-    This method should be strongly preferred over
-    explicitly creating a Parser object.
-    
+    You MUST call either this or `parse_with`.
+    Don't EVER call `parser.parse` directly.
+
     @param input_files: a list of file objects
     whose contents should be parsed.
     @param handler: an InputHandler.
     @param filetype_hint: either None or a valid
     filetype_ext string.
     """
+    parse_with(SmartParser(input_files, filetype_hint), handler)
+
+
+def parse_with(parser, handler):
+    r"""For each input file, detect its file format,
+    parse it and call the appropriate handler methods.
+    
+    You MUST call this function when parsing a file.
+    Don't EVER call `parser.parse` directly, or you will
+    suffer HARSH CONSEQUENCES. You have been warned.
+    
+    @param parser: an instance of AbstractParser.
+    @param handler: an instance of InputHandler.
+    """
     try:
         handler = FirstInputHandler(handler)
-        SmartParser(input_files, filetype_hint).parse(handler)
+        parser.parse(handler)
         handler.finish()
     except IOError as e:
         import errno
         if e.errno != errno.EPIPE:
             raise  # (EPIPE is just a closed stdout, so we ignore it)
+
 
 #############################
 
@@ -255,13 +270,13 @@ class SmartParser(common.AbstractParser):
         super(SmartParser, self).__init__(input_files)
         self.filetype_hint = filetype_hint
 
-    def parse(self, handler):    
+    def parse(self, handler):
         for sub_filelist in self.filelist.sublists():
             fti = self._detect_filetype(sub_filelist.only(), self.filetype_hint)
             checker_class, parser_class, _ = fti.operations()
             checker_class(sub_filelist.only()).check()
             p = parser_class(sub_filelist)
-            # Delegate the whole work to parser `p`.                   
+            # Delegate the whole work to parser `p`.
             p.parse(handler)
         handler.flush()
         return handler
