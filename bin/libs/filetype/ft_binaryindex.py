@@ -58,6 +58,7 @@ class BinaryIndexChecker(common.AbstractChecker):
         super(BinaryIndexChecker, self).check()
 
     def matches_header(self, strict):
+        # Check is always strict because the absence of header means file is wrong
         return self.fileobj.peek(20).startswith(b"corpus_size int")
 
 

@@ -55,6 +55,11 @@ The <candidates.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
 
 OPTIONS may be:
 
+--from <input-filetype-ext>
+    Force reading of corpus with given filetype extension.
+    (By default, file type is automatically detected):
+    {descriptions.input[corpus]}
+
 -s OR --surface
     Outputs surface forms instead of lemmas. Default false.
     
@@ -67,6 +72,7 @@ OPTIONS may be:
 surface_instead_lemmas = False  
 lemmapos = False
 sentence_counter = 0
+input_filetype_ext = None
             
 ################################################################################
 
@@ -82,6 +88,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     """
     global surface_instead_lemmas
     global lemmapos
+    global input_filetype_ext
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
         
@@ -90,15 +97,17 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-s", "--surface") : 
             surface_instead_lemmas = True     
         elif o in ("-p", "--lemmapos") : 
-            lemmapos = True                 
+            lemmapos = True   
+        elif o == "--from":
+            input_filetype_ext = a                          
         else:
             raise Exception("Bad arg: " + o)
 
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "surface", "lemmapos" ]
+longopts = [ "surface", "lemmapos", "from=" ]
 args = read_options( "sp", longopts, treat_options, -1, usage_string )
 filetype.parse(args, ft_csv.CSVPrinter(lemmapos=lemmapos,
                                        surfaces=surface_instead_lemmas,
-                                       category="candidates"))
+                                       category="candidates"),input_filetype_ext)

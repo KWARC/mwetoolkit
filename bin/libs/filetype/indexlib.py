@@ -755,7 +755,7 @@ def populate_index(index, corpus_fileobjs, filetype_hint=None):
     """Generates an `Index` from a corpus file."""
     handler = IndexPopulatorHandler(index)
     filetype.parse(corpus_fileobjs, handler, filetype_hint)
-    handler.flush()
+    #handler.flush()
 
 ################################################################################
 

@@ -61,6 +61,7 @@ class PWaCInfo(common.FiletypeInfo):
 class PWaCChecker(common.AbstractChecker):
     r"""Checks whether input is in pWaC format."""
     def matches_header(self, strict):
+        # Check is always strict because tag <text id is mandatory
         return self.fileobj.peek(20).startswith(b"<text id")
 
 

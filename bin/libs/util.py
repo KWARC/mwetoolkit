@@ -93,10 +93,10 @@ def usage(usage_string):
         that uses this function should provide a variable containing the
         usage string.
     """
-    usage_string = usage_string % {
-        "program": sys.argv[0],
-        "common_options": common_options_usage_string
-    }
+    #usage_string = usage_string % {
+    #    "program": sys.argv[0],
+    #    "common_options": common_options_usage_string
+    #}
     usage_string = usage_string.format(program=sys.argv[0],
             common_options=common_options_usage_string,
             descriptions=FiletypeDescriptions())

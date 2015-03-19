@@ -71,7 +71,7 @@ OPTIONS may be:
     Name of the POS tag that the TreeTagger uses to separate sentences. Please,
     specify this if you're not using the "</s>" segmentation. For example,
     when parsing English texts, one should indicate `--sentence="SENT"`. The 
-    default value is "SENT".
+    default behaviour is to consider sentences separated by "</s>" tag.
 
 --to <output-filetype-ext>
     Convert input to given filetype extension.
@@ -80,7 +80,7 @@ OPTIONS may be:
 
 {common_options}
 """
-sent_split = "SENT"
+sent_split = None
 output_filetype_ext = "XML"
 
 

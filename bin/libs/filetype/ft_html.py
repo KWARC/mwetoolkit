@@ -51,8 +51,9 @@ class HTMLInfo(common.FiletypeInfo):
 class HTMLChecker(common.AbstractChecker):
     r"""Checks whether input is in HTML format."""
     def matches_header(self, strict):
-        header = self.fileobj.peek(1024)
-        return b"<html>" in header
+        return not strict
+        #header = self.fileobj.peek(1024)
+        #return b"<html>" in header
 
 
 class HTMLPrinter(common.AbstractPrinter):
