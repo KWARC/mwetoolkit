@@ -58,7 +58,7 @@ def parse(input_files, handler, filetype_hint=None):
     r"""For each input file, detect its file format,
     parse it and call the appropriate handler methods.
     
-    Most of the time, this method should be preferred over
+    This method should be strongly preferred over
     explicitly creating a Parser object.
     
     @param input_files: a list of file objects
@@ -67,9 +67,14 @@ def parse(input_files, handler, filetype_hint=None):
     @param filetype_hint: either None or a valid
     filetype_ext string.
     """
-    handler = FirstInputHandler(handler)
-    SmartParser(input_files, filetype_hint).parse(handler)
-    handler.finish()
+    try:
+        handler = FirstInputHandler(handler)
+        SmartParser(input_files, filetype_hint).parse(handler)
+        handler.finish()
+    except IOError as e:
+        import errno
+        if e.errno != errno.EPIPE:
+            raise  # (EPIPE is just a closed stdout, so we ignore it)
 
 #############################
 

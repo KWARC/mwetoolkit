@@ -115,6 +115,7 @@ class FiletypeInfo(object):
         return self.operations().printer_class
 
 
+
 class FiletypeOperations(collections.namedtuple("FiletypeOperations",
         "checker_class parser_class printer_class")):
     r"""A named triple (checker_class, parser_class, printer_class):
@@ -229,13 +230,13 @@ class FileList(object):
     @staticmethod
     def _uncompressing(fileobj):
         header = fileobj.peek(20)
-        if header.startswith(b"\x50\x4b\x03\x04"):  # ZIP?
+        if header.startswith(b"\x50\x4b\x03\x04"):  # is ZIP?
             from .uncompress import ZipWrapper
             fileobj = io.BufferedReader(ZipWrapper(fileobj))
-        if header.startswith(b"\x42\x5a\x68"):  # BZ2?
+        if header.startswith(b"\x42\x5a\x68"):  # is BZ2?
             from .uncompress import Bz2Wrapper
             fileobj = io.BufferedReader(Bz2Wrapper(fileobj))
-        if header.startswith(b"\x1f\x8b\x08"):  # GZIP?
+        if header.startswith(b"\x1f\x8b\x08"):  # is GZIP?
             from .uncompress import GzipWrapper
             fileobj = io.BufferedReader(GzipWrapper(fileobj))
         return fileobj
@@ -294,12 +295,13 @@ class AbstractParser(object):
         @param handler: An instance of InputHandler.
         Callback methods will be called on `handler`.
         """
-        for f in self.filelist._list:
-            try:
+        try:
+            for f in self.filelist._list:
                 self._parse_file(f, handler)
-            except StopParsing:  # Reading only part of file
-                pass  # Just interrupt parsing
-        self.close()
+        except StopParsing:  # Reading only part of file
+            pass  # Just interrupt parsing
+        finally:
+            self.close()
         return handler
 
 
@@ -336,7 +338,7 @@ class AbstractParser(object):
         r"""Close all files opened by this parser."""
         for f in self.filelist._list:
             if hasattr(f, "close"):
-                if f != sys.stdin:  # XXX 2014-11-07 broken by Python2kFileWrapper
+                if not getattr(f, "wraps_stdin", False):
                     f.close()
         self.filelist = FileList([], [0])
     
@@ -355,7 +357,6 @@ class AbstractTxtParser(AbstractParser):
     """
     def __init__(self, input_files, encoding):
         super(AbstractTxtParser, self).__init__(input_files)
-        cp = re.escape(self.filetype_info.comment_prefix)
         self.encoding = encoding
         self.encoding_errors = "replace"
         self.category = "<unknown-category>"
@@ -400,6 +401,8 @@ class AbstractTxtParser(AbstractParser):
 
 class ParsingContext(object):
     r"""(Call `handler.{before,after}_file`.)"""
+    EXPECTED_ERRORS = (StopParsing, IOError, util.MWEToolkitInputError)
+
     def __init__(self, fileobj, handler, info):
         self.fileobj, self.handler, self.info = fileobj, handler, info
 
@@ -407,13 +410,13 @@ class ParsingContext(object):
         self.handler.before_file(self.fileobj, self.info)
     
     def __exit__(self, t, v, tb):
-        if not (v is None or isinstance(v, util.MWEToolkitInputError)):
+        if not (v is None or isinstance(v, self.EXPECTED_ERRORS)):
             print("UNEXPECTED ERROR when parsing input line {linenum}" \
                     .format(linenum=self.info.get("linenum", "<unknown>")),
                     file=sys.stderr)
 
         if v is None:
-            # If StopParsing was raised, we don't want
+            # If e.g. StopParsing was raised, we don't want
             # to append even more stuff in the output
             # (Especially since that would re-raise StopParsing
             # from inside __exit__, which will make a mess)
@@ -429,6 +432,8 @@ class Python2kFileWrapper(object):
     this will also fix Python Issue 1539381."""
     def __init__(self, wrapped):
         self._wrapped = wrapped
+        self.wraps_stdin = (wrapped == sys.stdin \
+                or getattr(wrapped, "wraps_stdin", False))
 
     def __getattr__(self, name):
         r"""Behave like the underlying file."""
@@ -466,8 +471,11 @@ class InputHandler(object):
     r"""Handler interface with callback methods that
     are called by the parser during its execution."""
 
-    def flush(self):
-        r"""May be called to flush outputs."""
+    def flush(self, full=True):
+        r"""May be called to flush outputs.
+        If `full==True`, flushes the underlying
+        output streams as well.
+        """
         pass  # By default, do nothing
 
     def before_file(self, fileobj, info={}):
@@ -480,7 +488,7 @@ class InputHandler(object):
 
     def finish(self):
         r"""Called after parsing all files."""
-        self.flush()  # By default, just flush whatever is in
+        self.flush(full=True)  # By default, just flush whatever is in
 
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
@@ -556,8 +564,8 @@ class ChainedInputHandler(InputHandler):
     """
     chain = None
 
-    def flush(self):
-        self.chain.flush()
+    def flush(self, full=True):
+        self.chain.flush(full=full)
 
     def before_file(self, fileobj, info={}):
         self.chain.before_file(fileobj, info)
@@ -646,11 +654,13 @@ class AbstractPrinter(InputHandler):
         r"""Return last (non-flushed) added object."""
         return self._waiting_objects[-1]
 
-    def flush(self):
+    def flush(self, full=True):
         r"""Eagerly print the current contents."""
         for obj in self._waiting_objects:
             self._write(obj)
         del self._waiting_objects[:]
+        if full:
+            self._output.flush()
         return self  # enable call chaining
 
     def _write(self, bytestring, end=""):
