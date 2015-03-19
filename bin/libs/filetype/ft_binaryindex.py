@@ -30,13 +30,14 @@ You should use the methods in package `filetype` instead.
 """
 
 
+
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from . import _common as common
-
+import sys
 
 class BinaryIndexInfo(common.FiletypeInfo):
     r"""FiletypeInfo subclass for BinaryIndex files."""
