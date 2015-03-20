@@ -608,7 +608,7 @@ class Index(object):
 
         # Is this any good? (May be with the old indexer; must test)
         sufarray = None
-        print("objects collected by gc.collect()", file=sys.stderr)
+        #print("objects collected by gc.collect()", file=sys.stderr)
 
 ################################################################################
 
