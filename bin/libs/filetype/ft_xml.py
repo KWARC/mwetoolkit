@@ -118,7 +118,10 @@ class XMLPrinter(common.AbstractPrinter):
         self.add_string(ElementTree.tostring(pattern.node))
 
     def _fallback(self, entity, info={}):
-        self.add_string(entity.to_xml(), "\n")
+        if type(entity) != common.Directive :
+            self.add_string(entity.to_xml(), "\n")
+        else:
+            self.handle_comment(str(entity))
 
 
 
