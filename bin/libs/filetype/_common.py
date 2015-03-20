@@ -693,7 +693,7 @@ class Directive(object):
         return "MWETOOLKIT: {}=\"{}\"".format(self.key, self.value)
 
     @staticmethod
-    def from_string(string, on_error=lambda: None):
+    def from_string(string):
         r"""Return an instance of Directive or None."""
         m = Directive.RE_PATTERN.match(string)
         if m is None: return None
