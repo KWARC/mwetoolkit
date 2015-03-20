@@ -75,7 +75,10 @@ class CounterHandler(filetype.InputHandler):
 
     def handle_comment(self, comment, info={}):
         pass  # We just ignore it
-
+        
+    def handle_meta(self,meta,info={}):
+        pass  # We just ignore it
+        
     def _fallback_entity(self, entity, info={}) :
         """For each candidate/sentence, counts the number of occurrences, the 
         number of words and the number of characters (except spaces and XML).
