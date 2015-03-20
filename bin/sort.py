@@ -150,7 +150,10 @@ class SorterHandler(filetype.ChainedInputHandler):
             self.feat_list_ok = True
 
         # Store the whole entity in a temporary database
-        temp_file[unicode(entity.id_number).encode('utf8')] = (entity, info)
+        import pdb
+        #pdb.set_trace()
+        self.info_saved = info
+        temp_file[unicode(entity.id_number).encode('utf8')] = (entity,info["linenum"])
         # Build up a tuple to be added to a list.
         one_tuple = []
         for feat_name in feat_list:
@@ -185,9 +188,10 @@ class SorterHandler(filetype.ChainedInputHandler):
         # its ID
         for feat_entry in self.feat_to_order:
             x = feat_entry[len(feat_entry) - 1]
-            entity, sub_info = temp_file[unicode(x).encode('utf8')]
-            self.chain.handle(entity, sub_info)
-        self.chain.after_file(fileobj, info)
+            entity, linenum = temp_file[unicode(x).encode('utf8')]
+            self.info_saved["linenum"] = linenum
+            self.chain.handle(entity, self.info_saved)
+        self.chain.after_file(fileobj, self.info_saved)
 
 
 ################################################################################
