@@ -222,7 +222,10 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
 
         self.current_corpus_name = re.sub(".*/", "",
                 re.sub("\.(xml|info)", "", fileobj.name))
-
+                
+    def after_file(self, fileobj, info={}):
+        pass # overwrite default behavior which is to flush output
+        
     def finish(self):
         self.print_candidates(self.chain)
         self.chain.after_file(None, {})
