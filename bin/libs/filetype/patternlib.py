@@ -160,7 +160,7 @@ class ParsedPattern(object):
         if repeat:
             self.pattern += "(?:"
 
-        if not scope_repeat and repeat != "":
+        if scope_repeat is not None and repeat != "":
             scope_repeat = node
         for subnode in node:
             self._do_parse(subnode, scope_repeat)
