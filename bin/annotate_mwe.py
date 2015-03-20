@@ -77,7 +77,7 @@ OPTIONS may be:
     (by default, outputs in same format as input):
     {descriptions.output[corpus]}
 
--d <method> OR --detection <method>
+-d <method> OR --detector <method>
     Choose a method of MWE detection (default: "ContiguousLemma"):
     * Method "ContiguousLemma": detects contiguous lemmas.
     * Method "Source": uses "<sources>" tag from candidates file.
@@ -93,6 +93,9 @@ OPTIONS may be:
 --filter
     Only outputs sentences that matched with MWEs.
     (Does not annotate the MWE candidates).
+    
+--filter-and-annot
+    Same as --filter, but also annotates the matched candidates.
 
 {common_options}
 """
@@ -164,7 +167,7 @@ class SourceDetector(AbstractDetector):
         self.info_from_s_id = self.candidate_info.parsed_source_tag()
 
     def detect(self, sentence):
-        for cand, indexes in self.info_from_s_id[sentence.id_number]:
+        for cand, indexes in self.info_from_s_id[sentence.id_number+1]:
             yield MWEOccurrence(sentence, cand, indexes)
 
 
@@ -269,7 +272,7 @@ class CandidateInfo(object):
             for ngram in cand.occurs:
                 for source in ngram.sources:
                     sentence_id, indexes = source.split(":")
-                    indexes = [int(i)-1 for i in indexes.split(",")]
+                    indexes = [int(i) for i in indexes.split(",")]
                     if len(cand) != len(indexes):
                         raise Exception("Bad value of indexes for cand {}: {}"
                                 .format(cand.id_number, indexes))
@@ -301,7 +304,9 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         if o in ("-c", "--candidates"):
             candidates_fnames.append(a)
         elif o in ("-d", "--detector"):
-            detector_class = detectors[a]
+            detector_class = detectors.get(a,None)
+            if detector_class is None :
+                error("Unkown detector name: "+a)
         elif o in ("-S", "--source"):
             detector_class = SourceDetector
         elif o in ("-g", "--gaps"):
@@ -315,6 +320,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
         elif o == "--filter":
             action_annotate = False
             action_filter = True
+        elif o == "--filter-and-annot":            
+            action_filter = True            
         else:
             raise Exception("Bad arg: " + o)
 
@@ -336,6 +343,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 
 longopts = ["corpus-from=", "candidates-from=", "to=",
-        "candidates=", "detector=", "gaps=", "source", "filter"]
+        "candidates=", "detector=", "gaps=", "source", "filter", 
+        "filter-and-annot"]
 arg = read_options("c:d:g:So:", longopts, treat_options, -1, usage_string)
 filetype.parse(arg, AnnotatorHandler(), filetype_corpus_ext)
