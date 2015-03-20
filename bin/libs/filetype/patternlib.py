@@ -195,7 +195,7 @@ class ParsedPattern(object):
         else:
             self.pattern += "(?:"
 
-        if not scope_repeat and repeat != "":
+        if scope_repeat is not None and repeat != "":
             scope_repeat = node
 
         first_pattern = True
