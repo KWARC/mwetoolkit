@@ -38,6 +38,7 @@ def print_dict(obj):
 
 
 def get_usage(toolname):
+    r"""Run `toolname` with `-h` and return output."""
     assert toolname != "c-indexer", "TODO: add -h to c-indexer"
     from subprocess import Popen, PIPE
     # XXX make this escape-friendly...
@@ -46,6 +47,7 @@ def get_usage(toolname):
     return "".join(p.communicate())
 
 def usage_paragraphs(text):
+    r"""Split text and return a list of paragraphs."""
     p = RE_PARAGRAPH.split(text)
     p = [line.strip() for line in p]
     return [line for line in p if line]
@@ -73,13 +75,23 @@ def tool_args(toolname):
 
 class ToolArgsParser(object):
     def __init__(self):
-        self.req_flags = {}
-        self.req_arguments = {}
-        self.required = []
-        self.optional = []
+        # doing_required: whether we're still handling the
+        # `required` section of the help message
         self.doing_required = True
 
+        # Required section (first part) of the help message
+        self.required = []
+        # Map flag_name -> JSON_obj  (to be further updated)
+        self.req_flags = {}
+        # Map argument -> JSON_obj  (to be further updated)
+        self.req_arguments = {}
+
+        # Optional section (second part) of the help message
+        self.optional = []
+
+
     def parse(self, paragraphs):
+        r"""Parse list of paragraphs and return JSON object."""
         for paragraph in paragraphs:
             self.current_p = paragraph
             if self.doing_required:
@@ -108,10 +120,20 @@ class ToolArgsParser(object):
                 "optional": self.optional})
 
 
+    def update_req_flags(self, arg):
+        r"""Update `self.req_flags` with `arg`."""
+        try:
+            self.req_flags[arg["flag"]].update(arg)
+        except KeyError:
+            self.req_flags[arg["miniflag"]].update(arg)
+
+
+
     RE_HEADER = re.compile(r"python (?P<progpath>\S+) " \
             "(?P<mandatory1>.*?) ?\[?OPTIONS\]? (?P<mandatory2>.*)")
 
     def try_header(self):
+        r"""Interpret command header, as in `self.RE_HEADER`."""
         m = self.RE_HEADER.match(self.current_p)
         if not m: return False
         self.required.extend(self.parse_args(m.group("mandatory1")))
@@ -119,13 +141,16 @@ class ToolArgsParser(object):
         return True
 
 
+
     RE_INPUT_HUMAN = re.compile(r"The (?P<inputname><\S+>).* must be.*")
 
     def try_input_human(self):
+        r"""Interpret paragraph "The BLABLA must be..."."""
         m = self.RE_INPUT_HUMAN.match(self.current_p)
         if not m: return False
         self.req_arguments[m.group("inputname")]["human_descr"] = m.string
         return True
+
 
 
     RE_PARAGRAPH_HEADER_ARG = re.compile(
@@ -133,6 +158,7 @@ class ToolArgsParser(object):
             "(?P<flag>--?\S+)(?P<flag_arg> <\S+>)?")
 
     def parse_paragraph_arg(self, paragraph):
+        r"""Interpret paragraph starting with: "-f <arg> OR --flag <arg>"."""
         head, tail = paragraph.split("\n", 1)
         head = head.strip()  # Remove trailing spaces (so common...)
         m = self.RE_PARAGRAPH_HEADER_ARG.match(head)
@@ -146,11 +172,6 @@ class ToolArgsParser(object):
         extract_from_human(ret)
         return ret
 
-    def update_req_flags(self, arg):
-        try:
-            self.req_flags[arg["flag"]].update(arg)
-        except KeyError:
-            self.req_flags[arg["miniflag"]].update(arg)
 
 
     RE_HEADER_ARG = re.compile(
@@ -161,6 +182,7 @@ class ToolArgsParser(object):
 
 
     def parse_args(self, arg_string):
+        r"""Parse a line such as: "[--flag <arg> | -g] --another-flag"."""
         ret = []
         for arg in self.RE_HEADER_ARG.finditer(arg_string):
             D = arg.groupdict()
@@ -188,7 +210,9 @@ class ToolArgsParser(object):
         return ret
 
 
+
 def argument_description(argument):
+    r"""Parse an argument such as "<pattern-list>" or "<min>"."""
     if ">:<" in argument:
         a, b = argument.split(":", 1)
         return {"argument_type": "range", "components":
@@ -208,9 +232,14 @@ def argument_description(argument):
         return {"argument_type": "unknown"}
 
 
+
 RE_HUMAN_CHOICE = re.compile('^\* "([^"]*)"', re.MULTILINE)
 
 def extract_from_human(arg):
+    r"""Read `human_descr` field of `arg` and improve
+    its data if finding descriptions of choice, such as
+    the choice "Foo" in: '* "Foo": Bar bar baz'.
+    """
     human = arg["human_descr"]
     if arg.get("flag_arguments", None):
         D = arg["flag_arguments"][0]["description"]

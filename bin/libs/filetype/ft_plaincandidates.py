@@ -79,7 +79,7 @@ class PlainCandidatesParser(common.AbstractTxtParser):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
         self.candidate_count += 1
         c = Candidate(self.candidate_count, words)
-        handler.handle_candidate(c)
+        handler.handle_candidate(c, info)
 
 
 class PlainCandidatesPrinter(common.AbstractPrinter):

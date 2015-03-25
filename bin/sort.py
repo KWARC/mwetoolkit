@@ -155,10 +155,13 @@ class SorterHandler(filetype.ChainedInputHandler):
             self.feat_list_ok = True
 
         # Store the whole entity in a temporary database
-        self.parser_saved = info['parser']
-        info['parser'] = None
+        self.saved_parser = info.get('parser')
+        self.saved_fileobj = info.get('fileobj')
+        info['parser'] = info['fileobj'] =None
         temp_file[unicode(entity.id_number).encode('utf8')] = (entity,info)
-        info['parser'] = self.parser_saved
+        info['fileobj'] = self.saved_fileobj
+        info['parser'] = self.saved_parser
+
         # Build up a tuple to be added to a list.
         one_tuple = []
         for feat_name in feat_list:
@@ -194,7 +197,8 @@ class SorterHandler(filetype.ChainedInputHandler):
         for feat_entry in self.feat_to_order:
             x = feat_entry[len(feat_entry) - 1]
             entity, info_saved = temp_file[unicode(x).encode('utf8')]            
-            info_saved["parser"] = self.parser_saved
+            info_saved["fileobj"] = self.saved_fileobj
+            info_saved["parser"] = self.saved_parser
             self.chain.handle(entity, info_saved)
         self.chain.after_file(fileobj, info)
 
