@@ -248,7 +248,7 @@ class Main(object):
         self.args = args
 
     def run(self):
-        os.chdir(os.environ.get("MWETOOLKIT", HERE))
+        os.chdir(os.environ.get("MWETOOLKIT", HERE+"/../bin"))
         COMMANDS[self.args.COMMAND](*self.args.ARGS)
 
 
