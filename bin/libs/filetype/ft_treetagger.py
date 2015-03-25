@@ -65,8 +65,8 @@ class TreeTaggerParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, sent_split=None, *args):
-        super(TreeTaggerParser, self).__init__(*args)
+    def __init__(self, in_files, encoding='utf-8', sent_split=None):
+        super(TreeTaggerParser, self).__init__(in_files, encoding)
         self.category = "corpus"
         self.words = []
         self.s_id = 0
