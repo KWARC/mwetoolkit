@@ -41,11 +41,15 @@ from __future__ import absolute_import
 
 import tempfile
 import shelve
+import locale
 
 from libs.util import read_options, treat_options_simplest, \
     error, warn
 from libs.base.__common import TEMP_PREFIX, TEMP_FOLDER
 from libs import filetype
+
+# this reads the environment and inits the right locale
+locale.setlocale(locale.LC_ALL, '')
 
 
 ################################################################################     
@@ -62,9 +66,9 @@ python {program} [OPTIONS] -f <feat> <candidates>
     question mark "?".
 
     Pseudo-features:
-    * "$LEMMA": Lexicographic sort based on word lemmas.
-    * "$SURFACE": Lexicographic sort based on word surfaces.
-    By default, if no features are defined, "$SURFACE" is used.
+    * "@LEMMA": Lexicographic sort based on word lemmas.
+    * "@SURFACE": Lexicographic sort based on word surfaces.
+    By default, if no features are defined, "@SURFACE" is used.
 
 The <candidates> input file must be in one of the filetype
 formats accepted by the `--from` switch.
@@ -91,9 +95,9 @@ OPTIONS may be:
 {common_options}
 """
 
-PSEUDO_FEATS = ["$LEMMA", "$SURFACE"]
+PSEUDO_FEATS = ["@LEMMA", "@SURFACE"]
 
-feat_list = ["$SURFACE"]
+feat_list = ["@SURFACE"]
 temp_file = None
 ascending = False
 
@@ -104,6 +108,7 @@ output_filetype_ext = None
 ################################################################################     
 
 class SorterHandler(filetype.ChainedInputHandler):
+
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
@@ -150,10 +155,10 @@ class SorterHandler(filetype.ChainedInputHandler):
             self.feat_list_ok = True
 
         # Store the whole entity in a temporary database
-        import pdb
-        #pdb.set_trace()
-        self.info_saved = info
-        temp_file[unicode(entity.id_number).encode('utf8')] = (entity,info["linenum"])
+        self.parser_saved = info['parser']
+        info['parser'] = None
+        temp_file[unicode(entity.id_number).encode('utf8')] = (entity,info)
+        info['parser'] = self.parser_saved
         # Build up a tuple to be added to a list.
         one_tuple = []
         for feat_name in feat_list:
@@ -167,7 +172,7 @@ class SorterHandler(filetype.ChainedInputHandler):
 
     def feat_value(self, entity, feat_name):
         r"""Return value for given feature name."""
-        if feat_name.startswith("$"):
+        if feat_name.startswith("@"):
             if feat_name == "@SURFACE":
                 return tuple(w.surface for w in entity)
             elif feat_name == "@LEMMA":
@@ -182,16 +187,16 @@ class SorterHandler(filetype.ChainedInputHandler):
         global ascending, temp_file
         # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
         # If I didn't ignore the last entry, the algorithm wouldn't be stable.
-        # If the user didn't ask "-a" explicitly, sorting is reversed (descending)
+        # If the user didn't ask "-a" explicitly, sorting is reversed (descending)        
         self.feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
         # Now print sorted candidates. A candidate is retrieved from temp DB through
         # its ID
         for feat_entry in self.feat_to_order:
             x = feat_entry[len(feat_entry) - 1]
-            entity, linenum = temp_file[unicode(x).encode('utf8')]
-            self.info_saved["linenum"] = linenum
-            self.chain.handle(entity, self.info_saved)
-        self.chain.after_file(fileobj, self.info_saved)
+            entity, info_saved = temp_file[unicode(x).encode('utf8')]            
+            info_saved["parser"] = self.parser_saved
+            self.chain.handle(entity, info_saved)
+        self.chain.after_file(fileobj, info)
 
 
 ################################################################################
@@ -208,7 +213,7 @@ def treat_feat_list(feat_string):
         @return A list of strings containing the (unverified) key feature names.
     """
     if feat_string == "":
-        return ""  # Python splits as [""]... ¬¬
+        return []  # Python splits as [""]... ¬¬
     return feat_string.split(":")
 
 
@@ -234,6 +239,8 @@ def treat_options(opts, arg, n_arg, usage_string):
     a_or_d = []
     for ( o, a ) in opts:
         if o in ("-f", "--feat"):
+            #import pdb
+            #pdb.set_trace()
             feat_list = treat_feat_list(a)
         elif o in ("-a", "--asc"):
             ascending = True
