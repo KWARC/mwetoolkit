@@ -233,7 +233,7 @@ def argument_description(argument):
 
 
 
-RE_HUMAN_CHOICE = re.compile('^\* "([^"]*)"', re.MULTILINE)
+RE_HUMAN_CHOICE = re.compile('^\* .*?"([^"]*)"', re.MULTILINE)
 
 def extract_from_human(arg):
     r"""Read `human_descr` field of `arg` and improve
