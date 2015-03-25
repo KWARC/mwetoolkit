@@ -512,7 +512,7 @@ class InputHandler(object):
 
     def handle_comment(self, comment, info={}):
         r"""Called when parsing a comment."""
-        info.setdefault("kind", "comment")
+        info["kind"] = "comment"
         return self._fallback(comment, info)
 
     def handle_directive(self, directive, info={}):
@@ -577,7 +577,7 @@ class ChainedInputHandler(InputHandler):
         self.chain.finish()
 
     def handle_directive(self, directive, info={}):
-        info.setdefault("kind", "directive")
+        info["kind"] = "directive"        
         return self._fallback(directive, info)
 
     def _fallback(self, entity, info={}):

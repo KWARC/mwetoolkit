@@ -106,7 +106,7 @@ class XMLPrinter(common.AbstractPrinter):
     def before_file(self, fileobj, info={}):
         self.add_string(XML_HEADER.format(category=self._category, ns=""), "\n")
 
-    def after_file(self, fileobj, info={}):
+    def finish(self, info={}):
         self.add_string(XML_FOOTER.format(category=self._category), "\n")
         self.flush()
 

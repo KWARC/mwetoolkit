@@ -159,7 +159,8 @@ output_filetype_ext = None
        
 class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
     r"""An InputHandler that generates Candidates."""
-
+    
+        
     def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, generates all the candidates that match
         at least one pattern in the patterns file (-p option) or all the
@@ -223,12 +224,12 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
         self.current_corpus_name = re.sub(".*/", "",
                 re.sub("\.(xml|info)", "", fileobj.name))
                 
-    def after_file(self, fileobj, info={}):
-        pass # overwrite default behavior which is to flush output
+    #def after_file(self, fileobj, info={}):
+    #    pass # overwrite default behavior which is to flush output
         
     def finish(self):
         self.print_candidates(self.chain)
-        self.chain.after_file(None, {})
+        self.chain.finish()
 
 
     def print_candidates(self, chain):
