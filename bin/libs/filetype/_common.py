@@ -564,9 +564,6 @@ class ChainedInputHandler(InputHandler):
     """
     chain = None
 
-    def flush(self, full=True):
-        self.chain.flush(full=full)
-
     def before_file(self, fileobj, info={}):
         self.chain.before_file(fileobj, info)
 
@@ -575,6 +572,10 @@ class ChainedInputHandler(InputHandler):
 
     def finish(self):
         self.chain.finish()
+
+
+    def flush(self, full=True):
+        self.chain.flush(full=full)
 
     def handle_directive(self, directive, info={}):
         info["kind"] = "directive"        
@@ -596,7 +597,7 @@ class AbstractPrinter(InputHandler):
 
     Required Constructor Arguments:
     @param category The category of the output file. This value
-    must be in the subclass's `valid_categories
+    must be in the subclass's `valid_categories` list.
 
     Optional Constructor Arguments:
     @param output An IO-like object, such as sys.stdout
@@ -616,10 +617,10 @@ class AbstractPrinter(InputHandler):
         if category not in self.valid_categories:
             raise Exception("Bad printer: {}(category=\"{}\")"
                     .format(type(self).__name__, category))
-        self._printed_filetype_directive = False
         self._category = category
         self._output = output or sys.stdout
         self._flush_on_add = flush_on_add
+        self._printed_filetype_directive = False
         self._waiting_objects = []
         self._scope = 0
 
@@ -628,8 +629,17 @@ class AbstractPrinter(InputHandler):
         if not self._printed_filetype_directive:
             directive = Directive("filetype",
                     self.filetype_info.filetype_ext)
-            self.handle_comment(unicode(directive), info)
-            self._printed_filetype_directive = True
+            self.write_directive(directive, info)
+
+
+    def escape(self, string):
+        r"""Return an escaped version of `unicode`, using
+        `self.filetype_info.escape_pairs` and whatever else is needed."""
+        # NEVER change the order in which you go through the list. The first
+        # character to escape must always be the escaper itself.
+        for unescaped, escaped in self.filetype_info.escape_pairs:
+            string = string.replace(unescaped, escaped)
+        return string
 
 
     def add_string(self, *strings):
@@ -640,15 +650,6 @@ class AbstractPrinter(InputHandler):
             bytestring = string.encode('utf-8')
             self._waiting_objects.append(bytestring)
         return self  # enable call chaining
-
-    def escape(self, string):
-        r"""Return an escaped version of `unicode`, using
-        `self.filetype_info.escape_pairs` and whatever else is needed."""
-        # NEVER change the order in which you go through the list. The first
-        # character to escape must always be the escaper itself.
-        for unescaped, escaped in self.filetype_info.escape_pairs:
-            string = string.replace(unescaped, escaped)
-        return string
 
     def last(self):
         r"""Return last (non-flushed) added object."""
@@ -667,6 +668,16 @@ class AbstractPrinter(InputHandler):
         r"""(Print bytestring in self._output)"""
         assert isinstance(bytestring, bytes)
         self._output.write(bytestring)
+
+
+    def write_directive(self, directive, info={}):
+        r"""Output directive. This is different from `handle_directive`
+        because Printers will actually interpret those directives instead
+        of just passing them along.
+        """
+        self.handle_comment(unicode(directive), info)
+        if directive.key == "filetype":
+            self._printed_filetype_directive = True
 
     def handle_comment(self, comment, info={}):
         r"""Default implementation to output comment."""

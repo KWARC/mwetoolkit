@@ -103,8 +103,10 @@ class XMLPrinter(common.AbstractPrinter):
     """Instances can be used to print XML objects."""
     valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
-    def before_file(self, fileobj, info={}):
+    def __init__(self, *args, **kwargs):
+        super(XMLPrinter, self).__init__(*args, **kwargs)
         self.add_string(XML_HEADER.format(category=self._category, ns=""), "\n")
+        self._printed_filetype_directive = True
 
     def finish(self, info={}):
         self.add_string(XML_FOOTER.format(category=self._category), "\n")
