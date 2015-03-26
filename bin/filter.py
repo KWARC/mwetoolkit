@@ -298,6 +298,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global maxlength
     global min_mweoccurs
     global max_mweoccurs
+    global input_filetype_ext
+    global output_filetype_ext
     
     treat_options_simplest( opts, arg, n_arg, usage_string )    
     
