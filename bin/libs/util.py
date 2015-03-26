@@ -116,7 +116,8 @@ class FiletypeDescriptions(object):
 
     def _descriptions(self, category2ftis):
         return {category: "\n    ".join("* \"{}\": {}".format(
-            fti.filetype_ext, fti.description) for fti in ftis)
+                fti.filetype_ext, fti.description) for fti in
+                sorted(ftis, key=lambda fti: fti.filetype_ext))
                 for (category, ftis) in category2ftis.iteritems()}
 
 
