@@ -52,7 +52,7 @@ class Entry( Ngram ) :
         """
         """
         super( Entry, self ).__init__( base, freqs )
-        self.id_number = id_number
+        self.id_number = int(id_number)
         self.features = features if features else []
             
 ################################################################################

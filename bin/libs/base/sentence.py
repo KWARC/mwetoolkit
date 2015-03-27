@@ -133,7 +133,7 @@ class Sentence( Ngram ) :
         result = list( tokens )
         for mweoccur in self.mweoccurs :
             for i in mweoccur.indexes :
-                mwetags_list[ i ].append( mweoccur.candidate.id_number )
+                mwetags_list[ i ].append( unicode(mweoccur.candidate.id_number) )
         for ( mwetag_i, mwetag ) in enumerate( mwetags_list ) :
             if mwetag : 
                 result[mwetag_i] = "<%(tag)s id=\"%(ids)s\">%(w)s</%(tag)s>" % \
