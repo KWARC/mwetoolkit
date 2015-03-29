@@ -62,7 +62,7 @@ class CandidateFactory(object):
 
     def make(self, word_list=[], id_number=None, **kwargs):
         r"""Calls `Candidate(id_number, word_list, ...)` to create a Candidate."""
-        self.prev_id = int(kwargs.pop("id_number", self.prev_id+1))
+        self.prev_id = int(id_number if id_number is not None else self.prev_id+1)
         return Candidate(base=word_list, id_number=self.prev_id, **kwargs)
 
     def uniquify(self, candidate):
