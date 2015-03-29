@@ -275,6 +275,9 @@ class SmartParser(common.AbstractParser):
             fti = self._detect_filetype(sub_filelist.only(), self.filetype_hint)
             checker_class, parser_class, _ = fti.operations()
             checker_class(sub_filelist.only()).check()
+            if parser_class is None:
+                util.error("No parser class for filetype: {filetype}",
+                        filetype=fti.filetype_ext)
             p = parser_class(sub_filelist)
             # Delegate the whole work to parser `p`.
             p.parse(handler)

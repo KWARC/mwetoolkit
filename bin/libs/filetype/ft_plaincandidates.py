@@ -38,8 +38,7 @@ from __future__ import absolute_import
 from . import _common as common
 from .ft_plaincorpus import PlainCorpusInfo
 from ..base.__common import WILDCARD
-from ..base.candidate import Candidate
-from ..base.sentence import Sentence
+from ..base.candidate import CandidateFactory
 from ..base.word import Word
 from .. import util
 
@@ -72,13 +71,12 @@ class PlainCandidatesParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCandidatesParser, self).__init__(in_files, encoding)
-        self.candidate_count = 0
+        self.candidate_factory = CandidateFactory()
         self.category = "candidates"
 
     def _parse_line(self, line, handler, info={}):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
-        self.candidate_count += 1
-        c = Candidate(self.candidate_count, words)
+        c = self.candidate_factory.make_uniq(words)
         handler.handle_candidate(c, info)
 
 

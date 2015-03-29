@@ -11,6 +11,12 @@ t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
 t_BIN="$t_TOOLKIT/bin"
 # Path to shared data
 t_INPUT="$t_TOOLKIT/test/inputs"
+# Path to shared data
+t_TEMP="${TMP:-/tmp}/mwetoolkit-testlib-$(id -u)"
+
+# Number of lines to display on `t_diff`
+t_DIFF_LENGTH=20
+
 # Limit number of tests to run
 t_N_TESTS_LIMIT=999999
 
@@ -70,14 +76,17 @@ t_run() {
 # Uses wdiff if available.
 t_diff() {
     if hash "wdiff" 2>/dev/null; then
-        diff -u "$@" | wdiff -d --terminal
+        diff -u "$@" | wdiff -d --terminal | head -n "$t_DIFF_LENGTH"
+        RETCODE="${PIPESTATUS[0]}"
     else
         if ! test "${_WARNED_WDIFF+set}"; then
             t_warn "wdiff is not installed; using diff"
             _WARNED_WDIFF=1
         fi
-        diff -u "$@"
+        diff -u "$@" | head -n "$t_DIFF_LENGTH"
+        RETCODE="${PIPESTATUS[0]}"
     fi
+    return "$RETCODE"
 }
 
 
@@ -141,3 +150,7 @@ trap 'on_error ERR' ERR
 # inside `on_error` when called for SIGINT
 # (also happens on `trap ... EXIT` -- may be a bash bug)
 trap 'on_error INT' SIGINT
+
+
+trap 'rm -rf "$t_TEMP"' EXIT
+mkdir -p "$t_TEMP"

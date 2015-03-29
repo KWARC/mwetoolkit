@@ -23,7 +23,7 @@ test_parser() {
     local file_path_output="$HERE/output/$(basename "$file_path_original").xml"
 
     t_run "$t_BIN/convert.py --from=$filetype --to=XML $file_path_original >$file_path_output"
-    t_compare "$file_path_output" "$file_path_xml_ref"
+    t_compare "$file_path_xml_ref" "$file_path_output"
 }
 
 # test_printer <filetype> <original-file> <xml-file>
@@ -35,7 +35,7 @@ test_printer() {
     local file_path_output="$HERE/output/$(basename "$file_path_original")"
 
     t_run "$t_BIN/convert.py --to=$filetype --from=XML $file_path_xml_ref >$file_path_output"
-    t_compare "$file_path_output" "$file_path_original"
+    t_compare "$file_path_original" "$file_path_output"
 }
 
 

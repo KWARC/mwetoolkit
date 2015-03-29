@@ -43,7 +43,7 @@ from libs.base.ngram import Ngram
 from libs.base.word import Word
 from libs.base.entry import Entry
 from libs.base.sentence import Sentence, SentenceFactory
-from libs.base.candidate import Candidate
+from libs.base.candidate import Candidate, CandidateFactory
 from libs.base.__common import WILDCARD
 from libs.util import read_options, treat_options_simplest, verbose
 from libs import filetype
@@ -104,6 +104,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
+            self.candidate_factory = CandidateFactory()
             self.sentence_factory = SentenceFactory()
         self.chain.before_file(fileobj, info)
 
@@ -206,7 +207,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
             Create an empty instance of the same type as 'entity'.
         """
         if isinstance( entity, Candidate ) :
-            return Candidate( 0, [], [], [], [], [] )
+            return self.candidate_factory.make()
         elif isinstance( entity, Entry ) :
             return Entry( 0, [], [], [] )
         elif isinstance( entity, Sentence ) :

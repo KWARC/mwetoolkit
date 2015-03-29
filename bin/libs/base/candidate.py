@@ -34,7 +34,52 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from .entry import Entry
+from .frequency import Frequency
 from .__common import UNKNOWN_FEAT_VALUE
+
+
+
+class CandidateFactory(object):
+    r"""Instances of CandidateFactory can be used
+    to create instances of Candidate with automatic
+    definition of its `id_number` attribute.
+
+    Call `self.make(word_list)` to create a Candidate.
+
+    Call `self.uniquified(candidate_instance)` to add it to
+    an internal mapping word_list -> Candidate.  The new
+    `candidate_instance` is returned by this method.
+    """
+    FIRST_ID = 1
+    def __init__(self):
+        self.prev_id = self.FIRST_ID-1
+        self.mapping = {}
+
+    def make_uniq(self, word_list, **kwargs):
+        r"""Utility function that calls `make` and then `uniquify`.
+        The word list must ALREADY be full if calling `make_uniq`."""
+        return self.uniquify(self.make(word_list, **kwargs))
+
+    def make(self, word_list=[], id_number=None, **kwargs):
+        r"""Calls `Candidate(id_number, word_list, ...)` to create a Candidate."""
+        self.prev_id = int(kwargs.pop("id_number", self.prev_id+1))
+        return Candidate(base=word_list, id_number=self.prev_id, **kwargs)
+
+    def uniquify(self, candidate):
+        r"""Return uniq'd version of this Candidate.
+        Make sure that `candidate.word_list` elements
+        will NOT be changed anymore.
+        """
+        # TODO implement Word.freeze and call it here, to avoid bugs
+        key = tuple(w.to_string() for w in candidate.word_list)
+        try:
+            ret = self.mapping[key]
+        except KeyError:
+            ret = self.mapping[key] = candidate
+        else:
+            ret.merge_from(candidate)
+        return ret
+
 
 ################################################################################
 
@@ -99,6 +144,51 @@ class Candidate ( Entry ) :
         
 ################################################################################
 
+    def merge_from(self, other):
+        r"""Merge `other` into `self`."""
+        self.occurs = list(set(self.occurs) | set(other.occurs))
+        self.features = Candidate.uniq_features(self.features, other.features)
+        self.tpclasses = list(set(self.tpclasses) | set(other.tpclasses))
+        self.freqs = list(set(self.freqs) | set(other.freqs))
+        unify_freqs = {}
+        for f in list(set(self.freqs) | set(other.freqs)):
+            unify_freqs[f.name] = unify_freqs.get(f.name, 0) + f.value
+        for k, v in unify_freqs.items():
+            self.add_frequency(Frequency(k, v))
+
+
+    @staticmethod
+    def position(item, list, key=lambda x: x):
+        """Returns the index of an element in a list, or None if the element is not found."""
+        for i in xrange(len(list)):
+            if item == key(list[i]):
+                return i
+        return None
+
+
+    @staticmethod
+    def uniq_features(*featlists):
+        """
+            Merges the lists of Features passed in as arguments. If the same
+            feature appears multiple times in the lists, keep only the one
+            with highest value.
+        """
+        result = []
+        for featlist in featlists:
+            for feature in featlist:
+                oldpos = Candidate.position(feature.name, result, key=lambda x: x.name)
+                if oldpos is not None:
+                    if result[oldpos].value < feature.value:
+                        result[oldpos] = feature
+                else:
+                    result.append(feature)
+
+        return result
+                
+
+
+################################################################################
+
     def to_plaincandidate(self):
         r"""Return this Candidate in the PlainCandidates format."""
         return "_".join(w.lemma_or_surface() for w in self)
@@ -118,7 +208,7 @@ class Candidate ( Entry ) :
             result = result + " candid=\"" + str(self.id_number) + "\">\n"
 
         # Unicode support          
-        base_string = super( Entry, self ).to_xml()
+        base_string = super( Candidate, self ).to_xml()
         result = result + "    " + base_string + "\n"        
 
         if self.bigrams :

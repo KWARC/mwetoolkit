@@ -42,7 +42,7 @@ import sys
 import re
 
 from libs.base.tpclass import TPClass
-from libs.base.candidate import Candidate
+from libs.base.candidate import CandidateFactory
 from libs.base.word import Word
 from libs.base.meta_tpclass import MetaTPClass
 from libs.util import read_options, treat_options_simplest, verbose, error
@@ -114,6 +114,7 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, None)
+            self.candidate_factory = CandidateFactory()
         self.chain.before_file(fileobj, info)
 
     def handle_meta(self, meta, info={}) :
@@ -148,7 +149,7 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
 
         true_positive = False
         #pdb.set_trace()
-        candidate = Candidate( 0, [], [], [], [], [] )
+        candidate = self.candidate_factory.make()
         for w in candidate_i :
             copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
             candidate.append( copy_w )    
@@ -174,7 +175,8 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
             tp_counter = tp_counter + 1
         else :
             candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
-        self.chain.handle_candidate(candidate_i)
+        candidate = self.candidate_factory.uniquify(candidate)
+        self.chain.handle_candidate(candidate_i, info)
         entity_counter += 1
 
 

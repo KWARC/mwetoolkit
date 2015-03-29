@@ -167,7 +167,7 @@ class SourceDetector(AbstractDetector):
         self.info_from_s_id = self.candidate_info.parsed_source_tag()
 
     def detect(self, sentence):
-        for cand, indexes in self.info_from_s_id[sentence.id_number+1]:
+        for cand, indexes in self.info_from_s_id[unicode(sentence.id_number)]:
             yield MWEOccurrence(sentence, cand, indexes)
 
 
@@ -272,11 +272,11 @@ class CandidateInfo(object):
             for ngram in cand.occurs:
                 for source in ngram.sources:
                     sentence_id, indexes = source.split(":")
-                    indexes = [int(i) for i in indexes.split(",")]
+                    indexes = [int(i)-1 for i in indexes.split(",")]
                     if len(cand) != len(indexes):
                         raise Exception("Bad value of indexes for cand {}: {}"
                                 .format(cand.id_number, indexes))
-                    ret[int(sentence_id)].append((cand,indexes))
+                    ret[sentence_id].append((cand,indexes))
         return ret
 
 

@@ -37,7 +37,7 @@ from __future__ import absolute_import
 
 from . import _common as common
 from ..base.__common import WILDCARD
-from ..base.candidate import Candidate
+from ..base.candidate import CandidateFactory
 from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
@@ -89,6 +89,7 @@ class ConllParser(common.AbstractTxtParser):
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
         self.sentence_factory = SentenceFactory()
+        self.candidate_factory = CandidateFactory()
         self.name2index = {name:i for (i, name) in
                 enumerate(self.filetype_info.entries)}
         self.ignoring_cur_sent = False
@@ -131,7 +132,7 @@ class ConllParser(common.AbstractTxtParser):
         if len(data[self.id_index]) != 1:
             from ..base.mweoccur import MWEOccurrence
             mwe_words = []  # XXX do we use surface or lemma?
-            c = Candidate(info["linenum"], mwe_words)
+            c = self.candidate_factory.make_uniq(mwe_words)
             mweo = MWEOccurrence(self.partial_obj, c, indexes)
             self.partial_obj.mweoccurs.append(mweo)
 

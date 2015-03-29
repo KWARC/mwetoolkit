@@ -52,7 +52,7 @@ from libs.base.meta import Meta
 from libs.base.meta_feat import MetaFeat
 from libs.base.corpus_size import CorpusSize
 from libs.base.frequency import Frequency
-from libs.base.candidate import Candidate
+from libs.base.candidate import CandidateFactory
 from libs.base.word import Word
 from libs.util import read_options, treat_options_simplest, verbose, warn, \
     error, interpret_ngram
@@ -133,6 +133,10 @@ def unkey(str):
 
 
 class NGramCounterHandler(filetype.InputHandler):
+    def __init__(self, *args, **kwargs):
+        super(NGramCounterHandler, self).__init__(*args, **kwargs)
+        self.candidate_factory = CandidateFactory()
+
     def handle_sentence(self, sentence, info={}):
         """Count all ngrams being considered in the sentence."""
         global corpus_size
@@ -167,11 +171,9 @@ class NGramCounterHandler(filetype.InputHandler):
                 Meta([CorpusSize("corpus", corpus_size)],
                         [MetaFeat("glue", "real")], []))
 
-        cand_id = 0
         for ngram_key in selected_candidates:
             if selected_candidates[ngram_key] and ngram_counts[ngram_key] >= min_frequency:
-                self.dump_ngram(ngram_key, cand_id)
-                cand_id += 1
+                self.dump_ngram(ngram_key, None)
         self.chain.after_file(fileobj, info)
 
 
@@ -197,10 +199,10 @@ class NGramCounterHandler(filetype.InputHandler):
                 selected_candidates[ngram_key] = False
 
 
-    def dump_ngram(self, ngram_key, id):
+    def dump_ngram(self, ngram_key, cand_id=None):
         """Print an ngram as XML."""
         ngram = unkey(ngram_key)
-        cand = Candidate(id, [], [], [], [], [])
+        cand = self.candidate_factory.make(id_number=cand_id)
         for value in ngram:
             word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
             setattr(word, base_attr, value.decode('utf-8'))
@@ -208,6 +210,7 @@ class NGramCounterHandler(filetype.InputHandler):
         freq = Frequency('corpus', ngram_counts[ngram_key])
         cand.add_frequency(freq)
         cand.add_feat(Feature('glue', glue(ngram)))
+        cand = self.candidate_factory.uniquify(cand)
         self.chain.handle_candidate(cand)
 
 

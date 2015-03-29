@@ -36,7 +36,7 @@ from __future__ import absolute_import
 
 from . import _common as common
 from ..base.__common import WILDCARD
-from ..base.candidate import Candidate
+from ..base.candidate import CandidateFactory
 from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
@@ -70,6 +70,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCorpusParser, self).__init__(in_files, encoding)
+        self.candidate_factory = CandidateFactory()
         self.sentence_factory = SentenceFactory()
         self.category = "corpus"
 
@@ -81,7 +82,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
             sentence.word_list.extend(words)
             if len(words) != 1:
                 from ..base.mweoccur import MWEOccurrence
-                c = Candidate(info["linenum"], words)
+                c = self.candidate_factory.make_uniq(words)
                 indexes = list(xrange(len(sentence)-len(words), len(sentence)))
                 mweo = MWEOccurrence(sentence, c, indexes)
                 sentence.mweoccurs.append(mweo)

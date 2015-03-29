@@ -45,14 +45,14 @@ class SentenceFactory(object):
     to create instances of Sentence with automatic
     definition of its `id_number` attribute.
 
-    Call `self.build(word_list)` to build a sentence.
+    Call `self.make(word_list)` to create a Sentence.
     """
     FIRST_ID = 1
     def __init__(self):
         self.prev_id = self.FIRST_ID-1
 
     def make(self, word_list=[], **kwargs):
-        r"""Calls `Sentence(word_list)` to build a sentence."""
+        r"""Calls `Sentence(word_list, ...)` to create a Sentence."""
         self.prev_id = kwargs.pop("id_number", self.prev_id+1)
         return Sentence(word_list, id_number=self.prev_id, **kwargs)
 

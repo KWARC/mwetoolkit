@@ -49,6 +49,7 @@ class MWEOccurrence(object):
     different word order (e.g. passive voice in English), a permutation of
     those indexes will be used.  If there are gaps inside the MWE (e.g.
     verb-particle compounds in English), other sentence indexes may be used.
+
     IMPORTANT: This list is 0-based in python but 1-based in XML.
 
     Examples:

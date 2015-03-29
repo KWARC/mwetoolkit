@@ -42,7 +42,7 @@ from . import _common as common
 from ..base.__common import WILDCARD
 from ..base.word import Word
 from ..base.sentence import SentenceFactory
-from ..base.candidate import Candidate
+from ..base.candidate import Candidate, CandidateFactory
 from ..base.entry import Entry
 from ..base.mweoccur import MWEOccurrence
 from ..base.ngram import Ngram
@@ -266,7 +266,7 @@ class XMLParser(common.AbstractParser):
 
     #######################################################
     def parse_candidates(self, inner_iterator, handler, info):
-        id_number_counter = 0
+        candidate_factory = CandidateFactory()
         candidate = None
         ngram = None
         in_bigram = False
@@ -281,12 +281,10 @@ class XMLParser(common.AbstractParser):
 
                 if elem.tag == "cand":
                     # Get the candidate ID or else create a new ID for it          
+                    id_number = None
                     if "candid" in elem.attrib:
                         id_number = self.unescape(elem.get("candid"))
-                    else:
-                        id_number = id_number_counter
-                        id_number_counter += 1
-                    candidate = Candidate(id_number, None, [], [], [], [])
+                    candidate = candidate_factory.make([], id_number=id_number)
 
                 elif elem.tag == "ngram":
                     ngram = Ngram([], [])
@@ -327,6 +325,7 @@ class XMLParser(common.AbstractParser):
 
                 if elem.tag == "cand" :
                     # Finished reading the candidate, call callback
+                    candidate = candidate_factory.uniquify(candidate)
                     handler.handle_candidate(candidate, info) 
 
                 elif elem.tag == "ngram":

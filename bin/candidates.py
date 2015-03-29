@@ -52,7 +52,7 @@ import tempfile
 
 from libs.base.__common import WILDCARD, TEMP_PREFIX, TEMP_FOLDER
 from libs.base.frequency import Frequency
-from libs.base.candidate import Candidate
+from libs.base.candidate import CandidateFactory
 from libs.base.ngram import Ngram
 from libs.util import read_options, treat_options_simplest, error, verbose,\
     interpret_ngram, warn
@@ -220,6 +220,7 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
             self.chain = filetype.printer_class(ext)("candidates")
             self.chain.before_file(None, info)
             self.chain.handle_meta(Meta([],[],[]), info)
+            self.candidate_factory = CandidateFactory()
 
         self.current_corpus_name = re.sub(".*/", "",
                 re.sub("\.(xml|info)", "", fileobj.name))
@@ -246,9 +247,8 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
         global print_cand_freq, print_source, temp_file
         verbose("Outputting candidates file...")
         #chain.handle_meta(Meta([],[],[]))
-        id_number = 0        
         for ngram_basestring, info in temp_file.iteritems() :
-            cand = Candidate( id_number, [], [], [], [], [] )
+            cand = self.candidate_factory.make()
             cand.from_string( unicode( ngram_basestring, 'utf-8' ) )
             for corpus_name, (surface_dict, total_freq) in info.iteritems():
                 if print_cand_freq :
@@ -264,8 +264,8 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
                     if print_source:
                         occur_form.add_sources(sources)
                     cand.add_occur( occur_form )
+            cand = self.candidate_factory.uniquify(cand)
             chain.handle_candidate(cand, {})
-            id_number = id_number + 1                        
 
         
 ################################################################################  
