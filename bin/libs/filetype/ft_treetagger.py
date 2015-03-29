@@ -97,7 +97,7 @@ class TreeTaggerParser(common.AbstractTxtParser):
 
     def finish_sentence(self, handler):
         r"""Finish building sentence and call handler."""
-        s = self.sentence_factory.build(self.words)
+        s = self.sentence_factory.make(self.words)
         handler.handle_sentence(s, {})
         self.words = []
 

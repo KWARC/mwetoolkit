@@ -210,7 +210,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
         elif isinstance( entity, Entry ) :
             return Entry( 0, [], [], [] )
         elif isinstance( entity, Sentence ) :
-            return self.sentence_factory.build()
+            return self.sentence_factory.make()
         else :
             return Ngram( [], [] )
 

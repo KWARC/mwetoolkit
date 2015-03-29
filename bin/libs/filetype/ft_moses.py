@@ -79,7 +79,7 @@ class MosesParser(common.AbstractTxtParser):
         self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        s = self.sentence_factory.build()
+        s = self.sentence_factory.make()
         words = line.split(" ")
         for i, w in enumerate(words):
             token = [self.unescape(x) for x in w.split("|")]

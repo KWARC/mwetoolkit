@@ -74,7 +74,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
         self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        sentence = self.sentence_factory.build()
+        sentence = self.sentence_factory.make()
         mwes = line.split()  # each entry is an SWE/MWE
         for mwe in mwes:
             words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]

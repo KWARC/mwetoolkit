@@ -41,7 +41,7 @@ from .ngram import Ngram
 
 
 class SentenceFactory(object):
-    r"""Instances of SentenceBuilder can be used
+    r"""Instances of SentenceFactory can be used
     to create instances of Sentence with automatic
     definition of its `id_number` attribute.
 
@@ -51,7 +51,7 @@ class SentenceFactory(object):
     def __init__(self):
         self.prev_id = self.FIRST_ID-1
 
-    def build(self, word_list=[], **kwargs):
+    def make(self, word_list=[], **kwargs):
         r"""Calls `Sentence(word_list)` to build a sentence."""
         self.prev_id = kwargs.pop("id_number", self.prev_id+1)
         return Sentence(word_list, id_number=self.prev_id, **kwargs)

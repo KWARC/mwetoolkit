@@ -189,7 +189,7 @@ class XMLParser(common.AbstractParser):
                     s_id = None
                     if "s_id" in elem.attrib:
                         s_id = int(self.unescape(elem.get("s_id")))
-                    sentence = sentence_factory.build(id_number=s_id)
+                    sentence = sentence_factory.make(id_number=s_id)
 
                 elif elem.tag == "mweoccur":
                     occur_cand = Candidate(int(elem.get("candid")))

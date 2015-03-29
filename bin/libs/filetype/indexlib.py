@@ -719,7 +719,7 @@ class Index(object):
         for i in range(0, length):
             if self.arrays[guide].corpus[i] == 0:
                 # We have already a whole sentence.
-                yield self.sentence_factory.build(words)
+                yield self.sentence_factory.make(words)
                 words = []
 
             else:

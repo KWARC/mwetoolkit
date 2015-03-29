@@ -120,7 +120,7 @@ class ConllParser(common.AbstractTxtParser):
                 else:
                     if wid == 1:
                         self.new_partial(handler.handle_sentence,
-                                self.sentence_factory.build(), info=info)
+                                self.sentence_factory.make(), info=info)
                         self.ignoring_cur_sent = False
 
                     if not self.ignoring_cur_sent:
