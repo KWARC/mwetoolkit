@@ -540,7 +540,8 @@ class InputHandler(object):
         r"""Called to handle anything that hasn't been handled explicitly."""
         if info["kind"] == "meta" and obj.is_dummy():
             return  # We don't want to complain about dummy metas
-        util.warn("Ignoring " + info["kind"])
+        util.warn("Ignoring {thing} (line {linenum})",
+                thing=info["kind"], linenum=info["linenum"])
 
 
     def make_printer(self, info, forced_filetype_ext):

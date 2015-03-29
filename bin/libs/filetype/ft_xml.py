@@ -41,7 +41,7 @@ from . import _common as common
 
 from ..base.__common import WILDCARD
 from ..base.word import Word
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..base.candidate import Candidate
 from ..base.entry import Entry
 from ..base.mweoccur import MWEOccurrence
@@ -179,16 +179,17 @@ class XMLParser(common.AbstractParser):
 
     #######################################################
     def parse_corpus(self, inner_iterator, handler, info):
+        sentence_factory = SentenceFactory()
         sentence = None
-        s_id = -1
 
         for event, elem in inner_iterator:
             info["linenum"] = elem.source_line
             if event == "start":
                 if elem.tag == "s" :
+                    s_id = None
                     if "s_id" in elem.attrib:
                         s_id = int(self.unescape(elem.get("s_id")))
-                    sentence = Sentence([], s_id)
+                    sentence = sentence_factory.build(id_number=s_id)
 
                 elif elem.tag == "mweoccur":
                     occur_cand = Candidate(int(elem.get("candid")))

@@ -37,7 +37,7 @@ from __future__ import absolute_import
 from . import _common as common
 from ..base.__common import WILDCARD
 from ..base.candidate import Candidate
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
 
@@ -70,12 +70,11 @@ class PlainCorpusParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(PlainCorpusParser, self).__init__(in_files, encoding)
-        self.sentence_count = 0
+        self.sentence_factory = SentenceFactory()
         self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        self.sentence_count += 1
-        sentence = Sentence([], self.sentence_count)
+        sentence = self.sentence_factory.build()
         mwes = line.split()  # each entry is an SWE/MWE
         for mwe in mwes:
             words = [Word(self.unescape(lemma)) for lemma in mwe.split("_")]
@@ -86,7 +85,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
                 indexes = list(xrange(len(sentence)-len(words), len(sentence)))
                 mweo = MWEOccurrence(sentence, c, indexes)
                 sentence.mweoccurs.append(mweo)
-        handler.handle_sentence(sentence)
+        handler.handle_sentence(sentence, info)
 
 
 class PlainCorpusPrinter(common.AbstractPrinter):

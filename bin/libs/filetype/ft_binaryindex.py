@@ -37,6 +37,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from . import _common as common
+from . import util
 import sys
 
 class BinaryIndexInfo(common.FiletypeInfo):
@@ -52,7 +53,7 @@ class BinaryIndexInfo(common.FiletypeInfo):
 class BinaryIndexChecker(common.AbstractChecker):
     r"""Checks whether input is in BinaryIndex format."""
     def check(self):
-        if self.fileobj == sys.stdin:
+        if self.fileobj.name == "<stdin>":
             util.error("Cannot read BinaryIndex file from stdin!")
         if not self.fileobj.name.endswith(".info"):
             util.error("BinaryIndex file should have extension .info!")

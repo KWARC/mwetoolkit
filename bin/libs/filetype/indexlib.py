@@ -56,7 +56,7 @@ import tempfile
 import subprocess
 import struct
 
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..util import verbose, strip_xml, warn, error
 from ..base.word import Word, WORD_ATTRIBUTES
 from ..base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
@@ -513,6 +513,7 @@ class Index(object):
                  use_c_indexer=None):
         self.arrays = {}
         self.metadata = {"corpus_size": 0}
+        self.sentence_factory = SentenceFactory()
 
         Index.use_c_indexer(use_c_indexer)
 
@@ -712,17 +713,14 @@ class Index(object):
             Returns an iterator over all sentences in the corpus.
         """
 
-        id = 1
         guide = self.used_word_attributes[0]  # guide?
         length = len(self.arrays[guide].corpus)
         words = []
         for i in range(0, length):
             if self.arrays[guide].corpus[i] == 0:
                 # We have already a whole sentence.
-                sentence = Sentence(words, id)
-                id += 1
+                yield self.sentence_factory.build(words)
                 words = []
-                yield sentence
 
             else:
                 args_dict = {}

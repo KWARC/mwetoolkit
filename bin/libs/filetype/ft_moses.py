@@ -36,7 +36,7 @@ from __future__ import absolute_import
 
 from . import _common as common
 from ..base.__common import WILDCARD
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
 
@@ -75,12 +75,11 @@ class MosesParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(MosesParser,self).__init__(in_files, encoding)
-        self.sentence_count = 0
+        self.sentence_factory = SentenceFactory()
         self.category = "corpus"
 
     def _parse_line(self, line, handler, info={}):
-        self.sentence_count += 1
-        s = Sentence([], self.sentence_count)
+        s = self.sentence_factory.build()
         words = line.split(" ")
         for i, w in enumerate(words):
             token = [self.unescape(x) for x in w.split("|")]
@@ -90,7 +89,7 @@ class MosesParser(common.AbstractTxtParser):
             else:
                 util.warn("Ignoring bad token (line {}, token {})" \
                         .format(info["linenum"], i+1))
-        handler.handle_sentence(s)
+        handler.handle_sentence(s, info)
 
 
 class MosesPrinter(common.AbstractPrinter):

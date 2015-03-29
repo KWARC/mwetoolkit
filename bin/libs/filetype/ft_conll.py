@@ -38,7 +38,7 @@ from __future__ import absolute_import
 from . import _common as common
 from ..base.__common import WILDCARD
 from ..base.candidate import Candidate
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
 
@@ -88,12 +88,12 @@ class ConllParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8'):
         super(ConllParser,self).__init__(in_files, encoding)
+        self.sentence_factory = SentenceFactory()
         self.name2index = {name:i for (i, name) in
                 enumerate(self.filetype_info.entries)}
         self.ignoring_cur_sent = False
         self.id_index = self.name2index["ID"]
         self.category = "corpus"
-        self.s_id = 0
 
     def _parse_line(self, line, handler, info={}):
         data = line.split("\t")
@@ -120,9 +120,8 @@ class ConllParser(common.AbstractTxtParser):
                 else:
                     if wid == 1:
                         self.new_partial(handler.handle_sentence,
-                                Sentence([], self.s_id), info=info)
+                                self.sentence_factory.build(), info=info)
                         self.ignoring_cur_sent = False
-                        self.s_id += 1
 
                     if not self.ignoring_cur_sent:
                         indexes.append(wid - 1)

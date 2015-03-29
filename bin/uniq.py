@@ -42,7 +42,7 @@ from libs.base.frequency import Frequency
 from libs.base.ngram import Ngram
 from libs.base.word import Word
 from libs.base.entry import Entry
-from libs.base.sentence import Sentence
+from libs.base.sentence import Sentence, SentenceFactory
 from libs.base.candidate import Candidate
 from libs.base.__common import WILDCARD
 from libs.util import read_options, treat_options_simplest, verbose
@@ -104,6 +104,7 @@ class UniqerHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
+            self.sentence_factory = SentenceFactory()
         self.chain.before_file(fileobj, info)
 
 
@@ -118,13 +119,13 @@ class UniqerHandler(filetype.ChainedInputHandler):
         global perform_retokenisation, ignore_pos, surface_instead_lemmas
 
         # TODO: improve the "copy" method
-        copy_ngram = create_instance( entity )
+        copy_ngram = self.create_instance( entity )
         for w in entity :
             copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
             copy_ngram.append( copy_w )
             
         if perform_retokenisation :
-            copy_ngram = retokenise( copy_ngram )
+            copy_ngram = self.retokenise( copy_ngram )
             
         if ignore_pos :
             copy_ngram.set_all( pos=WILDCARD )
@@ -200,53 +201,53 @@ class UniqerHandler(filetype.ChainedInputHandler):
     
 ################################################################################    
 
-def create_instance( entity ) :
-    """
-        Create an empty instance of the same type as 'entity'.
-    """
-    if isinstance( entity, Candidate ) :
-        return Candidate( 0, [], [], [], [], [] )
-    elif isinstance( entity, Entry ) :
-        return Entry( 0, [], [], [] )
-    elif isinstance( entity, Sentence ) :
-        return Sentence( [], 0 )
-    else :
-        return Ngram( [], [] )
+    def create_instance( self, entity ) :
+        """
+            Create an empty instance of the same type as 'entity'.
+        """
+        if isinstance( entity, Candidate ) :
+            return Candidate( 0, [], [], [], [], [] )
+        elif isinstance( entity, Entry ) :
+            return Entry( 0, [], [], [] )
+        elif isinstance( entity, Sentence ) :
+            return self.sentence_factory.build()
+        else :
+            return Ngram( [], [] )
 
 ################################################################################    
 
-def retokenise( ngram ) :
-    """
-        Retokenises an ngram, splitting words containing some kinds of
-        separators into individual words.
-    """
-    global split_characters
-    global surface_instead_lemmas
-    split_form = create_instance( ngram )
-    for w in ngram :
-        if surface_instead_lemmas :
-            splittable = w.surface
-        else :
-            splittable = w.lemma        
-        for c in list( split_characters ) :
-            splittable = splittable.replace( c, "-" )
-        for part in splittable.split( "-" ) :
-            part = part.strip()
-            # Little workaround for digits
-            if part.isdigit() :
-                pos = "NUM"
+    def retokenise( self, ngram ) :
+        """
+            Retokenises an ngram, splitting words containing some kinds of
+            separators into individual words.
+        """
+        global split_characters
+        global surface_instead_lemmas
+        split_form = self.create_instance( ngram )
+        for w in ngram :
+            if surface_instead_lemmas :
+                splittable = w.surface
             else :
-                pos = w.pos
-            #pdb.set_trace()
-            # Impossible to replace, one of the parts does never appear as
-            # an individual word.
-            if part != "" :
-                if surface_instead_lemmas :
-                    split_form.append( Word( part, WILDCARD, pos, WILDCARD, [] ) )
+                splittable = w.lemma        
+            for c in list( split_characters ) :
+                splittable = splittable.replace( c, "-" )
+            for part in splittable.split( "-" ) :
+                part = part.strip()
+                # Little workaround for digits
+                if part.isdigit() :
+                    pos = "NUM"
                 else :
-                    split_form.append( Word( WILDCARD, part, pos, WILDCARD, [] ) )
-    #pdb.set_trace()
-    return split_form
+                    pos = w.pos
+                #pdb.set_trace()
+                # Impossible to replace, one of the parts does never appear as
+                # an individual word.
+                if part != "" :
+                    if surface_instead_lemmas :
+                        split_form.append( Word( part, WILDCARD, pos, WILDCARD, [] ) )
+                    else :
+                        split_form.append( Word( WILDCARD, part, pos, WILDCARD, [] ) )
+        #pdb.set_trace()
+        return split_form
             
     
 ################################################################################

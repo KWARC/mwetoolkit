@@ -37,7 +37,7 @@ from __future__ import absolute_import
 from . import _common as common
 from ..base.__common import WILDCARD
 from ..base.candidate import Candidate
-from ..base.sentence import Sentence
+from ..base.sentence import SentenceFactory
 from ..base.word import Word
 from .. import util
 
@@ -67,9 +67,9 @@ class TreeTaggerParser(common.AbstractTxtParser):
 
     def __init__(self, in_files, encoding='utf-8', sent_split=None):
         super(TreeTaggerParser, self).__init__(in_files, encoding)
+        self.sentence_factory = SentenceFactory()
         self.category = "corpus"
         self.words = []
-        self.s_id = 0
         self.sent_split = sent_split
 
     def _parse_line(self, line, handler, info={}):
@@ -84,7 +84,7 @@ class TreeTaggerParser(common.AbstractTxtParser):
         else:
             fields = line.split("\t")
             if len(fields) != 3:
-                warn("Ignoring line {} (it has {} entries)" \
+                util.warn("Ignoring line {} (it has {} entries)" \
                         .format(info["linenum"], len(fields)))
                 return
 
@@ -97,8 +97,8 @@ class TreeTaggerParser(common.AbstractTxtParser):
 
     def finish_sentence(self, handler):
         r"""Finish building sentence and call handler."""
-        handler.handle_sentence(Sentence(self.words, self.s_id), {})
-        self.s_id += 1
+        s = self.sentence_factory.build(self.words)
+        handler.handle_sentence(s, {})
         self.words = []
 
 class TreeTaggerChecker(common.AbstractChecker):
