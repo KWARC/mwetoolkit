@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<candidates >
+<!-- =================================================
+  Important things to test:
+  * Values must be preserved (including escaping chars).
+  * Candidate ordering (through `candid`) must be preserved.
+  * Source IDs must be preserved.
+  * Frequency info must be preserved.
+================================================== -->
+<meta>
+</meta>
+<cand candid="340">
+    <ngram><w surface="Socialista" lemma="socialista" pos="NC" /> <w lemma="europeo" pos="ADJ" /> </ngram>
+    <occurs>
+    <ngram><w surface="socialistas" lemma="socialista" pos="NC" /> <w surface="europeos" lemma="europeo" pos="ADJ" /> <freq name="corpusX" value="1" /><sources ids="873:4,5"/>
+</ngram>
+    </occurs>
+</cand>
+<cand candid="335">
+    <ngram><w lemma="período" pos="NC" /> <w lemma="de" pos="PREP" /> <w lemma="sesión" pos="NC" /> </ngram>
+    <occurs>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="sesiones" lemma="sesión" pos="NC" /> <freq name="corpusY" value="3" /><sources ids="0:3,4,5;0:9,10,11;3:20,21,22"/>
+</ngram>
+    </occurs>
+</cand>
+<cand candid="350">
+    <ngram><w lemma="abc&lt;d&#10;ef" pos="NC" /> <w lemma="añadir" pos="VLadj" /> </ngram>
+    <occurs>
+    <ngram><w surface="valor" lemma="valor" pos="NC" /> <w surface="bad-matching" /> <freq name="corpusX" value="1" /><sources ids="778:24,25"/>
+</ngram>
+    </occurs>
+</cand>
+</candidates>

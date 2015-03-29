@@ -43,9 +43,11 @@ cd "$HERE"
 rm -rf ./output
 mkdir -p ./output
 
-t_testname "Check XML format"
-test_parser  XML "xml-ref/corpus.conll.xml" "xml-ref/corpus.conll.xml"
-# (For XML, test_parser will end up automatically testing printer)
+# (For XML, test_parser will end up automatically testing printer):
+t_testname "Check XML format (corpus)"
+test_parser  XML "corner-cases/corpus.xml" "corner-cases/corpus.xml"
+t_testname "Check XML format (candidates)"
+test_parser  XML "corner-cases/candidates.xml" "corner-cases/candidates.xml"
 
 t_testname "Check CONLL format"
 test_parser  CONLL "sample/corpus.conll" "xml-ref/corpus.conll.xml"
