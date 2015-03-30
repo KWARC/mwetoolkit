@@ -162,7 +162,7 @@ class ConllParser(common.AbstractTxtParser):
 
     def maybe_warn(self, entry, entry_name):
         if entry != WILDCARD:
-            util.warn_once("WARNING: unable to handle {} entry: {}." \
+            util.warn_once("Unable to handle {} entry: {}." \
                     .format(self.filetype_info.filetype_ext, entry_name))
 
 

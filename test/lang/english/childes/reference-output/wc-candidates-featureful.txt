@@ -1,4 +1,3 @@
-Debug mode on
 26 entities in candidates-featureful.xml
 52 words in candidates-featureful.xml
 169 characters in candidates-featureful.xml

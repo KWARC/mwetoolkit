@@ -783,13 +783,12 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             verbose( "Field separator: " + a )
             separator = a
             if len( separator ) > 1 :
-                warn("multi-char field separator!")
+                warn("Multi-char field separator!")
         if o in ("-d", "--distance") :
-            verbose( "Calculating weighted coefficients using distance file")
+            verbose("Calculating weighted coefficients using distance file")
             distances_matrix = read_distances( a )
             if distances_matrix is None :
-                warn( "WARNING: error in distance matrix!\n"
-                      "Weighted coefficients will use 1.0 as default distance")
+                warn("Error in distance matrix! Weighted coefficients will use 1.0 as default distance")
         if o in ("-c", "--confusion") :
             verbose( "Calculating confusion matrices" )
             calculate_confusion = True

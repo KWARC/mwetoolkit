@@ -106,7 +106,13 @@ class Ngram (object):
         """
         self.freqs.append( freq )
 
+################################################################################
+        
     def add_sources(self, sources):
+        r"""Add source information.
+        Example: ["1:3,4,5", "7:3,2"].
+        Meaning: ID 1 (words 3, 4 and 5) and ID 7 (words 3 and 2).
+        """
         self.sources.extend(sources)
 
 ################################################################################
@@ -149,29 +155,36 @@ class Ngram (object):
             self.append( a_word )
        
 ################################################################################
-        
-    def to_xml( self ) :
-        """
-            Provides an XML string representation of the current object, 
-            including internal variables.
+
+    def to_xml(self):
+        """Provides an XML string representation of the
+        current object, including internal variables.
             
-            @return A string containing the XML element <ngram> with its 
-            internal structure, according to mwetoolkit-candidates.dtd.
+        @return A string containing the XML element <ngram> with its 
+        internal structure, according to mwetoolkit-candidates.dtd.
         """
-        result = "<ngram>"
+        ret = ["<ngram>"]
+        self._to_xml_into(ret)
+        ret.append("</ngram>")
+        return "".join(ret)
+
+
+    def _to_xml_into( self, output ) :
+        r"""Output stuff into `output`, to be "".join()'ed
+        inside the `to_xml` caller function.
+        """
         for word in self :
-            result = result  + word.to_xml() + " "
-        if self.freqs :
-            result = result #+ "\n"        
-            for freq in self.freqs :
-                result = result + freq.to_xml()
+            output.append(word.to_xml())
+            output.append(" ")
+
+        for freq in self.freqs :
+            output.append(freq.to_xml())
+
         if len(self.sources) > 0:
-            #print >>sys.stderr, "-- %d sources" % len(self.sources)
-            sources_string = ';'.join(map(str, self.sources))
-            result += '<sources ids="%s"/>\n' % sources_string
-        result = result + "</ngram>"
-        return result.strip()
-        
+            sources_string = ';'.join(unicode(s) for s in self.sources)
+            output.append('<sources ids="%s"/>\n' % sources_string)
+
+
 ################################################################################
         
     def to_xml_custom( self, print_surface=True, print_lemma=True, 

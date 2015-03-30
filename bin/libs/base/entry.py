@@ -54,34 +54,40 @@ class Entry( Ngram ) :
         super( Entry, self ).__init__( base, freqs )
         self.id_number = int(id_number)
         self.features = features if features else []
-            
+
 ################################################################################
 
-    def to_xml( self ) :
+    def to_xml(self):
+        """Provides an XML string representation of the
+        current object, including internal variables.
+            
+        @return A string containing the XML element <ngram> with its 
+        internal structure, according to mwetoolkit-candidates.dtd.
         """
-            Provides an XML string representation of the current object,
-            including internal variables.
+        ret = ['<entry entryid="', unicode(self.id_number), '">']
+        self._to_xml_into(ret)
+        ret.append("</entry>")
+        return "".join(ret)
 
-            @return A string containing the XML element <entry> with its
-            internal structure, according to mwetoolkit-dict.dtd.
+
+    def _to_xml_into( self, output, _print_features=True ) :
+        r"""Output stuff into `output`, to be "".join()'ed
+        inside the `to_xml` caller function.
+
+        The `print_features` argument is used by the
+        Candidate subclass temporarily, but should be removed
+        as soon as we have all our regression tests working,
+        because there is no good reason to reorder the position
+        of the <features> tag and have duplicate code...
         """
-        result = ""        
-        #result = "<entry"
-        #if self.id_number >= 0 :
-        #    result = result + " entryid=\"" + str(self.id_number) + "\">"#+"\n"
-
-        # Unicode support
-        base_string = super( Entry, self ).to_xml()
-        if isinstance( base_string, str ) :
-            base_string = unicode( base_string, 'utf-8')
-        result = result + base_string #+ "\n"
-        if self.features :
-            result = result + "    <features>\n"
-            for feat in self.features :
-                result = result + "        " + feat.to_xml() + "\n"
-            result = result + "    </features>\n"
-        #return result + "</entry>"
-        return result
+        super(Entry, self)._to_xml_into(output)
+        if self.features and _print_features :
+            output.append("    <features>\n")
+            for feat in self.features:
+                output.append("        ")
+                output.append(feat.to_xml())
+                output.append("\n")
+            output.append("    </features>\n")
 
 ################################################################################
 

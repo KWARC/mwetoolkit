@@ -38,6 +38,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
+import os.path
 import sys
 
 from libs.util import read_options, treat_options_simplest, verbose
@@ -95,7 +96,7 @@ class CounterHandler(filetype.InputHandler):
         filename is only used to print the stats. All counters are reset
         after a call to this function.
         """
-        filename = fileobj.name
+        filename = os.path.basename(fileobj.name)
         print(unicode(self.entity_counter) + " entities in " + filename,file=sys.stderr)
         print(unicode(self.word_counter) + " words in " + filename,file=sys.stderr)
         print(unicode(self.char_counter) + " characters in " + filename,file=sys.stderr)

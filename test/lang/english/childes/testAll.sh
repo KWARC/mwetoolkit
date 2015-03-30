@@ -23,130 +23,86 @@ done
 
 test "$#" -ne 0  && usage_exit
 
-
 ##################################################
 
 
-DIR="$(readlink -f "$(dirname "$0")")"
-
-TOOLKITDIR="$DIR/../.."
-OUTDIR="$DIR/output"
-TESTNUM=0
-
-
-
-diff-sorted() {
-    diff <(sort "$1") <(sort "$2")
-}
+t_REFDIR="$t_HERE/reference-output"
 
 
 main() {
-    cd "$DIR"
-    mkdir -p "$OUTDIR"
-
-    cd "$OUTDIR"
-    [[ -e corpus.xml ]] || cp ../corpus.xml .
-
     t_testname "Corpus indexing"
-    t_run "$t_BIN/index.py -v -i corpus corpus.xml"
+    t_run "$t_BIN/index.py -i $t_OUTDIR/corpus $t_HERE/corpus.xml"
+    for filepath in "$t_REFDIR/corpus"*; do
+        t_compare_with_ref "$(basename "$filepath")"
+    done
 
     t_testname "Extraction from index"
-    t_run "$t_BIN/candidates.py -f -v -p $DIR/patterns.xml corpus.info >candidates-from-index.xml"
-    t_diff "candidates-from-index.xml" "../reference-output/candidates-from-index.xml"
+    t_run "$t_BIN/candidates.py -f -p $t_HERE/patterns.xml $t_OUTDIR/corpus.info >candidates-from-index.xml"
+    t_compare_with_ref "candidates-from-index.xml"
     
     t_testname "Extraction from XML"
-    t_run "$t_BIN/candidates.py -f -v -p $DIR/patterns.xml corpus.xml >candidates-from-corpus.xml"
-
-    t_testname "Comparison of candidate extraction outputs"
-    t_run "diff-sorted candidates-from-index.xml candidates-from-corpus.xml"
+    t_run "$t_BIN/candidates.py -f -p $t_HERE/patterns.xml $t_HERE/corpus.xml >$t_OUTDIR/candidates-from-corpus.xml"
+    t_compare_with_ref "candidates-from-corpus.xml"
+    t_compare "$t_OUTDIR/candidates-from-index.xml" "$t_OUTDIR/candidates-from-corpus.xml" "Comparing from-corpus vs from-index"
 
     t_testname "Individual word frequency counting"
-    t_run "$t_BIN/counter.py -v -J -i corpus.info candidates-from-index.xml >candidates-counted.xml"
+    t_run "$t_BIN/counter.py -J -i $t_OUTDIR/corpus.info $t_OUTDIR/candidates-from-index.xml >$t_OUTDIR/candidates-counted.xml"
+    t_compare_with_ref "candidates-counted.xml"
 
     t_testname "Association measures"
-    t_run "$t_BIN/feat_association.py -v -m mle:pmi:t:dice:ll candidates-counted.xml >candidates-featureful.xml"
+    t_run "$t_BIN/feat_association.py -m mle:pmi:t:dice:ll $t_OUTDIR/candidates-counted.xml >$t_OUTDIR/candidates-featureful.xml"
+    t_compare_with_ref "candidates-featureful.xml"
 
     t_testname "Evaluation"
-    t_run "$t_BIN/eval_automatic.py -v -r $DIR/reference.xml -g candidates-featureful.xml >eval.xml 2>eval-stats.txt"
+    t_run "$t_BIN/eval_automatic.py -r $t_HERE/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml 2>$t_OUTDIR/eval-stats.txt"
+    t_compare_with_ref "eval.xml"
+    t_compare_with_ref "eval-stats.txt"
 
     t_testname "Mean Average Precision"
-    t_run "$t_BIN/avg_precision.py -v -f mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus eval.xml >map.txt"
+    t_run "$t_BIN/avg_precision.py -f mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus $t_OUTDIR/eval.xml >$t_OUTDIR/avg_prec.txt"
+    t_compare_with_ref "avg_prec.txt"
 
     #for format in csv arff evita owl ucs; do
     #    t_testname "Conversion from XML to $format"
-    #    t_run "$t_BIN/xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt"
+    #    t_run "$t_BIN/xml2$format.py candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt"
     #done
 
     t_testname "Take first 50 candidates"
-    t_run "$t_BIN/head.py -v -n 50 candidates-featureful.xml >candidates-featureful-head.xml"
+    t_run "$t_BIN/head.py -n 50 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-featureful-head.xml"
+    t_compare_with_ref "candidates-featureful-head.xml"
 
     t_testname "Take last 50 candidates"
-    t_run "$t_BIN/tail.py -v -n 50 candidates-featureful.xml >candidates-featureful-tail.xml"
+    t_run "$t_BIN/tail.py -n 50 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-featureful-tail.xml"
+    t_compare_with_ref "candidates-featureful-tail.xml"
 
     t_testname "Take first 50 corpus sentences"
-    t_run "$t_BIN/head.py -v -n 50 corpus.xml >corpus-head.xml"
+    t_run "$t_BIN/head.py -n 50 $t_HERE/corpus.xml >$t_OUTDIR/corpus-head.xml"
+    t_compare_with_ref "corpus-head.xml"
 
     t_testname "Take last 50 corpus sentences"
-    t_run "$t_BIN/tail.py -v -n 50 corpus.xml >corpus-tail.xml"
+    t_run "$t_BIN/tail.py -n 50 $t_HERE/corpus.xml >$t_OUTDIR/corpus-tail.xml"
+    t_compare_with_ref "corpus-tail.xml"
 
     for base in candidates-featureful corpus; do
         for suffix in '' -head -tail; do
             t_testname "Word count for $base$suffix"
-            t_run "$t_BIN/wc.py $base$suffix.xml 2>&1 | tee wc-$base$suffix.txt"
+            t_run "$t_BIN/wc.py $t_OUTDIR/${base}${suffix}.xml 2>$t_OUTDIR/wc-${base}${suffix}.txt"
+            t_compare_with_ref "wc-${base}${suffix}.txt"
         done
     done
 
     t_testname "Removal of duplicated candidates"
-    t_run "$t_BIN/uniq.py candidates-featureful.xml >candidates-uniq.xml"
+    t_run "$t_BIN/uniq.py $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-uniq.xml"
+    t_compare_with_ref "candidates-uniq.xml"
 
     t_testname "Removal of duplicated candidates ignoring POS"
-    t_run "$t_BIN/uniq.py -g candidates-featureful.xml >candidates-uniq-nopos.xml"
+    t_run "$t_BIN/uniq.py -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-uniq-nopos.xml"
+    t_compare_with_ref "candidates-uniq-nopos.xml"
 
     t_testname "Filtering out candidates occurring less than twice"
-    t_run "$t_BIN/filter.py -t 2 candidates-featureful.xml >candidates-twice.xml"
-
-    #t_testname "Comparison against reference output"
-    #compare-to-reference
+    t_run "$t_BIN/filter.py -t 2 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-twice.xml"
+    t_compare_with_ref "candidates-twice.xml"
 }
 
-
-compare() {
-    local file="$1"; shift
-    local ref="$1"; shift
-    if [[ $file == *candidates* || $file == *eval* ]]; then
-        cmp -s <(sort "$file") <(sort "$ref")
-    elif [[ $file == *.suffix || $file == warning* || $file == *.corpus ]]; then
-        echo "IGNORED"
-        continue
-    else
-        cmp -s "$file" "$ref"
-    fi          
-}
-
-
-compare-to-reference() {
-    #tar -C .. -xvf ../reference-output.tar.bz2
-    countfail=0
-    errorreport="`pwd`/../error-report.log"
-    printf "" > $errorreport
-    for file in *.*; do
-        ref="../reference-output/$file"
-        printf "  Comparing %s... " "$file"
-        local ERROR=0
-        compare "$file" "$ref" || ERROR=1
-        if test "$ERROR" -eq 0; then
-            echo "OK"
-        else
-            echo "FAILED!"
-            difference=`diff <(sort "$file") <(sort "$ref")` || true
-            echo -ne "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
-            countfail=$((countfail+1))
-        fi
-    done
-    if [[ countfail -gt 0 ]]; then
-        printf "\n\e[1;31mWARNING: $countfail tests FAILED!\e[0m\n"
-        printf "Please consult the detailed error report in $errorreport\n"
-    fi
-}
 
 main "$@"

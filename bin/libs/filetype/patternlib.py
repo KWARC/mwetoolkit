@@ -170,8 +170,7 @@ class ParsedPattern(object):
         if repeat:
             if repeat != "*" and repeat != "?" and repeat != "+" and \
                 not re.match(r"^\{[0-9]*,[0-9]*\}|\{[0-9]+\}$",repeat ) :
-                warningrepeat = "WARNING: invalid repeat pattern: " + repeat
-                print(warningrepeat, file=sys.stderr)
+                util.warn("Invalid repeat pattern: {repeat}", repeat=repeat)
             self.pattern += repeat
 
         if id:

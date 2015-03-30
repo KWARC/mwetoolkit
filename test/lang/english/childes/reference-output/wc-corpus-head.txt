@@ -1,4 +1,3 @@
-Debug mode on
 50 entities in corpus-head.xml
 374 words in corpus-head.xml
-1272 characters in corpus-head.xml
+1252 characters in corpus-head.xml

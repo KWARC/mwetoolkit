@@ -139,13 +139,13 @@ class Candidate ( Entry ) :
         self.occurs = occurs if occurs else []             # Ngram list
         self.tpclasses = tpclasses if tpclasses else []        # TPClass list
         self.freqs = []
-        self.features = features if features else [] # TODO: redundant with Entry features, which are useless
         self.vars = vars if vars else []
         
 ################################################################################
 
     def merge_from(self, other):
         r"""Merge `other` into `self`."""
+        # TODO move some of this code into Ngram
         self.occurs = list(set(self.occurs) | set(other.occurs))
         self.features = Candidate.uniq_features(self.features, other.features)
         self.tpclasses = list(set(self.tpclasses) | set(other.tpclasses))
@@ -195,56 +195,67 @@ class Candidate ( Entry ) :
 
 ################################################################################
 
-    def to_xml( self ) :
-        """
-            Provides an XML string representation of the current object, 
-            including internal variables.
+    def to_xml(self):
+        """Provides an XML string representation of the
+        current object, including internal variables.
             
-            @return A string containing the XML element <cand> with its internal
-            structure, according to mwetoolkit-candidates.dtd.
+        @return A string containing the XML element <ngram> with its 
+        internal structure, according to mwetoolkit-candidates.dtd.
         """
-        result = "<cand"
-        if self.id_number >= 0 :
-            result = result + " candid=\"" + str(self.id_number) + "\">\n"
+        ret = ['<cand candid="', unicode(self.id_number), '">']
+        self._to_xml_into(ret)
+        ret.append("</cand>")
+        return "".join(ret)
 
-        # Unicode support          
-        base_string = super( Candidate, self ).to_xml()
-        result = result + "    " + base_string + "\n"        
+
+    def _to_xml_into( self, output ) :
+        r"""Output stuff into `output`, to be "".join()'ed
+        inside the `to_xml` caller function.
+        """
+        output.append("\n    <ngram>")
+        super(Candidate, self)._to_xml_into(output, _print_features=False)
+        output.append("</ngram>\n")
 
         if self.bigrams :
-            result = result + "    <bigram>\n"
+            output.append("    <bigram>\n")
             for bigram in self.bigrams :
-                # Unicode support
-                bigram_string = bigram.to_xml()
-                result = result + "    " + bigram_string +"\n"
-            result = result + "    </bigram>\n"
+                output.append("       ")
+                output.append(bigram.to_xml())
+                output.append("\n")
+            output.append("    </bigram>\n")
 
         if self.occurs :
-            result = result + "    <occurs>\n"
+            output.append("    <occurs>\n")
             for occur in self.occurs :
-                # Unicode support
-                occur_string = occur.to_xml()
-                result = result + "    " + occur_string +"\n"
-            result = result + "    </occurs>\n"
+                # XXX use 8 spaces here, not 4 (but only after we have
+                # regression tests ready)
+                output.append("    ")
+                output.append(occur.to_xml())
+                output.append("\n")
+            output.append("    </occurs>\n")
 
         if self.vars :
-            result = result + "    <vars>\n"
+            output.append("    <vars>\n")
             for var in self.vars :
-                # Unicode support
-                var_string = var.to_xml()
-                result = result + "    " + var_string +"\n"
-            result = result + "    </vars>\n"
+                output.append("        ")
+                output.append(var.to_xml())
+                output.append("\n")
+            output.append("    </vars>\n")
 
         if self.features :
-            result = result + "    <features>\n"
+            output.append("    <features>\n")
             for feat in self.features :
-                result = result + "        " + feat.to_xml() + "\n"
-            result = result + "    </features>\n" 
+                output.append("        ")
+                output.append(feat.to_xml())
+                output.append("\n")
+            output.append("    </features>\n")
 
         if self.tpclasses :
             for tpclass in self.tpclasses :
-                result = result + "    " + tpclass.to_xml() + "\n"                         
-        return result + "</cand>"
+                output.append("    ")
+                output.append(tpclass.to_xml())
+                output.append("\n")
+
         
 ################################################################################
 

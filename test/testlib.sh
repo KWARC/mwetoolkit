@@ -9,17 +9,46 @@ export LC_ALL=C
 t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
 # Path to mwetoolkit binary dir
 t_BIN="$t_TOOLKIT/bin"
-# Path to shared data
+# Path to input data shared among all tests
 t_INPUT="$t_TOOLKIT/test/inputs"
-# Path to shared data
-t_TEMP="${TMP:-/tmp}/mwetoolkit-testlib-$(id -u)"
 
 # Number of lines to display on `t_diff`
-t_DIFF_LENGTH=20
+t_DIFF_HEAD_LENGTH="${t_DIFF_HEAD_LENGTH:-30}"
+# Whether to continue on error (this is an executable! See how it's used!)
+t_STOP_ON_ERROR="${t_STOP_ON_ERROR:-true}"
 
 # Limit number of tests to run
-t_N_TESTS_LIMIT=999999
+t_RUN_N_TESTS="${t_RUN_N_TESTS:-999999}"
 
+
+##################################################
+
+# Path to the sourcing library
+if ! test "${t_HERE+set}"; then
+    t_HERE="${HERE:-"${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"}"
+fi
+
+# Path to output files:
+if ! test "${t_OUTDIR+set}"; then
+    t_OUTDIR="$t_HERE/output"
+    trap 'rm -rf "$t_OUTDIR"' EXIT
+    mkdir -p "$t_OUTDIR"
+fi
+
+# Path to reference output files:
+if ! test "${t_REFDIR+set}"; then
+    t_REFDIR="$t_HERE/reference"
+fi
+
+# Temporary directory, used mostly by auxiliary functions:
+if ! test "${t_TMP+set}"; then
+    t_TMP="$t_OUTDIR/tmp"
+    trap 'rm -rf "$t_TMP"' EXIT
+    mkdir -p "$t_TMP"
+fi
+
+
+##################################################
 
 # t_echo_bold <txt>
 # Print $txt in bold.
@@ -40,7 +69,11 @@ t_warn() { t_echo_bold_rgb 1 "WARNING: $1"; }
 
 # t_error <message>
 # Print "ERROR: $message"
-t_error() { t_echo_bold_rgb 1 "ERROR: $1"; }
+t_error() {
+    t_echo_bold_rgb 1 "ERROR: $1"
+    $t_STOP_ON_ERROR && return 50
+    return 0
+}
 
 
 
@@ -51,8 +84,8 @@ t_testname() {
     _THIS_TEST_NUM="$((${_THIS_TEST_NUM:-}+1))"
     test "$_THIS_TEST_NUM" -ne 1  && echo ""
 
-    if test "$_THIS_TEST_NUM" -ge "$t_N_TESTS_LIMIT"; then
-        t_echo_bold "[Stopping after $t_N_TESTS_LIMIT tests]"
+    if test "$_THIS_TEST_NUM" -ge "$t_RUN_N_TESTS"; then
+        t_echo_bold "[Stopping after $t_RUN_N_TESTS tests]"
         exit 0
     fi
     t_echo_bold "$_THIS_TEST_NUM: $_THIS_TEST_NAME"
@@ -76,41 +109,59 @@ t_run() {
 # Uses wdiff if available.
 t_diff() {
     if hash "wdiff" 2>/dev/null; then
-        diff -u "$@" | wdiff -d --terminal | head -n "$t_DIFF_LENGTH"
-        RETCODE="${PIPESTATUS[0]}"
+        diff -u "$@" | head -n "$t_DIFF_HEAD_LENGTH" | wdiff -d --terminal
+        retcode="${PIPESTATUS[0]}"
     else
         if ! test "${_WARNED_WDIFF+set}"; then
             t_warn "wdiff is not installed; using diff"
             _WARNED_WDIFF=1
         fi
-        diff -u "$@" | head -n "$t_DIFF_LENGTH"
-        RETCODE="${PIPESTATUS[0]}"
+        diff -u "$@" | head -n "$t_DIFF_HEAD_LENGTH"
+        retcode="${PIPESTATUS[0]}"
     fi
-    return "$RETCODE"
+    return "$retcode"
 }
 
 
-# t_compare <txt_ref> <txt_in>
+# t_compare_with_ref <txt>
+t_compare_with_ref() {
+    local base="$(basename "$1")"
+    t_compare "$t_REFDIR/$base" "$t_OUTDIR/$base" "Comparing \"$base\" vs reference"
+}
+
+# t_compare <txt_ref> <txt_in> [description]
 # Compare `txt_in` to reference `txt_ref` and output differences.
+# If a `description` is given, prepend it to OK/ERROR output.
 t_compare() {
-    local txt_ref="$1"
-    local txt_in="$2"
+    local txt_ref="$1"; shift
+    local txt_in="$1"; shift
+    local description="${1:-"Comparing files"}"
+    echo -n "$(t_echo_rgb 0 "${description}... ")"
 
     if ! test -f "$txt_ref"; then
-        t_warn "not found: $txt_ref"
+        echo ""; t_error "not found: $txt_ref"
+
+    elif ! test -f "$txt_in"; then
+        echo ""; t_error "not found: $txt_in"
 
     else
-        local error=0
-        t_diff "$txt_ref" "$txt_in" || error=1
+        local errcode=0
+        t_diff "$txt_ref" "$txt_in" >"$t_TMP/last_diff" || errcode="$?"
 
-        if test "$error" -ne 0; then
+        if test "$errcode" -ne 0; then
+            echo ""
+            t_echo_bold_rgb 1 "Test $_THIS_TEST_NUM FAILED! Head of diff below:"
+            echo "--------------------------------------"
+            cat "$t_TMP/last_diff"
             t_backtrace
-            t_echo_bold_rgb 1 "Test $_THIS_TEST_NUM: FAILED!"
         else
             t_echo_bold_rgb 2 "OK."
         fi
 
-        return "$error"
+        if ! $t_STOP_ON_ERROR; then
+            return 0  # Ignore error
+        fi
+        return "$errcode"
     fi
 }
 
@@ -120,7 +171,7 @@ t_compare() {
 # Skip the most recent `skip_n` frames (default: skip_n=0).
 t_backtrace() {
     local skip_n="${1:-0}"
-    echo "------------------------------------"
+    echo "===================================="
     echo "Shell backtrace (most recent first):"
     if test "${BASH_VERSION+set}"; then
         local n="${#BASH_LINENO[@]}"
@@ -150,7 +201,3 @@ trap 'on_error ERR' ERR
 # inside `on_error` when called for SIGINT
 # (also happens on `trap ... EXIT` -- may be a bash bug)
 trap 'on_error INT' SIGINT
-
-
-trap 'rm -rf "$t_TEMP"' EXIT
-mkdir -p "$t_TEMP"

@@ -1,4 +1,3 @@
-Debug mode on
 50 entities in corpus-tail.xml
 285 words in corpus-tail.xml
-946 characters in corpus-tail.xml
+936 characters in corpus-tail.xml

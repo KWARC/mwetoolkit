@@ -173,8 +173,8 @@ class XMLParser(common.AbstractParser):
         if elem.tag == ElementTree.Comment:
             handler.handle_comment(elem.text.strip())
         else:
-            util.warn("Ignoring unknown XML elem (ending on line {}): {!r}".format(
-                    elem.source_line, elem.tag))
+            util.warn("Ignoring unknown XML elem (at line {}): {!r}" \
+                    .format(elem.source_line, elem.tag))
 
 
     #######################################################
@@ -396,7 +396,7 @@ class XMLParser(common.AbstractParser):
                     mtp = MetaTPClass(elem.get("name"), elem.get("type"))
                     meta.add_meta_tpclass(mtp)
                 elif elem.tag == "features":
-                	pass # nothing to do, but don't WARNING user
+                    pass # nothing to do, but don't WARNING user
                 elif elem.tag == "candidates":
                     return  # Finished processing
                 else:
@@ -406,25 +406,24 @@ class XMLParser(common.AbstractParser):
 
     #######################################################
     def parse_dict(self, inner_iterator, handler, info):
-        id_number_counter = 0
+        id_number_counter = 1
         entry = None
         word = None
         meta = None
 
         for event, elem in inner_iterator:
             info["linenum"] = elem.source_line
+
             if event == "start":
 
                 if elem.tag == "entry":
                     # Get the candidate ID or else create a new ID for it
                     if "entryid" in elem.attrib:
-                        id_number = self.unescape(elem.get("entryid"))
-                    else:
-                        id_number = id_number_counter
-                        id_number_counter += 1
+                        id_number_counter = self.unescape(elem.get("entryid"))
                     # Instantiates an empty dict entry that will be treated
                     # when the <entry> tag is closed
-                    entry = Entry(id_number, [], [], [])
+                    entry = Entry(id_number_counter, [], [], [])
+                    id_number_counter += 1
 
                 elif elem.tag == "w":
                     def get(name):
