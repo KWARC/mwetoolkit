@@ -74,5 +74,6 @@ class BinaryIndexParser(common.AbstractParser):
             assert fileobj.name.endswith(".info")
             index = Index(fileobj.name[:-len(".info")])
             index.load_main()
-            for sentence in index.iterate_sentences():
-                handler.handle_sentence(sentence)
+            for sentence, progress in index.iterate_sentences_and_progress():
+                info["progress"] = progress
+                handler.handle_sentence(sentence, info)

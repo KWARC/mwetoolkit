@@ -114,7 +114,7 @@ class ParsedPattern(object):
 
         elif node.tag == "backpat": 
             id = node.get("id", "")
-            self.pattern += "(?P=%s)" % id
+            self.pattern += "(?P=id_%s)" % id
 
         elif node.tag == "w":
             self._parse_w(node, scope_repeat)
@@ -236,7 +236,7 @@ class ParsedPattern(object):
             val = node.get(attr, "")
             if val.startswith("back:"):
                 (refid, refattr) = val.split(":")[1].split(".")
-                val = "(?P=%s_%s)" % (refid, refattr)
+                val = "(?P=id_%s_%s)" % (refid, refattr)
             elif val:
                 val = re.escape(val).replace("\\*", self.ATTRIBUTE_WILDCARD)
             else:
@@ -258,10 +258,9 @@ class ParsedPattern(object):
         if id:
             self.check_scope_repeat(scope_repeat, node)
             if id in self.forepattern_ids:
-                attrs["wordnum"] = "(?P=%s)" % self.forepattern_ids[id]
-            # 2015-02-24 silvioricardoc: commenting out, because this looks useless
-            #for attr in attrs:
-            #    attrs[attr] = "(?P<wid_%s_%s>%s)" % (id, attr, attrs[attr])
+                attrs["wordnum"] = "(?P=id_%s)" % self.forepattern_ids[id]
+            for attr in attrs:
+                attrs[attr] = "(?P<wid_%s_%s>%s)" % (id, attr, attrs[attr])
             if id in self.defined_w_ids:
                 raise Exception("Id '%s' defined twice" % id)
             self.defined_w_ids.append(id)
@@ -272,7 +271,7 @@ class ParsedPattern(object):
             if depref in self.defined_w_ids:
                 # Backreference.
                 attrs["syn"] = (self.ATTRIBUTE_WILDCARD +
-                               ";%s:(?P=%s_wordnum);" % (deptype, depref) +
+                               ";%s:(?P=wid_%s_wordnum);" % (deptype, depref) +
                                self.ATTRIBUTE_WILDCARD)
             else:
                 # Fore-reference.

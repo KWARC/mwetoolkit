@@ -709,17 +709,20 @@ class Index(object):
 ################################################################################
 
     def iterate_sentences(self):
-        """
-            Returns an iterator over all sentences in the corpus.
-        """
+        """Returns an iterator over all sentences in the corpus."""
+        for sentence, progress in self.iterate_sentences_and_progress():
+            yield sentence
 
+
+    def iterate_sentences_and_progress(self):
+        """Returns an iterator over all (sentence, progress) pairs in the corpus."""
         guide = self.used_word_attributes[0]  # guide?
         length = len(self.arrays[guide].corpus)
         words = []
         for i in range(0, length):
             if self.arrays[guide].corpus[i] == 0:
                 # We have already a whole sentence.
-                yield self.sentence_factory.make(words)
+                yield self.sentence_factory.make(words), (i, length)
                 words = []
 
             else:
