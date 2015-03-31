@@ -1,171 +1,103 @@
-#!/bin/bash
+#! /bin/bash
+HERE="$(cd "$(dirname "$0")" && pwd)"
 
-set -e           # Exit on errors..
-exec </dev/null  # Don't hang if a script tries to read from stdin.
+source "$HERE/../../testlib.sh"
 
-# Use GNU readlink on Mac OS.
-if which greadlink >/dev/null 2>&1; then
-	readlink() { greadlink "$@"; }
-fi
-
-DIR="$(readlink -f "$(dirname "$0")")"
-
-TOOLKITDIR="$DIR/../.."
-OUTDIR="$DIR/output"
-
-run() {
-	local script="$1"; shift
-	eval python "$TOOLKITDIR/bin/$script" "$@"
+usage_exit() { {
+    echo "Usage: $(basename "$0") [-h] [-s]"
+    echo "Test Genia."
+    exit 1
+} 1>&2;
 }
 
-dotest() {
-	[[ $# -eq 3 ]] || { echo "dotest: Invalid arguments: $*" >&2; exit 2; }
-	local name="$1" run="$2" verify="$3"
 
-	((testnum++ < tests_to_skip)) && return 0		
+while test $# -gt 0; do
+    case "$1" in
+        -s) t_N_TESTS_LIMIT="$(($2-1))"; shift ;;
+        *) echo "Unknown option \"$1\"!" >&2; return 1 ;;
+    esac
+    shift
+done
 
-	printf "\e[1m%d. %s\e[0m\n" "$testnum" "$name"
-	printf "\e[1;33m%s\e[0m\n" "$run"
+test "$#" -ne 0  && usage_exit
 
-	if eval time "$run" && eval "$test"; then
-		printf "\e[1;32mOK\e[0m\n"
-	else
-		printf "\e[1;31mFAILED!\e[0m\n"
-		exit 1
-	fi
-}
+##################################################
 
-diff-sorted() {
-	diff <(sort "$1") <(sort "$2")
-}
 
 main() {
-	cd "$DIR"
-	[[ -d $OUTDIR ]] || mkdir "$OUTDIR"
+    t_testname "Corpus indexing"
+    t_run "$t_BIN/index.py -i $t_OUTDIR/corpus $t_LOCAL_INPUT/corpus.xml"
+    for filepath in "$t_REFDIR/corpus."{lemma,surface,pos,syn}.* "$t_REFDIR/corpus.info"; do
+        t_compare_with_ref "$(basename "$filepath")"
+    done
 
-	cd "$OUTDIR"
-	[[ -e corpus.xml ]] || cp ../corpus.xml .
+    t_testname "Extraction from index"
+    t_run "$t_BIN/candidates.py -v -p $t_LOCAL_INPUT/patterns.xml $t_OUTDIR/corpus.info >$t_OUTDIR/candidates-from-index.xml"
+    t_compare_with_ref "candidates-from-index.xml"
 
-	testnum=0
-	tests_to_skip=0
+    t_testname "Individual word frequency counting"
+    t_run "$t_BIN/counter.py -v -i $t_OUTDIR/corpus.info $t_OUTDIR/candidates-from-index.xml >$t_OUTDIR/candidates-counted.xml"
+    t_compare_with_ref "candidates-counted.xml"
+    for filepath in "$t_REFDIR/corpus.lemma+pos".*; do
+        t_compare_with_ref "$(basename "$filepath")"
+    done
 
-	while [[ $# -gt 0 ]]; do
-		case "$1" in
-			-s) tests_to_skip="$(($2-1))"; shift ;;
-			*) echo "Unknown option \"$1\"!" >&2; return 1 ;;
-		esac
-		shift
-	done
+    t_testname "Extraction from XML"
+    t_run "$t_BIN/candidates.py -v -p $t_LOCAL_INPUT/patterns.xml $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/candidates-from-corpus.xml"
+    t_compare_with_ref "candidates-from-corpus.xml"
+    t_compare "$t_OUTDIR/candidates-from-index.xml" "$t_OUTDIR/candidates-from-corpus.xml" "Comparing from-index vs from-corpus"
 
-	dotest "Corpus indexing" \
-		'run index.py -v -i corpus "corpus.xml"' \
-		'true'
+    t_testname "Association measures"
+    t_run "$t_BIN/feat_association.py -m 'mle:pmi:t:dice:ll' $t_OUTDIR/candidates-counted.xml >$t_OUTDIR/candidates-featureful.xml"
+    t_compare_with_ref "candidates-featureful.xml"
 
-	dotest "Extraction from index" \
-		'run candidates.py -v -p "$DIR/patterns.xml" -i corpus >candidates-from-index.xml' \
-		true
+    t_testname "Evaluation"
+    t_run "$t_BIN/eval_automatic.py -r $t_LOCAL_INPUT/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml 2>$t_OUTDIR/eval-stats.txt"
+    t_compare_with_ref "eval.xml"
+    t_compare_with_ref "eval-stats.txt"
 
-	dotest "Extraction from XML" \
-		'run candidates.py -v -p "$DIR/patterns.xml" "corpus.xml" >candidates-from-corpus.xml' \
-		true
+    t_testname "Mean Average Precision"
+    t_run "$t_BIN/avg_precision.py -f 'mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus' $t_OUTDIR/eval.xml >$t_OUTDIR/avg_prec.txt"
+    t_compare_with_ref "avg_prec.txt"
 
-	dotest "Comparison of candidate extraction outputs" \
-		'diff-sorted candidates-from-index.xml candidates-from-corpus.xml' \
-		true
 
-	dotest "Individual word frequency counting" \
-		'run counter.py -v -i corpus candidates-from-index.xml >candidates-counted.xml' \
-		true
+    t_testname "Take first 50 candidates"
+    t_run "$t_BIN/head.py -n 50 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-featureful-head.xml"
+    t_compare_with_ref "candidates-featureful-head.xml"
 
-	dotest "Association measures" \
-		'run feat_association.py -v -m "mle:pmi:t:dice:ll" candidates-counted.xml >candidates-featureful.xml' \
-		true
+    t_testname "Take last 50 candidates"
+    t_run "$t_BIN/tail.py -n 50 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-featureful-tail.xml"
+    t_compare_with_ref "candidates-featureful-tail.xml"
 
-	dotest "Evaluation" \
-		'run eval_automatic.py -v -r "$DIR/reference.xml" -g candidates-featureful.xml >eval.xml 2>eval-stats.txt' \
-		true
+    t_testname "Take first 50 corpus sentences"
+    t_run "$t_BIN/head.py -n 50 $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/corpus-head.xml"
+    t_compare_with_ref "corpus-head.xml"
 
-	dotest "Mean Average Precision" \
-		'run map.py -v -f "mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus" eval.xml >map.txt' \
-		true
+    t_testname "Take last 50 corpus sentences"
+    t_run "$t_BIN/tail.py -n 50 $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/corpus-tail.xml"
+    t_compare_with_ref "corpus-tail.xml"
 
-	for format in csv arff evita owl ucs; do
-		dotest "Conversion from XML to $format" \
-			'run xml2$format.py -v candidates-featureful.xml >candidates-featureful.$format 2>warnings-$format.txt' \
-			true
-	done
+    ln -s "$t_LOCAL_INPUT/corpus.xml" "$t_OUTDIR/corpus.xml"
+    for base in candidates-featureful corpus; do
+        for suffix in '' -head -tail; do
+            t_testname "Word count for $base$suffix"
+            t_run "$t_BIN/wc.py $t_OUTDIR/${base}${suffix}.xml 2>$t_OUTDIR/wc-${base}${suffix}.txt"
+            t_compare_with_ref "wc-${base}${suffix}.txt"
+        done
+    done
 
-	dotest "Take first 50 candidates" \
-		'run head.py -v -n 50 candidates-featureful.xml >candidates-featureful-head.xml' \
-		true
+    t_testname "Removal of duplicated candidates"
+    t_run "$t_BIN/uniq.py $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-uniq.xml"
+    t_compare_with_ref "candidates-uniq.xml"
 
-	dotest "Take last 50 candidates" \
-		'run tail.py -v -n 50 candidates-featureful.xml >candidates-featureful-tail.xml' \
-		true
+    t_testname "Removal of duplicated candidates ignoring POS"
+    t_run "$t_BIN/uniq.py -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-uniq-nopos.xml"
+    t_compare_with_ref "candidates-uniq-nopos.xml"
 
-	dotest "Take first 50 corpus sentences" \
-		'run head.py -v -n 50 corpus.xml >corpus-head.xml' \
-		true
-
-	dotest "Take last 50 corpus sentences" \
-		'run tail.py -v -n 50 corpus.xml >corpus-tail.xml' \
-		true
-
-	for base in candidates-featureful corpus; do
-		for suffix in '' -head -tail; do
-			dotest "Word count for $base$suffix" \
-				"run wc.py $base$suffix.xml 2>&1 | tee wc-$base$suffix.txt" \
-				true
-		done
-	done
-
-	dotest "Removal of duplicated candidates" \
-		'run uniq.py candidates-featureful.xml >candidates-uniq.xml' \
-		true
-
-	dotest "Removal of duplicated candidates ignoring POS" \
-		'run uniq.py -g candidates-featureful.xml >candidates-uniq-nopos.xml' \
-		true
-
-	dotest "Filtering out candidates occurring less than twice" \
-		'run filter.py -t 2 candidates-featureful.xml >candidates-twice.xml' \
-		true
-		
-	dotest "Comparison against reference output" \
-		compare-to-reference \
-		true
+    t_testname "Filtering out candidates occurring less than twice"
+    t_run "$t_BIN/filter.py -t 2 $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/candidates-twice.xml"
+    t_compare_with_ref "candidates-twice.xml"
 }
 
-compare-to-reference() {
-	tar -C .. -xvf ../reference-output.tar.bz2
-	countfail=0
-	errorreport="`pwd`/../error-report.log"
-	printf "" > $errorreport
-	for file in *.*; do
-		ref="../reference-output/$file"
-		printf "  Comparing %s... " "$file"
-		if [[ $file == *candidates* || $file == *eval* ]]; then
-			cmp -s <(sort "$file") <(sort "$ref")
-		elif [[ $file == *.suffix || $file == warning* || $file == *.corpus ]]; then
-			echo "IGNORED"
-			continue
-		else
-			cmp -s "$file" "$ref"
-		fi			
-		if [[ $? -eq 0 ]]; then
-			echo "OK"
-		else
-			echo "FAILED!"
-			difference=`diff <(sort "$file") <(sort "$ref")`
-			echo -ne "\n-----------------------\nFile: ${file}\n${difference}" >> $errorreport
-			#return 1
-			(( countfail++ ))
-		fi
-	done
-	if [[ countfail -gt 0 ]]; then
-		printf "\n\e[1;31mWARNING: $countfail tests FAILED!\e[0m\n"
-		printf "Please consult the detailed error report in $errorreport\n"
-	fi
-}
 
 main "$@"

@@ -47,12 +47,12 @@
 <w surface="," lemma="," pos="PUNCT" /> 
 <w surface="ο" lemma="ο" pos="DT" /> 
 <w surface="περίφημος" lemma="περίφημος" pos="AJ" /> 
-<w surface="&amp;quot;" lemma="&amp;quot;" pos="PUNCT" /> 
+<w surface="&quot;" lemma="&quot;" pos="PUNCT" /> 
 <w surface="ιός" lemma="ιός" pos="N" /> 
 <w surface="του" lemma="ο" pos="DT" /> 
 <w surface="έτους" lemma="έτος" pos="N" /> 
 <w surface="2000" lemma="2000" pos="DIG" /> 
-<w surface="&amp;quot;" lemma="&amp;quot;" pos="PUNCT" /> 
+<w surface="&quot;" lemma="&quot;" pos="PUNCT" /> 
 <w surface="δεν" lemma="δεν" pos="PRT" /> 
 <w surface="εμφανίσθηκε" lemma="εμφανίζω" pos="V" /> 
 <w surface="." lemma="." pos="PTERM_P" /> 
@@ -3153,9 +3153,9 @@
 <w surface="ψήφος" lemma="ψήφος" pos="N" /> 
 <w surface="μου" lemma="μου" pos="PN" /> 
 <w surface="ήταν" lemma="είμαι" pos="V" /> 
-<w surface="&amp;quot;" lemma="&amp;quot;" pos="PUNCT" /> 
+<w surface="&quot;" lemma="&quot;" pos="PUNCT" /> 
 <w surface="υπέρ" lemma="υπέρ" pos="P" /> 
-<w surface="&amp;quot;" lemma="&amp;quot;" pos="PUNCT" /> 
+<w surface="&quot;" lemma="&quot;" pos="PUNCT" /> 
 <w surface=";" lemma=";" pos="PTERM_P" /> 
 <w surface="." lemma="." pos="PTERM_P" /> 
 </s>
@@ -8890,7 +8890,7 @@
 <w surface=":" lemma=":" pos="PTERM_P" /> 
 </s>
 <s s_id="293">
-<w surface="&amp;quot;" lemma="&amp;quot;" pos="PUNCT" /> 
+<w surface="&quot;" lemma="&quot;" pos="PUNCT" /> 
 <w surface="Τα" lemma="ο" pos="DT" /> 
 <w surface="διαρθρωτικά" lemma="διαρθρωτικός" pos="AJ" /> 
 <w surface="ταμεία" lemma="ταμείο" pos="N" /> 
