@@ -407,8 +407,8 @@ class ParsedPattern(object):
             for wbn in words_by_numid:
                 if not wbn:
                     wbn.append(Word("", ""))
-                wbn[0] = wbn[0].dup()
-                wbn[-1] = wbn[-1].dup()
+                wbn[0] = wbn[0].copy()
+                wbn[-1] = wbn[-1].copy()
                 wbn[0].lemma = "{" + wbn[0].lemma
                 wbn[-1].lemma += "}"
 
@@ -428,7 +428,7 @@ class ParsedPattern(object):
 # XXX Do we actually need to copy it?
 # In this case isn't it better to use `copy.deepcopy()`?
 def copy_word_list(ws):
-    return [w.dup() for w in ws]
+    return [w.copy() for w in ws]
 
 
 

@@ -175,7 +175,6 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
             tp_counter = tp_counter + 1
         else :
             candidate_i.add_tpclass( TPClass( gs_name, "False" ) )
-        candidate = self.candidate_factory.uniquify(candidate)
         self.chain.handle_candidate(candidate_i, info)
         entity_counter += 1
 

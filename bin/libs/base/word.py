@@ -119,10 +119,10 @@ class Word :
 
 ################################################################################
 
-    def dup(self):
+    def copy(self):
         r"""Return a copy of this Word."""
         return Word(self.surface, self.lemma,
-                self.pos, self.syn, list(self.freqs))
+                self.pos, self.syn, [f.copy() for f in self.freqs])
 
 ################################################################################
 
@@ -159,9 +159,7 @@ class Word :
             @return A string with a special internal representation of the 
             word.
         """
-        return self.surface + SEPARATOR +\
-                self.lemma + SEPARATOR +\
-                self.pos
+        return SEPARATOR.join((self.surface, self.lemma, self.pos))
                 
 ################################################################################
             

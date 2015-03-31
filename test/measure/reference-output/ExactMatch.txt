@@ -1,0 +1,4 @@
+DEBUG: EvaluationResult(((20, 21), (20, 21)))
+Precision: 0.952380952381
+Recall: 0.952380952381
+F-measure: 0.952380952381

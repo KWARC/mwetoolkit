@@ -264,7 +264,6 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
                     if print_source:
                         occur_form.add_sources(sources)
                     cand.add_occur( occur_form )
-            cand = self.candidate_factory.uniquify(cand)
             chain.handle_candidate(cand, {})
 
         

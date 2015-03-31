@@ -325,7 +325,6 @@ class XMLParser(common.AbstractParser):
 
                 if elem.tag == "cand" :
                     # Finished reading the candidate, call callback
-                    candidate = candidate_factory.uniquify(candidate)
                     handler.handle_candidate(candidate, info) 
 
                 elif elem.tag == "ngram":

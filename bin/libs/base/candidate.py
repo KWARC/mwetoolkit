@@ -56,16 +56,16 @@ class CandidateFactory(object):
         self.mapping = {}
 
     def make_uniq(self, word_list, **kwargs):
-        r"""Utility function that calls `make` and then `uniquify`.
+        r"""Utility function that calls `make` and returns it `uniquified`.
         The word list must ALREADY be full if calling `make_uniq`."""
-        return self.uniquify(self.make(word_list, **kwargs))
+        return self.uniquified(self.make(word_list, **kwargs))
 
     def make(self, word_list=[], id_number=None, **kwargs):
         r"""Calls `Candidate(id_number, word_list, ...)` to create a Candidate."""
         self.prev_id = int(id_number if id_number is not None else self.prev_id+1)
         return Candidate(base=word_list, id_number=self.prev_id, **kwargs)
 
-    def uniquify(self, candidate):
+    def uniquified(self, candidate):
         r"""Return uniq'd version of this Candidate.
         Make sure that `candidate.word_list` elements
         will NOT be changed anymore.

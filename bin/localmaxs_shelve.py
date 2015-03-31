@@ -210,7 +210,6 @@ class NGramCounterHandler(filetype.InputHandler):
         freq = Frequency('corpus', ngram_counts[ngram_key])
         cand.add_frequency(freq)
         cand.add_feat(Feature('glue', glue(ngram)))
-        cand = self.candidate_factory.uniquify(cand)
         self.chain.handle_candidate(cand)
 
 

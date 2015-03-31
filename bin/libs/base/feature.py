@@ -58,6 +58,12 @@ class Feature(object) :
         
 ################################################################################
 
+    def copy( self ) :
+        r"""Return a copy of this Feature."""
+        return self.__class__(self.name, self.value)
+        
+################################################################################
+
     def __eq__( self, a_feat ) :
         """
             TODO: doc
