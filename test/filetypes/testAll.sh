@@ -39,10 +39,6 @@ test_printer() {
 }
 
 
-cd "$HERE"
-rm -rf ./output
-mkdir -p ./output
-
 # (For XML, test_parser will end up automatically testing printer):
 t_testname "Check XML format (corpus)"
 test_parser  XML "corner-cases/corpus.xml" "corner-cases/corpus.xml"

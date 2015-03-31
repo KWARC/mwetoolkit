@@ -31,17 +31,17 @@ t_REFDIR="$t_HERE/reference-output"
 
 main() {
     t_testname "Corpus indexing"
-    t_run "$t_BIN/index.py -i $t_OUTDIR/corpus $t_HERE/corpus.xml"
+    t_run "$t_BIN/index.py -i $t_OUTDIR/corpus $t_LOCAL_INPUT/corpus.xml"
     for filepath in "$t_REFDIR/corpus"*; do
         t_compare_with_ref "$(basename "$filepath")"
     done
 
     t_testname "Extraction from index"
-    t_run "$t_BIN/candidates.py -f -p $t_HERE/patterns.xml $t_OUTDIR/corpus.info >candidates-from-index.xml"
+    t_run "$t_BIN/candidates.py -f -p $t_LOCAL_INPUT/patterns.xml $t_OUTDIR/corpus.info >$t_OUTDIR/candidates-from-index.xml"
     t_compare_with_ref "candidates-from-index.xml"
     
     t_testname "Extraction from XML"
-    t_run "$t_BIN/candidates.py -f -p $t_HERE/patterns.xml $t_HERE/corpus.xml >$t_OUTDIR/candidates-from-corpus.xml"
+    t_run "$t_BIN/candidates.py -f -p $t_LOCAL_INPUT/patterns.xml $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/candidates-from-corpus.xml"
     t_compare_with_ref "candidates-from-corpus.xml"
     t_compare "$t_OUTDIR/candidates-from-index.xml" "$t_OUTDIR/candidates-from-corpus.xml" "Comparing from-corpus vs from-index"
 
@@ -54,7 +54,7 @@ main() {
     t_compare_with_ref "candidates-featureful.xml"
 
     t_testname "Evaluation"
-    t_run "$t_BIN/eval_automatic.py -r $t_HERE/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml 2>$t_OUTDIR/eval-stats.txt"
+    t_run "$t_BIN/eval_automatic.py -r $t_LOCAL_INPUT/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml 2>$t_OUTDIR/eval-stats.txt"
     t_compare_with_ref "eval.xml"
     t_compare_with_ref "eval-stats.txt"
 
@@ -76,11 +76,11 @@ main() {
     t_compare_with_ref "candidates-featureful-tail.xml"
 
     t_testname "Take first 50 corpus sentences"
-    t_run "$t_BIN/head.py -n 50 $t_HERE/corpus.xml >$t_OUTDIR/corpus-head.xml"
+    t_run "$t_BIN/head.py -n 50 $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/corpus-head.xml"
     t_compare_with_ref "corpus-head.xml"
 
     t_testname "Take last 50 corpus sentences"
-    t_run "$t_BIN/tail.py -n 50 $t_HERE/corpus.xml >$t_OUTDIR/corpus-tail.xml"
+    t_run "$t_BIN/tail.py -n 50 $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/corpus-tail.xml"
     t_compare_with_ref "corpus-tail.xml"
 
     for base in candidates-featureful corpus; do

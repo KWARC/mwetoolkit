@@ -28,6 +28,11 @@ if ! test "${t_HERE+set}"; then
     t_HERE="${HERE:-"${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]}"}"
 fi
 
+# Path to local (non-shared) input files:
+if ! test "${t_LOCAL_INPUT+set}"; then
+    t_LOCAL_INPUT="$t_HERE/local-input"
+fi
+
 # Path to output files:
 if ! test "${t_OUTDIR+set}"; then
     t_OUTDIR="$t_HERE/output"
@@ -36,7 +41,7 @@ fi
 
 # Path to reference output files:
 if ! test "${t_REFDIR+set}"; then
-    t_REFDIR="$t_HERE/reference"
+    t_REFDIR="$t_HERE/reference-output"
 fi
 
 # Temporary directory, used mostly by auxiliary functions:
@@ -69,7 +74,10 @@ t_warn() { t_echo_bold_rgb 1 "WARNING: $1"; }
 # Print "ERROR: $message"
 t_error() {
     t_echo_bold_rgb 1 "ERROR: $1"
-    $t_STOP_ON_ERROR && return 50
+    if $t_STOP_ON_ERROR; then
+        on_error TESTLIB
+        return 50
+    fi
     return 0
 }
 
@@ -123,8 +131,7 @@ t_diff() {
 
 # t_compare_with_ref <txt>
 t_compare_with_ref() {
-    local base="$(basename "$1")"
-    t_compare "$t_REFDIR/$base" "$t_OUTDIR/$base" "Comparing \"$base\" vs reference"
+    t_compare "$t_REFDIR/$1" "$t_OUTDIR/$1" "Comparing \"$1\" vs reference"
 }
 
 # t_compare <txt_ref> <txt_in> [description]

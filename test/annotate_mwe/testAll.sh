@@ -20,17 +20,16 @@ annotate() {
     local name_input="$2"
     local name_output="$3"
 
-    local xml_out="./output/${name_output}.xml"
-    local txt_out="./output/${name_output}.txt"
-    local txt_ref="./reference/${name_output}.txt"
+    local xml_out="$t_OUTDIR/${name_output}.xml"
+    local txt_out="$t_OUTDIR/${name_output}.txt"
+    local txt_ref="$t_REFDIR/${name_output}.txt"
 
-    t_run "$t_BIN/annotate_mwe.py -v $args \
--c ${HERE}/$name_input/candidates.xml ${HERE}/$name_input/corpus.xml >$xml_out"
+    local corpus="$t_LOCAL_INPUT/${name_input}/corpus.xml"
+    local candidates="$t_LOCAL_INPUT/${name_input}/candidates.xml"
 
-    t_run "$t_BIN/annotate_mwe.py -v $args --to=MosesText \
--c ${HERE}/$name_input/candidates.xml ${HERE}/$name_input/corpus.xml >$txt_out"
-
-    t_compare "$txt_ref" "$txt_out"
+    #t_run "$t_BIN/annotate_mwe.py -v $args -c $candidates $corpus >$xml_out"
+    t_run "$t_BIN/annotate_mwe.py -v $args --to=MosesText -c $candidates $corpus >$txt_out"
+    t_compare_with_ref "${name_output}.txt"
 }
 
 

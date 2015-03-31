@@ -19,29 +19,22 @@ find_candidates() {
     local args="$1"
     local out_fname="$2"
 
-    mkdir -p "$DIR_OUT/txt"
-    local txt_out="$DIR_OUT/${out_fname}.txt"
-    local txt_ref="$DIR_REF/${out_fname}.txt"
+    mkdir -p "$t_OUTDIR/$datadir/txt"
+    local txt_out="$t_OUTDIR/$datadir/${out_fname}.txt"
 
-    t_run "$t_BIN/candidates.py -s -v $args \
--p $DIR_IN/patterns.xml --to=PlainCandidates \
-$DIR_IN/corpus.xml | tail -n +2 | sort >$txt_out"
-
-    t_compare "$txt_ref" "$txt_out"
+    t_run "$t_BIN/candidates.py -s -v $args -p $t_LOCAL_INPUT/$datadir/patterns.xml \
+--to=PlainCandidates $t_LOCAL_INPUT/$datadir/corpus.xml | tail -n +2 | sort >$txt_out"
+    t_compare_with_ref "$datadir/${out_fname}.txt"
 }
 
 
 
 cd "$HERE"
-rm -rf ./output
-ln -sf "$t_INPUT/ted500.xml" VerbParticle/corpus.xml
+ln -sf "$t_INPUT/ted500.xml" "$t_LOCAL_INPUT/VerbParticle/corpus.xml"
 
 
-for DATADIR in NounCompound VerbParticle; do
-    DIR_IN="$DATADIR"
-    DIR_OUT="./output/$DATADIR"
-    DIR_REF="./reference-txt/$DATADIR"
-    mkdir -p "$DIR_OUT"
+for datadir in NounCompound VerbParticle; do
+    mkdir -p "$t_OUTDIR/$datadir"
 
     t_testname "Find all matches"
     find_candidates '-d All' "all-candidates"
