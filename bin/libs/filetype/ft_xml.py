@@ -161,7 +161,7 @@ class XMLParser(common.AbstractParser):
                         util.error("Bad top-level XML elem (line {}): {!r}" \
                                 .format(elem.source_line, elem.tag))
 
-                    info = {"parser": self, "category": elem.tag}
+                    info = {"parser": self, "fileobj": fileobj, "category": elem.tag}
                     with common.ParsingContext(fileobj, handler, info):
                         it = itertools.chain(already_seen, categ_finder_iter)
                         delegate(it, handler, info)

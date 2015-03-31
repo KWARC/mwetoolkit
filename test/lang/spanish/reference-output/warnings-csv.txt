@@ -1,0 +1,19 @@
+Debug mode on
+Verbose mode on
+Processing sentence number 0
+Processing sentence number 100
+Processing sentence number 200
+Processing sentence number 300
+Processing sentence number 400
+Processing sentence number 500
+Processing sentence number 600
+Processing sentence number 700
+Processing sentence number 800
+Processing sentence number 900
+Processing sentence number 1000
+Processing sentence number 1100
+Processing sentence number 1200
+Processing sentence number 1300
+Processing sentence number 1400
+Processing sentence number 1500
+Processing sentence number 1600

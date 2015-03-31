@@ -1,0 +1,2 @@
+Debug mode on
+Verbose mode on

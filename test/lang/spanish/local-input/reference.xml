@@ -1231,7 +1231,7 @@
     <occurs>
     <ngram><w surface="órgano" lemma="órgano" pos="NC" /> <w surface="legislativo" lemma="legislativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
-</cand
+</cand>
 <cand candid="203">
     <ngram><w lemma="espina" pos="NC" /> <w lemma="clavar" pos="VLadj" /> </ngram>
     <occurs>
@@ -1441,7 +1441,7 @@
     <occurs>
     <ngram><w surface="Cumbre" lemma="cumbre" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Berlín" lemma="Berlín" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
-</cand
+</cand>
 <cand candid="238">
     <ngram><w lemma="autoridad" pos="NC" /> <w lemma="competente" pos="ADJ" /> </ngram>
     <occurs>

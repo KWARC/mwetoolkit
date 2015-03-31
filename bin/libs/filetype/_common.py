@@ -411,8 +411,13 @@ class ParsingContext(object):
     
     def __exit__(self, t, v, tb):
         if not (v is None or isinstance(v, self.EXPECTED_ERRORS)):
-            print("UNEXPECTED ERROR when parsing input line {linenum}" \
-                    .format(linenum=self.info.get("linenum", "<unknown>")),
+            try:
+                filename = os.path.basename(self.info["fileobj"].name)
+            except KeyError:
+                filename = "<unknown-file>"
+            print("UNEXPECTED ERROR when parsing input line " \
+                    "{linenum} of {filename}".format(filename=filename,
+                    linenum=self.info.get("linenum", "<unknown>")),
                     file=sys.stderr)
 
         if v is None:

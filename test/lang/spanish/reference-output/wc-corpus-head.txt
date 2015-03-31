@@ -1,0 +1,3 @@
+50 entities in corpus-head.xml
+1218 words in corpus-head.xml
+5581 characters in corpus-head.xml

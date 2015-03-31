@@ -17,11 +17,10 @@ test "$#" -ne 0  && usage_exit
 
 cd "$HERE"
 
-t_testname "Diff reference vs prediction"
-t_run "colordiff reference.xml prediction.xml" || true
-
 t_testname "Measure using ExactMatch"
-t_run "$t_BIN/measure.py -e ExactMatch -r reference.xml prediction.xml"
+t_run "$t_BIN/measure.py -e ExactMatch -r $t_LOCAL_INPUT/reference.xml $t_LOCAL_INPUT/prediction.xml >$t_OUTDIR/ExactMatch.txt"
+t_compare_with_ref "ExactMatch.txt"
 
 t_testname "Measure using LinkBased"
-t_run "$t_BIN/measure.py -e LinkBased -r reference.xml prediction.xml"
+t_run "$t_BIN/measure.py -e LinkBased -r $t_LOCAL_INPUT/reference.xml $t_LOCAL_INPUT/prediction.xml >$t_OUTDIR/LinkBased.txt"
+t_compare_with_ref "LinkBased.txt"

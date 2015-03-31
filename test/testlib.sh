@@ -105,7 +105,7 @@ t_testname() {
 # Respects env-var `quiet`.
 t_run() {
     if test "${quiet:-0}" -eq 0; then
-        t_echo_bold_rgb 3 "$@"
+        t_echo_rgb 3 "$@"
     fi
     eval "$@"
 }
@@ -116,7 +116,7 @@ t_run() {
 # Uses wdiff if available.
 t_diff() {
     if hash "wdiff" 2>/dev/null; then
-        diff -u "$@" | wdiff -d --terminal
+        diff -u "$@" | wdiff -d --terminal -y $'\e[35m' -z $'\e[m'
     else
         if ! test "${_WARNED_WDIFF+set}"; then
             t_warn "wdiff is not installed; using diff"
@@ -135,6 +135,7 @@ t_compare_with_ref() {
 # Compare `txt_in` to reference `txt_ref` and output differences.
 # If a `description` is given, prepend it to OK/ERROR output.
 t_compare() {
+    local errcode=0
     local txt_ref="$1"; shift
     local txt_in="$1"; shift
     local description="${1:-"Comparing files"}"
@@ -143,21 +144,18 @@ t_compare() {
     if ! test -f "$txt_ref"; then
         t_echo_bold_rgb 1 "ERROR!"
         t_echo_bold_rgb 1 "↪ Not found: $txt_ref"
-        $t_STOP_ON_ERROR && return 60
+        $t_STOP_ON_ERROR && exit 60
 
     elif ! test -f "$txt_in"; then
         t_echo_bold_rgb 1 "ERROR!"
         t_echo_bold_rgb 1 "↪ Not found: $txt_in"
-        $t_STOP_ON_ERROR && return 61
+        $t_STOP_ON_ERROR && exit 61
 
     else
-        local errcode=0
         t_diff "$txt_ref" "$txt_in" >"$t_TMP/last_diff" || errcode="$?"
 
         if test "$errcode" -ne 0; then
-            t_echo_bold_rgb 1 "FAILED!"
-            t_echo_bold_rgb 1 "↪  Outputting the beginning of diff below:"
-
+            t_echo_bold_rgb 1 "FAILED! Beginning of diff:"
             # We add a size restriction, as lines may have much more than
             # $COLUMNS and end up looking much bigger than $t_COMPARE_DIFF_LENGTH
             # on the terminal.  Also note that "head -c" will count the number
@@ -169,17 +167,14 @@ t_compare() {
             if ! cmp --silent "$t_TMP/last_diff" "$t_TMP/byterestr_last_diff"; then
                 echo -e '\e[0m[...]' >>"$t_TMP/byterestr_last_diff"
             fi
+            t_echo_rgb 5 ==============================================
             head -n "$t_COMPARE_DIFF_LENGTH" "$t_TMP/byterestr_last_diff"
 
-            t_backtrace
+            $t_STOP_ON_ERROR && exit "$errcode"
+            t_backtrace  # Not printed by _t_on_exit, in this case
         else
             t_echo_bold_rgb 2 "OK."
         fi
-
-        if ! $t_STOP_ON_ERROR; then
-            return 0  # Ignore error
-        fi
-        return "$errcode"
     fi
     return 0
 }
@@ -190,13 +185,13 @@ t_compare() {
 # Skip the most recent `skip_n` frames (default: skip_n=0).
 t_backtrace() {
     local skip_n="${1:-0}"
-    echo "===================================="
-    echo "Shell backtrace (most recent first):"
+    local c_echo='t_echo_rgb 1'
+    $c_echo ==============================================
+    $c_echo "Shell backtrace (most recent first):"
     if test "${BASH_VERSION+set}"; then
         local n="${#BASH_LINENO[@]}"
         for i in `seq ${skip_n} $((n - 2))`; do
-            echo "  In ${FUNCNAME[$((i+1))]} at" \
-                "${BASH_SOURCE[$((i+1))]}:${BASH_LINENO[$i]}"
+            $c_echo "  In ${FUNCNAME[$((i+1))]} at ${BASH_SOURCE[$((i+1))]}:${BASH_LINENO[$i]}"
         done
     else
         echo "  Unable to get a backtrace (shell=$SHELL)"
@@ -219,5 +214,4 @@ trap '_t_on_exit 1 ERR' ERR
 # TODO find out why bash corrupts BASH_LINENO[0]
 # inside `_t_on_exit` when called for SIGINT/EXIT
 # (may be a bash bug)
-trap '_t_on_exit 2 INT' SIGINT
 trap '_t_on_exit 2 EXIT' EXIT

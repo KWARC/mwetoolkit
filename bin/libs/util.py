@@ -328,13 +328,13 @@ def default_exception_handler(type, value, trace):
     """
     global debug_mode
 
-    if type == MWEToolkitInputError and not debug_mode:
+    if isinstance(value, MWEToolkitInputError) and not debug_mode:
         import os
         here = os.path.dirname(__file__)
         tb = traceback.extract_tb(trace)[-1-value.depth]
         fname, lineno, func, text = tb
         fname = os.path.relpath(fname, '.')
-        print("ERROR:")
+        print("ERROR:", file=sys.stderr)
         print("=>", value, file=sys.stderr)
         print("-" * 40)
         print("Detected in: \"%s\" (line %d)" % (fname, lineno), file=sys.stderr)

@@ -68,7 +68,8 @@ python {program} [OPTIONS] -f <feat> <candidates>
     Pseudo-features:
     * "@LEMMA": Lexicographic sort based on word lemmas.
     * "@SURFACE": Lexicographic sort based on word surfaces.
-    By default, if no features are defined, "@SURFACE" is used.
+    * "@POS": Lexicographic sort based on word POS-tags.
+    By default, if no features are defined, "@LEMMA:@SURFACE:@POS" is used.
 
 The <candidates> input file must be in one of the filetype
 formats accepted by the `--from` switch.
@@ -95,9 +96,9 @@ OPTIONS may be:
 {common_options}
 """
 
-PSEUDO_FEATS = ["@LEMMA", "@SURFACE"]
+PSEUDO_FEATS = ["@LEMMA", "@SURFACE", "@POS"]
 
-feat_list = ["@SURFACE"]
+feat_list = ["@LEMMA", "@SURFACE", "@POS"]
 temp_file = None
 ascending = False
 
@@ -178,8 +179,10 @@ class SorterHandler(filetype.ChainedInputHandler):
         if feat_name.startswith("@"):
             if feat_name == "@SURFACE":
                 return tuple(w.surface for w in entity)
-            elif feat_name == "@LEMMA":
+            if feat_name == "@LEMMA":
                 return tuple(w.lemma for w in entity)
+            if feat_name == "@POS":
+                return tuple(w.pos for w in entity)
             error("Bad pseudo-feature name", feat_name=feat_name)
         return entity.get_feat_value(feat_name)
 
