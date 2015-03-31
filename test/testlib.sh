@@ -31,7 +31,6 @@ fi
 # Path to output files:
 if ! test "${t_OUTDIR+set}"; then
     t_OUTDIR="$t_HERE/output"
-    trap 'rm -rf "$t_OUTDIR"' EXIT
     mkdir -p "$t_OUTDIR"
 fi
 
@@ -42,8 +41,7 @@ fi
 
 # Temporary directory, used mostly by auxiliary functions:
 if ! test "${t_TMP+set}"; then
-    t_TMP="$t_OUTDIR/tmp"
-    trap 'rm -rf "$t_TMP"' EXIT
+    t_TMP="${TMP:-/tmp}/testlib.$(id -u)"
     mkdir -p "$t_TMP"
 fi
 

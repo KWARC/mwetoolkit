@@ -34,10 +34,6 @@ annotate() {
 }
 
 
-cd "$HERE"
-rm -rf ./output
-mkdir -p ./output
-
 t_testname "Annotate candidates with ContiguousLemma's"
 annotate '' "ContiguousLemma" "ContigLemma"
 
