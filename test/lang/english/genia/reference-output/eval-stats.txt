@@ -1,0 +1,6 @@
+Nb. of true positives: 136
+Nb. of candidates: 2629
+Nb. of references: 2009
+Precision: 0.051731
+Recall: 0.067695
+F-measure: 0.058646

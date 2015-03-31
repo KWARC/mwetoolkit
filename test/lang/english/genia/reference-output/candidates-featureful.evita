@@ -1,0 +1,7888 @@
+candid=0 pos="A N"
+"current knowledge"
+
+candid=1 pos="A N"
+"cyclin-like dna"
+
+candid=2 pos="N N"
+"fp promoter"
+
+candid=3 pos="N NUM"
+"gp350/ 220"
+
+candid=4 pos="N N N"
+"granulocyte colony-stimulating factor"
+
+candid=5 pos="A N N"
+"higher order nf-atp"
+
+candid=6 pos="A N"
+"physiological conditions"
+
+candid=7 pos="A N"
+"potent inhibitors"
+
+candid=8 pos="A N"
+"ric gire"
+
+candid=9 pos="A N"
+"second e2f-i"
+
+candid=10 pos="A N"
+"serine-threonine phosphatase"
+
+candid=11 pos="A N"
+"transcriptional regulation"
+
+candid=12 pos="A N N"
+"transient transfection assay"
+
+candid=13 pos="N NUM N N"
+"type 2 enhancer activation"
+
+candid=14 pos="A N N"
+"17-bp gas homology"
+
+candid=15 pos="N N"
+"cell division"
+
+candid=16 pos="A N N"
+"human cytomegalovirus ie2"
+
+candid=17 pos="A N"
+"human nk"
+
+candid=18 pos="A N N N N N"
+"human t cell line jurkat j6"
+
+candid=19 pos="N N"
+"interleukin responsiveness"
+
+candid=20 pos="A N"
+"linear ebv"
+
+candid=21 pos="A N N N"
+"major histocompatibility complex class"
+
+candid=22 pos="A A N"
+"ngfi-b/ nur77-related transcription"
+
+candid=23 pos="N N N"
+"nucleoside diphosphate kinase"
+
+candid=24 pos="N N"
+"b-independent hiv"
+
+candid=25 pos="A N"
+"cell-specific histone"
+
+candid=26 pos="A N N"
+"double-stranded gire sequence"
+
+candid=27 pos="N N"
+"expression vectors"
+
+candid=28 pos="A N N"
+"functional promoter region"
+
+candid=29 pos="N A N"
+"gm-csf proximal promoter"
+
+candid=30 pos="N N"
+"induction levels"
+
+candid=31 pos="A N N"
+"intercellular adhesion molecule-1"
+
+candid=32 pos="A A N"
+"main regulatory pathways"
+
+candid=33 pos="A N"
+"relative ratio"
+
+candid=34 pos="A N"
+"several hours"
+
+candid=35 pos="N N"
+"src homology"
+
+candid=36 pos="N N"
+"target quantity"
+
+candid=37 pos="A N"
+"thp-1 cells"
+
+candid=38 pos="N N"
+"tumour necrosis"
+
+candid=39 pos="N N"
+"virus i"
+
+candid=40 pos="A N"
+"additional mechanism"
+
+candid=41 pos="A N N N"
+"cd28 cell surface molecule"
+
+candid=42 pos="A N N"
+"cell-specific histone h5"
+
+candid=43 pos="A N N"
+"common control mechanisms"
+
+candid=44 pos="A N N N"
+"electrophoretic mobility shift assay"
+
+candid=45 pos="A A N"
+"epo-inducible tal1 dna"
+
+candid=46 pos="A N N"
+"human epor gene"
+
+candid=47 pos="A N A N"
+"human t lymphoid cell"
+
+candid=48 pos="N N"
+"initiation site"
+
+candid=49 pos="N N"
+"jak-stat pathway"
+
+candid=50 pos="A N N"
+"lymphoid cell line"
+
+candid=51 pos="N N N"
+"macrophage cell line"
+
+candid=52 pos="A N"
+"molecular basis"
+
+candid=53 pos="A CC A N"
+"monocytic or granulocytic differentiation"
+
+candid=54 pos="N N N"
+"mouse granulocyte/ macrophage-colony"
+
+candid=55 pos="N N"
+"necrosis factor"
+
+candid=56 pos="A A N"
+"nucleic acid sequence"
+
+candid=57 pos="N N"
+"protein-protein interaction"
+
+candid=58 pos="N N N"
+"receptor alpha gene"
+
+candid=59 pos="A N N"
+"serine/ threonine phosphatases"
+
+candid=60 pos="A N"
+"single t"
+
+candid=61 pos="A N N"
+"single transcription initiation"
+
+candid=62 pos="A N"
+"staphylococcal enterotoxin"
+
+candid=63 pos="N N N"
+"susceptibility gene product"
+
+candid=64 pos="N N"
+"estrogen receptor"
+
+candid=65 pos="A N"
+"a-induced i"
+
+candid=66 pos="N N"
+"autoregulatory mechanism"
+
+candid=67 pos="A N"
+"beta message"
+
+candid=68 pos="A N"
+"binding capacity"
+
+candid=69 pos="A N"
+"core sequences"
+
+candid=70 pos="A N"
+"distinct changes"
+
+candid=71 pos="N N"
+"er expressions"
+
+candid=72 pos="A N"
+"functional assays"
+
+candid=73 pos="N N"
+"hepor transcription"
+
+candid=74 pos="A CC N N"
+"human or rat tissues"
+
+candid=75 pos="A N"
+"il-2-inducible component"
+
+candid=76 pos="N N N"
+"mhc class ii"
+
+candid=77 pos="A N"
+"new insights"
+
+candid=78 pos="N A N"
+"precursor 32dc13 cell"
+
+candid=79 pos="N N"
+"ras-raf-1-map kinase"
+
+candid=80 pos="N N"
+"signal transduction"
+
+candid=81 pos="N N N"
+"t cells il-10"
+
+candid=82 pos="A N"
+"top tamarin"
+
+candid=83 pos="N N"
+"transcription complex"
+
+candid=84 pos="N N N"
+"udg gene product"
+
+candid=85 pos="A N N"
+"various v-atpase subunits"
+
+candid=86 pos="A N N N"
+"cyclin-like udg gene product"
+
+candid=87 pos="A N"
+"differential sensitivity"
+
+candid=88 pos="A N"
+"e1a-immortalized cells"
+
+candid=89 pos="N A N"
+"factor nuclear factor"
+
+candid=90 pos="N N"
+"hcleo element"
+
+candid=91 pos="A N N N N"
+"human granulocyte-macrophage colony-stimulating factor gene"
+
+candid=92 pos="N N N N N"
+"janus family tyrosine kinase jak2"
+
+candid=93 pos="N N"
+"lymphocytes results"
+
+candid=94 pos="A N"
+"moderate levels"
+
+candid=95 pos="A N"
+"primer extension"
+
+candid=96 pos="A N"
+"recombinant proteins"
+
+candid=97 pos="N N"
+"suppressor gene"
+
+candid=98 pos="N N"
+"t leukemia"
+
+candid=99 pos="A N"
+"various tumor"
+
+candid=100 pos="N N N A N"
+"zinc finger protein binding site"
+
+candid=101 pos="N N"
+"c-fos mrna"
+
+candid=102 pos="N N N"
+"chemokine receptor gene"
+
+candid=103 pos="N N"
+"cytokine profiles"
+
+candid=104 pos="N N N"
+"dna repair enzyme"
+
+candid=105 pos="A N"
+"endothelial activation"
+
+candid=106 pos="N N"
+"fusion transcript"
+
+candid=107 pos="A A N"
+"gata1 erythroid transcription"
+
+candid=108 pos="A N"
+"human immunodeficiency"
+
+candid=109 pos="A N"
+"human nm23-h1"
+
+candid=110 pos="A N"
+"il-12 synergized"
+
+candid=111 pos="N N"
+"il-2 transcription"
+
+candid=112 pos="N N"
+"il-2r beta"
+
+candid=113 pos="A N N"
+"integrin-dependent cell adhesion"
+
+candid=114 pos="A N N"
+"lymphocytic cell line"
+
+candid=115 pos="N N"
+"mnp protein"
+
+candid=116 pos="N N N"
+"mobility shift assay"
+
+candid=117 pos="A N"
+"nfat-1-mediated transcription"
+
+candid=118 pos="N N"
+"nk cells"
+
+candid=119 pos="A N N N"
+"nm23/ ndp kinase protein"
+
+candid=120 pos="A N N"
+"other cell surface"
+
+candid=121 pos="N N"
+"tyrosine phosphorylation"
+
+candid=122 pos="N N"
+"alpha b1"
+
+candid=123 pos="N N N N N"
+"b-independent hiv promoter domain activity"
+
+candid=124 pos="N N"
+"care unit"
+
+candid=125 pos="A N"
+"cis-acting element"
+
+candid=126 pos="A N"
+"egr-1 transcription"
+
+candid=127 pos="N N A N"
+"finger protein binding site"
+
+candid=128 pos="A N"
+"first exon"
+
+candid=129 pos="N N"
+"hcleo region"
+
+candid=130 pos="A N"
+"identical sensitivities"
+
+candid=131 pos="A N"
+"lymphoma-derived hybridoma"
+
+candid=132 pos="N N"
+"monocyte differentiation"
+
+candid=133 pos="A N"
+"nfat-1-linked lac-z"
+
+candid=134 pos="N N"
+"protein phosphatase"
+
+candid=135 pos="A N"
+"s6 kinase"
+
+candid=136 pos="A N"
+"scrambled sequence"
+
+candid=137 pos="A N"
+"splenic erythroblasts"
+
+candid=138 pos="A N"
+"transcriptional activity"
+
+candid=139 pos="N N"
+"antigen expression"
+
+candid=140 pos="A A N"
+"apparent binding affinity"
+
+candid=141 pos="N N"
+"carg motif"
+
+candid=142 pos="N N N"
+"cell ag receptor"
+
+candid=143 pos="N N N"
+"cell cycle-dependent transcription"
+
+candid=144 pos="N N N"
+"class ii genes"
+
+candid=145 pos="A N"
+"cytolytic susceptibility"
+
+candid=146 pos="N N"
+"deletion analysis"
+
+candid=147 pos="A A N"
+"duffy antigen/ chemokine"
+
+candid=148 pos="A N"
+"eber-1 loci"
+
+candid=149 pos="A N"
+"erythroid cells"
+
+candid=150 pos="N N"
+"factor gata-1"
+
+candid=151 pos="A N"
+"il-12-induced gene"
+
+candid=152 pos="A N"
+"inducible complex"
+
+candid=153 pos="A N"
+"intercellular adhesion"
+
+candid=154 pos="A A N"
+"major costimulatory signal"
+
+candid=155 pos="A N"
+"major transcription"
+
+candid=156 pos="A N"
+"nm23 protein"
+
+candid=157 pos="A A N"
+"non-inducible rb-defective tumor"
+
+candid=158 pos="A N"
+"p95vav-induced nfat"
+
+candid=159 pos="A N A N"
+"peripheral blood mononuclear leucocyte"
+
+candid=160 pos="A N"
+"prolactin-induced transcription"
+
+candid=161 pos="A A N"
+"several recent studies"
+
+candid=162 pos="A N"
+"tal1 dna"
+
+candid=163 pos="N N"
+"transactivator e2f-i"
+
+candid=164 pos="N N N"
+"tyrosine kinase inhibitor"
+
+candid=165 pos="A N"
+"u937 cells"
+
+candid=166 pos="N N"
+"cells-binding factor"
+
+candid=167 pos="A N N"
+"32dc13 cell line"
+
+candid=168 pos="N N"
+"alpha phosphorylation"
+
+candid=169 pos="A N"
+"chromatin-dependent manner"
+
+candid=170 pos="N N N"
+"control il-2 receptor"
+
+candid=171 pos="A N"
+"cooperative effect"
+
+candid=172 pos="A N"
+"er gene"
+
+candid=173 pos="A N"
+"erythroid-specific gata-1"
+
+candid=174 pos="N N N N"
+"gamma ri transcript levels"
+
+candid=175 pos="A N N"
+"hiv-2 enhancer element"
+
+candid=176 pos="A N"
+"independent sites"
+
+candid=177 pos="A N"
+"major histocompatibility"
+
+candid=178 pos="A N"
+"nfat-1-mediated beta-galactosidase"
+
+candid=179 pos="N N"
+"platelet aggregation"
+
+candid=180 pos="N N"
+"protein binds"
+
+candid=181 pos="N N"
+"stem cell"
+
+candid=182 pos="N N N"
+"t-cell antigen receptor"
+
+candid=183 pos="N N"
+"tcr activation"
+
+candid=184 pos="A N"
+"vd treatment"
+
+candid=185 pos="N N"
+"activation cascade"
+
+candid=186 pos="A N N"
+"full promoter function"
+
+candid=187 pos="N A N"
+"growth response-1 gene"
+
+candid=188 pos="A N N"
+"hematopoietic lineage commitment"
+
+candid=189 pos="A N"
+"il-2 production"
+
+candid=190 pos="A N"
+"il-2-inducible dna"
+
+candid=191 pos="A A N"
+"large granular lymphocytes"
+
+candid=192 pos="A CC A N"
+"multiple and varied effects"
+
+candid=193 pos="A N N"
+"new protein synthesis"
+
+candid=194 pos="A N"
+"relative quantification"
+
+candid=195 pos="N A N N"
+"share common control mechanisms"
+
+candid=196 pos="N N N"
+"t cell line"
+
+candid=197 pos="N N N"
+"t cell proliferation"
+
+candid=198 pos="A N"
+"targeted gene"
+
+candid=199 pos="A N"
+"acid sequence"
+
+candid=200 pos="N N"
+"cell types"
+
+candid=201 pos="A N N"
+"chinese hamster ovary"
+
+candid=202 pos="A N N N"
+"duffy blood group system"
+
+candid=203 pos="A N"
+"functional characterization"
+
+candid=204 pos="A N"
+"greater magnitude"
+
+candid=205 pos="A N N"
+"hematopoietic gene expression"
+
+candid=206 pos="A N N"
+"hiv-2 enhancer activation"
+
+candid=207 pos="N N"
+"homology domains"
+
+candid=208 pos="A N"
+"interleukin-2 gene"
+
+candid=209 pos="A N"
+"lymphocyte-mediated effects"
+
+candid=210 pos="N N"
+"mrna accumulation"
+
+candid=211 pos="A N"
+"nm23 genes"
+
+candid=212 pos="N N N"
+"plasma cortisol concentrations"
+
+candid=213 pos="A N"
+"posttranscriptional levels"
+
+candid=214 pos="A N"
+"susceptible target"
+
+candid=215 pos="N N"
+"t lymphocytes"
+
+candid=216 pos="A CC N N"
+"vcam-1 and e-selectin surface"
+
+candid=217 pos="A N"
+"-like site"
+
+candid=218 pos="N N N"
+"adult t cell"
+
+candid=219 pos="N NUM"
+"band 3"
+
+candid=220 pos="N NUM"
+"band 4.1"
+
+candid=221 pos="A N"
+"blastic transformation"
+
+candid=222 pos="A N"
+"cd4 transcription"
+
+candid=223 pos="N N N N"
+"ciita mrna induction levels"
+
+candid=224 pos="N N N"
+"de novo infection"
+
+candid=225 pos="A N"
+"early expression"
+
+candid=226 pos="N N"
+"enhancer activation"
+
+candid=227 pos="N N N"
+"gamma ri expression"
+
+candid=228 pos="A A N N"
+"human nm23-h2 gene product"
+
+candid=229 pos="N N N N N"
+"igg fc receptor type ic"
+
+candid=230 pos="A N"
+"important immunoregulatory"
+
+candid=231 pos="N N"
+"kappa b-alpha"
+
+candid=232 pos="A N"
+"low activity"
+
+candid=233 pos="N N"
+"mnp site"
+
+candid=234 pos="N N"
+"model changes"
+
+candid=235 pos="A N"
+"monocytic cell"
+
+candid=236 pos="A N"
+"secretable cytokines"
+
+candid=237 pos="A N"
+"active form"
+
+candid=238 pos="N N N"
+"alpha b2 ratio"
+
+candid=239 pos="N N"
+"b cells"
+
+candid=240 pos="N NUM"
+"c-rich 5"
+
+candid=241 pos="N N N N"
+"cd4-cd8- t lymphocytes results"
+
+candid=242 pos="N N"
+"cell v-atpase"
+
+candid=243 pos="N N"
+"hiv promoter"
+
+candid=244 pos="A N"
+"nuclear factors"
+
+candid=245 pos="A A N"
+"peak inhibitory activity"
+
+candid=246 pos="A N"
+"peripheral cd4-cd8-"
+
+candid=247 pos="A A N"
+"phytohemagglutinin-stimulated human jurkat"
+
+candid=248 pos="A N"
+"present studies"
+
+candid=249 pos="N N"
+"promoter activity"
+
+candid=250 pos="N N"
+"protection analyses"
+
+candid=251 pos="N N N"
+"repair enzyme uracil-dna"
+
+candid=252 pos="A N N"
+"single gata-binding site"
+
+candid=253 pos="N N"
+"tumor suppressor"
+
+candid=254 pos="A CC A N N"
+"u937 and hel/ s cells"
+
+candid=255 pos="A A N"
+"ap-1 binding proteins"
+
+candid=256 pos="A N N"
+"bare lymphocyte syndrome"
+
+candid=257 pos="A N N"
+"cd4+ t cells"
+
+candid=258 pos="A N"
+"distinct elements"
+
+candid=259 pos="A N"
+"electrophoretic mobilities"
+
+candid=260 pos="N N"
+"estrogen predominance"
+
+candid=261 pos="N N"
+"factors nf-kappa"
+
+candid=262 pos="A N"
+"full maturation"
+
+candid=263 pos="N N"
+"gamma ri"
+
+candid=264 pos="N N"
+"gene disruption"
+
+candid=265 pos="N N"
+"hepor promoter"
+
+candid=266 pos="A N"
+"human udg"
+
+candid=267 pos="A A N A N"
+"human umbilical vein endothelial cells"
+
+candid=268 pos="A N"
+"il-4 gene"
+
+candid=269 pos="A A N"
+"nfat-1 transcriptional complex"
+
+candid=270 pos="N N"
+"protein pairs"
+
+candid=271 pos="A N"
+"relative formation"
+
+candid=272 pos="N N"
+"transcription rate"
+
+candid=273 pos="A N N"
+"b7/ lfa-3triple transfectant"
+
+candid=274 pos="N N N"
+"bind stat proteins"
+
+candid=275 pos="A A N"
+"bsap-stimulated cd19 gene"
+
+candid=276 pos="N N"
+"domain activity"
+
+candid=277 pos="N N"
+"extension analysis"
+
+candid=278 pos="A N"
+"further increase"
+
+candid=279 pos="A N"
+"heterologous promoter"
+
+candid=280 pos="N N N"
+"host defence response"
+
+candid=281 pos="A N"
+"me1a1 g3ag4ag3"
+
+candid=282 pos="A A N"
+"multiple binding sites"
+
+candid=283 pos="A N N N"
+"new world primate cell"
+
+candid=284 pos="A N"
+"novel fusion"
+
+candid=285 pos="N N"
+"peer cells"
+
+candid=286 pos="A A N N"
+"putative metastatic suppressor genes"
+
+candid=287 pos="A N"
+"replicative genes"
+
+candid=288 pos="A N"
+"retinoic acid"
+
+candid=289 pos="A A A N"
+"single major transcriptional start"
+
+candid=290 pos="A A N"
+"sp1-like binding proteins"
+
+candid=291 pos="A N N"
+"steady state levels"
+
+candid=292 pos="N N"
+"subunit gene"
+
+candid=293 pos="A N"
+"vacuolar h(+)-atpase"
+
+candid=294 pos="N N A N"
+"b cell lineage-specific activator"
+
+candid=295 pos="N N"
+"cell activation"
+
+candid=296 pos="A A N"
+"cytokine-induced vcam-1 expression"
+
+candid=297 pos="N N N"
+"cytomegalovirus ie2 protein"
+
+candid=298 pos="A N N"
+"deficient b-cell lines"
+
+candid=299 pos="A N"
+"distinct cytokines"
+
+candid=300 pos="A N"
+"distinct epitopes"
+
+candid=301 pos="A N A N"
+"early growth response-1 gene"
+
+candid=302 pos="N N N N"
+"granulocyte-macrophage colony-stimulating factor promoter"
+
+candid=303 pos="A N"
+"high g"
+
+candid=304 pos="A N"
+"human equivalent"
+
+candid=305 pos="N N N N"
+"i kappa b-alpha proteolysis"
+
+candid=306 pos="A N"
+"identical sequences"
+
+candid=307 pos="A N A N N"
+"major histocompatibility complex class ii"
+
+candid=308 pos="A N N N N"
+"major histocompatibility complex class i"
+
+candid=309 pos="A N"
+"n-terminal fragment"
+
+candid=310 pos="N N N"
+"nf-kappa b-independent hiv"
+
+candid=311 pos="A N"
+"nm23 gene"
+
+candid=312 pos="A N"
+"phosphorylated i"
+
+candid=313 pos="A N"
+"putative guanine"
+
+candid=314 pos="N N"
+"receptor interaction"
+
+candid=315 pos="N N"
+"receptor motifs"
+
+candid=316 pos="N N"
+"t lymphocyte"
+
+candid=317 pos="A N"
+"vascular cell"
+
+candid=318 pos="A N"
+"bacterial lipopolysaccharide"
+
+candid=319 pos="A N"
+"basal activity"
+
+candid=320 pos="N N"
+"calcium stimulation"
+
+candid=321 pos="N N"
+"cdna clone"
+
+candid=322 pos="N N"
+"cell lines"
+
+candid=323 pos="N N"
+"cycle control"
+
+candid=324 pos="N N N N"
+"de novo ebv infection"
+
+candid=325 pos="A N"
+"delayed administration"
+
+candid=326 pos="A N N"
+"diverse cell lineages"
+
+candid=327 pos="N N"
+"factor promoter"
+
+candid=328 pos="N N"
+"hcmv dna"
+
+candid=329 pos="A N N N"
+"htlv-i-infected cord blood lymphocytes"
+
+candid=330 pos="A N"
+"human cleo"
+
+candid=331 pos="A N"
+"inducible protein"
+
+candid=332 pos="N N"
+"jurkat t"
+
+candid=333 pos="N N"
+"lymphocyte syndrome"
+
+candid=334 pos="N N N"
+"maz transcription factor"
+
+candid=335 pos="A N"
+"murine t"
+
+candid=336 pos="N N"
+"response element"
+
+candid=337 pos="N N"
+"strand competition"
+
+candid=338 pos="N N A N"
+"transcription factor nuclear factor"
+
+candid=339 pos="A N"
+"vcam-1 gene"
+
+candid=340 pos="N A N"
+"virus replicative gene"
+
+candid=341 pos="A N"
+"additional expression"
+
+candid=342 pos="N N"
+"alpha a1"
+
+candid=343 pos="N N"
+"b cell"
+
+candid=344 pos="N N"
+"b1/ alpha"
+
+candid=345 pos="A N"
+"causal relationship"
+
+candid=346 pos="A N"
+"cd19 mrna"
+
+candid=347 pos="A N"
+"different nf-kappa"
+
+candid=348 pos="A N"
+"efficient c-fos"
+
+candid=349 pos="A N N"
+"electrophoretic mobility shift"
+
+candid=350 pos="N N A N"
+"fc gamma ric gene"
+
+candid=351 pos="A N"
+"further studies"
+
+candid=352 pos="N A N N N"
+"hiv ltr-driven luciferase expression constructs"
+
+candid=353 pos="N A N"
+"ifn-gamma responsive element"
+
+candid=354 pos="A A N"
+"il-1 beta message"
+
+candid=355 pos="A N"
+"infected thymocytes"
+
+candid=356 pos="N N N"
+"leukemia virus type"
+
+candid=357 pos="N N"
+"leukocyte adhesion"
+
+candid=358 pos="A N N"
+"lipopolysaccharide-induced e-selectin expression"
+
+candid=359 pos="A N"
+"mrl-ipr/ ipr"
+
+candid=360 pos="A N"
+"nuclear factor"
+
+candid=361 pos="A N"
+"nur77 family"
+
+candid=362 pos="N N"
+"p95vav involvement"
+
+candid=363 pos="A N"
+"possible role"
+
+candid=364 pos="N N"
+"promoter domain"
+
+candid=365 pos="A N N"
+"rapid signal-transduction pathway"
+
+candid=366 pos="A N N"
+"several e2f sites"
+
+candid=367 pos="A N"
+"terminal events"
+
+candid=368 pos="N N"
+"78-nucleotide segment"
+
+candid=369 pos="A N"
+"binding elements"
+
+candid=370 pos="N N N"
+"blast-crisis cdna library"
+
+candid=371 pos="N A A N"
+"bone marrow-derived erythroid progenitor"
+
+candid=372 pos="A N N"
+"cd19 gene expression"
+
+candid=373 pos="N A N N"
+"cd4-cd8- murine t lymphocyte"
+
+candid=374 pos="N N"
+"ciita inducibility"
+
+candid=375 pos="A N"
+"dose-dependent inhibition"
+
+candid=376 pos="A A N N N"
+"duffy antigen/ chemokine receptor gene"
+
+candid=377 pos="N N"
+"far-upstream alpha-globin"
+
+candid=378 pos="A N N"
+"functional t-cell receptor"
+
+candid=379 pos="N N N"
+"hepor gene expression"
+
+candid=380 pos="A N N N"
+"human alpha-globin promoter activity"
+
+candid=381 pos="A N N N"
+"il-2-mediated t cell proliferation"
+
+candid=382 pos="A A N"
+"larger palindromic sequences"
+
+candid=383 pos="A N"
+"leukemic cells"
+
+candid=384 pos="N N"
+"lps responses"
+
+candid=385 pos="A N"
+"ltr-driven luciferase"
+
+candid=386 pos="A A N"
+"other cell-specific factors"
+
+candid=387 pos="A A N"
+"purine-rich binding sites"
+
+candid=388 pos="A N"
+"regulatory region"
+
+candid=389 pos="A N"
+"response-1 gene"
+
+candid=390 pos="A N"
+"squamous cell"
+
+candid=391 pos="N N N"
+"tnf mrna accumulation"
+
+candid=392 pos="N N A N"
+"type ii estrogenic receptors"
+
+candid=393 pos="A A N"
+"32dc13 myeloid cells"
+
+candid=394 pos="A N N"
+"asymmetric cell division"
+
+candid=395 pos="A N"
+"binding proteins"
+
+candid=396 pos="A N"
+"cellular stimuli"
+
+candid=397 pos="A N N N"
+"complex class ii molecules"
+
+candid=398 pos="N N N"
+"differentiation induction systems"
+
+candid=399 pos="A N"
+"distinct stages"
+
+candid=400 pos="A N"
+"enhanced gr"
+
+candid=401 pos="A N N"
+"erythroid transcription factor"
+
+candid=402 pos="N N"
+"gel shift"
+
+candid=403 pos="N N N"
+"guanine nucleotide exchange"
+
+candid=404 pos="A A N N"
+"human peripheral blood lymphocytes"
+
+candid=405 pos="A N N N"
+"il-2 control il-2 receptor"
+
+candid=406 pos="A N"
+"il-2 induction"
+
+candid=407 pos="N N"
+"lymphocyte precursors"
+
+candid=408 pos="N N"
+"monocyte specificity"
+
+candid=409 pos="A N"
+"multiple signals"
+
+candid=410 pos="A N"
+"ndp kinase"
+
+candid=411 pos="A N"
+"nm23/ ndp"
+
+candid=412 pos="A N N N"
+"peripheral blood t cells"
+
+candid=413 pos="N N A N"
+"receptor dna binding site"
+
+candid=414 pos="N N N"
+"ri transcript levels"
+
+candid=415 pos="N N"
+"steroid receptor"
+
+candid=416 pos="N N N N"
+"t cell ag receptor"
+
+candid=417 pos="N N"
+"transcription start"
+
+candid=418 pos="A N N N N"
+"vcam-1 promoter reporter gene constructs"
+
+candid=419 pos="N N"
+"alpha a-gene"
+
+candid=420 pos="A N N"
+"canonical dna sequence"
+
+candid=421 pos="A N"
+"cyclin-like species"
+
+candid=422 pos="A A A N"
+"cytokine-stimulated human saphenous vein"
+
+candid=423 pos="N N"
+"cytomegalovirus ie2"
+
+candid=424 pos="A N"
+"dioxin-mediated alteration"
+
+candid=425 pos="A N N"
+"hel/ s cells"
+
+candid=426 pos="N N N"
+"i kappa b-alpha"
+
+candid=427 pos="N N"
+"ifn-gamma pre-treatment"
+
+candid=428 pos="N N N"
+"il-2r alpha transcripts"
+
+candid=429 pos="N N"
+"lps addition"
+
+candid=430 pos="A N"
+"mixed cytosol"
+
+candid=431 pos="A N A N"
+"myeloid leukemia m1 cells"
+
+candid=432 pos="A N"
+"myeloid leukemia"
+
+candid=433 pos="A N N"
+"nfat-1-mediated gene expression"
+
+candid=434 pos="A N"
+"novel transcription"
+
+candid=435 pos="A N"
+"ocim1 cells"
+
+candid=436 pos="A N N N"
+"other cell surface interactions"
+
+candid=437 pos="A A N"
+"potential binding sites"
+
+candid=438 pos="A N"
+"predominant factor"
+
+candid=439 pos="N N"
+"promoter reporter"
+
+candid=440 pos="N N"
+"protein-dna complexes"
+
+candid=441 pos="A N N"
+"simian immunodeficiency virus"
+
+candid=442 pos="N A N"
+"stat nuclear proteins"
+
+candid=443 pos="A A N"
+"strong negative regulator"
+
+candid=444 pos="A N N"
+"zlf-1 gene product"
+
+candid=445 pos="N N"
+"camp-inducing agents"
+
+candid=446 pos="N N N N"
+"gel mobility shift assays"
+
+candid=447 pos="A A N"
+"hormonal ovulatory situation"
+
+candid=448 pos="A N N"
+"human granulocyte-macrophage colony-stimulating"
+
+candid=449 pos="A N"
+"-dependent growth"
+
+candid=450 pos="N N"
+"activator protein-1"
+
+candid=451 pos="A N N"
+"common stat proteins"
+
+candid=452 pos="A N N"
+"complete t cell"
+
+candid=453 pos="N N"
+"dna mobility"
+
+candid=454 pos="A N"
+"erythroid gene"
+
+candid=455 pos="A N"
+"g1 phase"
+
+candid=456 pos="N A N N"
+"gamma ric promoter sequences"
+
+candid=457 pos="N N"
+"hiv tat"
+
+candid=458 pos="N N"
+"ifn-gamma production"
+
+candid=459 pos="A N"
+"jak2 tyrosine"
+
+candid=460 pos="A N"
+"ligand-induced tyrosine"
+
+candid=461 pos="A N"
+"monocyte-specific function"
+
+candid=462 pos="N N N N"
+"nf-kappa b-independent hiv promoter"
+
+candid=463 pos="A N"
+"nk3.3 cell"
+
+candid=464 pos="N N"
+"promoter fragment"
+
+candid=465 pos="N A N"
+"protein-dna binding studies"
+
+candid=466 pos="A N A N"
+"saphenous vein endothelial cells"
+
+candid=467 pos="N N N"
+"subunit promoter region"
+
+candid=468 pos="N N"
+"surface immunoglobulin"
+
+candid=469 pos="A N N"
+"transfected cos cells"
+
+candid=470 pos="A N"
+"binding activity"
+
+candid=471 pos="A N"
+"cd34+ cells"
+
+candid=472 pos="N A N N"
+"cell lineage-specific activator protein"
+
+candid=473 pos="A N N N"
+"chemical-induced erythroleukemia cell lines"
+
+candid=474 pos="N N A N"
+"class ii deficient b-cell"
+
+candid=475 pos="N N"
+"dna-binding complex"
+
+candid=476 pos="N N N"
+"enzyme uracil-dna glycosylase"
+
+candid=477 pos="N N N N"
+"fc receptor type ic"
+
+candid=478 pos="A N"
+"functional consequence"
+
+candid=479 pos="A N"
+"hematopoietic gene"
+
+candid=480 pos="A A N"
+"human saphenous vein"
+
+candid=481 pos="N N"
+"novo infection"
+
+candid=482 pos="A N"
+"peripheral blood"
+
+candid=483 pos="N N"
+"pets site"
+
+candid=484 pos="A N N"
+"ric promoter sequences"
+
+candid=485 pos="A N"
+"selective inhibitor"
+
+candid=486 pos="N N"
+"steroid receptors"
+
+candid=487 pos="A V N"
+"tcr-mediated signaling events"
+
+candid=488 pos="A A N"
+"transfected human cells"
+
+candid=489 pos="A N N"
+"vcam-1 promoter reporter"
+
+candid=490 pos="A N"
+"b7/ lfa-3"
+
+candid=491 pos="A N"
+"cp/ wp"
+
+candid=492 pos="N A N"
+"dna binding site"
+
+candid=493 pos="A N N N N"
+"il-2 control il-2 receptor alpha"
+
+candid=494 pos="N N N"
+"janus family tyrosine"
+
+candid=495 pos="A N"
+"lymphocytic cell"
+
+candid=496 pos="A N"
+"n-terminal activation"
+
+candid=497 pos="A N"
+"northern blot"
+
+candid=498 pos="N N"
+"oka stimulation"
+
+candid=499 pos="A A N N"
+"primitive hematopoietic stem cells"
+
+candid=500 pos="N N"
+"promoter sequences"
+
+candid=501 pos="A N"
+"same time"
+
+candid=502 pos="N N"
+"state levels"
+
+candid=503 pos="N N"
+"target cells"
+
+candid=504 pos="A A N"
+"various cellular stimuli"
+
+candid=505 pos="N N"
+"bind stat"
+
+candid=506 pos="A N"
+"binding motif"
+
+candid=507 pos="A N"
+"bzlf-1 locus"
+
+candid=508 pos="A A N"
+"cho-dr/ b7/ lfa-3triple"
+
+candid=509 pos="N N N"
+"complex class i"
+
+candid=510 pos="N N N N"
+"fc gamma ri transcript"
+
+candid=511 pos="A N N"
+"human immunodeficiency virus"
+
+candid=512 pos="A N N"
+"human t leukemia"
+
+candid=513 pos="N N"
+"immunoregulatory cytokine"
+
+candid=514 pos="A N"
+"lfa-3 costimulation"
+
+candid=515 pos="N N"
+"lipoxygenase metabolites"
+
+candid=516 pos="N N"
+"map kinase"
+
+candid=517 pos="A N"
+"marked increase"
+
+candid=518 pos="A N"
+"molecular mechanisms"
+
+candid=519 pos="A N"
+"myeloid precursor"
+
+candid=520 pos="N N"
+"receptor superfamily"
+
+candid=521 pos="A N"
+"same stat"
+
+candid=522 pos="N N"
+"shift assay"
+
+candid=523 pos="N N N"
+"t lymphocytes results"
+
+candid=524 pos="A N N"
+"targeted gene disruption"
+
+candid=525 pos="A N N"
+"transient transfection experiments"
+
+candid=526 pos="A N"
+"various promoters"
+
+candid=527 pos="N N"
+"ca2+ ionophore"
+
+candid=528 pos="A A N"
+"cytoplasmic free calcium"
+
+candid=529 pos="A N"
+"double transfectants"
+
+candid=530 pos="A N"
+"functional promoter"
+
+candid=531 pos="N N N"
+"gamma activation site"
+
+candid=532 pos="N N N"
+"gm-csf promoter activity"
+
+candid=533 pos="A N"
+"htlv-1 transactivator"
+
+candid=534 pos="A A A N"
+"human peripheral mononuclear cells"
+
+candid=535 pos="N N"
+"immunoglobulin production"
+
+candid=536 pos="A N"
+"negative regulation"
+
+candid=537 pos="A N"
+"non-polymorphic regions"
+
+candid=538 pos="A N"
+"novel inhibitors"
+
+candid=539 pos="A A N N N"
+"phytohemagglutinin-stimulated human jurkat t cells"
+
+candid=540 pos="N N"
+"protein levels"
+
+candid=541 pos="N N N"
+"protein tyrosine kinases"
+
+candid=542 pos="N N"
+"sequence cttgg"
+
+candid=543 pos="N N N"
+"t leukemia virus"
+
+candid=544 pos="A N"
+"thp-1 differentiation"
+
+candid=545 pos="A A N"
+"truncated nm23-h2 protein"
+
+candid=546 pos="A N"
+"various chains"
+
+candid=547 pos="A N N"
+"various differentiation induction"
+
+candid=548 pos="N N"
+"cell transformation"
+
+candid=549 pos="A N"
+"cellular stimulus"
+
+candid=550 pos="A N"
+"costimulatory signals"
+
+candid=551 pos="N N"
+"cytokine pleiotropy"
+
+candid=552 pos="A N"
+"cytoplasmic mrna"
+
+candid=553 pos="A A N"
+"different specific bands"
+
+candid=554 pos="N A N"
+"factor nuclear factor-kappa"
+
+candid=555 pos="A N"
+"human erythropoietin"
+
+candid=556 pos="N N"
+"i mhc"
+
+candid=557 pos="A N"
+"marginal levels"
+
+candid=558 pos="A A N N"
+"primary human bone marrow"
+
+candid=559 pos="A N N"
+"promoter-driven reporter plasmid"
+
+candid=560 pos="N N N"
+"protein tyrosine kinase"
+
+candid=561 pos="N N"
+"t-cell receptor"
+
+candid=562 pos="N N"
+"transactivator ciita"
+
+candid=563 pos="A N N N"
+"transient transfection assay result"
+
+candid=564 pos="N N"
+"b2 proteins"
+
+candid=565 pos="N N N"
+"blast crisis phase"
+
+candid=566 pos="N A N"
+"camp regulatory element"
+
+candid=567 pos="N N N"
+"cell surface interactions"
+
+candid=568 pos="A N"
+"chromosomal translocation"
+
+candid=569 pos="N N"
+"cycle-dependent transcription"
+
+candid=570 pos="N A N"
+"display significant differences"
+
+candid=571 pos="A NUM N N"
+"first 67 amino acids"
+
+candid=572 pos="N N N"
+"igg fc receptor"
+
+candid=573 pos="A N"
+"il-10 treatment"
+
+candid=574 pos="A N"
+"il-2 gene"
+
+candid=575 pos="N N A N N"
+"il-2 share common control mechanisms"
+
+candid=576 pos="A N"
+"important component"
+
+candid=577 pos="N N"
+"laboratory employees"
+
+candid=578 pos="N N"
+"motif characteristic"
+
+candid=579 pos="A N"
+"other leukocyte"
+
+candid=580 pos="N N"
+"receptor complex"
+
+candid=581 pos="N N"
+"reconstitution conditions"
+
+candid=582 pos="A N"
+"replicative gene"
+
+candid=583 pos="A N N"
+"same stat protein"
+
+candid=584 pos="N A N"
+"share common control"
+
+candid=585 pos="A A N"
+"simultaneous early expression"
+
+candid=586 pos="N N"
+"axis activation"
+
+candid=587 pos="N N A N N"
+"b cell lineage-specific activator protein"
+
+candid=588 pos="N N"
+"beta subunits"
+
+candid=589 pos="A CC N N"
+"biochemical and mutagenesis analyses"
+
+candid=590 pos="A N"
+"brief introduction"
+
+candid=591 pos="A N"
+"cd28 surface"
+
+candid=592 pos="A N"
+"cyclin-like udg"
+
+candid=593 pos="N N"
+"gamma activation"
+
+candid=594 pos="N N"
+"gene effects"
+
+candid=595 pos="N N N"
+"glucoc orticoid receptors"
+
+candid=596 pos="N N"
+"hematopoietin receptors"
+
+candid=597 pos="A N N"
+"human jurkat t"
+
+candid=598 pos="A A N"
+"human nm23-h2 gene"
+
+candid=599 pos="A N"
+"human population"
+
+candid=600 pos="N N N N N"
+"igg fc receptor type i"
+
+candid=601 pos="N N"
+"interferon gamma"
+
+candid=602 pos="N N N"
+"interleukin-2 receptor alpha"
+
+candid=603 pos="N N"
+"ionomycin pathway"
+
+candid=604 pos="A N"
+"main difference"
+
+candid=605 pos="N A N"
+"nih 3t3 cells"
+
+candid=606 pos="N N"
+"sequence requirements"
+
+candid=607 pos="N N N N"
+"t cell antigen receptors"
+
+candid=608 pos="A N"
+"tal1 locus"
+
+candid=609 pos="N N N"
+"tumor necrosis factor-alpha"
+
+candid=610 pos="A N N"
+"apoptotic cell death"
+
+candid=611 pos="A N"
+"calmodulin-regulated kinase"
+
+candid=612 pos="A N"
+"canonical dna"
+
+candid=613 pos="N N"
+"cell line"
+
+candid=614 pos="N N"
+"class ii-positive"
+
+candid=615 pos="N N"
+"control group"
+
+candid=616 pos="A N"
+"costimulatory pathway"
+
+candid=617 pos="N N"
+"differentiation arrest"
+
+candid=618 pos="N N"
+"dna sequence"
+
+candid=619 pos="N N N"
+"family tyrosine kinase"
+
+candid=620 pos="N N N N N"
+"fc receptor type ic gene"
+
+candid=621 pos="N N"
+"finger protein"
+
+candid=622 pos="A N"
+"human host"
+
+candid=623 pos="N N"
+"il transactivator"
+
+candid=624 pos="A N"
+"large family"
+
+candid=625 pos="N N"
+"leukemia virus"
+
+candid=626 pos="N N"
+"mhc class"
+
+candid=627 pos="N N"
+"phosphatase type"
+
+candid=628 pos="N N N"
+"retinoblastoma gene product"
+
+candid=629 pos="N N"
+"saguinus oedipus"
+
+candid=630 pos="A N"
+"steady state"
+
+candid=631 pos="A N"
+"tal1/ scl"
+
+candid=632 pos="A N N N"
+"vcam-1 promoter reporter gene"
+
+candid=633 pos="N N"
+"vessel wall"
+
+candid=634 pos="A N"
+"a1 antibodies"
+
+candid=635 pos="N NUM"
+"age 25-79"
+
+candid=636 pos="A N N"
+"apoptotic peer cells"
+
+candid=637 pos="N A N"
+"bind antigenic peptide"
+
+candid=638 pos="A N"
+"cd19 gene"
+
+candid=639 pos="N N"
+"cd4 promoter"
+
+candid=640 pos="A A N"
+"erythroid cell-specific genes"
+
+candid=641 pos="A N N N"
+"erythroid transcription factor gata-1"
+
+candid=642 pos="N N"
+"gel-shift analyses"
+
+candid=643 pos="N N N N N"
+"granulocyte-macrophage colony-stimulating factor promoter activity"
+
+candid=644 pos="A N"
+"hematopoietic lineage"
+
+candid=645 pos="N N"
+"hepor gene"
+
+candid=646 pos="A N N"
+"interleukin-2 gene expression"
+
+candid=647 pos="N N"
+"jurkat cell"
+
+candid=648 pos="A N"
+"myc-associated zinc"
+
+candid=649 pos="A N"
+"normal ifn-gamma"
+
+candid=650 pos="N N"
+"surface receptor"
+
+candid=651 pos="N N"
+"tata box"
+
+candid=652 pos="A CC N N N"
+"vcam-1 and e-selectin surface expression"
+
+candid=653 pos="N N N"
+"cell line thp-1"
+
+candid=654 pos="A N"
+"competitive inhibitor"
+
+candid=655 pos="N N"
+"complex class"
+
+candid=656 pos="A N"
+"costimulatory signal"
+
+candid=657 pos="A N N"
+"cyclin-like udg gene"
+
+candid=658 pos="A N N"
+"cytoplasmic tyrosine kinases"
+
+candid=659 pos="A N"
+"distinct pathways"
+
+candid=660 pos="A N"
+"erythroid differentiation"
+
+candid=661 pos="A N"
+"htlv-i-transformed cells"
+
+candid=662 pos="A A N"
+"human bactericidal/ permeability-increasing"
+
+candid=663 pos="A N N"
+"human skin cancers"
+
+candid=664 pos="A N"
+"il-2 responsiveness"
+
+candid=665 pos="A N"
+"immediate-early genes"
+
+candid=666 pos="N N N N"
+"interleukin-2 receptor alpha gene"
+
+candid=667 pos="A N"
+"interleukin-5/ receptor"
+
+candid=668 pos="A N N"
+"mutant nm23-h2his protein"
+
+candid=669 pos="A N N"
+"nm23 gene family"
+
+candid=670 pos="A N N"
+"peripheral blood monocytes"
+
+candid=671 pos="N N N"
+"reporter gene constructs"
+
+candid=672 pos="A N"
+"vcam-1 promoter"
+
+candid=673 pos="A N"
+"west africa"
+
+candid=674 pos="N N N"
+"% sequence similarity"
+
+candid=675 pos="N N N"
+"basic-helix-loop-helix motif characteristic"
+
+candid=676 pos="A N N"
+"beta message levels"
+
+candid=677 pos="A N"
+"costimulated il-2"
+
+candid=678 pos="A A N"
+"e2f-1 binding protein"
+
+candid=679 pos="A N N"
+"embryonic stem cells"
+
+candid=680 pos="A N"
+"enhanced c-fos"
+
+candid=681 pos="N N"
+"factors bind"
+
+candid=682 pos="A N"
+"fluorescein-labeled amplicon"
+
+candid=683 pos="N A N"
+"gamma ric gire"
+
+candid=684 pos="N N"
+"guanine nucleotide"
+
+candid=685 pos="N N N"
+"hepor promoter activity"
+
+candid=686 pos="N N"
+"kinase jak2"
+
+candid=687 pos="A N"
+"nk cells"
+
+candid=688 pos="N N"
+"novo ebv"
+
+candid=689 pos="A A N"
+"oct-1 binding proteins"
+
+candid=690 pos="N N"
+"proteins stat3"
+
+candid=691 pos="A N"
+"responsive element"
+
+candid=692 pos="A N"
+"significant amounts"
+
+candid=693 pos="A N"
+"tata-less promoter"
+
+candid=694 pos="A N"
+"various fc"
+
+candid=695 pos="N N N"
+"b1/ alpha b2"
+
+candid=696 pos="A A N"
+"b95-8 lymphoid cells"
+
+candid=697 pos="N A N"
+"blood mononuclear leucocytes"
+
+candid=698 pos="N A N"
+"cell lymphotropic virus"
+
+candid=699 pos="A N"
+"dose-related increase"
+
+candid=700 pos="N N"
+"enzyme uracil-dna"
+
+candid=701 pos="A CC A N"
+"erythroid and non-erythroid cells"
+
+candid=702 pos="N A N"
+"gm-csf cytoplasmic mrna"
+
+candid=703 pos="N N"
+"hematopoietin receptor"
+
+candid=704 pos="A A N N"
+"human cd4+ t cells"
+
+candid=705 pos="A A N"
+"low basal activity"
+
+candid=706 pos="A N N"
+"metastatic suppressor genes"
+
+candid=707 pos="A N"
+"molecular changes"
+
+candid=708 pos="A N N"
+"monocytic cell line"
+
+candid=709 pos="A N N"
+"myc-associated zinc finger"
+
+candid=710 pos="A N N"
+"normal ifn-gamma induction"
+
+candid=711 pos="N N"
+"phospholipase a2"
+
+candid=712 pos="N N"
+"promoter function"
+
+candid=713 pos="N N N"
+"retinoblastoma susceptibility gene"
+
+candid=714 pos="N N"
+"susceptibility gene"
+
+candid=715 pos="N N N"
+"transcription control elements"
+
+candid=716 pos="N N N"
+"udg promoter sequences"
+
+candid=717 pos="A N"
+"unlabeled amplicon"
+
+candid=718 pos="A N N"
+"various fc gamma"
+
+candid=719 pos="A A N N N"
+"various vcam-1 promoter reporter gene"
+
+candid=720 pos="N N N N"
+"colony-stimulating factor gene promoter"
+
+candid=721 pos="A A N"
+"lps-mediated endothelial activation"
+
+candid=722 pos="N N N"
+"lymphocyte immunoglobulin production"
+
+candid=723 pos="A N"
+"mixed lymphocyte"
+
+candid=724 pos="A N"
+"regulatory pathways"
+
+candid=725 pos="A N"
+"related region"
+
+candid=726 pos="A N"
+"transcriptional level"
+
+candid=727 pos="A N"
+"transcriptional means"
+
+candid=728 pos="A A A N N"
+"13-acetate/ phytohemagglutinin-stimulated human jurkat t"
+
+candid=729 pos="A N"
+"2a-sensitive sites"
+
+candid=730 pos="A N N"
+"acid augments pma-"
+
+candid=731 pos="N N"
+"activation sequence"
+
+candid=732 pos="N A N"
+"all-trans retinoic acid"
+
+candid=733 pos="A N"
+"alpha/ gos19"
+
+candid=734 pos="N N"
+"augments pma-"
+
+candid=735 pos="A N"
+"b95-8 cytosol"
+
+candid=736 pos="N N"
+"beta-galactosidase mrna"
+
+candid=737 pos="N A N N"
+"cell lymphotropic virus i"
+
+candid=738 pos="N N"
+"de novo"
+
+candid=739 pos="N A N"
+"dna binding sites"
+
+candid=740 pos="N N"
+"enhancer regions"
+
+candid=741 pos="N N"
+"friend virus"
+
+candid=742 pos="N N"
+"gel-shift analysis"
+
+candid=743 pos="N N"
+"gm-csf element"
+
+candid=744 pos="N N"
+"gm-csf expression"
+
+candid=745 pos="N A A N"
+"gr apparent binding affinity"
+
+candid=746 pos="N N"
+"helper cells"
+
+candid=747 pos="A N N"
+"ie2 gene product"
+
+candid=748 pos="A N"
+"interleukin-2 control"
+
+candid=749 pos="A N N"
+"lineage-specific activator protein"
+
+candid=750 pos="A N"
+"mass action"
+
+candid=751 pos="N N"
+"phorbol ester"
+
+candid=752 pos="N N"
+"protein synthesis"
+
+candid=753 pos="N N"
+"ribonuclease protection"
+
+candid=754 pos="A N"
+"saphenous vein"
+
+candid=755 pos="N N"
+"tinur gene"
+
+candid=756 pos="N N"
+"uracil-dna glycosylase"
+
+candid=757 pos="A A N"
+"active ocim1 cells"
+
+candid=758 pos="N N N"
+"alpha a-gene product"
+
+candid=759 pos="N A N"
+"alpha b-encoded isomers"
+
+candid=760 pos="N N"
+"alpha b2"
+
+candid=761 pos="N N"
+"alpha subunit"
+
+candid=762 pos="A N"
+"different combinations"
+
+candid=763 pos="N N N N"
+"fc receptor type i"
+
+candid=764 pos="A A A N"
+"functional sp1 binding elements"
+
+candid=765 pos="N N N"
+"glycoprotein hormone erythropoietin"
+
+candid=766 pos="A CC A N"
+"high and low activity"
+
+candid=767 pos="N A N N"
+"hiv ltr-driven luciferase expression"
+
+candid=768 pos="A CC A N"
+"hiv-1 and hiv-2 display"
+
+candid=769 pos="A N N N"
+"human erythropoietin receptor gene"
+
+candid=770 pos="N N"
+"il-2 expression"
+
+candid=771 pos="N N"
+"lps stimulation"
+
+candid=772 pos="N N"
+"lyn tyrosine"
+
+candid=773 pos="A N N"
+"multiple tyrosine kinases"
+
+candid=774 pos="A N"
+"myeloid leukemias"
+
+candid=775 pos="A N N"
+"nk3.3 cell line"
+
+candid=776 pos="A N"
+"precise role"
+
+candid=777 pos="A N"
+"primary regulator"
+
+candid=778 pos="N N"
+"protein kinase"
+
+candid=779 pos="N N N N"
+"repair enzyme uracil-dna glycosylase"
+
+candid=780 pos="N N"
+"sequence similarity"
+
+candid=781 pos="N N"
+"site-binding protein"
+
+candid=782 pos="A N"
+"stat1 alpha"
+
+candid=783 pos="A A N N"
+"620-bp human gm-csf promoter-"
+
+candid=784 pos="N N"
+"ag receptor"
+
+candid=785 pos="N N"
+"anti-ig induction"
+
+candid=786 pos="N N"
+"cell ag"
+
+candid=787 pos="A N"
+"chinese hamster"
+
+candid=788 pos="N N N"
+"colony-stimulating factor gene"
+
+candid=789 pos="A N N"
+"glucocorticoid receptor number"
+
+candid=790 pos="A N N N"
+"human cytomegalovirus ie2 protein"
+
+candid=791 pos="A N N"
+"human gm-csf promoter-"
+
+candid=792 pos="A A N"
+"major transcriptional start"
+
+candid=793 pos="A N"
+"multiple ap2"
+
+candid=794 pos="A N"
+"reproductive target"
+
+candid=795 pos="A A A N N"
+"single major transcriptional start site"
+
+candid=796 pos="A A A N"
+"strong positive regulatory effect"
+
+candid=797 pos="N N"
+"t cell"
+
+candid=798 pos="A A N"
+"viral regulatory proteins"
+
+candid=799 pos="N N"
+"alpha protein"
+
+candid=800 pos="N N"
+"amino acid"
+
+candid=801 pos="A N N"
+"antigen/ chemokine receptor"
+
+candid=802 pos="N N"
+"calcium ionophore"
+
+candid=803 pos="A N"
+"calcium-dependent pma"
+
+candid=804 pos="N N N"
+"cell cycle control"
+
+candid=805 pos="N N N"
+"cycle-dependent transcription factor"
+
+candid=806 pos="N N"
+"cytokine message"
+
+candid=807 pos="N N"
+"dissociation rate"
+
+candid=808 pos="A N"
+"distinct effects"
+
+candid=809 pos="N N"
+"finger region"
+
+candid=810 pos="A N"
+"gata-1 levels"
+
+candid=811 pos="N N"
+"gland tissue"
+
+candid=812 pos="N NUM"
+"homology 3"
+
+candid=813 pos="A A N"
+"human glucocorticoid receptor"
+
+candid=814 pos="N N"
+"immunodeficiency virus"
+
+candid=815 pos="N N"
+"kinase inhibitor"
+
+candid=816 pos="A A N"
+"marrow-derived erythroid progenitor"
+
+candid=817 pos="N N"
+"mouse il-2r"
+
+candid=818 pos="A A N"
+"nuclear tal1 protein"
+
+candid=819 pos="A N"
+"palindromic sequences"
+
+candid=820 pos="N N"
+"run-on assays"
+
+candid=821 pos="A N"
+"s phase"
+
+candid=822 pos="A N"
+"several methods"
+
+candid=823 pos="N N"
+"skin cancer"
+
+candid=824 pos="N N N"
+"syk tyrosine kinase"
+
+candid=825 pos="N N N N NUM"
+"t leukemia virus type 1"
+
+candid=826 pos="N N"
+"tumor necrosis"
+
+candid=827 pos="N N"
+"type i"
+
+candid=828 pos="A A N N"
+"major transcriptional start site"
+
+candid=829 pos="A A N"
+"new biologic markers"
+
+candid=830 pos="A A N"
+"novel nuclear factor"
+
+candid=831 pos="A N"
+"second messengers"
+
+candid=832 pos="N N"
+"stat3 complexes"
+
+candid=833 pos="A N N N"
+"vacuolar h(+)-atpase b2 subunit"
+
+candid=834 pos="N N"
+"acid sequence"
+
+candid=835 pos="A N"
+"cd4 promoter"
+
+candid=836 pos="N N"
+"cell lineages"
+
+candid=837 pos="A N N"
+"chemical-induced erythroleukemia cell"
+
+candid=838 pos="N N"
+"cytokine expression"
+
+candid=839 pos="A N"
+"enhanced production"
+
+candid=840 pos="N N"
+"epor promoter"
+
+candid=841 pos="N N"
+"gm-csf mrnas"
+
+candid=842 pos="N A N"
+"hiv ltr-driven luciferase"
+
+candid=843 pos="A N N N"
+"human jurkat t cells"
+
+candid=844 pos="A N N"
+"human stat proteins"
+
+candid=845 pos="N N N"
+"ii mhc genes"
+
+candid=846 pos="A N"
+"il-1 alpha"
+
+candid=847 pos="N N"
+"inhibitor h-89"
+
+candid=848 pos="N N"
+"jurkat cells"
+
+candid=849 pos="A N"
+"low levels"
+
+candid=850 pos="N N"
+"mouse interleukin-2"
+
+candid=851 pos="A N"
+"murine macrophage"
+
+candid=852 pos="N N"
+"nf-at transcription"
+
+candid=853 pos="N N N N N"
+"nf-kappa b-independent hiv promoter domain"
+
+candid=854 pos="A N N"
+"northern blot analysis"
+
+candid=855 pos="A A N"
+"numerous intracellular substrates"
+
+candid=856 pos="A N N N"
+"other leukocyte adhesion molecules"
+
+candid=857 pos="N N"
+"polyomavirus enhancer"
+
+candid=858 pos="A N"
+"sp1 site"
+
+candid=859 pos="N N"
+"t-cell stimulation"
+
+candid=860 pos="N N N"
+"transfection assay result"
+
+candid=861 pos="A N"
+"transient vs"
+
+candid=862 pos="A CC A N"
+"antiatherogenic and antiinflammatory properties"
+
+candid=863 pos="A CC A N"
+"b7 and lfa-3 costimulation"
+
+candid=864 pos="N N"
+"beta-galactosidase activity"
+
+candid=865 pos="N A N"
+"cell lineage-specific activator"
+
+candid=866 pos="N N"
+"cell proliferation"
+
+candid=867 pos="A N"
+"cellular processes"
+
+candid=868 pos="N N N"
+"class ii proteins"
+
+candid=869 pos="N N"
+"danazol decreases"
+
+candid=870 pos="A N"
+"different parts"
+
+candid=871 pos="A N N N"
+"duffy blood group antigen"
+
+candid=872 pos="A N"
+"early event"
+
+candid=873 pos="A N N N"
+"human t leukemia virus"
+
+candid=874 pos="A A N"
+"immediate biochemical response"
+
+candid=875 pos="N N N"
+"inhibitor i kappa"
+
+candid=876 pos="N N"
+"kinase protein"
+
+candid=877 pos="N N N"
+"lpr cd4-cd8- t"
+
+candid=878 pos="A N"
+"mutant-activated ras"
+
+candid=879 pos="A N N"
+"natural killer cells"
+
+candid=880 pos="N N"
+"nucleoside diphosphate"
+
+candid=881 pos="A N"
+"on-going lps"
+
+candid=882 pos="N N"
+"ovulation induction"
+
+candid=883 pos="N N N"
+"plasmodium vivax malaria"
+
+candid=884 pos="A N"
+"several criteria"
+
+candid=885 pos="A N"
+"sp1 functions"
+
+candid=886 pos="A N"
+"tnf-induced nf-kappa"
+
+candid=887 pos="N N"
+"1,25-dihydroxyvitamin d2"
+
+candid=888 pos="N N N"
+"acid sequence similarity"
+
+candid=889 pos="A N"
+"anti-cd4 mab"
+
+candid=890 pos="N N N"
+"blood group antigen"
+
+candid=891 pos="N N"
+"blood lymphocytes"
+
+candid=892 pos="N N"
+"blot analysis"
+
+candid=893 pos="N N N"
+"bone marrow cultures"
+
+candid=894 pos="A N"
+"different research"
+
+candid=895 pos="A N N"
+"different role monocytes"
+
+candid=896 pos="A N N"
+"glucocorticoid receptor affinity"
+
+candid=897 pos="A A N"
+"human lymphoid cell"
+
+candid=898 pos="N A N"
+"ii deficient b-cell"
+
+candid=899 pos="A N"
+"il-2 cd28re"
+
+candid=900 pos="N N N"
+"immunodeficiency virus type"
+
+candid=901 pos="A N"
+"inhibitory effect"
+
+candid=902 pos="A N N"
+"mixed lymphocyte reaction"
+
+candid=903 pos="A N N"
+"murine t lymphocyte"
+
+candid=904 pos="A N"
+"negative regulator"
+
+candid=905 pos="A N N"
+"nm23/ ndp kinase"
+
+candid=906 pos="A N"
+"ras/ protein"
+
+candid=907 pos="A A N"
+"several il-2-inducible dna"
+
+candid=908 pos="N N"
+"signal transducer"
+
+candid=909 pos="A N"
+"significant difference"
+
+candid=910 pos="A N"
+"spastic paraparesis"
+
+candid=911 pos="N N N"
+"t helper cells"
+
+candid=912 pos="N N"
+"tcdd treatment"
+
+candid=913 pos="N N N"
+"transcription initiation site"
+
+candid=914 pos="A N"
+"transcriptional control"
+
+candid=915 pos="A N"
+"biological modifications"
+
+candid=916 pos="N N N N"
+"consensus ah receptor dna"
+
+candid=917 pos="N N"
+"control mechanisms"
+
+candid=918 pos="A N"
+"il-10-stimulated stat"
+
+candid=919 pos="N N N"
+"promoter- luciferase reporter"
+
+candid=920 pos="A N"
+"purine-rich element"
+
+candid=921 pos="N N"
+"t cells"
+
+candid=922 pos="A A N"
+"weak inducible complex"
+
+candid=923 pos="N N"
+"alpha/ gos19"
+
+candid=924 pos="A N"
+"b-encoded isomers"
+
+candid=925 pos="N N N N"
+"b-independent hiv promoter domain"
+
+candid=926 pos="N N"
+"blood t"
+
+candid=927 pos="N N N"
+"class ii mhc"
+
+candid=928 pos="A N"
+"critical element"
+
+candid=929 pos="A N"
+"cytolytic phenotypes"
+
+candid=930 pos="A N N"
+"different cd4 epitopes"
+
+candid=931 pos="N N"
+"diphosphate kinase"
+
+candid=932 pos="N N N N"
+"dna repair enzyme uracil-dna"
+
+candid=933 pos="A N"
+"dr-nm23 mrna"
+
+candid=934 pos="A N"
+"erythroid progenitor"
+
+candid=935 pos="A N"
+"experimental system"
+
+candid=936 pos="N N N"
+"factor promoter activity"
+
+candid=937 pos="A N N"
+"human t cell"
+
+candid=938 pos="N N"
+"ifn-gamma induction"
+
+candid=939 pos="A N"
+"il-1 beta"
+
+candid=940 pos="A N"
+"mip1 alpha"
+
+candid=941 pos="N N"
+"monoclonal antibodies"
+
+candid=942 pos="A N N"
+"nuclear run-on assays"
+
+candid=943 pos="A A N N N"
+"primary human bone marrow cultures"
+
+candid=944 pos="N N"
+"protein tyrosine"
+
+candid=945 pos="A N"
+"rapid signal-transduction"
+
+candid=946 pos="N N N"
+"receptor type ic"
+
+candid=947 pos="N N"
+"tumor lines"
+
+candid=948 pos="N N N"
+"tumor suppressor protein"
+
+candid=949 pos="N A N N"
+"vs stable e1a expression"
+
+candid=950 pos="N N"
+"activator protein"
+
+candid=951 pos="N N N"
+"beta-galactosidase mrna levels"
+
+candid=952 pos="A N"
+"constitutive expression"
+
+candid=953 pos="N N"
+"cyclooxygenase activity"
+
+candid=954 pos="N N N"
+"cytokine message induction"
+
+candid=955 pos="N N"
+"erythrocyte ndp"
+
+candid=956 pos="A N"
+"glucocorticoid receptors"
+
+candid=957 pos="N A N N"
+"growth response-1 gene expression"
+
+candid=958 pos="A A N"
+"human monocytic cell"
+
+candid=959 pos="N N"
+"lac-z reporter"
+
+candid=960 pos="A N"
+"lps-mediated activation"
+
+candid=961 pos="N N"
+"lymphocyte cell"
+
+candid=962 pos="A N"
+"nur77-related transcription"
+
+candid=963 pos="N N"
+"orticoid receptors"
+
+candid=964 pos="A N"
+"regulatory elements"
+
+candid=965 pos="A N N"
+"reproductive target tissues"
+
+candid=966 pos="A A N"
+"significant negative correlation"
+
+candid=967 pos="A A N"
+"transfected erythroid cells"
+
+candid=968 pos="A N"
+"32dc13 cell"
+
+candid=969 pos="N N N N"
+"adult t cell leukemia"
+
+candid=970 pos="N N N N"
+"class i mhc antigen"
+
+candid=971 pos="N N N"
+"class ii molecules"
+
+candid=972 pos="N A N"
+"cotton top tamarin"
+
+candid=973 pos="N N"
+"cytokine redundancy"
+
+candid=974 pos="A N"
+"different lines"
+
+candid=975 pos="A N"
+"duffy blood"
+
+candid=976 pos="N N"
+"factor alpha"
+
+candid=977 pos="A A A N"
+"few viral regulatory proteins"
+
+candid=978 pos="A N"
+"functional t-cell"
+
+candid=979 pos="A N N N NUM N"
+"human immunodeficiency virus type 2 enhancer"
+
+candid=980 pos="N N"
+"ie2 protein"
+
+candid=981 pos="A N"
+"inflammatory protein"
+
+candid=982 pos="A N N"
+"intensive care unit"
+
+candid=983 pos="A N"
+"intensive care"
+
+candid=984 pos="N N N"
+"interferon-gamma activation sequence"
+
+candid=985 pos="N N N N N N"
+"mouse interleukin-2 receptor alpha gene expression"
+
+candid=986 pos="A N"
+"patient group"
+
+candid=987 pos="A CC A N"
+"positive and negative regulation"
+
+candid=988 pos="A A N"
+"putative downstream site"
+
+candid=989 pos="A A N"
+"putative metastatic suppressor"
+
+candid=990 pos="N N"
+"retinoblastoma protein"
+
+candid=991 pos="A N"
+"septic shock"
+
+candid=992 pos="A N N"
+"tcr-induced protein tyrosine"
+
+candid=993 pos="N N"
+"alpha-globin gene"
+
+candid=994 pos="A N N"
+"bactericidal/ permeability-increasing protein"
+
+candid=995 pos="A N"
+"biological markers"
+
+candid=996 pos="A N N"
+"cd28 cell surface"
+
+candid=997 pos="A N"
+"distinct region"
+
+candid=998 pos="N N N"
+"dnase i footprinting"
+
+candid=999 pos="A N"
+"essential feature"
+
+candid=1000 pos="N N"
+"h(+)-atpase b2"
+
+candid=1001 pos="A N"
+"large amounts"
+
+candid=1002 pos="A A N"
+"major inducible protein"
+
+candid=1003 pos="N N N"
+"mobility shift assays"
+
+candid=1004 pos="A N"
+"nm23-h2 gene"
+
+candid=1005 pos="A N"
+"powerful enhancer"
+
+candid=1006 pos="N N"
+"tax activation"
+
+candid=1007 pos="N N"
+"tumor metastasis"
+
+candid=1008 pos="A CC N N"
+"vcam-1 and e-selectin upregulation"
+
+candid=1009 pos="N N NUM N"
+"78-nucleotide segment 1.3 kilobases"
+
+candid=1010 pos="A N"
+"biological effects"
+
+candid=1011 pos="N N"
+"cell cycle"
+
+candid=1012 pos="A N"
+"chemical-induced erythroleukemia"
+
+candid=1013 pos="A V N"
+"distinct signaling properties"
+
+candid=1014 pos="A N"
+"e2f-mediated transcription"
+
+candid=1015 pos="N N N N N"
+"fc gamma ri transcript levels"
+
+candid=1016 pos="N N"
+"host defence"
+
+candid=1017 pos="A N N"
+"human bone marrow"
+
+candid=1018 pos="N N"
+"il-12 stimulation"
+
+candid=1019 pos="N N N"
+"il-2 receptor alpha"
+
+candid=1020 pos="N N N"
+"il-2r alpha expression"
+
+candid=1021 pos="N N N"
+"jurkat t cells"
+
+candid=1022 pos="A N A N"
+"major histocompatibility complex class"
+
+candid=1023 pos="N N"
+"mapping experiments"
+
+candid=1024 pos="A A N"
+"mip-1 alpha/ gos19"
+
+candid=1025 pos="N N N N"
+"mouse interleukin-2 receptor alpha"
+
+candid=1026 pos="A N"
+"multiple tyrosine"
+
+candid=1027 pos="A N N"
+"pebp2 alpha a1"
+
+candid=1028 pos="N A N N"
+"precursor 32dc13 cell line"
+
+candid=1029 pos="N N"
+"promoter region"
+
+candid=1030 pos="N A N"
+"protein binding site"
+
+candid=1031 pos="N N"
+"protein-affinity chromatography"
+
+candid=1032 pos="N NUM"
+"saos 2"
+
+candid=1033 pos="N N N"
+"shc adaptor protein"
+
+candid=1034 pos="A N"
+"tal1 gene"
+
+candid=1035 pos="N N"
+"alpha-globin enhancer"
+
+candid=1036 pos="A N N"
+"cd3 zeta tyrosine"
+
+candid=1037 pos="N N"
+"control subjects"
+
+candid=1038 pos="A N N"
+"duffy gene promoter"
+
+candid=1039 pos="N N"
+"erythrocyte receptor"
+
+candid=1040 pos="N N N N"
+"gel mobility shift assay"
+
+candid=1041 pos="A N"
+"glucocorticoid target"
+
+candid=1042 pos="A N N N N"
+"human t leukemia virus type"
+
+candid=1043 pos="N N"
+"leukemia cells"
+
+candid=1044 pos="A N"
+"lineage-specific activator"
+
+candid=1045 pos="A N"
+"lymphoid cells"
+
+candid=1046 pos="N N"
+"microm inhibitors"
+
+candid=1047 pos="A N"
+"mononuclear leucocytes"
+
+candid=1048 pos="A N"
+"scatchard analysis"
+
+candid=1049 pos="A N A N"
+"umbilical vein endothelial cells"
+
+candid=1050 pos="N N"
+"v-atpase content"
+
+candid=1051 pos="A N"
+"asymmetric cell"
+
+candid=1052 pos="A N"
+"biological significance"
+
+candid=1053 pos="N N N"
+"cell surface enzyme"
+
+candid=1054 pos="N N N"
+"class i mhc"
+
+candid=1055 pos="A N"
+"developmental expression"
+
+candid=1056 pos="A N"
+"epithelial cells"
+
+candid=1057 pos="A N"
+"epo-induced phosphorylation"
+
+candid=1058 pos="A N"
+"functional regions"
+
+candid=1059 pos="A CC A N"
+"gata-1 and er associate"
+
+candid=1060 pos="A N N"
+"integrin-mediated tyrosine phosphorylation"
+
+candid=1061 pos="N N"
+"jak phosphorylation"
+
+candid=1062 pos="N N N"
+"kinase inhibitor h-89"
+
+candid=1063 pos="A N N"
+"lps-induced tnf mrna"
+
+candid=1064 pos="A N"
+"lps-induced tnf"
+
+candid=1065 pos="A N"
+"lymphoid cell"
+
+candid=1066 pos="N N"
+"macrophage cell"
+
+candid=1067 pos="A N N"
+"mass action law"
+
+candid=1068 pos="A N"
+"mononuclear leucocyte"
+
+candid=1069 pos="A A N N"
+"multiple nuclear factors bind"
+
+candid=1070 pos="N N"
+"p &amp;lt"
+
+candid=1071 pos="N N"
+"p95vav overexpression"
+
+candid=1072 pos="N N"
+"protein products"
+
+candid=1073 pos="A N"
+"recent demonstration"
+
+candid=1074 pos="N N"
+"retinoblastoma gene"
+
+candid=1075 pos="N N"
+"run-on analysis"
+
+candid=1076 pos="A N A N N"
+"transient vs stable e1a expression"
+
+candid=1077 pos="N NUM"
+"type 1"
+
+candid=1078 pos="N N"
+"world primates"
+
+candid=1079 pos="N N"
+"anti-cd28 ab"
+
+candid=1080 pos="A N N"
+"calcium-independent anti-cd28 ab"
+
+candid=1081 pos="A A N N"
+"gata1 erythroid transcription factor"
+
+candid=1082 pos="A N"
+"human granulocyte-macrophage"
+
+candid=1083 pos="A N A N N"
+"human t lymphoid cell line"
+
+candid=1084 pos="A A N"
+"i-factor/ nm23 protein"
+
+candid=1085 pos="A N"
+"inflammatory process"
+
+candid=1086 pos="A N"
+"intracellular calcium"
+
+candid=1087 pos="A N N"
+"ndp kinase activity"
+
+candid=1088 pos="A A A N"
+"novel il-2 transcriptional inhibitors"
+
+candid=1089 pos="A N"
+"retarded mobility"
+
+candid=1090 pos="N N N"
+"ribonuclease protection analyses"
+
+candid=1091 pos="N N N"
+"sephacryl g-200 ultrafiltration"
+
+candid=1092 pos="N N N"
+"transcription factor sp1"
+
+candid=1093 pos="N N"
+"% sequence"
+
+candid=1094 pos="A A A N N N"
+"13-acetate/ phytohemagglutinin-stimulated human jurkat t cells"
+
+candid=1095 pos="N N"
+"bp promoter"
+
+candid=1096 pos="N N"
+"cell cycle-dependent"
+
+candid=1097 pos="N N N"
+"class ii expression"
+
+candid=1098 pos="N N N N"
+"class ii gene transactivator"
+
+candid=1099 pos="N N"
+"coat protein"
+
+candid=1100 pos="N N N"
+"dna strand competition"
+
+candid=1101 pos="N N N"
+"e1a gene expression"
+
+candid=1102 pos="N N"
+"ebv genome"
+
+candid=1103 pos="A N"
+"er associate"
+
+candid=1104 pos="A CC N N"
+"hematopoietic and trophoblast cells"
+
+candid=1105 pos="N N N N"
+"igg fc receptor type"
+
+candid=1106 pos="N N"
+"il-2r alpha"
+
+candid=1107 pos="A N"
+"intense phosphorylation"
+
+candid=1108 pos="A N"
+"metastatic potential"
+
+candid=1109 pos="A N"
+"metastatic suppressor"
+
+candid=1110 pos="A N A N"
+"mip1 alpha nuclear protein"
+
+candid=1111 pos="N N"
+"mouse gm-csf"
+
+candid=1112 pos="A N N"
+"pebp2 site-binding protein"
+
+candid=1113 pos="A N"
+"sp1 protein"
+
+candid=1114 pos="N N N"
+"surface enzyme immunoassays"
+
+candid=1115 pos="A A N"
+"tropical spastic paraparesis"
+
+candid=1116 pos="N N"
+"udg promoter"
+
+candid=1117 pos="A N N N"
+"various tumor cell types"
+
+candid=1118 pos="N N"
+"b2 subunit"
+
+candid=1119 pos="A N"
+"binding affinity"
+
+candid=1120 pos="N N N N"
+"cell ag receptor complex"
+
+candid=1121 pos="N N"
+"cell transcription"
+
+candid=1122 pos="A N"
+"critical illness"
+
+candid=1123 pos="A N N"
+"enhanced c-fos induction"
+
+candid=1124 pos="N N"
+"group system"
+
+candid=1125 pos="N N N N"
+"h(+)-atpase b2 subunit gene"
+
+candid=1126 pos="A N N"
+"new world primates"
+
+candid=1127 pos="N N"
+"reporter plasmids"
+
+candid=1128 pos="A A N"
+"several t-cell-expressed cytokines"
+
+candid=1129 pos="A N"
+"stable integration"
+
+candid=1130 pos="A N"
+"subsequent monocyte"
+
+candid=1131 pos="A N N"
+"t-cell-expressed cytokine genes"
+
+candid=1132 pos="A A N"
+"upstream nuclear factor-kappa"
+
+candid=1133 pos="N N"
+"activation site"
+
+candid=1134 pos="A N"
+"bare lymphocyte"
+
+candid=1135 pos="N N N"
+"cell adhesion molecule-1"
+
+candid=1136 pos="A N"
+"cellular factors"
+
+candid=1137 pos="N N"
+"defence response"
+
+candid=1138 pos="N N"
+"enhancer binding-protein"
+
+candid=1139 pos="N N N N"
+"fc gamma ri transcription"
+
+candid=1140 pos="N A N"
+"friend virus-induced erythroblasts"
+
+candid=1141 pos="N N"
+"glycoprotein hormone"
+
+candid=1142 pos="A N"
+"integrin-dependent cell"
+
+candid=1143 pos="N N N"
+"leukocyte adhesion molecules"
+
+candid=1144 pos="A N N N"
+"major transcription start site"
+
+candid=1145 pos="A A A N"
+"many erythroid cell-specific genes"
+
+candid=1146 pos="A N"
+"matrix-bound rb"
+
+candid=1147 pos="A N N"
+"new world primate"
+
+candid=1148 pos="A N"
+"nitric oxide"
+
+candid=1149 pos="A N N"
+"other leukocyte adhesion"
+
+candid=1150 pos="A N"
+"positive effect"
+
+candid=1151 pos="A N"
+"preactivated pbl"
+
+candid=1152 pos="A N"
+"primary t"
+
+candid=1153 pos="A N"
+"recent studies"
+
+candid=1154 pos="N N"
+"reporter plasmid"
+
+candid=1155 pos="N N N N N"
+"t cell line jurkat j6"
+
+candid=1156 pos="N N N"
+"transcription factor nf-kappa"
+
+candid=1157 pos="A N"
+"transfected cos"
+
+candid=1158 pos="N N"
+"transfection studies"
+
+candid=1159 pos="A N"
+"various stimuli"
+
+candid=1160 pos="N N"
+"ah receptor"
+
+candid=1161 pos="N N"
+"antigen receptors"
+
+candid=1162 pos="A N"
+"continuous presence"
+
+candid=1163 pos="A N"
+"estrogenic receptors"
+
+candid=1164 pos="N N N"
+"far-upstream alpha-globin enhancer"
+
+candid=1165 pos="A N"
+"inhibitory factor"
+
+candid=1166 pos="N N N N"
+"lpr cd4-cd8- t lymphocytes"
+
+candid=1167 pos="A N"
+"native monocytes"
+
+candid=1168 pos="A A N"
+"ngfi-b/ nur77 family"
+
+candid=1169 pos="A N"
+"nuclear runoff"
+
+candid=1170 pos="A N"
+"present study"
+
+candid=1171 pos="N N N"
+"protein phosphatase type"
+
+candid=1172 pos="A A N"
+"several t-cell-expressed cytokine"
+
+candid=1173 pos="N N"
+"transduction pathways"
+
+candid=1174 pos="A N N"
+"vacuolar h(+)-atpase b2"
+
+candid=1175 pos="N N"
+"zeta tyrosine"
+
+candid=1176 pos="A N"
+"-negative b-cell"
+
+candid=1177 pos="A N"
+"20-bp region"
+
+candid=1178 pos="N N"
+"aids cases"
+
+candid=1179 pos="N N"
+"bone marrow"
+
+candid=1180 pos="N N"
+"bp hepor"
+
+candid=1181 pos="N N A N N"
+"class ii deficient b-cell lines"
+
+candid=1182 pos="N N"
+"control elements"
+
+candid=1183 pos="A N N"
+"cp/ wp promoter"
+
+candid=1184 pos="N N N"
+"de novo ebv"
+
+candid=1185 pos="N N"
+"dna repair"
+
+candid=1186 pos="N N"
+"e1a gene"
+
+candid=1187 pos="N N N N"
+"family tyrosine kinase jak2"
+
+candid=1188 pos="N N N"
+"gamma ri transcription"
+
+candid=1189 pos="A CC A N"
+"gata-1 and er bind"
+
+candid=1190 pos="N N"
+"granulocyte differentiation"
+
+candid=1191 pos="N N N"
+"granulocyte-macrophage colony-stimulating factor"
+
+candid=1192 pos="A A N N N"
+"htlv-i-infected peripheral blood t cells"
+
+candid=1193 pos="A N"
+"human stat"
+
+candid=1194 pos="N N N"
+"il transactivator ciita"
+
+candid=1195 pos="A N"
+"key cytokine"
+
+candid=1196 pos="A N"
+"lymphotropic virus"
+
+candid=1197 pos="A N"
+"multifunctional target"
+
+candid=1198 pos="A N"
+"nk cell"
+
+candid=1199 pos="N N N"
+"novo ebv infection"
+
+candid=1200 pos="N N N N"
+"promoter reporter gene constructs"
+
+candid=1201 pos="N N N N"
+"protein tyrosine kinase activity"
+
+candid=1202 pos="A N"
+"such monocyte"
+
+candid=1203 pos="N N N"
+"ah receptor dna"
+
+candid=1204 pos="A N"
+"alpha-globin g"
+
+candid=1205 pos="N N"
+"anti-ig stimulation"
+
+candid=1206 pos="A N"
+"biological models"
+
+candid=1207 pos="N N N"
+"cell v-atpase content"
+
+candid=1208 pos="N N"
+"class ii"
+
+candid=1209 pos="A N A N N"
+"early growth response-1 gene expression"
+
+candid=1210 pos="A N"
+"exogenous il-2"
+
+candid=1211 pos="A N N N N"
+"human erythrocyte ndp kinase protein"
+
+candid=1212 pos="A N"
+"human erythrocyte"
+
+candid=1213 pos="A N N"
+"human leukemia cells"
+
+candid=1214 pos="A N N"
+"il-4 gene transcription"
+
+candid=1215 pos="N N"
+"pp-2a-opposing kinases"
+
+candid=1216 pos="A A A N"
+"13-acetate/ phytohemagglutinin-stimulated human jurkat"
+
+candid=1217 pos="N N N N N"
+"alpha b1/ alpha b2 ratio"
+
+candid=1218 pos="A N"
+"artificial promoter"
+
+candid=1219 pos="N N N"
+"blood t cells"
+
+candid=1220 pos="N N"
+"calcium flux"
+
+candid=1221 pos="A N"
+"differential effect"
+
+candid=1222 pos="A N N"
+"erythroid progenitor cells"
+
+candid=1223 pos="N N N"
+"erythroleukemia cell lines"
+
+candid=1224 pos="A CC N N"
+"human and mouse gene"
+
+candid=1225 pos="A N N N NUM"
+"human immunodeficiency virus type 2"
+
+candid=1226 pos="A A N"
+"ick-1 binding site"
+
+candid=1227 pos="N N"
+"ifn-gamma activation"
+
+candid=1228 pos="N N"
+"mrna levels"
+
+candid=1229 pos="N N"
+"mutagenesis analyses"
+
+candid=1230 pos="A N"
+"myelogenous leukemia"
+
+candid=1231 pos="N N N"
+"nk cell line"
+
+candid=1232 pos="N N N"
+"nucleotide exchange domain"
+
+candid=1233 pos="N N"
+"protein tbp"
+
+candid=1234 pos="N N N N"
+"receptor type ic gene"
+
+candid=1235 pos="N N"
+"ri expression"
+
+candid=1236 pos="N A N"
+"stat nuclear factors"
+
+candid=1237 pos="N N N"
+"t cell transformation"
+
+candid=1238 pos="N N"
+"tcr expression"
+
+candid=1239 pos="A N"
+"transfected target"
+
+candid=1240 pos="N N N"
+"tumour necrosis factor"
+
+candid=1241 pos="N A N"
+"vein endothelial cells"
+
+candid=1242 pos="A N"
+"cell-specific patterns"
+
+candid=1243 pos="N N"
+"chemokine receptor"
+
+candid=1244 pos="A N"
+"early growth"
+
+candid=1245 pos="A N N"
+"efficient c-fos induction"
+
+candid=1246 pos="A N"
+"healthy laboratory"
+
+candid=1247 pos="A N"
+"helical turns"
+
+candid=1248 pos="N N"
+"hl cytosol"
+
+candid=1249 pos="A N N N"
+"human erythrocyte ndp kinase"
+
+candid=1250 pos="A A N N"
+"il-1 beta message induction"
+
+candid=1251 pos="N N N"
+"lac-z reporter gene"
+
+candid=1252 pos="A A N"
+"nfat-1 regulatory element"
+
+candid=1253 pos="A A N N"
+"novel il-10-stimulated stat protein"
+
+candid=1254 pos="N N"
+"promoter induction"
+
+candid=1255 pos="N N"
+"receptor dna"
+
+candid=1256 pos="A A N"
+"recombinant n-terminal fragment"
+
+candid=1257 pos="A N"
+"silent fy@star@b"
+
+candid=1258 pos="N N"
+"target tissues"
+
+candid=1259 pos="A N"
+"temperature-induced down-regulation"
+
+candid=1260 pos="N N A N"
+"transcription factor nuclear factor-kappa"
+
+candid=1261 pos="A N"
+"b7/ lfa-3triple"
+
+candid=1262 pos="A N"
+"binding sites"
+
+candid=1263 pos="A N N N"
+"canonical dna sequence canntg"
+
+candid=1264 pos="A N"
+"cell-specific genes"
+
+candid=1265 pos="A N"
+"cellular promoters"
+
+candid=1266 pos="N N N"
+"consensus ah receptor"
+
+candid=1267 pos="A N"
+"developmental control"
+
+candid=1268 pos="A N N"
+"duffy blood group"
+
+candid=1269 pos="A N N"
+"egr-1 gene expression"
+
+candid=1270 pos="A N A N"
+"epstein-barr virus replicative gene"
+
+candid=1271 pos="A N"
+"er form"
+
+candid=1272 pos="N N"
+"g3ag4ag3 motif"
+
+candid=1273 pos="N NUM"
+"homology 2"
+
+candid=1274 pos="A N N"
+"human udg promoter"
+
+candid=1275 pos="A N N"
+"linear ebv genome"
+
+candid=1276 pos="N N"
+"malaria parasite"
+
+candid=1277 pos="N N"
+"map kinases"
+
+candid=1278 pos="A N"
+"neoplastic progression"
+
+candid=1279 pos="A N"
+"pebp2 alpha"
+
+candid=1280 pos="A N N"
+"peripheral blood lymphocytes"
+
+candid=1281 pos="A N"
+"regulatory effect"
+
+candid=1282 pos="N N"
+"shift assays"
+
+candid=1283 pos="A A N"
+"sp1 binding motif"
+
+candid=1284 pos="N N"
+"udg expression"
+
+candid=1285 pos="A N"
+"viral infection"
+
+candid=1286 pos="N N"
+"world primate"
+
+candid=1287 pos="N N N"
+"zinc finger protein"
+
+candid=1288 pos="A N"
+"zlf-1 gene"
+
+candid=1289 pos="A A N N N N"
+"620-bp human gm-csf promoter- luciferase reporter"
+
+candid=1290 pos="A N"
+"differential assembly"
+
+candid=1291 pos="A A N"
+"fundamental cellular processes"
+
+candid=1292 pos="N N"
+"gm-csf promoter-"
+
+candid=1293 pos="A N N"
+"high level gene"
+
+candid=1294 pos="A N N N N"
+"human gm-csf promoter- luciferase reporter"
+
+candid=1295 pos="A N N"
+"nfat-1-mediated beta-galactosidase activity"
+
+candid=1296 pos="A N N"
+"nm23-h2 gene product"
+
+candid=1297 pos="N N"
+"permeability-increasing protein"
+
+candid=1298 pos="N N"
+"promoter- luciferase"
+
+candid=1299 pos="N N N"
+"stat protein pairs"
+
+candid=1300 pos="N N"
+"surface interactions"
+
+candid=1301 pos="N N"
+"b2 ratio"
+
+candid=1302 pos="A N"
+"brlf-1 locus"
+
+candid=1303 pos="N N"
+"cell surface"
+
+candid=1304 pos="N N"
+"dna strand"
+
+candid=1305 pos="N N"
+"estrogen administration"
+
+candid=1306 pos="N N N N"
+"fc gamma ri expression"
+
+candid=1307 pos="N A N"
+"gamma ric gene"
+
+candid=1308 pos="N N"
+"gene family"
+
+candid=1309 pos="N N"
+"histone h5"
+
+candid=1310 pos="A N N"
+"jak2 tyrosine kinase"
+
+candid=1311 pos="A N"
+"latter genes"
+
+candid=1312 pos="A N"
+"ligand-dependent manner"
+
+candid=1313 pos="A N"
+"low-molecular-weight chemokines"
+
+candid=1314 pos="A N"
+"major coat"
+
+candid=1315 pos="A A A N"
+"major putative downstream site"
+
+candid=1316 pos="A N"
+"marked decrease"
+
+candid=1317 pos="A N"
+"minimal cd4"
+
+candid=1318 pos="A N"
+"mononuclear cells"
+
+candid=1319 pos="N N N"
+"mouse il-2r alpha"
+
+candid=1320 pos="A N N N"
+"murine t lymphocyte precursors"
+
+candid=1321 pos="N N"
+"nf-kappa b-independent"
+
+candid=1322 pos="N N"
+"protein complexes"
+
+candid=1323 pos="A A N"
+"rapid intracellular formation"
+
+candid=1324 pos="A N"
+"same complexes"
+
+candid=1325 pos="N N"
+"surface expression"
+
+candid=1326 pos="N N"
+"terminal repeat"
+
+candid=1327 pos="A N"
+"therapeutic effects"
+
+candid=1328 pos="A N N"
+"vascular cell adhesion"
+
+candid=1329 pos="N N"
+"zebra protein"
+
+candid=1330 pos="N N"
+"-dr transfectants"
+
+candid=1331 pos="N N N"
+"class ii inducibility"
+
+candid=1332 pos="A N"
+"duffy-negative individuals"
+
+candid=1333 pos="N N"
+"footprint analysis"
+
+candid=1334 pos="N N"
+"histocompatibility complex"
+
+candid=1335 pos="A N"
+"hypothalamic-pituitary-adrenal axis"
+
+candid=1336 pos="N N"
+"ii gene"
+
+candid=1337 pos="A N N"
+"im-9 cell line"
+
+candid=1338 pos="A N N"
+"inducible protein complex"
+
+candid=1339 pos="A N N"
+"integrated alpha-globin gene"
+
+candid=1340 pos="A N"
+"kinetic studies"
+
+candid=1341 pos="N A N"
+"leukemia m1 cells"
+
+candid=1342 pos="N N"
+"level gene"
+
+candid=1343 pos="N N"
+"ndp kinase"
+
+candid=1344 pos="A N"
+"normal human"
+
+candid=1345 pos="A N N"
+"phosphorylated i kappa"
+
+candid=1346 pos="N N N N"
+"plasmodium vivax malaria parasite"
+
+candid=1347 pos="N N"
+"pma stimulation"
+
+candid=1348 pos="A N"
+"possible involvement"
+
+candid=1349 pos="A N N"
+"second cell line"
+
+candid=1350 pos="N N N"
+"serum response element"
+
+candid=1351 pos="A N"
+"tcr-like signals"
+
+candid=1352 pos="N N"
+"transcription factor"
+
+candid=1353 pos="N N"
+"adaptor protein"
+
+candid=1354 pos="N N"
+"antigen receptor"
+
+candid=1355 pos="A N N"
+"basal cell carcinomas"
+
+candid=1356 pos="A N"
+"basal cell"
+
+candid=1357 pos="N N"
+"box elements"
+
+candid=1358 pos="N N"
+"ciita mrna"
+
+candid=1359 pos="A A N"
+"cytokine-induced endothelial activation"
+
+candid=1360 pos="A N"
+"distinct actions"
+
+candid=1361 pos="N N"
+"dnase i"
+
+candid=1362 pos="N N"
+"ebv infection"
+
+candid=1363 pos="A N N N"
+"electrophoretic mobility shift assays"
+
+candid=1364 pos="A N"
+"embryonic stem"
+
+candid=1365 pos="A N N"
+"enhanced gr expression"
+
+candid=1366 pos="A N N"
+"enhancer/ promoter region"
+
+candid=1367 pos="N N"
+"fva cells"
+
+candid=1368 pos="N A N"
+"histocompatibility complex class"
+
+candid=1369 pos="N A N"
+"hiv regulatory region"
+
+candid=1370 pos="A A N N"
+"human mip-1 alpha gene"
+
+candid=1371 pos="N N N"
+"ifn-gamma activation sequence"
+
+candid=1372 pos="A N"
+"interleukin-2 expression"
+
+candid=1373 pos="N N"
+"jak-stat pathways"
+
+candid=1374 pos="N N"
+"lymphocyte line"
+
+candid=1375 pos="N A N"
+"macrophage inflammatory protein"
+
+candid=1376 pos="A N"
+"mip-1 alpha/"
+
+candid=1377 pos="A A N"
+"multiple nuclear factors"
+
+candid=1378 pos="N N"
+"oxygen intermediates"
+
+candid=1379 pos="N N"
+"sequence canntg"
+
+candid=1380 pos="N N N"
+"tumor necrosis factor"
+
+candid=1381 pos="A N"
+"calcium-independent anti-cd28"
+
+candid=1382 pos="N A N"
+"calyculin a-induced i"
+
+candid=1383 pos="N N N N"
+"dna mobility shift assays"
+
+candid=1384 pos="A N"
+"healthy controls"
+
+candid=1385 pos="A N"
+"human alpha-globin"
+
+candid=1386 pos="A N N"
+"human cd19 gene"
+
+candid=1387 pos="N N A N"
+"il-2 share common control"
+
+candid=1388 pos="N N"
+"killer cells"
+
+candid=1389 pos="N N N"
+"kinase inhibitors genistein"
+
+candid=1390 pos="N N"
+"lpr cd4-cd8-"
+
+candid=1391 pos="A N"
+"negative correlation"
+
+candid=1392 pos="N N"
+"nm23-h2his protein"
+
+candid=1393 pos="A N"
+"ovulatory situation"
+
+candid=1394 pos="A V N"
+"possible signaling role"
+
+candid=1395 pos="A N"
+"proteasome-mediated degradation"
+
+candid=1396 pos="A N"
+"same cells"
+
+candid=1397 pos="A N"
+"sh2 domain"
+
+candid=1398 pos="N N"
+"species specificity"
+
+candid=1399 pos="A N"
+"specific members"
+
+candid=1400 pos="N A N N"
+"t lymphocytic cell line"
+
+candid=1401 pos="N A N"
+"alpha a1 antibodies"
+
+candid=1402 pos="A N"
+"binding studies"
+
+candid=1403 pos="N N"
+"calcium pathways"
+
+candid=1404 pos="N N"
+"class il"
+
+candid=1405 pos="A N"
+"erythroid progenitors"
+
+candid=1406 pos="N N A N"
+"fc gamma ric promoter"
+
+candid=1407 pos="N N"
+"gene promoter"
+
+candid=1408 pos="N N"
+"gr mrna"
+
+candid=1409 pos="N N N"
+"high-dose estrogen administration"
+
+candid=1410 pos="A N N"
+"htlv-i-mediated t cell"
+
+candid=1411 pos="A A N"
+"human monocytic cells"
+
+candid=1412 pos="A N N N"
+"human nk cell line"
+
+candid=1413 pos="A N"
+"human skin"
+
+candid=1414 pos="A N"
+"human thymocytes"
+
+candid=1415 pos="N N N"
+"il-2r alpha gene"
+
+candid=1416 pos="A CC A N"
+"interleukin-1 and interleukin-2 control"
+
+candid=1417 pos="A N"
+"lymphoblastic leukemia"
+
+candid=1418 pos="A N N"
+"metastatic suppressor gene"
+
+candid=1419 pos="N N"
+"nf-kappa b/"
+
+candid=1420 pos="A N"
+"nm23 function"
+
+candid=1421 pos="A N N"
+"novel fusion transcript"
+
+candid=1422 pos="A N"
+"obvious merit"
+
+candid=1423 pos="A N"
+"previous work"
+
+candid=1424 pos="A N N"
+"reactive oxygen production"
+
+candid=1425 pos="N N"
+"role monocytes"
+
+candid=1426 pos="N N"
+"shc adaptor"
+
+candid=1427 pos="N N"
+"t-cell activation"
+
+candid=1428 pos="A N"
+"tal1 mrna"
+
+candid=1429 pos="N N"
+"vitro exposure"
+
+candid=1430 pos="N N"
+"anti-stat3 ab"
+
+candid=1431 pos="N N N"
+"b2 subunit gene"
+
+candid=1432 pos="A CC A N"
+"biochemical and biophysical ones"
+
+candid=1433 pos="N A N"
+"blood mononuclear leucocyte"
+
+candid=1434 pos="N N"
+"c-rel proteins"
+
+candid=1435 pos="A N"
+"egr-1 promoter"
+
+candid=1436 pos="A N N"
+"htlv-1 transactivator protein"
+
+candid=1437 pos="A N N"
+"human t cells"
+
+candid=1438 pos="A A N"
+"human vacuolar h(+)-atpase"
+
+candid=1439 pos="N A N"
+"ii estrogenic receptors"
+
+candid=1440 pos="A N"
+"immune responsiveness"
+
+candid=1441 pos="N N"
+"induction systems"
+
+candid=1442 pos="N N"
+"monocyte-macrophage differentiation"
+
+candid=1443 pos="A A N"
+"strong positive effect"
+
+candid=1444 pos="N N"
+"type 2a"
+
+candid=1445 pos="N N"
+"amino acids"
+
+candid=1446 pos="N N"
+"b-alpha proteolysis"
+
+candid=1447 pos="A N"
+"cognate receptor"
+
+candid=1448 pos="A N N"
+"constitutive hepor expression"
+
+candid=1449 pos="N N"
+"cytokine messages"
+
+candid=1450 pos="A N"
+"cytoplasmic domains"
+
+candid=1451 pos="A A N"
+"different pebp2 isoforms"
+
+candid=1452 pos="A N"
+"dna-binding complex"
+
+candid=1453 pos="A N"
+"full activation"
+
+candid=1454 pos="A CC A N"
+"gata-1 and sp1 motifs"
+
+candid=1455 pos="A N"
+"granular lymphocytes"
+
+candid=1456 pos="A N N"
+"hematopoietic stem cells"
+
+candid=1457 pos="A A N"
+"human pebp2 alpha"
+
+candid=1458 pos="N N"
+"kinase inhibitors"
+
+candid=1459 pos="A N N"
+"lps-induced tnf production"
+
+candid=1460 pos="N N"
+"ltr constructs"
+
+candid=1461 pos="A N N"
+"major coat protein"
+
+candid=1462 pos="A N"
+"marked reduction"
+
+candid=1463 pos="N N"
+"message induction"
+
+candid=1464 pos="N N N N"
+"mouse il-2r alpha gene"
+
+candid=1465 pos="N N"
+"p95vav activity"
+
+candid=1466 pos="A N"
+"potent differentiation"
+
+candid=1467 pos="N N N"
+"protein synthesis-independent appearance"
+
+candid=1468 pos="N A N"
+"sheep mammary gland"
+
+candid=1469 pos="N N"
+"skin cancers"
+
+candid=1470 pos="N N"
+"tcr stimulation"
+
+candid=1471 pos="N N"
+"th2-type lymphocytes"
+
+candid=1472 pos="A A A N"
+"various fundamental cellular processes"
+
+candid=1473 pos="A N"
+"bactericidal/ permeability-increasing"
+
+candid=1474 pos="N N"
+"cell receptor"
+
+candid=1475 pos="N N"
+"i footprinting"
+
+candid=1476 pos="A N"
+"lipopolysaccharide-induced e-selectin"
+
+candid=1477 pos="N N N"
+"ndp kinase protein"
+
+candid=1478 pos="N N N"
+"t cells-binding factor"
+
+candid=1479 pos="N NUM"
+"binding-protein 2"
+
+candid=1480 pos="N N"
+"blood group"
+
+candid=1481 pos="N A N N N"
+"cd4-cd8- murine t lymphocyte precursors"
+
+candid=1482 pos="N N N N N"
+"class i mhc antigen expression"
+
+candid=1483 pos="A N"
+"concentration-dependent manner"
+
+candid=1484 pos="N N N N"
+"control il-2 receptor alpha"
+
+candid=1485 pos="A A N"
+"distinct cis-acting elements"
+
+candid=1486 pos="N N"
+"e2f sites"
+
+candid=1487 pos="N N"
+"exchange domain"
+
+candid=1488 pos="N N"
+"growth factor-beta"
+
+candid=1489 pos="A A N N"
+"htlv-i-infected peripheral blood t"
+
+candid=1490 pos="A N"
+"il-2 expression"
+
+candid=1491 pos="A N"
+"intact tcr"
+
+candid=1492 pos="N N N"
+"kappa b-alpha proteolysis"
+
+candid=1493 pos="N N N"
+"luciferase expression constructs"
+
+candid=1494 pos="A N N"
+"nm23 gene product"
+
+candid=1495 pos="A N"
+"post-transcriptional mechanisms"
+
+candid=1496 pos="A A N"
+"primary human bone"
+
+candid=1497 pos="A N"
+"promoter-driven reporter"
+
+candid=1498 pos="N N"
+"protein expression"
+
+candid=1499 pos="A A N"
+"sp1 binding sites"
+
+candid=1500 pos="N N N"
+"t cell lines"
+
+candid=1501 pos="N N N"
+"transcription proteins stat3"
+
+candid=1502 pos="N N N"
+"transcription start site"
+
+candid=1503 pos="N N"
+"udg gene"
+
+candid=1504 pos="N N"
+"zinc finger"
+
+candid=1505 pos="N N N"
+"alpha-globin gene expression"
+
+candid=1506 pos="A N"
+"core sequence"
+
+candid=1507 pos="A N"
+"human leukemia"
+
+candid=1508 pos="A N"
+"low concentrations"
+
+candid=1509 pos="A N"
+"other transcription"
+
+candid=1510 pos="N A N"
+"phosphatase 2a-sensitive sites"
+
+candid=1511 pos="A A N"
+"recombinant human nm23-h1"
+
+candid=1512 pos="A N"
+"selective modulation"
+
+candid=1513 pos="N N N"
+"alpha b1/ alpha"
+
+candid=1514 pos="N N"
+"alpha expression"
+
+candid=1515 pos="A N"
+"aml1-related transcription"
+
+candid=1516 pos="N N N N"
+"class ii mhc genes"
+
+candid=1517 pos="A N"
+"constitutive hepor"
+
+candid=1518 pos="N N"
+"cos cells"
+
+candid=1519 pos="N A N N"
+"dna binding protein complexes"
+
+candid=1520 pos="N N"
+"dna damage"
+
+candid=1521 pos="A N"
+"erythroid ocim1"
+
+candid=1522 pos="N N"
+"gene induction"
+
+candid=1523 pos="N N"
+"gene transactivator"
+
+candid=1524 pos="N N"
+"hepor expression"
+
+candid=1525 pos="A N"
+"homeostatic control"
+
+candid=1526 pos="A N"
+"ick-1 family"
+
+candid=1527 pos="N N N"
+"ifn-gamma gene expression"
+
+candid=1528 pos="A N"
+"il-2 control"
+
+candid=1529 pos="A N N"
+"mip-1 alpha gene"
+
+candid=1530 pos="A N"
+"normal t"
+
+candid=1531 pos="A A N"
+"potent transcriptional activator"
+
+candid=1532 pos="A N"
+"proximal position"
+
+candid=1533 pos="N N N"
+"rb expression vectors"
+
+candid=1534 pos="N N"
+"rb status"
+
+candid=1535 pos="N N"
+"receptor expression"
+
+candid=1536 pos="N N"
+"sequence present"
+
+candid=1537 pos="A N"
+"tcr-induced protein"
+
+candid=1538 pos="A N"
+"therapeutic strategies"
+
+candid=1539 pos="N N"
+"tnf mrna"
+
+candid=1540 pos="N N"
+"transfection experiments"
+
+candid=1541 pos="N N"
+"tyrosine kinase"
+
+candid=1542 pos="A N"
+"b2 isoform"
+
+candid=1543 pos="A N"
+"binding characteristics"
+
+candid=1544 pos="N N"
+"cell antigen"
+
+candid=1545 pos="A A N"
+"costimulated cd4+ t"
+
+candid=1546 pos="N N"
+"cytokine genes"
+
+candid=1547 pos="N N"
+"cytokine interleukin"
+
+candid=1548 pos="A N"
+"differential effects"
+
+candid=1549 pos="A N"
+"egr-1 induction"
+
+candid=1550 pos="A N"
+"hel/ s"
+"hel/ s"
+
+candid=1551 pos="A N"
+"higher order"
+
+candid=1552 pos="A A N N"
+"human monocytic cell line"
+
+candid=1553 pos="A N N N"
+"human t cell line"
+
+candid=1554 pos="N N N"
+"lymphocyte cell line"
+
+candid=1555 pos="A N"
+"neutrophil adhesion"
+
+candid=1556 pos="A A N"
+"nfat-1 regulatory elements"
+
+candid=1557 pos="A A N N"
+"ngfi-b/ nur77-related transcription factor"
+
+candid=1558 pos="A N"
+"nuclear translocation"
+
+candid=1559 pos="A N"
+"peripheral adaptation"
+
+candid=1560 pos="N N"
+"response factor"
+
+candid=1561 pos="N N"
+"transactivator protein"
+
+candid=1562 pos="A N"
+"17-bp gas"
+
+candid=1563 pos="N N"
+"antigen-presenting cells"
+
+candid=1564 pos="N A N"
+"bamhi zlf-1 gene"
+
+candid=1565 pos="A N"
+"cd4 gene"
+
+candid=1566 pos="N N"
+"components tyrosine"
+
+candid=1567 pos="N N"
+"epor gene"
+
+candid=1568 pos="A N N"
+"ets consensus sequence"
+
+candid=1569 pos="A N"
+"general transcription"
+
+candid=1570 pos="A N"
+"gos19.1 promoter"
+
+candid=1571 pos="A N N"
+"hematopoietic cell types"
+
+candid=1572 pos="A N"
+"human cells"
+
+candid=1573 pos="A N N N N"
+"human t cell line jurkat"
+
+candid=1574 pos="A N"
+"human th2-type"
+
+candid=1575 pos="N N"
+"kinases p56lck"
+
+candid=1576 pos="A N"
+"long terminal"
+
+candid=1577 pos="N N N"
+"lyn tyrosine kinase"
+
+candid=1578 pos="A CC A N N"
+"rapid and intense tyrosine phosphorylation"
+
+candid=1579 pos="A N"
+"ras activation"
+
+candid=1580 pos="N N N N"
+"receptor alpha gene expression"
+
+candid=1581 pos="A N"
+"regulatory proteins"
+
+candid=1582 pos="N N"
+"ri transcript"
+
+candid=1583 pos="N N"
+"ri transcription"
+
+candid=1584 pos="N N"
+"roi formation"
+
+candid=1585 pos="A N"
+"sp1 motifs"
+
+candid=1586 pos="N N A N N"
+"t cell lymphotropic virus i"
+
+candid=1587 pos="N A N"
+"t lymphoid cell"
+
+candid=1588 pos="A V N"
+"tcr-mediated signaling processes"
+
+candid=1589 pos="A N A N"
+"transient vs stable e1a"
+
+candid=1590 pos="N N N A N"
+"ah receptor dna binding site"
+
+candid=1591 pos="N N N"
+"alpha-globin promoter activity"
+
+candid=1592 pos="N A N N"
+"calyculin a-induced i kappa"
+
+candid=1593 pos="N N N"
+"cd4-cd8- t lymphocytes"
+
+candid=1594 pos="A N"
+"ck-1 element"
+
+candid=1595 pos="N N N"
+"gel mobility shift"
+
+candid=1596 pos="N N"
+"il-2 share"
+
+candid=1597 pos="A N"
+"il-2-mediated t"
+
+candid=1598 pos="A N N"
+"ligand-induced tyrosine phosphorylation"
+
+candid=1599 pos="N N N"
+"necrosis factor alpha"
+
+candid=1600 pos="A N"
+"nm23-h2 protein"
+
+candid=1601 pos="N N"
+"surface molecule"
+
+candid=1602 pos="N A N N"
+"t lymphoid cell line"
+
+candid=1603 pos="N N N"
+"tumor metastasis regulation"
+
+candid=1604 pos="A N"
+"various differentiation"
+
+candid=1605 pos="N N N"
+"amino acid sequence"
+
+candid=1606 pos="N N"
+"cell killing"
+
+candid=1607 pos="A N"
+"chronic phase"
+
+candid=1608 pos="A N"
+"differential modification"
+
+candid=1609 pos="A N"
+"equivalent levels"
+
+candid=1610 pos="A N"
+"genomic sequence"
+
+candid=1611 pos="A N"
+"higher rate"
+
+candid=1612 pos="A A N N"
+"hiv-1 long terminal repeat"
+
+candid=1613 pos="N N"
+"ifn-gamma gene"
+
+candid=1614 pos="N N"
+"igg fc"
+
+candid=1615 pos="N N"
+"ii genes"
+
+candid=1616 pos="N N"
+"ii mhc"
+
+candid=1617 pos="A N"
+"intense tyrosine"
+
+candid=1618 pos="A N N"
+"interleukin-5/ receptor interaction"
+
+candid=1619 pos="A N N"
+"jak2 tyrosine kinases"
+
+candid=1620 pos="A N"
+"last site"
+
+candid=1621 pos="A N N N"
+"lps-induced tnf mrna accumulation"
+
+candid=1622 pos="N N N"
+"mrna induction levels"
+
+candid=1623 pos="A N"
+"natural history"
+
+candid=1624 pos="A N"
+"nonstatic assays"
+
+candid=1625 pos="A A A N"
+"novel e2f-1 binding protein"
+
+candid=1626 pos="A A N"
+"nuclear matrix-bound rb"
+
+candid=1627 pos="A N N"
+"replicative gene transcription"
+
+candid=1628 pos="A N"
+"ric gene"
+
+candid=1629 pos="A N N N"
+"single transcription initiation site"
+
+candid=1630 pos="N N"
+"t-cell lines"
+
+candid=1631 pos="A A N"
+"thymic lymphoma-derived hybridoma"
+
+candid=1632 pos="A N N"
+"transfected target cells"
+
+candid=1633 pos="N N"
+"alpha-globin promoter"
+
+candid=1634 pos="A N N N"
+"antigen/ chemokine receptor gene"
+
+candid=1635 pos="A N"
+"ap-1-like complex"
+
+candid=1636 pos="A N"
+"apoptotic peer"
+
+candid=1637 pos="N N"
+"chloramphenicol acetyltransferase"
+
+candid=1638 pos="A N N"
+"core sequence cttgg"
+
+candid=1639 pos="A N N"
+"egr-1 promoter fragments"
+
+candid=1640 pos="A N N"
+"il-2 gene transcription"
+
+candid=1641 pos="A N"
+"inert quality"
+
+candid=1642 pos="N N"
+"lymphoma cells"
+
+candid=1643 pos="N N"
+"platelet factor"
+
+candid=1644 pos="N N"
+"primate cell"
+
+candid=1645 pos="A N"
+"proteasome inhibitor"
+
+candid=1646 pos="N N"
+"super-shift analysis"
+
+candid=1647 pos="A N"
+"tnf-alpha-stimulated cells"
+
+candid=1648 pos="N N"
+"transcription factors"
+
+candid=1649 pos="A N"
+"transcriptional activation"
+
+candid=1650 pos="N N N"
+"tumor cell types"
+
+candid=1651 pos="A N N N N"
+"vacuolar h(+)-atpase b2 subunit gene"
+
+candid=1652 pos="A N"
+"abnormal regulation"
+
+candid=1653 pos="A N"
+"adaptive mechanisms"
+
+candid=1654 pos="A N"
+"deficient b-cell"
+
+candid=1655 pos="A A N"
+"e2f-mediated transcriptional activity"
+
+candid=1656 pos="N N"
+"epo acts"
+
+candid=1657 pos="A A N"
+"erythroid cell-specific histone"
+
+candid=1658 pos="A N"
+"hiv-2 enhancer"
+
+candid=1659 pos="A N"
+"htlv-i-mediated t"
+
+candid=1660 pos="N N N"
+"i mhc antigen"
+
+candid=1661 pos="N N"
+"ii molecules"
+
+candid=1662 pos="N N"
+"janus family"
+
+candid=1663 pos="A N"
+"mammary gland"
+
+candid=1664 pos="A N N"
+"mip-1 alpha/ gos19"
+
+candid=1665 pos="A N"
+"nk3.3 cells"
+
+candid=1666 pos="A A N N"
+"non-inducible rb-defective tumor lines"
+
+candid=1667 pos="N N"
+"phosphatase pp2a"
+
+candid=1668 pos="A N N"
+"primer extension analysis"
+
+candid=1669 pos="N N N"
+"protein tyrosine phosphorylation"
+
+candid=1670 pos="A CC A N"
+"shared and distinct actions"
+
+candid=1671 pos="A N N"
+"squamous cell carcinomas"
+
+candid=1672 pos="A N N"
+"stat1 alpha protein"
+
+candid=1673 pos="A N"
+"stat4 expression"
+
+candid=1674 pos="A N"
+"transcriptional activator"
+
+candid=1675 pos="N N N"
+"tyrosine kinase activity"
+
+candid=1676 pos="A N"
+"various jurkat"
+
+candid=1677 pos="A N N"
+"vcam-1 gene transcription"
+
+candid=1678 pos="N A N N"
+"virus replicative gene transcription"
+
+candid=1679 pos="A N"
+"-m2 proteins"
+
+candid=1680 pos="N N"
+"c-fos induction"
+
+candid=1681 pos="A N N"
+"distinct cytokine profiles"
+
+candid=1682 pos="A N"
+"distinct cytokine"
+
+candid=1683 pos="A N"
+"enhanced nf-kappa"
+
+candid=1684 pos="N N N"
+"histocompatibility complex class"
+
+candid=1685 pos="A A N"
+"human cd4+ t"
+
+candid=1686 pos="A N N N N N"
+"human granulocyte-macrophage colony-stimulating factor gene promoter"
+
+candid=1687 pos="A N N N N NUM"
+"human t leukemia virus type 1"
+
+candid=1688 pos="N N"
+"integrin ligation"
+
+candid=1689 pos="A A N N"
+"major inducible protein complex"
+
+candid=1690 pos="A A N N N"
+"native human erythrocyte ndp kinase"
+
+candid=1691 pos="A N N"
+"nur77-related transcription factor"
+
+candid=1692 pos="N N"
+"promoter fragments"
+
+candid=1693 pos="N N"
+"protein complex"
+
+candid=1694 pos="A N"
+"proximal promoter"
+
+candid=1695 pos="A N"
+"purine-rich region"
+
+candid=1696 pos="A N"
+"recent characterization"
+
+candid=1697 pos="N N N"
+"tyrosine kinase syk"
+
+candid=1698 pos="N A N"
+"100-fold further increase"
+
+candid=1699 pos="N N"
+"alpha b1/"
+
+candid=1700 pos="N A N"
+"dna binding protein"
+
+candid=1701 pos="A N"
+"dp1 complex"
+
+candid=1702 pos="N N"
+"family member"
+
+candid=1703 pos="A N"
+"full promoter"
+
+candid=1704 pos="N N"
+"glucoc orticoid"
+
+candid=1705 pos="A N N N"
+"htlv-i-mediated t cell transformation"
+
+candid=1706 pos="A N"
+"human bone"
+
+candid=1707 pos="A N N"
+"human nk cells"
+
+candid=1708 pos="A A N A N"
+"human saphenous vein endothelial cells"
+
+candid=1709 pos="N N"
+"interferon-gamma activation"
+
+candid=1710 pos="A N N"
+"me1a1 g3ag4ag3 motif"
+
+candid=1711 pos="N N N"
+"mhc antigen expression"
+
+candid=1712 pos="N N N"
+"mouse gm-csf promoter"
+
+candid=1713 pos="A CC A N"
+"myeloid and lymphoid cell"
+
+candid=1714 pos="A N N"
+"primary t lymphocytes"
+
+candid=1715 pos="A N"
+"proinflammatory cytokines"
+
+candid=1716 pos="A N N"
+"ras/ protein kinase"
+
+candid=1717 pos="A N"
+"rb-defective lines"
+
+candid=1718 pos="A N"
+"reactive oxygen"
+
+candid=1719 pos="A N"
+"several e2f"
+
+candid=1720 pos="A N"
+"several elements"
+
+candid=1721 pos="A N"
+"simian immunodeficiency"
+
+candid=1722 pos="N N"
+"stat proteins"
+
+candid=1723 pos="A N N"
+"such monocyte specificity"
+
+candid=1724 pos="N N"
+"syk tyrosine"
+
+candid=1725 pos="A N"
+"complete t"
+
+candid=1726 pos="A A N"
+"critical early event"
+
+candid=1727 pos="N A N"
+"differentiation inhibitory factor"
+
+candid=1728 pos="N N N"
+"estrogen receptor gene"
+
+candid=1729 pos="N N"
+"factor iv"
+
+candid=1730 pos="A N"
+"inhibitory action"
+
+candid=1731 pos="N N"
+"luf syndrome"
+
+candid=1732 pos="N N"
+"message levels"
+
+candid=1733 pos="N N"
+"mmol/ l"
+
+candid=1734 pos="N N"
+"order nf-atp"
+
+candid=1735 pos="A N"
+"potential inhibition"
+
+candid=1736 pos="N N"
+"run-on assay"
+
+candid=1737 pos="N N N"
+"t cell antigen"
+
+candid=1738 pos="A A N"
+"th2 lymphocyte-mediated effects"
+
+candid=1739 pos="A N N"
+"aml1-related transcription factor"
+
+candid=1740 pos="N N"
+"cdna library"
+
+candid=1741 pos="N N N"
+"cord blood lymphocytes"
+
+candid=1742 pos="A N"
+"different cd4"
+
+candid=1743 pos="N N"
+"e1a expression"
+
+candid=1744 pos="A N"
+"early stages"
+
+candid=1745 pos="A A N"
+"effective immunologic barrier"
+
+candid=1746 pos="N N"
+"family tyrosine"
+
+candid=1747 pos="N N N"
+"hepor transcription activity"
+
+candid=1748 pos="N N N"
+"hiv promoter domain"
+
+candid=1749 pos="A N A N"
+"hiv-2 display significant differences"
+
+candid=1750 pos="N N"
+"hormone erythropoietin"
+
+candid=1751 pos="A A N"
+"human aml1 gene"
+
+candid=1752 pos="A N N"
+"human nk cell"
+
+candid=1753 pos="A A N"
+"human peripheral blood"
+
+candid=1754 pos="N N"
+"ic gene"
+
+candid=1755 pos="N A A N N"
+"ii non-inducible rb-defective tumor lines"
+
+candid=1756 pos="N N"
+"kinase expression"
+
+candid=1757 pos="A N"
+"large diffusion"
+
+candid=1758 pos="N N"
+"mobility shift"
+
+candid=1759 pos="A N N N"
+"myc-associated zinc finger protein"
+
+candid=1760 pos="A N N"
+"peripheral blood t"
+
+candid=1761 pos="N N N N"
+"protein tyrosine kinases p56lck"
+
+candid=1762 pos="A N"
+"similar activities"
+
+candid=1763 pos="N N"
+"synthesis-independent appearance"
+
+candid=1764 pos="N N"
+"tata sequence"
+
+candid=1765 pos="A N"
+"5&apos;-flanking region"
+
+candid=1766 pos="A A N"
+"620-bp human gm-csf"
+
+candid=1767 pos="N A N"
+"calyculin a-treated cells"
+
+candid=1768 pos="A N N"
+"distinct transcription factors"
+
+candid=1769 pos="N N"
+"e-selectin expression"
+
+candid=1770 pos="A N"
+"human gm-csf"
+
+candid=1771 pos="A N"
+"likely dp-i"
+
+candid=1772 pos="N N"
+"line jurkat"
+
+candid=1773 pos="N N"
+"mouse granulocyte/"
+
+candid=1774 pos="N N"
+"receptor number"
+
+candid=1775 pos="N N"
+"signal-transduction pathway"
+
+candid=1776 pos="N N"
+"stat protein"
+
+candid=1777 pos="N N"
+"t cells-binding"
+
+candid=1778 pos="A N N"
+"transient transfection assays"
+
+candid=1779 pos="N N N"
+"b-independent hiv promoter"
+
+candid=1780 pos="N A N"
+"b/ cd28-responsive complex"
+
+candid=1781 pos="N A A N N"
+"bone marrow-derived erythroid progenitor cells"
+
+candid=1782 pos="N N"
+"cd4 epitopes"
+
+candid=1783 pos="N N"
+"cgmp analogues"
+
+candid=1784 pos="A A N"
+"different extracellular signals"
+
+candid=1785 pos="A A N"
+"different physiological conditions"
+
+candid=1786 pos="N N"
+"differentiation inducers"
+
+candid=1787 pos="A N"
+"downstream site"
+
+candid=1788 pos="A N A N N"
+"epstein-barr virus replicative gene transcription"
+
+candid=1789 pos="N N"
+"histidine residue"
+
+candid=1790 pos="A N"
+"hiv-1 enhancer"
+
+candid=1791 pos="N N"
+"ii expression"
+
+candid=1792 pos="N N N"
+"jurkat cell extract"
+
+candid=1793 pos="N N"
+"life cycle"
+
+candid=1794 pos="N N"
+"mhc antigen"
+
+candid=1795 pos="N N"
+"mhc genes"
+
+candid=1796 pos="A N N N"
+"monocytic cell line thp-1"
+
+candid=1797 pos="A N"
+"nuclear factor-kappa"
+
+candid=1798 pos="A N"
+"okadaic acid"
+
+candid=1799 pos="A N A N"
+"phosphorylate stat nuclear proteins"
+
+candid=1800 pos="A N"
+"single gata-binding"
+
+candid=1801 pos="A A N"
+"sp1 binding elements"
+
+candid=1802 pos="A N N N"
+"tcr-induced protein tyrosine phosphorylation"
+
+candid=1803 pos="N N"
+"transcription proteins"
+
+candid=1804 pos="N N N"
+"bind hematopoietin receptors"
+
+candid=1805 pos="A N"
+"ck-1/ cd28re"
+
+candid=1806 pos="N N"
+"consensus ah"
+
+candid=1807 pos="N A N"
+"differentiation inhibitory activity"
+
+candid=1808 pos="A N"
+"diminished gr"
+
+candid=1809 pos="A N"
+"duffy gene"
+
+candid=1810 pos="A N"
+"er mrna"
+
+candid=1811 pos="A N"
+"erythroid-specific repression"
+
+candid=1812 pos="N N"
+"granulocyte/ macrophage-colony"
+
+candid=1813 pos="A N"
+"human t"
+
+candid=1814 pos="N N"
+"mrna expression"
+
+candid=1815 pos="A A N N N N"
+"native human erythrocyte ndp kinase protein"
+
+candid=1816 pos="A A N"
+"pma/ ca2+ activation"
+
+candid=1817 pos="A N"
+"several cytokines"
+
+candid=1818 pos="A N"
+"subsequent degradation"
+
+candid=1819 pos="N A N"
+"t lymphocytic cell"
+
+candid=1820 pos="A CC A N"
+"transcriptional and posttranscriptional levels"
+
+candid=1821 pos="A N"
+"transcriptional start"
+
+candid=1822 pos="N N N"
+"colony-stimulating factor promoter"
+
+candid=1823 pos="A N N N"
+"cyclin-like dna repair enzyme"
+
+candid=1824 pos="A N N"
+"different protein binds"
+
+candid=1825 pos="A N N"
+"different research groups"
+
+candid=1826 pos="N N N"
+"fc receptor type"
+
+candid=1827 pos="N N N N N"
+"granulocyte-macrophage colony-stimulating factor gene promoter"
+
+candid=1828 pos="A A N"
+"human mononuclear cells"
+
+candid=1829 pos="A N"
+"il-2 mrna"
+
+candid=1830 pos="A N"
+"il-2-independent growth"
+
+candid=1831 pos="A N"
+"marginal amounts"
+
+candid=1832 pos="A N"
+"mature cell"
+
+candid=1833 pos="N N"
+"oxygen production"
+
+candid=1834 pos="A N N N"
+"putative guanine nucleotide exchange"
+
+candid=1835 pos="A N"
+"stable e1a"
+
+candid=1836 pos="A N N"
+"subsequent monocyte adhesion"
+
+candid=1837 pos="N A A N"
+"t-cell acute lymphoblastic leukemia"
+
+candid=1838 pos="A N"
+"therapeutical levels"
+
+candid=1839 pos="N N"
+"tnf production"
+
+candid=1840 pos="N N"
+"tpa treatment"
+
+candid=1841 pos="A N"
+"transcriptional inhibitors"
+
+candid=1842 pos="A N N"
+"various jurkat mutants"
+
+candid=1843 pos="A N"
+"various v-atpase"
+
+candid=1844 pos="A N N N"
+"vascular cell adhesion molecule-1"
+
+candid=1845 pos="A N"
+"vital importance"
+
+candid=1846 pos="N N"
+"vitro translation"
+
+candid=1847 pos="N N"
+"wp promoter"
+
+candid=1848 pos="N N"
+"cleo element"
+
+candid=1849 pos="A N"
+"mitogenic stimulation"
+
+candid=1850 pos="A N"
+"bacterial endotoxin"
+
+candid=1851 pos="A CC A N"
+"biochemical and molecular events"
+
+candid=1852 pos="A N"
+"biochemical response"
+
+candid=1853 pos="N N"
+"blast-crisis cdna"
+
+candid=1854 pos="N N"
+"cd19 gene"
+
+candid=1855 pos="N N N N"
+"class il transactivator ciita"
+
+candid=1856 pos="A N"
+"common stat"
+
+candid=1857 pos="A N"
+"cooh-terminal portion"
+
+candid=1858 pos="N N"
+"crisis phase"
+
+candid=1859 pos="N N"
+"erythroleukemia cell"
+
+candid=1860 pos="N N"
+"fc gamma"
+
+candid=1861 pos="N N"
+"gata-binding site"
+
+candid=1862 pos="N N"
+"il-2 receptor"
+
+candid=1863 pos="N N N N N"
+"interleukin-2 receptor alpha gene expression"
+
+candid=1864 pos="N N"
+"lineage commitment"
+
+candid=1865 pos="A A N N"
+"marrow-derived erythroid progenitor cells"
+
+candid=1866 pos="N N N"
+"mouse interleukin-2 receptor"
+
+candid=1867 pos="A N"
+"nonradioactive assay"
+
+candid=1868 pos="A N"
+"novel model"
+
+candid=1869 pos="A N"
+"nuclear levels"
+
+candid=1870 pos="A N N"
+"nuclear run-on analysis"
+
+candid=1871 pos="A N"
+"promoter-proximal region"
+
+candid=1872 pos="N N"
+"protein synthesis-independent"
+
+candid=1873 pos="A N N"
+"putative guanine nucleotide"
+
+candid=1874 pos="A N"
+"significant differences"
+
+candid=1875 pos="A N"
+"structural motifs"
+
+candid=1876 pos="A N"
+"vivo studies"
+
+candid=1877 pos="N N"
+"degradation rate"
+
+candid=1878 pos="A N"
+"integrated alpha-globin"
+
+candid=1879 pos="N N"
+"model system"
+
+candid=1880 pos="A N"
+"murine homolog"
+
+candid=1881 pos="A N"
+"real effect"
+
+candid=1882 pos="N N"
+"signal transducers"
+
+candid=1883 pos="A N"
+"soluble cytokines"
+
+candid=1884 pos="N N"
+"subunit promoter"
+
+candid=1885 pos="N N N N"
+"t leukemia virus type"
+
+candid=1886 pos="A N"
+"tnf-stimulated huvecs"
+
+candid=1887 pos="A CC A N"
+"u937 and hel/ s"
+
+candid=1888 pos="A N"
+"vcam-1 transcription"
+
+candid=1889 pos="A N N"
+"-negative b-cell lines"
+
+candid=1890 pos="A N"
+"17-bp sequence"
+
+candid=1891 pos="A N"
+"antigen/ chemokine"
+
+candid=1892 pos="A N"
+"b7 costimulation"
+
+candid=1893 pos="N N"
+"darc gene"
+
+candid=1894 pos="A N"
+"distinct transcription"
+
+candid=1895 pos="A N"
+"double-stranded gire"
+
+candid=1896 pos="A N"
+"gata-1 activity"
+
+candid=1897 pos="N N"
+"gel mobility"
+
+candid=1898 pos="N N"
+"granulocyte colony-stimulating"
+
+candid=1899 pos="N N"
+"group antigen"
+
+candid=1900 pos="N A N N N"
+"histocompatibility complex class ii molecules"
+
+candid=1901 pos="A A N"
+"hiv-1 long terminal"
+
+candid=1902 pos="A N"
+"human interleukin-2"
+
+candid=1903 pos="A N"
+"human monocytes"
+
+candid=1904 pos="A N"
+"important role"
+
+candid=1905 pos="A N N"
+"interleukin-2 control transcription"
+
+candid=1906 pos="N N"
+"k562 cells"
+
+candid=1907 pos="N N"
+"line nk3.3"
+
+candid=1908 pos="A N"
+"mip-1 alpha"
+
+candid=1909 pos="A N"
+"molecular bases"
+
+candid=1910 pos="A N"
+"monocytic cells"
+
+candid=1911 pos="N N"
+"nk cell"
+
+candid=1912 pos="N N"
+"plasmodium vivax"
+
+candid=1913 pos="A A N"
+"principal il-2-inducible component"
+
+candid=1914 pos="N N"
+"tnf stimulation"
+
+candid=1915 pos="N N"
+"transcription activity"
+
+candid=1916 pos="A N N A N"
+"various fc gamma ric promoter"
+
+candid=1917 pos="N N N"
+"cell line jurkat"
+
+candid=1918 pos="A N"
+"common control"
+
+candid=1919 pos="N N"
+"gene expression"
+
+candid=1920 pos="N N"
+"gm-csf promoter"
+
+candid=1921 pos="A N"
+"new family"
+
+candid=1922 pos="N N"
+"a-gene product"
+
+candid=1923 pos="A N"
+"cd28-mediated activation"
+
+candid=1924 pos="N N"
+"coimmunoprecipitation experiments"
+
+candid=1925 pos="A N"
+"double-labeled probe"
+
+candid=1926 pos="A N"
+"epstein-barr virus"
+
+candid=1927 pos="N A N"
+"gamma ric promoter"
+
+candid=1928 pos="N N N N"
+"guanine nucleotide exchange domain"
+
+candid=1929 pos="N N"
+"hel cells"
+
+candid=1930 pos="A CC N N N"
+"human and mouse granulocyte/ macrophage-colony"
+
+candid=1931 pos="A N N"
+"il-2 control il-2"
+
+candid=1932 pos="N N"
+"luciferase reporter"
+
+candid=1933 pos="N N N"
+"t cell ag"
+
+candid=1934 pos="N NUM"
+"t1/ 2"
+
+candid=1935 pos="N NUM"
+"type 2"
+
+candid=1936 pos="A N N N"
+"various differentiation induction systems"
+
+candid=1937 pos="A A N N N N"
+"various vcam-1 promoter reporter gene constructs"
+
+candid=1938 pos="A N N"
+"viral gene effects"
+
+candid=1939 pos="A N"
+"a-treated cells"
+
+candid=1940 pos="N N"
+"alpha transcripts"
+
+candid=1941 pos="N N"
+"antimouse alpha"
+
+candid=1942 pos="A N"
+"bcl-2 expression"
+
+candid=1943 pos="A N N"
+"beta message induction"
+
+candid=1944 pos="N N"
+"cell adhesion"
+
+candid=1945 pos="N N N"
+"class ii gene"
+
+candid=1946 pos="N N"
+"colony-stimulating factor"
+
+candid=1947 pos="N N N N N"
+"dna repair enzyme uracil-dna glycosylase"
+
+candid=1948 pos="N N N"
+"dna sequence canntg"
+
+candid=1949 pos="N A N"
+"factor binding sites"
+
+candid=1950 pos="N N"
+"factor nf-kappa"
+
+candid=1951 pos="A N"
+"fresh pbl"
+
+candid=1952 pos="A N"
+"high degree"
+
+candid=1953 pos="A N N"
+"human erythropoietin receptor"
+
+candid=1954 pos="N N"
+"ii inducibility"
+
+candid=1955 pos="N N"
+"interleukin-2 receptor"
+
+candid=1956 pos="N A N NUM"
+"macrophage inflammatory protein 1"
+
+candid=1957 pos="N N"
+"monocyte adhesion"
+
+candid=1958 pos="A N N"
+"nfat-1-linked lac-z transfectants"
+
+candid=1959 pos="N N"
+"nucleotide exchange"
+
+candid=1960 pos="A N"
+"other ccgccc"
+
+candid=1961 pos="A N"
+"possible mechanism"
+
+candid=1962 pos="N N"
+"research groups"
+
+candid=1963 pos="N N"
+"scl gene"
+
+candid=1964 pos="N N N"
+"t cell leukemia"
+
+candid=1965 pos="A N"
+"vivo survival"
+
+candid=1966 pos="N N N N"
+"granulocyte-macrophage colony-stimulating factor gene"
+
+candid=1967 pos="A A N"
+"adjacent brlf-1 locus"
+
+candid=1968 pos="N N A N"
+"antimouse alpha a1 antibodies"
+
+candid=1969 pos="A N"
+"ap-1 complex"
+
+candid=1970 pos="A N"
+"ca2+ activation"
+
+candid=1971 pos="A N"
+"ebna-1 gene"
+
+candid=1972 pos="A N N N"
+"human granulocyte-macrophage colony-stimulating factor"
+
+candid=1973 pos="A N"
+"ie2 gene"
+
+candid=1974 pos="A N"
+"integrin-mediated tyrosine"
+
+candid=1975 pos="A N"
+"interleukin-2-dependent transcription"
+
+candid=1976 pos="A N"
+"multiple copies"
+
+candid=1977 pos="A N"
+"nonradioactive quantification"
+
+candid=1978 pos="A N N"
+"novel transcription factor"
+
+candid=1979 pos="N N"
+"progenitor cells"
+
+candid=1980 pos="N NUM"
+"protein 1"
+
+candid=1981 pos="N N"
+"reporter gene"
+
+candid=1982 pos="A N"
+"significant relatedness"
+
+candid=1983 pos="A N"
+"unknown mechanism"
+
+candid=1984 pos="A N"
+"antiinflammatory properties"
+
+candid=1985 pos="A N"
+"b2 subunit"
+
+candid=1986 pos="A N"
+"b95-8 cells"
+
+candid=1987 pos="N N"
+"blood monocytes"
+
+candid=1988 pos="A N"
+"cd28 ligation"
+
+candid=1989 pos="A N"
+"cellular composition"
+
+candid=1990 pos="A N"
+"conflicting results"
+
+candid=1991 pos="N N"
+"fva cell"
+
+candid=1992 pos="A N N"
+"gata-1 mrna levels"
+
+candid=1993 pos="A N N"
+"general transcription machinery"
+
+candid=1994 pos="A N N"
+"hypothalamic-pituitary-adrenal axis activation"
+
+candid=1995 pos="N N"
+"jurkat j6"
+
+candid=1996 pos="N N"
+"lac-z transfectants"
+
+candid=1997 pos="A N N N"
+"ltr-driven luciferase expression constructs"
+
+candid=1998 pos="A A N"
+"proximal functional promoter"
+
+candid=1999 pos="A N N"
+"rb-defective tumor lines"
+
+candid=2000 pos="N N N N"
+"retinoblastoma susceptibility gene product"
+
+candid=2001 pos="A N"
+"similar manner"
+
+candid=2002 pos="A A N"
+"similar tyrosine-phosphorylated motifs"
+
+candid=2003 pos="N N N"
+"stem cell proliferation"
+
+candid=2004 pos="N N"
+"tat expression"
+
+candid=2005 pos="A N"
+"differential activation"
+
+candid=2006 pos="N N"
+"enhancer element"
+
+candid=2007 pos="A N"
+"er-mediated repression"
+
+candid=2008 pos="A N"
+"etiological agent"
+
+candid=2009 pos="N N N"
+"gel shift experiments"
+
+candid=2010 pos="N N N"
+"gm-csf gene expression"
+
+candid=2011 pos="N N N N"
+"gm-csf promoter- luciferase reporter"
+
+candid=2012 pos="N A N"
+"gm-csf promoter-driven reporter"
+
+candid=2013 pos="N N"
+"kd fractions"
+
+candid=2014 pos="N N"
+"line thp-1"
+
+candid=2015 pos="N N"
+"mouse nm23-m1"
+
+candid=2016 pos="A A N"
+"novel cis-acting element"
+
+candid=2017 pos="N N N"
+"pleckstrin homology domains"
+
+candid=2018 pos="A N"
+"potent inducers"
+
+candid=2019 pos="A N N"
+"reactive oxygen intermediates"
+
+candid=2020 pos="A N N"
+"susceptible target cells"
+
+candid=2021 pos="N N N"
+"transcription factor gata-1"
+
+candid=2022 pos="N N"
+"type ic"
+
+candid=2023 pos="A N"
+"various cell"
+
+candid=2024 pos="N N N"
+"world primate cell"
+
+candid=2025 pos="N N N"
+"ah receptor complex"
+
+candid=2026 pos="N N N N"
+"amino acid sequence similarity"
+
+candid=2027 pos="A N"
+"binding protein"
+
+candid=2028 pos="N A N"
+"cd4-cd8- murine t"
+
+candid=2029 pos="A N N"
+"comparable enhancer element"
+
+candid=2030 pos="A N"
+"different protein"
+
+candid=2031 pos="N N N"
+"fc gamma ri"
+
+candid=2032 pos="N N"
+"fy@star@b alleles"
+
+candid=2033 pos="N N"
+"hiv pathogenesis"
+
+candid=2034 pos="N N N N"
+"i mhc antigen expression"
+
+candid=2035 pos="A N"
+"mutant nm23-h2his"
+
+candid=2036 pos="A N"
+"t-cell-expressed cytokines"
+
+candid=2037 pos="A N"
+"transcriptional response"
+
+candid=2038 pos="N N"
+"action law"
+
+candid=2039 pos="A A N N N"
+"apoptotic human t cell line"
+
+candid=2040 pos="N N"
+"b-cell lines"
+
+candid=2041 pos="N N"
+"basic-helix-loop-helix motif"
+
+candid=2042 pos="A N"
+"biologic markers"
+
+candid=2043 pos="N N"
+"body temperature"
+
+candid=2044 pos="N N N"
+"danazol decreases transcription"
+
+candid=2045 pos="A N"
+"different genes"
+
+candid=2046 pos="N A N"
+"dna binding activity"
+
+candid=2047 pos="N N"
+"e-selectin upregulation"
+
+candid=2048 pos="N N"
+"gm-csf gene"
+
+candid=2049 pos="A N N N"
+"human udg promoter sequences"
+
+candid=2050 pos="A N N"
+"il-10-stimulated stat protein"
+
+candid=2051 pos="A N N"
+"il-12-induced gene expression"
+
+candid=2052 pos="A N"
+"jak2 kinase"
+
+candid=2053 pos="A N"
+"linear configuration"
+
+candid=2054 pos="N N"
+"metastasis regulation"
+
+candid=2055 pos="A N A N N"
+"myeloid precursor 32dc13 cell line"
+
+candid=2056 pos="A A A N"
+"other sp1-like binding proteins"
+
+candid=2057 pos="A V N"
+"proximal coding regions"
+
+candid=2058 pos="N N"
+"runoff experiments"
+
+candid=2059 pos="A N"
+"serine/ threonine"
+
+candid=2060 pos="A N N"
+"silent fy@star@b allele"
+
+candid=2061 pos="A N"
+"transcriptional rate"
+
+candid=2062 pos="N N N"
+"tyrosine kinase jak2"
+
+candid=2063 pos="A N"
+"viral gene"
+
+candid=2064 pos="N N"
+"bind hematopoietin"
+
+candid=2065 pos="N N"
+"cancer therapy"
+
+candid=2066 pos="A N N"
+"cd28 surface receptor"
+
+candid=2067 pos="A N"
+"cd3 zeta"
+
+candid=2068 pos="A N"
+"common dna"
+
+candid=2069 pos="A N"
+"differential manner"
+
+candid=2070 pos="A N"
+"g-protein-coupled receptor"
+
+candid=2071 pos="N N"
+"gene transcription"
+
+candid=2072 pos="N N"
+"gr expression"
+
+candid=2073 pos="N N N"
+"hcmv dna replication"
+
+candid=2074 pos="A A N N"
+"human lymphoid cell line"
+
+candid=2075 pos="A N"
+"important aspect"
+
+candid=2076 pos="A N N"
+"ltr-driven luciferase expression"
+
+candid=2077 pos="A N N"
+"lymphotropic virus i"
+
+candid=2078 pos="N N"
+"mrna stability"
+
+candid=2079 pos="A N"
+"myeloid differentiation"
+
+candid=2080 pos="A N N"
+"response-1 gene expression"
+
+candid=2081 pos="A N"
+"tal1 expression"
+
+candid=2082 pos="A N"
+"transcriptional repressor"
+
+candid=2083 pos="A N"
+"tyrosine-phosphorylated motifs"
+
+candid=2084 pos="A N"
+"umbilical vein"
+
+candid=2085 pos="A N N"
+"various tumor cell"
+
+candid=2086 pos="N N NUM N"
+"virus type 2 enhancer"
+
+candid=2087 pos="A N"
+"3t3 cells"
+
+candid=2088 pos="N N"
+"activation domain"
+
+candid=2089 pos="A N"
+"adjacent kappa"
+
+candid=2090 pos="A N"
+"cd28 cell"
+
+candid=2091 pos="A N"
+"clinical data"
+
+candid=2092 pos="A N"
+"different role"
+
+candid=2093 pos="A N"
+"endothelial expression"
+
+candid=2094 pos="N N"
+"gata motif"
+
+candid=2095 pos="N N N N"
+"histocompatibility complex class i"
+
+candid=2096 pos="A A N N N"
+"human monocytic cell line thp-1"
+
+candid=2097 pos="A N"
+"inflammatory responses"
+
+candid=2098 pos="A N"
+"intact promoter"
+
+candid=2099 pos="N N"
+"lps response"
+
+candid=2100 pos="N N"
+"mouse gene"
+
+candid=2101 pos="N N"
+"p95vav synergizes"
+
+candid=2102 pos="A N"
+"present findings"
+
+candid=2103 pos="N N N"
+"promoter reporter gene"
+
+candid=2104 pos="N N"
+"protooncogene c-fos"
+
+candid=2105 pos="A N"
+"rbpi21 acts"
+
+candid=2106 pos="N N N"
+"t cell receptor"
+
+candid=2107 pos="A N"
+"u937 monocytes"
+
+candid=2108 pos="N N N"
+"zeta tyrosine phosphorylation"
+
+candid=2109 pos="A N"
+"ap-1 activity"
+
+candid=2110 pos="N N"
+"consensus nf-kappa"
+
+candid=2111 pos="A N N"
+"costimulated il-2 transcription"
+
+candid=2112 pos="N N"
+"e1a proteins"
+
+candid=2113 pos="A N"
+"endothelial cells"
+
+candid=2114 pos="N N"
+"granulocyte-macrophage colony-stimulating"
+
+candid=2115 pos="A N"
+"human jurkat"
+
+candid=2116 pos="A N N"
+"human skin cancer"
+
+candid=2117 pos="A N"
+"il-1 responsiveness"
+
+candid=2118 pos="A N"
+"immune response"
+
+candid=2119 pos="A N N"
+"intense tyrosine phosphorylation"
+
+candid=2120 pos="N N"
+"marrow cultures"
+
+candid=2121 pos="N N N A N"
+"mhc class ii deficient b-cell"
+
+candid=2122 pos="N N N N N N"
+"nf-kappa b-independent hiv promoter domain activity"
+
+candid=2123 pos="A N"
+"nfat-1-mediated gene"
+
+candid=2124 pos="A N N"
+"nuclear runoff experiments"
+
+candid=2125 pos="A A N"
+"okadaic acid augments"
+
+candid=2126 pos="A N"
+"pebp2 site-binding"
+
+candid=2127 pos="A N N"
+"potent differentiation inducers"
+
+candid=2128 pos="N N"
+"rat tissues"
+
+candid=2129 pos="N N N"
+"signal transduction pathways"
+
+candid=2130 pos="A N"
+"signal-induced phosphorylation"
+
+candid=2131 pos="A N N"
+"stable e1a expression"
+
+candid=2132 pos="N N"
+"trophoblast cells"
+
+candid=2133 pos="N N"
+"virus type"
+
+candid=2134 pos="N N N"
+"gm-csf promoter- luciferase"
+
+candid=2135 pos="N N"
+"monocytes results"
+
+candid=2136 pos="A A N N"
+"proximal functional promoter region"
+
+candid=2137 pos="A N"
+"clinical disease"
+
+candid=2138 pos="A N N N"
+"complete t cell activation"
+
+candid=2139 pos="A N"
+"enhancer/ promoter"
+
+candid=2140 pos="N N A N"
+"fc gamma ric gire"
+
+candid=2141 pos="A N"
+"gata-1 mrna"
+
+candid=2142 pos="A N N"
+"htlv-i-infected cord blood"
+
+candid=2143 pos="A N N A N"
+"human t cell lymphotropic virus"
+
+candid=2144 pos="A N"
+"hypothetical model"
+
+candid=2145 pos="N A A N"
+"ii non-inducible rb-defective tumor"
+
+candid=2146 pos="N NUM"
+"interleukin 2"
+
+candid=2147 pos="A N"
+"n-terminal peptides"
+
+candid=2148 pos="A N N"
+"nuclear factors bind"
+
+candid=2149 pos="A A A N"
+"second weak inducible complex"
+
+candid=2150 pos="A N"
+"slow rate"
+
+candid=2151 pos="A A N"
+"sp1 binding site"
+
+candid=2152 pos="A N"
+"tal1 protein"
+
+candid=2153 pos="A N"
+"varied effects"
+
+candid=2154 pos="N A N"
+"vs stable e1a"
+
+candid=2155 pos="A A N N"
+"bsap-stimulated cd19 gene transcription"
+
+candid=2156 pos="N N N"
+"cell line nk3.3"
+
+candid=2157 pos="N N N"
+"cell surface molecule"
+
+candid=2158 pos="N N N"
+"cell surface receptor"
+
+candid=2159 pos="N N"
+"granulocyte-macrophage csf"
+
+candid=2160 pos="A N"
+"human cd19"
+
+candid=2161 pos="A A N"
+"human mip-1 alpha"
+
+candid=2162 pos="A A N"
+"human umbilical vein"
+
+candid=2163 pos="A A N N"
+"il-1 beta message levels"
+
+candid=2164 pos="A N"
+"inhibitory activity"
+
+candid=2165 pos="N N N N"
+"janus family tyrosine kinase"
+
+candid=2166 pos="N N N"
+"nf-at transcription factor"
+
+candid=2167 pos="N NUM"
+"nucleotide -46"
+
+candid=2168 pos="A N"
+"p65 subunits"
+
+candid=2169 pos="N N"
+"pleckstrin homology"
+
+candid=2170 pos="A N N N N"
+"putative guanine nucleotide exchange domain"
+
+candid=2171 pos="A A N N"
+"several t-cell-expressed cytokine genes"
+
+candid=2172 pos="A N"
+"single transcription"
+
+candid=2173 pos="N N N N"
+"t cell line jurkat"
+
+candid=2174 pos="N N"
+"threonine phosphatases"
+
+candid=2175 pos="N N"
+"transcript levels"
+
+candid=2176 pos="N N"
+"tumor cell"
+
+candid=2177 pos="A A N"
+"apoptotic human t"
+
+candid=2178 pos="N N"
+"assay result"
+
+candid=2179 pos="N N"
+"cd4-cd8- t"
+
+candid=2180 pos="A A N"
+"chronic myelogenous leukemia"
+
+candid=2181 pos="A N N"
+"cytokine gene expression"
+
+candid=2182 pos="A V N"
+"distinct signaling pathways"
+
+candid=2183 pos="A A N N"
+"duffy antigen/ chemokine receptor"
+
+candid=2184 pos="N N N"
+"e-selectin surface expression"
+
+candid=2185 pos="A N"
+"full function"
+
+candid=2186 pos="N N N"
+"gamma ri transcript"
+
+candid=2187 pos="A N"
+"high levels"
+
+candid=2188 pos="A N"
+"hiv-2 functions"
+
+candid=2189 pos="A N N"
+"human alpha-globin promoter"
+
+candid=2190 pos="A N N"
+"human erythrocyte ndp"
+
+candid=2191 pos="A N"
+"human osteosarcoma"
+
+candid=2192 pos="A CC A N"
+"il-2 and il-12 synergized"
+
+candid=2193 pos="N N"
+"integer numbers"
+
+candid=2194 pos="A N N"
+"lps-induced e-selectin expression"
+
+candid=2195 pos="N N"
+"lymphoma model"
+
+candid=2196 pos="A A N"
+"native human erythrocyte"
+
+candid=2197 pos="A N"
+"new protein"
+
+candid=2198 pos="A N"
+"opposite situation"
+
+candid=2199 pos="N N"
+"receptor affinity"
+
+candid=2200 pos="A N"
+"substantial amounts"
+
+candid=2201 pos="N N N"
+"t cell activation"
+
+candid=2202 pos="A N"
+"transcriptional complex"
+
+candid=2203 pos="A A N"
+"additional significant finding"
+
+candid=2204 pos="A N"
+"calcium-mediated activation"
+
+candid=2205 pos="N N"
+"enzyme immunoassays"
+
+candid=2206 pos="A N N"
+"glucocorticoid receptor expression"
+
+candid=2207 pos="A N"
+"high level"
+
+candid=2208 pos="A A N N"
+"human bactericidal/ permeability-increasing protein"
+
+candid=2209 pos="A N"
+"human cytomegalovirus"
+
+candid=2210 pos="A N"
+"ie2 transactivation"
+
+candid=2211 pos="A N"
+"initiator-like sequence"
+
+candid=2212 pos="A N N"
+"minimal cd4 promoter"
+
+candid=2213 pos="A N"
+"new world"
+
+candid=2214 pos="N N"
+"nfat activation"
+
+candid=2215 pos="A N"
+"p2 promoter"
+
+candid=2216 pos="A N"
+"pebp2 site"
+
+candid=2217 pos="N N N"
+"promoter domain activity"
+
+candid=2218 pos="A N"
+"significant finding"
+
+candid=2219 pos="A N N"
+"transcriptional start site"
+
+candid=2220 pos="N N N N"
+"tyrosine kinase inhibitors genistein"
+
+candid=2221 pos="N N NUM N N"
+"virus type 2 enhancer activation"
+
+candid=2222 pos="N N"
+"adhesion molecules"
+
+candid=2223 pos="A N"
+"antigenic peptide"
+
+candid=2224 pos="N N"
+"cell death"
+
+candid=2225 pos="N N N"
+"class il transactivator"
+
+candid=2226 pos="A N"
+"cytokine gene"
+
+candid=2227 pos="N N"
+"differentiation induction"
+
+candid=2228 pos="N N"
+"e-selectin surface"
+
+candid=2229 pos="N N N"
+"e1a gene products"
+
+candid=2230 pos="A N"
+"functional relationship"
+
+candid=2231 pos="A N"
+"fundamental differences"
+
+candid=2232 pos="A CC A N"
+"high and low levels"
+
+candid=2233 pos="A N N N"
+"high level gene expression"
+
+candid=2234 pos="N N N N"
+"hiv promoter domain activity"
+
+candid=2235 pos="A N"
+"il-2 respond"
+
+candid=2236 pos="A N NUM N"
+"inflammatory protein 1 alpha"
+
+candid=2237 pos="A N"
+"initial phase"
+
+candid=2238 pos="A N"
+"lps-induced e-selectin"
+
+candid=2239 pos="A A N N"
+"native human erythrocyte ndp"
+
+candid=2240 pos="A A N"
+"other cellular factors"
+
+candid=2241 pos="A A N"
+"peripheral mononuclear cells"
+
+candid=2242 pos="N N"
+"rb expression"
+
+candid=2243 pos="A N"
+"basal levels"
+
+candid=2244 pos="A CC A N"
+"cellular and molecular mechanisms"
+
+candid=2245 pos="N N N"
+"ciita mrna induction"
+
+candid=2246 pos="N N"
+"decreases transcription"
+
+candid=2247 pos="A N"
+"er bind"
+
+candid=2248 pos="N N"
+"factor sp1"
+
+candid=2249 pos="A N"
+"first description"
+
+candid=2250 pos="N N"
+"gene constructs"
+
+candid=2251 pos="N N N"
+"hematopoietin receptor superfamily"
+
+candid=2252 pos="A N N"
+"human gm-csf element"
+
+candid=2253 pos="A N"
+"ick-1 site"
+
+candid=2254 pos="A N"
+"il-2-inducible enhancer"
+
+candid=2255 pos="A N"
+"il-3 gene"
+
+candid=2256 pos="A CC A N N"
+"interleukin-1 and interleukin-2 control transcription"
+
+candid=2257 pos="N N N N N"
+"lpr cd4-cd8- t lymphocytes results"
+
+candid=2258 pos="A N"
+"lymphoblastoid cells"
+
+candid=2259 pos="A N"
+"monocytic differentiation"
+
+candid=2260 pos="A N"
+"other cell"
+
+candid=2261 pos="N N"
+"phosphatase inhibitors"
+
+candid=2262 pos="A N"
+"present experiment"
+
+candid=2263 pos="A A N"
+"primitive hematopoietic stem"
+
+candid=2264 pos="N N"
+"sephacryl g-200"
+
+candid=2265 pos="A N N"
+"serine-threonine phosphatase pp2a"
+
+candid=2266 pos="N N"
+"surface enzyme"
+
+candid=2267 pos="N N N"
+"alpha b2 proteins"
+
+candid=2268 pos="A N"
+"apoptotic cell"
+
+candid=2269 pos="N N N"
+"bp hepor promoter"
+
+candid=2270 pos="N N N N"
+"cell surface enzyme immunoassays"
+
+candid=2271 pos="A N A A N"
+"diminished gr apparent binding affinity"
+
+candid=2272 pos="N N"
+"expression constructs"
+
+candid=2273 pos="A N"
+"extracellular signals"
+
+candid=2274 pos="N N"
+"factor gene"
+
+candid=2275 pos="N N"
+"flow cytometry"
+
+candid=2276 pos="A N N"
+"human th2-type lymphocytes"
+
+candid=2277 pos="A N N"
+"important immunoregulatory cytokine"
+
+candid=2278 pos="A N N"
+"long terminal repeat"
+
+candid=2279 pos="N N"
+"maz transcription"
+
+candid=2280 pos="N N"
+"mouse homologue"
+
+candid=2281 pos="N N"
+"necrosis factor-alpha"
+
+candid=2282 pos="A N"
+"nuclear run-on"
+
+candid=2283 pos="A N"
+"promoter-luciferase reporter"
+
+candid=2284 pos="N N"
+"shift experiments"
+
+candid=2285 pos="N N N N N"
+"t cell ag receptor complex"
+
+candid=2286 pos="N N"
+"t helper"
+
+candid=2287 pos="A CC A N"
+"transcriptional and post-transcriptional mechanisms"
+
+candid=2288 pos="N N"
+"adhesion molecule-1"
+
+candid=2289 pos="N N N"
+"amino acid residues"
+
+candid=2290 pos="A N N N"
+"b2 subunit promoter region"
+
+candid=2291 pos="N A N"
+"bind specific members"
+
+candid=2292 pos="N N"
+"blast crisis"
+
+candid=2293 pos="A N"
+"diverse cell"
+
+candid=2294 pos="N N"
+"dna replication"
+
+candid=2295 pos="N N"
+"gene products"
+
+candid=2296 pos="A A N"
+"htlv-i-infected peripheral blood"
+
+candid=2297 pos="N N"
+"ifn-gamma treatment"
+
+candid=2298 pos="A N"
+"il-2 transcription"
+
+candid=2299 pos="N NUM"
+"interleukin 12"
+
+candid=2300 pos="N N"
+"jurkat mutants"
+
+candid=2301 pos="N N"
+"luciferase expression"
+
+candid=2302 pos="A CC A N N"
+"myeloid and lymphoid cell types"
+
+candid=2303 pos="A N"
+"phosphorylate stat"
+
+candid=2304 pos="A N"
+"potential mechanisms"
+
+candid=2305 pos="N N N"
+"receptor type i"
+
+candid=2306 pos="A N N"
+"same dna sequence"
+
+candid=2307 pos="N A N N"
+"sheep mammary gland tissue"
+
+candid=2308 pos="A N N"
+"tal1/ scl gene"
+
+candid=2309 pos="A A N"
+"acute lymphoblastic leukemia"
+
+candid=2310 pos="N N"
+"alpha mrna"
+
+candid=2311 pos="A A N"
+"alpha-stimulated vcam-1 expression"
+
+candid=2312 pos="N A N N"
+"bamhi zlf-1 gene product"
+
+candid=2313 pos="N N N"
+"dna mobility shift"
+
+candid=2314 pos="A N"
+"egr-1 gene"
+
+candid=2315 pos="N N N N"
+"erythrocyte ndp kinase protein"
+
+candid=2316 pos="N N"
+"kinase activity"
+
+candid=2317 pos="N N"
+"ovulation markers"
+
+candid=2318 pos="N N"
+"phorbol esters"
+
+candid=2319 pos="A N"
+"rb-defective tumor"
+
+candid=2320 pos="A N"
+"same dna"
+
+candid=2321 pos="A N"
+"same range"
+
+candid=2322 pos="N N N"
+"tyrosine kinases p56lck"
+
+candid=2323 pos="A N"
+"unprimed cells"
+
+candid=2324 pos="N N"
+"adenovirus infection"
+
+candid=2325 pos="N N N"
+"alpha gene expression"
+
+candid=2326 pos="N N N N"
+"b1/ alpha b2 ratio"
+
+candid=2327 pos="A N N N"
+"cd3 zeta tyrosine phosphorylation"
+
+candid=2328 pos="N N"
+"cell extract"
+
+candid=2329 pos="A N"
+"complex class"
+
+candid=2330 pos="N N"
+"control il-2"
+
+candid=2331 pos="A N"
+"duffy-negative blacks"
+
+candid=2332 pos="A N"
+"functional criteria"
+
+candid=2333 pos="A N N"
+"general transcription factors"
+
+candid=2334 pos="N N"
+"hiv ltr"
+
+candid=2335 pos="N N N N N N"
+"igg fc receptor type ic gene"
+
+candid=2336 pos="N N"
+"inhibitors genistein"
+
+candid=2337 pos="A N"
+"intracellular substrates"
+
+candid=2338 pos="A V N"
+"intracytoplasmic signalling cascade"
+
+candid=2339 pos="N N"
+"mrna induction"
+
+candid=2340 pos="A N"
+"nm23 proteins"
+
+candid=2341 pos="A N A N"
+"peripheral blood mononuclear leucocytes"
+
+candid=2342 pos="N N"
+"t-cell antigen"
+
+candid=2343 pos="N N N"
+"tyrosine kinase inhibitors"
+
+candid=2344 pos="N N"
+"-c-c family"
+
+candid=2345 pos="N N"
+"alpha degradation"
+
+candid=2346 pos="N N N"
+"blood group system"
+
+candid=2347 pos="N N N"
+"bp promoter fragment"
+
+candid=2348 pos="N N"
+"cell carcinomas"
+
+candid=2349 pos="A N N"
+"erythroid gene expression"
+
+candid=2350 pos="A N"
+"gas-binding proteins"
+
+candid=2351 pos="A N"
+"hematopoietic cell"
+
+candid=2352 pos="N N N"
+"hiv tat expression"
+
+candid=2353 pos="A CC N N"
+"human and mouse granulocyte/"
+
+candid=2354 pos="N N"
+"ifn-gamma responsiveness"
+
+candid=2355 pos="A A N"
+"important functional regions"
+
+candid=2356 pos="N N"
+"kinase syk"
+
+candid=2357 pos="A N N"
+"n-terminal activation domain"
+
+candid=2358 pos="A A N N"
+"okadaic acid augments pma-"
+
+candid=2359 pos="N N"
+"protein heterodimers"
+
+candid=2360 pos="N N"
+"repressor raz"
+
+candid=2361 pos="N N"
+"segment functions"
+
+candid=2362 pos="N N"
+"site result"
+
+candid=2363 pos="A N"
+"specific band"
+
+candid=2364 pos="N N"
+"suppressor genes"
+
+candid=2365 pos="N N"
+"transcription machinery"
+
+candid=2366 pos="A A N"
+"various vcam-1 promoter"
+
+candid=2367 pos="A N"
+"vcam-1 mrna"
+
+candid=2368 pos="N N N"
+"vivax malaria parasite"
+
+candid=2369 pos="A A N N N"
+"620-bp human gm-csf promoter- luciferase"
+
+candid=2370 pos="N N"
+"cap site"
+
+candid=2371 pos="A N"
+"cd4+ t"
+
+candid=2372 pos="N N"
+"cell leukemia"
+
+candid=2373 pos="N N N"
+"cell transcription factor"
+
+candid=2374 pos="A A N"
+"cho-dr/ b7/ lfa-3"
+
+candid=2375 pos="N N"
+"class i"
+
+candid=2376 pos="A N"
+"comparable enhancer"
+
+candid=2377 pos="A A N N"
+"costimulated cd4+ t cells"
+
+candid=2378 pos="N N"
+"gas homology"
+
+candid=2379 pos="A N N"
+"human alpha-globin gene"
+
+candid=2380 pos="A A N"
+"human endothelial cells"
+
+candid=2381 pos="A N N N"
+"human gm-csf promoter- luciferase"
+
+candid=2382 pos="A N"
+"il-2 promoter"
+
+candid=2383 pos="A N N"
+"normal t cells"
+
+candid=2384 pos="N N N"
+"platelet factor iv"
+
+candid=2385 pos="A N N"
+"promoter-luciferase reporter plasmids"
+
+candid=2386 pos="N N"
+"rat thymus"
+
+candid=2387 pos="N NUM"
+"segment 1.3"
+
+candid=2388 pos="A N"
+"single cytokine"
+
+candid=2389 pos="N N N"
+"steroid receptor superfamily"
+
+candid=2390 pos="A N"
+"tissue-specific expression"
+
+candid=2391 pos="A N N"
+"various cell lines"
+
+candid=2392 pos="N N N N"
+"alpha b1/ alpha b2"
+
+candid=2393 pos="N N N"
+"cat reporter gene"
+
+candid=2394 pos="A A N"
+"cd28 costimulatory pathway"
+
+candid=2395 pos="A N"
+"electrophoretic mobility"
+
+candid=2396 pos="N N N"
+"factor gene promoter"
+
+candid=2397 pos="A A N"
+"frequent molecular lesion"
+
+candid=2398 pos="N N"
+"ii proteins"
+
+candid=2399 pos="N N N"
+"il-2r alpha mrna"
+
+candid=2400 pos="N N"
+"lfa-3triple transfectant"
+
+candid=2401 pos="A N"
+"m1 cells"
+
+candid=2402 pos="A N N"
+"mature cell types"
+
+candid=2403 pos="N A N"
+"mouse myeloid leukemia"
+
+candid=2404 pos="A N"
+"normal hematopoiesis"
+
+candid=2405 pos="A N"
+"p50 nf-kappa"
+
+candid=2406 pos="A A N"
+"positive regulatory effect"
+
+candid=2407 pos="A CC A N"
+"rapid and intense tyrosine"
+
+candid=2408 pos="A N"
+"second phase"
+
+candid=2409 pos="N N N"
+"serum response factor"
+
+candid=2410 pos="A N"
+"wide variety"
+
+candid=2411 pos="N N"
+"acid residues"
+
+candid=2412 pos="A N"
+"aml1 gene"
+
+candid=2413 pos="A N N"
+"complex class ii"
+
+candid=2414 pos="A N N"
+"cyclin-like dna repair"
+
+candid=2415 pos="A A N"
+"e2f-1/ dp1 complex"
+
+candid=2416 pos="N N"
+"fc receptor"
+
+candid=2417 pos="A N"
+"free calcium"
+
+candid=2418 pos="A N"
+"hematopoietic cells"
+
+candid=2419 pos="A N N"
+"human granulocyte-macrophage csf"
+
+candid=2420 pos="A N"
+"il-12 induction"
+
+candid=2421 pos="N N"
+"inhibitor i"
+
+candid=2422 pos="N N N N"
+"mhc class ii inducibility"
+
+candid=2423 pos="A N A N"
+"mip-1 alpha nuclear protein"
+
+candid=2424 pos="A N"
+"myeloid cells"
+
+candid=2425 pos="A N"
+"specific bands"
+
+candid=2426 pos="A A N"
+"unidentified proximal position"
+
+candid=2427 pos="N N"
+"adult t"
+
+candid=2428 pos="A A N N"
+"apoptotic human t cell"
+
+candid=2429 pos="N N"
+"consensus sequence"
+
+candid=2430 pos="N N"
+"crisis transition"
+
+candid=2431 pos="A N"
+"enhancer-dependent effect"
+
+candid=2432 pos="A N"
+"ets consensus"
+
+candid=2433 pos="A N"
+"granulocytic differentiation"
+
+candid=2434 pos="N A N N"
+"histocompatibility complex class ii"
+
+candid=2435 pos="N N"
+"i kappa"
+
+candid=2436 pos="A N N"
+"lymphoid cell types"
+
+candid=2437 pos="A A N"
+"monoblast-like u937 cells"
+
+candid=2438 pos="A N A N"
+"myeloid precursor 32dc13 cell"
+
+candid=2439 pos="A N"
+"obvious regulation"
+
+candid=2440 pos="A N N"
+"p95vav-induced nfat activation"
+
+candid=2441 pos="A N"
+"pebp2 isoforms"
+
+candid=2442 pos="N N"
+"receptor type"
+
+candid=2443 pos="A N"
+"rgd domain"
+
+candid=2444 pos="N N"
+"s cells"
+
+candid=2445 pos="N N"
+"tcr signals"
+
+candid=2446 pos="N N"
+"tinur binds"
+
+candid=2447 pos="N N"
+"v-atpase subunits"
+
+candid=2448 pos="A CC A N"
+"viral and cellular promoters"
+
+candid=2449 pos="A A N"
+"additional binding site"
+
+candid=2450 pos="A N N"
+"apparent dissociation rate"
+
+candid=2451 pos="A N"
+"apparent dissociation"
+
+candid=2452 pos="A N"
+"binding site"
+
+candid=2453 pos="A N"
+"biophysical ones"
+
+candid=2454 pos="A N"
+"cd28-responsive complex"
+
+candid=2455 pos="N N N N"
+"cell cycle-dependent transcription factor"
+
+candid=2456 pos="N N N N"
+"cell line jurkat j6"
+
+candid=2457 pos="A N"
+"cutaneous carcinogenesis"
+
+candid=2458 pos="N N N"
+"h(+)-atpase b2 subunit"
+
+candid=2459 pos="N N"
+"hiv transcription"
+
+candid=2460 pos="A N N"
+"il-2-mediated t cell"
+
+candid=2461 pos="A N N"
+"major histocompatibility complex"
+
+candid=2462 pos="A N"
+"molecular lesion"
+
+candid=2463 pos="A N"
+"normal lymphocytes"
+
+candid=2464 pos="A N N"
+"prolactin-induced transcription factor"
+
+candid=2465 pos="N N"
+"repair enzyme"
+
+candid=2466 pos="A N"
+"ric promoter"
+
+candid=2467 pos="A N"
+"significant effect"
+
+candid=2468 pos="A N"
+"similar inhibition"
+
+candid=2469 pos="A N"
+"single exon"
+
+candid=2470 pos="N N"
+"tyrosine kinases"
+
+candid=2471 pos="N N"
+"c-rich region"
+
+candid=2472 pos="A N"
+"cd4 coreceptor"
+
+candid=2473 pos="A N"
+"cell-specific factors"
+
+candid=2474 pos="N N"
+"fy@star@b allele"
+
+candid=2475 pos="A N N"
+"glucocorticoid target tissues"
+
+candid=2476 pos="A N"
+"htlv-i-associated myelopathy"
+
+candid=2477 pos="A N N"
+"il-2 gene expression"
+
+candid=2478 pos="A A N"
+"il-2 transcriptional inhibitors"
+
+candid=2479 pos="N N"
+"immunoregulatory protein"
+
+candid=2480 pos="A N"
+"inducible expression"
+
+candid=2481 pos="N N"
+"inositol phosphates"
+
+candid=2482 pos="A N N"
+"mammary gland tissue"
+
+candid=2483 pos="A N N"
+"nk cell killing"
+
+candid=2484 pos="A N"
+"non-erythroid cells"
+
+candid=2485 pos="N N"
+"stat family"
+
+candid=2486 pos="A N"
+"t-cell-expressed cytokine"
+
+candid=2487 pos="N N"
+"transfection assays"
+
+candid=2488 pos="N N"
+"b-cell mutants"
+
+candid=2489 pos="A N N"
+"b2 subunit promoter"
+
+candid=2490 pos="A N"
+"beta genes"
+
+candid=2491 pos="N N"
+"c-fos control"
+
+candid=2492 pos="A N N"
+"cd19 gene transcription"
+
+candid=2493 pos="A A N"
+"different anti-cd4 mab"
+
+candid=2494 pos="A A N"
+"distinct electrophoretic mobilities"
+
+candid=2495 pos="N N"
+"e1a transfection"
+
+candid=2496 pos="N N N"
+"erythrocyte ndp kinase"
+
+candid=2497 pos="A N"
+"erythroid transcription"
+
+candid=2498 pos="A N"
+"hematopoietic stem"
+
+candid=2499 pos="N N"
+"high-dose estrogen"
+
+candid=2500 pos="A N N N"
+"human bone marrow cultures"
+
+candid=2501 pos="A N N N"
+"human immunodeficiency virus type"
+
+candid=2502 pos="A N"
+"human lymphocytes"
+
+candid=2503 pos="A N"
+"immunologic barrier"
+
+candid=2504 pos="A N"
+"lesser extent"
+
+candid=2505 pos="A N"
+"nuclear proteins"
+
+candid=2506 pos="N N"
+"plasma cortisol"
+
+candid=2507 pos="N N N"
+"polyomavirus enhancer binding-protein"
+
+candid=2508 pos="N N"
+"retinoblastoma susceptibility"
+
+candid=2509 pos="A N"
+"specific mrna"
+
+candid=2510 pos="N N"
+"suppressor protein"
+
+candid=2511 pos="N N"
+"transfection assay"
+
+candid=2512 pos="N N N"
+"type ic gene"
+
+candid=2513 pos="A N"
+"various functions"
+
+candid=2514 pos="A A N N"
+"various vcam-1 promoter reporter"
+
+candid=2515 pos="N N N"
+"c-fos mrna induction"
+
+candid=2516 pos="A N"
+"acid augments"
+
+candid=2517 pos="N A N"
+"alpha nuclear protein"
+
+candid=2518 pos="A N"
+"basal level"
+
+candid=2519 pos="N N"
+"c-myc gene"
+
+candid=2520 pos="A A N N"
+"cho-dr/ b7/ lfa-3triple transfectant"
+
+candid=2521 pos="N N N N"
+"colony-stimulating factor promoter activity"
+
+candid=2522 pos="N N"
+"er gene"
+
+candid=2523 pos="A N N"
+"healthy laboratory employees"
+
+candid=2524 pos="A N"
+"hiv-1 gp120"
+
+candid=2525 pos="A N"
+"human epor"
+
+candid=2526 pos="N N N"
+"ii gene transactivator"
+
+candid=2527 pos="A N N"
+"initiator-like sequence present"
+
+candid=2528 pos="A N"
+"intracellular formation"
+
+candid=2529 pos="N N"
+"jak kinases"
+
+candid=2530 pos="A N"
+"ligand-dependent repression"
+
+candid=2531 pos="A N N"
+"major transcription start"
+
+candid=2532 pos="A N"
+"maximal increase"
+
+candid=2533 pos="A N"
+"new gene"
+
+candid=2534 pos="A N"
+"rb-defective cells"
+
+candid=2535 pos="N N"
+"receptor alpha"
+
+candid=2536 pos="A N"
+"sp1 phosphorylation"
+
+candid=2537 pos="N N N"
+"stat family member"
+
+candid=2538 pos="A N"
+"transient transfections"
+
+candid=2539 pos="A N"
+"vcam-1 expression"
+
+candid=2540 pos="A N N"
+"a-induced i kappa"
+
+candid=2541 pos="A N N"
+"binding protein complexes"
+
+candid=2542 pos="A N"
+"endothelial monolayers"
+
+candid=2543 pos="N N"
+"erythropoietin receptor"
+
+candid=2544 pos="N N"
+"gene regulation"
+
+candid=2545 pos="A N"
+"hiv-2 display"
+
+candid=2546 pos="N N N"
+"level gene expression"
+
+candid=2547 pos="N N N"
+"line jurkat j6"
+
+candid=2548 pos="N N"
+"lymphocyte reaction"
+
+candid=2549 pos="N N N N N"
+"mouse interleukin-2 receptor alpha gene"
+
+candid=2550 pos="A N"
+"natural killer"
+
+candid=2551 pos="N N N"
+"ndp kinase expression"
+
+candid=2552 pos="A N N"
+"normal t lymphocytes"
+
+candid=2553 pos="A N N"
+"other transcription factors"
+
+candid=2554 pos="N N"
+"pokeweed mitogen"
+
+candid=2555 pos="A A N"
+"recurrent chromosomal translocation"
+
+candid=2556 pos="A N"
+"transient transfection"
+
+candid=2557 pos="A N"
+"virus-induced erythroblasts"
+
+candid=2558 pos="N N"
+"anemia-inducing strain"
+
+candid=2559 pos="A N"
+"cis-acting elements"
+
+candid=2560 pos="A N"
+"cytoplasmic tyrosine"
+
+candid=2561 pos="A A N N"
+"erythroid cell-specific histone h5"
+
+candid=2562 pos="N N"
+"g-200 ultrafiltration"
+
+candid=2563 pos="N N"
+"gene product"
+
+candid=2564 pos="N N"
+"gire sequence"
+
+candid=2565 pos="N A N N"
+"gm-csf promoter-driven reporter plasmid"
+
+candid=2566 pos="A N"
+"gos19 promoter"
+
+candid=2567 pos="N N"
+"host cell"
+
+candid=2568 pos="A N"
+"htlv-i-infected cord"
+
+candid=2569 pos="A N N"
+"human lymphocyte line"
+
+candid=2570 pos="N A N N"
+"ii deficient b-cell lines"
+
+candid=2571 pos="N N A N"
+"nf-kappa b/ cd28-responsive complex"
+
+candid=2572 pos="A A N"
+"novel il-10-stimulated stat"
+
+candid=2573 pos="N N"
+"orphan receptor"
+
+candid=2574 pos="A N"
+"single kappa"
+
+candid=2575 pos="N N A N"
+"t cell lymphotropic virus"
+
+candid=2576 pos="N N"
+"transcription initiation"
+
+candid=2577 pos="N N"
+"transfection data"
+
+candid=2578 pos="N N N N"
+"tumor necrosis factor alpha"
+
+candid=2579 pos="N N"
+"type ii"
+
+candid=2580 pos="N N"
+"% decrease"
+
+candid=2581 pos="N N"
+"alpha gene"
+
+candid=2582 pos="N N"
+"cat reporter"
+
+candid=2583 pos="N N"
+"control transcription"
+
+candid=2584 pos="N N"
+"cyclosporin treatment"
+
+candid=2585 pos="N N"
+"enzyme activity"
+
+candid=2586 pos="A A N"
+"human leukemic cells"
+
+candid=2587 pos="A N A N"
+"murine macrophage inflammatory protein"
+
+candid=2588 pos="N N"
+"receptor gene"
+
+candid=2589 pos="N N"
+"sequence analysis"
+
+candid=2590 pos="A N"
+"sp1 proteins"
+
+candid=2591 pos="N N"
+"transcription control"
+
+candid=2592 pos="N N N"
+"ag receptor complex"
+
+candid=2593 pos="N N"
+"cd28re region"
+
+candid=2594 pos="N N"
+"cells il-10"
+
+candid=2595 pos="A N N"
+"ck-1/ cd28re region"
+
+candid=2596 pos="N N"
+"cord blood"
+
+candid=2597 pos="N N N"
+"erythropoietin receptor gene"
+
+candid=2598 pos="A N"
+"human lymphocyte"
+
+candid=2599 pos="N A N"
+"ifn-gamma cytoplasmic mrna"
+
+candid=2600 pos="A N"
+"immunohistochemical study"
+
+candid=2601 pos="A N"
+"inverted repeats"
+
+candid=2602 pos="A N"
+"molecular events"
+
+candid=2603 pos="A N"
+"nuclear protein"
+
+candid=2604 pos="A N"
+"other hand"
+
+candid=2605 pos="A A N"
+"pma-induced il-2 production"
+
+candid=2606 pos="N N"
+"stem cells"
+
+candid=2607 pos="N N N"
+"t lymphocyte precursors"
+
+candid=2608 pos="N N"
+"tnf alpha"
+
+candid=2609 pos="N N"
+"transcription activation"
+
+candid=2610 pos="A N"
+"ad-infected targets"
+
+candid=2611 pos="A N"
+"ca2+ ionophore"
+
+candid=2612 pos="N N N"
+"cell antigen receptors"
+
+candid=2613 pos="N N"
+"cortisol concentrations"
+
+candid=2614 pos="N N A N N"
+"fc gamma ric promoter sequences"
+
+candid=2615 pos="A N"
+"glucocorticoid receptor"
+
+candid=2616 pos="N N"
+"hamster ovary"
+
+candid=2617 pos="A N"
+"im-9 cell"
+
+candid=2618 pos="A N N"
+"important immunoregulatory protein"
+
+candid=2619 pos="N N"
+"lymphocyte immunoglobulin"
+
+candid=2620 pos="A N"
+"negative effect"
+
+candid=2621 pos="A N N"
+"nuclear factors nf-kappa"
+
+candid=2622 pos="A A N N"
+"phytohemagglutinin-stimulated human jurkat t"
+
+candid=2623 pos="N NUM"
+"positions -51"
+
+candid=2624 pos="A N"
+"regulatory element"
+
+candid=2625 pos="A N"
+"second cell"
+
+candid=2626 pos="N N"
+"serum response"
+
+candid=2627 pos="N N"
+"start site"
+
+candid=2628 pos="N N"
+"vivax malaria"
+

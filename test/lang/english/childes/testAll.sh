@@ -11,8 +11,6 @@ usage_exit() { {
 }
 
 
-tests_to_skip=0
-
 while test $# -gt 0; do
     case "$1" in
         -s) t_N_TESTS_LIMIT="$(($2-1))"; shift ;;
@@ -26,13 +24,10 @@ test "$#" -ne 0  && usage_exit
 ##################################################
 
 
-t_REFDIR="$t_HERE/reference-output"
-
-
 main() {
     t_testname "Corpus indexing"
     t_run "$t_BIN/index.py -i $t_OUTDIR/corpus $t_LOCAL_INPUT/corpus.xml"
-    for filepath in "$t_REFDIR/corpus"*; do
+    for filepath in "$t_REFDIR/corpus."{lemma,surface,pos,syn}.* "$t_REFDIR/corpus.info"; do
         t_compare_with_ref "$(basename "$filepath")"
     done
 
@@ -83,6 +78,7 @@ main() {
     t_run "$t_BIN/tail.py -n 50 $t_LOCAL_INPUT/corpus.xml >$t_OUTDIR/corpus-tail.xml"
     t_compare_with_ref "corpus-tail.xml"
 
+    ln -s "$t_LOCAL_INPUT/corpus.xml" "$t_OUTDIR/corpus.xml"
     for base in candidates-featureful corpus; do
         for suffix in '' -head -tail; do
             t_testname "Word count for $base$suffix"

@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<candidates >
+<meta>
+    <corpussize name="corpus" value="12878" />
+    <metafeat name="mle_corpus" type="real" />
+    <metafeat name="pmi_corpus" type="real" />
+    <metafeat name="t_corpus" type="real" />
+    <metafeat name="dice_corpus" type="real" />
+    <metafeat name="ll_corpus" type="real" />
+</meta>
+<cand candid="2579">
+    <ngram><w surface="type" pos="N" ><freq name="corpus" value="8" /></w> <w surface="ii" pos="N" ><freq name="corpus" value="16" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="type" lemma="type" pos="N" /> <w surface="ii" lemma="ii" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="6.65273296687" />
+        <feat name="t_corpus" value="0.990061340226" />
+        <feat name="dice_corpus" value="0.0833333333333" />
+        <feat name="ll_corpus" value="4.96521534658" />
+    </features>
+</cand>
+<cand candid="2580">
+    <ngram><w surface="%" pos="N" ><freq name="corpus" value="9" /></w> <w surface="decrease" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="%" lemma="%" pos="N" /> <w surface="decrease" lemma="decrease" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="9.48280796543" />
+        <feat name="t_corpus" value="0.998602375969" />
+        <feat name="dice_corpus" value="0.181818181818" />
+        <feat name="ll_corpus" value="6.89478959817" />
+    </features>
+</cand>
+<cand candid="2581">
+    <ngram><w surface="alpha" pos="N" ><freq name="corpus" value="56" /></w> <w surface="gene" pos="N" ><freq name="corpus" value="96" /></w> <freq name="corpus" value="5" /></ngram>
+    <occurs>
+    <ngram><w surface="alpha" lemma="alpha" pos="N" /> <w surface="gene" lemma="gene" pos="N" /> <freq name="corpus" value="5" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000388259046436" />
+        <feat name="pmi_corpus" value="3.58234363898" />
+        <feat name="t_corpus" value="2.04939041908" />
+        <feat name="dice_corpus" value="0.0657894736842" />
+        <feat name="ll_corpus" value="8.80652312392" />
+    </features>
+</cand>
+<cand candid="2582">
+    <ngram><w surface="cat" pos="N" ><freq name="corpus" value="2" /></w> <w surface="reporter" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="cat" lemma="cat" pos="N" /> <w surface="reporter" lemma="reporter" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="9.33080487198" />
+        <feat name="t_corpus" value="0.99844708441" />
+        <feat name="dice_corpus" value="0.166666666667" />
+        <feat name="ll_corpus" value="6.79814765124" />
+    </features>
+</cand>
+<cand candid="2583">
+    <ngram><w surface="control" pos="N" ><freq name="corpus" value="14" /></w> <w surface="transcription" pos="N" ><freq name="corpus" value="80" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="control" lemma="control" pos="N" /> <w surface="transcription" lemma="transcription" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="3.52344994992" />
+        <feat name="t_corpus" value="0.913036726978" />
+        <feat name="dice_corpus" value="0.0212765957447" />
+        <feat name="ll_corpus" value="3.09644773512" />
+    </features>
+</cand>
+<cand candid="2584">
+    <ngram><w surface="cyclosporin" pos="N" ><freq name="corpus" value="2" /></w> <w surface="treatment" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="cyclosporin" lemma="cyclosporin" pos="N" /> <w surface="treatment" lemma="treatment" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="9.33080487198" />
+        <feat name="t_corpus" value="0.99844708441" />
+        <feat name="dice_corpus" value="0.166666666667" />
+        <feat name="ll_corpus" value="6.79814765124" />
+    </features>
+</cand>
+<cand candid="2585">
+    <ngram><w surface="enzyme" pos="N" ><freq name="corpus" value="5" /></w> <w surface="activity" pos="N" ><freq name="corpus" value="46" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="enzyme" lemma="enzyme" pos="N" /> <w surface="activity" lemma="activity" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000155303618574" />
+        <feat name="pmi_corpus" value="6.80724291592" />
+        <feat name="t_corpus" value="1.40158567522" />
+        <feat name="dice_corpus" value="0.078431372549" />
+        <feat name="ll_corpus" value="8.6495961976" />
+    </features>
+</cand>
+<cand candid="2586">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="leukemic" pos="A" ><freq name="corpus" value="1" /></w> <w surface="cells" pos="N" ><freq name="corpus" value="152" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="leukemic" lemma="leukemic" pos="A" /> <w surface="cells" lemma="cell" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.8876134276" />
+        <feat name="t_corpus" value="0.999934020079" />
+        <feat name="dice_corpus" value="0.0133333333333" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2587">
+    <ngram><w surface="murine" pos="A" ><freq name="corpus" value="3" /></w> <w surface="macrophage" pos="N" ><freq name="corpus" value="2" /></w> <w surface="inflammatory" pos="A" ><freq name="corpus" value="3" /></w> <w surface="protein" pos="N" ><freq name="corpus" value="59" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="murine" lemma="murine" pos="A" /> <w surface="macrophage" lemma="macrophage" pos="N" /> <w surface="inflammatory" lemma="inflammatory" pos="A" /> <w surface="protein" lemma="protein" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="30.9056308759" />
+        <feat name="t_corpus" value="0.999999999503" />
+        <feat name="dice_corpus" value="0.0597014925373" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2588">
+    <ngram><w surface="receptor" pos="N" ><freq name="corpus" value="44" /></w> <w surface="gene" pos="N" ><freq name="corpus" value="96" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="receptor" lemma="receptor" pos="N" /> <w surface="gene" lemma="gene" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000232955427861" />
+        <feat name="pmi_corpus" value="3.19330134823" />
+        <feat name="t_corpus" value="1.54269390701" />
+        <feat name="dice_corpus" value="0.0428571428571" />
+        <feat name="ll_corpus" value="5.28898636202" />
+    </features>
+</cand>
+<cand candid="2589">
+    <ngram><w surface="sequence" pos="N" ><freq name="corpus" value="22" /></w> <w surface="analysis" pos="N" ><freq name="corpus" value="12" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="sequence" lemma="sequence" pos="N" /> <w surface="analysis" lemma="analysis" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="5.60833884751" />
+        <feat name="t_corpus" value="0.979501514216" />
+        <feat name="dice_corpus" value="0.0588235294118" />
+        <feat name="ll_corpus" value="4.31779888297" />
+    </features>
+</cand>
+<cand candid="2590">
+    <ngram><w surface="sp1" pos="A" ><freq name="corpus" value="15" /></w> <w surface="proteins" pos="N" ><freq name="corpus" value="36" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="sp1" lemma="sp1" pos="A" /> <w surface="proteins" lemma="protein" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="4.57591736982" />
+        <feat name="t_corpus" value="0.958071279079" />
+        <feat name="dice_corpus" value="0.0392156862745" />
+        <feat name="ll_corpus" value="3.69824283203" />
+    </features>
+</cand>
+<cand candid="2591">
+    <ngram><w surface="transcription" pos="N" ><freq name="corpus" value="80" /></w> <w surface="control" pos="N" ><freq name="corpus" value="14" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="transcription" lemma="transcription" pos="N" /> <w surface="control" lemma="control" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="3.52344994992" />
+        <feat name="t_corpus" value="0.913036726978" />
+        <feat name="dice_corpus" value="0.0212765957447" />
+        <feat name="ll_corpus" value="3.09644773512" />
+    </features>
+</cand>
+<cand candid="2592">
+    <ngram><w surface="ag" pos="N" ><freq name="corpus" value="1" /></w> <w surface="receptor" pos="N" ><freq name="corpus" value="44" /></w> <w surface="complex" pos="N" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ag" lemma="ag" pos="N" /> <w surface="receptor" lemma="receptor" pos="N" /> <w surface="complex" lemma="complex" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="17.7585714825" />
+        <feat name="t_corpus" value="0.999995490407" />
+        <feat name="dice_corpus" value="0.0483870967742" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2593">
+    <ngram><w surface="cd28re" pos="N" ><freq name="corpus" value="4" /></w> <w surface="region" pos="N" ><freq name="corpus" value="28" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="cd28re" lemma="cd28re" pos="N" /> <w surface="region" lemma="region" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="6.84537804481" />
+        <feat name="t_corpus" value="0.991303672698" />
+        <feat name="dice_corpus" value="0.0625" />
+        <feat name="ll_corpus" value="5.12980668481" />
+    </features>
+</cand>
+<cand candid="2594">
+    <ngram><w surface="cells" pos="N" ><freq name="corpus" value="152" /></w> <w surface="il-10" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="cells" lemma="cell" pos="N" /> <w surface="il-10" lemma="il-10" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="4.40480545342" />
+        <feat name="t_corpus" value="0.952791366074" />
+        <feat name="dice_corpus" value="0.0128205128205" />
+        <feat name="ll_corpus" value="3.67287271611" />
+    </features>
+</cand>
+<cand candid="2595">
+    <ngram><w surface="ck-1/" pos="A" ><freq name="corpus" value="2" /></w> <w surface="cd28re" pos="N" ><freq name="corpus" value="4" /></w> <w surface="region" pos="N" ><freq name="corpus" value="28" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ck-1/" lemma="ck-1/" pos="A" /> <w surface="cd28re" lemma="cd28re" pos="N" /> <w surface="region" lemma="region" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="19.4981110204" />
+        <feat name="t_corpus" value="0.999998649534" />
+        <feat name="dice_corpus" value="0.0882352941176" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2596">
+    <ngram><w surface="cord" pos="N" ><freq name="corpus" value="1" /></w> <w surface="blood" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="cord" lemma="cord" pos="N" /> <w surface="blood" lemma="blood" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="10.4828079654" />
+        <feat name="t_corpus" value="0.999301187985" />
+        <feat name="dice_corpus" value="0.2" />
+        <feat name="ll_corpus" value="8.09836972829" />
+    </features>
+</cand>
+<cand candid="2597">
+    <ngram><w surface="erythropoietin" pos="N" ><freq name="corpus" value="4" /></w> <w surface="receptor" pos="N" ><freq name="corpus" value="44" /></w> <w surface="gene" pos="N" ><freq name="corpus" value="96" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="erythropoietin" lemma="erythropoietin" pos="N" /> <w surface="receptor" lemma="receptor" pos="N" /> <w surface="gene" lemma="gene" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.2610718231" />
+        <feat name="t_corpus" value="0.999898136263" />
+        <feat name="dice_corpus" value="0.0208333333333" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2598">
+    <ngram><w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="lymphocyte" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="human" lemma="human" pos="A" /> <w surface="lymphocyte" lemma="lymphocyte" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="4.8978454647" />
+        <feat name="t_corpus" value="0.966457023263" />
+        <feat name="dice_corpus" value="0.025641025641" />
+        <feat name="ll_corpus" value="3.92400470581" />
+    </features>
+</cand>
+<cand candid="2599">
+    <ngram><w surface="ifn-gamma" pos="N" ><freq name="corpus" value="32" /></w> <w surface="cytoplasmic" pos="A" ><freq name="corpus" value="6" /></w> <w surface="mrna" pos="N" ><freq name="corpus" value="31" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ifn-gamma" lemma="ifn-gamma" pos="N" /> <w surface="cytoplasmic" lemma="cytoplasmic" pos="A" /> <w surface="mrna" lemma="mrna" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="14.7663071313" />
+        <feat name="t_corpus" value="0.999964116183" />
+        <feat name="dice_corpus" value="0.0434782608696" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2600">
+    <ngram><w surface="immunohistochemical" pos="A" ><freq name="corpus" value="1" /></w> <w surface="study" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="immunohistochemical" lemma="immunohistochemical" pos="A" /> <w surface="study" lemma="study" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="12.0677704661" />
+        <feat name="t_corpus" value="0.999767062662" />
+        <feat name="dice_corpus" value="0.5" />
+        <feat name="ll_corpus" value="9.16668756066" />
+    </features>
+</cand>
+<cand candid="2601">
+    <ngram><w surface="inverted" pos="A" ><freq name="corpus" value="1" /></w> <w surface="repeats" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="inverted" lemma="inverted" pos="A" /> <w surface="repeats" lemma="repeat" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.6527329669" />
+        <feat name="t_corpus" value="0.999922354221" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.8252951063" />
+    </features>
+</cand>
+<cand candid="2602">
+    <ngram><w surface="molecular" pos="A" ><freq name="corpus" value="6" /></w> <w surface="events" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="molecular" lemma="molecular" pos="A" /> <w surface="events" lemma="event" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="9.06777046615" />
+        <feat name="t_corpus" value="0.998136501292" />
+        <feat name="dice_corpus" value="0.2" />
+        <feat name="ll_corpus" value="6.52443992694" />
+    </features>
+</cand>
+<cand candid="2603">
+    <ngram><w surface="nuclear" pos="A" ><freq name="corpus" value="29" /></w> <w surface="protein" pos="N" ><freq name="corpus" value="59" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="nuclear" lemma="nuclear" pos="A" /> <w surface="protein" lemma="protein" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000155303618574" />
+        <feat name="pmi_corpus" value="3.91210892238" />
+        <feat name="t_corpus" value="1.3202730627" />
+        <feat name="dice_corpus" value="0.0454545454545" />
+        <feat name="ll_corpus" value="4.90545372697" />
+    </features>
+</cand>
+<cand candid="2604">
+    <ngram><w surface="other" pos="A" ><freq name="corpus" value="9" /></w> <w surface="hand" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="other" lemma="other" pos="A" /> <w surface="hand" lemma="hand" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="10.4828079654" />
+        <feat name="t_corpus" value="0.999301187985" />
+        <feat name="dice_corpus" value="0.2" />
+        <feat name="ll_corpus" value="8.09836972829" />
+    </features>
+</cand>
+<cand candid="2605">
+    <ngram><w surface="pma-induced" pos="A" ><freq name="corpus" value="1" /></w> <w surface="il-2" pos="A" ><freq name="corpus" value="24" /></w> <w surface="production" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="pma-induced" lemma="pma-induced" pos="A" /> <w surface="il-2" lemma="il-2" pos="A" /> <w surface="production" lemma="production" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="19.5505784403" />
+        <feat name="t_corpus" value="0.999998697765" />
+        <feat name="dice_corpus" value="0.0882352941176" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2606">
+    <ngram><w surface="stem" pos="N" ><freq name="corpus" value="3" /></w> <w surface="cells" pos="N" ><freq name="corpus" value="152" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="stem" lemma="stem" pos="N" /> <w surface="cells" lemma="cell" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000155303618574" />
+        <feat name="pmi_corpus" value="5.8198429527" />
+        <feat name="t_corpus" value="1.38917740349" />
+        <feat name="dice_corpus" value="0.0258064516129" />
+        <feat name="ll_corpus" value="7.81191100317" />
+    </features>
+</cand>
+<cand candid="2607">
+    <ngram><w surface="t" pos="N" ><freq name="corpus" value="76" /></w> <w surface="lymphocyte" pos="N" ><freq name="corpus" value="6" /></w> <w surface="precursors" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="t" lemma="t" pos="N" /> <w surface="lymphocyte" lemma="lymphocyte" pos="N" /> <w surface="precursors" lemma="precursor" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="18.4725759283" />
+        <feat name="t_corpus" value="0.999997250837" />
+        <feat name="dice_corpus" value="0.0361445783133" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2608">
+    <ngram><w surface="tnf" pos="N" ><freq name="corpus" value="14" /></w> <w surface="alpha" pos="N" ><freq name="corpus" value="56" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="tnf" lemma="tnf" pos="N" /> <w surface="alpha" lemma="alpha" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="4.03802312275" />
+        <feat name="t_corpus" value="0.939125708885" />
+        <feat name="dice_corpus" value="0.0285714285714" />
+        <feat name="ll_corpus" value="3.38743431989" />
+    </features>
+</cand>
+<cand candid="2609">
+    <ngram><w surface="transcription" pos="N" ><freq name="corpus" value="80" /></w> <w surface="activation" pos="N" ><freq name="corpus" value="72" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="transcription" lemma="transcription" pos="N" /> <w surface="activation" lemma="activation" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="1.16087987054" />
+        <feat name="t_corpus" value="0.552760310174" />
+        <feat name="dice_corpus" value="0.0131578947368" />
+        <feat name="ll_corpus" value="1.95937449193" />
+    </features>
+</cand>
+<cand candid="2610">
+    <ngram><w surface="ad-infected" pos="A" ><freq name="corpus" value="1" /></w> <w surface="targets" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ad-infected" lemma="ad-infected" pos="A" /> <w surface="targets" lemma="target" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.6527329669" />
+        <feat name="t_corpus" value="0.999922354221" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.8252951063" />
+    </features>
+</cand>
+<cand candid="2611">
+    <ngram><w surface="ca2+" pos="A" ><freq name="corpus" value="4" /></w> <w surface="ionophore" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ca2+" lemma="ca2+" pos="A" /> <w surface="ionophore" lemma="ionophore" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000232955427861" />
+        <feat name="pmi_corpus" value="10.4303405455" />
+        <feat name="t_corpus" value="1.73079560084" />
+        <feat name="dice_corpus" value="0.545454545455" />
+        <feat name="ll_corpus" value="20.0330868774" />
+    </features>
+</cand>
+<cand candid="2612">
+    <ngram><w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <w surface="antigen" pos="N" ><freq name="corpus" value="8" /></w> <w surface="receptors" pos="N" ><freq name="corpus" value="12" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="cell" lemma="cell" pos="N" /> <w surface="antigen" lemma="antigen" pos="N" /> <w surface="receptors" lemma="receptor" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000155303618574" />
+        <feat name="pmi_corpus" value="15.6119789849" />
+        <feat name="t_corpus" value="1.41418532391" />
+        <feat name="dice_corpus" value="0.0674157303371" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2613">
+    <ngram><w surface="cortisol" pos="N" ><freq name="corpus" value="3" /></w> <w surface="concentrations" pos="N" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="cortisol" lemma="cortisol" pos="N" /> <w surface="concentrations" lemma="concentration" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000232955427861" />
+        <feat name="pmi_corpus" value="11.330804872" />
+        <feat name="t_corpus" value="1.73137837539" />
+        <feat name="dice_corpus" value="0.75" />
+        <feat name="ll_corpus" value="23.2158819224" />
+    </features>
+</cand>
+<cand candid="2614">
+    <ngram><w surface="fc" pos="N" ><freq name="corpus" value="11" /></w> <w surface="gamma" pos="N" ><freq name="corpus" value="11" /></w> <w surface="ric" pos="A" ><freq name="corpus" value="5" /></w> <w surface="promoter" pos="N" ><freq name="corpus" value="63" /></w> <w surface="sequences" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="fc" lemma="fc" pos="N" /> <w surface="gamma" lemma="gamma" pos="N" /> <w surface="ric" lemma="ric" pos="A" /> <w surface="promoter" lemma="promoter" pos="N" /> <w surface="sequences" lemma="sequence" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="36.392860664" />
+        <feat name="t_corpus" value="0.999999999989" />
+        <feat name="dice_corpus" value="0.0510204081633" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2615">
+    <ngram><w surface="glucocorticoid" pos="A" ><freq name="corpus" value="17" /></w> <w surface="receptor" pos="N" ><freq name="corpus" value="44" /></w> <freq name="corpus" value="12" /></ngram>
+    <occurs>
+    <ngram><w surface="glucocorticoid" lemma="glucocorticoid" pos="A" /> <w surface="receptor" lemma="receptor" pos="N" /> <freq name="corpus" value="12" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000931821711446" />
+        <feat name="pmi_corpus" value="7.6908010077" />
+        <feat name="t_corpus" value="3.44733563957" />
+        <feat name="dice_corpus" value="0.393442622951" />
+        <feat name="ll_corpus" value="53.5622404051" />
+    </features>
+</cand>
+<cand candid="2616">
+    <ngram><w surface="hamster" pos="N" ><freq name="corpus" value="1" /></w> <w surface="ovary" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="hamster" lemma="hamster" pos="N" /> <w surface="ovary" lemma="ovary" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.6527329669" />
+        <feat name="t_corpus" value="0.999922354221" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.8252951063" />
+    </features>
+</cand>
+<cand candid="2617">
+    <ngram><w surface="im-9" pos="A" ><freq name="corpus" value="2" /></w> <w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="im-9" lemma="im-9" pos="A" /> <w surface="cell" lemma="cell" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="6.54420851009" />
+        <feat name="t_corpus" value="0.989284882431" />
+        <feat name="dice_corpus" value="0.0281690140845" />
+        <feat name="ll_corpus" value="5.08581220723" />
+    </features>
+</cand>
+<cand candid="2618">
+    <ngram><w surface="important" pos="A" ><freq name="corpus" value="13" /></w> <w surface="immunoregulatory" pos="N" ><freq name="corpus" value="2" /></w> <w surface="protein" pos="N" ><freq name="corpus" value="59" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="important" lemma="important" pos="A" /> <w surface="immunoregulatory" lemma="immunoregulatory" pos="N" /> <w surface="protein" lemma="protein" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="16.7223831749" />
+        <feat name="t_corpus" value="0.999990751718" />
+        <feat name="dice_corpus" value="0.0405405405405" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2619">
+    <ngram><w surface="lymphocyte" pos="N" ><freq name="corpus" value="6" /></w> <w surface="immunoglobulin" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="lymphocyte" lemma="lymphocyte" pos="N" /> <w surface="immunoglobulin" lemma="immunoglobulin" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="10.0677704661" />
+        <feat name="t_corpus" value="0.999068250646" />
+        <feat name="dice_corpus" value="0.25" />
+        <feat name="ll_corpus" value="7.27339753091" />
+    </features>
+</cand>
+<cand candid="2620">
+    <ngram><w surface="negative" pos="A" ><freq name="corpus" value="6" /></w> <w surface="effect" pos="N" ><freq name="corpus" value="21" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="negative" lemma="negative" pos="A" /> <w surface="effect" lemma="effect" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="6.67545304337" />
+        <feat name="t_corpus" value="0.990216631785" />
+        <feat name="dice_corpus" value="0.0740740740741" />
+        <feat name="ll_corpus" value="4.99192194752" />
+    </features>
+</cand>
+<cand candid="2621">
+    <ngram><w surface="nuclear" pos="A" ><freq name="corpus" value="29" /></w> <w surface="factors" pos="N" ><freq name="corpus" value="23" /></w> <w surface="nf-kappa" pos="N" ><freq name="corpus" value="44" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="nuclear" lemma="nuclear" pos="A" /> <w surface="factors" lemma="factor" pos="N" /> <w surface="nf-kappa" lemma="nf-kappa" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="12.4644913726" />
+        <feat name="t_corpus" value="0.99982306481" />
+        <feat name="dice_corpus" value="0.03125" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2622">
+    <ngram><w surface="phytohemagglutinin-stimulated" pos="A" ><freq name="corpus" value="1" /></w> <w surface="human" pos="A" ><freq name="corpus" value="72" /></w> <w surface="jurkat" pos="N" ><freq name="corpus" value="13" /></w> <w surface="t" pos="N" ><freq name="corpus" value="76" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="phytohemagglutinin-stimulated" lemma="phytohemagglutinin-stimulated" pos="A" /> <w surface="human" lemma="human" pos="A" /> <w surface="jurkat" lemma="jurkat" pos="N" /> <w surface="t" lemma="t" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="24.8399066937" />
+        <feat name="t_corpus" value="0.9999999667" />
+        <feat name="dice_corpus" value="0.0246913580247" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="2623">
+    <ngram><w surface="positions" pos="N" ><freq name="corpus" value="1" /></w> <w surface="-51" pos="NUM" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="positions" lemma="position" pos="N" /> <w surface="-51" lemma="@card@" pos="NUM" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.6527329669" />
+        <feat name="t_corpus" value="0.999922354221" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.8252951063" />
+    </features>
+</cand>
+<cand candid="2624">
+    <ngram><w surface="regulatory" pos="A" ><freq name="corpus" value="7" /></w> <w surface="element" pos="N" ><freq name="corpus" value="16" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="regulatory" lemma="regulatory" pos="A" /> <w surface="element" lemma="element" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000155303618574" />
+        <feat name="pmi_corpus" value="7.84537804481" />
+        <feat name="t_corpus" value="1.40806433037" />
+        <feat name="dice_corpus" value="0.173913043478" />
+        <feat name="ll_corpus" value="9.84033120916" />
+    </features>
+</cand>
+<cand candid="2625">
+    <ngram><w surface="second" pos="A" ><freq name="corpus" value="5" /></w> <w surface="cell" pos="N" ><freq name="corpus" value="69" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="second" lemma="second" pos="A" /> <w surface="cell" lemma="cell" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="5.2222804152" />
+        <feat name="t_corpus" value="0.973212206078" />
+        <feat name="dice_corpus" value="0.027027027027" />
+        <feat name="ll_corpus" value="4.13051265846" />
+    </features>
+</cand>
+<cand candid="2626">
+    <ngram><w surface="serum" pos="N" ><freq name="corpus" value="3" /></w> <w surface="response" pos="N" ><freq name="corpus" value="22" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="serum" lemma="serum" pos="N" /> <w surface="response" lemma="response" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000232955427861" />
+        <feat name="pmi_corpus" value="9.19330134823" />
+        <feat name="t_corpus" value="1.729092106" />
+        <feat name="dice_corpus" value="0.24" />
+        <feat name="ll_corpus" value="18.5275008631" />
+    </features>
+</cand>
+<cand candid="2627">
+    <ngram><w surface="start" pos="N" ><freq name="corpus" value="4" /></w> <w surface="site" pos="N" ><freq name="corpus" value="39" /></w> <freq name="corpus" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="start" lemma="start" pos="N" /> <w surface="site" lemma="site" pos="N" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000310607237149" />
+        <feat name="pmi_corpus" value="8.36733074801" />
+        <feat name="t_corpus" value="1.9939436292" />
+        <feat name="dice_corpus" value="0.186046511628" />
+        <feat name="ll_corpus" value="22.0711679778" />
+    </features>
+</cand>
+<cand candid="2628">
+    <ngram><w surface="vivax" pos="N" ><freq name="corpus" value="1" /></w> <w surface="malaria" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="vivax" lemma="vivax" pos="N" /> <w surface="malaria" lemma="malaria" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="7.76518092872e-05" />
+        <feat name="pmi_corpus" value="13.6527329669" />
+        <feat name="t_corpus" value="0.999922354221" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.8252951063" />
+    </features>
+</cand>
+</candidates>

@@ -12,8 +12,8 @@ t_BIN="$t_TOOLKIT/bin"
 # Path to input data shared among all tests
 t_INPUT="$t_TOOLKIT/test/inputs"
 
-# Number of lines to display on `t_diff`
-t_DIFF_HEAD_LENGTH="${t_DIFF_HEAD_LENGTH:-30}"
+# Number of diff lines to display on `t_compare`
+t_COMPARE_DIFF_LENGTH="${t_COMPARE_DIFF_LENGTH:-25}"
 # Whether to continue on error (this is an executable! See how it's used!)
 t_STOP_ON_ERROR="${t_STOP_ON_ERROR:-true}"
 
@@ -36,6 +36,7 @@ fi
 # Path to output files:
 if ! test "${t_OUTDIR+set}"; then
     t_OUTDIR="$t_HERE/output"
+    rm -rf "$t_OUTDIR"
     mkdir -p "$t_OUTDIR"
 fi
 
@@ -90,7 +91,7 @@ t_testname() {
     _THIS_TEST_NUM="$((${_THIS_TEST_NUM:-}+1))"
     test "$_THIS_TEST_NUM" -ne 1  && echo ""
 
-    if test "$_THIS_TEST_NUM" -ge "$t_RUN_N_TESTS"; then
+    if test "$_THIS_TEST_NUM" -gt "$t_RUN_N_TESTS"; then
         t_echo_bold "[Stopping after $t_RUN_N_TESTS tests]"
         exit 0
     fi
@@ -115,17 +116,13 @@ t_run() {
 # Uses wdiff if available.
 t_diff() {
     if hash "wdiff" 2>/dev/null; then
-        diff -u "$@" | head -n "$t_DIFF_HEAD_LENGTH" | wdiff -d --terminal
-        retcode="${PIPESTATUS[0]}"
+        diff -u "$@" | wdiff -d --terminal
     else
         if ! test "${_WARNED_WDIFF+set}"; then
             t_warn "wdiff is not installed; using diff"
             _WARNED_WDIFF=1
         fi
-        diff -u "$@" | head -n "$t_DIFF_HEAD_LENGTH"
-        retcode="${PIPESTATUS[0]}"
     fi
-    return "$retcode"
 }
 
 
@@ -144,20 +141,36 @@ t_compare() {
     echo -n "$(t_echo_rgb 0 "${description}... ")"
 
     if ! test -f "$txt_ref"; then
-        echo ""; t_error "not found: $txt_ref"
+        t_echo_bold_rgb 1 "ERROR!"
+        t_echo_bold_rgb 1 "↪ Not found: $txt_ref"
+        $t_STOP_ON_ERROR && return 60
 
     elif ! test -f "$txt_in"; then
-        echo ""; t_error "not found: $txt_in"
+        t_echo_bold_rgb 1 "ERROR!"
+        t_echo_bold_rgb 1 "↪ Not found: $txt_in"
+        $t_STOP_ON_ERROR && return 61
 
     else
         local errcode=0
         t_diff "$txt_ref" "$txt_in" >"$t_TMP/last_diff" || errcode="$?"
 
         if test "$errcode" -ne 0; then
-            echo ""
-            t_echo_bold_rgb 1 "Test $_THIS_TEST_NUM FAILED! Head of diff below:"
-            echo "--------------------------------------"
-            cat "$t_TMP/last_diff"
+            t_echo_bold_rgb 1 "FAILED!"
+            t_echo_bold_rgb 1 "↪  Outputting the beginning of diff below:"
+
+            # We add a size restriction, as lines may have much more than
+            # $COLUMNS and end up looking much bigger than $t_COMPARE_DIFF_LENGTH
+            # on the terminal.  Also note that "head -c" will count the number
+            # of bytes, which includes formatting stuff like "^[[1m;" and
+            # is not necessarily a good estimator of the number of
+            # (mostly utf-8) characters...
+            local byterestrict="$((${COLUMNS:-80} * t_COMPARE_DIFF_LENGTH))"
+            head -c "$byterestrict" "$t_TMP/last_diff" >"$t_TMP/byterestr_last_diff"
+            if ! cmp --silent "$t_TMP/last_diff" "$t_TMP/byterestr_last_diff"; then
+                echo -e '\e[0m[...]' >>"$t_TMP/byterestr_last_diff"
+            fi
+            head -n "$t_COMPARE_DIFF_LENGTH" "$t_TMP/byterestr_last_diff"
+
             t_backtrace
         else
             t_echo_bold_rgb 2 "OK."
@@ -168,6 +181,7 @@ t_compare() {
         fi
         return "$errcode"
     fi
+    return 0
 }
 
 
@@ -192,17 +206,18 @@ t_backtrace() {
 
 
 
-# on_exit <err_kind>
+# _t_on_exit <skip_n> <err_kind>
 # Function that is called when exiting due to some error.
-on_error() {
+_t_on_exit() {
     ERRCODE="$?"
-    t_backtrace 1
+    test "$ERRCODE" -ne 0 && t_backtrace "$1"
     return "$ERRCODE"
 }
 
-trap 'on_error ERR' ERR
+trap '_t_on_exit 1 ERR' ERR
 
 # TODO find out why bash corrupts BASH_LINENO[0]
-# inside `on_error` when called for SIGINT
-# (also happens on `trap ... EXIT` -- may be a bash bug)
-trap 'on_error INT' SIGINT
+# inside `_t_on_exit` when called for SIGINT/EXIT
+# (may be a bash bug)
+trap '_t_on_exit 2 INT' SIGINT
+trap '_t_on_exit 2 EXIT' EXIT

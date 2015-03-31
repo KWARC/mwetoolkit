@@ -1,0 +1,3 @@
+2629 entities in candidates-featureful.xml
+6749 words in candidates-featureful.xml
+48650 characters in candidates-featureful.xml

@@ -1,0 +1,4 @@
+Debug mode on
+503 entities in corpus.xml
+12878 words in corpus.xml
+66979 characters in corpus.xml

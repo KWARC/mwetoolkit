@@ -254,6 +254,4 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = ["from=", "to=", "palavras", "genia" ]
 args = read_options( "xF:pg", longopts, treat_options, -1, usage_string )
-
-printer = FilterHandler(output_filetype_ext)
-filetype.parse(args, printer, input_filetype_ext)
+filetype.parse(args, FilterHandler(), input_filetype_ext)
