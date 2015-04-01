@@ -218,10 +218,10 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
         if not self.chain:
             ext = output_filetype_ext or "XML"
             self.chain = filetype.printer_class(ext)("candidates")
-            self.chain.before_file(None, info)
             self.chain.handle_meta(Meta([],[],[]), info)
             self.candidate_factory = CandidateFactory()
 
+        self.chain.before_file(fileobj, info)
         self.current_corpus_name = re.sub(".*/", "",
                 re.sub("\.(xml|info)", "", fileobj.name))
                 
