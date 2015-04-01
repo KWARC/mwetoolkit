@@ -49,7 +49,7 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 		             symbolnumber_t);
 		resize_alloc(suf->suffix,
 		             suf->allocated + SUFFIX_ARRAY_ALLOC_CHUNK,
-		             size_t);
+		             position_t);
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 	}
 
@@ -59,8 +59,8 @@ void suffixarray_append_word(suffixarray_t *suf, symbolname_t word) {
 	suf->used++;
 }
 
-int suffixarray_compare(suffixarray_t *suf, size_t pos1, size_t pos2) {
-	size_t limit = suf->used;
+int suffixarray_compare(suffixarray_t *suf, position_t pos1, position_t pos2) {
+	position_t limit = suf->used;
 	symbolnumber_t *corpus = suf->corpus;
 	int first = 1;
 
@@ -80,13 +80,12 @@ int suffixarray_compare(suffixarray_t *suf, size_t pos1, size_t pos2) {
 		return 0;
 }
 
-
 int suffixarray_compare_global(const void *ptr1, const void *ptr2) {
 	return suffixarray_compare(current_suffix_array, *(size_t *)ptr1, *(size_t *)ptr2);
 }
 
 void suffixarray_sort(suffixarray_t *suf) {
-	size_t i;
+	position_t i;
 	current_suffix_array = suf;
 	for (i=0; i < suf->used; i++)
 		suf->suffix[i] = i;
@@ -94,13 +93,13 @@ void suffixarray_sort(suffixarray_t *suf) {
 }
 
 void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
-	size_t nread1;//nread2;
+	position_t nread1;//nread2;
 	while (1) {
 		suf->allocated += SUFFIX_ARRAY_ALLOC_CHUNK;
 		resize_alloc(suf->corpus, suf->allocated, symbolnumber_t);
-		resize_alloc(suf->suffix, suf->allocated, size_t);
+		resize_alloc(suf->suffix, suf->allocated, position_t);
 		nread1 = fread(corpusfile, sizeof(symbolnumber_t), SUFFIX_ARRAY_ALLOC_CHUNK, corpusfile);
-		         fread(suffixfile, sizeof(size_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
+		         fread(suffixfile, sizeof(position_t), SUFFIX_ARRAY_ALLOC_CHUNK, suffixfile);
 		suf->used += nread1;
 		if (nread1 < SUFFIX_ARRAY_ALLOC_CHUNK)
 			break;
@@ -109,7 +108,7 @@ void read_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
 
 void write_suffix_array(suffixarray_t *suf, FILE *corpusfile, FILE *suffixfile) {
 	fwrite(suf->corpus, sizeof(symbolnumber_t), suf->used, corpusfile);
-	fwrite(suf->suffix, sizeof(size_t), suf->used, suffixfile);
+	fwrite(suf->suffix, sizeof(position_t), suf->used, suffixfile);
 }
 
 void load_suffix_array(suffixarray_t *suf, char *basepath) {

@@ -22,14 +22,14 @@
 #include <stdlib.h>
 #include "base.h"
 
-void *check_malloc(size_t size) {
+void *check_malloc(position_t size) {
 	void *new = malloc(size);
 	if (!new)
 		error("Error allocating %zu bytes!\n", size);
 	return new;
 }
 
-void *check_realloc(void *ptr, size_t size) {
+void *check_realloc(void *ptr, position_t size) {
 	void *new = realloc(ptr, size);
 	if (!new)
 		error("Error reallocating %zu bytes!\n", size);

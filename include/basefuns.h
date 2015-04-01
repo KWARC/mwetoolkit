@@ -5,8 +5,11 @@
 #include <stdlib.h>
 #include "base.h"
 
-void *check_malloc(size_t size);
+// Type of an integer representing a corpus token position (int for small corpora, size_t for large corpora)
+typedef unsigned int position_t;
 
-void *check_realloc(void *ptr, size_t size);
+void *check_malloc(position_t size);
+
+void *check_realloc(void *ptr, position_t size);
 
 #endif

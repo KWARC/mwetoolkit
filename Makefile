@@ -3,14 +3,15 @@ INCLUDE := include
 OBJECTS := src/indexer/basefuns.o src/indexer/readline.o src/indexer/rbtree.o src/indexer/symboltable.o src/indexer/suffixarray.o src/indexer/main.o
 LIBS :=
 BIN := bin
+CC := gcc
 
 all: $(BIN)/c-indexer
 
 $(BIN)/c-indexer: $(OBJECTS)
-	gcc -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
+	$(CC) -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
 
 %.o: %.c
-	gcc -Wall -Wno-parentheses -c -I $(INCLUDE) $^ -o $*.o
+	$(CC) -Wall -Wno-parentheses -c -I $(INCLUDE) $^ -o $*.o
 
 doc: doc/html/index.html
 
