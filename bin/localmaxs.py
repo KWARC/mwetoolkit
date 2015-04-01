@@ -100,7 +100,7 @@ OPTIONS may be:
 
 -S OR --shelve
     Use a shelve (disk storage) rather than an in-memory data structure for
-    storing candidate counts. Uses less memory, but is slower.
+    storing candidate counts. Uses less memory, but is slower. Default false.
 
 {common_options}
 """
@@ -110,6 +110,12 @@ ngram_counts = {}
 selected_candidates = {}
 corpus_size = 0
 input_filetype_ext = None
+base_attr = 'lemma'
+glue = scp_glue
+min_ngram = 2
+max_ngram = 8
+min_frequency = 2
+use_shelve = False
 
 
 ################################################################################
@@ -336,13 +342,6 @@ def destroy_shelve(shlv, path):
         warn("Error removing temporary file: " + str(err))
 
 ################################################################################
-
-base_attr = 'lemma'
-glue = scp_glue
-min_ngram = 2
-max_ngram = 8
-min_frequency = 2
-use_shelve = False
 
 longopts = ["from=", "surface", "glue=", "ngram=", "freq=", "shelve"]
 args = read_options("sG:n:f:iS", longopts, treat_options, 1, usage_string)
