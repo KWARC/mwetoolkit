@@ -33,6 +33,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import os
+import sys
 
 ################################################################################
 
@@ -62,7 +63,7 @@ YAHOO_APPID = "ngram001"
 """
     Path to the C indexer program. The default value should work.
 """
-C_INDEXER_PROGRAM = os.path.dirname(__file__) + "/../../c-indexer"
+C_INDEXER_PROGRAM = os.path.dirname(__file__.decode('utf-8')) + "/../../c-indexer"
 
 # Internal options below (do not modify unless you know what you are doing)
 
