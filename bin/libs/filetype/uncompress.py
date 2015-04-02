@@ -65,7 +65,7 @@ class Bz2Wrapper(bz2.BZ2File):
     def __init__(self, fileobj):
         # XXX Does not work before Python 3.3, because nobody
         # thought anyone would ever want to uncompress from a
-        # filestream -- that's a very advanced concept, folks! ¬¬
+        # file stream -- that's a very advanced concept, folks! ¬¬
         super(Bz2Wrapper, self).__init__(fileobj=fileobj)
 
 
@@ -73,20 +73,19 @@ class Bz2Wrapper(bz2.BZ2File):
 class GzipWrapper(gzip.GzipFile):
     r"""Wrapper to transparently read gzip-compressed files."""
     def __init__(self, fileobj):
-        super(GzipWrapper, self).__init__(fileobj=fileobj)
-
-    def _read(self, size=1024):
-        # Modify python's implementation because it's
-        # stupid and tries to seek() even if it's an
-        # unseekable file with peek()...
-        if self.fileobj is None:
-            raise EOFError, "Reached EOF"
-        if self._new_member:
-            if len(self.fileobj.peek(1)) == 0:
-                raise EOFError, "Reached EOF"
-            self._init_read()
-            self._read_gzip_header()
-            import zlib
-            self.decompress = zlib.decompressobj(-zlib.MAX_WBITS)
-            self._new_member = False
-        super(GzipWrapper, self)._read(size)
+        # XXX Load the whole file in memory, because I've just
+        # spent a couple of hours of my life looking for a way to
+        # pass an io.BufferedReader as argument, but in Python2k
+        # it just throws the exception:
+        #   TypeError: 'NoneType' object cannot be interpreted as an index
+        # with a traceback that starts when `io.BufferedReader.seek` is being
+        # called (it doesn't show the actual offending line that tries to acces
+        # a None). This is probably a bug in the internal implementation of
+        # io.BufferedReader, but right now I don't care about it.
+        #
+        # TODO check if we need this hack at all in Python3k.
+        # (Besides, in Python3k we may not need to explicitly instantiate
+        # BufferedReader for e.g. sys.stdin, which is our current headache).
+        import io; 
+        io_contents = io.BytesIO(fileobj.read())
+        super(GzipWrapper, self).__init__(fileobj=io_contents)

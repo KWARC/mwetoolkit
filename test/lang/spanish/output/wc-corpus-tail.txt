@@ -1,3 +1,0 @@
-50 entities in corpus-tail.xml
-1532 words in corpus-tail.xml
-7396 characters in corpus-tail.xml
