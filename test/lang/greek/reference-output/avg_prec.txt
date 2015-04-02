@@ -2,27 +2,27 @@
 Statistics for reference:
 ----------------------------------------------------------------
 Feature: mle_corpus
-MAP      : 2.9647
+MAP      : 2.9693
 # of TPs : 5
-Variance : 17.4369
+Variance : 17.4072
 
 Feature: pmi_corpus
-MAP      : 0.4578
+MAP      : 0.4581
 # of TPs : 5
 Variance : 0.0235
 
 Feature: t_corpus
-MAP      : 2.9225
+MAP      : 2.9229
 # of TPs : 5
-Variance : 16.6230
+Variance : 16.6209
 
 Feature: dice_corpus
-MAP      : 1.9367
+MAP      : 1.9409
 # of TPs : 5
-Variance : 0.3590
+Variance : 0.3602
 
 Feature: ll_corpus
-MAP      : 6.1147
+MAP      : 6.1170
 # of TPs : 5
-Variance : 62.1030
+Variance : 62.0783
 

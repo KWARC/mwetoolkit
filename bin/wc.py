@@ -87,19 +87,16 @@ class CounterHandler(filetype.InputHandler):
         """
         for word in entity:
             self.word_counter += 1
-            self.char_counter += len( word )
+            self.char_counter += len(word)
         self.entity_counter += 1
 
 
     def after_file(self, fileobj, info={}) :
-        """Prints the entity, word and character counters on stderr. The
-        filename is only used to print the stats. All counters are reset
-        after a call to this function.
-        """
+        """Prints the entity, word and character counters."""
         filename = os.path.basename(fileobj.name)
-        print(unicode(self.entity_counter) + " entities in " + filename,file=sys.stderr)
-        print(unicode(self.word_counter) + " words in " + filename,file=sys.stderr)
-        print(unicode(self.char_counter) + " characters in " + filename,file=sys.stderr)
+        print(self.entity_counter, "entities in", filename)
+        print(self.word_counter, "words in", filename)
+        print(self.char_counter, "characters in", filename)
 
 
 ################################################################################

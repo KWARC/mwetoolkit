@@ -39,6 +39,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 import sys
+import textwrap
 import re
 
 from libs.base.tpclass import TPClass
@@ -179,13 +180,36 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
         entity_counter += 1
 
 
+    def finish(self):
+        precision = float( tp_counter ) / float( entity_counter )
+        recall = float( tp_counter ) / float( ref_counter )
+        if precision + recall > 0 :
+            fmeasure =  ( 2 * precision * recall) / ( precision + recall )
+        else :
+            fmeasure = 0.0
+
+        footer = """\
+            ====================
+            Nb. of true positives: {tp}
+            Nb. of candidates: {ca}
+            Nb. of references: {refs}
+            Precision: {p:.6f}
+            Recall: {r:.6f}
+            F-measure: {f:.6f}
+            ===================="""
+        footer = footer.format(tp=tp_counter, ca=entity_counter,
+                refs=ref_counter, p=precision, r=recall, f=fmeasure)
+        footer = textwrap.dedent(footer)
+        self.chain.handle_comment(footer)
+        super(EvaluatorHandler, self).finish()
+
+
 ################################################################################
 
 class ReferenceReaderHandler(filetype.InputHandler):
     def handle_candidate(self, reference, info={}):
         """For each entry in the reference Gold Standard, store it in main memory
-        in the `pre_gs` global list. We hope that the GS is not too big. Future
-        implementation should consider to use "shelve" for this.
+        in the `pre_gs` global list.
 
         @param reference A `Pattern` contained in the reference Gold Standard.
         """
@@ -272,17 +296,3 @@ longopts = ["input-from=", "reference-from=",
 args = read_options( "r:gcL", longopts, treat_options, -1, usage_string )
 
 filetype.parse(args, EvaluatorHandler(), input_filetype_ext)
-        
-
-precision = float( tp_counter ) / float( entity_counter )
-recall = float( tp_counter ) / float( ref_counter )
-if precision + recall > 0 :
-    fmeas =  ( 2 * precision * recall) / ( precision + recall )
-else :
-    fmeas = 0.0
-print("Nb. of true positives: {tp}".format(tp=tp_counter), file=sys.stderr)
-print("Nb. of candidates: {ca}".format(ca=entity_counter), file=sys.stderr)
-print("Nb. of references: {refs}".format(refs=ref_counter), file=sys.stderr)
-print("Precision: {p:.6f}".format(p=precision), file=sys.stderr)
-print("Recall: {r:.6f}".format(r=recall), file=sys.stderr)
-print("F-measure: {f:.6f}".format(f=fmeas), file=sys.stderr)

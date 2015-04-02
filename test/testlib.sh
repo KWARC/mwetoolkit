@@ -4,7 +4,7 @@ set -o nounset    # Using "$UNDEF" var raises error
 set -o errexit    # Exit on error, do not continue quietly
 exec </dev/null   # Don't hang if a script tries to read from stdin
 export LC_ALL=C   # Use a unified locale (otherwise our `diff`s will break)
-export IFS=""     # Do not split variables on spaces automatically
+export IFS=$'\n'  # Do not split variables on " " automatically (only on "\n")
 
 # Avoid e.g. outputting timestamps (breaks our `diff`)
 export MWETOOLKIT_DETERMINISTIC_MODE=""
@@ -189,13 +189,12 @@ t_compare() {
 # Skip the most recent `skip_n` frames (default: skip_n=0).
 t_backtrace() {
     local skip_n="${1:-0}"
-    local c_echo='t_echo_rgb 1'
-    $c_echo ==============================================
-    $c_echo "Shell backtrace (most recent first):"
+    t_echo_rgb 1 ==============================================
+    t_echo_rgb 1 "Shell backtrace (most recent first):"
     if test "${BASH_VERSION+set}"; then
         local n="${#BASH_LINENO[@]}"
         for i in `seq ${skip_n} $((n - 2))`; do
-            $c_echo "  In ${FUNCNAME[$((i+1))]} at ${BASH_SOURCE[$((i+1))]}:${BASH_LINENO[$i]}"
+            t_echo_rgb 1 "  In ${FUNCNAME[$((i+1))]} at ${BASH_SOURCE[$((i+1))]}:${BASH_LINENO[$i]}"
         done
     else
         echo "  Unable to get a backtrace (shell=$SHELL)"

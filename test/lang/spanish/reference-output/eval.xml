@@ -22682,4 +22682,12 @@
     </features>
     <tpclass name="reference" value="False" />
 </cand>
+<!-- ====================
+Nb. of true positives: 358
+Nb. of candidates: 1612
+Nb. of references: 355
+Precision: 0.222084
+Recall: 1.008451
+F-measure: 0.364006
+==================== -->
 </candidates>

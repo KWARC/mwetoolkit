@@ -375,4 +375,12 @@
     </features>
     <tpclass name="reference" value="False" />
 </cand>
+<!-- ====================
+Nb. of true positives: 20
+Nb. of candidates: 26
+Nb. of references: 1846
+Precision: 0.769231
+Recall: 0.010834
+F-measure: 0.021368
+==================== -->
 </candidates>

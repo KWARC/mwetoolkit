@@ -68,9 +68,8 @@ main() {
     t_compare_with_ref "candidates-featureful.xml"
 
     t_testname "Evaluation"
-    t_run "$t_BIN/eval_automatic.py -r $t_LOCAL_INPUT/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml 2>$t_OUTDIR/eval-stats.txt"
+    t_run "$t_BIN/eval_automatic.py -r $t_LOCAL_INPUT/reference.xml -g $t_OUTDIR/candidates-featureful.xml >$t_OUTDIR/eval.xml"
     t_compare_with_ref "eval.xml"
-    t_compare_with_ref "eval-stats.txt"
 
     t_testname "Mean Average Precision"
     t_run "$t_BIN/avg_precision.py -v -f 'mle_corpus:pmi_corpus:t_corpus:dice_corpus:ll_corpus' $t_OUTDIR/eval.xml >$t_OUTDIR/avg_prec.txt"
@@ -96,7 +95,7 @@ main() {
     for base in candidates-featureful corpus; do
         for suffix in '' -head -tail; do
             t_testname "Word count for $base$suffix"
-            t_run "$t_BIN/wc.py $t_OUTDIR/${base}${suffix}.xml 2>$t_OUTDIR/wc-${base}${suffix}.txt"
+            t_run "$t_BIN/wc.py $t_OUTDIR/${base}${suffix}.xml >$t_OUTDIR/wc-${base}${suffix}.txt"
             t_compare_with_ref "wc-${base}${suffix}.txt"
         done
     done
