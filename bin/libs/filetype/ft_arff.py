@@ -66,7 +66,7 @@ class ArffChecker(common.AbstractChecker):
 
 class ArffPrinter(common.AbstractPrinter):
     filetype_info = INFO
-    valid_categories = ["corpus"]
+    valid_categories = ["candidates"]
 
     def __init__(self, category, relation_name="MWETOOLKIT_RELATION", **kwargs):
         super(ArffPrinter, self).__init__(category, **kwargs)

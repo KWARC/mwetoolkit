@@ -31,6 +31,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import getopt
+import os
 import sys
 import traceback
 import xml.sax
@@ -50,6 +51,14 @@ common_options_usage_string = """\
 -h or --help
     Print usage information about parameters and options"""
 
+
+################################################################################
+
+# Boolean flag indicating if the output should be completely deterministic.
+# This should be used when running tests that will be `diff`ed against other
+# files, to avoid e.g. outputting timestamps (which would generate different
+# `diff` outputs each time).
+deterministic_mode = ("MWETOOLKIT_DETERMINISTIC_MODE" in os.environ)
 
 
 ################################################################################

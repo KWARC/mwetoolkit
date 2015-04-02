@@ -35,6 +35,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from . import _common as common
+from .. import util
+
 
 class HTMLInfo(common.FiletypeInfo):
     r"""FiletypeInfo subclass for HTML format."""
@@ -102,8 +104,12 @@ class HTMLPrinter(common.AbstractPrinter):
         s = fileobj.name
         import os, datetime
         # XXX escape these parameters
-        self.add_string(html_header.format(
-                timestamp=datetime.datetime.now(),
+
+        timestamp = datetime.datetime.now()
+        if util.deterministic_mode:
+            timestamp = "[MWETOOLKIT_DETERMINISTIC_MODE]"
+
+        self.add_string(html_header.format(timestamp=timestamp,
                 corpusname=s[s.rfind("/")+1:],
                 filename=os.path.abspath(s)))
 

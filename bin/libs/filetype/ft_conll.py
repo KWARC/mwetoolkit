@@ -190,9 +190,10 @@ class ConllPrinter(common.AbstractPrinter):
                     "CPOSTAG": word.pos,
                     "POSTAG": word.pos,
                     "DEPREL": word.syn.split(":")[0],
-                    "HEAD": word.syn.split(":")[1] if ":" in word.syn else "_",
+                    "HEAD": word.syn.split(":")[1] \
+                            if ":" in word.syn else WILDCARD,
                 }
-                entry = [self.handle_wildcard(data.get(entry_name, "_")) \
+                entry = [self.handle_wildcard(data.get(entry_name, WILDCARD)) \
                         for entry_name in self.filetype_info.entries]
                 entries.append(entry)
 
@@ -205,7 +206,4 @@ class ConllPrinter(common.AbstractPrinter):
         r"""Transform WILDCARD into CONLL "_"."""
         if argument == WILDCARD:
             return "_"
-        return argument
-
-
-
+        return self.escape(argument)

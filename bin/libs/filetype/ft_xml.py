@@ -168,10 +168,10 @@ class XMLParser(common.AbstractParser):
 
 
 
-    def unknown_end_elem(self, handler, elem):
+    def unknown_end_elem(self, handler, elem, info):
         r"""Complain about unknown XML element."""
         if elem.tag == ElementTree.Comment:
-            handler.handle_comment(elem.text.strip())
+            handler.handle_comment(elem.text.strip(), info)
         else:
             util.warn("Ignoring unknown XML elem (at line {}): {!r}" \
                     .format(elem.source_line, elem.tag))
@@ -234,7 +234,7 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "corpus":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem)
+                    self.unknown_end_elem(handler, elem, info)
                 elem.clear()
 
 
@@ -257,7 +257,7 @@ class XMLParser(common.AbstractParser):
                     if elem.tag == "pat":
                         handler.handle_pattern(patternlib.parse_pattern(elem))
                     else:
-                        self.unknown_end_elem(handler, elem)
+                        self.unknown_end_elem(handler, elem, info)
                     elem.clear()
                 elif depth == 0:
                     # Just closed </patterns>
@@ -399,7 +399,7 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "candidates":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem)
+                    self.unknown_end_elem(handler, elem, info)
                 elem.clear()
 
 
@@ -487,7 +487,7 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "dict":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem)
+                    self.unknown_end_elem(handler, elem, info)
 
 
 
