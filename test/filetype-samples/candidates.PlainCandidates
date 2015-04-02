@@ -1,15 +1,15 @@
 # MWETOOLKIT: filetype="PlainCandidates"
 group_a
-type_a
 rich_person
-wealthy_person
 body_of_work
 prison_term
-number_1
 trade_good
+computer_science
+snake${underscore}case_variable
 selective_information
 written_report
 elbow_room
+hashtag_${hash}fail
 inspection_and_repair
 service_of_process
 armed_service
@@ -44,7 +44,6 @@ write_up
 political_campaign
 nursing_home
 rest_home
-snake${underscore}case_variable
 insurance_policy
 business_firm
 government_issue

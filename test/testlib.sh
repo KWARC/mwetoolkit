@@ -5,6 +5,9 @@ set -o errexit    # Exit on error, do not continue quietly
 exec </dev/null   # Don't hang if a script tries to read from stdin
 export LC_ALL=C
 
+# Avoid e.g. outputting timestamps (breaks our `diff`)
+export MWETOOLKIT_DETERMINISTIC_MODE=
+
 # Path to mwetoolkit root
 t_TOOLKIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."; pwd)"
 # Path to mwetoolkit binary dir

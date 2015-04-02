@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<corpus >
+<s s_id="1"><w surface="Why" /> <w surface="it" /> <w surface="'s" /> <w surface="worth" /> <w surface="giving" /> <w surface="up" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="1"><mwepart index="5"/><mwepart index="6"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="2"><w surface="The" /> <w surface="human" /> <w surface="body" /> <w surface="is" /> <w surface="remarkably" /> <w surface="resilient" /> <w surface="and" /> <w surface="will" /> <w surface="start" /> <w surface="to" /> <w surface="repair" /> <w surface="the" /> <w surface="damage" /> <w surface="caused" /> <w surface="by" /> <w surface="smoking" /> <w surface="almost" /> <w surface="as" /> <w surface="soon" /> <w surface="as" /> <w surface="you" /> <w surface="start" /> <w surface="giving" /> <w surface="up" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="2"><mwepart index="2"/><mwepart index="3"/></mweoccur>
+  <mweoccur candid="1"><mwepart index="23"/><mwepart index="24"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="3"><w surface="The" /> <w surface="benefits" /> <w surface="to" /> <w surface="your" /> <w surface="health" /> <w surface="can" /> <w surface="be" /> <w surface="seen" /> <w surface="in" /> <w surface="as" /> <w surface="little" /> <w surface="as" /> <w surface="20" /> <w surface="minutes" /> <w surface="from" /> <w surface="the" /> <w surface="time" /> <w surface="you" /> <w surface="put" /> <w surface="down" /> <w surface="your" /> <w surface="last" /> <w surface="cigarette" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="4"><mwepart index="19"/><mwepart index="20"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="4"><w surface="The" /> <w surface="whole" /> <w surface="process" /> <w surface="remains" /> <w surface="only" /> <w surface="marginally" /> <w surface="safe" /> <w surface="on" /> <w surface="average" /> <w surface="for" /> <w surface="women" /> <w surface="and" /> <w surface="children" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="5"><mwepart index="6"/><mwepart index="7"/></mweoccur>
+  <mweoccur candid="6"><mwepart index="11"/><mwepart index="12"/><mwepart index="13"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="5"><w surface="Both" /> <w surface="men" /> <w surface="and" /> <w surface="women" /> <w surface="want" /> <w surface="the" /> <w surface="process" /> <w surface="to" /> <w surface="be" /> <w surface="safer" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="7"><mwepart index="2"/><mwepart index="3"/><mwepart index="4"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="6"><w surface="Both" /> <w surface="men" /> <w surface="and" /> <w surface="women" /> <w surface="are" /> <w surface="involved" /> <w surface="in" /> <w surface="developing" /> <w surface="and" /> <w surface="exploiting" /> <w surface="the" /> <w surface="sciences" /> <w surface="and" /> <w surface="technologies" /> <w surface="to" /> <w surface="make" /> <w surface="this" /> <w surface="happen" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="7"><mwepart index="2"/><mwepart index="3"/><mwepart index="4"/></mweoccur>
+  <mweoccur candid="9"><mwepart index="16"/><mwepart index="17"/><mwepart index="18"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="7"><w surface="The" /> <w surface="gender" /> <w surface="dynamics" /> <w surface="of" /> <w surface="public" /> <w surface="perceptions" /> <w surface="on" /> <w surface="DNA" /> <w surface="paternity" /> <w surface="testing" /> <w surface="are" /> <w surface="likely" /> <w surface="to" /> <w surface="become" /> <w surface="more" /> <w surface="important" /> <w surface="as" /> <w surface="the" /> <w surface="tests" /> <w surface="become" /> <w surface="more" /> <w surface="widespread" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="10"><mwepart index="2"/><mwepart index="3"/></mweoccur>
+  <mweoccur candid="11"><mwepart index="5"/><mwepart index="6"/></mweoccur>
+  <mweoccur candid="12"><mwepart index="8"/><mwepart index="9"/><mwepart index="10"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="8"><w surface="Some" /> <w surface="perceptions" /> <w surface="of" /> <w surface="paternity" /> <w surface="testing" /> <w surface="will" /> <w surface="obviously" /> <w surface="be" /> <w surface="dependent" /> <w surface="on" /> <w surface="the" /> <w surface="inherently" /> <w surface="different" /> <w surface="reproductive" /> <w surface="roles" /> <w surface="of" /> <w surface="men" /> <w surface="and" /> <w surface="women" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="13"><mwepart index="4"/><mwepart index="5"/></mweoccur>
+  <mweoccur candid="14"><mwepart index="12"/><mwepart index="13"/></mweoccur>
+  <mweoccur candid="15"><mwepart index="14"/><mwepart index="15"/></mweoccur>
+  <mweoccur candid="7"><mwepart index="17"/><mwepart index="18"/><mwepart index="19"/></mweoccur>
+</mweoccurs>
+</s>
+</corpus>
