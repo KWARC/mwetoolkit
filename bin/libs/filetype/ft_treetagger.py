@@ -58,6 +58,7 @@ class TreeTaggerInfo(common.FiletypeInfo):
         return common.FiletypeOperations(
                 TreeTaggerChecker, TreeTaggerParser, TreeTaggerPrinter)
 
+
 class TreeTaggerParser(common.AbstractTxtParser):
     r"""Parse file in TreeTagger TAB-separated format:
     One word per line, each word is in format "surface\tpos\tlemma".
@@ -73,6 +74,7 @@ class TreeTaggerParser(common.AbstractTxtParser):
         self.sent_split = sent_split
 
     def _parse_line(self, line, handler, info={}):
+        self.current_info = info
         sentence = None
 
         if not self.words:
@@ -95,11 +97,13 @@ class TreeTaggerParser(common.AbstractTxtParser):
             if pos == self.sent_split:
                 self.flush_partial_callback()
 
+
     def finish_sentence(self, handler):
         r"""Finish building sentence and call handler."""
         s = self.sentence_factory.make(self.words)
-        handler.handle_sentence(s, {})
+        handler.handle_sentence(s, self.current_info)
         self.words = []
+
 
 class TreeTaggerChecker(common.AbstractChecker):
     r"""Checks whether input is in TreeTagger format."""

@@ -185,13 +185,14 @@ class FirstInputHandler(ChainedInputHandler):
             self.handle_meta(Meta([], [], []), info={})
 
     def print_progress(self, info):
-        if self.count % 100 == 0:
-            percent = float("NAN")
+        PROGRESS_EVERY = 100
+        if self.count % PROGRESS_EVERY == 0:
+            percent = ""
             if "progress" in info:
                 a, b = info["progress"]
                 if b != 0 :
-                    percent = 100 * (a/b)                    
-            util.verbose("~~> Processing {kind} number {n} ({percent:2.0f}%)"
+                    percent = " ({:2.0f}%)".format(100 * (a/b))
+            util.verbose("~~> Processing {kind} number {n}{percent}"
                     .format(kind=self.kind, n=self.count, percent=percent))
 
 ################################################################################
