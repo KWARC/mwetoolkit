@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-dict.dtd">
+<dict>
+<meta>
+</meta>
+
+  <entry>
+      <w lemma="abound" pos="V"/>
+      <w lemma="in" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="act" pos="V"/>
+      <w lemma="on" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="act" pos="V"/>
+      <w lemma="out" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="act" pos="V"/>
+      <w lemma="up" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="add" pos="V"/>
+      <w lemma="in" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="add" pos="V"/>
+      <w lemma="on" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="add" pos="V"/>
+      <w lemma="up" pos="P"/>
+  </entry>
+  
+  <!-- ... -->
+  
+  <entry>
+      <w lemma="zonk" pos="V"/>
+      <w lemma="out" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="zoom" pos="V"/>
+      <w lemma="in" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="zoom" pos="V"/>
+      <w lemma="off" pos="P"/>
+  </entry>
+  
+  <entry>
+      <w lemma="zoom" pos="V"/>
+      <w lemma="out" pos="P"/>
+  </entry>
+
+</dict>

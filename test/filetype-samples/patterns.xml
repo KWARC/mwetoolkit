@@ -1,0 +1,23 @@
+<patterns>
+    <!--
+        Pattern: a verb (VV*) followed by a (II|RR|RP)
+             up to 6 positions after the verb.
+
+        Matches:
+            VV* WORD*{ignore} II
+            VV* WORD*{ignore} RR
+            VV* WORD*{ignore} RP
+
+        Does not match, e.g.:
+            VBZ WORD*{ignore} II
+    -->
+    <pat>
+        <w pos="VV*" />
+        <pat ignore="true" repeat="{0,5}"> <w/> </pat>
+        <either>
+            <pat><w pos="II"/></pat>
+            <pat><w pos="RR"/></pat>
+            <pat><w pos="RP"/></pat>
+        </either>
+    </pat>
+</patterns>

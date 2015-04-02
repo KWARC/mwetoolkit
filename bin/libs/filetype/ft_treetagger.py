@@ -50,7 +50,7 @@ class TreeTaggerInfo(common.FiletypeInfo):
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
                     ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}")]
+                    ("\t", "${tab}"), ("\n", "${newline}")]
                     
     entries = ["SURFACE", "POS", "LEMMA"]
 
