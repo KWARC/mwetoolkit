@@ -1,12 +1,10 @@
 # MWETOOLKIT: filetype="CSV"
+
 # =================================================
-#   Important things to test:
-#   * Values must be preserved (including escaping chars).
-#   * Candidate ordering (through `candid`) must be preserved.
-#   * Candidate ID may be repeated (ugly input exists in real life).
-#   * Source IDs must be preserved.
-#   * Frequency info must be preserved.
+#   This is a sample CSV file representing a list
+#   of MWE candidates and their features.
 # ==================================================
+
 id	ngram	pos	corpus	occurs	sources	mle_corpus	pmi_corpus	t_corpus	dice_corpus	ll_corpus
 37	análisis de empresa	NC PREP NC	1	análisis de empresas		3.26551938086e-05	9.26005741805	0.99836903382	0.00160170848905	0.0
 4	armonización adecuar	NC VLadj	1	armonización adecuada		3.26551938086e-05	9.58044702114	0.998693834902	0.153846153846	6.78729848938

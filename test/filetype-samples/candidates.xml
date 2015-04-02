@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<candidates >
+
+<!-- =================================================
+  This is a sample XML file in the "candidates" category,
+  including features calculated from "corpusX".
+================================================== -->
+
+<meta>
+    <corpussize name="corpusX" value="30623" />
+    <metafeat name="mle_corpus" type="real" />
+    <metafeat name="pmi_corpus" type="real" />
+    <metafeat name="t_corpus" type="real" />
+    <metafeat name="dice_corpus" type="real" />
+    <metafeat name="ll_corpus" type="real" />
+</meta>
+
+<cand candid="1">
+    <ngram>
+        <w lemma="análisis" pos="NC" ><freq name="corpusX" value="18" /></w>
+        <w lemma="de" pos="PREP" ><freq name="corpusX" value="1808" /></w>
+        <w lemma="empresa" pos="NC" ><freq name="corpusX" value="47" /></w>
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <occurs>
+        <ngram>
+            <w surface="análisis" lemma="análisis" pos="NC" />
+            <w surface="de" lemma="de" pos="PREP" />
+            <w surface="empresas" lemma="empresa" pos="NC" />
+            <freq name="corpusX" value="1" />
+        </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.26005741805" />
+        <feat name="t_corpus" value="0.99836903382" />
+        <feat name="dice_corpus" value="0.00160170848905" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+
+<cand candid="2">
+    <ngram>
+        <w lemma="armonización" pos="NC" ><freq name="corpusX" value="8" /></w>
+        <w lemma="adecuar" pos="VLadj" ><freq name="corpusX" value="5" /></w>
+        <freq name="corpusX" value="1" /></ngram>
+    <occurs>
+    <ngram>
+        <w surface="armonización" lemma="armonización" pos="NC" />
+        <w surface="adecuada" lemma="adecuar" pos="VLadj" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.58044702114" />
+        <feat name="t_corpus" value="0.998693834902" />
+        <feat name="dice_corpus" value="0.153846153846" />
+        <feat name="ll_corpus" value="6.78729848938" />
+    </features>
+</cand>
+
+<cand candid="3">
+    <ngram>
+        <w lemma="comisión" pos="NC" ><freq name="corpusX" value="211" /></w>
+        <w lemma="de" pos="PREP" ><freq name="corpusX" value="1808" /></w>
+        <w pos="NC" ><freq name="corpusX" value="418" /></w>
+        <freq name="corpusX" value="2" />
+    </ngram>
+    <occurs>
+    <ngram>
+        <w surface="Comisión" lemma="comisión" pos="NC" />
+        <w surface="de" lemma="de" pos="PREP" />
+        <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <ngram>
+        <w surface="Comisión" lemma="comisión" pos="NC" />
+        <w surface="de" lemma="de" pos="PREP" />
+        <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="3.55611295038" />
+        <feat name="t_corpus" value="1.29398204398" />
+        <feat name="dice_corpus" value="0.0024620434961" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+
+<cand candid="4">
+    <ngram>
+        <w lemma="análisis" pos="NC" ><freq name="corpusX" value="18" /></w>
+        <w lemma="de" pos="PREP" ><freq name="corpusX" value="1808" /></w>
+        <w lemma="empresa" pos="NC" ><freq name="corpusX" value="47" /></w>
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <occurs>
+    <ngram>
+        <w surface="análisis" lemma="análisis" pos="NC" />
+        <w surface="de" lemma="de" pos="PREP" />
+        <w surface="empresas" lemma="empresa" pos="NC" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.26005741805" />
+        <feat name="t_corpus" value="0.99836903382" />
+        <feat name="dice_corpus" value="0.00160170848905" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+
+<cand candid="5">
+    <ngram>
+        <w lemma="armonización" pos="NC" ><freq name="corpusX" value="8" /></w>
+        <w lemma="adecuar" pos="VLadj" ><freq name="corpusX" value="5" /></w>
+        <freq name="corpusX" value="1" /></ngram>
+    <occurs>
+    <ngram>
+        <w surface="armonización" lemma="armonización" pos="NC" />
+        <w surface="adecuada" lemma="adecuar" pos="VLadj" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.58044702114" />
+        <feat name="t_corpus" value="0.998693834902" />
+        <feat name="dice_corpus" value="0.153846153846" />
+        <feat name="ll_corpus" value="6.78729848938" />
+    </features>
+</cand>
+
+<cand candid="6">
+    <ngram>
+        <w lemma="comisión" pos="NC" ><freq name="corpusX" value="211" /></w>
+        <w lemma="de" pos="PREP" ><freq name="corpusX" value="1808" /></w>
+        <w pos="NC" ><freq name="corpusX" value="418" /></w>
+        <freq name="corpusX" value="2" /></ngram>
+    <occurs>
+    <ngram>
+        <w surface="Comisión" lemma="comisión" pos="NC" />
+        <w surface="de" lemma="de" pos="PREP" />
+        <w surface="Presupuestos" pos="NC" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <ngram>
+        <w surface="Comisión" lemma="comisión" pos="NC" />
+        <w surface="de" lemma="de" pos="PREP" />
+        <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="3.55611295038" />
+        <feat name="t_corpus" value="1.29398204398" />
+        <feat name="dice_corpus" value="0.0024620434961" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+
+<cand candid="7">
+    <ngram>
+        <w lemma="evaluación" pos="NC" ><freq name="corpusX" value="8" /></w>
+        <w lemma="exhaustivo" pos="ADJ" ><freq name="corpusX" value="1" /></w>
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <occurs>
+    <ngram>
+        <w surface="evaluación" lemma="evaluación" pos="NC" />
+        <w surface="exhaustiva" lemma="exhaustivo" pos="ADJ" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="11.902375116" />
+        <feat name="t_corpus" value="0.99973876698" />
+        <feat name="dice_corpus" value="0.222222222222" />
+        <feat name="ll_corpus" value="8.95972421722" />
+    </features>
+</cand>
+
+<cand candid="8">
+    <ngram>
+        <w lemma="evaluación" pos="NC" ><freq name="corpusX" value="8" /></w>
+        <w lemma="exhaustivo" pos="ADJ" ><freq name="corpusX" value="1" /></w>
+        <freq name="corpusX" value="1" />
+    </ngram>
+    <occurs>
+    <ngram>
+        <w surface="evaluación" lemma="evaluación" pos="NC" />
+        <w surface="exhaustiva" lemma="exhaustivo" pos="ADJ" />
+        <freq name="corpusX" value="1" />
+    </ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="11.902375116" />
+        <feat name="t_corpus" value="0.99973876698" />
+        <feat name="dice_corpus" value="0.222222222222" />
+        <feat name="ll_corpus" value="8.95972421722" />
+    </features>
+</cand>
+</candidates>

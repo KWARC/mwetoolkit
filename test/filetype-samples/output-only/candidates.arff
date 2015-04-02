@@ -1,12 +1,9 @@
 % MWETOOLKIT: filetype="ARFF"
+
 % =================================================
-%   Important things to test:
-%   * Values must be preserved (including escaping chars).
-%   * Candidate ordering (through `candid`) must be preserved.
-%   * Candidate ID may be repeated (ugly input exists in real life).
-%   * Source IDs must be preserved.
-%   * Frequency info must be preserved.
+%   This is a sample ARFF file for execution in Weka.
 % ==================================================
+
 @relation MWETOOLKIT_RELATION
 @attribute mle_corpus real
 @attribute pmi_corpus real

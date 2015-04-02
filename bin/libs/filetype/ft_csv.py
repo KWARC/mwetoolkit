@@ -46,19 +46,23 @@ class CSVInfo(common.FiletypeInfo):
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("/", "${slash}"),
                     (" ", "${space}"), (";", "${semicolon}"),
-                    ("\t", "${tab}"), ("\n", "${newline}")]
+                    ("\t", "${tab}"), ("\n", "${newline}"),
+                    ("#", "${hash}")]
 
     def operations(self):
         return common.FiletypeOperations(CSVChecker, None, CSVPrinter)
 
+
 INFO = CSVInfo()
 r"""Singleton instance of CSVInfo."""
+
 
 class CSVChecker(common.AbstractChecker):
     r"""Checks whether input is in CSV format."""
     filetype_info = INFO
     def matches_header(self, strict):
         return not strict
+
 
 class CSVPrinter(common.AbstractPrinter):
     filetype_info = INFO
@@ -93,11 +97,12 @@ class CSVPrinter(common.AbstractPrinter):
             @param entity: `Candidate` being read from the file
         """
         values = [str(candidate.id_number)]
-        ngram_list = map(lambda x: self.escape("%s/%s" % (x.lemma, x.pos))
-                                if self.lemmapos else
-                                self.escape(x.surface)
-                                if self.surfaces or common.WILDCARD == x.lemma
-                                else self.escape(x.lemma),
+        ngram_list = map(lambda x:
+                    "%s/%s" % (self.escape(x.lemma), self.escape(x.pos))
+                    if self.lemmapos else
+                    self.escape(x.surface)
+                    if self.surfaces or common.WILDCARD == x.lemma
+                    else self.escape(x.lemma),
                          candidate)
         values.append(" ".join(ngram_list))
         values.append("" if self.lemmapos else " ".join(map(lambda x: x.pos, candidate)))

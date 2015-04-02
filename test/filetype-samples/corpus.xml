@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<corpus >
+
+<!-- =================================================
+  This is a sample XML file in the "corpus" category.
+================================================== -->
+
+  <s s_id="1">
+    <w surface="Cathy" lemma="Cathy" pos="N" syn="su:2" />
+    <w surface="zag" lemma="zie" pos="V" syn="ROOT:0" />
+    <w surface="hen" lemma="hen" pos="Pron" syn="obj1:2" />
+    <w surface="wild" lemma="wild" pos="Adj" syn="mod:5" />
+    <w surface="zwaaien" lemma="zwaai" pos="N" syn="vc:2" />
+    <w surface="." lemma="." pos="Punc" syn="punct:5" />
+  </s>
+  <s s_id="2">
+    <w surface="Het" lemma="het" pos="Pron" syn="su:2" />
+    <w surface="hoorde" lemma="hoor" pos="V" syn="ROOT:0" />
+    <w surface="bij" lemma="bij" pos="Prep" syn="ld:2" />
+    <w surface="de" lemma="de" pos="Art" syn="det:6" />
+    <w surface="warme" lemma="warm" pos="Adj" syn="mod:6" />
+    <w surface="zomerdag" lemma="zomerdag" pos="N" syn="obj1:3" />
+    <w surface="die" lemma="die" pos="Pron" syn="mod:6" />
+    <w surface="ze" lemma="ze" pos="Pron" syn="su:12" />
+    <w surface="ginds" lemma="ginds" pos="Adv" syn="mod:12" />
+    <w surface="achter" lemma="achter" pos="Adv" syn="svp:12" />
+    <w surface="had" lemma="heb" pos="V" syn="body:7" />
+    <w surface="gelaten" lemma="laat" pos="V" syn="vc:11" />
+    <w surface="." lemma="." pos="Punc" syn="punct:12" />
+  </s>
+  <s s_id="3">
+    <w surface="Dat" lemma="dat" pos="Pron" syn="det:2" />
+    <w surface="werkwoord" lemma="werkwoord" pos="N" syn="obj1:6" />
+    <w surface="had" lemma="heb" pos="V" syn="ROOT:0" />
+    <w surface="ze" lemma="ze" pos="Pron" syn="su:6" />
+    <w surface="zelf" lemma="zelf" pos="Pron" syn="predm:3" />
+    <w surface="uitgevonden" lemma="vind" pos="V" syn="vc:3" />
+    <w surface="." lemma="." pos="Punc" syn="punct:6" />
+  </s>
+  <s s_id="4">
+    <w surface="Ze" lemma="ze" pos="Pron" syn="su:2" />
+    <w surface="hadden" lemma="heb" pos="V" syn="ROOT:0" />
+    <w surface="languit" lemma="languit" pos="Adv" syn="mod:11" />
+    <w surface="naast" lemma="naast" pos="Prep" syn="mod:11" />
+    <w surface="elkaar" lemma="elkaar" pos="Pron" syn="obj1:4" />
+    <w surface="op" lemma="op" pos="Prep" syn="ld:11" />
+    <w surface="de" lemma="de" pos="Art" syn="det:8" />
+    <w surface="strandstoelen" lemma="strandstoel" pos="N" syn="obj1:6" />
+    <w surface="kunnen" lemma="kan" pos="V" syn="vc:2" />
+    <w surface="gaan" lemma="ga" pos="V" syn="vc:9" />
+    <w surface="liggen" lemma="lig" pos="V" syn="vc:10" />
+    <w surface="." lemma="." pos="Punc" syn="punct:11" />
+  </s>
+</corpus>
