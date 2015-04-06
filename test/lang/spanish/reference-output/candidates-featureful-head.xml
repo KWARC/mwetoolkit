@@ -11,440 +11,250 @@
     <metafeat name="ll_corpus" type="real" />
 </meta>
 <cand candid="1">
-    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="competente" pos="ADJ" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="período" pos="NC" ><freq name="corpus" value="23" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="sesión" pos="NC" ><freq name="corpus" value="13" /></w> <freq name="corpus" value="3" /></ngram>
     <occurs>
-    <ngram><w surface="Comisaria" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="competente" lemma="competente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="sesiones" lemma="sesión" pos="NC" /> <freq name="corpus" value="3" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="4.19501598394" />
-        <feat name="t_corpus" value="0.945402298909" />
-        <feat name="dice_corpus" value="0.00473933649289" />
-        <feat name="ll_corpus" value="3.54986854052" />
+        <feat name="mle_corpus" value="9.79655814257e-05" />
+        <feat name="pmi_corpus" value="12.3455320977" />
+        <feat name="t_corpus" value="1.73171800616" />
+        <feat name="dice_corpus" value="0.00488069414317" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="2">
-    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="número" pos="NC" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="parlamento" pos="NC" ><freq name="corpus" value="77" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="13" /></ngram>
     <occurs>
-    <ngram><w surface="Enmiendas" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="Números" lemma="número" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Parlamento" lemma="parlamento" pos="NC" /> <w surface="Europeo" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="13" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="3.87308788906" />
-        <feat name="t_corpus" value="0.931752873636" />
-        <feat name="dice_corpus" value="0.00472813238771" />
-        <feat name="ll_corpus" value="3.34231201673" />
+        <feat name="mle_corpus" value="0.000424517519511" />
+        <feat name="pmi_corpus" value="4.03682027508" />
+        <feat name="t_corpus" value="3.38588282515" />
+        <feat name="dice_corpus" value="0.0663265306122" />
+        <feat name="ll_corpus" value="23.8375906374" />
     </features>
 </cand>
 <cand candid="3">
-    <ngram><w lemma="análisis" pos="NC" ><freq name="corpus" value="18" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="empresa" pos="NC" ><freq name="corpus" value="47" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="víctima" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="catástrofe" pos="NC" ><freq name="corpus" value="9" /></w> <w lemma="natural" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="análisis" lemma="análisis" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="empresas" lemma="empresa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="víctimas" lemma="víctima" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="catástrofes" lemma="catástrofe" pos="NC" /> <w surface="naturales" lemma="natural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="9.26005741805" />
-        <feat name="t_corpus" value="0.99836903382" />
-        <feat name="dice_corpus" value="0.00160170848905" />
+        <feat name="pmi_corpus" value="28.7170213888" />
+        <feat name="t_corpus" value="0.999999997734" />
+        <feat name="dice_corpus" value="0.00219659527732" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="4">
-    <ngram><w lemma="armonización" pos="NC" ><freq name="corpus" value="8" /></w> <w lemma="adecuar" pos="VLadj" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="víctima" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="catástrofe" pos="NC" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="armonización" lemma="armonización" pos="NC" /> <w surface="adecuada" lemma="adecuar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="víctimas" lemma="víctima" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="catástrofes" lemma="catástrofe" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="9.58044702114" />
-        <feat name="t_corpus" value="0.998693834902" />
-        <feat name="dice_corpus" value="0.153846153846" />
-        <feat name="ll_corpus" value="6.78729848938" />
-    </features>
-</cand>
-<cand candid="5">
-    <ngram><w lemma="comisión" pos="NC" ><freq name="corpus" value="211" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="2" /></ngram>
-    <occurs>
-    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="6.53103876172e-05" />
-        <feat name="pmi_corpus" value="3.55611295038" />
-        <feat name="t_corpus" value="1.29398204398" />
-        <feat name="dice_corpus" value="0.0024620434961" />
+        <feat name="pmi_corpus" value="14.8146462697" />
+        <feat name="t_corpus" value="0.999965298592" />
+        <feat name="dice_corpus" value="0.00164925783397" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="6">
-    <ngram><w lemma="evaluación" pos="NC" ><freq name="corpus" value="8" /></w> <w lemma="exhaustivo" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="5">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="país" pos="NC" ><freq name="corpus" value="48" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="evaluación" lemma="evaluación" pos="NC" /> <w surface="exhaustiva" lemma="exhaustivo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="nuestros" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="países" lemma="país" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="11.902375116" />
-        <feat name="t_corpus" value="0.99973876698" />
-        <feat name="dice_corpus" value="0.222222222222" />
-        <feat name="ll_corpus" value="8.95972421722" />
+        <feat name="pmi_corpus" value="0.610053483222" />
+        <feat name="t_corpus" value="0.344827586906" />
+        <feat name="dice_corpus" value="0.00429184549356" />
+        <feat name="ll_corpus" value="1.80612392522" />
+    </features>
+</cand>
+<cand candid="6">
+    <ngram><w lemma="catástrofe" pos="NC" ><freq name="corpus" value="9" /></w> <w lemma="natural" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="catástrofes" lemma="catástrofe" pos="NC" /> <w surface="naturales" lemma="natural" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="10.7324501146" />
+        <feat name="t_corpus" value="0.999412225706" />
+        <feat name="dice_corpus" value="0.181818181818" />
+        <feat name="ll_corpus" value="7.64697304787" />
     </features>
 </cand>
 <cand candid="7">
-    <ngram><w lemma="garantía" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="seguridad" pos="NC" ><freq name="corpus" value="52" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="silencio" pos="NC" ><freq name="corpus" value="3" /></w> <w lemma="en" pos="PREP" ><freq name="corpus" value="814" /></w> <w lemma="memoria" pos="NC" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="garantías" lemma="garantía" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="seguridad" lemma="seguridad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="silencio" lemma="silencio" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="memoria" lemma="memoria" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="10.6991690523" />
-        <feat name="t_corpus" value="0.999398508926" />
-        <feat name="dice_corpus" value="0.0016077170418" />
+        <feat name="pmi_corpus" value="17.5509027486" />
+        <feat name="t_corpus" value="0.99999479223" />
+        <feat name="dice_corpus" value="0.003663003663" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="8">
-    <ngram><w lemma="gasto" pos="NC" ><freq name="corpus" value="7" /></w> <w lemma="financiero" pos="ADJ" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="2" /></ngram>
+    <ngram><w lemma="unión" pos="NC" ><freq name="corpus" value="62" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="32" /></ngram>
     <occurs>
-    <ngram><w surface="gasto" lemma="gasto" pos="NC" /> <w surface="financiero" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="Unión" lemma="unión" pos="NC" /> <w surface="Europea" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="32" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="6.53103876172e-05" />
-        <feat name="pmi_corpus" value="10.2876652719" />
-        <feat name="t_corpus" value="1.41308215458" />
-        <feat name="dice_corpus" value="0.285714285714" />
-        <feat name="ll_corpus" value="12.9398892015" />
+        <feat name="mle_corpus" value="0.00104496620187" />
+        <feat name="pmi_corpus" value="5.64897078725" />
+        <feat name="t_corpus" value="5.54411754444" />
+        <feat name="dice_corpus" value="0.16976127321" />
+        <feat name="ll_corpus" value="93.3417049599" />
     </features>
 </cand>
 <cand candid="9">
-    <ngram><w lemma="informe" pos="NC" ><freq name="corpus" value="124" /></w> <w lemma="presentar" pos="VLadj" ><freq name="corpus" value="18" /></w> <freq name="corpus" value="2" /></ngram>
+    <ngram><w lemma="cuestión" pos="NC" ><freq name="corpus" value="37" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="procedimiento" pos="NC" ><freq name="corpus" value="18" /></w> <freq name="corpus" value="2" /></ngram>
     <occurs>
-    <ngram><w surface="informes" lemma="informe" pos="NC" /> <w surface="presentados" lemma="presentar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="informe" lemma="informe" pos="NC" /> <w surface="presentado" lemma="presentar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="cuestión" lemma="cuestión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="procedimiento" lemma="procedimiento" pos="NC" /> <freq name="corpus" value="2" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="6.53103876172e-05" />
-        <feat name="pmi_corpus" value="4.7782538042" />
-        <feat name="t_corpus" value="1.36267678292" />
-        <feat name="dice_corpus" value="0.0281690140845" />
-        <feat name="ll_corpus" value="5.92327194759" />
+        <feat name="pmi_corpus" value="10.6051929041" />
+        <feat name="t_corpus" value="1.41330567114" />
+        <feat name="dice_corpus" value="0.00322061191626" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="10">
-    <ngram><w lemma="política" pos="NC" ><freq name="corpus" value="95" /></w> <w lemma="pesquero" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="señora" pos="NC" ><freq name="corpus" value="39" /></w> <w lemma="presidente" pos="NC" ><freq name="corpus" value="107" /></w> <freq name="corpus" value="24" /></ngram>
     <occurs>
-    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="pesqueras" lemma="pesquero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señora" lemma="señora" pos="NC" /> <w surface="Presidenta" lemma="presidente" pos="NC" /> <freq name="corpus" value="7" /></ngram>
+    <ngram><w surface="Señora" lemma="señora" pos="NC" /> <w surface="Presidenta" lemma="presidente" pos="NC" /> <freq name="corpus" value="17" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="7.33251950769" />
-        <feat name="t_corpus" value="0.993795715785" />
-        <feat name="dice_corpus" value="0.020618556701" />
-        <feat name="ll_corpus" value="5.55689346736" />
+        <feat name="mle_corpus" value="0.000783724651406" />
+        <feat name="pmi_corpus" value="7.46046841148" />
+        <feat name="t_corpus" value="4.87116437137" />
+        <feat name="dice_corpus" value="0.328767123288" />
+        <feat name="ll_corpus" value="99.6487955863" />
     </features>
 </cand>
 <cand candid="11">
-    <ngram><w lemma="requisito" pos="NC" ><freq name="corpus" value="16" /></w> <w lemma="pequeño" pos="ADJ" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="4" /></ngram>
+    <ngram><w lemma="serie" pos="NC" ><freq name="corpus" value="3" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="explosión" pos="NC" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="requisitos" lemma="requisito" pos="NC" /> <w surface="mínimos" lemma="pequeño" pos="ADJ" /> <freq name="corpus" value="4" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000130620775234" />
-        <feat name="pmi_corpus" value="8.3174126153" />
-        <feat name="t_corpus" value="1.99373040753" />
-        <feat name="dice_corpus" value="0.2" />
-        <feat name="ll_corpus" value="19.0824095398" />
-    </features>
-</cand>
-<cand candid="12">
-    <ngram><w lemma="ciento" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="puesto" pos="NC" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="cientos" lemma="ciento" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="miles" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="puestos" lemma="puesto" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="serie" lemma="serie" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="explosiones" lemma="explosión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="25.8023517978" />
-        <feat name="t_corpus" value="0.999999982911" />
-        <feat name="dice_corpus" value="0.00123578843302" />
+        <feat name="pmi_corpus" value="17.3996087705" />
+        <feat name="t_corpus" value="0.999994216432" />
+        <feat name="dice_corpus" value="0.00165562913907" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="12">
+    <ngram><w lemma="asesinato" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="en" pos="PREP" ><freq name="corpus" value="814" /></w> <w lemma="Sri~Lanka" pos="NP" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="asesinatos" lemma="asesinato" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="Sri Lanka" lemma="Sri~Lanka" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="18.5509027486" />
+        <feat name="t_corpus" value="0.999997396115" />
+        <feat name="dice_corpus" value="0.00366748166259" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="13">
-    <ngram><w lemma="competitividad" pos="NC" ><freq name="corpus" value="9" /></w> <w lemma="global" pos="ADJ" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="presidente" pos="NC" ><freq name="corpus" value="107" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="Sri~Lanka" pos="NP" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="competitividad" lemma="competitividad" pos="NC" /> <w surface="global" lemma="global" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Presidente" lemma="presidente" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Sri Lanka" lemma="Sri~Lanka" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="10.1474876139" />
-        <feat name="t_corpus" value="0.999118338559" />
-        <feat name="dice_corpus" value="0.166666666667" />
-        <feat name="ll_corpus" value="7.19271245204" />
+        <feat name="pmi_corpus" value="10.658141784" />
+        <feat name="t_corpus" value="0.999381158222" />
+        <feat name="dice_corpus" value="0.00156412930136" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="14">
-    <ngram><w lemma="interés" pos="NC" ><freq name="corpus" value="7" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="semejante" pos="ADJ" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="muerte" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="violento" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="interés" lemma="interés" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="semejantes" lemma="semejante" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="muertes" lemma="muerte" pos="NC" /> <w surface="violentas" lemma="violento" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="14.5922538484" />
-        <feat name="t_corpus" value="0.999959515024" />
-        <feat name="dice_corpus" value="0.0016501650165" />
-        <feat name="ll_corpus" value="0.0" />
+        <feat name="pmi_corpus" value="12.902375116" />
+        <feat name="t_corpus" value="0.99986938349" />
+        <feat name="dice_corpus" value="0.5" />
+        <feat name="ll_corpus" value="9.16957985026" />
     </features>
 </cand>
 <cand candid="15">
-    <ngram><w lemma="miembro" pos="NC" ><freq name="corpus" value="53" /></w> <w lemma="sobre" pos="PREP" ><freq name="corpus" value="123" /></w> <w lemma="simplificación" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="administrativo" pos="ADJ" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="reconciliación" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="pacífico" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="miembros" lemma="miembro" pos="NC" /> <w surface="sobre" lemma="sobre" pos="PREP" /> <w surface="simplificación" lemma="simplificación" pos="NC" /> <w surface="administrativa" lemma="administrativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="reconciliación" lemma="reconciliación" pos="NC" /> <w surface="pacífica" lemma="pacífico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="28.4517278921" />
-        <feat name="t_corpus" value="0.999999997276" />
-        <feat name="dice_corpus" value="0.0217391304348" />
-        <feat name="ll_corpus" value="0.0" />
+        <feat name="pmi_corpus" value="14.902375116" />
+        <feat name="t_corpus" value="0.999967345873" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="11.5777914489" />
     </features>
 </cand>
 <cand candid="16">
-    <ngram><w lemma="provisión" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="estrategia" pos="NC" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="señor" pos="NC" ><freq name="corpus" value="110" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="13" /></ngram>
     <occurs>
-    <ngram><w surface="provisión" lemma="provisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estrategias" lemma="estrategia" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Berend" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Poettering" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="3" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Fruteau" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Wynn" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Cox" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Hänsch" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Nogueira" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Segni" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Evans" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="señor" lemma="señor" pos="NC" /> <w surface="Monti" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="16.3996087705" />
-        <feat name="t_corpus" value="0.999988432864" />
-        <feat name="dice_corpus" value="0.00165289256198" />
-        <feat name="ll_corpus" value="0.0" />
+        <feat name="mle_corpus" value="0.000424517519511" />
+        <feat name="pmi_corpus" value="3.52224710225" />
+        <feat name="t_corpus" value="3.29173920358" />
+        <feat name="dice_corpus" value="0.0611764705882" />
+        <feat name="ll_corpus" value="19.7784132451" />
     </features>
 </cand>
 <cand candid="17">
-    <ngram><w lemma="territorio" pos="NC" ><freq name="corpus" value="14" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="objetivo" pos="NC" ><freq name="corpus" value="47" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="programa" pos="NC" ><freq name="corpus" value="39" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="dirección" pos="NC" ><freq name="corpus" value="5" /></w> <w lemma="&lt;unknown&gt;" pos="ADJ" ><freq name="corpus" value="118" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="territorios" lemma="territorio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="objetivo" lemma="objetivo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="programas" lemma="programa" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="dirección" lemma="dirección" pos="NC" /> <w surface="plurianual" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="9.62262749744" />
-        <feat name="t_corpus" value="0.998731470749" />
-        <feat name="dice_corpus" value="0.0016051364366" />
+        <feat name="pmi_corpus" value="19.3969730272" />
+        <feat name="t_corpus" value="0.999998551464" />
+        <feat name="dice_corpus" value="0.00203045685279" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="18">
-    <ngram><w lemma="Alexander" pos="NP" ><freq name="corpus" value="2" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="conducta" pos="NC" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="programa" pos="NC" ><freq name="corpus" value="39" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="dirección" pos="NC" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="Alexander" lemma="Alexander" pos="NP" /> <w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="conducta" lemma="conducta" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="programas" lemma="programa" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="dirección" lemma="dirección" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="23.0027758712" />
-        <feat name="t_corpus" value="0.99999988102" />
-        <feat name="dice_corpus" value="0.00187969924812" />
+        <feat name="pmi_corpus" value="11.3772409574" />
+        <feat name="t_corpus" value="0.999624068079" />
+        <feat name="dice_corpus" value="0.00161987041037" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="19">
-    <ngram><w lemma="aprobación" pos="NC" ><freq name="corpus" value="8" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="disposición" pos="NC" ><freq name="corpus" value="12" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="aprobación" lemma="aprobación" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="disposiciones" lemma="disposición" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="12.3996087705" />
-        <feat name="t_corpus" value="0.999814925824" />
-        <feat name="dice_corpus" value="0.00164113785558" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="20">
-    <ngram><w lemma="carencia" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="recurso" pos="NC" ><freq name="corpus" value="10" /></w> <w lemma="financiero" pos="ADJ" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="carencia" lemma="carencia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="recursos" lemma="recurso" pos="NC" /> <w surface="financieros" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="27.7576633733" />
-        <feat name="t_corpus" value="0.999999995593" />
-        <feat name="dice_corpus" value="0.00219058050383" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="21">
-    <ngram><w lemma="desarrollo" pos="NC" ><freq name="corpus" value="46" /></w> <w lemma="óptimo" pos="ADJ" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="desarrollo" lemma="desarrollo" pos="NC" /> <w surface="óptimo" lemma="óptimo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="6.79385065925" />
-        <feat name="t_corpus" value="0.990987460825" />
-        <feat name="dice_corpus" value="0.0384615384615" />
-        <feat name="ll_corpus" value="5.05146973245" />
-    </features>
-</cand>
-<cand candid="22">
-    <ngram><w lemma="efecto" pos="NC" ><freq name="corpus" value="10" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="efectos" lemma="efecto" pos="NC" /> <w surface="nocivos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="2.87308788906" />
-        <feat name="t_corpus" value="0.863505747272" />
-        <feat name="dice_corpus" value="0.00467289719626" />
-        <feat name="ll_corpus" value="2.75145910884" />
-    </features>
-</cand>
-<cand candid="23">
-    <ngram><w lemma="informe" pos="NC" ><freq name="corpus" value="124" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="2" /></ngram>
-    <occurs>
-    <ngram><w surface="informe" lemma="informe" pos="NC" /> <w surface="Bourlanges" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="informe" lemma="informe" pos="NC" /> <w surface="von" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="6.53103876172e-05" />
-        <feat name="pmi_corpus" value="0.240819673557" />
-        <feat name="t_corpus" value="0.217415017331" />
-        <feat name="dice_corpus" value="0.00738007380074" />
-        <feat name="ll_corpus" value="1.76047742904" />
-    </features>
-</cand>
-<cand candid="24">
-    <ngram><w lemma="objetivo" pos="NC" ><freq name="corpus" value="47" /></w> <w lemma="prioritario" pos="ADJ" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="2" /></ngram>
-    <occurs>
-    <ngram><w surface="objetivo" lemma="objetivo" pos="NC" /> <w surface="prioritario" lemma="prioritario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="objetivos" lemma="objetivo" pos="NC" /> <w surface="prioritarios" lemma="prioritario" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="6.53103876172e-05" />
-        <feat name="pmi_corpus" value="8.34778626435" />
-        <feat name="t_corpus" value="1.40987265084" />
-        <feat name="dice_corpus" value="0.078431372549" />
-        <feat name="ll_corpus" value="10.6246475633" />
-    </features>
-</cand>
-<cand candid="25">
-    <ngram><w lemma="observación" pos="NC" ><freq name="corpus" value="10" /></w> <w lemma="breve" pos="ADJ" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="observaciones" lemma="observación" pos="NC" /> <w surface="breves" lemma="breve" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="9.25851892625" />
-        <feat name="t_corpus" value="0.998367293628" />
-        <feat name="dice_corpus" value="0.133333333333" />
-        <feat name="ll_corpus" value="6.58195789145" />
-    </features>
-</cand>
-<cand candid="26">
-    <ngram><w lemma="palabra" pos="NC" ><freq name="corpus" value="7" /></w> <w lemma="en" pos="PREP" ><freq name="corpus" value="814" /></w> <w lemma="nombre" pos="NC" ><freq name="corpus" value="18" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="palabra" lemma="palabra" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="nombre" lemma="nombre" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="13.1585853258" />
-        <feat name="t_corpus" value="0.999890636823" />
-        <feat name="dice_corpus" value="0.00357568533969" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="27">
-    <ngram><w lemma="plan" pos="NC" ><freq name="corpus" value="10" /></w> <w lemma="estratégico" pos="ADJ" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="plan" lemma="plan" pos="NC" /> <w surface="estratégico" lemma="estratégico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="8.1210154025" />
-        <feat name="t_corpus" value="0.996408045981" />
-        <feat name="dice_corpus" value="0.0952380952381" />
-        <feat name="ll_corpus" value="5.8460712591" />
-    </features>
-</cand>
-<cand candid="28">
-    <ngram><w lemma="provisión" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="estrategia" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="salida" pos="NC" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="provisión" lemma="provisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estrategias" lemma="estrategia" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="salida" lemma="salida" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="35.3841800478" />
-        <feat name="t_corpus" value="0.999999999978" />
-        <feat name="dice_corpus" value="0.00137969094923" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="29">
-    <ngram><w lemma="seguridad" pos="NC" ><freq name="corpus" value="52" /></w> <w lemma="en" pos="PREP" ><freq name="corpus" value="814" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="seguridad" lemma="seguridad" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="nuestras" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="5.7280663991" />
-        <feat name="t_corpus" value="0.981133984074" />
-        <feat name="dice_corpus" value="0.00233644859813" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="30">
-    <ngram><w lemma="trabajo" pos="NC" ><freq name="corpus" value="46" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="normalización" pos="NC" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="trabajos" lemma="trabajo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="normalización" lemma="normalización" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="11.8760468144" />
-        <feat name="t_corpus" value="0.999733955871" />
-        <feat name="dice_corpus" value="0.0016155088853" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="31">
-    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="grupo" pos="NC" ><freq name="corpus" value="48" /></w> <freq name="corpus" value="3" /></ngram>
-    <occurs>
-    <ngram><w surface="Nuestro" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="Grupo" lemma="grupo" pos="NC" /> <freq name="corpus" value="2" /></ngram>
-    <ngram><w surface="nuestro" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="Grupo" lemma="grupo" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="9.79655814257e-05" />
-        <feat name="pmi_corpus" value="2.19501598394" />
-        <feat name="t_corpus" value="1.3537868385" />
-        <feat name="dice_corpus" value="0.0128755364807" />
-        <feat name="ll_corpus" value="3.72201754508" />
-    </features>
-</cand>
-<cand candid="32">
-    <ngram><w lemma="capacidad" pos="NC" ><freq name="corpus" value="5" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="iniciativa" pos="NC" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="capacidad" lemma="capacidad" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="iniciativa" lemma="iniciativa" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="13.4927181748" />
-        <feat name="t_corpus" value="0.99991324648" />
-        <feat name="dice_corpus" value="0.00164654226125" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="33">
-    <ngram><w lemma="competitividad" pos="NC" ><freq name="corpus" value="9" /></w> <w lemma="regional" pos="ADJ" ><freq name="corpus" value="37" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="competitividad" lemma="competitividad" pos="NC" /> <w surface="regional" lemma="regional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="6.52299674895" />
-        <feat name="t_corpus" value="0.98912617556" />
-        <feat name="dice_corpus" value="0.0434782608696" />
-        <feat name="ll_corpus" value="4.86589376828" />
-    </features>
-</cand>
-<cand candid="34">
     <ngram><w lemma="forma" pos="NC" ><freq name="corpus" value="17" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
     <ngram><w surface="forma" lemma="forma" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="penalizaciones" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
@@ -457,214 +267,407 @@
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="35">
-    <ngram><w lemma="infracción" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="evidente" pos="ADJ" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="20">
+    <ngram><w lemma="objetivo" pos="NC" ><freq name="corpus" value="47" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="reducción" pos="NC" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="infracciones" lemma="infracción" pos="NC" /> <w surface="evidentes" lemma="evidente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="objetivos" lemma="objetivo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="reducción" lemma="reducción" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="11.902375116" />
-        <feat name="t_corpus" value="0.99973876698" />
-        <feat name="dice_corpus" value="0.222222222222" />
-        <feat name="ll_corpus" value="8.95972421722" />
+        <feat name="pmi_corpus" value="10.8450199188" />
+        <feat name="t_corpus" value="0.999456344607" />
+        <feat name="dice_corpus" value="0.00161203653949" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="21">
+    <ngram><w lemma="reducción" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="flota" pos="NC" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="reducción" lemma="reducción" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="flota" lemma="flota" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="16.3996087705" />
+        <feat name="t_corpus" value="0.999988432864" />
+        <feat name="dice_corpus" value="0.00165289256198" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="22">
+    <ngram><w lemma="dirección" pos="NC" ><freq name="corpus" value="5" /></w> <w lemma="&lt;unknown&gt;" pos="ADJ" ><freq name="corpus" value="118" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="dirección" lemma="dirección" pos="NC" /> <w surface="plurianual" lemma="&lt;unknown&gt;" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="5.69780397178" />
+        <feat name="t_corpus" value="0.980734064806" />
+        <feat name="dice_corpus" value="0.0162601626016" />
+        <feat name="ll_corpus" value="4.40921074877" />
+    </features>
+</cand>
+<cand candid="23">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="basar" pos="VLadj" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="penalizaciones" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="basada" lemma="basar" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="4.61005348322" />
+        <feat name="t_corpus" value="0.959051724182" />
+        <feat name="dice_corpus" value="0.00475059382423" />
+        <feat name="ll_corpus" value="3.83310260224" />
+    </features>
+</cand>
+<cand candid="24">
+    <ngram><w lemma="objetivo" pos="NC" ><freq name="corpus" value="47" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="reducción" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="flota" pos="NC" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="objetivos" lemma="objetivo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="reducción" lemma="reducción" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="flota" lemma="flota" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="29.8295911961" />
+        <feat name="t_corpus" value="0.999999998952" />
+        <feat name="dice_corpus" value="0.00136239782016" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="25">
+    <ngram><w lemma="principio" pos="NC" ><freq name="corpus" value="14" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="estabilidad" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="relativo" pos="ADJ" ><freq name="corpus" value="27" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estabilidad" lemma="estabilidad" pos="NC" /> <w surface="relativa" lemma="relativo" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="25.3247039661" />
+        <feat name="t_corpus" value="1.41421352872" />
+        <feat name="dice_corpus" value="0.00432198811453" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="26">
+    <ngram><w lemma="principio" pos="NC" ><freq name="corpus" value="14" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="estabilidad" pos="NC" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="estabilidad" lemma="estabilidad" pos="NC" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="15.1772163491" />
+        <feat name="t_corpus" value="1.41417539277" />
+        <feat name="dice_corpus" value="0.00328947368421" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="27">
+    <ngram><w lemma="estabilidad" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="relativo" pos="ADJ" ><freq name="corpus" value="27" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="estabilidad" lemma="estabilidad" pos="NC" /> <w surface="relativa" lemma="relativo" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="10.1474876139" />
+        <feat name="t_corpus" value="1.41296670481" />
+        <feat name="dice_corpus" value="0.137931034483" />
+        <feat name="ll_corpus" value="14.0217621377" />
+    </features>
+</cand>
+<cand candid="28">
+    <ngram><w lemma="principio" pos="NC" ><freq name="corpus" value="14" /></w> <w lemma="legal" pos="ADJ" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="principio" lemma="principio" pos="NC" /> <w surface="legal" lemma="legal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.09502019397" />
+        <feat name="t_corpus" value="0.998171368863" />
+        <feat name="dice_corpus" value="0.111111111111" />
+        <feat name="ll_corpus" value="6.49608776261" />
+    </features>
+</cand>
+<cand candid="29">
+    <ngram><w lemma="política" pos="NC" ><freq name="corpus" value="95" /></w> <w lemma="pesquero" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="políticas" lemma="política" pos="NC" /> <w surface="pesqueras" lemma="pesquero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="7.33251950769" />
+        <feat name="t_corpus" value="0.993795715785" />
+        <feat name="dice_corpus" value="0.020618556701" />
+        <feat name="ll_corpus" value="5.55689346736" />
+    </features>
+</cand>
+<cand candid="30">
+    <ngram><w lemma="tipo" pos="NC" ><freq name="corpus" value="11" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="objeción" pos="NC" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="tipo" lemma="tipo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="objeción" lemma="objeción" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="13.9401771518" />
+        <feat name="t_corpus" value="0.999936380752" />
+        <feat name="dice_corpus" value="0.00164654226125" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="31">
+    <ngram><w lemma="propuesta" pos="NC" ><freq name="corpus" value="45" /></w> <w lemma="legislativo" pos="ADJ" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="propuesta" lemma="propuesta" pos="NC" /> <w surface="legislativa" lemma="legislativo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="6.24059701825" />
+        <feat name="t_corpus" value="0.986775078384" />
+        <feat name="dice_corpus" value="0.037037037037" />
+        <feat name="ll_corpus" value="4.69556860813" />
+    </features>
+</cand>
+<cand candid="32">
+    <ngram><w lemma="joven" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="@card@" pos="CARD" ><freq name="corpus" value="69" /></w> <w lemma="año" pos="NC" ><freq name="corpus" value="37" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="joven" lemma="joven" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="34" lemma="@card@" pos="CARD" /> <w surface="años" lemma="año" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="19.9840060671" />
+        <feat name="t_corpus" value="0.999999035694" />
+        <feat name="dice_corpus" value="0.00208333333333" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="33">
+    <ngram><w lemma="nombre" pos="NC" ><freq name="corpus" value="18" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="nombre" lemma="nombre" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Hicks" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="6.51543825134" />
+        <feat name="t_corpus" value="0.989069056451" />
+        <feat name="dice_corpus" value="0.0014012143858" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="34">
+    <ngram><w lemma="período" pos="NC" ><freq name="corpus" value="23" /></w> <w lemma="parcial" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="parcial" lemma="parcial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.37881315997" />
+        <feat name="t_corpus" value="0.998497910137" />
+        <feat name="dice_corpus" value="0.08" />
+        <feat name="ll_corpus" value="6.80141324755" />
+    </features>
+</cand>
+<cand candid="35">
+    <ngram><w lemma="pena" pos="NC" ><freq name="corpus" value="3" /></w> <w lemma="capital" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="pena" lemma="pena" pos="NC" /> <w surface="capital" lemma="capital" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="12.3174126153" />
+        <feat name="t_corpus" value="0.999804075235" />
+        <feat name="dice_corpus" value="0.4" />
+        <feat name="ll_corpus" value="8.71512065492" />
     </features>
 </cand>
 <cand candid="36">
-    <ngram><w lemma="jueves" pos="NC" ><freq name="corpus" value="7" /></w> <w lemma="próximo" pos="ADJ" ><freq name="corpus" value="15" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="período" pos="NC" ><freq name="corpus" value="23" /></w> <w lemma="parcial" pos="ADJ" ><freq name="corpus" value="2" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="sesión" pos="NC" ><freq name="corpus" value="13" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="jueves" lemma="jueves" pos="NC" /> <w surface="próximo" lemma="próximo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="parcial" lemma="parcial" pos="ADJ" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="sesiones" lemma="sesión" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="8.18812959836" />
-        <feat name="t_corpus" value="0.996571316618" />
-        <feat name="dice_corpus" value="0.0909090909091" />
-        <feat name="ll_corpus" value="5.89546462573" />
+        <feat name="pmi_corpus" value="24.6629447161" />
+        <feat name="t_corpus" value="0.999999962354" />
+        <feat name="dice_corpus" value="0.00216684723727" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="37">
-    <ngram><w lemma="mercado" pos="NC" ><freq name="corpus" value="58" /></w> <w lemma="único" pos="ADJ" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="3" /></ngram>
+    <ngram><w lemma="diputado" pos="NC" ><freq name="corpus" value="11" /></w> <w lemma="francés" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="mercado" lemma="mercado" pos="NC" /> <w surface="único" lemma="único" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    <ngram><w surface="diputado" lemma="diputado" pos="NC" /> <w surface="francés" lemma="francés" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="9.79655814257e-05" />
-        <feat name="pmi_corpus" value="7.16992500298" />
-        <feat name="t_corpus" value="1.72002267697" />
-        <feat name="dice_corpus" value="0.0869565217391" />
-        <feat name="ll_corpus" value="12.5552615814" />
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="10.4429434974" />
+        <feat name="t_corpus" value="0.999281609196" />
+        <feat name="dice_corpus" value="0.153846153846" />
+        <feat name="ll_corpus" value="7.46331610167" />
     </features>
 </cand>
 <cand candid="38">
-    <ngram><w lemma="período" pos="NC" ><freq name="corpus" value="23" /></w> <w lemma="&lt;unknown&gt;" pos="VLadj" ><freq name="corpus" value="39" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="estado" pos="NC" ><freq name="corpus" value="68" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="Texas" pos="NP" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="período" lemma="período" pos="NC" /> <w surface="abarcado" lemma="&lt;unknown&gt;" pos="VLadj" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Estado" lemma="estado" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Texas" lemma="Texas" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="5.09341094111" />
-        <feat name="t_corpus" value="0.97070924768" />
-        <feat name="dice_corpus" value="0.0322580645161" />
-        <feat name="ll_corpus" value="3.98916000622" />
+        <feat name="pmi_corpus" value="11.8971084299" />
+        <feat name="t_corpus" value="0.999737811583" />
+        <feat name="dice_corpus" value="0.00159744408946" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="39">
-    <ngram><w lemma="política" pos="NC" ><freq name="corpus" value="95" /></w> <w lemma="territorial" pos="ADJ" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="comunidad" pos="NC" ><freq name="corpus" value="6" /></w> <w lemma="europeo" pos="ADJ" ><freq name="corpus" value="36" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="política" lemma="política" pos="NC" /> <w surface="territorial" lemma="territorial" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Comunidad" lemma="comunidad" pos="NC" /> <w surface="europea" lemma="europeo" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="6.01059141281" />
-        <feat name="t_corpus" value="0.984489289463" />
-        <feat name="dice_corpus" value="0.02" />
-        <feat name="ll_corpus" value="4.59580544926" />
+        <feat name="pmi_corpus" value="7.14748761386" />
+        <feat name="t_corpus" value="0.992946708471" />
+        <feat name="dice_corpus" value="0.047619047619" />
+        <feat name="ll_corpus" value="5.2656267957" />
     </features>
 </cand>
 <cand candid="40">
-    <ngram><w lemma="sector" pos="NC" ><freq name="corpus" value="38" /></w> <w lemma="económico" pos="ADJ" ><freq name="corpus" value="45" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="condena" pos="NC" ><freq name="corpus" value="1" /></w> <w lemma="a" pos="PREP" ><freq name="corpus" value="532" /></w> <w lemma="muerte" pos="NC" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="sectores" lemma="sector" pos="NC" /> <w surface="económicos" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="condena" lemma="condena" pos="NC" /> <w surface="a" lemma="a" pos="PREP" /> <w surface="muerte" lemma="muerte" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="4.16259450625" />
-        <feat name="t_corpus" value="0.944161442066" />
-        <feat name="dice_corpus" value="0.0240963855422" />
-        <feat name="ll_corpus" value="3.44211566242" />
+        <feat name="pmi_corpus" value="19.7494677981" />
+        <feat name="t_corpus" value="0.999998865465" />
+        <feat name="dice_corpus" value="0.00560747663551" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="41">
-    <ngram><w lemma="seguridad" pos="NC" ><freq name="corpus" value="52" /></w> <w lemma="en" pos="PREP" ><freq name="corpus" value="814" /></w> <w lemma="Suecia" pos="NP" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="caso" pos="NC" ><freq name="corpus" value="41" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="Alexander" pos="NP" ><freq name="corpus" value="2" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="seguridad" lemma="seguridad" pos="NC" /> <w surface="en" lemma="en" pos="PREP" /> <w surface="Suecia" lemma="Suecia" pos="NP" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="caso" lemma="caso" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Alexander" lemma="Alexander" pos="NP" /> <w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="14.4354255312" />
-        <feat name="t_corpus" value="0.999954865991" />
-        <feat name="dice_corpus" value="0.00346020761246" />
+        <feat name="pmi_corpus" value="19.2301863673" />
+        <feat name="t_corpus" value="0.999998373938" />
+        <feat name="dice_corpus" value="0.00184672206833" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="42">
-    <ngram><w lemma="tiempo" pos="NC" ><freq name="corpus" value="15" /></w> <w lemma="suficiente" pos="ADJ" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="caso" pos="NC" ><freq name="corpus" value="41" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="Alexander" pos="NP" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="tiempo" lemma="tiempo" pos="NC" /> <w surface="suficiente" lemma="suficiente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="caso" lemma="caso" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Alexander" lemma="Alexander" pos="NP" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="8.99548452042" />
-        <feat name="t_corpus" value="0.998040752353" />
-        <feat name="dice_corpus" value="0.105263157895" />
-        <feat name="ll_corpus" value="6.43407796807" />
-    </features>
-</cand>
-<cand candid="43">
-    <ngram><w lemma="tipo" pos="NC" ><freq name="corpus" value="11" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="actividad" pos="NC" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="tipo" lemma="tipo" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="actividades" lemma="actividad" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="12.0657080339" />
-        <feat name="t_corpus" value="0.999766729423" />
-        <feat name="dice_corpus" value="0.0016393442623" />
+        <feat name="pmi_corpus" value="12.6270192666" />
+        <feat name="t_corpus" value="0.999841915808" />
+        <feat name="dice_corpus" value="0.00162074554295" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="44">
-    <ngram><w lemma="transparencia" pos="NC" ><freq name="corpus" value="14" /></w> <w lemma="financiero" pos="ADJ" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="43">
+    <ngram><w lemma="medio" pos="NC" ><freq name="corpus" value="10" /></w> <w lemma="ambiente" pos="ADJ" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="3" /></ngram>
     <occurs>
-    <ngram><w surface="transparencia" lemma="transparencia" pos="NC" /> <w surface="financiera" lemma="financiero" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="medio" lemma="medio" pos="NC" /> <w surface="ambiente" lemma="ambiente" pos="ADJ" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="9.79655814257e-05" />
+        <feat name="pmi_corpus" value="11.5804470211" />
+        <feat name="t_corpus" value="1.73148522149" />
+        <feat name="dice_corpus" value="0.461538461538" />
+        <feat name="ll_corpus" value="23.0903626819" />
+    </features>
+</cand>
+<cand candid="44">
+    <ngram><w lemma="derecho" pos="NC" ><freq name="corpus" value="17" /></w> <w lemma="constitucional" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="derecho" lemma="derecho" pos="NC" /> <w surface="constitucional" lemma="constitucional" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="8.28766527191" />
-        <feat name="t_corpus" value="0.99679989551" />
-        <feat name="dice_corpus" value="0.0952380952381" />
-        <feat name="ll_corpus" value="5.95738927286" />
+        <feat name="pmi_corpus" value="10.8149122748" />
+        <feat name="t_corpus" value="0.999444879833" />
+        <feat name="dice_corpus" value="0.111111111111" />
+        <feat name="ll_corpus" value="8.27436756702" />
     </features>
 </cand>
 <cand candid="45">
-    <ngram><w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="4" /></ngram>
+    <ngram><w lemma="Alexander" pos="NP" ><freq name="corpus" value="2" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="conducta" pos="NC" ><freq name="corpus" value="3" /></w> <w lemma="criminal" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="dejación" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="nuestras" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="Tratado" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Amsterdam" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="2" /></ngram>
-    <ngram><w surface="coup" lemma="&lt;unknown&gt;" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="chapeau" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Alexander" lemma="Alexander" pos="NP" /> <w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="conducta" lemma="conducta" pos="NC" /> <w surface="criminal" lemma="criminal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="0.000130620775234" />
-        <feat name="pmi_corpus" value="3.56985300701" />
-        <feat name="t_corpus" value="1.83157864369" />
-        <feat name="dice_corpus" value="0.00453857791225" />
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="37.9051509918" />
+        <feat name="t_corpus" value="0.999999999996" />
+        <feat name="dice_corpus" value="0.00234852043213" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="46">
-    <ngram><w lemma="abogado" pos="NC" ><freq name="corpus" value="2" /></w> <w lemma="especializado" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="Alexander" pos="NP" ><freq name="corpus" value="2" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="conducta" pos="NC" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="abogados" lemma="abogado" pos="NC" /> <w surface="especializados" lemma="especializado" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Alexander" lemma="Alexander" pos="NP" /> <w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="conducta" lemma="conducta" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="13.902375116" />
-        <feat name="t_corpus" value="0.999934691745" />
-        <feat name="dice_corpus" value="0.666666666667" />
-        <feat name="ll_corpus" value="10.3736714662" />
-    </features>
-</cand>
-<cand candid="47">
-    <ngram><w lemma="análisis" pos="NC" ><freq name="corpus" value="18" /></w> <w lemma="económico" pos="ADJ" ><freq name="corpus" value="45" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="análisis" lemma="análisis" pos="NC" /> <w surface="económico" lemma="económico" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="5.24059701825" />
-        <feat name="t_corpus" value="0.973550156768" />
-        <feat name="dice_corpus" value="0.031746031746" />
-        <feat name="ll_corpus" value="4.07919265563" />
-    </features>
-</cand>
-<cand candid="48">
-    <ngram><w lemma="beneficio" pos="NC" ><freq name="corpus" value="5" /></w> <w lemma="inmediato" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="beneficios" lemma="beneficio" pos="NC" /> <w surface="inmediatos" lemma="inmediato" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="11.5804470211" />
-        <feat name="t_corpus" value="0.999673458726" />
-        <feat name="dice_corpus" value="0.285714285714" />
-        <feat name="ll_corpus" value="8.20056482592" />
-    </features>
-</cand>
-<cand candid="49">
-    <ngram><w lemma="colega" pos="NC" ><freq name="corpus" value="30" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="grupo" pos="NC" ><freq name="corpus" value="48" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="colega" lemma="colega" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Grupo" lemma="grupo" pos="NC" /> <w surface="Elisabeth" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="Schroedter" lemma="&lt;unknown&gt;" pos="NP" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="21.6990523778" />
-        <feat name="t_corpus" value="0.999999706279" />
-        <feat name="dice_corpus" value="0.00198728139905" />
+        <feat name="pmi_corpus" value="23.0027758712" />
+        <feat name="t_corpus" value="0.99999988102" />
+        <feat name="dice_corpus" value="0.00187969924812" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="50">
-    <ngram><w lemma="desigualdad" pos="NC" ><freq name="corpus" value="13" /></w> <w lemma="existente" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="47">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="conducta" pos="NC" ><freq name="corpus" value="3" /></w> <w lemma="criminal" pos="ADJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="desigualdad" lemma="desigualdad" pos="NC" /> <w surface="existentes" lemma="existente" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="conducta" lemma="conducta" pos="NC" /> <w surface="criminal" lemma="criminal" pos="ADJ" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="3.26551938086e-05" />
-        <feat name="pmi_corpus" value="10.2019353979" />
-        <feat name="t_corpus" value="0.999150992686" />
-        <feat name="dice_corpus" value="0.133333333333" />
-        <feat name="ll_corpus" value="7.31183467318" />
+        <feat name="pmi_corpus" value="24.0027758712" />
+        <feat name="t_corpus" value="0.99999994051" />
+        <feat name="dice_corpus" value="0.00188058298072" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="48">
+    <ngram><w lemma="&lt;unknown&gt;" pos="NP" ><freq name="corpus" value="315" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="conducta" pos="NC" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="Nikitin" lemma="&lt;unknown&gt;" pos="NP" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="conducta" lemma="conducta" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="9.10040075206" />
+        <feat name="t_corpus" value="0.998178176075" />
+        <feat name="dice_corpus" value="0.00141110065851" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="49">
+    <ngram><w lemma="sesión" pos="NC" ><freq name="corpus" value="13" /></w> <w lemma="plenario" pos="ADJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="sesión" lemma="sesión" pos="NC" /> <w surface="plenaria" lemma="plenario" pos="ADJ" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="6.53103876172e-05" />
+        <feat name="pmi_corpus" value="11.2019353979" />
+        <feat name="t_corpus" value="1.41361322354" />
+        <feat name="dice_corpus" value="0.266666666667" />
+        <feat name="ll_corpus" value="15.3665168821" />
+    </features>
+</cand>
+<cand candid="50">
+    <ngram><w lemma="año" pos="NC" ><freq name="corpus" value="37" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="año" lemma="año" pos="NC" /> <w surface="pasado-" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="3.26551938086e-05" />
+        <feat name="pmi_corpus" value="0.985562618315" />
+        <feat name="t_corpus" value="0.494971264906" />
+        <feat name="dice_corpus" value="0.0043956043956" />
+        <feat name="ll_corpus" value="1.90374954698" />
     </features>
 </cand>
 </candidates>

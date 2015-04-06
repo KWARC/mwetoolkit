@@ -40,7 +40,6 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 import tempfile
-import shelve
 import locale
 
 from libs.util import read_options, treat_options_simplest, \
@@ -78,10 +77,10 @@ formats accepted by the `--from` switch.
 OPTIONS may be:
 
 -a OR --asc
-    Sort in ascending order. By default, classification is descending.
+    Sort in ascending order (default).
 
 -d OR --desc
-    Sort in descending order (default).
+    Sort in descending order. By default, classification is ascending.
 
 --from <input-filetype-ext>
     Force conversion from given filetype extension.
@@ -99,8 +98,7 @@ OPTIONS may be:
 PSEUDO_FEATS = ["@LEMMA", "@SURFACE", "@POS"]
 
 feat_list = ["@LEMMA", "@SURFACE", "@POS"]
-temp_file = None
-ascending = False
+ascending = True
 
 input_filetype_ext = None
 output_filetype_ext = None
@@ -113,6 +111,7 @@ class SorterHandler(filetype.ChainedInputHandler):
     def before_file(self, fileobj, info={}):
         if not self.chain:
             self.chain = self.make_printer(info, output_filetype_ext)
+            self.all_entities = {}
         self.chain.before_file(fileobj, info)
         self.feat_list_ok = False
         self.all_feats = list(PSEUDO_FEATS)
@@ -156,12 +155,8 @@ class SorterHandler(filetype.ChainedInputHandler):
             self.feat_list_ok = True
 
         # Store the whole entity in a temporary database
-        self.saved_parser = info.get('parser')
-        self.saved_fileobj = info.get('fileobj')
-        info['parser'] = info['fileobj'] =None
-        temp_file[unicode(entity.id_number).encode('utf8')] = (entity,info)
-        info['fileobj'] = self.saved_fileobj
-        info['parser'] = self.saved_parser
+        #info['parser'] = info['fileobj'] = None
+        self.all_entities[unicode(entity.id_number)] = (entity,info)
 
         # Build up a tuple to be added to a list.
         one_tuple = []
@@ -190,19 +185,17 @@ class SorterHandler(filetype.ChainedInputHandler):
     def after_file(self, fileobj, info={}):
         """Sorts the tuple list `self.feat_to_order` and then retrieves the
         candidates from the temporary DB in order to print them out."""
-        global ascending, temp_file
+        global ascending
         # Sorts the tuple list ignoring the last entry, i.e. the candidate ID
         # If I didn't ignore the last entry, the algorithm wouldn't be stable.
-        # If the user didn't ask "-a" explicitly, sorting is reversed (descending)        
+        # If the user didn't ask "-d" explicitly, sorting is ascending
         self.feat_to_order.sort(key=lambda x: x[0:len(x) - 1], reverse=(not ascending))
         # Now print sorted candidates. A candidate is retrieved from temp DB through
         # its ID
         for feat_entry in self.feat_to_order:
             x = feat_entry[len(feat_entry) - 1]
-            entity, info_saved = temp_file[unicode(x).encode('utf8')]            
-            info_saved["fileobj"] = self.saved_fileobj
-            info_saved["parser"] = self.saved_parser
-            self.chain.handle(entity, info_saved)
+            entity, info = self.all_entities[unicode(x)]            
+            self.chain.handle(entity, info)
         self.chain.after_file(fileobj, info)
 
 
@@ -263,8 +256,8 @@ def treat_options(opts, arg, n_arg, usage_string):
             raise Exception("Bad arg")
 
     if len(a_or_d) > 1:
-        warn("you must provide only one option, -a OR -d. Only the last one" + \
-             " will be considered.")
+        warn("You must provide only one option, -a OR -d. " \
+                "Only the last one will be considered.")
 
 
 
@@ -273,21 +266,4 @@ def treat_options(opts, arg, n_arg, usage_string):
 
 longopts = ["from=", "to=", "feat=", "asc", "desc"]
 args = read_options("f:ad", longopts, treat_options, -1, usage_string)
-
-try:
-    temp_fh = tempfile.NamedTemporaryFile(prefix=TEMP_PREFIX,
-                                          dir=TEMP_FOLDER, delete=True)
-    temp_name = temp_fh.name
-    temp_fh.close()
-    temp_file = shelve.open(temp_name, 'n')
-except IOError as err:
-    error("Error opening temporary file.\n" + \
-          "Please verify __common.py configuration")
-
 filetype.parse(args, SorterHandler(), input_filetype_ext)
-
-try:
-    temp_file.close()
-except IOError as err:
-    error("Error closing temporary file.\n" + \
-          "Please verify __common.py configuration")

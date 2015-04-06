@@ -35,6 +35,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from .ngram import Ngram
+from .feature import FeatureSet
 from .__common import UNKNOWN_FEAT_VALUE
 
 ################################################################################
@@ -53,7 +54,20 @@ class Entry( Ngram ) :
         """
         super( Entry, self ).__init__( base, freqs )
         self.id_number = int(id_number)
-        self.features = features if features else []
+        assert features is None or isinstance(features, FeatureSet), features
+        # XXX using `max` to merge... Not always a good idea, though,
+        # since some features should be summed, and not all features
+        # are even numeric!...
+        self.features = features or FeatureSet("feat", max)
+
+
+###############################################################################
+
+    def merge_from(self, other):
+        r"""Merge `other` into `self`."""
+        super(Entry, self).merge_from(other)
+        self.features.merge_from(other.features)
+
 
 ################################################################################
 
@@ -83,10 +97,7 @@ class Entry( Ngram ) :
         super(Entry, self)._to_xml_into(output)
         if self.features and _print_features :
             output.append("    <features>\n")
-            for feat in self.features:
-                output.append("        ")
-                output.append(feat.to_xml())
-                output.append("\n")
+            self.features._to_xml_into(output)
             output.append("    </features>\n")
 
 ################################################################################
@@ -98,7 +109,7 @@ class Entry( Ngram ) :
             @param feat A `Feature` of this candidate. No test is performed in
             order to verify whether this is a repeated feature in the list.
         """
-        self.features.append( feat )
+        self.features.add( feat.name, feat.value )
 
 ################################################################################
 

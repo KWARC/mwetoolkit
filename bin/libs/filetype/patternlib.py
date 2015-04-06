@@ -386,7 +386,7 @@ class ParsedPattern(object):
                 ngram.extend(words_by_numid[numid])
                 wordnums.extend(nums_by_numid[numid])
 
-            yield (Ngram(copy_word_list(ngram), []), wordnums)
+            yield (Ngram(copy_word_list(ngram)), wordnums)
             if anchor_end: return
 
 

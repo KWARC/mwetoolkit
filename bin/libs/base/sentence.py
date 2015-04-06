@@ -94,7 +94,7 @@ class Sentence( Ngram ) :
         """
         self.word_list = list(word_list)
         self.id_number = id_number
-        self.freqs = None
+        #self.freqs = None
         self.mweoccurs = []
         
 
@@ -259,7 +259,7 @@ class Sentence( Ngram ) :
         m = len( self.word_list )
         if n <= m :
             for i in range( m - n + 1 ) :
-                ngrams.append( Ngram( self.word_list[ i : i+n ], [] ) )
+                ngrams.append( Ngram( self.word_list[ i : i+n ], None ) )
         return ngrams
         
 ################################################################################

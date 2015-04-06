@@ -364,10 +364,10 @@ def getCand( filename ):
         for word in words:
             if SURFACE_FLAG == 0:
                 # Option -s was not activated
-                objectWord = Word( WILDCARD , line [ indexes [ word ] ] , WILDCARD , WILDCARD, [] )
+                objectWord = Word( WILDCARD , line [ indexes [ word ] ] , WILDCARD , WILDCARD )
             else:
                 # Option -s was activated
-                objectWord = Word( line [ indexes [ word ] ] , WILDCARD , WILDCARD , WILDCARD, [] )
+                objectWord = Word( line [ indexes [ word ] ] , WILDCARD , WILDCARD , WILDCARD )
             
             # Set the word frequencies for each corpus
             for corpus in corpora:

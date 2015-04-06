@@ -45,12 +45,11 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
+import collections
 import re
-import shelve
 import os
-import tempfile
 
-from libs.base.__common import WILDCARD, TEMP_PREFIX, TEMP_FOLDER
+from libs.base.__common import WILDCARD
 from libs.base.frequency import Frequency
 from libs.base.candidate import CandidateFactory
 from libs.base.ngram import Ngram
@@ -152,7 +151,7 @@ print_source = False
 id_order = ["*"]
 
 input_filetype_ext = None
-output_filetype_ext = None
+output_filetype_ext = "XML"
 
 
 ################################################################################
@@ -160,18 +159,27 @@ output_filetype_ext = None
 class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
     r"""An InputHandler that generates Candidates."""
     
-        
+    def before_file(self, fileobj, info={}):
+        if not self.chain:
+            ext = output_filetype_ext
+            self.chain = filetype.printer_class(ext)("candidates")
+            self.chain.handle_meta(Meta(None,None,None), info)
+            self.candidate_factory = CandidateFactory()
+            self.all_entities = collections.OrderedDict()
+
+        self.chain.before_file(fileobj, info)
+        self.current_corpus_name = re.sub(".*/", "",
+                re.sub("\.(xml|info)", "", fileobj.name))
+
+
     def handle_sentence(self, sentence, info={}):
         """For each sentence in the corpus, generates all the candidates that match
         at least one pattern in the patterns file (-p option) or all the
-        ngrams that are in the valid range (-n option). The candidates are
-        stored into a temporary file and will be further printed to a XML file.
-        The temp file is used to avoid printing twice a repeated candidate and
-        to count occurrences of the same candidate.
+        ngrams that are in the valid range (-n option).
         
         @param sentence A `Sentence` that is being read from the XML file.    
         """
-        global patterns, temp_file, ignore_pos, surface_instead_lemmas, \
+        global patterns, ignore_pos, surface_instead_lemmas, \
                longest_pattern, shortest_pattern
 
         already_matched = set()
@@ -185,11 +193,9 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
                     continue
                 already_matched.add( wordnums_string )
 
-                #match_ngram = Ngram(copy_word_list(ngram), [])
-
                 if ignore_pos :    
                     match_ngram.set_all( pos=WILDCARD )
-                internal_key = unicode( match_ngram.to_string() ).encode('utf-8')
+                ngram_real = unicode(match_ngram.to_string())
 
                 if( surface_instead_lemmas ) :
                     match_ngram.set_all( lemma=WILDCARD )
@@ -199,35 +205,20 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
                         if word.lemma != WILDCARD:
                             word.surface = WILDCARD
 
-                ngram_basestring = unicode(match_ngram.to_string()).encode('utf-8')
-                info_for_ngram_basestring = temp_file.get(ngram_basestring, {})
+                ngram_basestring = unicode(match_ngram.to_string())
+                info_for_ngram_basestring = self.all_entities.setdefault(ngram_basestring, {})
                 (surfaces_dict, total_freq) = info_for_ngram_basestring \
                         .get(self.current_corpus_name, ({}, 0))
-                freq_surface = surfaces_dict.setdefault(internal_key, [])
+                freq_surface = surfaces_dict.setdefault(ngram_real, [])
 
                 # Append the id of the source sentence. The number of items in
                 # surfaces_dict[form] is the number of occurrences of that form.
                 source_sent_id = str( sentence.id_number ) + ":" + wordnums_string
-                surfaces_dict[ internal_key ].append( source_sent_id )
+                surfaces_dict[ ngram_real ].append( source_sent_id )
                 info_for_ngram_basestring[self.current_corpus_name] \
                         = (surfaces_dict, total_freq + 1)
-                temp_file[ngram_basestring] = info_for_ngram_basestring
 
 
-    def before_file(self, fileobj, info={}):
-        if not self.chain:
-            ext = output_filetype_ext or "XML"
-            self.chain = filetype.printer_class(ext)("candidates")
-            self.chain.handle_meta(Meta([],[],[]), info)
-            self.candidate_factory = CandidateFactory()
-
-        self.chain.before_file(fileobj, info)
-        self.current_corpus_name = re.sub(".*/", "",
-                re.sub("\.(xml|info)", "", fileobj.name))
-                
-    #def after_file(self, fileobj, info={}):
-    #    pass # overwrite default behavior which is to flush output
-        
     def finish(self):
         self.print_candidates(self.chain)
         self.chain.finish()
@@ -244,19 +235,18 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
         @param filename: The file name of the corpus from which we generate the
         candidates.
         """
-        global print_cand_freq, print_source, temp_file
+        global print_cand_freq, print_source
         verbose("Outputting candidates file...")
-        #chain.handle_meta(Meta([],[],[]))
-        for ngram_basestring, info in temp_file.iteritems() :
+        for ngram_basestring, info in self.all_entities.iteritems() :
             cand = self.candidate_factory.make()
-            cand.from_string( unicode( ngram_basestring, 'utf-8' ) )
+            cand.from_string(ngram_basestring)
             for corpus_name, (surface_dict, total_freq) in info.iteritems():
                 if print_cand_freq :
                    freq = Frequency( corpus_name, total_freq )
                    cand.add_frequency( freq )
                 for occur_string in surface_dict.keys() :
-                    occur_form = Ngram( [], [] )
-                    occur_form.from_string( unicode(occur_string, 'utf-8') )
+                    occur_form = Ngram( None, None )
+                    occur_form.from_string(occur_string)
                     sources = surface_dict[occur_string]
                     freq_value = len(sources)
                     freq = Frequency( corpus_name, freq_value )
@@ -264,7 +254,7 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
                     if print_source:
                         occur_form.add_sources(sources)
                     cand.add_occur( occur_form )
-            chain.handle_candidate(cand, {})
+            chain.handle_candidate(cand, info)
 
         
 ################################################################################  
@@ -359,24 +349,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 # MAIN SCRIPT
 
 longopts = [ "from=", "to=", "patterns=", "ngram=", "index", "match-distance=",
-        "non-overlapping", "freq", "ignore-pos", "surface", "source",
-        "id-order=" ]
+        "non-overlapping", "freq", "ignore-pos", "surface", "source", "id-order=" ]
 arg = read_options( "p:n:id:NfgsS", longopts, treat_options, -1, usage_string )
-
-with tempfile.NamedTemporaryFile(
-        prefix=TEMP_PREFIX, dir=TEMP_FOLDER) as temp_fh:
-    temp_name = temp_fh.name
-
-from contextlib import closing
-with closing(shelve.open( temp_name, 'n' )) as temp_file :
-    filetype.parse(arg, CandidatesGeneratorHandler(), input_filetype_ext)
-
-# Try to remove temp file, if the system didn't do it automatically
-try :
-    os.remove(temp_fh.name)
-except OSError :
-    os.remove( temp_fh.name + ".db" ) # Some dbms used by shelve add the
-   # .db suffix to the file
-except IOError as err :
-    error(str(err)+"\nError closing temporary file.\n"
-                   "Please verify __common.py configuration")
+filetype.parse(arg, CandidatesGeneratorHandler(), input_filetype_ext)

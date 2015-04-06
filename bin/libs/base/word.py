@@ -34,6 +34,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from xml.sax.saxutils import quoteattr
+
+from .feature import FeatureSet
 from .__common import WILDCARD, SEPARATOR
 
 
@@ -105,7 +107,7 @@ class Word :
             the index of the word on which this word depends. An example can be
             found in the corpus DTD file.
             
-            @param freqs A list of `Frequency`ies corresponding to counts of 
+            @param freqs A dict of `corpus_name`->`Frequency` corresponding to counts of 
             occurrences of this word in a certain corpus. Please notice that
             the frequencies correspond to occurrences of a SINGLE word in a 
             corpus. Joint `Ngram` frequencies are attached to the corresponding 
@@ -115,14 +117,14 @@ class Word :
         self.lemma = lemma
         self.pos = pos
         self.syn = syn
-        self.freqs = freqs or []
+        assert freqs is None or isinstance(freqs, FeatureSet), freqs
+        self.freqs = freqs or FeatureSet("freq", lambda x,y: x+y)
 
 ################################################################################
 
     def copy(self):
         r"""Return a copy of this Word."""
-        return Word(self.surface, self.lemma,
-                self.pos, self.syn, [f.copy() for f in self.freqs])
+        return Word(self.surface, self.lemma, self.pos, self.syn, self.freqs.copy())
 
 ################################################################################
 
@@ -144,7 +146,7 @@ class Word :
             a corpus. No test is performed in order to verify whether this is a 
             repeated frequency in the list.
         """
-        self.freqs.append( freq )
+        self.freqs.add(freq.name, freq.value)
 
 ################################################################################
             
@@ -178,22 +180,6 @@ class Word :
         
 ################################################################################
 
-    def to_xml( self ) :
-        """
-            Provides an XML string representation of the current object, 
-            including internal variables.
-            
-            @return A string containing the XML element <w> with its 
-            internal structure, according to mwetoolkit-candidates.dtd, 
-            mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd. Attributes that
-            do not have a defined value (i.e. are `WILDCARD`) are not printed.
-        """
-        # TODO merge `to_xml_custom` into `to_xml`?
-        return self.to_xml_custom()
-
-
-################################################################################
-
     def to_html( self, wid ) :
         """
             TODO
@@ -209,8 +195,8 @@ class Word :
 
 ################################################################################
         
-    def to_xml_custom(self, print_surface=True, print_lemma=True,
-                       print_pos=True, print_syn=True, print_freqs=True):
+
+    def to_xml(self, **kwargs):
         """
             Provides an XML string representation of the current object, 
             including internal variables. The printed attributes of the word
@@ -237,22 +223,31 @@ class Word :
             mwetoolkit-patterns.dtd and mwetoolkit-corpus.dtd and 
             depending on the input flags.
         """
-        result = "<w"
+        ret = []
+        self._to_xml_into(ret)
+        return "".join(ret)
+
+    def _to_xml_into(self, output, print_surface=True, print_lemma=True,
+               print_pos=True, print_syn=True, print_freqs=True):
+        output.append("<w")
         if self.surface != WILDCARD and print_surface:
-            result += " surface=" + quoteattr(self.surface)
+            output.append(" surface=")
+            output.append(quoteattr(self.surface))
         if self.lemma != WILDCARD and print_lemma:
-            result += " lemma=" + quoteattr(self.lemma)
+            output.append(" lemma=")
+            output.append(quoteattr(self.lemma))
         if self.pos != WILDCARD and print_pos:
-            result += " pos=" + quoteattr(self.pos)
+            output.append(" pos=")
+            output.append(quoteattr(self.pos))
         if self.syn != WILDCARD and print_syn:
-            result += " syn=" + quoteattr(self.syn)
+            output.append(" syn=")
+            output.append(quoteattr(self.syn))
         if not self.freqs or not print_freqs:
-            return result + " />"
+            output.append(" />")
         else:
-            result = result + " >"
-            for freq in self.freqs :
-                result = result + freq.to_xml()                
-            return result + "</w>"
+            output.append(" >")
+            self.freqs._to_xml_into(output)
+            output.append("</w>")
 
 ################################################################################
 

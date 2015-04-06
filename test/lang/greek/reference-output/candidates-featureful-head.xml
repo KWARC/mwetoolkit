@@ -11,35 +11,36 @@
     <metafeat name="ll_corpus" type="real" />
 </meta>
 <cand candid="1">
-    <ngram><w lemma="βιοποριστικός" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="μέσο" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="Επαvάληψη" pos="N" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="συvσδου" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="βιοποριστικών" lemma="βιοποριστικός" pos="AJ" /> <w surface="μέσων" lemma="μέσο" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Επαvάληψη" lemma="Επαvάληψη" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="συvσδoυ" lemma="συvσδου" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="13.1822391665" />
-        <feat name="t_corpus" value="0.999892415278" />
-        <feat name="dice_corpus" value="1.0" />
-        <feat name="ll_corpus" value="10.5419385702" />
-    </features>
-</cand>
-<cand candid="2">
-    <ngram><w lemma="ρύθμιση" pos="N" ><freq name="corpus" value="11" /></w> <w lemma="ανά" pos="P" ><freq name="corpus" value="1" /></w> <w lemma="χώρα" pos="N" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="ρυθμίσεις" lemma="ρύθμιση" pos="N" /> <w surface="ανά" lemma="ανά" pos="P" /> <w surface="χώρα" lemma="χώρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="18.8175838898" />
-        <feat name="t_corpus" value="0.999997835574" />
-        <feat name="dice_corpus" value="0.103448275862" />
+        <feat name="pmi_corpus" value="16.0744595028" />
+        <feat name="t_corpus" value="0.999985508761" />
+        <feat name="dice_corpus" value="0.00239234449761" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="3">
-    <ngram><w lemma="ισχυρός" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="επιχείρημα" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="2">
+    <ngram><w lemma="ευρωπαϊκός" pos="AJ" ><freq name="corpus" value="32" /></w> <w lemma="κοινοβούλιο" pos="N" ><freq name="corpus" value="35" /></w> <freq name="corpus" value="7" /></ngram>
     <occurs>
-    <ngram><w surface="ισχυρά" lemma="ισχυρός" pos="AJ" /> <w surface="επιχειρήματα" lemma="επιχείρημα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Ευρωπαϊκό" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Κοινοβούλιο" lemma="κοινοβούλιο" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    <ngram><w surface="Ευρωπαϊκού" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> <freq name="corpus" value="4" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000753174090811" />
+        <feat name="pmi_corpus" value="5.86031107162" />
+        <feat name="t_corpus" value="2.6002085241" />
+        <feat name="dice_corpus" value="0.208955223881" />
+        <feat name="ll_corpus" value="21.7896245573" />
+    </features>
+</cand>
+<cand candid="3">
+    <ngram><w lemma="θερμός" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="ευχή" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="θερμές" lemma="θερμός" pos="AJ" /> <w surface="ευχές" lemma="ευχή" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
@@ -50,167 +51,22 @@
     </features>
 </cand>
 <cand candid="4">
-    <ngram><w lemma="προφορικός" pos="AJ" ><freq name="corpus" value="5" /></w> <w lemma="ερώτηση" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="5" /></ngram>
+    <ngram><w lemma="επανάληψη" pos="N" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="σύνοδος" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="προφορικής" lemma="προφορικός" pos="AJ" /> <w surface="ερώτησης" lemma="ερώτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="προφορική" lemma="προφορικός" pos="AJ" /> <w surface="ερώτηση" lemma="ερώτηση" pos="N" /> <freq name="corpus" value="4" /></ngram>
+    <ngram><w surface="επανάληψη" lemma="επανάληψη" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="0.000537981493437" />
-        <feat name="pmi_corpus" value="10.1822391665" />
-        <feat name="t_corpus" value="2.23414344349" />
-        <feat name="dice_corpus" value="0.769230769231" />
-        <feat name="ll_corpus" value="34.173707847" />
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="13.4894970021" />
+        <feat name="t_corpus" value="0.999913052565" />
+        <feat name="dice_corpus" value="0.00238284352661" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="5">
-    <ngram><w lemma="σε" pos="P" ><freq name="corpus" value="79" /></w> <w lemma="ιδιάζων" pos="AJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="κηρύσσω" pos="V" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="επανάληψη" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="ιδιάζοντες" lemma="ιδιάζων" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="6.87845841833" />
-        <feat name="t_corpus" value="0.991500806984" />
-        <feat name="dice_corpus" value="0.025" />
-        <feat name="ll_corpus" value="5.88361616604" />
-    </features>
-</cand>
-<cand candid="6">
-    <ngram><w lemma="τρόπος" pos="N" ><freq name="corpus" value="16" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="συζήτηση" pos="N" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="τρόπο" lemma="τρόπος" pos="N" /> <w surface="τη" lemma="ο" pos="DT" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="7.48949700207" />
-        <feat name="t_corpus" value="0.994435364142" />
-        <feat name="dice_corpus" value="0.00232198142415" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="7">
-    <ngram><w lemma="αναφέρω" pos="V" ><freq name="corpus" value="12" /></w> <w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="καθυστέρηση" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="αναφερθεί" lemma="αναφέρω" pos="V" /> <w surface="στην" lemma="στου" pos="P" /> <w surface="καθυστέρηση" lemma="καθυστέρηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="14.107090507" />
-        <feat name="t_corpus" value="0.999943331384" />
-        <feat name="dice_corpus" value="0.0137614678899" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="8">
-    <ngram><w lemma="ανταποκρίνομαι" pos="V" ><freq name="corpus" value="1" /></w> <w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="απαίτηση" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="ανταποκριθούμε" lemma="ανταποκρίνομαι" pos="V" /> <w surface="στις" lemma="στου" pos="P" /> <w surface="απαιτήσεις" lemma="απαίτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="15.8846980857" />
-        <feat name="t_corpus" value="0.999983471654" />
-        <feat name="dice_corpus" value="0.0141509433962" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="9">
-    <ngram><w lemma="επανεξετάζω" pos="V" ><freq name="corpus" value="2" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="θέμα" pos="N" ><freq name="corpus" value="34" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="επανεξετάσουμε" lemma="επανεξετάζω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="θέμα" lemma="θέμα" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="9.98699666154" />
-        <feat name="t_corpus" value="0.999014595734" />
-        <feat name="dice_corpus" value="0.00232919254658" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="10">
-    <ngram><w lemma="ρυθμίζω" pos="V" ><freq name="corpus" value="2" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="διαδικασία" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="ρυθμίζει" lemma="ρυθμίζω" pos="V" /> <w surface="τις" lemma="ο" pos="DT" /> <w surface="διαδικασίες" lemma="διαδικασία" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="11.9045345013" />
-        <feat name="t_corpus" value="0.999739157694" />
-        <feat name="dice_corpus" value="0.00237529691211" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="11">
-    <ngram><w lemma="τρεις" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="μήνας" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="2" /></ngram>
-    <occurs>
-    <ngram><w surface="τρεις" lemma="τρεις" pos="AJ" /> <w surface="μήνες" lemma="μήνας" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="τριών" lemma="τρεις" pos="AJ" /> <w surface="μηνών" lemma="μήνας" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000215192597375" />
-        <feat name="pmi_corpus" value="10.3748842445" />
-        <feat name="t_corpus" value="1.41314852797" />
-        <feat name="dice_corpus" value="0.444444444444" />
-        <feat name="ll_corpus" value="14.5050266793" />
-    </features>
-</cand>
-<cand candid="12">
-    <ngram><w lemma="για" pos="P" ><freq name="corpus" value="133" /></w> <w lemma="πρώτος" pos="AJ" ><freq name="corpus" value="9" /></w> <w lemma="φορά" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="πρώτη" lemma="πρώτος" pos="AJ" /> <w surface="φορά" lemma="φορά" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="12.8173428179" />
-        <feat name="t_corpus" value="0.999861453568" />
-        <feat name="dice_corpus" value="0.0197368421053" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="13">
-    <ngram><w lemma="είμαι" pos="V" ><freq name="corpus" value="105" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="γνώμη" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="είμαι" lemma="είμαι" pos="V" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="γνώμης" lemma="γνώμη" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="7.7752514844" />
-        <feat name="t_corpus" value="0.995435259648" />
-        <feat name="dice_corpus" value="0.00220588235294" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="14">
-    <ngram><w lemma="εν" pos="P" ><freq name="corpus" value="27" /></w> <w lemma="λόγω" pos="N" ><freq name="corpus" value="17" /></w> <w lemma="προσπάθεια" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="εν" lemma="εν" pos="P" /> <w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="προσπάθειες" lemma="προσπάθεια" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="15.5221280063" />
-        <feat name="t_corpus" value="0.999978749269" />
-        <feat name="dice_corpus" value="0.0625" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="15">
-    <ngram><w lemma="με" pos="P" ><freq name="corpus" value="99" /></w> <w lemma="συγκεκριμένος" pos="AJ" ><freq name="corpus" value="13" /></w> <w lemma="άποψη" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="συγκεκριμένες" lemma="συγκεκριμένος" pos="AJ" /> <w surface="απόψεις" lemma="άποψη" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="13.4497195108" />
-        <feat name="t_corpus" value="0.999910621926" />
-        <feat name="dice_corpus" value="0.0254237288136" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="16">
-    <ngram><w lemma="αναμένω" pos="V" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="θέσπιση" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="αναμένει" lemma="αναμένω" pos="V" /> <w surface="τη" lemma="ο" pos="DT" /> <w surface="θέσπιση" lemma="θέσπιση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Κηρύσσω" lemma="κηρύσσω" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="επανάληψη" lemma="επανάληψη" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
@@ -220,315 +76,10 @@
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="17">
-    <ngram><w lemma="ελάχιστος" pos="AJ" ><freq name="corpus" value="8" /></w> <w lemma="ποσότητα" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="6">
+    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="διακοπή" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="ελάχιστων" lemma="ελάχιστος" pos="AJ" /> <w surface="ποσοτήτων" lemma="ποσότητα" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="8.59727666579" />
-        <feat name="t_corpus" value="0.997417966679" />
-        <feat name="dice_corpus" value="0.181818181818" />
-        <feat name="ll_corpus" value="6.26657310607" />
-    </features>
-</cand>
-<cand candid="18">
-    <ngram><w lemma="λόγος" pos="N" ><freq name="corpus" value="18" /></w> <w lemma="εκ" pos="P" ><freq name="corpus" value="16" /></w> <w lemma="όνομα" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="λόγο" lemma="λόγος" pos="N" /> <w surface="εξ" lemma="εκ" pos="P" /> <w surface="ονόματος" lemma="όνομα" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="15.6095908476" />
-        <feat name="t_corpus" value="0.999979999312" />
-        <feat name="dice_corpus" value="0.075" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="19">
-    <ngram><w lemma="μεγάλος" pos="AJ" ><freq name="corpus" value="25" /></w> <w lemma="πεδίο" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="μεγαλύτερο" lemma="μεγάλος" pos="AJ" /> <w surface="πεδίο" lemma="πεδίο" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="8.53838297673" />
-        <feat name="t_corpus" value="0.997310381957" />
-        <feat name="dice_corpus" value="0.0769230769231" />
-        <feat name="ll_corpus" value="6.89507773879" />
-    </features>
-</cand>
-<cand candid="20">
-    <ngram><w lemma="μόλις" pos="ADV" ><freq name="corpus" value="6" /></w> <w lemma="κάνω" pos="V" ><freq name="corpus" value="19" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="μόλις" lemma="μόλις" pos="ADV" /> <w surface="έκανε" lemma="κάνω" pos="V" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="6.34934915234" />
-        <feat name="t_corpus" value="0.987735341723" />
-        <feat name="dice_corpus" value="0.08" />
-        <feat name="ll_corpus" value="4.79942032088" />
-    </features>
-</cand>
-<cand candid="21">
-    <ngram><w lemma="τρίτος" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="σημείο" pos="N" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="τρίτο" lemma="τρίτος" pos="AJ" /> <w surface="σημείο" lemma="σημείο" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="9.86031107162" />
-        <feat name="t_corpus" value="0.998924152783" />
-        <feat name="dice_corpus" value="0.285714285714" />
-        <feat name="ll_corpus" value="7.16497248376" />
-    </features>
-</cand>
-<cand candid="22">
-    <ngram><w lemma="όρος" pos="N" ><freq name="corpus" value="8" /></w> <w lemma="ανταγωνισμός" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="όρους" lemma="όρος" pos="N" /> <w surface="ανταγωνισμού" lemma="ανταγωνισμός" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="9.18223916651" />
-        <feat name="t_corpus" value="0.998278644452" />
-        <feat name="dice_corpus" value="0.2" />
-        <feat name="ll_corpus" value="6.72040597724" />
-    </features>
-</cand>
-<cand candid="23">
-    <ngram><w lemma="δήλωση" pos="N" ><freq name="corpus" value="4" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="επιτροπή" pos="N" ><freq name="corpus" value="78" /></w> <freq name="corpus" value="3" /></ngram>
-    <occurs>
-    <ngram><w surface="δήλωσης" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="δήλωση" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="δηλώσεις" lemma="δήλωση" pos="N" /> <w surface="της" lemma="ο" pos="DT" /> <w surface="Επιτροπής" lemma="επιτροπή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000322788896062" />
-        <feat name="pmi_corpus" value="9.37401978465" />
-        <feat name="t_corpus" value="1.72944045306" />
-        <feat name="dice_corpus" value="0.00674662668666" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="24">
-    <ngram><w lemma="καταβάλλω" pos="V" ><freq name="corpus" value="2" /></w> <w lemma="προσπάθεια" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="καταβάλουμε" lemma="καταβάλλω" pos="V" /> <w surface="προσπάθειες" lemma="προσπάθεια" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="10.1822391665" />
-        <feat name="t_corpus" value="0.999139322226" />
-        <feat name="dice_corpus" value="0.333333333333" />
-        <feat name="ll_corpus" value="7.38434667685" />
-    </features>
-</cand>
-<cand candid="25">
-    <ngram><w lemma="κυρία" pos="N" ><freq name="corpus" value="35" /></w> <w lemma="πρόεδρος" pos="N" ><freq name="corpus" value="55" /></w> <freq name="corpus" value="27" /></ngram>
-    <occurs>
-    <ngram><w surface="κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="8" /></ngram>
-    <ngram><w surface="Kυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="Κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="18" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.00290510006456" />
-        <feat name="pmi_corpus" value="7.0264839382" />
-        <feat name="t_corpus" value="5.15629589571" />
-        <feat name="dice_corpus" value="0.6" />
-        <feat name="ll_corpus" value="112.715617694" />
-    </features>
-</cand>
-<cand candid="26">
-    <ngram><w lemma="δύο" pos="AJ" ><freq name="corpus" value="9" /></w> <w lemma="περίπτωση" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="2" /></ngram>
-    <occurs>
-    <ngram><w surface="δύο" lemma="δύο" pos="AJ" /> <w surface="περιπτώσεις" lemma="περίπτωση" pos="N" /> <freq name="corpus" value="2" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000215192597375" />
-        <feat name="pmi_corpus" value="8.01231416507" />
-        <feat name="t_corpus" value="1.40873624256" />
-        <feat name="dice_corpus" value="0.235294117647" />
-        <feat name="ll_corpus" value="10.0981309906" />
-    </features>
-</cand>
-<cand candid="27">
-    <ngram><w lemma="εννοώ" pos="V" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="περίπτωση" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="Εννοώ" lemma="εννοώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="περίπτωση" lemma="περίπτωση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="13.0744595028" />
-        <feat name="t_corpus" value="0.999884070086" />
-        <feat name="dice_corpus" value="0.00237906423473" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="28">
-    <ngram><w lemma="προτείνω" pos="V" ><freq name="corpus" value="8" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="όριο" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="πρότεινα" lemma="προτείνω" pos="V" /> <w surface="το" lemma="ο" pos="DT" /> <w surface="όριο" lemma="όριο" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="11.4894970021" />
-        <feat name="t_corpus" value="0.999652210259" />
-        <feat name="dice_corpus" value="0.00237529691211" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="29">
-    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="περιοχή" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="Στην" lemma="στου" pos="P" /> <w surface="περιοχή" lemma="περιοχή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="2.3398888231" />
-        <feat name="t_corpus" value="0.802474450915" />
-        <feat name="dice_corpus" value="0.0093896713615" />
-        <feat name="ll_corpus" value="2.48285268628" />
-    </features>
-</cand>
-<cand candid="30">
-    <ngram><w lemma="πρωτεύων" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="στόχος" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="πρωτεύων" lemma="πρωτεύων" pos="AJ" /> <w surface="στόχος" lemma="στόχος" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="10.5972766658" />
-        <feat name="t_corpus" value="0.99935449167" />
-        <feat name="dice_corpus" value="0.285714285714" />
-        <feat name="ll_corpus" value="8.19382360898" />
-    </features>
-</cand>
-<cand candid="31">
-    <ngram><w lemma="ψηλός" pos="AJ" ><freq name="corpus" value="3" /></w> <w lemma="βαθμός" pos="N" ><freq name="corpus" value="13" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="υψηλό" lemma="ψηλός" pos="AJ" /> <w surface="βαθμό" lemma="βαθμός" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="7.89683694765" />
-        <feat name="t_corpus" value="0.995804195853" />
-        <feat name="dice_corpus" value="0.125" />
-        <feat name="ll_corpus" value="5.82339891115" />
-    </features>
-</cand>
-<cand candid="32">
-    <ngram><w lemma="ασφάλεια" pos="N" ><freq name="corpus" value="46" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="μεταφορά" pos="N" ><freq name="corpus" value="48" /></w> <freq name="corpus" value="7" /></ngram>
-    <occurs>
-    <ngram><w surface="ασφάλειας" lemma="ασφάλεια" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <freq name="corpus" value="4" /></ngram>
-    <ngram><w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="μεταφορών" lemma="μεταφορά" pos="N" /> <freq name="corpus" value="3" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000753174090811" />
-        <feat name="pmi_corpus" value="7.77328996807" />
-        <feat name="t_corpus" value="2.63365771177" />
-        <feat name="dice_corpus" value="0.0156017830609" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="33">
-    <ngram><w lemma="διασφαλίζω" pos="V" ><freq name="corpus" value="4" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="εφαρμογή" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="διασφαλίσουμε" lemma="διασφαλίζω" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="εφαρμογή" lemma="εφαρμογή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="11.0744595028" />
-        <feat name="t_corpus" value="0.999536280345" />
-        <feat name="dice_corpus" value="0.00237341772152" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="34">
-    <ngram><w lemma="σε" pos="P" ><freq name="corpus" value="79" /></w> <w lemma="πολύς" pos="AJ" ><freq name="corpus" value="19" /></w> <w lemma="άνθρωπος" pos="N" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="σε" lemma="σε" pos="P" /> <w surface="πολλoύς" lemma="πολύς" pos="AJ" /> <w surface="ανθρώπους" lemma="άνθρωπος" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="13.4908419932" />
-        <feat name="t_corpus" value="0.999913133586" />
-        <feat name="dice_corpus" value="0.0291262135922" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="35">
-    <ngram><w lemma="σχετικός" pos="AJ" ><freq name="corpus" value="6" /></w> <w lemma="συνθήκη" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="σχετικές" lemma="σχετικός" pos="AJ" /> <w surface="συνθήκες" lemma="συνθήκη" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="8.59727666579" />
-        <feat name="t_corpus" value="0.997417966679" />
-        <feat name="dice_corpus" value="0.2" />
-        <feat name="ll_corpus" value="6.24147396668" />
-    </features>
-</cand>
-<cand candid="36">
-    <ngram><w lemma="δημιουργία" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="ευρωπαϊκός" pos="AJ" ><freq name="corpus" value="32" /></w> <w lemma="δίκαιο" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="δημιουργία" lemma="δημιουργία" pos="N" /> <w surface="ευρωπαϊκού" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="δικαίου" lemma="δίκαιο" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="18.779515849" />
-        <feat name="t_corpus" value="0.999997777701" />
-        <feat name="dice_corpus" value="0.0810810810811" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="37">
-    <ngram><w lemma="κράτος" pos="N" ><freq name="corpus" value="5" /></w> <w lemma="μέλος" pos="N" ><freq name="corpus" value="15" /></w> <freq name="corpus" value="3" /></ngram>
-    <occurs>
-    <ngram><w surface="κράτος" lemma="κράτος" pos="N" /> <w surface="μέλος" lemma="μέλος" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="κράτη" lemma="κράτος" pos="N" /> <w surface="μέλη" lemma="μέλος" pos="N" /> <freq name="corpus" value="2" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000322788896062" />
-        <feat name="pmi_corpus" value="8.53838297673" />
-        <feat name="t_corpus" value="1.72739225247" />
-        <feat name="dice_corpus" value="0.3" />
-        <feat name="ll_corpus" value="15.848371561" />
-    </features>
-</cand>
-<cand candid="38">
-    <ngram><w lemma="λόγω" pos="N" ><freq name="corpus" value="17" /></w> <w lemma="δύο" pos="AJ" ><freq name="corpus" value="9" /></w> <w lemma="αρχή" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="δύο" lemma="δύο" pos="AJ" /> <w surface="αρχών" lemma="αρχή" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="16.299735585" />
-        <feat name="t_corpus" value="0.99998760374" />
-        <feat name="dice_corpus" value="0.0909090909091" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="39">
-    <ngram><w lemma="προσπάθεια" pos="N" ><freq name="corpus" value="4" /></w> <w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="θέμα" pos="N" ><freq name="corpus" value="34" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="προσπάθειες" lemma="προσπάθεια" pos="N" /> <w surface="στο" lemma="στου" pos="P" /> <w surface="θέμα" lemma="θέμα" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    </occurs>
-    <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="11.6045901665" />
-        <feat name="t_corpus" value="0.999678877843" />
-        <feat name="dice_corpus" value="0.0123966942149" />
-        <feat name="ll_corpus" value="0.0" />
-    </features>
-</cand>
-<cand candid="40">
-    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="μνήμη" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
-    <occurs>
-    <ngram><w surface="στη" lemma="στου" pos="P" /> <w surface="μνήμη" lemma="μνήμη" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="διακοπές" lemma="διακοπή" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
@@ -538,136 +89,584 @@
         <feat name="ll_corpus" value="5.05622165323" />
     </features>
 </cand>
-<cand candid="41">
-    <ngram><w lemma="τρόπος" pos="N" ><freq name="corpus" value="16" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="ασφάλεια" pos="N" ><freq name="corpus" value="46" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="7">
+    <ngram><w lemma="ιός" pos="N" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="έτος" pos="N" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="τρόπο" lemma="τρόπος" pos="N" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ασφάλεια" lemma="ασφάλεια" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="ιός" lemma="ιός" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="έτους" lemma="έτος" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="6.55089754673" />
-        <feat name="t_corpus" value="0.98933444794" />
-        <feat name="dice_corpus" value="0.00228310502283" />
+        <feat name="pmi_corpus" value="13.0744595028" />
+        <feat name="t_corpus" value="0.999884070086" />
+        <feat name="dice_corpus" value="0.00237906423473" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="42">
-    <ngram><w lemma="από" pos="P" ><freq name="corpus" value="71" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="οδικός" pos="AJ" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="8">
+    <ngram><w lemma="όπως" pos="ADV" ><freq name="corpus" value="23" /></w> <w lemma="μπορώ" pos="V" ><freq name="corpus" value="37" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="από" lemma="από" pos="P" /> <w surface="τις" lemma="ο" pos="DT" /> <w surface="οδικές" lemma="οδικός" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Όπως" lemma="όπως" pos="ADV" /> <w surface="μπορέσατε" lemma="μπορώ" pos="V" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="5.83724954204" />
-        <feat name="t_corpus" value="0.982509074271" />
-        <feat name="dice_corpus" value="0.00223880597015" />
+        <feat name="pmi_corpus" value="3.44922384482" />
+        <feat name="t_corpus" value="0.908445401813" />
+        <feat name="dice_corpus" value="0.0333333333333" />
+        <feat name="ll_corpus" value="3.05017429458" />
+    </features>
+</cand>
+<cand candid="9">
+    <ngram><w lemma="ορισμένος" pos="AJ" ><freq name="corpus" value="15" /></w> <w lemma="χώρα" pos="N" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="ορισμένες" lemma="ορισμένος" pos="AJ" /> <w surface="χώρες" lemma="χώρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="ορισμένων" lemma="ορισμένος" pos="AJ" /> <w surface="χωρών" lemma="χώρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000215192597375" />
+        <feat name="pmi_corpus" value="6.18788572965" />
+        <feat name="t_corpus" value="1.39481472137" />
+        <feat name="dice_corpus" value="0.125" />
+        <feat name="ll_corpus" value="7.69634052101" />
+    </features>
+</cand>
+<cand candid="10">
+    <ngram><w lemma="φυσικός" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="καταστροφή" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="φυσική" lemma="φυσικός" pos="AJ" /> <w surface="καταστροφή" lemma="καταστροφή" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="φυσικών" lemma="φυσικός" pos="AJ" /> <w surface="καταστροφών" lemma="καταστροφή" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000215192597375" />
+        <feat name="pmi_corpus" value="9.86031107162" />
+        <feat name="t_corpus" value="1.41269208465" />
+        <feat name="dice_corpus" value="0.333333333333" />
+        <feat name="ll_corpus" value="13.796138988" />
+    </features>
+</cand>
+<cand candid="11">
+    <ngram><w lemma="πολίτης" pos="N" ><freq name="corpus" value="7" /></w> <w lemma="ορισμένος" pos="AJ" ><freq name="corpus" value="15" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="πολίτες" lemma="πολίτης" pos="N" /> <w surface="ορισμένων" lemma="ορισμένος" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="6.46799364884" />
+        <feat name="t_corpus" value="0.988703604219" />
+        <feat name="dice_corpus" value="0.0909090909091" />
+        <feat name="ll_corpus" value="4.86508877731" />
+    </features>
+</cand>
+<cand candid="12">
+    <ngram><w lemma="θύμα" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="φυσικός" pos="AJ" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="θύματα" lemma="θύμα" pos="N" /> <w surface="φυσικών" lemma="φυσικός" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="10.5972766658" />
+        <feat name="t_corpus" value="0.99935449167" />
+        <feat name="dice_corpus" value="0.4" />
+        <feat name="ll_corpus" value="7.67939802624" />
+    </features>
+</cand>
+<cand candid="13">
+    <ngram><w lemma="πολίτης" pos="N" ><freq name="corpus" value="7" /></w> <w lemma="ορισμένος" pos="AJ" ><freq name="corpus" value="15" /></w> <w lemma="χώρα" pos="N" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="πολίτες" lemma="πολίτης" pos="N" /> <w surface="ορισμένων" lemma="ορισμένος" pos="AJ" /> <w surface="χωρών" lemma="χώρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="15.5627699908" />
+        <feat name="t_corpus" value="0.999979339567" />
+        <feat name="dice_corpus" value="0.0769230769231" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="43">
-    <ngram><w lemma="διατηρώ" pos="V" ><freq name="corpus" value="3" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="ουσία" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="14">
+    <ngram><w lemma="θύμα" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="φυσικός" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="καταστροφή" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="διατήρησε" lemma="διατηρώ" pos="V" /> <w surface="την" lemma="ο" pos="DT" /> <w surface="ουσία" lemma="ουσία" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="θύματα" lemma="θύμα" pos="N" /> <w surface="φυσικών" lemma="φυσικός" pos="AJ" /> <w surface="καταστροφών" lemma="καταστροφή" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="12.9045345013" />
-        <feat name="t_corpus" value="0.999869578847" />
+        <feat name="pmi_corpus" value="20.4575877541" />
+        <feat name="t_corpus" value="0.999999305532" />
+        <feat name="dice_corpus" value="0.2" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="15">
+    <ngram><w lemma="υπάρχω" pos="V" ><freq name="corpus" value="19" /></w> <w lemma="θύμα" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="υπήρξαν" lemma="υπάρχω" pos="V" /> <w surface="θύματα" lemma="θύμα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="7.34934915234" />
+        <feat name="t_corpus" value="0.993867670862" />
+        <feat name="dice_corpus" value="0.0909090909091" />
+        <feat name="ll_corpus" value="5.48387317325" />
+    </features>
+</cand>
+<cand candid="16">
+    <ngram><w lemma="επόμενος" pos="AJ" ><freq name="corpus" value="9" /></w> <w lemma="ημέρα" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="επόμενες" lemma="επόμενος" pos="AJ" /> <w surface="ημέρες" lemma="ημέρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="9.01231416507" />
+        <feat name="t_corpus" value="0.998063475009" />
+        <feat name="dice_corpus" value="0.181818181818" />
+        <feat name="ll_corpus" value="6.6116413885" />
+    </features>
+</cand>
+<cand candid="17">
+    <ngram><w lemma="τρέχων" pos="AJ" ><freq name="corpus" value="4" /></w> <w lemma="περίοδος" pos="N" ><freq name="corpus" value="11" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="τρέχουσας" lemma="τρέχων" pos="AJ" /> <w surface="περιόδου" lemma="περίοδος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="7.72280754787" />
+        <feat name="t_corpus" value="0.995266272244" />
+        <feat name="dice_corpus" value="0.133333333333" />
+        <feat name="ll_corpus" value="5.68035336999" />
+    </features>
+</cand>
+<cand candid="18">
+    <ngram><w lemma="περίοδος" pos="N" ><freq name="corpus" value="11" /></w> <w lemma="σύνοδος" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="4" /></ngram>
+    <occurs>
+    <ngram><w surface="περιόδου" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    <ngram><w surface="περίοδο" lemma="περίοδος" pos="N" /> <w surface="συνόδου" lemma="σύνοδος" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000430385194749" />
+        <feat name="pmi_corpus" value="9.13784504715" />
+        <feat name="t_corpus" value="1.99644970418" />
+        <feat name="dice_corpus" value="0.470588235294" />
+        <feat name="ll_corpus" value="22.5607681079" />
+    </features>
+</cand>
+<cand candid="19">
+    <ngram><w lemma="επιθυμώ" pos="V" ><freq name="corpus" value="7" /></w> <w lemma="ένας" pos="DT" ><freq name="corpus" value="93" /></w> <w lemma="συζήτηση" pos="N" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="Επιθυμείτε" lemma="επιθυμώ" pos="V" /> <w surface="μία" lemma="ένας" pos="DT" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="12.4330021158" />
+        <feat name="t_corpus" value="0.999819160446" />
+        <feat name="dice_corpus" value="0.0241935483871" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="20">
+    <ngram><w lemma="ορισμένος" pos="AJ" ><freq name="corpus" value="15" /></w> <w lemma="συνάδελφος" pos="N" ><freq name="corpus" value="18" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ορισμένοι" lemma="ορισμένος" pos="AJ" /> <w surface="συνάδελφοι" lemma="συνάδελφος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="5.10542356946" />
+        <feat name="t_corpus" value="0.970952125135" />
+        <feat name="dice_corpus" value="0.0606060606061" />
+        <feat name="ll_corpus" value="4.01852366774" />
+    </features>
+</cand>
+<cand candid="21">
+    <ngram><w lemma="πληγείς" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="χώρα" pos="N" ><freq name="corpus" value="17" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="πληγείσες" lemma="πληγείς" pos="AJ" /> <w surface="χώρες" lemma="χώρα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="9.09477632526" />
+        <feat name="t_corpus" value="0.998171059731" />
+        <feat name="dice_corpus" value="0.111111111111" />
+        <feat name="ll_corpus" value="7.23851468835" />
+    </features>
+</cand>
+<cand candid="22">
+    <ngram><w lemma="ευρωπαϊκός" pos="AJ" ><freq name="corpus" value="32" /></w> <w lemma="ένωση" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="7" /></ngram>
+    <occurs>
+    <ngram><w surface="Ευρωπαϊκή" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Ένωση" lemma="ένωση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Ευρωπαϊκής" lemma="ευρωπαϊκός" pos="AJ" /> <w surface="Ένωσης" lemma="ένωση" pos="N" /> <freq name="corpus" value="6" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000753174090811" />
+        <feat name="pmi_corpus" value="7.66766599368" />
+        <feat name="t_corpus" value="2.63273908622" />
+        <feat name="dice_corpus" value="0.333333333333" />
+        <feat name="ll_corpus" value="31.6376276339" />
+    </features>
+</cand>
+<cand candid="23">
+    <ngram><w lemma="λεπτό" pos="N" ><freq name="corpus" value="4" /></w> <w lemma="σιγή" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="λεπτού" lemma="λεπτό" pos="N" /> <w surface="σιγή" lemma="σιγή" pos="N" /> <freq name="corpus" value="3" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000322788896062" />
+        <feat name="pmi_corpus" value="11.1822391665" />
+        <feat name="t_corpus" value="1.73130543875" />
+        <feat name="dice_corpus" value="0.857142857143" />
+        <feat name="ll_corpus" value="23.3348864042" />
+    </features>
+</cand>
+<cand candid="24">
+    <ngram><w lemma="θύμα" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="καταιγίδα" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="θύματα" lemma="θύμα" pos="N" /> <w surface="των" lemma="ο" pos="DT" /> <w surface="καταιγίδων" lemma="καταιγίδα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="14.4894970021" />
+        <feat name="t_corpus" value="0.999956526282" />
+        <feat name="dice_corpus" value="0.00238853503185" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="25">
+    <ngram><w lemma="τηρώ" pos="V" ><freq name="corpus" value="2" /></w> <w lemma="ένας" pos="DT" ><freq name="corpus" value="93" /></w> <w lemma="λεπτό" pos="N" ><freq name="corpus" value="4" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="τηρεί" lemma="τηρώ" pos="V" /> <w surface="ενός" lemma="ένας" pos="DT" /> <w surface="λεπτού" lemma="λεπτό" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="τηρήσουμε" lemma="τηρώ" pos="V" /> <w surface="ενός" lemma="ένας" pos="DT" /> <w surface="λεπτού" lemma="λεπτό" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000215192597375" />
+        <feat name="pmi_corpus" value="17.8253195386" />
+        <feat name="t_corpus" value="1.41420747319" />
+        <feat name="dice_corpus" value="0.0606060606061" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="26">
+    <ngram><w lemma="για" pos="P" ><freq name="corpus" value="133" /></w> <w lemma="όλος" pos="AJ" ><freq name="corpus" value="23" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="για" lemma="για" pos="P" /> <w surface="όλα" lemma="όλος" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="1.60339477495" />
+        <feat name="t_corpus" value="0.670898336247" />
+        <feat name="dice_corpus" value="0.0128205128205" />
+        <feat name="ll_corpus" value="2.12976792411" />
+    </features>
+</cand>
+<cand candid="27">
+    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="διάφορος" pos="AJ" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="στις" lemma="στου" pos="P" /> <w surface="διάφορες" lemma="διάφορος" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="3.92485132382" />
+        <feat name="t_corpus" value="0.934158150305" />
+        <feat name="dice_corpus" value="0.00966183574879" />
+        <feat name="ll_corpus" value="3.43599067455" />
+    </features>
+</cand>
+<cand candid="28">
+    <ngram><w lemma="κυρία" pos="N" ><freq name="corpus" value="35" /></w> <w lemma="πρόεδρος" pos="N" ><freq name="corpus" value="55" /></w> <freq name="corpus" value="27" /></ngram>
+    <occurs>
+    <ngram><w surface="Κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="18" /></ngram>
+    <ngram><w surface="Kυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="κυρία" lemma="κυρία" pos="N" /> <w surface="Πρόεδρε" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="8" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.00290510006456" />
+        <feat name="pmi_corpus" value="7.0264839382" />
+        <feat name="t_corpus" value="5.15629589571" />
+        <feat name="dice_corpus" value="0.6" />
+        <feat name="ll_corpus" value="112.715617694" />
+    </features>
+</cand>
+<cand candid="29">
+    <ngram><w lemma="θέμα" pos="N" ><freq name="corpus" value="34" /></w> <w lemma="διαδικασία" pos="N" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="θέματος" lemma="θέμα" pos="N" /> <w surface="διαδικασίας" lemma="διαδικασία" pos="N" /> <freq name="corpus" value="2" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000215192597375" />
+        <feat name="pmi_corpus" value="5.92485132382" />
+        <feat name="t_corpus" value="1.39093495317" />
+        <feat name="dice_corpus" value="0.093023255814" />
+        <feat name="ll_corpus" value="7.41584400629" />
+    </features>
+</cand>
+<cand candid="30">
+    <ngram><w lemma="ορισμένος" pos="AJ" ><freq name="corpus" value="15" /></w> <w lemma="έκρηξη" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ορισμένες" lemma="ορισμένος" pos="AJ" /> <w surface="εκρήξεις" lemma="έκρηξη" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="9.2753485709" />
+        <feat name="t_corpus" value="0.998386229174" />
+        <feat name="dice_corpus" value="0.125" />
+        <feat name="ll_corpus" value="7.35078579755" />
+    </features>
+</cand>
+<cand candid="31">
+    <ngram><w lemma="έκρηξη" pos="N" ><freq name="corpus" value="1" /></w> <w lemma="βόμβα" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="εκρήξεις" lemma="έκρηξη" pos="N" /> <w surface="βομβών" lemma="βόμβα" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="13.1822391665" />
+        <feat name="t_corpus" value="0.999892415278" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.5419385702" />
+    </features>
+</cand>
+<cand candid="32">
+    <ngram><w lemma="λίγος" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="μήνας" pos="N" ><freq name="corpus" value="7" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="λίγους" lemma="λίγος" pos="AJ" /> <w surface="μήνες" lemma="μήνας" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="10.3748842445" />
+        <feat name="t_corpus" value="0.999246906948" />
+        <feat name="dice_corpus" value="0.25" />
+        <feat name="ll_corpus" value="8.04838101464" />
+    </features>
+</cand>
+<cand candid="33">
+    <ngram><w lemma="βίαιος" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="θάνατος" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="βίαιους" lemma="βίαιος" pos="AJ" /> <w surface="θανάτους" lemma="θάνατος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="12.1822391665" />
+        <feat name="t_corpus" value="0.999784830557" />
+        <feat name="dice_corpus" value="0.666666666667" />
+        <feat name="ll_corpus" value="9.33781858757" />
+    </features>
+</cand>
+<cand candid="34">
+    <ngram><w lemma="ειρηνικός" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="διευθέτηση" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ειρηνική" lemma="ειρηνικός" pos="AJ" /> <w surface="διευθέτηση" lemma="διευθέτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="13.1822391665" />
+        <feat name="t_corpus" value="0.999892415278" />
+        <feat name="dice_corpus" value="1.0" />
+        <feat name="ll_corpus" value="10.5419385702" />
+    </features>
+</cand>
+<cand candid="35">
+    <ngram><w lemma="δύσκολος" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="κατάσταση" pos="N" ><freq name="corpus" value="6" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="δύσκολη" lemma="δύσκολος" pos="AJ" /> <w surface="κατάσταση" lemma="κατάσταση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="9.59727666579" />
+        <feat name="t_corpus" value="0.998708983339" />
+        <feat name="dice_corpus" value="0.25" />
+        <feat name="ll_corpus" value="6.99017116265" />
+    </features>
+</cand>
+<cand candid="36">
+    <ngram><w lemma="λύπη" pos="N" ><freq name="corpus" value="1" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="κοινοβούλιο" pos="N" ><freq name="corpus" value="35" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="λύπη" lemma="λύπη" pos="N" /> <w surface="του" lemma="ο" pos="DT" /> <w surface="Κοινοβουλίου" lemma="κοινοβούλιο" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="10.9451764858" />
+        <feat name="t_corpus" value="0.999492806628" />
+        <feat name="dice_corpus" value="0.00232919254658" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="37">
+    <ngram><w lemma="επιστολή" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="πρόεδρος" pos="N" ><freq name="corpus" value="55" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="επιστολή" lemma="επιστολή" pos="N" /> <w surface="στην" lemma="στου" pos="P" /> <w surface="Πρόεδρο" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="11.3257307935" />
+        <feat name="t_corpus" value="0.999610403265" />
+        <feat name="dice_corpus" value="0.0114503816794" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="38">
+    <ngram><w lemma="γράφω" pos="V" ><freq name="corpus" value="1" /></w> <w lemma="ένας" pos="DT" ><freq name="corpus" value="93" /></w> <w lemma="επιστολή" pos="N" ><freq name="corpus" value="3" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="γράψετε" lemma="γράφω" pos="V" /> <w surface="μία" lemma="ένας" pos="DT" /> <w surface="επιστολή" lemma="επιστολή" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="18.2403570379" />
+        <feat name="t_corpus" value="0.999996770722" />
+        <feat name="dice_corpus" value="0.0309278350515" />
+        <feat name="ll_corpus" value="0.0" />
+    </features>
+</cand>
+<cand candid="39">
+    <ngram><w lemma="εκφράζω" pos="V" ><freq name="corpus" value="5" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="λύπη" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="εκφράζετε" lemma="εκφράζω" pos="V" /> <w surface="τη" lemma="ο" pos="DT" /> <w surface="λύπη" lemma="λύπη" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="13.7525314079" />
+        <feat name="t_corpus" value="0.999927543804" />
         <feat name="dice_corpus" value="0.00238473767886" />
         <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
-<cand candid="44">
-    <ngram><w lemma="εν" pos="P" ><freq name="corpus" value="27" /></w> <w lemma="πρώτοις" pos="AJ" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+<cand candid="40">
+    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="πρόεδρος" pos="N" ><freq name="corpus" value="55" /></w> <freq name="corpus" value="2" /></ngram>
     <occurs>
-    <ngram><w surface="Εν" lemma="εν" pos="P" /> <w surface="πρώτοις" lemma="πρώτοις" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="στον" lemma="στου" pos="P" /> <w surface="Πρόεδρο" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="Πρόεδρο" lemma="πρόεδρος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000215192597375" />
+        <feat name="pmi_corpus" value="0.728454111013" />
+        <feat name="t_corpus" value="0.560664558278" />
+        <feat name="dice_corpus" value="0.015444015444" />
+        <feat name="ll_corpus" value="1.93185369208" />
+    </features>
+</cand>
+<cand candid="41">
+    <ngram><w lemma="μόλις" pos="ADV" ><freq name="corpus" value="6" /></w> <w lemma="προτείνω" pos="V" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="μόλις" lemma="μόλις" pos="ADV" /> <w surface="προτείνατε" lemma="προτείνω" pos="V" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="8.42735166435" />
-        <feat name="t_corpus" value="0.997095212513" />
-        <feat name="dice_corpus" value="0.0714285714286" />
-        <feat name="ll_corpus" value="6.82690940011" />
+        <feat name="pmi_corpus" value="7.59727666579" />
+        <feat name="t_corpus" value="0.994835933357" />
+        <feat name="dice_corpus" value="0.142857142857" />
+        <feat name="ll_corpus" value="5.57903018906" />
+    </features>
+</cand>
+<cand candid="42">
+    <ngram><w lemma="απόλυτα" pos="ADV" ><freq name="corpus" value="7" /></w> <w lemma="ενδείκνυμαι" pos="V" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="απολύτως" lemma="απόλυτα" pos="ADV" /> <w surface="ενδεδειγμένη" lemma="ενδείκνυμαι" pos="V" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="10.3748842445" />
+        <feat name="t_corpus" value="0.999246906948" />
+        <feat name="dice_corpus" value="0.25" />
+        <feat name="ll_corpus" value="8.04838101464" />
+    </features>
+</cand>
+<cand candid="43">
+    <ngram><w lemma="όπως" pos="ADV" ><freq name="corpus" value="23" /></w> <w lemma="προτείνω" pos="V" ><freq name="corpus" value="8" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="όπως" lemma="όπως" pos="ADV" /> <w surface="πρότεινε" lemma="προτείνω" pos="V" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="5.65867721045" />
+        <feat name="t_corpus" value="0.980204411203" />
+        <feat name="dice_corpus" value="0.0645161290323" />
+        <feat name="ll_corpus" value="4.36540681362" />
+    </features>
+</cand>
+<cand candid="44">
+    <ngram><w lemma="θέλω" pos="V" ><freq name="corpus" value="38" /></w> <w lemma="ο" pos="DT" ><freq name="corpus" value="1252" /></w> <w lemma="συμβουλή" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ήθελα" lemma="θέλω" pos="V" /> <w surface="τη" lemma="ο" pos="DT" /> <w surface="συμβουλή" lemma="συμβουλή" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    </occurs>
+    <features>
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="9.82653198935" />
+        <feat name="t_corpus" value="0.99889866582" />
+        <feat name="dice_corpus" value="0.00232198142415" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="45">
-    <ngram><w lemma="καλός" pos="AJ" ><freq name="corpus" value="11" /></w> <w lemma="λύση" pos="N" ><freq name="corpus" value="2" /></w> <freq name="corpus" value="2" /></ngram>
+    <ngram><w lemma="θέτω" pos="V" ><freq name="corpus" value="15" /></w> <w lemma="προς" pos="P" ><freq name="corpus" value="11" /></w> <w lemma="συζήτηση" pos="N" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="καλή" lemma="καλός" pos="AJ" /> <w surface="λύση" lemma="λύση" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="καλύτερη" lemma="καλός" pos="AJ" /> <w surface="λύση" lemma="λύση" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="τεθεί" lemma="θέτω" pos="V" /> <w surface="προς" lemma="προς" pos="P" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="0.000215192597375" />
-        <feat name="pmi_corpus" value="9.72280754787" />
-        <feat name="t_corpus" value="1.41253993687" />
-        <feat name="dice_corpus" value="0.307692307692" />
-        <feat name="ll_corpus" value="13.6124252925" />
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="14.4131936348" />
+        <feat name="t_corpus" value="0.99995416509" />
+        <feat name="dice_corpus" value="0.06" />
+        <feat name="ll_corpus" value="0.0" />
     </features>
 </cand>
 <cand candid="46">
-    <ngram><w lemma="λόγω" pos="N" ><freq name="corpus" value="17" /></w> <w lemma="δύο" pos="AJ" ><freq name="corpus" value="9" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="προς" pos="P" ><freq name="corpus" value="11" /></w> <w lemma="συζήτηση" pos="N" ><freq name="corpus" value="24" /></w> <freq name="corpus" value="3" /></ngram>
     <occurs>
-    <ngram><w surface="λόγω" lemma="λόγω" pos="N" /> <w surface="δύο" lemma="δύο" pos="AJ" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="προς" lemma="προς" pos="P" /> <w surface="συζήτηση" lemma="συζήτηση" pos="N" /> <freq name="corpus" value="3" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="5.92485132382" />
-        <feat name="t_corpus" value="0.983539537576" />
-        <feat name="dice_corpus" value="0.0769230769231" />
-        <feat name="ll_corpus" value="4.52356985146" />
+        <feat name="mle_corpus" value="0.000322788896062" />
+        <feat name="pmi_corpus" value="6.72280754787" />
+        <feat name="t_corpus" value="1.7156526936" />
+        <feat name="dice_corpus" value="0.171428571429" />
+        <feat name="ll_corpus" value="11.8516974499" />
     </features>
 </cand>
 <cand candid="47">
-    <ngram><w lemma="με" pos="P" ><freq name="corpus" value="99" /></w> <w lemma="διαφανής" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="τρόπος" pos="N" ><freq name="corpus" value="16" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="πολυετής" pos="AJ" ><freq name="corpus" value="1" /></w> <w lemma="πρόγραμμα" pos="N" ><freq name="corpus" value="20" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="με" lemma="με" pos="P" /> <w surface="διαφανή" lemma="διαφανής" pos="AJ" /> <w surface="τρόπο" lemma="τρόπος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="πολυετή" lemma="πολυετής" pos="AJ" /> <w surface="προγράμματα" lemma="πρόγραμμα" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="14.7351217296" />
-        <feat name="t_corpus" value="0.999963332072" />
-        <feat name="dice_corpus" value="0.025641025641" />
-        <feat name="ll_corpus" value="0.0" />
+        <feat name="pmi_corpus" value="8.86031107162" />
+        <feat name="t_corpus" value="0.997848305566" />
+        <feat name="dice_corpus" value="0.0952380952381" />
+        <feat name="ll_corpus" value="7.09337557986" />
     </features>
 </cand>
 <cand candid="48">
-    <ngram><w lemma="πολύς" pos="AJ" ><freq name="corpus" value="19" /></w> <w lemma="άνθρωπος" pos="N" ><freq name="corpus" value="5" /></w> <freq name="corpus" value="2" /></ngram>
+    <ngram><w lemma="πρόγραμμα" pos="N" ><freq name="corpus" value="20" /></w> <w lemma="προσανατολισμός" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="πολλoύς" lemma="πολύς" pos="AJ" /> <w surface="ανθρώπους" lemma="άνθρωπος" pos="N" /> <freq name="corpus" value="1" /></ngram>
-    <ngram><w surface="πολλοί" lemma="πολύς" pos="AJ" /> <w surface="άνθρωποι" lemma="άνθρωπος" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="προγράμματα" lemma="πρόγραμμα" pos="N" /> <w surface="προσανατολισμού" lemma="προσανατολισμός" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
-        <feat name="mle_corpus" value="0.000215192597375" />
-        <feat name="pmi_corpus" value="7.61238355818" />
-        <feat name="t_corpus" value="1.40698654318" />
-        <feat name="dice_corpus" value="0.166666666667" />
-        <feat name="ll_corpus" value="9.67124613676" />
+        <feat name="mle_corpus" value="0.000107596298687" />
+        <feat name="pmi_corpus" value="8.86031107162" />
+        <feat name="t_corpus" value="0.997848305566" />
+        <feat name="dice_corpus" value="0.0952380952381" />
+        <feat name="ll_corpus" value="7.09337557986" />
     </features>
 </cand>
 <cand candid="49">
-    <ngram><w lemma="στου" pos="P" ><freq name="corpus" value="204" /></w> <w lemma="αυριανός" pos="AJ" ><freq name="corpus" value="2" /></w> <w lemma="ψηφοφορία" pos="N" ><freq name="corpus" value="10" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="μορφή" pos="N" ><freq name="corpus" value="3" /></w> <w lemma="ποσόστωση" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="στην" lemma="στου" pos="P" /> <w surface="αυριανή" lemma="αυριανός" pos="AJ" /> <w surface="ψηφοφορία" lemma="ψηφοφορία" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="μορφή" lemma="μορφή" pos="N" /> <w surface="ποσοστώσεων" lemma="ποσόστωση" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="14.3701249129" />
-        <feat name="t_corpus" value="0.999952776153" />
-        <feat name="dice_corpus" value="0.0138888888889" />
-        <feat name="ll_corpus" value="0.0" />
+        <feat name="pmi_corpus" value="11.5972766658" />
+        <feat name="t_corpus" value="0.999677245835" />
+        <feat name="dice_corpus" value="0.5" />
+        <feat name="ll_corpus" value="8.88333102457" />
     </features>
 </cand>
 <cand candid="50">
-    <ngram><w lemma="συγκεκριμένος" pos="AJ" ><freq name="corpus" value="13" /></w> <w lemma="οδηγία" pos="N" ><freq name="corpus" value="26" /></w> <freq name="corpus" value="1" /></ngram>
+    <ngram><w lemma="στόχος" pos="N" ><freq name="corpus" value="6" /></w> <w lemma="μείωση" pos="N" ><freq name="corpus" value="1" /></w> <freq name="corpus" value="1" /></ngram>
     <occurs>
-    <ngram><w surface="συγκεκριμένης" lemma="συγκεκριμένος" pos="AJ" /> <w surface="οδηγίας" lemma="οδηγία" pos="N" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="στόχους" lemma="στόχος" pos="N" /> <w surface="μείωσης" lemma="μείωση" pos="N" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="0.000107596298687" />
-        <feat name="pmi_corpus" value="4.78135973023" />
-        <feat name="t_corpus" value="0.963636364057" />
-        <feat name="dice_corpus" value="0.0512820512821" />
-        <feat name="ll_corpus" value="3.82624674151" />
+        <feat name="pmi_corpus" value="10.5972766658" />
+        <feat name="t_corpus" value="0.99935449167" />
+        <feat name="dice_corpus" value="0.285714285714" />
+        <feat name="ll_corpus" value="8.19382360898" />
     </features>
 </cand>
 </candidates>

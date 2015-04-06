@@ -105,7 +105,7 @@ class StatsCollectorHandler(filetype.InputHandler):
         """
         global all_feats, usage_string, feat_to_order
         for meta_feat in meta.meta_feats :
-            if meta_feat.value == "integer" or meta_feat.value == "real" :
+            if meta_feat.feat_type in ("integer", "real") :
                 all_feats.append( meta_feat.name )
         tp_classes_ok = False
         for meta_tp in meta.meta_tpclasses :

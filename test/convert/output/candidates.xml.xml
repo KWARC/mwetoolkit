@@ -47,8 +47,8 @@
 <cand candid="5">
     <ngram><w lemma="comisión" pos="NC" ><freq name="corpus" value="211" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="2" /></ngram>
     <occurs>
-    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="6.53103876172e-05" />
@@ -87,8 +87,8 @@
 <cand candid="5">
     <ngram><w lemma="comisión" pos="NC" ><freq name="corpus" value="211" /></w> <w lemma="de" pos="PREP" ><freq name="corpus" value="1808" /></w> <w lemma="&lt;unknown&gt;" pos="NC" ><freq name="corpus" value="418" /></w> <freq name="corpus" value="2" /></ngram>
     <occurs>
-    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Industria" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
+    <ngram><w surface="Comisión" lemma="comisión" pos="NC" /> <w surface="de" lemma="de" pos="PREP" /> <w surface="Presupuestos" lemma="&lt;unknown&gt;" pos="NC" /> <freq name="corpus" value="1" /></ngram>
     </occurs>
     <features>
         <feat name="mle_corpus" value="6.53103876172e-05" />

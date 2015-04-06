@@ -152,7 +152,7 @@ class EvaluatorHandler(filetype.ChainedInputHandler):
         #pdb.set_trace()
         candidate = self.candidate_factory.make()
         for w in candidate_i :
-            copy_w = Word( w.surface, w.lemma, w.pos, w.syn, [] )
+            copy_w = Word( w.surface, w.lemma, w.pos, w.syn)
             candidate.append( copy_w )    
         
         if ignore_pos :

@@ -32,7 +32,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.feature import Feature
+from .feature import Feature
 
 ################################################################################
 
@@ -50,16 +50,9 @@ class CorpusSize( Feature ) :
 
 ################################################################################
 
-    def to_xml( self ) :
-        """
-            Provides an XML string representation of the current object, 
-            including internal variables.
-            
-            @return A string containing the XML element <corpussize> with its 
-            attributes, according to mwetoolkit-candidates.dtd.
-        """
-        return "<corpussize name=\"" + self.name + \
-               "\" value=\"" + str(self.value) + "\" />"
+    def __init__( self, name, value ):
+        r"""(See Feature.__init__)."""
+        super(CorpusSize, self).__init__(name, value, xml_class="corpussize")
         
 ################################################################################
 

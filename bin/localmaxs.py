@@ -142,6 +142,7 @@ class NGramCounterHandler(filetype.InputHandler):
     def __init__(self, *args, **kwargs):
         super(NGramCounterHandler, self).__init__(*args, **kwargs)
         self.candidate_factory = CandidateFactory()
+        self.chain = None
 
     def handle_sentence(self, sentence, info={}):
         """Count all ngrams being considered in the sentence."""
@@ -163,7 +164,13 @@ class NGramCounterHandler(filetype.InputHandler):
 
     
     def before_file(self, fileobj, info={}):
-        pass  # Do not chain it right now
+        if self.chain is None:
+            self.chain = self.make_printer(info, None)
+            self.chain.before_file(fileobj, info)
+            m = Meta(None,None,None)
+            m.add_corpus_size(CorpusSize("corpus", corpus_size))
+            m.add_meta_feat(MetaFeat("glue", "real"))
+            self.chain.handle_meta(m)
 
     def after_file(self, fileobj, info={}):
         global corpus_size_f
@@ -171,11 +178,6 @@ class NGramCounterHandler(filetype.InputHandler):
         verbose("Selecting ngrams through LocalMaxs...")
         self.localmaxs()
         verbose("Outputting candidates file...")
-        self.chain = self.make_printer(info, None)
-        self.chain.before_file(fileobj, info)
-        self.chain.handle_meta(
-                Meta([CorpusSize("corpus", corpus_size)],
-                        [MetaFeat("glue", "real")], []))
 
         for ngram_key in selected_candidates:
             if selected_candidates[ngram_key] and ngram_counts[ngram_key] >= min_frequency:
@@ -210,7 +212,7 @@ class NGramCounterHandler(filetype.InputHandler):
         ngram = unkey(ngram_key)
         cand = self.candidate_factory.make(id_number=cand_id)
         for value in ngram:
-            word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD, [])
+            word = Word(WILDCARD, WILDCARD, WILDCARD, WILDCARD)
             setattr(word, base_attr, value.decode('utf-8'))
             cand.append(word)
         freq = Frequency('corpus', ngram_counts[ngram_key])

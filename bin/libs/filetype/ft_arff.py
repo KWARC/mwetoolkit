@@ -87,12 +87,12 @@ class ArffPrinter(common.AbstractPrinter):
         self.add_string("@relation {}\n".format(self.relation_name))
         for meta_feat in meta.meta_feats:
             self.add_string("@attribute {} {}\n".format(
-                    meta_feat.name, meta_feat.value))
+                    meta_feat.name, meta_feat.feat_type))
             # features that will be considered in each candidate
             self.all_feats.append(meta_feat.name)
         for meta_tpclass in meta.meta_tpclasses:
             self.add_string("@attribute {} {}\n".format(
-                    meta_tpclass.name, meta_tpclass.value))
+                    meta_tpclass.name, meta_tpclass.feat_type))
         self.add_string("@data\n")
 
 
@@ -115,5 +115,5 @@ class ArffPrinter(common.AbstractPrinter):
             else:
                 feat_value = unicode(feat_value)
             line.append(feat_value)
-        line.extend(tpc.value for tpc in candidate.tpclasses)
+        line.extend(tpc.feat_type for tpc in candidate.tpclasses)
         self.add_string(",".join(line), "\n")

@@ -34,6 +34,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from .entry import Entry
+from .feature import FeatureSet
 from .frequency import Frequency
 from .__common import UNKNOWN_FEAT_VALUE
 
@@ -134,58 +135,21 @@ class Candidate ( Entry ) :
            
            @return A new Multiword Term `Candidate` .
         """
-        super(Candidate,self).__init__(id_number,base,features)
-        self.bigrams = bigrams if bigrams else []
-        self.occurs = occurs if occurs else []             # Ngram list
-        self.tpclasses = tpclasses if tpclasses else []        # TPClass list
-        self.freqs = []
-        self.vars = vars if vars else []
+        super(Candidate,self).__init__(id_number,base,None,features)
+        self.bigrams = set(bigrams or ())
+        self.occurs = set(occurs or ())  # Ngram list
+        assert not tpclasses or isinstance(tpclasses, FeatureSet), tpclasses
+        self.tpclasses = tpclasses or FeatureSet("tpclass", lambda x,y: x+y)  # TPClass list
+        self.vars = set(vars or ())
         
 ################################################################################
 
     def merge_from(self, other):
         r"""Merge `other` into `self`."""
-        # TODO move some of this code into Ngram
-        self.occurs = list(set(self.occurs) | set(other.occurs))
-        self.features = Candidate.uniq_features(self.features, other.features)
-        self.tpclasses = list(set(self.tpclasses) | set(other.tpclasses))
-        self.freqs = list(set(self.freqs) | set(other.freqs))
-        unify_freqs = {}
-        for f in list(set(self.freqs) | set(other.freqs)):
-            unify_freqs[f.name] = unify_freqs.get(f.name, 0) + f.value
-        for k, v in unify_freqs.items():
-            self.add_frequency(Frequency(k, v))
-
-
-    @staticmethod
-    def position(item, list, key=lambda x: x):
-        """Returns the index of an element in a list, or None if the element is not found."""
-        for i in xrange(len(list)):
-            if item == key(list[i]):
-                return i
-        return None
-
-
-    @staticmethod
-    def uniq_features(*featlists):
-        """
-            Merges the lists of Features passed in as arguments. If the same
-            feature appears multiple times in the lists, keep only the one
-            with highest value.
-        """
-        result = []
-        for featlist in featlists:
-            for feature in featlist:
-                oldpos = Candidate.position(feature.name, result, key=lambda x: x.name)
-                if oldpos is not None:
-                    if result[oldpos].value < feature.value:
-                        result[oldpos] = feature
-                else:
-                    result.append(feature)
-
-        return result
-                
-
+        super(Candidate, self).merge_from(other)
+        self.occurs.update(other.occurs)
+        self.features.merge_from(other.features)
+        self.tpclasses.merge_from(other.tpclasses)
 
 ################################################################################
 
@@ -244,17 +208,11 @@ class Candidate ( Entry ) :
 
         if self.features :
             output.append("    <features>\n")
-            for feat in self.features :
-                output.append("        ")
-                output.append(feat.to_xml())
-                output.append("\n")
+            self.features._to_xml_into(output, indent=8, after_each="\n")
             output.append("    </features>\n")
 
         if self.tpclasses :
-            for tpclass in self.tpclasses :
-                output.append("    ")
-                output.append(tpclass.to_xml())
-                output.append("\n")
+            self.tpclasses._to_xml_into(output, indent=4, after_each="\n")
 
         
 ################################################################################
@@ -266,7 +224,7 @@ class Candidate ( Entry ) :
             @param bigram `Ngram` that corresponds to an bigram of this 
             candidate. 
         """
-        self.bigrams.append( bigram )
+        self.bigrams.add( bigram )
 
 ################################################################################
 
@@ -278,7 +236,7 @@ class Candidate ( Entry ) :
             candidate. No test is performed in order to verify whether this is a 
             repeated occurrence in the list.
         """
-        self.occurs.append( occur )
+        self.occurs.add( occur )
 
 ################################################################################
 
@@ -290,7 +248,7 @@ class Candidate ( Entry ) :
             candidate. No test is performed in order to verify whether this is a
             repeated variation in the list.
         """
-        self.vars.append( var )
+        self.vars.add( var )
 
 ################################################################################
 
@@ -305,7 +263,7 @@ class Candidate ( Entry ) :
             expert. No test is performed in order to verify whether this is a 
             repeated TP class in the list.                
         """
-        self.tpclasses.append( tpclass )
+        self.tpclasses.add( tpclass.name, tpclass.value )
 
 ################################################################################
 
@@ -323,7 +281,4 @@ class Candidate ( Entry ) :
             this name, then it will return `UNKNOWN_FEAT_VALUE` (generally "?"
             as in the WEKA's arff file format).
         """
-        for tpclass in self.tpclasses :
-            if tpclass.name == tpclass_name :
-                return tpclass.value
-        return UNKNOWN_FEAT_VALUE
+        return self.tpclasses.get_feature(tpclass_name, UNKNOWN_FEAT_VALUE).value

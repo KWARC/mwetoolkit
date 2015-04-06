@@ -28,9 +28,12 @@
     that the file contains.
 """
 
+from .feature import FeatureSet
+
+
 ################################################################################
 
-class Meta :
+class Meta(object) :
     """
         Meta-information at the header of a candidates list XML file. The `Meta`
         header includes information about the corpora used to calculate word and
@@ -62,9 +65,10 @@ class Meta :
             
             @return A new instance of `Meta` information header.
         """                 
-        self.corpus_sizes = corpus_sizes
-        self.meta_feats = meta_feats
-        self.meta_tpclasses = meta_tpclasses
+        assert corpus_sizes is None or isinstance(corpus_sizes, FeatureSet)
+        self.corpus_sizes = corpus_sizes or FeatureSet("corpussize", lambda x,y: y)
+        self.meta_feats = meta_feats or []
+        self.meta_tpclasses = meta_tpclasses or []
 
 ################################################################################
         
@@ -85,7 +89,7 @@ class Meta :
             @param feat A `CorpusSize` of this candidate. No test is performed 
             in order to verify whether this is a repeated feature in the list.        
         """
-        self.corpus_sizes.append( corpus_size )
+        self.corpus_sizes.add( corpus_size.name, corpus_size.value )
 
 ################################################################################
         
@@ -120,15 +124,17 @@ class Meta :
             @return A string containing the XML element <meta> with its internal
             structure, according to mwetoolkit-candidates.dtd.
         """
-        result = "<meta>\n"
-        for corpus_size in self.corpus_sizes :
-            result = result + "    " + corpus_size.to_xml() + "\n"
+        output = ["<meta>\n"]
+        self._to_xml_into(output)
+        output.append("</meta>")
+        return "".join(output)
+
+    def _to_xml_into(self, output):
+        self.corpus_sizes._to_xml_into(output, indent=4, after_each="\n")
         for meta_feat in self.meta_feats :
-            result = result + "    " + meta_feat.to_xml() + "\n"            
+            output.extend(("    ", meta_feat.to_xml(), "\n"))
         for meta_tpclass in self.meta_tpclasses :
-            result = result + "    " + meta_tpclass.to_xml() + "\n"            
-        result = result + "</meta>"        
-        return result    
+            output.extend(("    ", meta_tpclass.to_xml(), "\n"))
         
 ################################################################################
 
@@ -137,7 +143,7 @@ class Meta :
         """
         for feat in self.meta_feats :
             if feat.name == feat_name :
-                return feat.value
+                return feat.feat_type
         return None
 
 ################################################################################

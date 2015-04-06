@@ -32,21 +32,43 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.feature import Feature
+from .feature import Feature
+from xml.sax.saxutils import quoteattr
+
 
 ################################################################################
 
-class MetaFeat( Feature ) :
+class MetaFeat(object) :
     """
         A meta-feature is the meta-information about a candidate feature. 
         Meta-features are generally placed in the header of the XML file 
         (in the `Meta` element) and contain the type of a feature. MetaFeat 
-        extends `Feature`, so the name corresponds to the name that uniquely 
-        identifies the feature while value corresponds to the type of the
-        feature. The type can be an "integer", a "real" number, a "string" or an 
-        element of an enumeration e.g. "{class1,class2}". These are the allowed 
-        types in WEKA's arff file format.
+        describes a `Feature`: `name` corresponds to the name that uniquely 
+        identifies the feature, while `feat_type` corresponds to the type of
+        the feature's `value` field. The type can be an "integer", a "real"
+        number, a "string" or an element of an enumeration
+        e.g. "{class1,class2}". These are also the allowed types in WEKA's
+        arff file format.
     """
+
+    def __init__( self, name, feat_type ) :
+        """
+            @param name String that identifies the corresponding `Feature`.
+
+            @param feat_type The type of the corresponding `Feature`'s
+            `value`field.  This type can be an "integer", a "real" number,
+            a "string" or an element of an enumeration (allowed types in WEKA).
+        """
+        self.name = name
+        self.feat_type = feat_type
+
+################################################################################
+
+    def merge_op( self, value1, value2 ):
+        r"""Return a merge of the values of two features
+        represented by this MetaFeat."""
+        return max(value1, value2)
+
 
 ################################################################################
 
@@ -58,5 +80,13 @@ class MetaFeat( Feature ) :
             @return A string containing the XML element <metafeat> with its 
             attributes, according to mwetoolkit-candidates.dtd.
         """
-        return "<metafeat name=\"" + self.name + \
-               "\" type=\"" + str(self.value) + "\" />"
+        ret = []
+        self._to_xml_into(ret)
+        return "".join(ret)
+
+    def _to_xml_into( self, output ) :
+        output.append("<metafeat name=")
+        output.append(quoteattr(self.name))
+        output.append(" type=")
+        output.append(quoteattr(unicode(self.feat_type)))
+        output.append(" />")

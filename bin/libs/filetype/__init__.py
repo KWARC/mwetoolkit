@@ -182,7 +182,7 @@ class FirstInputHandler(ChainedInputHandler):
     def handle_meta_if_absent(self):
         if not self._meta_handled:
             from ..base.meta import Meta
-            self.handle_meta(Meta([], [], []), info={})
+            self.handle_meta(Meta(None,None,None), info={})
 
     def print_progress(self, info):
         PROGRESS_EVERY = 100

@@ -33,9 +33,10 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.word import Word
-from libs.base.frequency import Frequency
-from libs.base.__common import SEPARATOR, WILDCARD, WORD_SEPARATOR
+from .feature import FeatureSet
+from .word import Word
+from .frequency import Frequency
+from .__common import SEPARATOR, WILDCARD, WORD_SEPARATOR
 
 ################################################################################        
 
@@ -72,9 +73,19 @@ class Ngram (object):
             
             @return A new instance of a `Ngram`.
         """
-        self.word_list = word_list if word_list else []
-        self.freqs = freqs if freqs else []
-        self.sources = [x for x in sources] if sources else []
+        self.word_list = word_list or []
+        assert freqs is None or isinstance(freqs, FeatureSet), freqs
+        self.freqs = freqs or FeatureSet("freq", lambda x,y: x+y)
+        self.sources = list(sources) if sources else []
+
+
+###############################################################################
+
+    def merge_from(self, other):
+        r"""Merge `other` into `self`."""
+        self.freqs.merge_from(other.freqs)
+        self.sources.extend(other.sources)
+
 
 ################################################################################
     
@@ -104,7 +115,7 @@ class Ngram (object):
             a corpus. No test is performed in order to verify whether this is a 
             repeated frequency in the list.
         """
-        self.freqs.append( freq )
+        self.freqs.add( freq.name, freq.value )
 
 ################################################################################
         
@@ -150,7 +161,7 @@ class Ngram (object):
         """
         words_string = the_string.split( WORD_SEPARATOR )
         for word_string in words_string :           
-            a_word = Word( WILDCARD, WILDCARD, WILDCARD, WILDCARD, [] )
+            a_word = Word()
             a_word.from_string( word_string )
             self.append( a_word )
        
@@ -174,66 +185,20 @@ class Ngram (object):
         inside the `to_xml` caller function.
         """
         for word in self :
-            output.append(word.to_xml())
+            word._to_xml_into(output)
             output.append(" ")
 
-        for freq in self.freqs :
-            output.append(freq.to_xml())
+        self.freqs._to_xml_into(output)
 
         if len(self.sources) > 0:
             sources_string = ';'.join(unicode(s) for s in self.sources)
             output.append('<sources ids="%s"/>\n' % sources_string)
-
-
-################################################################################
         
-    def to_xml_custom( self, print_surface=True, print_lemma=True, 
-                       print_pos=True, print_freqs=True ) :
-        """
-            Provides an XML string representation of the current object, 
-            including internal variables. The printed attributes of the words
-            depend on the boolean parameters.
-            
-            @param print_surface If print_surface is True, will include the 
-            `surface` of the ngram's words in the XML <ngram> element, otherwise 
-            the surface form will not be printed. Default True.
-            
-            @param print_lemma If print_lemma is True, will include the `lemma` 
-            of the ngram's words in the XML <ngram> element, otherwise the lemma
-            will not be printed. Default True.
-            
-            @param print_pos If print_pos is True, will include the `pos` of the 
-            ngram's words in the XML <ngram> element, otherwise the Part Of 
-            Speech will not be printed. Default True.
-            
-            @param print_freqs If print_freqs is True, will include the `freqs` 
-            of the ngram's words and of the ngram itself in the XML <ngram> 
-            element, otherwise the ngram and word frequencies will not be 
-            printed. Default True.
-            
-            @return A string containing the XML element <ngram> with its 
-            internal structure, according to mwetoolkit-candidates.dtd and 
-            depending on the input flags.
-        """
-        result = "<ngram>"
-        for word in self :
-            result = result + word.to_xml_custom( print_surface=print_surface, 
-                                                  print_lemma=print_lemma, 
-                                                  print_pos=print_pos, 
-                                                  print_freqs=print_freqs )+ " "
-        result = result + "</ngram>"
-        if self.freqs and print_freqs :
-            result = result + "\n"
-            for freq in self.freqs :
-                result = result + freq.to_xml()
-        return result.strip()
-        
+
 ################################################################################    
     
     def __iter__( self ) :
-        """
-        """
-        return NgramIter( self )
+        return iter(self.word_list)
 
 ################################################################################            
     
@@ -265,16 +230,20 @@ class Ngram (object):
 
 ################################################################################
 
-    def __eq__( self, an_ngram ) :
-        """
-        """
-        if len( self ) != len( an_ngram ) :
-            return False
-        for i in range( len( self ) ) :
-            if an_ngram[ i ] != self[ i ] :
-                return False
-        return True
-        
+    def __cmp__( self, other ) :
+        return cmp(self.word_list, other.word_list)
+
+################################################################################
+
+    def __eq__( self, other ) :
+        return self.word_list == other.word_list
+
+################################################################################
+
+    def __hash__( self ) :
+        # XXX TODO implement freeze() method and refuse to hash when unfrozen
+        return hash(self.to_string())
+
 ################################################################################
 
     def get_pos_pattern( self ) :
@@ -482,34 +451,3 @@ class Ngram (object):
             return True
         else :
             return False
-
-################################################################################
-################################################################################
-
-class NgramIter() :
-    """
-    """
-
-    def __init__( self, ngram ) :
-        """
-        """
-        self.current = -1
-        self.ngram = ngram
-
-################################################################################
-        
-    def __iter__( self ) :
-        """
-        """    
-        return self
-        
-################################################################################        
-        
-    def next( self ) :
-        """
-        """    
-        self.current += 1
-        if self.current >= len( self.ngram ) :
-            raise StopIteration
-        else :
-            return self.ngram[ self.current ]

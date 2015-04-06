@@ -221,7 +221,7 @@ class XMLParser(common.AbstractParser):
                     pos = get("pos")
                     syn = get("syn")
                     # Add word to the sentence that is currently being read
-                    sentence.append(Word(surface, lemma, pos, syn, []))
+                    sentence.append(Word(surface, lemma, pos, syn))
 
                 elif elem.tag == "mweoccurs":
                     pass  # This tag is just a wrapper around `mweoccur` tags
@@ -287,7 +287,7 @@ class XMLParser(common.AbstractParser):
                     candidate = candidate_factory.make([], id_number=id_number)
 
                 elif elem.tag == "ngram":
-                    ngram = Ngram([], [])
+                    ngram = Ngram()
 
                 elif elem.tag == "bigrams":
                     in_bigram = True
@@ -308,7 +308,7 @@ class XMLParser(common.AbstractParser):
                     lemma = get("lemma")
                     pos = get("pos")
                     syn = get("syn")
-                    word = Word(surface, lemma, pos, syn, [])
+                    word = Word(surface, lemma, pos, syn)
                     # Add the word to the ngram that is on the stack
                     ngram.append(word)
 
@@ -318,7 +318,7 @@ class XMLParser(common.AbstractParser):
                 # to the info in the candidates (e.g. meta-feature has the 
                 # same elem.tag as actual feature)      
                 elif elem.tag == "meta":
-                    meta = Meta([], [], [])
+                    meta = Meta(None, None, None)
 
 
             elif event == "end":
@@ -421,7 +421,7 @@ class XMLParser(common.AbstractParser):
                         id_number_counter = self.unescape(elem.get("entryid"))
                     # Instantiates an empty dict entry that will be treated
                     # when the <entry> tag is closed
-                    entry = Entry(id_number_counter, [], [], [])
+                    entry = Entry(id_number_counter)
                     id_number_counter += 1
 
                 elif elem.tag == "w":
@@ -433,7 +433,7 @@ class XMLParser(common.AbstractParser):
                     lemma = get("lemma")
                     pos = get("pos")
                     syn = get("syn")
-                    word = Word(surface, lemma, pos, syn, [])
+                    word = Word(surface, lemma, pos, syn)
                     entry.append(word)
 
                 # Meta section and elements, correspond to meta-info about the
@@ -442,7 +442,7 @@ class XMLParser(common.AbstractParser):
                 # to the info in the dictionary (e.g. meta-feature has the
                 # same name as actual feature)
                 elif elem.tag == "meta":
-                    meta = Meta([], [], [])
+                    meta = Meta(None,None,None)
 
             if event == "end":
 

@@ -736,7 +736,6 @@ class Index(object):
                     args_dict[attr] = symbol
                 for poss_attr in WORD_ATTRIBUTES:
                     args.append(args_dict[poss_attr])
-                args.append([])
                 words.append(Word(*args))
 
 ################################################################################
