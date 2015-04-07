@@ -26,7 +26,7 @@
 
 """
     This script converts between file formats.
-    By default, the output is generated in mwetoolkit's XML format,
+    By default, the output is in the same format as the input,
     but many input/output formats are available.
     
     For more information, call the script with no parameter and read the
@@ -61,14 +61,14 @@ OPTIONS may be:
 
 --to <output-filetype-ext>
     Convert input to given filetype extension.
-    (By default, converts input to "XML" format):
+    (By default, keeps input in input format):
     {descriptions.output[ALL]}
 
 {common_options}
 """
 
 input_filetype_ext = None
-output_filetype_ext = "XML"
+output_filetype_ext = None
 
 
 ################################################################################
