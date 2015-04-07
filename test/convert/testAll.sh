@@ -90,6 +90,10 @@ t_testname "Check XML format (corpus)"
 test_outputOnly  XML "corpus.xml" ".xml"
 t_testname "Check XML format (candidates)"
 test_outputOnly  XML "candidates.xml" ".xml"
+t_testname "Check XML format (patterns)"
+test_outputOnly  XML "patterns.xml" ".xml"
+test_outputOnly  XML "patterns_deprecated.xml" ".xml"
+test_outputOnly  XML "patterns_deprecated2.xml" ".xml"
 
 
 

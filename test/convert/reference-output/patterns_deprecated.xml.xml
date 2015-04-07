@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE patterns SYSTEM "dtd/mwetoolkit-patterns.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<patterns >
+<!-- XXX DEPRECATED: comment in first line of XML file -->
+<!-- Comment before the <patterns> tag (currently mishandled) -->
+<pat> 
+      <pat repeat="+"> 
+          <pat repeat="?">
+              <w lemma="of" pos="IO" />
+          </pat>
+          <w pos="NN*" />
+          <w pos="NN*">
+          </w>
+      </pat>
+  </pat>
+</patterns>
