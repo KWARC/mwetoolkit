@@ -213,6 +213,8 @@ class ParsedPattern(object):
 
     def _neg_children(self, node, only_attr):
         for subnode in node:
+            if subnode.tag == ElementTree.Comment:
+                continue  # We ignore it :p
             if subnode.tag != "neg":
                 util.error("Elem <w> only accepts subelem <neg>; got " \
                         "<{bad_subelem}> (line {line})",

@@ -111,7 +111,7 @@ class HTMLPrinter(common.AbstractPrinter):
 
         self.add_string(html_header.format(timestamp=timestamp,
                 corpusname=s[s.rfind("/")+1:],
-                filename=os.path.abspath(s)))
+                filename=os.path.basename(s)))
 
 
     def after_file(self, fileobj, info={}):

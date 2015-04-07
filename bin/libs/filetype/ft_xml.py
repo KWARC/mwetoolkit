@@ -84,8 +84,10 @@ class XMLChecker(common.AbstractChecker):
     def matches_header(self, strict):
         header = self.fileobj.peek(30)
         if header.startswith(b"\xef\xbb\xbf"):
-            header = header[3:]  # remove BOM
-        return header.startswith(b"<?xml") or header.startswith(b"<pattern")
+            header = header[3:]  # remove utf8's BOM
+        return header.startswith(b"<?xml") \
+                or header.startswith(b"<pattern") \
+                or header.startswith(b"<!--")
 
 
 
@@ -141,6 +143,12 @@ class XMLParser(common.AbstractParser):
         # complains if we feed it a pre-decoded stream in python2k
         parser = CommentHandlingParser()
         self.current_fileobj = fileobj
+        if not fileobj.peek(10).startswith(b"<?xml"):
+            if b"\n<?xml" in fileobj.peek(1000):
+                # Python's XMLParser is unable to handle this, so we just give up
+                util.error("XML tag <?xml> cannot appear after first line!")
+            util.warn("XML file should start with <?xml> tag!")
+
         categ_finder_iter = ElementTree.iterparse(
                 fileobj, ["start", "end"], parser)
         already_seen = []
@@ -247,6 +255,11 @@ class XMLParser(common.AbstractParser):
         depth = 0
         for event, elem in inner_iterator:
             info["linenum"] = elem.source_line
+            if elem.tag == ElementTree.Comment:
+                if event == "start":
+                    handler.handle_comment(elem.text.strip(), info)
+                continue   # (Does not generate an "end" systematically ¬¬)
+
             assert depth >= 0, "Not seeing `start` events?"
             if event == "start":
                 depth += 1
