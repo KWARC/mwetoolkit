@@ -1,0 +1,15 @@
+<!-- XXX DEPRECATED: comment in first line of XML file -->
+
+<!-- Comment before the <patterns> tag (currently mishandled) -->
+<patterns>
+  <pat> 
+      <pat repeat="+"> 
+          <pat repeat="?">
+              <w lemma="of" pos="IO"/>
+          </pat>
+          <w pos="NN*"/>
+          <w pos="NN*">
+          </w>
+      </pat>
+  </pat>
+</patterns>

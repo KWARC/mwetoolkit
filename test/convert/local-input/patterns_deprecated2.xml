@@ -1,0 +1,8 @@
+<patterns>
+  <!-- XXX DEPRECATED: file starting with <patterns> without <?xml> tag -->
+  <pat> 
+      <pat repeat="+"> 
+          <w pos="NN*"/>
+      </pat>
+  </pat>
+</patterns>
