@@ -68,13 +68,13 @@ class PlainCorpusParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PlainCorpusParser, self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8'):
+        super(PlainCorpusParser, self).__init__(encoding)
         self.candidate_factory = CandidateFactory()
         self.sentence_factory = SentenceFactory()
         self.category = "corpus"
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         sentence = self.sentence_factory.make()
         mwes = line.split()  # each entry is an SWE/MWE
         for mwe in mwes:
@@ -86,7 +86,7 @@ class PlainCorpusParser(common.AbstractTxtParser):
                 indexes = list(xrange(len(sentence)-len(words), len(sentence)))
                 mweo = MWEOccurrence(sentence, c, indexes)
                 sentence.mweoccurs.append(mweo)
-        handler.handle_sentence(sentence, info)
+        self.handler.handle_sentence(sentence, info)
 
 
 class PlainCorpusPrinter(common.AbstractPrinter):

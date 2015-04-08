@@ -115,5 +115,5 @@ def treat_options(opts, arg, n_arg, usage_string):
 longopts = ["sentence=", "to="]
 args = read_options("s:", longopts, treat_options, -1, usage_string)
 handler = filetype.AutomaticPrinterHandler(output_filetype_ext)
-parser = ft_treetagger.TreeTaggerParser(args, "utf-8", sent_split)
-filetype.parse_with(parser, handler)
+parser = ft_treetagger.TreeTaggerParser("utf-8", sent_split)
+filetype.parse(args, handler, parser=parser)

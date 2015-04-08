@@ -71,10 +71,10 @@ class PWaCParser(ConllParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PWaCParser, self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8'):
+        super(PWaCParser, self).__init__(encoding)
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         if line == "":
             pass  # Ignore empty lines
         elif line[0] == "<" and line[-1] == ">":
@@ -82,7 +82,7 @@ class PWaCParser(ConllParser):
             # `new_partial` will be called when seeing ID "1"
             pass
         else:
-            super(PWaCParser, self)._parse_line(line, handler, info)
+            super(PWaCParser, self)._parse_line(line, info)
 
 
 class PWaCPrinter(ConllPrinter):

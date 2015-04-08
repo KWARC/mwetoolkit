@@ -66,19 +66,19 @@ class TreeTaggerParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, in_files, encoding='utf-8', sent_split=None):
-        super(TreeTaggerParser, self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8', sent_split=None):
+        super(TreeTaggerParser, self).__init__(encoding)
         self.sentence_factory = SentenceFactory()
         self.category = "corpus"
         self.words = []
         self.sent_split = sent_split
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         self.current_info = info
         sentence = None
 
         if not self.words:
-            self.new_partial(self.finish_sentence, handler)
+            self.new_partial(self.finish_sentence)
 
         if line == "</s>":
             self.flush_partial_callback()
@@ -98,10 +98,10 @@ class TreeTaggerParser(common.AbstractTxtParser):
                 self.flush_partial_callback()
 
 
-    def finish_sentence(self, handler):
+    def finish_sentence(self):
         r"""Finish building sentence and call handler."""
         s = self.sentence_factory.make(self.words)
-        handler.handle_sentence(s, self.current_info)
+        self.handler.handle_sentence(s, self.current_info)
         self.words = []
 
 

@@ -69,15 +69,15 @@ class PlainCandidatesParser(common.AbstractTxtParser):
     """
     valid_categories = ["candidates"]    
 
-    def __init__(self, in_files, encoding='utf-8'):
-        super(PlainCandidatesParser, self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8'):
+        super(PlainCandidatesParser, self).__init__(encoding)
         self.candidate_factory = CandidateFactory()
         self.category = "candidates"
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         words = [Word(self.unescape(lemma)) for lemma in line.split("_")]
         c = self.candidate_factory.make_uniq(words)
-        handler.handle_candidate(c, info)
+        self.handler.handle_candidate(c, info)
 
 
 class PlainCandidatesPrinter(common.AbstractPrinter):

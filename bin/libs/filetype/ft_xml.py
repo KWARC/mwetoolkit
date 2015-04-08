@@ -138,11 +138,10 @@ class XMLParser(common.AbstractParser):
     valid_categories = ["dict", "corpus", "candidates", "patterns"]
 
 
-    def _parse_file(self, fileobj, handler):
+    def _parse_file(self, fileobj):
         # Here, fileobj is raw bytes, not unicode, because ElementTree
         # complains if we feed it a pre-decoded stream in python2k
         parser = CommentHandlingParser()
-        self.current_fileobj = fileobj
         if not fileobj.peek(10).startswith(b"<?xml"):
             if b"\n<?xml" in fileobj.peek(1000):
                 # Python's XMLParser is unable to handle this, so we just give up
@@ -170,23 +169,23 @@ class XMLParser(common.AbstractParser):
                                 .format(elem.source_line, elem.tag))
 
                     info = {"parser": self, "fileobj": fileobj, "category": elem.tag}
-                    with common.ParsingContext(fileobj, handler, info):
+                    with common.ParsingContext(fileobj, self.handler, info):
                         it = itertools.chain(already_seen, categ_finder_iter)
-                        delegate(it, handler, info)
+                        delegate(it, info)
 
 
 
-    def unknown_end_elem(self, handler, elem, info):
+    def unknown_end_elem(self, elem, info):
         r"""Complain about unknown XML element."""
         if elem.tag == ElementTree.Comment:
-            handler.handle_comment(elem.text.strip(), info)
+            self.handler.handle_comment(elem.text.strip(), info)
         else:
             util.warn("Ignoring unknown XML elem (at line {}): {!r}" \
                     .format(elem.source_line, elem.tag))
 
 
     #######################################################
-    def parse_corpus(self, inner_iterator, handler, info):
+    def parse_corpus(self, inner_iterator, info):
         sentence_factory = SentenceFactory()
         sentence = None
 
@@ -207,17 +206,9 @@ class XMLParser(common.AbstractParser):
             elif event == "end":
                 if elem.tag == "s":
                     # A complete sentence was read, call the callback function
-                    info["fileobj"] = self.current_fileobj
-
-                    try:
-                        progr = (self.filelist.starting_positions[0] \
-                                        + self.current_fileobj.tell(),
-                                self.filelist.starting_positions[-1])
-                    except IOError:
-                        pass  # Just do not generate progress info, then
-                    else:
-                        info["progress"] = progr
-                    handler.handle_sentence(sentence, info)
+                    info["fileobj"] = self.input.fileobj
+                    info["progress"] = self.input.current_progress()
+                    self.handler.handle_sentence(sentence, info)
 
                 elif elem.tag == "w":
                     def get(name):
@@ -242,13 +233,13 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "corpus":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem, info)
+                    self.unknown_end_elem(elem, info)
                 elem.clear()
 
 
 
     #######################################################
-    def parse_patterns(self, inner_iterator, handler, info):
+    def parse_patterns(self, inner_iterator, info):
         # TODO: move code from ParsedPattern to here and build to build an
         # internal Pattern object (independent from XML)
         from . import patternlib
@@ -257,7 +248,7 @@ class XMLParser(common.AbstractParser):
             info["linenum"] = elem.source_line
             if elem.tag == ElementTree.Comment:
                 if event == "start":
-                    handler.handle_comment(elem.text.strip(), info)
+                    self.handler.handle_comment(elem.text.strip(), info)
                 continue   # (Does not generate an "end" systematically ¬¬)
 
             assert depth >= 0, "Not seeing `start` events?"
@@ -268,9 +259,9 @@ class XMLParser(common.AbstractParser):
                 if depth == 1:
                     # Just closed an element
                     if elem.tag == "pat":
-                        handler.handle_pattern(patternlib.parse_pattern(elem))
+                        self.handler.handle_pattern(patternlib.parse_pattern(elem))
                     else:
-                        self.unknown_end_elem(handler, elem, info)
+                        self.unknown_end_elem(elem, info)
                     elem.clear()
                 elif depth == 0:
                     # Just closed </patterns>
@@ -278,7 +269,7 @@ class XMLParser(common.AbstractParser):
 
 
     #######################################################
-    def parse_candidates(self, inner_iterator, handler, info):
+    def parse_candidates(self, inner_iterator, info):
         candidate_factory = CandidateFactory()
         candidate = None
         ngram = None
@@ -338,7 +329,7 @@ class XMLParser(common.AbstractParser):
 
                 if elem.tag == "cand" :
                     # Finished reading the candidate, call callback
-                    handler.handle_candidate(candidate, info) 
+                    self.handler.handle_candidate(candidate, info) 
 
                 elif elem.tag == "ngram":
                     if in_occurs:
@@ -358,7 +349,7 @@ class XMLParser(common.AbstractParser):
 
                 elif elem.tag == "meta":
                     # Finished reading the meta header, call callback        
-                    handler.handle_meta(meta, info)
+                    self.handler.handle_meta(meta, info)
 
                 elif elem.tag == "bigrams":
                     in_bigram = False
@@ -412,12 +403,12 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "candidates":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem, info)
+                    self.unknown_end_elem(elem, info)
                 elem.clear()
 
 
     #######################################################
-    def parse_dict(self, inner_iterator, handler, info):
+    def parse_dict(self, inner_iterator, info):
         id_number_counter = 1
         entry = None
         word = None
@@ -460,13 +451,13 @@ class XMLParser(common.AbstractParser):
             if event == "end":
 
                 if elem.tag == "entry":
-                    handler.handle_candidate(entry)
+                    self.handler.handle_candidate(entry)
                     entry = None
                 elif elem.tag == "w":
                     word = None
                 elif elem.tag == "meta":
                     # Finished reading the meta header, call callback 
-                    handler.handle_meta(meta)
+                    self.handler.handle_meta(meta)
 
                 elif elem.tag == "freq":
                     freq = Frequency(self.unescape(elem.get("name")),
@@ -500,7 +491,7 @@ class XMLParser(common.AbstractParser):
                 elif elem.tag == "dict":
                     return  # Finished processing
                 else:
-                    self.unknown_end_elem(handler, elem, info)
+                    self.unknown_end_elem(elem, info)
 
 
 

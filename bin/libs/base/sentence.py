@@ -92,7 +92,7 @@ class Sentence( Ngram ) :
             
             @return A new instance of a `Sentence`
         """
-        self.word_list = list(word_list)
+        super(Sentence, self).__init__(word_list)
         self.id_number = id_number
         #self.freqs = None
         self.mweoccurs = []

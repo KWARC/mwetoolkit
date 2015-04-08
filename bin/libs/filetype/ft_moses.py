@@ -73,12 +73,12 @@ class MosesParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, in_files, encoding='utf-8'):
-        super(MosesParser,self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8'):
+        super(MosesParser,self).__init__(encoding)
         self.sentence_factory = SentenceFactory()
         self.category = "corpus"
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         s = self.sentence_factory.make()
         words = line.split(" ")
         for i, w in enumerate(words):
@@ -89,7 +89,7 @@ class MosesParser(common.AbstractTxtParser):
             else:
                 util.warn("Ignoring bad token (line {}, token {})" \
                         .format(info["linenum"], i+1))
-        handler.handle_sentence(s, info)
+        self.handler.handle_sentence(s, info)
 
 
 class MosesPrinter(common.AbstractPrinter):

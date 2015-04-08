@@ -86,8 +86,8 @@ class ConllParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
 
-    def __init__(self, in_files, encoding='utf-8'):
-        super(ConllParser,self).__init__(in_files, encoding)
+    def __init__(self, encoding='utf-8'):
+        super(ConllParser,self).__init__(encoding)
         self.sentence_factory = SentenceFactory()
         self.candidate_factory = CandidateFactory()
         self.name2index = {name:i for (i, name) in
@@ -96,7 +96,7 @@ class ConllParser(common.AbstractTxtParser):
         self.id_index = self.name2index["ID"]
         self.category = "corpus"
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         data = line.split("\t")
         if len(data) <= 1: return
         data = [d.split(" ") for d in data]  # split MWEs
@@ -120,21 +120,21 @@ class ConllParser(common.AbstractTxtParser):
                     self.ignoring_cur_sent = True
                 else:
                     if wid == 1:
-                        self.new_partial(handler.handle_sentence,
+                        self.new_partial(self.handler.handle_sentence,
                                 self.sentence_factory.make(), info=info)
                         self.ignoring_cur_sent = False
 
                     if not self.ignoring_cur_sent:
                         indexes.append(wid - 1)
-                        word = self._parse_word(handler, info)
-                        self.partial_obj.append(word)
+                        word = self._parse_word(self.handler, info)
+                        self.partial_args[0].append(word)
 
         if len(data[self.id_index]) != 1:
             from ..base.mweoccur import MWEOccurrence
             mwe_words = []  # XXX do we use surface or lemma?
             c = self.candidate_factory.make_uniq(mwe_words)
-            mweo = MWEOccurrence(self.partial_obj, c, indexes)
-            self.partial_obj.mweoccurs.append(mweo)
+            mweo = MWEOccurrence(self.partial_args[0], c, indexes)
+            self.partial_args[0].mweoccurs.append(mweo)
 
     def get(self, attribute, default=WILDCARD):
         r"""Return CONLL data with given attribute

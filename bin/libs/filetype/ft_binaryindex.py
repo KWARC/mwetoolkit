@@ -67,13 +67,13 @@ class BinaryIndexChecker(common.AbstractChecker):
 class BinaryIndexParser(common.AbstractParser):
     valid_categories = ["corpus"]
 
-    def _parse_file(self, fileobj, handler):
+    def _parse_file(self, fileobj):
         info = {"parser": self, "category": "corpus"}
-        with common.ParsingContext(fileobj, handler, info):
+        with common.ParsingContext(fileobj, self.handler, info):
             from .indexlib import Index
             assert fileobj.name.endswith(".info")
             index = Index(fileobj.name[:-len(".info")])
             index.load_main()
             for sentence, progress in index.iterate_sentences_and_progress():
                 info["progress"] = progress
-                handler.handle_sentence(sentence, info)
+                self.handler.handle_sentence(sentence, info)

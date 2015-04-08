@@ -54,36 +54,31 @@ from ._common import StopParsing, InputHandler, \
 #############################
 
 
-def parse(input_files, handler, filetype_hint=None):
-    r"""For each input file, detect its file format,
+def parse(input_fileobjs, handler, filetype_hint=None,
+        parser=None, call_finish=True):
+    r"""For each input fileobj, detect its file format,
     parse it and call the appropriate handler methods.
-    
-    You MUST call either this or `parse_with`.
-    Don't EVER call `parser.parse` directly.
 
-    @param input_files: a list of file objects
-    whose contents should be parsed.
-    @param handler: an InputHandler.
-    @param filetype_hint: either None or a valid
-    filetype_ext string.
-    """
-    parse_with(SmartParser(input_files, filetype_hint), handler)
-
-
-def parse_with(parser, handler):
-    r"""For each input file, detect its file format,
-    parse it and call the appropriate handler methods.
-    
     You MUST call this function when parsing a file.
     Don't EVER call `parser.parse` directly, or you will
     suffer HARSH CONSEQUENCES. You have been warned.
-    
-    @param parser: an instance of AbstractParser.
+
+    @param input_fileobjs: a list of file objects to be parsed.
     @param handler: an instance of InputHandler.
+    @param filetype_hint: either None or a valid filetype_ext string.
+    @param parser: either None or an instance of AbstractParser.
     """
+    assert not (parser and filetype_hint)
+    parser = parser or SmartParser(filetype_hint)
+
     try:
         handler = FirstInputHandler(handler)
-        parser.parse(handler)
+        try:
+            for input_file in common.make_input_files(input_fileobjs):
+                parser.parse(input_file, handler)
+                input_file.close()
+        except StopParsing:  # Reading only part of file
+            pass  # Just interrupt parsing
         handler.finish()
     except IOError as e:
         import errno
@@ -267,23 +262,20 @@ class SmartParser(common.AbstractParser):
     r"""Class that detects input file formats
     and chains the work to the correct parser.
     """
-    def __init__(self, input_files, filetype_hint=None):
-        super(SmartParser, self).__init__(input_files)
+    def __init__(self, filetype_hint=None):
+        super(SmartParser, self).__init__()
         self.filetype_hint = filetype_hint
 
-    def parse(self, handler):
-        for sub_filelist in self.filelist.sublists():
-            fti = self._detect_filetype(sub_filelist.only(), self.filetype_hint)
-            checker_class, parser_class, _ = fti.operations()
-            checker_class(sub_filelist.only()).check()
-            if parser_class is None:
-                util.error("No parser class for filetype: {filetype}",
-                        filetype=fti.filetype_ext)
-            p = parser_class(sub_filelist)
-            # Delegate the whole work to parser `p`.
-            p.parse(handler)
-        handler.flush()
-        return handler
+    def _parse_file(self, fileobj):
+        fti = self._detect_filetype(fileobj, self.filetype_hint)
+        checker_class, parser_class, _ = fti.operations()
+        checker_class(fileobj).check()
+        if parser_class is None:
+            util.error("No parser class for filetype: {filetype}",
+                    filetype=fti.filetype_ext)
+        p = parser_class()
+        # Delegate the whole work to parser `p`.
+        p.parse(self.input, self.handler)
 
 
     def _detect_filetype(self, fileobj, filetype_hint=None):

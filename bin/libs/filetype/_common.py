@@ -181,54 +181,49 @@ class StopParsing(Exception):
     pass
 
 
-class FileList(object):
-    r"""A FileList represents a list of files to be read.
+class InputFile(object):
+    def __init__(self, fileobj):
+        self.original_fileobj = fileobj
+        self.compressed_fileobj = self.__open_file()
+        self.fileobj = self.__uncompressed()
+        self.size = self.__sizeof()
+        self.beg, self.total = None, None
 
-    IMPORTANT: The `starting_positions` list should have an extra
-    last element indicating the size of it all."""
-    def __init__(self, list_of_files, starting_positions):
-        assert isinstance(list_of_files, list), list_of_files
-        self._list = list_of_files
-        self.starting_positions = starting_positions
+    def current_progress(self):
+        r"""Return progress for this file."""
+        return (self.beg + self.fileobj.tell(), self.total)
 
-    def sublists(self):
-        r"""Yield a FileList instance for each file."""
-        size = self.starting_positions[-1]
-        for f, cl in zip(self._list, self.starting_positions):
-            yield FileList([f], [cl, size])
+    def close(self):
+        r"""Close underlying fileobj."""
+        if hasattr(self.original_fileobj, "close"):
+            # XXX we don't need this "wraps" thing anymore...
+            if not getattr(self.fileobj, "wraps_stdin", False):
+                self.original_fileobj.close()
+        self.fileobj = self.original_fileobj \
+                = self.compressed_fileobj = None
+    
 
-    def only(self):
-        r"""Return the only file in this FileList.
-        If the list has more than one file, raise an error."""
-        if len(self._list) != 1:
-            raise Exception("BUG: Expected 1 file, got " + self._list)
-        return self._list[0]
-
-    @staticmethod
-    def make_from(list_of_files):
-        r"""Return a FileList for given list_of_files."""
-        if isinstance(list_of_files, FileList):
-            return list_of_files
-
-        list_of_files = list_of_files or ["-"]
-        files = [FileList._open_file(f) for f in list_of_files]
-
-        starting_positions = [0]
-        for f in files:
-            last = starting_positions[-1]
-            starting_positions.append(last + FileList._sizeof(f))
-        return FileList(files, starting_positions)
-
-    @staticmethod
-    def _sizeof(fileobj):
+    def __sizeof(self):
         r"""(Quick'n'dirty way of measuring file size; 0 if unknown)."""
         try:
-            return os.fstat(fileobj.fileno()).st_size
+            return os.fstat(self.fileobj.fileno()).st_size
         except (AttributeError, io.UnsupportedOperation):
             return 0
 
-    @staticmethod
-    def _uncompressing(fileobj):
+    def __open_file(self):
+        r"""(Return buffered file object for given path)"""
+        f = self.original_fileobj
+        if isinstance(f, io.BufferedReader):
+            return f
+        if f == "-":
+            f = sys.stdin
+        elif isinstance(f, basestring):
+            f = open(f, "rb")
+        f = Python2kFileWrapper(f)
+        return io.BufferedReader(f)
+
+    def __uncompressed(self):
+        fileobj = self.compressed_fileobj
         header = fileobj.peek(20)
         if header.startswith(b"\x50\x4b\x03\x04"):  # is ZIP?
             from .uncompress import ZipWrapper
@@ -241,18 +236,19 @@ class FileList(object):
             fileobj = io.BufferedReader(GzipWrapper(fileobj))
         return fileobj
 
-    @staticmethod
-    def _open_file(path):
-        r"""(Return buffered file object for given path)"""
-        if isinstance(path, io.BufferedReader):
-            return path
-        if path == "-":
-            path = sys.stdin
-        elif isinstance(path, basestring):
-            path = open(path, "rb")
-        f = Python2kFileWrapper(path)
-        f = io.BufferedReader(f)
-        return FileList._uncompressing(f)
+
+def make_input_files(list_of_files):
+    r"""A FileList represents a list of InputFile's to be parsed."""
+    assert isinstance(list_of_files, list), list_of_files
+    list_of_files = list_of_files or ["-"]
+    L = [InputFile(f) for f in list_of_files]
+    current, total = 0, sum(f.size for f in L)
+
+    for f in L:
+        f.beg, f.total = current, total
+        current += f.size
+    return L
+
 
 
 class AbstractParser(object):
@@ -268,53 +264,52 @@ class AbstractParser(object):
     filetype_info = None
     valid_categories = []
 
-    def __init__(self, input_files):
-        self.filelist = FileList.make_from(input_files)
+    def __init__(self):
         self.partial_fun = None
-        self.partial_obj = None
+        self.partial_args = None
         self.partial_kwargs = None
         self._meta_handled = False
 
     def flush_partial_callback(self):
         r"""Finally perform the callback `self.partial_fun(...args...)`."""
         if self.partial_fun is not None:
-            self.partial_fun(self.partial_obj, **self.partial_kwargs)
-        self.partial_fun = self.partial_obj = self.partial_kwargs = None
+            self.partial_fun(*self.partial_args, **self.partial_kwargs)
+        self.partial_fun = self.partial_args = self.partial_kwargs = None
 
-    def new_partial(self, new_partial_fun, obj, **kwargs):
+    def new_partial(self, new_partial_fun, *args, **kwargs):
         r"""Add future callback `partial_fun(...args...)`."""
         self.flush_partial_callback()
         self.partial_fun = new_partial_fun
-        self.partial_obj = obj
+        self.partial_args = args
         self.partial_kwargs = kwargs
 
 
-    def parse(self, handler):
+    def parse(self, input_file, handler):
         r"""Parse all files with this parser.
+        (Sets `self.input` and `self.handler`).
 
+        WARNING: Don't EVER call this function directly unless you
+        know what you're doing. Call `filetype.parse` instead.
+
+        @param input_file: An instance of InputFile.
         @param handler: An instance of InputHandler.
         Callback methods will be called on `handler`.
         """
-        try:
-            for f in self.filelist._list:
-                self._parse_file(f, handler)
-        except StopParsing:  # Reading only part of file
-            pass  # Just interrupt parsing
-        finally:
-            self.close()
-        return handler
+        self.input = input_file
+        self.handler = handler
+        self._parse_file(input_file.fileobj)
 
 
-    def _parse_comment(self, handler, comment, info):
+    def _parse_comment(self, comment, info):
         r"""Parse contents of comment string and chain to 
         `handler.handle_{directive,comment}` accordingly.
         """
         comment = comment.strip()
         directive = Directive.from_string(comment)
         if directive:
-            handler.handle_directive(directive, info)
+            self.handler.handle_directive(directive, info)
         else:
-            handler.handle_comment(comment)
+            self.handler.handle_comment(comment)
 
 
     def unescape(self, string):
@@ -329,19 +324,11 @@ class AbstractParser(object):
         return string
 
 
-    def _parse_file(self, fileobj, handler):
+    def _parse_file(self, fileobj):
         r"""(Called to parse file `fileobj`)"""
         raise NotImplementedError
 
 
-    def close(self):
-        r"""Close all files opened by this parser."""
-        for f in self.filelist._list:
-            if hasattr(f, "close"):
-                if not getattr(f, "wraps_stdin", False):
-                    f.close()
-        self.filelist = FileList([], [0])
-    
 ################################################################################
 
 class AbstractTxtParser(AbstractParser):
@@ -355,23 +342,22 @@ class AbstractTxtParser(AbstractParser):
     @param input_files: A list of target file paths.
     @param encoding: The encoding to use when reading files.
     """
-    def __init__(self, input_files, encoding):
-        super(AbstractTxtParser, self).__init__(input_files)
+    def __init__(self, encoding):
+        super(AbstractTxtParser, self).__init__()
         self.encoding = encoding
         self.encoding_errors = "replace"
         self.category = "<unknown-category>"
 
-    def _parse_file(self, fileobj, handler):
+    def _parse_file(self, fileobj):
+        assert self.category != "<unknown-category>", \
+                "Subclass should have set `self.category`"
         info = {"parser": self, "fileobj": fileobj, "category": self.category}
-        with ParsingContext(fileobj, handler, info):
-            assert self.category != "<unknown-category>", \
-                    "Subclass should have set `self.category`"
+        with ParsingContext(fileobj, self.handler, info):
             just_saw_a_comment = False
 
             for i, line in enumerate(fileobj):
                 info["linenum"] = i + 1
-                info["progress"] = (self.filelist.starting_positions[0] + \
-                        fileobj.tell(), self.filelist.starting_positions[-1])
+                info["progress"] = self.input.current_progress()
 
                 line = line.rstrip()
                 line = line.decode(self.encoding, self.encoding_errors)
@@ -379,18 +365,18 @@ class AbstractTxtParser(AbstractParser):
 
                 if line.startswith(cp):
                     comment = line[len(cp):]
-                    self._parse_comment(handler, comment, info)
+                    self._parse_comment(comment, info)
                     just_saw_a_comment = True
 
                 elif line == "" and just_saw_a_comment:
-                    self._parse_comment(handler, "", info)
+                    self._parse_comment("", info)
                     just_saw_a_comment = False
 
                 else:
-                    self._parse_line(line, handler, info)
+                    self._parse_line(line, info)
                     just_saw_a_comment = False
 
-    def _parse_line(self, line, handler, info={}):
+    def _parse_line(self, line, info={}):
         r"""Called to parse a line of the TXT file.
         Not called for comments and SOMETIMES not called
         for empty lines.
@@ -476,9 +462,9 @@ class InputHandler(object):
     r"""Handler interface with callback methods that
     are called by the parser during its execution."""
 
-    def flush(self, full=True):
+    def flush(self, fully=True):
         r"""May be called to flush outputs.
-        If `full==True`, flushes the underlying
+        If `fully==True`, flushes the underlying
         output streams as well.
         """
         pass  # By default, do nothing
@@ -493,7 +479,7 @@ class InputHandler(object):
 
     def finish(self):
         r"""Called after parsing all files."""
-        self.flush(full=True)  # By default, just flush whatever is in
+        self.flush(fully=True)  # By default, just flush whatever is in
 
     def handle_sentence(self, sentence, info={}):
         r"""Called to treat a Sentence object."""
@@ -580,8 +566,8 @@ class ChainedInputHandler(InputHandler):
         self.chain.finish()
 
 
-    def flush(self, full=True):
-        self.chain.flush(full=full)
+    def flush(self, fully=True):
+        self.chain.flush(fully=fully)
 
     def handle_directive(self, directive, info={}):
         info["kind"] = "directive"        
@@ -661,12 +647,12 @@ class AbstractPrinter(InputHandler):
         r"""Return last (non-flushed) added object."""
         return self._waiting_objects[-1]
 
-    def flush(self, full=True):
+    def flush(self, fully=True):
         r"""Eagerly print the current contents."""
         for obj in self._waiting_objects:
             self._write(obj)
         del self._waiting_objects[:]
-        if full:
+        if fully:
             self._output.flush()
         return self  # enable call chaining
 
