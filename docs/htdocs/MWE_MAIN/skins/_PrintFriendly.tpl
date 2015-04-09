@@ -1,0 +1,12 @@
+<HTML>
+<HEAD>
+<TITLE>{PAGETITLE}</TITLE>
+</HEAD>
+<BODY>
+{BODY}
+<!-- START BLOCK : CENTER_BOX -->
+<p><hr><br><b>{CENTER_TITLE}</b><br>
+{CENTER_CONTENT}
+<!-- END BLOCK : CENTER_BOX -->
+</BODY>
+</HTML>

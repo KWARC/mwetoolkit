@@ -1,0 +1,26 @@
+filetype.parse()->Parser: parse
+
+Parser->FirstInputHandler: before_file
+FirstInputHandler->(ChainedInputHandler's): before_file
+(ChainedInputHandler's)->InputHandler: before_file
+
+Parser->FirstInputHandler: handle_sentence
+FirstInputHandler->(ChainedInputHandler's): handle_sentence
+(ChainedInputHandler's)->InputHandler: handle_sentence
+
+Parser->FirstInputHandler: handle_sentence
+FirstInputHandler->(ChainedInputHandler's): handle_sentence
+(ChainedInputHandler's)->InputHandler: handle_sentence
+
+note right of Parser: Parse more sentences...
+
+Parser->FirstInputHandler: after_file
+FirstInputHandler->(ChainedInputHandler's): after_file
+(ChainedInputHandler's)->InputHandler: after_file
+
+note right of filetype.parse(): If there are other inputs: \nCall Parser.parse() again...
+
+filetype.parse()->Parser: finish
+Parser->FirstInputHandler: finish
+FirstInputHandler->(ChainedInputHandler's): finish
+(ChainedInputHandler's)->InputHandler: finish

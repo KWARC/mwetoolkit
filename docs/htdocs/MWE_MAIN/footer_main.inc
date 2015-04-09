@@ -1,0 +1,1 @@
+<?php include_once('tools/counter/statistics.php'); ?><a target='_blank' href='http://www.phite.org.au' style="color: #FFFFFF;">Powered by Phite</a>
