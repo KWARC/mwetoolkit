@@ -48,9 +48,10 @@ from libs import filetype
 # GLOBALS     
 usage_string = """Usage: 
     
-python {program} OPTIONS <candidates.xml>
+python {program} OPTIONS <input-file>
 
-The <candidates.xml> file must be valid XML (dtd/mwetoolkit-*.dtd).
+The <input-file> must be in one of the filetype
+formats accepted by the `--from` switch.
 
 
 OPTIONS may be:
@@ -64,8 +65,7 @@ OPTIONS may be:
     Outputs surface forms instead of lemmas. Default false.
     
 -p OR --lemmapos
-    Outputs the corpus in lemma/pos format. Replaces slashes by "@SLASH@". 
-    Default false.
+    Outputs the corpus in lemma/pos format. Default false.
 
 {common_options}
 """   
@@ -108,6 +108,6 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 
 longopts = [ "surface", "lemmapos", "from=" ]
 args = read_options( "sp", longopts, treat_options, -1, usage_string )
-filetype.parse(args, ft_csv.CSVPrinter(lemmapos=lemmapos,
-                                       surfaces=surface_instead_lemmas,
-                                       category="candidates"),input_filetype_ext)
+handler = ft_csv.CSVPrinter(lemmapos=lemmapos,
+        surfaces=surface_instead_lemmas, category="candidates")
+filetype.parse(args, handler, input_filetype_ext)

@@ -22,7 +22,7 @@ type	NN	type
 of	IN	of
 corruption	NN	corruption
 is	VBZ	be
-application-dependent	JJ	application-dependent
+application-dependent	JJ	<unknown>
 and	CC	and
 may	MD	may
 be	VB	be

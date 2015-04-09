@@ -50,7 +50,7 @@ from libs.base.tpclass import TPClass
 from libs.base.candidate import Candidate
 from libs.base.frequency import Frequency
 from libs.util import read_options, strip_xml, error
-from libs.base.__common import WILDCARD, XML_HEADER, XML_FOOTER
+from libs.filetype.ft_xml import WILDCARD, XML_HEADER, XML_FOOTER
 
 ################################################################################
 #GLOBALS
@@ -449,7 +449,7 @@ if __name__ == '__main__':
 
     for file in files:
         initialize(file)
-        print(XML_HEADER % { "root":"candidates", "ns":"" })
+        print(XML_HEADER % { "category":"candidates", "ns":"" })
         getMeta(file)
         getCand(file)
-        print(XML_FOOTER % { "root":"candidates" })
+        print(XML_FOOTER % { "category":"candidates" })

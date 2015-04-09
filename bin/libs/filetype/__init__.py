@@ -54,8 +54,7 @@ from ._common import StopParsing, InputHandler, \
 #############################
 
 
-def parse(input_fileobjs, handler, filetype_hint=None,
-        parser=None, call_finish=True):
+def parse(input_fileobjs, handler, filetype_hint=None, parser=None):
     r"""For each input fileobj, detect its file format,
     parse it and call the appropriate handler methods.
 
@@ -68,7 +67,10 @@ def parse(input_fileobjs, handler, filetype_hint=None,
     @param filetype_hint: either None or a valid filetype_ext string.
     @param parser: either None or an instance of AbstractParser.
     """
-    assert not (parser and filetype_hint)
+    assert not (parser and filetype_hint), \
+            "Pass filetype_hint to the ctor of the parser instead"
+    assert filetype_hint is None or isinstance(filetype_hint, basestring)
+    assert parser is None or isinstance(parser, common.AbstractParser)
     parser = parser or SmartParser(filetype_hint)
 
     try:

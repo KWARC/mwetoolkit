@@ -21,16 +21,21 @@ test "$#" -ne 0  && usage_exit
 #   Then convert it back and compare with <input-file>.
 test_bidir() {
     local filetype="$1"; shift
-    local input1="$t_OUTDIR/$1"; shift
-    local output="$t_OUTDIR/$(basename "$input1").xml"
+    local filename="$1"; shift
+    local input1="$t_OUTDIR/$filename"
+    local output="$t_OUTDIR/${filename}.xml"
 
     t_run "$t_BIN/convert.py --from=$filetype --to=XML $input1 >$output"
-    t_compare_with_ref "$(basename "$output")"
+    t_compare_with_ref "${filename}.xml"
 
     local input2="$output"
     local output="${output}.${input1##*.}"
     t_run "$t_BIN/convert.py --from=XML --to=$filetype $input2 >$output"
-    t_compare "$output" "$input1" "Comparing \"$(basename "$output")\" against original"
+    if test -f "$t_REFDIR/$filename"; then
+        t_compare_with_ref "$filename"
+    else
+        t_compare "$output" "$input1" "Comparing \"$filename\" vs original"
+    fi
 }
 
 # test_outputOnly <filetype> <input-xml-file> <suffix-output>
@@ -65,7 +70,7 @@ test_bidir PlainCorpus "corpus.PlainCorpus"
 
 t_testname "Check pWaC format"
 # TODO add a source_url directive so that the whole conversion works
-t_STOP_ON_ERROR=false test_bidir pWaC "corpus.pwac"
+test_bidir pWaC "corpus.pwac"
 
 t_testname "Check PlainCandidates format"
 test_bidir PlainCandidates "candidates.PlainCandidates"

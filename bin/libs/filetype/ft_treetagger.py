@@ -90,6 +90,8 @@ class TreeTaggerParser(common.AbstractTxtParser):
                         .format(info["linenum"], len(fields)))
                 return
 
+            fields = (WILDCARD if f=="<unknown>" \
+                    else self.unescape(f) for f in fields)
             surface, pos, lemma = fields
             word = Word(surface, lemma, pos)
             self.words.append(word)
@@ -115,6 +117,7 @@ class TreeTaggerChecker(common.AbstractChecker):
                 return len(line.split(b"\t")) == len(self.filetype_info.entries)
         return not strict
 
+
 class TreeTaggerPrinter(common.AbstractPrinter):
 
     valid_categories = ["corpus"]
@@ -139,7 +142,8 @@ class TreeTaggerPrinter(common.AbstractPrinter):
                     "LEMMA": word.lemma,
                     "POS": word.pos,        
                 }
-                entry = [data[entry_name] for entry_name in self.filetype_info.entries]
+                entry = [self.escape(data[entry_name]) \
+                        for entry_name in self.filetype_info.entries]
                 entries.append(entry)
 
             line = zip(*entries)  # [[entries A for all], [entries B], ...]
@@ -147,4 +151,7 @@ class TreeTaggerPrinter(common.AbstractPrinter):
             self.add_string(line, "\n")
 
 
-
+    def escape(self, string):
+        if string == WILDCARD:
+            return "<unknown>"
+        return super(TreeTaggerPrinter, self).escape(string)
