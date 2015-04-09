@@ -14,14 +14,14 @@
   <tr align="left" valign="top"> 
 	<td width="240" height="400" bgcolor="#FFFFFF"> <b><font face="Arial, Helvetica, sans-serif" size="3">
 	<br>&nbsp;<a href="{HOMELINK}">{HOMENAME}</a><br>
-<ul style="margin:5px;padding:0px 15px">	
+<ul style="margin:5px;padding:5px 10px">	
 <!-- START BLOCK : LEFT_NAV -->
       <font face="Arial, Helvetica, sans-serif" size="3">
       
-	 <li><a href="{OPTION_LINK}">{OPTION_NAME}</a><br></font></li>
+	 <li style='margin:7px'><a style='text-decoration:none' href="{OPTION_LINK}">{OPTION_NAME}</a><br></font></li>
 <!-- START BLOCK : SUB_NAV -->
       <font face="Arial, Helvetica, sans-serif" size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#149;	
-	  <a href="{SUB_LINK}">{SUB_NAME}</a><br></font>
+	  <a style='text-decoration:none' href="{SUB_LINK}">{SUB_NAME}</a><br></font>
 <!-- END BLOCK : SUB_NAV -->
 <!-- END BLOCK : LEFT_NAV -->
      </ul>
@@ -51,6 +51,9 @@
 	  <table width="200" border="0" cellspacing="0" cellpadding="1">
 		<tr> 
 		  <td bgcolor="#006699" align="center" valign="top"><b><font color="#FFFFFF" size="2" face="Arial, Helvetica, sans-serif"> 
+			<style type="text/css">
+				li {margin: 10px}
+			</style>
 			{RB_TITLE}</font> </b> 
 			<table width="100%" border="0" cellspacing="0" cellpadding="3">
 			  <tr> 
