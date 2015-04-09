@@ -221,7 +221,7 @@ class ParsedPattern(object):
                         bad_subelem=subnode.tag, line=node.source_line)
             for attr,val in subnode.items():
                 if attr == only_attr:
-                    yield "(?!" + re.escape(val) + ")"
+                    yield "(?!" + re.escape(val).replace("\\*", self.ATTRIBUTE_WILDCARD) + ")"
 
     def _parse_w(self, node, scope_repeat):
         valid_attrs = set(WORD_ATTRIBUTES + ["id", "neg", "syndep"])
