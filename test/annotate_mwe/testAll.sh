@@ -28,7 +28,7 @@ annotate() {
     local candidates="$t_LOCAL_INPUT/${name_input}/candidates.xml"
 
     #t_run "$t_BIN/annotate_mwe.py -v $args -c $candidates $corpus >$xml_out"
-    t_run "$t_BIN/annotate_mwe.py -v $args --to=MosesText -c $candidates $corpus >$txt_out"
+    t_run "$t_BIN/annotate_mwe.py -v $args --to=TaggedPlainCorpus -c $candidates $corpus >$txt_out"
     t_compare_with_ref "${name_output}.txt"
 }
 

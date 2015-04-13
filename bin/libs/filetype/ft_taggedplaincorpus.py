@@ -6,7 +6,7 @@
 # Copyright 2010-2015 Carlos Ramisch, Vitor De Araujo, Silvio Ricardo Cordeiro,
 # Sandra Castellanos
 #
-# ft_mosestext.py is part of mwetoolkit
+# ft_taggedplaincorpus.py is part of mwetoolkit
 #
 # mwetoolkit is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 ################################################################################
 """
 This module provides classes to manipulate files that are encoded in the
-"MosesText" filetype, which is a useful output corpus textual format.
+"TaggedPlainCorpus" filetype, which is a useful output corpus textual format.
 
 You should use the methods in package `filetype` instead.
 """
@@ -36,10 +36,10 @@ from __future__ import absolute_import
 
 from . import _common as common
 
-class MosesTextInfo(common.FiletypeInfo):
-    r"""FiletypeInfo subclass for MosesText format."""
-    description = "Moses textual format, with one sentence per line and <mwe> tags"
-    filetype_ext = "MosesText"
+class TPCInfo(common.FiletypeInfo):
+    r"""FiletypeInfo subclass for TaggedPlainCorpus format."""
+    description = "One sentence per line with <mwepart>tags</mwepart>"
+    filetype_ext = "TaggedPlainCorpus"
   
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
@@ -47,16 +47,16 @@ class MosesTextInfo(common.FiletypeInfo):
                     ("\t", "${tab}"), ("\n", "${newline}")]
 
     def operations(self):
-        return common.FiletypeOperations(MosesTextChecker, None, MosesTextPrinter)
+        return common.FiletypeOperations(TPCChecker, None, TPCPrinter)
 
 
-class MosesTextChecker(common.AbstractChecker):
-    r"""Checks whether input is in MosesText format."""
+class TPCChecker(common.AbstractChecker):
+    r"""Checks whether input is in TaggedPlainCorpus format."""
     def matches_header(self, strict):
         return not strict
 
 
-class MosesTextPrinter(common.AbstractPrinter):
+class TPCPrinter(common.AbstractPrinter):
     """Instances can be used to print HTML format."""
     valid_categories = ["corpus"]
 

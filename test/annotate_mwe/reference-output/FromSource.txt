@@ -1,4 +1,4 @@
-# MWETOOLKIT: filetype="MosesText"
+# MWETOOLKIT: filetype="TaggedPlainCorpus"
 Reanudación del <mwepart id="335" >período</mwepart> <mwepart id="335" >de</mwepart> <mwepart id="335" >sesiones</mwepart> Declaro reanudado el <mwepart id="335" >período</mwepart> <mwepart id="335" >de</mwepart> <mwepart id="335" >sesiones</mwepart> del <mwepart id="649" >Parlamento</mwepart> <mwepart id="649" >Europeo</mwepart> , interrumpido el viernes 17 de diciembre pasado , y reitero a Sus Señorías mi deseo de que hayan tenido unas buenas vacaciones .
 Como todos han podido comprobar , el gran " efecto del año 2000 " no se ha producido .
 En${space}cambio , los ciudadanos de varios de <mwepart id="54" >nuestros</mwepart> <mwepart id="54" >países</mwepart> han sido <mwepart id="507,1506" >víctimas</mwepart> <mwepart id="507,1506" >de</mwepart> <mwepart id="507,821,1506" >catástrofes</mwepart> <mwepart id="507,821" >naturales</mwepart> verdaderamente terribles .

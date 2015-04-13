@@ -214,24 +214,24 @@ class AutomaticPrinterHandler(ChainedInputHandler):
 
 
 from . import ft_arff
-from . import ft_xml
-from . import ft_csv
-from . import ft_moses
-from . import ft_conll
-from . import ft_pwac
 from . import ft_binaryindex
-from . import ft_plaincorpus
-from . import ft_plaincandidates
+from . import ft_conll
+from . import ft_csv
 from . import ft_html
-from . import ft_mosestext
+from . import ft_moses
+from . import ft_plaincandidates
+from . import ft_plaincorpus
+from . import ft_pwac
+from . import ft_taggedplaincorpus
 from . import ft_treetagger
+from . import ft_xml
 
 # Instantiate FiletypeInfo singletons
 INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ft_conll.ConllInfo(), 
          ft_pwac.PWaCInfo(), ft_plaincorpus.PlainCorpusInfo(), 
          ft_binaryindex.BinaryIndexInfo(), ft_moses.MosesInfo(), 
          ft_plaincandidates.PlainCandidatesInfo(), ft_html.HTMLInfo(), 
-         ft_mosestext.MosesTextInfo(), ft_treetagger.TreeTaggerInfo()]
+         ft_taggedplaincorpus.TPCInfo(), ft_treetagger.TreeTaggerInfo()]
 
 # Map filetype_hint -> filetype_info
 HINT_TO_INFO = {}
