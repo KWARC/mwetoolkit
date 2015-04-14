@@ -111,7 +111,12 @@ t_run() {
     if test "${quiet:-0}" -eq 0; then
         t_echo_rgb 3 "$@"
     fi
-    eval "$@"
+    local errcode=0
+    eval "$@" || errcode="$?"
+    if test "$errcode" -ne 0 && $t_STOP_ON_ERROR; then
+        exit 70
+    fi
+    return 0
 }
 
 

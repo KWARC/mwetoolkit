@@ -46,7 +46,7 @@ WORD_ATTRIBUTES = ["surface", "lemma", "pos", "syn"]
 
 ################################################################################
 
-class Word :
+class Word(object):
     """
         An orthographic word (in languages for which words are separated from 
         each other by a space) is the simplest lexical unit recognisable by a

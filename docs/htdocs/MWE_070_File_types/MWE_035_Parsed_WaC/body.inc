@@ -157,4 +157,6 @@ file.</p>
 <sup id="fn1">1. Case-sensitive string to be used with the <tt>filetype</tt>
 directive and with script options such as <tt>--from</tt> and <tt>--to</tt>.<a href="#ref1" title="Jump back to footnote 1 in the text.">↩</a></sup>
 <br/>
-<sup id="fn2">2. The original pUKWaC file was distributed using Windows-1252 encoding (similar to ISO-8859-1). Please convert to UTF-8 before using in the mwetoolkit.<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>
+<sup id="fn2">2. The original pUKWaC file was distributed using Windows-1252
+encoding (similar to ISO-8859-1). Please convert to UTF-8 and escape at least
+the occurrences of "#" before using this corpus in the mwetoolkit.<a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a></sup>

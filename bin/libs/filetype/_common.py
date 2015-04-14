@@ -182,25 +182,42 @@ class StopParsing(Exception):
 
 
 class InputFile(object):
-    def __init__(self, fileobj):
-        self.original_fileobj = fileobj
-        self.compressed_fileobj = self.__open_file()
+    def __init__(self, filepath):
+        self.__open_file(filepath)
         self.fileobj = self.__uncompressed()
         self.size = self.__sizeof()
         self.beg, self.total = None, None
 
     def current_progress(self):
         r"""Return progress for this file."""
+        if self.compressed:
+            # XXX we may not have everything in memory, so we cannot know
+            # the fileobj1's size, and thus we need to use the fileobj0's size.
+            # But fileobj0 is being completely cached in-memory by GzipWrapper
+            # and friends, so buffered_fileobj0.tell() == `self.size`.
+            # Maybe we should (1) artificially inflate self.size when seeing
+            # that it is compressed (with the *sole* goal of being fair when
+            # reading from more than 1 file); and (2) add a method to e.g.
+            # GzipWrapper that returns the current position in the underlying
+            # buffer. Kind of like tell(), which it should already have...
+            #
+            # XXX Or, a possibly better (less hacky and faster, because it
+            # would be running in pipeline with a parallel process written in
+            # C... And we wouldn't have to put up with Python's atrociously bad
+            # lib!!!) alternative would be to pipe through `gzip`, `bzip2` or
+            # `zip`.  We could then look at self.buffered_fileobj0.tell() to
+            # know how much has been read...
+            return (0, 0)
         return (self.beg + self.fileobj.tell(), self.total)
 
     def close(self):
         r"""Close underlying fileobj."""
-        if hasattr(self.original_fileobj, "close"):
+        if hasattr(self.raw_fileobj0, "close"):
             # XXX we don't need this "wraps" thing anymore...
             if not getattr(self.fileobj, "wraps_stdin", False):
-                self.original_fileobj.close()
-        self.fileobj = self.original_fileobj \
-                = self.compressed_fileobj = None
+                self.raw_fileobj0.close()
+        self.raw_fileobj0 = self.buffered_fileobj0 \
+                = self.raw_fileobj1 = self.fileobj = None
     
 
     def __sizeof(self):
@@ -208,33 +225,47 @@ class InputFile(object):
         try:
             return os.fstat(self.fileobj.fileno()).st_size
         except (AttributeError, io.UnsupportedOperation):
-            return 0
+            try:
+                cur = self.buffered_fileobj0.tell()
+                self.buffered_fileobj0.seek(0, os.SEEK_END)
+                size = self.buffered_fileobj0.tell()
+                self.buffered_fileobj0.seek(cur, os.SEEK_SET)
+                return size
+            except (ValueError, io.UnsupportedOperation):
+                util.warn("Input file size unknown for {filename!r}",
+                        filename=self.filename)
+                return 0
 
-    def __open_file(self):
+    def __open_file(self, filepath):
         r"""(Return buffered file object for given path)"""
-        f = self.original_fileobj
-        if isinstance(f, io.BufferedReader):
-            return f
-        if f == "-":
-            f = sys.stdin
-        elif isinstance(f, basestring):
-            f = open(f, "rb")
-        f = Python2kFileWrapper(f)
-        return io.BufferedReader(f)
+        if filepath == "-":
+            self.raw_fileobj0 = sys.stdin
+        elif isinstance(filepath, basestring):
+            self.raw_fileobj0 = io.open(filepath, "rb")
+        else:
+            raise Exception("Unknown:" + repr(filepath))
+        self.filepath = self.raw_fileobj0.name
+        self.filename = os.path.basename(filepath)
+        f = Python2kFileWrapper(self.raw_fileobj0)
+        self.buffered_fileobj0 = io.BufferedReader(f)
 
     def __uncompressed(self):
-        fileobj = self.compressed_fileobj
-        header = fileobj.peek(20)
+        header = self.buffered_fileobj0.peek(20)
         if header.startswith(b"\x50\x4b\x03\x04"):  # is ZIP?
             from .uncompress import ZipWrapper
-            fileobj = io.BufferedReader(ZipWrapper(fileobj))
-        if header.startswith(b"\x42\x5a\x68"):  # is BZ2?
+            self.raw_fileobj1 = (ZipWrapper(self.buffered_fileobj0))
+        elif header.startswith(b"\x42\x5a\x68"):  # is BZ2?
             from .uncompress import Bz2Wrapper
-            fileobj = io.BufferedReader(Bz2Wrapper(fileobj))
-        if header.startswith(b"\x1f\x8b\x08"):  # is GZIP?
+            self.raw_fileobj1 = (Bz2Wrapper(self.buffered_fileobj0))
+        elif header.startswith(b"\x1f\x8b\x08"):  # is GZIP?
             from .uncompress import GzipWrapper
-            fileobj = io.BufferedReader(GzipWrapper(fileobj))
-        return fileobj
+            self.raw_fileobj1 = (GzipWrapper(self.buffered_fileobj0))
+        else:
+            self.compressed = False
+            self.raw_fileobj1 = self.buffered_fileobj0
+            return self.raw_fileobj1
+        self.compressed = True
+        return io.BufferedReader(self.raw_fileobj1)
 
 
 def make_input_files(list_of_files):

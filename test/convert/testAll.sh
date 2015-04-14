@@ -25,12 +25,12 @@ test_bidir() {
     local input1="$t_OUTDIR/$filename"
     local output="$t_OUTDIR/${filename}.xml"
 
-    t_run "$t_BIN/convert.py --from=$filetype --to=XML $input1 >$output"
+    t_run "$t_BIN/convert.py -v --from=$filetype --to=XML $input1 >$output"
     t_compare_with_ref "${filename}.xml"
 
     local input2="$output"
     local output="${output}.${input1##*.}"
-    t_run "$t_BIN/convert.py --from=XML --to=$filetype $input2 >$output"
+    t_run "$t_BIN/convert.py -v --from=XML --to=$filetype $input2 >$output"
     if test -f "$t_REFDIR/$filename"; then
         t_compare_with_ref "$filename"
     else
@@ -48,7 +48,7 @@ test_outputOnly() {
     local output="$t_OUTDIR/${basename}${suffix_output}"
 
     local reference="${input%.xml}"
-    t_run "$t_BIN/convert.py --to=$filetype $input >$output"
+    t_run "$t_BIN/convert.py -v --to=$filetype $input >$output"
     t_compare_with_ref "${basename}${suffix_output}"
 }
 
@@ -105,3 +105,20 @@ test_outputOnly  XML "patterns_deprecated2.xml" ".xml"
 # TODO
 # Implement parser/printer: corpus.palavras
 # Implement parser/printer: corpus.treetagger
+
+
+
+###########################################################
+
+t_testname "Check Gzip uncompression"
+t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.gz >$t_OUTDIR/corpus.gz.PlainCorpus"
+t_compare "$t_OUTDIR/corpus.gz.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"
+
+#(This test fails before Python 3.3)
+#t_testname "Check Bzip2 uncompression"
+#t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.bz2 >$t_OUTDIR/corpus.bz2.PlainCorpus"
+#t_compare "$t_OUTDIR/corpus.bz2.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"
+
+t_testname "Check Zip uncompression"
+t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.zip >$t_OUTDIR/corpus.zip.PlainCorpus"
+t_compare "$t_OUTDIR/corpus.zip.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"

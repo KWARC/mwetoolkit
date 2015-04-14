@@ -87,5 +87,8 @@ class GzipWrapper(gzip.GzipFile):
         # (Besides, in Python3k we may not need to explicitly instantiate
         # BufferedReader for e.g. sys.stdin, which is our current headache).
         import io; 
-        io_contents = io.BytesIO(fileobj.read())
-        super(GzipWrapper, self).__init__(fileobj=io_contents)
+        self._io_contents = io.BytesIO(fileobj.read())
+        super(GzipWrapper, self).__init__(fileobj=self._io_contents)
+
+    def tell(self):
+        return self._io_contents.tell()

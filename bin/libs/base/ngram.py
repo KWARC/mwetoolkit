@@ -140,11 +140,8 @@ class Ngram (object):
             @return A string with a special internal representation of the 
             ngram.
         """
-        result = ""
-        for word in self :
-            result = result  + word.to_string() + WORD_SEPARATOR
-        return result[ 0 : len(result) - len(WORD_SEPARATOR) ]
-  
+        return WORD_SEPARATOR.join(w.to_string() for w in self)
+
 ################################################################################
         
     def from_string( self, the_string ) :
