@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-patterns.dtd">
+<patterns>
+<!-- Pattern that extract noun-noun compounds, optionally
+     using preposition "of" -->
+	  <pat> 
+	      <w pos="NN*"/>
+	      <pat repeat="+"> 
+	          <pat repeat="?">
+	              <w lemma="of" pos="IO"/>
+	          </pat>
+	          <w pos="NN*"/>
+        </pat>
+	  </pat>
+</patterns>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dict SYSTEM "dtd/mwetoolkit-patterns.dtd">
+<patterns>
+    <!-- This pattern extracts the nouns that occur with verb "open"-->
+    <!-- Canonical object position -->
+	  <pat> 
+	      <w pos="V*" lemma="open" id="base"/>
+	      <pat repeat="{1,7}" ignore="true" > <!-- A sequence of 1 to 5 words -->
+	          <w><neg pos="N*"/></w> <!-- that are not nouns -->
+	      </pat>
+        <w pos="N*" id="collocate"/>        
+	  </pat>
+	  <!-- Canonical subject position -->
+	  <pat> 
+        <w pos="N*" id="collocate"/> 
+        <pat repeat="{1,7}" ignore="true" > <!-- A sequence of 1 to 5 words -->
+	          <w><neg pos="N*"/></w> <!-- that are not nouns -->
+	      </pat>
+	      <w pos="V*" lemma="open" id="base"/>       
+	  </pat>	  
+</patterns>
