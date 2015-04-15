@@ -170,7 +170,8 @@ class FirstInputHandler(ChainedInputHandler):
         
     def handle_candidate(self, candidate, info={}):
         self.handle_meta_if_absent()
-        self.chain.handle_candidate(candidate,info)
+        info["kind"] = "candidate"
+        self._fallback_entity(candidate,info)
     
     def handle_meta(self, meta, info={}):
         self._meta_handled = True

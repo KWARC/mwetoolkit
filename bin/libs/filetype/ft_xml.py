@@ -329,6 +329,8 @@ class XMLParser(common.AbstractParser):
 
                 if elem.tag == "cand" :
                     # Finished reading the candidate, call callback
+                    info["fileobj"] = self.input.fileobj
+                    info["progress"] = self.input.current_progress()                    
                     self.handler.handle_candidate(candidate, info) 
 
                 elif elem.tag == "ngram":
@@ -451,6 +453,8 @@ class XMLParser(common.AbstractParser):
             if event == "end":
 
                 if elem.tag == "entry":
+                    info["fileobj"] = self.input.fileobj
+                    info["progress"] = self.input.current_progress()                
                     self.handler.handle_candidate(entry)
                     entry = None
                 elif elem.tag == "w":
