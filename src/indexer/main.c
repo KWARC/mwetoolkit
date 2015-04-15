@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
 		suffixarray_append_word(suf, newsym);
 	}
 
-	fprintf(stderr, "Corpus read: %zu words.\n", suf->used);
+	fprintf(stderr, "Corpus read: %u words.\n", suf->used);
 	fprintf(stderr, "Sorting suffix array...\n");
 	
 	suffixarray_sort(suf);

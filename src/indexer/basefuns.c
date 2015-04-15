@@ -25,14 +25,14 @@
 void *check_malloc(position_t size) {
 	void *new = malloc(size);
 	if (!new)
-		error("Error allocating %zu bytes!\n", size);
+		error("Error allocating %u bytes!\n", size);
 	return new;
 }
 
 void *check_realloc(void *ptr, position_t size) {
 	void *new = realloc(ptr, size);
 	if (!new)
-		error("Error reallocating %zu bytes!\n", size);
+		error("Error reallocating %u bytes!\n", size);
 	return new;
 }
 
