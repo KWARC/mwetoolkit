@@ -22,5 +22,5 @@ doc/html/index.html:
 	
 clean:
 	rm -rf doc/html bin/c-indexer
-	rm $(SRC)/indexer/*.o
+	rm -rf $(SRC)/indexer/*.o
 	
