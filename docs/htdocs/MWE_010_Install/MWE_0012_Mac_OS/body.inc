@@ -19,7 +19,7 @@
 
 <!--<p>The Python installation comes with a handy utility called easy_install, which easily installs missing components: <code>sudo easy_install simplejson</code></p>-->
 
-<p>Once you have checked and installed missing packages, open a Terminal and follow the <a href="?sitesig=MWE&page=MWE_010_Installing_the_mwetoolkit">general <code>mwetoolkit</code> installation instructions.</a>
+<p>Once you have checked and installed missing packages, open a Terminal and follow the <a href="?sitesig=MWE&page=MWE_010_Install">general <code>mwetoolkit</code> installation instructions.</a>
 
 <p><strong>Note:</strong> Some of these packages are optional, like <code>wdiff</code> and <code>libxml2</code>, but they are needed for unit testing.</p>
 

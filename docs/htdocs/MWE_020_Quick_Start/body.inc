@@ -4,6 +4,7 @@
 
 <p>You can download and follow the instructions on the slides of <a href="downloads/mwetk-tutorial-files.zip">the mwetoolkit tutorial</a> (last updated for WG2 Parseme meeting in March 20, 2015)</p>
 
+<!--
 <h3>Step-by-step guide (NOT UP-TO-DATE!)</h3>
 
 <p><tt>mwetoolkit</tt> works by extracting MWE candidates from a corpus using a set of morphosyntactical patterns. Then it can apply a number of statistics to filter the extracted candidates. <del>Input corpora, patterns and candidates are stored as XML files, following the format described by the DTDs in the <tt>dtd</tt> directory in the distribution.</del> The toolkit consists of a set of scripts performing each phase of candidate extraction and analysis; these scripts are in the <tt>bin</tt> directory.</p>
@@ -29,7 +30,7 @@
 
 <p>After generating the index for the Genia fragment, it performs a candidate extraction by running <tt>candidates.py -p patterns.xml -i index/corpus &gt; candidates.xml</tt>. This invokes the candidate extraction script, telling it to use the patterns described in the file <tt>patterns.xml</tt>, and to use the corpus contained in the index files whose prefix is <tt>corpus</tt> (this is the same name given to the <tt>index.py</tt> script). Instead of using a patterns file, you could specify the <tt>-n <em>min:max</em></tt> option to extract all ngrams with size between <em>min</em> and <em>max</em>.</p>
 
-<!--<p>Next, it runs the command <tt>candidates.py -p patterns.xml corpus.xml &gt;candidates-from-xml.xml</tt>. This performs the same extraction as the previous command, but reads the corpus from the XML file instead of the index (note the absence of the <tt>-i</tt> option). The results are the same; the only diference is that extracting from the index is slightly faster, and extracting from the XML file consumes less memory. In the next pass, the script checks whether the output of both extractions are indeed equal (they must be).-->
+<p>Next, it runs the command <tt>candidates.py -p patterns.xml corpus.xml &gt;candidates-from-xml.xml</tt>. This performs the same extraction as the previous command, but reads the corpus from the XML file instead of the index (note the absence of the <tt>-i</tt> option). The results are the same; the only diference is that extracting from the index is slightly faster, and extracting from the XML file consumes less memory. In the next pass, the script checks whether the output of both extractions are indeed equal (they must be).
 
 <p>Once candidates have been extracted, the frequencies of the individual words in each candidates are computed with the command <tt>counter.py -i index/corpus candidates.xml &gt; candidates-counted.xml</tt>. These counts are used by other scripts to compute statistics on the candidates. Word frequency cannot be computed directly from the XML file (it is done through binary search on the index). Instead of a corpus, you can count estimated word frequencies from the Web, using either the Yahoo (option <tt>-y</tt> - DEPRECATED) or Google (option <tt>-w</tt>) search engine. You can also count word frequencies from an indexed corpus different from the one used for the extraction.</p>
 
@@ -38,5 +39,5 @@
 <p>The association measures can be used in several ways. Here, we simply chose an association measure that we consider good, the t score, and sort the candidates according to this score, with the command <tt>sort.py -f t_corpus candidates-featureful.xml &gt; candidates-sorted.xml</tt>. The next script then works as Linux <tt>head</tt> command, cropping the sorted file and keeping only candidates with higher t score values. Finally, we compare the resulting candidates with a reference list containing some expressions that are already in a dictionary for the Genia biomedical domain. This is quite standard in MWE extraction, even though it only gives you an underestimation of the quality of the candidates as dictionaries are not complete. The command used in the evaluation is <tt>eval_automatic.py -r reference.xml -g candidates-crop.xml &gt; eval.xml 2&gt; eval-stats.txt</tt>. The <tt>-g</tt> option tells the script to ignore parts of speech while the <tt>-r</tt> option indicates the file containing the reference gold standard in XML format. The final figures of precision and recall is in file <tt>eval-stats.txt</tt>. Remember that this is only a toy experiment and that with such a small corpus, the association measures cannot be trusted</p>
 
 <p>For more advanced options, you can call the scripts using the <tt>--help</tt> option. This will print a message telling what the script does, what are the mandatory arguments and optional parameters. If you still have questions, write to our gmail addres, username mwetoolkit, and we'll be happy to help!</p>
-
+-->
 

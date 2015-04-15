@@ -12,7 +12,7 @@
 
 <h3>Details</h3>
 
-<p>See <a href="PHITE.php?sitesig=MWE&page=MWE_030_Defining_Patterns">Defining Patterns</a>.</p>
+<p>See <a href="?sitesig=MWE&page=MWE_020_Quick_Start&subpage=MWE_030_Defining_Patterns">Defining Patterns</a>.</p>
 
 
 

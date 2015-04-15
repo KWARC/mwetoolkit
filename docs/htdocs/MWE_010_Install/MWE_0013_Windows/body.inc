@@ -46,7 +46,7 @@ In order to select a package for installation, type the package name in the "Sea
 <img style="margin-bottom: 40px;" src="images/printscreen/cygwin-screen9.png" alt="Cygwin installation screen - Step 9"/></li>
 <li>Choose whether you want to create shortcuts on Desktop or in Start Menu, and click "Finish"<br/>
 <img style="margin-bottom: 40px;" src="images/printscreen/cygwin-screen10.png" alt="Cygwin installation screen - Step 10"/></li>
-<li>Now, open the Cygwin Terminal through one of the shortcuts and now follow the <a href="?sitesig=MWE&page=MWE_010_Installing_the_mwetoolkit">general <code>mwetoolkit</code> installation instructions.</a><br/>
+<li>Now, open the Cygwin Terminal through one of the shortcuts and now follow the <a href="?sitesig=MWE&page=MWE_010_Install">general <code>mwetoolkit</code> installation instructions.</a><br/>
 <img style="margin-bottom: 40px;" src="images/printscreen/cygwin-screen11.png" alt="Cygwin installation screen - Step 11"/></li>
 </ol>
 

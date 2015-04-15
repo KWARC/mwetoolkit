@@ -9,6 +9,8 @@ part-of-speech and lemma.  Each sentence must be terminated by a line with
 "&lt;/s&gt;" or by a custom user-defined POS-tag.
 </p>
 
+<p>See <a href="?sitesig=MWE&page=MWE_020_Quick_Start&subpage=MWE_040_TreeTagging_a_corpus">our page</a> for an example of use of TreeTagger with the mwetoolkit.</p>
+
 
 
 <h3>Characteristics</h3>

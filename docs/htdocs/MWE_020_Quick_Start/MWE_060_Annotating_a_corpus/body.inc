@@ -47,7 +47,7 @@ Now you can try other things, such as:
 
   <li>Modify "./my_patterns.xml" and introduce your own patterns.
   The XML pattern syntax is described <a
-  href="PHITE.php?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_066_XML_patterns">here</a>.
+  href="?sitesig=MWE&page=MWE_020_Quick_Start&subpage=MWE_030_Defining_Patterns">here</a>.
   </li>
 
   <li>Apply the modified patterns in another corpus of yours.</li>

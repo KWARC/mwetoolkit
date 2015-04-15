@@ -4,9 +4,9 @@
 
 <p>Before following the instructions below, please check that you have installed all the requirements according to your Operating System:</p>
 <ul>
-<li><a href="?sitesig=MWE&page=MWE_010_Installing_the_mwetoolkit&subpage=MWE_0011_Linux">Linux</a></li>
-<li><a href="?sitesig=MWE&page=MWE_010_Installing_the_mwetoolkit&subpage=MWE_0012_Mac_OS">Mac OS</a></li>
-<li><a href="?sitesig=MWE&page=MWE_010_Installing_the_mwetoolkit&subpage=MWE_0013_Windows">Windows</a></li>
+<li><a href="?sitesig=MWE&page=MWE_010_Install&subpage=MWE_0011_Linux">Linux</a></li>
+<li><a href="?sitesig=MWE&page=MWE_010_Install&subpage=MWE_0012_Mac_OS">Mac OS</a></li>
+<li><a href="?sitesig=MWE&page=MWE_010_Install&subpage=MWE_0013_Windows">Windows</a></li>
 </ul>
 
 <p>Once the requirements are installed, choose one installation method, <a href="#step2">from SVN</a> or <a href="#step2b">from release</a>, and follow the instructions below. As the code evolves fast and releases are not that frequent, we HIGHLY recommend you to use the SVN version.</p>
