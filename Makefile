@@ -6,6 +6,7 @@ BIN := bin
 CC := gcc
 
 all: $(BIN)/c-indexer
+	echo "\nThe mwetoolkit indexer was compiled and installed successfully at $^\n"
 
 $(BIN)/c-indexer: $(OBJECTS)
 	$(CC) -Wall -Wno-parentheses -I $(INCLUDE) -o $(BIN)/c-indexer $^
