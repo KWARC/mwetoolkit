@@ -26,7 +26,18 @@
 
 """
     This script converts a candidates file in a given format
-    into a corresponding representation in the "CSV" format.
+    into a corresponding representation in the "UCS" format.
+    Since UCS works only with pairs (2-grams), all ngrams with
+    sizes other than 2 are discarded.
+    
+    For more information, call the script with no parameter and read the
+    usage instructions.
+"""
+
+"""
+    This script converts a candidates file in XML (mwetoolkit-candidates.dtd)
+    into the UCS data set format. Since UCS works only with pairs (2-grams),
+    all ngrams with sizes other than 2 are discarded.
     
     For more information, call the script with no parameter and read the
     usage instructions.
@@ -37,11 +48,13 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
+import sys
+
 from libs.util import read_options, treat_options_simplest
-from libs.filetype import ft_csv
+from libs.filetype import ft_ucs
 from libs import filetype
 
-
+     
 ################################################################################     
 # GLOBALS     
 usage_string = """Usage: 
@@ -65,13 +78,16 @@ OPTIONS may be:
 -p OR --lemmapos
     Outputs the corpus in lemma/pos format. Default false.
 
+-f <name> OR --freq-source <name>
+    Uses the frequencies from the frequency source <name>.
+    By default, the first frequency source found in each entity is used.
+
 {common_options}
 """   
 surface_instead_lemmas = False  
 lemmapos = False
-sentence_counter = 0
-input_filetype_ext = None
-            
+freq_source = None
+
 ################################################################################
 
 def treat_options( opts, arg, n_arg, usage_string ) :
@@ -89,12 +105,14 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global input_filetype_ext
     
     treat_options_simplest( opts, arg, n_arg, usage_string )
-        
+
     for ( o, a ) in opts:        
         if o in ("-s", "--surface") : 
-            surface_instead_lemmas = True     
+            surface_instead_lemmas = True
         elif o in ("-p", "--lemmapos") : 
             lemmapos = True   
+        elif o in ("-f", "--freq-source") : 
+            freq_source = a
         elif o == "--from":
             input_filetype_ext = a                          
         else:
@@ -103,8 +121,8 @@ def treat_options( opts, arg, n_arg, usage_string ) :
 ################################################################################     
 # MAIN SCRIPT
 
-longopts = [ "surface", "lemmapos", "from=" ]
-args = read_options( "sp", longopts, treat_options, -1, usage_string )
-handler = ft_csv.CSVPrinter("candidates", lemmapos=lemmapos,
-        surfaces=surface_instead_lemmas)
+longopts = [ "surface", "lemmapos", "freq-source=" "from=" ]
+args = read_options( "spf:", longopts, treat_options, -1, usage_string )
+handler = ft_ucs.UCSPrinter("candidates", freq_source=freq_source,
+        lemmapos=lemmapos, surfaces=surface_instead_lemmas)
 filetype.parse(args, handler, input_filetype_ext)
