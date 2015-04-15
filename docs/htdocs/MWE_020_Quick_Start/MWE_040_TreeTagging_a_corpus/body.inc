@@ -23,4 +23,4 @@ English, you must specify the appropriate POS-tag that works as a sentence delim
 For example, when working with Spanish, you will need to use "<tt>-s FS</tt>"
 instead of "<tt>-s SENT</tt>".
 
-<p align="justify">From there on you can process the XML corpus using <tt>mwetoolkit</tt>'s tools, such as is shown in the <a href="http://mwetoolkit.sourceforge.net/PHITE.php?sitesig=MWE&page=MWE_002_Quick_Start">Quick Start</a> page.</p>
+<p align="justify">From there on you can process the XML corpus using <tt>mwetoolkit</tt>'s tools, such as is shown in the <a href="http://mwetoolkit.sourceforge.net/PHITE.php?sitesig=MWE&page=MWE_020_Quick_Start">Quick Start</a> page.</p>
