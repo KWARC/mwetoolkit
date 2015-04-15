@@ -70,6 +70,7 @@ def list_tools():
 @make_command
 def tool_args(toolname):
     r"""List arguments for a tool."""
+    toolname = os.path.basename(toolname)
     ToolArgsParser().parse(usage_paragraphs(get_usage(toolname)))
 
 

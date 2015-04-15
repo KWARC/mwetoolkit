@@ -62,8 +62,8 @@ ln -s "$t_LOCAL_INPUT"/* "$t_OUTDIR"/
 t_testname "Check CONLL format"
 test_bidir CONLL "corpus.conll"
 
-t_testname "Check FactoredMoses format"
-test_bidir FactoredMoses "corpus.moses"
+t_testname "Check Moses format"
+test_bidir Moses "corpus.moses"
 
 t_testname "Check PlainCorpus format"
 test_bidir PlainCorpus "corpus.PlainCorpus"

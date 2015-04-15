@@ -24,7 +24,7 @@
 ################################################################################
 """
 This module provides classes to manipulate files that are encoded in the
-"FactoredMoses" filetype, which is a useful input/output corpus textual format.
+"Moses" filetype, which is a useful input/output corpus textual format.
 
 You should use the methods in package `filetype` instead.
 """
@@ -46,7 +46,7 @@ from .. import util
 class MosesInfo(common.FiletypeInfo):
     r"""FiletypeInfo subclass for Moses."""
     description = "Moses factored format (word=f1|f2|f3|f4|f5)"
-    filetype_ext = "FactoredMoses"
+    filetype_ext = "Moses"
 
     comment_prefix = "#"
     escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
@@ -58,7 +58,7 @@ class MosesInfo(common.FiletypeInfo):
 
 
 class MosesChecker(common.AbstractChecker):
-    r"""Checks whether input is in FactoredMoses format."""
+    r"""Checks whether input is in Moses format."""
     def matches_header(self, strict):
         header = self.fileobj.peek(512)
         for line in header.split(b"\n"):
@@ -68,7 +68,7 @@ class MosesChecker(common.AbstractChecker):
 
 
 class MosesParser(common.AbstractTxtParser):
-    r"""Instances of this class parse the FactoredMoses format,
+    r"""Instances of this class parse the Moses format,
     calling the `handler` for each object that is parsed.
     """
     valid_categories = ["corpus"]
@@ -93,15 +93,15 @@ class MosesParser(common.AbstractTxtParser):
 
 
 class MosesPrinter(common.AbstractPrinter):
-    """Instances can be used to print Moses factored format."""
+    """Instances can be used to print Moses format."""
     valid_categories = ["corpus"]
 
     def handle_sentence(self, sentence, info={}):
-        """Prints a simple Moses-factored string where words are separated by 
+        """Prints a simple Moses string where words are separated by 
         a single space and each word part (surface, lemma, POS, syntax) is 
         separated from the next using a vertical bar "|".
         
-        @return A string with the Moses factored form of the sentence
+        @return A string with the Moses form of the sentence
         """
         moses_list = [self.word_to_moses(w) for w in sentence.word_list]
         tagged_list = sentence.add_mwe_tags(moses_list)
@@ -113,7 +113,7 @@ class MosesPrinter(common.AbstractPrinter):
         separated from each other by "|" character, as in Moses' factored
         translation format.
             
-        @return A string with Moses factored representation of a word.
+        @return A string with Moses representation of a word.
         """
         args = (word.surface, word.lemma, word.pos, word.syn)
         return "|".join(self.escape(w) if w != WILDCARD else "" for w in args)

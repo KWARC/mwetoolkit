@@ -1,8 +1,8 @@
-<h2>FactoredMoses file type</h2>
+<h2>Moses file type</h2>
 
 <!-- Short description -->
 <p>
-The "FactoredMoses" file type represents a corpus with one sentence per line, each
+The "Moses" file type represents a corpus with one sentence per line, each
 sentence containing space-separated words, each word containing 4 pipe-separated 
 factors (pipe is the vertical bar "|" character). The factors are surface form, lemma,
 part of speech and syntax information.
@@ -13,7 +13,7 @@ part of speech and syntax information.
 <h3>Characteristics</h3>
 
 <table border="1">
-<tr><td><strong>String name<sup><a href="#fn1" id="ref1">1</a></sup></strong></td><td>"FactoredMoses"</td></tr>
+<tr><td><strong>String name<sup><a href="#fn1" id="ref1">1</a></sup></strong></td><td>"Moses"</td></tr>
 <tr><td><strong>Categories</strong></td><td>"corpus" (input/output)</td></tr>
 <tr><td><strong>Encoding</strong></td><td>Text file, UTF-8</td></tr>
 <tr><td><strong>Source</strong></td><td>Factored corpus format for <a href="http://www.statmt.org/moses/?n=Moses.FactoredTutorial">Moses SMT toolkit</a></td></tr>
@@ -24,7 +24,7 @@ part of speech and syntax information.
 
 <h3>Details</h3>
 
-The "FactoredMoses" file type is a text file of category "corpus",
+The "Moses" file type is a text file of category "corpus",
 encoded in UTF-8. Each line should contain a list of space-separated words, and
 each word should be the concatenation of 4 factors using the pipe character "|"
 as separator:
