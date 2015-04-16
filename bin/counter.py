@@ -73,11 +73,13 @@ python {program} [-w | -u <id> | -T <dir> | -i <index-corpus>] OPTIONS <candidat
 -w OR --google
     Search for frequencies in the Web using Google Web Search as approximator 
     for Web document frequencies.
+    ** THIS OPTION IS DEPRECATED AS GOOGLE SHUT DOWN THEIR FREE SEARCH API **        
     
 -u <id> OR --univ <id>
     Same as -w (Google frequencies) but uses Google University Research program
     URL and ID. The ID must be registered with a static IP address at:
     http://research.google.com/university/search/
+    ** THIS OPTION IS DEPRECATED AS GOOGLE SHUT DOWN THEIR FREE SEARCH API **            
 
 -T <dir> OR --web1t <dir>
     Use Google's Web 1T 5-gram corpus. <dir> is the a directory containing the

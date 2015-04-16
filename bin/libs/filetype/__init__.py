@@ -287,7 +287,8 @@ class SmartParser(common.AbstractParser):
         r"""Return a FiletypeInfo instance for given fileobj."""
         if filetype_hint in HINT_TO_INFO:
             return HINT_TO_INFO[filetype_hint]
-
+        if filetype_hint is not None :
+            util.error("Invalid filetype: {hint}", hint=filetype_hint )
         header = fileobj.peek(1024)
         for m in common.Directive.RE_PATTERN.finditer(header):
             if m.group(1) == "filetype":

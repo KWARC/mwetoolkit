@@ -239,7 +239,7 @@ class InputFile(object):
     def __open_file(self, filepath):
         r"""(Return buffered file object for given path)"""
         if filepath == "-":
-            self.raw_fileobj0 = io.open(sys.stdin.fileno(), "rb")
+            self.raw_fileobj0 = sys.stdin#io.open(sys.stdin.fileno(), "rb")            
         elif isinstance(filepath, basestring):
             self.raw_fileobj0 = io.open(filepath, "rb")
         else:
