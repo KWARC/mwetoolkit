@@ -41,7 +41,6 @@ gunzip -c ted-en-sample.conll.gz > ted-en-sample.conll
 # Since our corpus contains around half a million words, this will take some 
 # time (30 secs to a couple of minutes, depending on your computer)
 mkdir -p index 
-rm -rf index/*  
 ${MWETKBIN}/index.py -v -i index/ted ted-en-sample.conll 
 
 # If you look at the index folder, you will notice the creation of many files
@@ -89,7 +88,7 @@ echo -e "\nStep 4 - Candidate filtering\n"
 # There are several available filtering tools included in the mwetoolkit. It is
 # possible to filter using simple criteria such as frequency and n-gram length,
 # using the filter.py script. Below, we show an example that filters out every 
-# n-gram that occurred only once in the corpus. This is genrally a good idea if
+# n-gram that occurred only once in the corpus. This is generally a good idea if
 # we want to obtain reliable association measures for further filtering (see 
 # below)
 ${MWETKBIN}/filter.py -v -t ted:2 cand-count.xml > cand-count-f1.xml
@@ -117,7 +116,7 @@ head -n 30 cand-feat.xml | grep -B 5 -A 7 "<features"
 # descending order using sort.py with -d option. The feature used in our example
 # is t_ted, but you can test other association measures and see if the top-100
 # retrieved expressions seem more interesting. Remark that the mwetoolkit has
-# scripts that are similat to common Linux commands like sort, head, tail, etc.
+# scripts that are similar to common Linux commands like sort, head, tail, etc.
 # Here, we use head.py to keep only the top 100 candidates sorted by t-score.
 python ${MWETKBIN}/sort.py -d -v -f t_ted cand-feat.xml | 
 ${MWETKBIN}/head.py -v -n 100 > cand-feat-ft.xml
@@ -177,11 +176,8 @@ ${MWETKBIN}/transform.py --from XML --to CSV cand-feat-ft.xml > cand-feat-ft.csv
 # Also, do not hesitate to test other patterns like the one in pat_open.xml, and
 # the examples described on our website.
 
-# In the end, we can remove the corpus and keep only the gzipped version, if we 
-# want to save some disk space.
-# rm ted-en-sample.conll
-
 # If you want to remove all temporary files, uncomment the lines below
 # rm -f cand-feat-ft.csv ted-mwe.html ted-en-sample-mwe.txt cand-feat-ft.xml \
-#       cand-count-f1.xml index/* cand.xml cand-count.xml ted-en-sample.conll
+#       cand-count-f1.xml index/* cand.xml cand-count.xml ted-en-sample.conll \
+#       cand-feat.xml
 
