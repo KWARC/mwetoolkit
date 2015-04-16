@@ -138,6 +138,8 @@ Because the <span style="color:#F0F">killer_apps</span> can be downloaded . <br/
 
 <p>Also, do not hesitate to test other patterns like the one in pat_open.xml, and the <a href="?sitesig=MWE&page=MWE_020_Quick_Start&subpage=MWE_030_Defining_Patterns">examples described on the website</a>.</p>
 
+<p>If you want to know more about how the toolkit works and contribute your own scripts and impromentes, you can access our <a href="?sitesig=MWE&page=MWE_080_For_developers"dedicated page for developers</a></p>
+
 
 
 
