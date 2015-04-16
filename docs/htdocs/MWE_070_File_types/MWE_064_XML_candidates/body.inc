@@ -58,7 +58,7 @@ A word and the n-gram may have several <tt>&lt;freq/&gt;</tt> elements which cor
  <p>A candidate may contain other elements like <tt>&lt;bigrams&gt;</tt> and <tt>&lt;vars&gt;</tt>. These are not widely supported and can be ignored.</p>
 
 <p>
-Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be ommited, an attribute value should never be empty. 
+Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be omitted, an attribute value should never be empty. 
 </p>
 
 

@@ -34,7 +34,7 @@ The input will come from either <code>&lt;file-inputs&gt;</code> or, if no filen
 
 <p>
 In order to simplify this architecture, the toolkit has a shared library that can be used by the python tools: <code>mwetoolkit/bin/lib</code>.
-This library is basically divided between the <code>base</code> package, which defines the internal representation of things in the toolkit; and the <code>filetype</code> package, which converts between the toolkit's <a href="PHITE.php?sitesig=MWE&page=MWE_070_File_types">accepted filetypes</a> and the internal representation in memory.
+This library is basically divided between the <code>base</code> package, which defines the internal representation of things in the toolkit; and the <code>filetype</code> package, which converts between the toolkit's <a href="?sitesig=MWE&page=MWE_070_File_types">accepted filetypes</a> and the internal representation in memory.
 </p>
 
 <style type="text/css">
@@ -60,7 +60,7 @@ FeatureSets are essentially python <tt>dict</tt>s, and may in the future be conv
 
 
 <p>
-Ngrams, sentences and MWE candidates contain a list of words as their main attribute. An MWE occurrence is a mapping between a candidate and the internals of a sentence.
+N-grams, sentences and MWE candidates contain a list of words as their main attribute. An MWE occurrence is a mapping between a candidate and the internals of a sentence.
 </p>
 <img class="centered" src="images/mwet4devs_base2.jpg" alt="Class diagram: Ngram and subclasses"/>
 

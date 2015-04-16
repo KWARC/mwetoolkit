@@ -4,7 +4,7 @@
 
 <h3>Installing TreeTagger</h3>
 
-<p align="justify">To install TreeTagger, just follow the instructions in the "Download" section of <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/">TreeTagger's webpage</a>. In addition to TreeTagger itself, you will need to download parameter files for each language you wish to use the tagger with. We recommend that you add the path to TreeTagger to your PATH variable as suggested by the TreeTagger installation script, this will allow you to call it without using the full path.</p>
+<p align="justify">To install TreeTagger, just follow the instructions in the "Download" section of <a href="http://www.ims.uni-stuttgart.de/projekte/corplex/TreeTagger/">TreeTagger's web page</a>. In addition to TreeTagger itself, you will need to download parameter files for each language you wish to use the tagger with. We recommend that you add the path to TreeTagger to your PATH variable as suggested by the TreeTagger installation script, this will allow you to call it without using the full path.</p>
 
 <h3>Converting TreeTagger's output to XML</h3>
 

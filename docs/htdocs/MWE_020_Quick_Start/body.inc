@@ -1,6 +1,6 @@
 <h2>Getting started</h2>
 
-<p>To start using the mwetoolkit, you need first to <a href="">install it</a>. The toolkit currently works at the command line. If you are not familiar with it, you can simply follow the steps below and copy-paste the commands. This tutorial is based on the slides of <a href="downloads/mwetk-tutorial-files.zip">the mwetoolkit tutorial</a> (last updated for WG2 Parseme meeting in March 20, 2015). Each command is explained and you can try and adapt the options to your corpus, MWE patterns, and so on. In the scripts below, we use the variable${MWETKBIN} to indicate the path to your mwetoolkit <tt>bin</tt> folder. The commands are also available in the mwetoolkit itself in the form of a script in folder <tt>toy</tt>, called <tt>run-tutorial.sh</tt>.</p>
+<p>To start using the mwetoolkit, you need first to <a href="">install it</a>. The toolkit currently works at the command line. If you are not familiar with it, you can simply follow the steps below and copy-paste the commands. This tutorial is based on the slides of <a href="downloads/mwetk-tutorial-files.zip">the mwetoolkit tutorial</a> (last updated for WG2 PARSEME meeting in March 20, 2015). Each command is explained and you can try and adapt the options to your corpus, MWE patterns, and so on. In the scripts below, we use the variable${MWETKBIN} to indicate the path to your mwetoolkit <tt>bin</tt> folder. The commands are also available in the mwetoolkit itself in the form of a script in folder <tt>toy</tt>, called <tt>run-tutorial.sh</tt>.</p>
 
 <h3>1. Introduction</h3>
 

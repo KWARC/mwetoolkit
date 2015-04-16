@@ -3,7 +3,7 @@
 <p>The <code>mwetoolkit</code> was developed and tested extensively on Linux, but this doesn't mean you cannot use it on Windows :-)</p>
 
 <!--<span style="color:red;">-->
-<p>It is now possible to run the <code>mwetoolkit</code> in Windows environments by installing a command line emmulator called <strong>Cygwin</strong>. The instructions below have been tested in Windows 7 Home Basic - 64 bits and worked perfectly. We detail below specific Cygwin installation instructions for use with the <code>mwetoolkit</code>. If you are familiar with Cygwin, you can run the installation setup and go to step 7, to install the required packages.</p>
+<p>It is now possible to run the <code>mwetoolkit</code> in Windows environments by installing a command line emulator called <strong>Cygwin</strong>. The instructions below have been tested in Windows 7 Home Basic - 64 bits and worked perfectly. We detail below specific Cygwin installation instructions for use with the <code>mwetoolkit</code>. If you are familiar with Cygwin, you can run the installation setup and go to step 7, to install the required packages.</p>
 
 <h3>Download the Cygwin installer</h3>
 
@@ -25,7 +25,7 @@ Once you have downloaded the installer, double-click it to start the installatio
 
 <!--<h3>3. Package selection</h3>-->
 
-<li>Like in any Linux-based distribution, Cygwin program installation is based on <em>packages</em>. At this step, you must select the packages that you want to install in addition to the basic ones. A simple possibility would be to select all packages, but this would take hours and fill up several gigabytes of HD storage. Instead, we recommend installing only the packages listed below, required to run the mwetoolkit:
+<li>Like in any Linux-based distribution, Cygwin program installation is based on <em>packages</em>. At this step, you must select the packages that you want to install in addition to the basic ones. A simple possibility would be to select all packages, but this would take hours and fill up several gigabytes of disk storage. Instead, we recommend installing only the packages listed below, required to run the mwetoolkit:
 <ul>
 <li><code>subversion</code> - category "Devel"</li>
 <li><code>python</code> - category "Python"</li>
@@ -51,6 +51,6 @@ In order to select a package for installation, type the package name in the "Sea
 <img style="margin-bottom: 40px;" src="images/printscreen/cygwin-screen11.png" alt="Cygwin installation screen - Step 11"/></li>
 </ol>
 
-<p><em>WARNING</em>: when emmulated in Cygwin, we remarked that the <code>mwetoolkit</code> runs considerably slower than in Linux. Consider using Linux if you want to process very large corpora</p>
+<p><em>WARNING</em>: when emulated in Cygwin, we remarked that the <code>mwetoolkit</code> runs considerably slower than in Linux. Consider using Linux if you want to process very large corpora</p>
 
 

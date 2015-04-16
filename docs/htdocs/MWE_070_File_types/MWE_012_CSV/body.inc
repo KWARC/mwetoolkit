@@ -31,7 +31,7 @@ columns. The possible column names are:
   <li>Column  "ngram": Space-separated list of words.</li>
   <li>Column  "pos": The POS-tag for each element of the n-gram.</li>
   <li>Column  "occurs": Number of occurrences in the corpus.</li>
-  <li>Column  "corpus": [[Undocummented]].</li>
+  <li>Column  "corpus": [[Undocumented]].</li>
   <li>Column  "sources": A ";"-separated list of n-grams for each occurrence of the MWE.</li>
 </ul>
 

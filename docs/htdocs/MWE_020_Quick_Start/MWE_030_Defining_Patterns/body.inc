@@ -15,7 +15,7 @@
 
 <h3>Literal matches</h3>
 
-<p>The simplest kind of pattern is one that matches literal ocurrences of one or more attributes in the corpus. This is done with the tag <tt>&lt;w attribute="value" .../&gt;</tt>. For example, to match an adjective followed by a noun, one could use the pattern:</P>
+<p>The simplest kind of pattern is one that matches literal occurrences of one or more attributes in the corpus. This is done with the tag <tt>&lt;w attribute="value" .../&gt;</tt>. For example, to match an adjective followed by a noun, one could use the pattern:</P>
 <pre>
 &lt;pat&gt;
     &lt;w pos="A" /&gt;
@@ -32,7 +32,7 @@
 <p>It is possible to define regular-expression-like patterns, containing elements that can appear a variable number of times. This is done with the <tt>repeat</tt> attribute of the <tt>pat</tt> tag and with the <tt>either</tt> element. The <tt>repeat</tt> attribute specifies how many times a pattern can be repeated, for instance:</p> 
 <ul>
 <li><tt>repeat="?"</tt>: the pattern may appear 0 or 1 times (in other words, it is optional, as it may or may not occur)</li>
-<li> <tt>repreat="*"</tt>: the pattern may appear from 0 to any number of times</li>
+<li> <tt>repeat="*"</tt>: the pattern may appear from 0 to any number of times</li>
 <li><tt>repeat="+"</tt>: similar to above, except that the pattern must appear at least 1 time </li>
 <li><li><tt>repeat="{m,n}"</tt>: the pattern may appear from <em>m</em> to <em>n</em> times (with m &leq; n). If you omit the first (or second) boundary, it defines an upper (or lower) bound on the number of occurrences.</li>
 </ul>
@@ -160,4 +160,4 @@ forbidding specifically the sequence "of the", one could use the pattern:</p>
 &lt;/pat&gt;
 </pre>    
 
-<p>Both "backward" and "forward" syntactic dependencies are supported. That is, the word on which the <tt>syndep</tt> attribute depends may occur before or after the current word. However, if you want to acquire both back and forth dependencies simultaneously, you must define both in an <tt>either</tt> element, e.g. to extract adjectives that modify nouns, independently of the position of the noun wrt the adjective, like <em>bella casa</em> and <em>casa bella</em> in Spanish.</p>
+<p>Both "backward" and "forward" syntactic dependencies are supported. That is, the word on which the <tt>syndep</tt> attribute depends may occur before or after the current word. However, if you want to acquire both back and forth dependencies simultaneously, you must define both in an <tt>either</tt> element, e.g. to extract adjectives that modify nouns, independently of the position of the noun relative to the adjective, like <em>bella casa</em> and <em>casa bella</em> in Spanish.</p>

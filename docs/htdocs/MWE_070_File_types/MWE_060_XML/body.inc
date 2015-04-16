@@ -29,7 +29,7 @@ dictionary using a XML schema designed specifically for the mwetoolkit.
 generic file format, being used as input and output for corpus, candidates, patterns and
 dictionaries. It evolved with the toolkit's functionalities, and nowadays, it is used
 mainly for candidates, dicts and patterns, since it is too verbose for large corpora.
-For large annotated corpora, CONLL or MosesFactored are preferrable.</p>
+For large annotated corpora, CONLL or Moses are preferable.</p>
 
 <p>The specific structure of a given XML category is described in the documents for each category:</p>
 <ul>

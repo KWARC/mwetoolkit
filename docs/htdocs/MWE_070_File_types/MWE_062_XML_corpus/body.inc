@@ -20,11 +20,11 @@ optional attributes: </p>
 <li><tt>surface</tt> : surface form, word as it occurs in running text.</li>
 <li><tt>lemma</tt> : canonical word form, e.g. infinitive for verbs and singular for nouns</li>
 <li><tt>pos</tt> : part of speech, that is, morphosyntactic categories like NOUN, ADVERB, etc.</li>
-<li><tt>syn</tt> : dependency syntax in the form of a colon-separated pair REL:HEAD, where REL is the nature of the suntactic relation and HEAD is the position of the governor</li>
+<li><tt>syn</tt> : dependency syntax in the form of a colon-separated pair REL:HEAD, where REL is the nature of the syntactic relation and HEAD is the position of the governor</li>
 </ul>
 
 <p>
-Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be ommited, an attribute value should never be empty. 
+Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be omitted, an attribute value should never be empty. 
 </p>
 
 

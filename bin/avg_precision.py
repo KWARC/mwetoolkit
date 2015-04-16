@@ -109,7 +109,7 @@ class StatsCollectorHandler(filetype.InputHandler):
                 all_feats.append( meta_feat.name )
         tp_classes_ok = False
         for meta_tp in meta.meta_tpclasses :
-            if meta_tp.value == "{True,False}" :
+            if meta_tp.feat_type == "{True,False}" :
                 tp_classes_ok = True
                 feat_to_order[ meta_tp.name ] = {}
                 for feat_name in all_feats :

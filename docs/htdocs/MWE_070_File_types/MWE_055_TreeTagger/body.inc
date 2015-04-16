@@ -72,7 +72,7 @@ Each word should be terminated by one of these two options:
     <tr>
       <td>"|"</td>
       <td>"${pipe}"</td>
-      <td>[[Undocummented]].</td>
+      <td>[[Undocumented]].</td>
     </tr>
 
     <tr>
