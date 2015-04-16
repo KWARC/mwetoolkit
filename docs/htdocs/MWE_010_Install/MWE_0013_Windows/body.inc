@@ -2,7 +2,8 @@
 
 <p>The <code>mwetoolkit</code> was developed and tested extensively on Linux, but this doesn't mean you cannot use it on Windows :-)</p>
 
-<p><span style="color:red;">It is now possible to run the <code>mwetoolkit</code> in Windows environments</span> by installing a command line emmulator called <strong>Cygwin</strong>. The instructions below have been tested in Windows 7 Home Basic - 64 bits and worked perfectly. We detail below specific Cygwin installation instructions for use with the <code>mwetoolkit</code>. If you are familiar with Cygwin, you can run the installation setup and go to step 7, to install the required packages.</p>
+<!--<span style="color:red;">-->
+<p>It is now possible to run the <code>mwetoolkit</code> in Windows environments by installing a command line emmulator called <strong>Cygwin</strong>. The instructions below have been tested in Windows 7 Home Basic - 64 bits and worked perfectly. We detail below specific Cygwin installation instructions for use with the <code>mwetoolkit</code>. If you are familiar with Cygwin, you can run the installation setup and go to step 7, to install the required packages.</p>
 
 <h3>Download the Cygwin installer</h3>
 

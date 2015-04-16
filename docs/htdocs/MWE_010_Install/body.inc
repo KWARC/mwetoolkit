@@ -51,7 +51,7 @@ cd ..</pre>
 ./testAll.sh
 cd ..</pre>
 
-<p>Should one of the tests fail, please send a copy of the output and a brief description of your configurations (operating system, version, machine) to our gmail, our username is mwetoolkit. In some architectures (Mac OS), the test appears to fail because of floating point rounding differences in the last digits. This can be checked in the test log files and safely ignored.</p>
+<p>Should one of the tests fail, please <a href="?sitesig=MWE&page=MWE_090_Contact">contact us</a> sending a copy of the output and a brief description of your configurations (operating system, version, machine). In some architectures (Mac OS), the test appears to fail because of floating point rounding differences in the last digits. This can be checked in the test log files and safely ignored.</p>
 
 <p><strong>Failed tests do not prevent you from using the mwetoolkit normally :-)</strong></p>
 

@@ -1,11 +1,13 @@
 
 <h2>Contact</h2>
 
-<p>A question? A bug? A suggestion? Please don't hesitate to send us an email:</p>
+<p>A question? A bug? A suggestion? </p>
 
-<p>Our username is <tt>mwetoolkit</tt> and the email provider is <strong>Gmail</strong>, can you guess our email address? ;-)</p>
+<p>You can post your message or bug report to the <a href="https://groups.google.com/d/forum/mwetoolkit" target="_blank">public mailing list</a>.</p>
 
-<p>You can also subscribe to the <a href="https://groups.google.com/d/forum/mwetoolkit" target="_blank">public mailing list</a>.</p>
+<p>For specific questions, please don't hesitate to send us an email. Our username is <tt>mwetoolkit</tt> and the email provider is <strong>Gmail</strong>, can you guess our email address? ;-)</p>
+
+
 
 <hr/>
 

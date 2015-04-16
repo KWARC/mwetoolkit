@@ -144,7 +144,7 @@ automatically when generating output. -->
 The file type &quot;<code>XML</code>&quot; is the only format originally
 accepted by the <code>mwetoolkit</code>, and is hence the most generic and
 flexible one.  If you have any problem with other input filetypes, you can
-always try to <code>convert.py</code> your file into &quot;<code>XML</code>&quot;
+always try to <code>transform.py</code> your file into &quot;<code>XML</code>&quot;
 format and take it from there.
 </p>
 
