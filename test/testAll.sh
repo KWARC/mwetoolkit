@@ -1,13 +1,8 @@
 #!/bin/bash
 set -e           # Exit on errors...
 
-# Use GNU readlink on Mac OS.
-if which greadlink >/dev/null 2>&1; then
-    readlink() { greadlink "$@"; }
-fi
+cd "$(dirname "$0")"
 
-DIR="$(readlink -f "$(dirname "$0")")"
-cd "$DIR"
 
 for dir in *; do
     if test -f "./$dir/testAll.sh"; then
