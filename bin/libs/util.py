@@ -201,42 +201,6 @@ def read_options(shortopts, longopts, treat_options, n_args, usage_string):
     treat_options(opts, arg, n_args, usage_string)
     return arg
 
-
-################################################################################             
-
-def strip_xml(the_string):
-    """
-    	Escapes the XML special characters in the string by replacing them with
-    	the corresponding XML entities. The five special characters in XML are :
-    	' " < > &
-
-    	@param the_string The unicode object whose characters should be escaped
-
-    	@return an equivalent unicode object where special XML characters were
-    	replaced by their corresponding entities
-    """
-    if not isinstance(the_string, unicode):
-        warn_once("Will fail to replace in `bytes` instance")
-
-    cleanContent = the_string
-    # First, replace entities with their characters, guaranteeing that, if the
-    # text already contains escaped entities, they won't become something like
-    # &amp;quot; 
-    cleanContent = cleanContent.replace("&apos;", "\'")  # Escape sequence
-    cleanContent = cleanContent.replace("&quot;", "\"")  # Escape sequence
-    cleanContent = cleanContent.replace("&gt;", ">")  # Escape sequence
-    cleanContent = cleanContent.replace("&lt;", "<")  # Escape sequence
-    cleanContent = cleanContent.replace("&amp;", "&")  # Escape sequence
-    ## Now, replace the characters with the entities
-    #cleanContent = cleanContent.replace("&", "&amp;")  # Escape sequence
-    #cleanContent = cleanContent.replace("<", "&lt;")  # Escape sequence
-    #cleanContent = cleanContent.replace(">", "&gt;")  # Escape sequence
-    #cleanContent = cleanContent.replace("\"", "&quot;")  # Escape sequence
-    #cleanContent = cleanContent.replace("\'", "&apos;")  # Escape sequence
-    ##cleanContent = cleanContent.replace( "*", "&lowast;" ) # Escape WILDCARD
-    return cleanContent
-
-
 ################################################################################
 
 def interpret_ngram(argument):

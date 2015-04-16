@@ -57,7 +57,7 @@ import subprocess
 import struct
 
 from ..base.sentence import SentenceFactory
-from ..util import verbose, strip_xml, warn, error
+from ..util import verbose, warn, error
 from ..base.word import Word, WORD_ATTRIBUTES
 from ..base.__common import ATTRIBUTE_SEPARATOR, WILDCARD, C_INDEXER_PROGRAM
 from .. import filetype

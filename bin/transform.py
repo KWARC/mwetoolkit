@@ -109,6 +109,9 @@ class TransformHandler(filetype.ChainedInputHandler):
             self.global_dict["word"] = self.global_dict["w"] = word
             exec(executable_w, self.global_dict)
         self.chain.handle(entity, info)
+        
+    def handle_pattern(self, pattern, info={}):
+        self.chain.handle_pattern(pattern, info)
 
 
 ################################################################################

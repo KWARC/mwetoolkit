@@ -188,7 +188,7 @@ class CandidatesGeneratorHandler(filetype.ChainedInputHandler):
             for (match_ngram, wordnums) in pattern.matches(sentence,
                     match_distance=match_distance, id_order=id_order,
                     overlapping=not non_overlapping):
-                wordnums_string = ",".join( map( str, wordnums ) )
+                wordnums_string = ",".join(unicode(wn+1) for wn in wordnums)
                 if wordnums_string in already_matched:
                     continue
                 already_matched.add( wordnums_string )

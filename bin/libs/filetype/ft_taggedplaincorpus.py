@@ -71,9 +71,9 @@ class TPCParser(common.AbstractTxtParser):
     """
     valid_categories = ["corpus"]
     RE_ENTRY = re.compile(
-            "(?P<word>[^<> ])" \
-            "|(?P<complex><mwepart +id=\"(?P<ids>[0-9,])*\">" \
-                    "(?P<c_word>[^<> ])</ *mwepart *>)")
+            "(?P<word>[^<> ]+)" \
+            "|(?P<complex><mwepart +id=\"(?P<ids>[0-9,]*)\">" \
+                    "(?P<c_word>[^<> ]+)</ *mwepart *>)")
 
     def __init__(self, encoding='utf-8'):
         super(TPCParser, self).__init__(encoding)
@@ -96,7 +96,8 @@ class TPCParser(common.AbstractTxtParser):
                     num2cand[int(id)].append(sentence[-1])
                     num2indexes[int(id)].append(len(sentence)-1)
 
-        for num, words in num2cand.iteritems():
+        for num in sorted(num2cand.keys()):
+            words = num2cand[ num ]
             c = self.candidate_factory.make(words, id_number=num)
             mweo = MWEOccurrence(sentence, c, num2indexes[num])
             sentence.mweoccurs.append(mweo)
