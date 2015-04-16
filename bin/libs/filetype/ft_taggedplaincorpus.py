@@ -34,7 +34,16 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
+import collections
+import re
+
 from . import _common as common
+from ..base.candidate import CandidateFactory
+from ..base.sentence import SentenceFactory
+from ..base.mweoccur import MWEOccurrence
+from ..base.word import Word
+from .. import util
+
 
 class TPCInfo(common.FiletypeInfo):
     r"""FiletypeInfo subclass for TaggedPlainCorpus format."""
@@ -42,18 +51,57 @@ class TPCInfo(common.FiletypeInfo):
     filetype_ext = "TaggedPlainCorpus"
   
     comment_prefix = "#"
-    escape_pairs = [("$", "${dollar}"), ("|", "${pipe}"), ("#", "${hash}"),
+    escape_pairs = [("$", "${dollar}"), ("#", "${hash}"),
                     ("<", "${lt}"), (">", "${gt}"), (" ", "${space}"),
-                    ("\t", "${tab}"), ("\n", "${newline}")]
+                    ("\n", "${newline}")]
 
     def operations(self):
-        return common.FiletypeOperations(TPCChecker, None, TPCPrinter)
+        return common.FiletypeOperations(TPCChecker, TPCParser, TPCPrinter)
 
 
 class TPCChecker(common.AbstractChecker):
     r"""Checks whether input is in TaggedPlainCorpus format."""
     def matches_header(self, strict):
-        return not strict
+        return not strict or "<mwepart" in self.fileobj.peek(1024)
+
+
+class TPCParser(common.AbstractTxtParser):
+    r"""Instances of this class parse the TaggedPlainCorpus format,
+    calling the `handler` for each object that is parsed.
+    """
+    valid_categories = ["corpus"]
+    RE_ENTRY = re.compile(
+            "(?P<word>[^<> ])" \
+            "|(?P<complex><mwepart +id=\"(?P<ids>[0-9,])*\">" \
+                    "(?P<c_word>[^<> ])</ *mwepart *>)")
+
+    def __init__(self, encoding='utf-8'):
+        super(TPCParser, self).__init__(encoding)
+        self.candidate_factory = CandidateFactory()
+        self.sentence_factory = SentenceFactory()
+        self.category = "corpus"
+
+    def _parse_line(self, line, info={}):
+        sentence = self.sentence_factory.make()
+        num2cand = collections.defaultdict(list)
+        num2indexes = collections.defaultdict(list)
+
+        for match in self.RE_ENTRY.finditer(line):
+            word, complex, ids, c_word = match.groups()
+            if word:
+                sentence.append(Word(word))
+            else:
+                sentence.append(Word(c_word))
+                for id in ids.split(","):
+                    num2cand[int(id)].append(sentence[-1])
+                    num2indexes[int(id)].append(len(sentence)-1)
+
+        for num, words in num2cand.iteritems():
+            c = self.candidate_factory.make(words, id_number=num)
+            mweo = MWEOccurrence(sentence, c, num2indexes[num])
+            sentence.mweoccurs.append(mweo)
+
+        self.handler.handle_sentence(sentence, info)
 
 
 class TPCPrinter(common.AbstractPrinter):
@@ -79,4 +127,3 @@ class TPCPrinter(common.AbstractPrinter):
                               + "\">" + surface_list[mwetag_i] + "</mwepart>"
         line = " ".join(surface_list)
         self.add_string(line, "\n")
-
