@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<corpus >
+<s s_id="1"><w surface="It" /> <w surface="can" /> <w surface="be" /> <w surface="a" /> <w surface="very" /> <w surface="complicated" /> <w surface="thing" /> <w surface="," /> <w surface="the" /> <w surface="ocean" /> <w surface="." /> </s>
+<s s_id="2"><w surface="And" /> <w surface="it" /> <w surface="can" /> <w surface="be" /> <w surface="a" /> <w surface="very" /> <w surface="complicated" /> <w surface="thing" /> <w surface="," /> <w surface="what" /> <w surface="human" /> <w surface="health" /> <w surface="is" /> <w surface="." /> </s>
+<s s_id="3"><w surface="And" /> <w surface="bringing" /> <w surface="those" /> <w surface="two" /> <w surface="together" /> <w surface="might" /> <w surface="seem" /> <w surface="a" /> <w surface="very" /> <w surface="daunting" /> <w surface="task" /> <w surface="," /> <w surface="but" /> <w surface="what" /> <w surface="I" /> <w surface="am" /> <w surface="going" /> <w surface="to" /> <w surface="try" /> <w surface="to" /> <w surface="say" /> <w surface="is" /> <w surface="that" /> <w surface="even" /> <w surface="in" /> <w surface="that" /> <w surface="complexity" /> <w surface="," /> <w surface="there" /> <w surface="is" /> <w surface="some" /> <w surface="simple" /> <w surface="themes" /> <w surface="that" /> <w surface="I" /> <w surface="think" /> <w surface="," /> <w surface="if" /> <w surface="we" /> <w surface="understand" /> <w surface="," /> <w surface="we" /> <w surface="can" /> <w surface="really" /> <w surface="move" /> <w surface="forward" /> <w surface="." /> </s>
+<s s_id="4"><w surface="And" /> <w surface="those" /> <w surface="simple" /> <w surface="themes" /> <w surface="are" /> <w surface="not" /> <w surface="really" /> <w surface="themes" /> <w surface="about" /> <w surface="the" /> <w surface="complex" /> <w surface="science" /> <w surface="of" /> <w surface="what" /> <w surface="is" /> <w surface="going" /> <w surface="on" /> <w surface="," /> <w surface="but" /> <w surface="things" /> <w surface="that" /> <w surface="we" /> <w surface="all" /> <w surface="pretty" /> <w surface="well" /> <w surface="know" /> <w surface="." /> </s>
+<s s_id="5"><w surface="And" /> <w surface="I" /> <w surface="am" /> <w surface="going" /> <w surface="to" /> <w surface="start" /> <w surface="with" /> <w surface="this" /> <w surface="one" /> <w surface=":" /> <w surface="If" /> <w surface="momma" /> <w surface="am" /> <w surface="not" /> <w surface="happy" /> <w surface="," /> <w surface="am" /> <w surface="not" /> <w surface="nobody" /> <w surface="happy" /> <w surface="." /> </s>
+<s s_id="6"><w surface="We" /> <w surface="know" /> <w surface="that" /> <w surface="," /> <w surface="right" /> <w surface="?" /> </s>
+<s s_id="7"><w surface="We" /> <w surface="&amp;apos;ve" /> <w surface="experienced" /> <w surface="that" /> <w surface="." /> </s>
+<s s_id="8"><w surface="And" /> <w surface="if" /> <w surface="we" /> <w surface="just" /> <w surface="take" /> <w surface="that" /> <w surface="and" /> <w surface="we" /> <w surface="build" /> <w surface="from" /> <w surface="there" /> <w surface="," /> <w surface="then" /> <w surface="we" /> <w surface="can" /> <w surface="go" /> <w surface="to" /> <w surface="the" /> <w surface="next" /> <w surface="step" /> <w surface="," /> <w surface="which" /> <w surface="is" /> <w surface="that" /> <w surface="if" /> <w surface="the" /> <w surface="ocean" /> <w surface="am" /> <w surface="not" /> <w surface="happy" /> <w surface="," /> <w surface="am" /> <w surface="not" /> <w surface="nobody" /> <w surface="happy" /> <w surface="." /> </s>
+<s s_id="9"><w surface="That" /> <w surface="is" /> <w surface="the" /> <w surface="theme" /> <w surface="of" /> <w surface="my" /> <w surface="talk" /> <w surface="." /> </s>
+<s s_id="10"><w surface="And" /> <w surface="we" /> <w surface="are" /> <w surface="making" /> <w surface="the" /> <w surface="ocean" /> <w surface="pretty" /> <w surface="unhappy" /> <w surface="in" /> <w surface="a" /> <w surface="lot" /> <w surface="of" /> <w surface="different" /> <w surface="ways" /> <w surface="." /> </s>
+<s s_id="11"><w surface="This" /> <w surface="is" /> <w surface="a" /> <w surface="shot" /> <w surface="of" /> <w surface="Cannery" /> <w surface="Row" /> <w surface="in" /> <w surface="1932" /> <w surface="." /> </s>
+<s s_id="12"><w surface="Cannery" /> <w surface="Row" /> <w surface="," /> <w surface="at" /> <w surface="the" /> <w surface="time" /> <w surface="," /> <w surface="had" /> <w surface="the" /> <w surface="biggest" /> <w surface="industrial" /> <w surface="canning" /> <w surface="operation" /> <w surface="on" /> <w surface="the" /> <w surface="west" /> <w surface="coast" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="1"><mwepart index="12"/><mwepart index="13"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="13"><w surface="We" /> <w surface="piled" /> <w surface="enormous" /> <w surface="amounts" /> <w surface="of" /> <w surface="pollution" /> <w surface="into" /> <w surface="the" /> <w surface="air" /> <w surface="and" /> <w surface="into" /> <w surface="the" /> <w surface="water" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="2"><mwepart index="4"/><mwepart index="5"/><mwepart index="6"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="14"><w surface="Rolf" /> <w surface="Bolin" /> <w surface="," /> <w surface="who" /> <w surface="was" /> <w surface="a" /> <w surface="professor" /> <w surface="at" /> <w surface="the" /> <w surface="Hopkin" /> <w surface="&amp;apos;s" /> <w surface="Marine" /> <w surface="Station" /> <w surface="where" /> <w surface="I" /> <w surface="work" /> <w surface="," /> <w surface="wrote" /> <w surface="in" /> <w surface="the" /> <w surface="1940s" /> <w surface="that" /> <w surface="&amp;quot;" /> <w surface="The" /> <w surface="fumes" /> <w surface="from" /> <w surface="the" /> <w surface="scum" /> <w surface="floating" /> <w surface="on" /> <w surface="the" /> <w surface="inlets" /> <w surface="of" /> <w surface="the" /> <w surface="bay" /> <w surface="were" /> <w surface="so" /> <w surface="bad" /> <w surface="they" /> <w surface="turned" /> <w surface="lead-based" /> <w surface="paints" /> <w surface="black" /> <w surface="." /> <w surface="&amp;quot;" /> </s>
+<s s_id="15"><w surface="People" /> <w surface="working" /> <w surface="in" /> <w surface="these" /> <w surface="canneries" /> <w surface="could" /> <w surface="barely" /> <w surface="stay" /> <w surface="there" /> <w surface="all" /> <w surface="day" /> <w surface="because" /> <w surface="of" /> <w surface="the" /> <w surface="smell" /> <w surface="," /> <w surface="but" /> <w surface="you" /> <w surface="know" /> <w surface="what" /> <w surface="they" /> <w surface="came" /> <w surface="out" /> <w surface="saying" /> <w surface="?" /> </s>
+<s s_id="16"><w surface="They" /> <w surface="say" /> <w surface="," /> <w surface="You" /> <w surface="know" /> <w surface="what" /> <w surface="you" /> <w surface="smell" /> <w surface="?" /> </s>
+<s s_id="17"><w surface="You" /> <w surface="smell" /> <w surface="money" /> <w surface="." /> </s>
+<s s_id="18"><w surface="That" /> <w surface="pollution" /> <w surface="was" /> <w surface="money" /> <w surface="to" /> <w surface="that" /> <w surface="community" /> <w surface="," /> <w surface="and" /> <w surface="those" /> <w surface="people" /> <w surface="dealt" /> <w surface="with" /> <w surface="the" /> <w surface="pollution" /> <w surface="and" /> <w surface="absorbed" /> <w surface="it" /> <w surface="into" /> <w surface="their" /> <w surface="skin" /> <w surface="and" /> <w surface="into" /> <w surface="their" /> <w surface="bodies" /> <w surface="because" /> <w surface="they" /> <w surface="needed" /> <w surface="the" /> <w surface="money" /> <w surface="." /> </s>
+<s s_id="19"><w surface="We" /> <w surface="made" /> <w surface="the" /> <w surface="ocean" /> <w surface="unhappy" /> <w surface=";" /> <w surface="we" /> <w surface="made" /> <w surface="people" /> <w surface="very" /> <w surface="unhappy" /> <w surface="," /> <w surface="and" /> <w surface="we" /> <w surface="made" /> <w surface="them" /> <w surface="unhealthy" /> <w surface="." /> </s>
+<s s_id="20"><w surface="The" /> <w surface="connection" /> <w surface="between" /> <w surface="ocean" /> <w surface="health" /> <w surface="and" /> <w surface="human" /> <w surface="health" /> <w surface="is" /> <w surface="actually" /> <w surface="based" /> <w surface="upon" /> <w surface="another" /> <w surface="couple" /> <w surface="simple" /> <w surface="adages" /> <w surface="," /> <w surface="and" /> <w surface="I" /> <w surface="want" /> <w surface="to" /> <w surface="call" /> <w surface="that" /> <w surface="&amp;quot;" /> <w surface="pinch" /> <w surface="a" /> <w surface="minnow" /> <w surface="," /> <w surface="hurt" /> <w surface="a" /> <w surface="whale" /> <w surface="." /> <w surface="&amp;quot;" /> 
+<mweoccurs>
+  <mweoccur candid="3"><mwepart index="4"/><mwepart index="5"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="21"><w surface="The" /> <w surface="pyramid" /> <w surface="of" /> <w surface="ocean" /> <w surface="life" /> <w surface="..." /> 
+<mweoccurs>
+  <mweoccur candid="4"><mwepart index="2"/><mwepart index="3"/><mwepart index="4"/><mwepart index="5"/></mweoccur>
+  <mweoccur candid="5"><mwepart index="2"/><mwepart index="3"/><mwepart index="4"/></mweoccur>
+  <mweoccur candid="6"><mwepart index="4"/><mwepart index="5"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="22"><w surface="Now" /> <w surface="," /> <w surface="when" /> <w surface="an" /> <w surface="ecologist" /> <w surface="looks" /> <w surface="at" /> <w surface="the" /> <w surface="ocean" /> <w surface="--" /> <w surface="I" /> <w surface="have" /> <w surface="to" /> <w surface="tell" /> <w surface="you" /> <w surface="--" /> <w surface="we" /> <w surface="look" /> <w surface="at" /> <w surface="the" /> <w surface="ocean" /> <w surface="in" /> <w surface="a" /> <w surface="very" /> <w surface="different" /> <w surface="way" /> <w surface="," /> <w surface="and" /> <w surface="we" /> <w surface="see" /> <w surface="different" /> <w surface="things" /> <w surface="than" /> <w surface="when" /> <w surface="a" /> <w surface="regular" /> <w surface="person" /> <w surface="looks" /> <w surface="at" /> <w surface="the" /> <w surface="ocean" /> <w surface="because" /> <w surface="when" /> <w surface="an" /> <w surface="ecologist" /> <w surface="looks" /> <w surface="at" /> <w surface="the" /> <w surface="ocean" /> <w surface="," /> <w surface="we" /> <w surface="see" /> <w surface="all" /> <w surface="those" /> <w surface="interconnections" /> <w surface="." /> </s>
+<s s_id="23"><w surface="We" /> <w surface="see" /> <w surface="the" /> <w surface="base" /> <w surface="of" /> <w surface="the" /> <w surface="food" /> <w surface="chain" /> <w surface="," /> <w surface="the" /> <w surface="plankton" /> <w surface="," /> <w surface="the" /> <w surface="small" /> <w surface="things" /> <w surface="," /> <w surface="and" /> <w surface="we" /> <w surface="see" /> <w surface="how" /> <w surface="those" /> <w surface="animals" /> <w surface="are" /> <w surface="food" /> <w surface="to" /> <w surface="animals" /> <w surface="in" /> <w surface="the" /> <w surface="middle" /> <w surface="of" /> <w surface="the" /> <w surface="pyramid" /> <w surface="," /> <w surface="and" /> <w surface="on" /> <w surface="so" /> <w surface="up" /> <w surface="this" /> <w surface="diagram" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="7"><mwepart index="7"/><mwepart index="8"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="24"><w surface="And" /> <w surface="that" /> <w surface="flow" /> <w surface="," /> <w surface="that" /> <w surface="flow" /> <w surface="of" /> <w surface="life" /> <w surface="," /> <w surface="from" /> <w surface="the" /> <w surface="very" /> <w surface="base" /> <w surface="up" /> <w surface="to" /> <w surface="the" /> <w surface="very" /> <w surface="top" /> <w surface="," /> <w surface="is" /> <w surface="the" /> <w surface="flow" /> <w surface="that" /> <w surface="ecologists" /> <w surface="see" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="8"><mwepart index="6"/><mwepart index="7"/><mwepart index="8"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="25"><w surface="And" /> <w surface="that" /> <w surface="is" /> <w surface="what" /> <w surface="we" /> <w surface="are" /> <w surface="trying" /> <w surface="to" /> <w surface="preserve" /> <w surface="when" /> <w surface="we" /> <w surface="say" /> <w surface="," /> <w surface="Save" /> <w surface="the" /> <w surface="ocean" /> <w surface="." /> </s>
+<s s_id="26"><w surface="Heal" /> <w surface="the" /> <w surface="ocean" /> <w surface="." /> </s>
+<s s_id="27"><w surface="It" /> <w surface="is" /> <w surface="that" /> <w surface="pyramid" /> <w surface="." /> </s>
+<s s_id="28"><w surface="Now" /> <w surface="why" /> <w surface="does" /> <w surface="that" /> <w surface="matter" /> <w surface="for" /> <w surface="human" /> <w surface="health" /> <w surface="?" /> </s>
+<s s_id="29"><w surface="Because" /> <w surface="when" /> <w surface="we" /> <w surface="jam" /> <w surface="things" /> <w surface="in" /> <w surface="the" /> <w surface="bottom" /> <w surface="of" /> <w surface="that" /> <w surface="pyramid" /> <w surface="that" /> <w surface="should" /> <w surface="not" /> <w surface="be" /> <w surface="there" /> <w surface="," /> <w surface="some" /> <w surface="very" /> <w surface="frightening" /> <w surface="things" /> <w surface="happen" /> <w surface="." /> </s>
+<s s_id="30"><w surface="Pollutants" /> <w surface="," /> <w surface="some" /> <w surface="pollutants" /> <w surface="have" /> <w surface="been" /> <w surface="created" /> <w surface="by" /> <w surface="us" /> <w surface=":" /> <w surface="molecules" /> <w surface="like" /> <w surface="PCBs" /> <w surface="that" /> <w surface="ca" /> <w surface="not" /> <w surface="be" /> <w surface="broken" /> <w surface="down" /> <w surface="by" /> <w surface="our" /> <w surface="bodies" /> <w surface="." /> </s>
+<s s_id="31"><w surface="And" /> <w surface="they" /> <w surface="go" /> <w surface="in" /> <w surface="the" /> <w surface="base" /> <w surface="of" /> <w surface="that" /> <w surface="pyramid" /> <w surface="," /> <w surface="and" /> <w surface="they" /> <w surface="drift" /> <w surface="up" /> <w surface=";" /> <w surface="they" /> <w surface="are" /> <w surface="passed" /> <w surface="up" /> <w surface="that" /> <w surface="way" /> <w surface="," /> <w surface="on" /> <w surface="to" /> <w surface="predators" /> <w surface="and" /> <w surface="on" /> <w surface="to" /> <w surface="the" /> <w surface="top" /> <w surface="predators" /> <w surface="," /> <w surface="and" /> <w surface="in" /> <w surface="so" /> <w surface="doing" /> <w surface="," /> <w surface="they" /> <w surface="accumulate" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="9"><mwepart index="30"/><mwepart index="31"/></mweoccur>
+  <mweoccur candid="14"><mwepart index="30"/><mwepart index="31"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="32"><w surface="Now" /> <w surface="," /> <w surface="to" /> <w surface="bring" /> <w surface="that" /> <w surface="home" /> <w surface="," /> <w surface="I" /> <w surface="thought" /> <w surface="I" /> <w surface="&amp;apos;d" /> <w surface="invent" /> <w surface="a" /> <w surface="little" /> <w surface="game" /> <w surface="." /> </s>
+<s s_id="33"><w surface="We" /> <w surface="do" /> <w surface="not" /> <w surface="really" /> <w surface="have" /> <w surface="to" /> <w surface="play" /> <w surface="it" /> <w surface=";" /> <w surface="we" /> <w surface="can" /> <w surface="just" /> <w surface="think" /> <w surface="about" /> <w surface="it" /> <w surface="here" /> <w surface="." /> </s>
+<s s_id="34"><w surface="It" /> <w surface="is" /> <w surface="the" /> <w surface="Styrofoam" /> <w surface="and" /> <w surface="chocolate" /> <w surface="game" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="10"><mwepart index="6"/><mwepart index="7"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="35"><w surface="Imagine" /> <w surface="that" /> <w surface="when" /> <w surface="we" /> <w surface="got" /> <w surface="on" /> <w surface="this" /> <w surface="boat" /> <w surface="," /> <w surface="we" /> <w surface="were" /> <w surface="all" /> <w surface="given" /> <w surface="two" /> <w surface="Styrofoam" /> <w surface="peanuts" /> <w surface="." /> </s>
+<s s_id="36"><w surface="Ca" /> <w surface="not" /> <w surface="do" /> <w surface="much" /> <w surface="with" /> <w surface="them" /> <w surface=":" /> <w surface="Put" /> <w surface="them" /> <w surface="in" /> <w surface="your" /> <w surface="pocket" /> <w surface="." /> </s>
+<s s_id="37"><w surface="Suppose" /> <w surface="the" /> <w surface="rules" /> <w surface="are" /> <w surface=":" /> <w surface="every" /> <w surface="time" /> <w surface="you" /> <w surface="offer" /> <w surface="somebody" /> <w surface="a" /> <w surface="drink" /> <w surface="," /> <w surface="you" /> <w surface="give" /> <w surface="them" /> <w surface="the" /> <w surface="drink" /> <w surface="," /> <w surface="and" /> <w surface="you" /> <w surface="give" /> <w surface="them" /> <w surface="your" /> <w surface="Styrofoam" /> <w surface="peanuts" /> <w surface="too" /> <w surface="." /> </s>
+<s s_id="38"><w surface="What" /> <w surface="&amp;apos;ll" /> <w surface="happen" /> <w surface="is" /> <w surface="that" /> <w surface="the" /> <w surface="Styrofoam" /> <w surface="peanuts" /> <w surface="will" /> <w surface="start" /> <w surface="moving" /> <w surface="through" /> <w surface="our" /> <w surface="society" /> <w surface="here" /> <w surface="," /> <w surface="and" /> <w surface="they" /> <w surface="will" /> <w surface="accumulate" /> <w surface="in" /> <w surface="the" /> <w surface="drunkest" /> <w surface="," /> <w surface="stingiest" /> <w surface="people" /> <w surface="." /> </s>
+<s s_id="39"><w surface="There" /> <w surface="is" /> <w surface="no" /> <w surface="mechanism" /> <w surface="in" /> <w surface="this" /> <w surface="game" /> <w surface="for" /> <w surface="them" /> <w surface="to" /> <w surface="go" /> <w surface="anywhere" /> <w surface="but" /> <w surface="into" /> <w surface="a" /> <w surface="bigger" /> <w surface="and" /> <w surface="bigger" /> <w surface="pile" /> <w surface="of" /> <w surface="indigestible" /> <w surface="Styrofoam" /> <w surface="peanuts" /> <w surface="." /> </s>
+<s s_id="40"><w surface="And" /> <w surface="that" /> <w surface="is" /> <w surface="exactly" /> <w surface="what" /> <w surface="happens" /> <w surface="with" /> <w surface="PDBs" /> <w surface="in" /> <w surface="this" /> <w surface="food" /> <w surface="pyramid" /> <w surface=":" /> <w surface="They" /> <w surface="accumulate" /> <w surface="into" /> <w surface="the" /> <w surface="top" /> <w surface="of" /> <w surface="it" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="11"><mwepart index="11"/><mwepart index="12"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="41"><w surface="Now" /> <w surface="suppose" /> <w surface="," /> <w surface="instead" /> <w surface="of" /> <w surface="Styrofoam" /> <w surface="peanuts" /> <w surface="," /> <w surface="we" /> <w surface="take" /> <w surface="these" /> <w surface="lovely" /> <w surface="little" /> <w surface="chocolates" /> <w surface="that" /> <w surface="we" /> <w surface="get" /> <w surface="and" /> <w surface="we" /> <w surface="had" /> <w surface="those" /> <w surface="instead" /> <w surface="." /> </s>
+<s s_id="42"><w surface="Well" /> <w surface="," /> <w surface="some" /> <w surface="of" /> <w surface="us" /> <w surface="would" /> <w surface="be" /> <w surface="eating" /> <w surface="those" /> <w surface="chocolates" /> <w surface="instead" /> <w surface="of" /> <w surface="passing" /> <w surface="them" /> <w surface="around" /> <w surface="," /> <w surface="and" /> <w surface="instead" /> <w surface="of" /> <w surface="accumulating" /> <w surface="," /> <w surface="they" /> <w surface="will" /> <w surface="just" /> <w surface="pass" /> <w surface="into" /> <w surface="our" /> <w surface="group" /> <w surface="here" /> <w surface="and" /> <w surface="not" /> <w surface="accumulate" /> <w surface="in" /> <w surface="any" /> <w surface="one" /> <w surface="group" /> <w surface="because" /> <w surface="they" /> <w surface="are" /> <w surface="absorbed" /> <w surface="by" /> <w surface="us" /> <w surface="." /> </s>
+<s s_id="43"><w surface="And" /> <w surface="that" /> <w surface="is" /> <w surface="the" /> <w surface="difference" /> <w surface="between" /> <w surface="a" /> <w surface="PCB" /> <w surface="and" /> <w surface="," /> <w surface="say" /> <w surface="," /> <w surface="something" /> <w surface="natural" /> <w surface="like" /> <w surface="an" /> <w surface="omega-3" /> <w surface="," /> <w surface="something" /> <w surface="we" /> <w surface="want" /> <w surface="out" /> <w surface="of" /> <w surface="the" /> <w surface="marine" /> <w surface="food" /> <w surface="chain" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="7"><mwepart index="26"/><mwepart index="27"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="44"><w surface="PCBs" /> <w surface="accumulate" /> <w surface="." /> </s>
+<s s_id="45"><w surface="We" /> <w surface="have" /> <w surface="great" /> <w surface="examples" /> <w surface="of" /> <w surface="that" /> <w surface="," /> <w surface="unfortunately" /> <w surface="." /> </s>
+<s s_id="46"><w surface="PCBs" /> <w surface="accumulate" /> <w surface="in" /> <w surface="dolphins" /> <w surface="in" /> <w surface="Sarasota" /> <w surface="Bay" /> <w surface="," /> <w surface="in" /> <w surface="Texas" /> <w surface="," /> <w surface="in" /> <w surface="North" /> <w surface="Carolina" /> <w surface="." /> </s>
+<s s_id="47"><w surface="They" /> <w surface="get" /> <w surface="into" /> <w surface="the" /> <w surface="food" /> <w surface="chain" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="7"><mwepart index="5"/><mwepart index="6"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="48"><w surface="The" /> <w surface="dolphins" /> <w surface="eat" /> <w surface="the" /> <w surface="fish" /> <w surface="that" /> <w surface="have" /> <w surface="PCBs" /> <w surface="from" /> <w surface="the" /> <w surface="plankton" /> <w surface="," /> <w surface="and" /> <w surface="those" /> <w surface="PCBs" /> <w surface="," /> <w surface="being" /> <w surface="fat-soluble" /> <w surface="," /> <w surface="accumulate" /> <w surface="in" /> <w surface="these" /> <w surface="dolphins" /> <w surface="." /> </s>
+<s s_id="49"><w surface="Now" /> <w surface="," /> <w surface="a" /> <w surface="dolphin" /> <w surface="," /> <w surface="mother" /> <w surface="dolphin" /> <w surface="," /> <w surface="any" /> <w surface="dolphin" /> <w surface="--" /> <w surface="there" /> <w surface="is" /> <w surface="only" /> <w surface="one" /> <w surface="way" /> <w surface="that" /> <w surface="a" /> <w surface="PCB" /> <w surface="can" /> <w surface="get" /> <w surface="out" /> <w surface="of" /> <w surface="a" /> <w surface="dolphin" /> <w surface="." /> </s>
+<s s_id="50"><w surface="And" /> <w surface="what" /> <w surface="is" /> <w surface="that" /> <w surface="?" /> </s>
+<s s_id="51"><w surface="In" /> <w surface="mother" /> <w surface="&amp;apos;s" /> <w surface="milk" /> <w surface="." /> </s>
+<s s_id="52"><w surface="Here" /> <w surface="is" /> <w surface="a" /> <w surface="diagram" /> <w surface="of" /> <w surface="the" /> <w surface="PCB" /> <w surface="load" /> <w surface="of" /> <w surface="dolphins" /> <w surface="in" /> <w surface="Sarasota" /> <w surface="Bay" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="12"><mwepart index="8"/><mwepart index="9"/><mwepart index="10"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="53"><w surface="Adult" /> <w surface="males" /> <w surface=":" /> <w surface="a" /> <w surface="huge" /> <w surface="load" /> <w surface="." /> </s>
+<s s_id="54"><w surface="Juveniles" /> <w surface=":" /> <w surface="a" /> <w surface="huge" /> <w surface="load" /> <w surface="." /> </s>
+<s s_id="55"><w surface="females" /> <w surface="after" /> <w surface="their" /> <w surface="first" /> <w surface="calf" /> <w surface="is" /> <w surface="already" /> <w surface="weaned" /> <w surface=":" /> <w surface="a" /> <w surface="lower" /> <w surface="load" /> <w surface="." /> </s>
+<s s_id="56"><w surface="Those" /> <w surface="females" /> <w surface="," /> <w surface="they" /> <w surface="are" /> <w surface="not" /> <w surface="trying" /> <w surface="to" /> <w surface="." /> </s>
+<s s_id="57"><w surface="Those" /> <w surface="females" /> <w surface="are" /> <w surface="passing" /> <w surface="the" /> <w surface="PCBs" /> <w surface="in" /> <w surface="the" /> <w surface="fat" /> <w surface="of" /> <w surface="their" /> <w surface="own" /> <w surface="mother" /> <w surface="&amp;apos;s" /> <w surface="milk" /> <w surface="into" /> <w surface="their" /> <w surface="offspring" /> <w surface="," /> <w surface="and" /> <w surface="their" /> <w surface="offspring" /> <w surface="do" /> <w surface="not" /> <w surface="survive" /> <w surface="." /> </s>
+<s s_id="58"><w surface="The" /> <w surface="death" /> <w surface="rate" /> <w surface="in" /> <w surface="these" /> <w surface="dolphins" /> <w surface="," /> <w surface="for" /> <w surface="the" /> <w surface="first" /> <w surface="calf" /> <w surface="born" /> <w surface="of" /> <w surface="every" /> <w surface="female" /> <w surface="dolphin" /> <w surface="," /> <w surface="is" /> <w surface="60" /> <w surface="to" /> <w surface="80" /> <w surface="percent" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="13"><mwepart index="2"/><mwepart index="3"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="59"><w surface="These" /> <w surface="mothers" /> <w surface="pump" /> <w surface="their" /> <w surface="first" /> <w surface="offspring" /> <w surface="full" /> <w surface="of" /> <w surface="this" /> <w surface="pollutant" /> <w surface="," /> <w surface="and" /> <w surface="most" /> <w surface="of" /> <w surface="them" /> <w surface="die" /> <w surface="." /> </s>
+<s s_id="60"><w surface="Now" /> <w surface="," /> <w surface="the" /> <w surface="mother" /> <w surface="then" /> <w surface="can" /> <w surface="go" /> <w surface="and" /> <w surface="reproduce" /> <w surface="," /> <w surface="but" /> <w surface="what" /> <w surface="a" /> <w surface="terrible" /> <w surface="price" /> <w surface="to" /> <w surface="pay" /> <w surface="for" /> <w surface="the" /> <w surface="accumulation" /> <w surface="of" /> <w surface="this" /> <w surface="pollutant" /> <w surface="in" /> <w surface="these" /> <w surface="animals" /> <w surface="--" /> <w surface="the" /> <w surface="death" /> <w surface="of" /> <w surface="the" /> <w surface="first-born" /> <w surface="calf" /> <w surface="." /> </s>
+<s s_id="61"><w surface="There" /> <w surface="is" /> <w surface="another" /> <w surface="top" /> <w surface="predator" /> <w surface="in" /> <w surface="the" /> <w surface="ocean" /> <w surface="," /> <w surface="it" /> <w surface="turns" /> <w surface="out" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="9"><mwepart index="4"/><mwepart index="5"/></mweoccur>
+  <mweoccur candid="14"><mwepart index="4"/><mwepart index="5"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="62"><w surface="That" /> <w surface="top" /> <w surface="predator" /> <w surface="," /> <w surface="of" /> <w surface="course" /> <w surface="," /> <w surface="is" /> <w surface="us" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="9"><mwepart index="2"/><mwepart index="3"/></mweoccur>
+  <mweoccur candid="14"><mwepart index="2"/><mwepart index="3"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="63"><w surface="And" /> <w surface="we" /> <w surface="also" /> <w surface="are" /> <w surface="eating" /> <w surface="meat" /> <w surface="that" /> <w surface="comes" /> <w surface="from" /> <w surface="some" /> <w surface="of" /> <w surface="these" /> <w surface="same" /> <w surface="places" /> <w surface="." /> </s>
+<s s_id="64"><w surface="This" /> <w surface="is" /> <w surface="whale" /> <w surface="meat" /> <w surface="that" /> <w surface="I" /> <w surface="photographed" /> <w surface="in" /> <w surface="a" /> <w surface="grocery" /> <w surface="store" /> <w surface="in" /> <w surface="Tokyo" /> <w surface="--" /> <w surface="or" /> <w surface="is" /> <w surface="it" /> <w surface="?" /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="3"/><mwepart index="4"/></mweoccur>
+  <mweoccur candid="16"><mwepart index="10"/><mwepart index="11"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="65"><w surface="In" /> <w surface="fact" /> <w surface="," /> <w surface="what" /> <w surface="we" /> <w surface="did" /> <w surface="a" /> <w surface="few" /> <w surface="years" /> <w surface="ago" /> <w surface="was" /> <w surface="learn" /> <w surface="how" /> <w surface="to" /> <w surface="smuggle" /> <w surface="a" /> <w surface="molecular" /> <w surface="biology" /> <w surface="lab" /> <w surface="into" /> <w surface="Tokyo" /> <w surface="and" /> <w surface="use" /> <w surface="it" /> <w surface="to" /> <w surface="genetically" /> <w surface="test" /> <w surface="the" /> <w surface="DNA" /> <w surface="out" /> <w surface="of" /> <w surface="whale" /> <w surface="meat" /> <w surface="samples" /> <w surface="and" /> <w surface="identify" /> <w surface="what" /> <w surface="they" /> <w surface="really" /> <w surface="were" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="32"/><mwepart index="33"/></mweoccur>
+  <mweoccur candid="17"><mwepart index="18"/><mwepart index="19"/></mweoccur>
+  <mweoccur candid="18"><mwepart index="32"/><mwepart index="33"/><mwepart index="34"/></mweoccur>
+  <mweoccur candid="19"><mwepart index="33"/><mwepart index="34"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="66"><w surface="And" /> <w surface="some" /> <w surface="of" /> <w surface="those" /> <w surface="whale" /> <w surface="meat" /> <w surface="samples" /> <w surface="were" /> <w surface="whale" /> <w surface="meat" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="5"/><mwepart index="6"/><mwepart index="9"/><mwepart index="10"/></mweoccur>
+  <mweoccur candid="18"><mwepart index="5"/><mwepart index="6"/><mwepart index="7"/></mweoccur>
+  <mweoccur candid="19"><mwepart index="6"/><mwepart index="7"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="67"><w surface="Some" /> <w surface="of" /> <w surface="them" /> <w surface="were" /> <w surface="illegal" /> <w surface="whale" /> <w surface="meat" /> <w surface="," /> <w surface="by" /> <w surface="the" /> <w surface="way" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="6"/><mwepart index="7"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="68"><w surface="That" /> <w surface="is" /> <w surface="another" /> <w surface="story" /> <w surface="." /> </s>
+<s s_id="69"><w surface="But" /> <w surface="some" /> <w surface="of" /> <w surface="them" /> <w surface="were" /> <w surface="not" /> <w surface="whale" /> <w surface="meat" /> <w surface="at" /> <w surface="all" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="7"/><mwepart index="8"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="70"><w surface="Even" /> <w surface="though" /> <w surface="they" /> <w surface="were" /> <w surface="labeled" /> <w surface="whale" /> <w surface="meat" /> <w surface="," /> <w surface="they" /> <w surface="were" /> <w surface="dolphin" /> <w surface="meat" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="6"/><mwepart index="7"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="71"><w surface="Some" /> <w surface="of" /> <w surface="them" /> <w surface="were" /> <w surface="dolphin" /> <w surface="liver" /> <w surface="." /> </s>
+<s s_id="72"><w surface="Some" /> <w surface="of" /> <w surface="them" /> <w surface="were" /> <w surface="dolphin" /> <w surface="blubber" /> <w surface="." /> </s>
+<s s_id="73"><w surface="And" /> <w surface="those" /> <w surface="dolphin" /> <w surface="parts" /> <w surface="had" /> <w surface="a" /> <w surface="huge" /> <w surface="load" /> <w surface="of" /> <w surface="PCBs" /> <w surface="," /> <w surface="dioxins" /> <w surface="and" /> <w surface="heavy" /> <w surface="metals" /> <w surface="." /> </s>
+<s s_id="74"><w surface="And" /> <w surface="that" /> <w surface="huge" /> <w surface="load" /> <w surface="was" /> <w surface="passing" /> <w surface="into" /> <w surface="the" /> <w surface="people" /> <w surface="that" /> <w surface="ate" /> <w surface="this" /> <w surface="meat" /> <w surface="." /> </s>
+<s s_id="75"><w surface="It" /> <w surface="turns" /> <w surface="out" /> <w surface="that" /> <w surface="a" /> <w surface="lot" /> <w surface="of" /> <w surface="dolphins" /> <w surface="are" /> <w surface="being" /> <w surface="sold" /> <w surface="as" /> <w surface="meat" /> <w surface="in" /> <w surface="the" /> <w surface="whale" /> <w surface="meat" /> <w surface="market" /> <w surface="around" /> <w surface="the" /> <w surface="world" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="16"/><mwepart index="17"/></mweoccur>
+  <mweoccur candid="20"><mwepart index="6"/><mwepart index="7"/><mwepart index="8"/></mweoccur>
+  <mweoccur candid="21"><mwepart index="16"/><mwepart index="17"/><mwepart index="18"/></mweoccur>
+  <mweoccur candid="22"><mwepart index="17"/><mwepart index="18"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="76"><w surface="That" /> <w surface="is" /> <w surface="a" /> <w surface="tragedy" /> <w surface="for" /> <w surface="those" /> <w surface="populations" /> <w surface="," /> <w surface="but" /> <w surface="it" /> <w surface="is" /> <w surface="also" /> <w surface="a" /> <w surface="tragedy" /> <w surface="for" /> <w surface="the" /> <w surface="people" /> <w surface="eating" /> <w surface="them" /> <w surface="because" /> <w surface="they" /> <w surface="do" /> <w surface="not" /> <w surface="know" /> <w surface="that" /> <w surface="that" /> <w surface="is" /> <w surface="toxic" /> <w surface="meat" /> <w surface="." /> </s>
+<s s_id="77"><w surface="We" /> <w surface="had" /> <w surface="these" /> <w surface="data" /> <w surface="a" /> <w surface="few" /> <w surface="years" /> <w surface="ago" /> <w surface="." /> </s>
+<s s_id="78"><w surface="I" /> <w surface="remember" /> <w surface="sitting" /> <w surface="at" /> <w surface="my" /> <w surface="desk" /> <w surface="being" /> <w surface="about" /> <w surface="the" /> <w surface="only" /> <w surface="person" /> <w surface="in" /> <w surface="the" /> <w surface="world" /> <w surface="who" /> <w surface="knew" /> <w surface="that" /> <w surface="whale" /> <w surface="meat" /> <w surface="being" /> <w surface="sold" /> <w surface="in" /> <w surface="these" /> <w surface="markets" /> <w surface="was" /> <w surface="really" /> <w surface="dolphin" /> <w surface="meat" /> <w surface="," /> <w surface="and" /> <w surface="it" /> <w surface="was" /> <w surface="toxic" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="15"><mwepart index="18"/><mwepart index="19"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="79"><w surface="It" /> <w surface="had" /> <w surface="two-to-three-to-400" /> <w surface="times" /> <w surface="the" /> <w surface="toxic" /> <w surface="loads" /> <w surface="ever" /> <w surface="allowed" /> <w surface="by" /> <w surface="the" /> <w surface="EPA" /> <w surface="." /> </s>
+<s s_id="80"><w surface="And" /> <w surface="I" /> <w surface="remember" /> <w surface="there" /> <w surface="sitting" /> <w surface="at" /> <w surface="my" /> <w surface="desk" /> <w surface="thinking" /> <w surface="," /> <w surface="Well" /> <w surface="," /> <w surface="I" /> <w surface="know" /> <w surface="this" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="23"><mwepart index="8"/><mwepart index="9"/></mweoccur>
+</mweoccurs>
+</s>
+<s s_id="81"><w surface="This" /> <w surface="is" /> <w surface="a" /> <w surface="great" /> <w surface="scientific" /> <w surface="discovery" /> <w surface="," /> <w surface="but" /> <w surface="it" /> <w surface="was" /> <w surface="so" /> <w surface="awful" /> <w surface="." /> </s>
+<s s_id="82"><w surface="And" /> <w surface="for" /> <w surface="the" /> <w surface="very" /> <w surface="first" /> <w surface="time" /> <w surface="in" /> <w surface="my" /> <w surface="scientific" /> <w surface="career" /> <w surface="," /> <w surface="I" /> <w surface="broke" /> <w surface="scientific" /> <w surface="protocol" /> <w surface="," /> <w surface="which" /> <w surface="is" /> <w surface="that" /> <w surface="you" /> <w surface="take" /> <w surface="the" /> <w surface="data" /> <w surface="and" /> <w surface="publish" /> <w surface="them" /> <w surface="in" /> <w surface="scientific" /> <w surface="journals" /> <w surface="and" /> <w surface="then" /> <w surface="begin" /> <w surface="to" /> <w surface="talk" /> <w surface="about" /> <w surface="them" /> <w surface="." /> </s>
+<s s_id="83"><w surface="We" /> <w surface="sent" /> <w surface="a" /> <w surface="very" /> <w surface="polite" /> <w surface="letter" /> <w surface="to" /> <w surface="the" /> <w surface="Minister" /> <w surface="of" /> <w surface="Health" /> <w surface="in" /> <w surface="Japan" /> <w surface="and" /> <w surface="simply" /> <w surface="pointed" /> <w surface="out" /> <w surface="that" /> <w surface="this" /> <w surface="is" /> <w surface="an" /> <w surface="intolerable" /> <w surface="situation" /> <w surface="," /> <w surface="not" /> <w surface="for" /> <w surface="us" /> <w surface="," /> <w surface="but" /> <w surface="for" /> <w surface="the" /> <w surface="people" /> <w surface="of" /> <w surface="Japan" /> <w surface="because" /> <w surface="mothers" /> <w surface="who" /> <w surface="may" /> <w surface="be" /> <w surface="breastfeeding" /> <w surface="," /> <w surface="who" /> <w surface="may" /> <w surface="have" /> <w surface="young" /> <w surface="children" /> <w surface="," /> <w surface="would" /> <w surface="be" /> <w surface="buying" /> <w surface="something" /> <w surface="that" /> <w surface="they" /> <w surface="thought" /> <w surface="was" /> <w surface="healthy" /> <w surface="," /> <w surface="but" /> <w surface="it" /> <w surface="was" /> <w surface="really" /> <w surface="toxic" /> <w surface="." /> 
+<mweoccurs>
+  <mweoccur candid="24"><mwepart index="9"/><mwepart index="10"/><mwepart index="11"/></mweoccur>
+</mweoccurs>
+</s>
+</corpus>

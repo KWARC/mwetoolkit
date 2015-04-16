@@ -25,12 +25,12 @@ test_bidir() {
     local input1="$t_OUTDIR/$filename"
     local output="$t_OUTDIR/${filename}.xml"
 
-    t_run "$t_BIN/convert.py -v --from=$filetype --to=XML $input1 >$output"
+    t_run "$t_BIN/transform.py -v --from=$filetype --to=XML $input1 >$output"
     t_compare_with_ref "${filename}.xml"
 
     local input2="$output"
     local output="${output}.${input1##*.}"
-    t_run "$t_BIN/convert.py -v --from=XML --to=$filetype $input2 >$output"
+    t_run "$t_BIN/transform.py -v --from=XML --to=$filetype $input2 >$output"
     if test -f "$t_REFDIR/$filename"; then
         t_compare_with_ref "$filename"
     else
@@ -48,7 +48,7 @@ test_outputOnly() {
     local output="$t_OUTDIR/${basename}${suffix_output}"
 
     local reference="${input%.xml}"
-    t_run "$t_BIN/convert.py -v --to=$filetype $input >$output"
+    t_run "$t_BIN/transform.py -v --to=$filetype $input >$output"
     t_compare_with_ref "${basename}${suffix_output}"
 }
 
@@ -79,6 +79,9 @@ test_bidir PlainCandidates "candidates.PlainCandidates"
 
 t_testname "Check TreeTagger format"
 test_bidir TreeTagger "corpus.treetagger"
+
+t_testname "Check TaggedPlainCorpus format"
+test_bidir TaggedPlainCorpus "corpus.TaggedPlainCorpus"
 
 
 # (For XML, test_outputOnly will end up automatically testing
@@ -112,11 +115,8 @@ test_outputOnly CSV "candidates.xml" ".csv"
 t_testname "Check HTML format"
 test_outputOnly HTML "corpus.xml" ".html"
 
-t_testname "Check TaggedPlainCorpus format"
-test_outputOnly TaggedPlainCorpus "corpus.xml" ".TaggedPlainCorpus"
-
 t_testname "Check UCS format"
-test_outputOnly UCS "candidates.xml" ".ucs"
+test_outputOnly UCS "candidates2.xml" ".ucs"
 
 
 
@@ -124,14 +124,14 @@ test_outputOnly UCS "candidates.xml" ".ucs"
 # Testing compressed files
 
 t_testname "Check Gzip uncompression"
-t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.gz >$t_OUTDIR/corpus.gz.PlainCorpus"
+t_run "$t_BIN/transform.py -v $t_LOCAL_INPUT/uncompress/corpus.gz >$t_OUTDIR/corpus.gz.PlainCorpus"
 t_compare "$t_OUTDIR/corpus.gz.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"
 
 #(This test fails before Python 3.3)
 #t_testname "Check Bzip2 uncompression"
-#t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.bz2 >$t_OUTDIR/corpus.bz2.PlainCorpus"
+#t_run "$t_BIN/transform.py -v $t_LOCAL_INPUT/uncompress/corpus.bz2 >$t_OUTDIR/corpus.bz2.PlainCorpus"
 #t_compare "$t_OUTDIR/corpus.bz2.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"
 
 t_testname "Check Zip uncompression"
-t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.zip >$t_OUTDIR/corpus.zip.PlainCorpus"
+t_run "$t_BIN/transform.py -v $t_LOCAL_INPUT/uncompress/corpus.zip >$t_OUTDIR/corpus.zip.PlainCorpus"
 t_compare "$t_OUTDIR/corpus.zip.PlainCorpus" "$t_REFDIR/uncompress/corpus.PlainCorpus"

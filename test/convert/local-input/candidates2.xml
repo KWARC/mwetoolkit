@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE candidates SYSTEM "dtd/mwetoolkit-candidates.dtd">
+<!-- MWETOOLKIT: filetype="XML" -->
+<candidates >
+<meta>
+    <corpussize name="ted" value="543804" />
+</meta>
+<cand candid="1">
+    <ngram><w lemma="canning" pos="NN1" ><freq name="ted" value="2" /></w> <w lemma="operation" pos="NN1" ><freq name="ted" value="19" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="canning" lemma="canning" pos="NN1" /> <w surface="operation" lemma="operation" pos="NN1" /> <freq name="ted" value="1" /><sources ids="12:11,12"/></ngram>
+    </occurs>
+</cand>
+<cand candid="3">
+    <ngram><w lemma="ocean" pos="NN1" ><freq name="ted" value="110" /></w> <w lemma="health" pos="NN1" ><freq name="ted" value="150" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ocean" lemma="ocean" pos="NN1" /> <w surface="health" lemma="health" pos="NN1" /> <freq name="ted" value="1" /><sources ids="20:3,4"/></ngram>
+    </occurs>
+</cand>
+<cand candid="6">
+    <ngram><w lemma="ocean" pos="NN1" ><freq name="ted" value="110" /></w> <w lemma="life" pos="NN1" ><freq name="ted" value="435" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ocean" lemma="ocean" pos="NN1" /> <w surface="life" lemma="life" pos="NN1" /> <freq name="ted" value="1" /><sources ids="21:3,4"/></ngram>
+    </occurs>
+</cand>
+<cand candid="7">
+    <ngram><w lemma="food" pos="NN1" ><freq name="ted" value="204" /></w> <w lemma="chain" pos="NN1" ><freq name="ted" value="20" /></w> <freq name="ted" value="8" /></ngram>
+    <occurs>
+    <ngram><w surface="food" lemma="food" pos="NN1" /> <w surface="chain" lemma="chain" pos="NN1" /> <freq name="ted" value="8" /><sources ids="23:6,7;43:25,26;47:4,5;88:21,22;120:8,9;13495:14,15;13496:7,8;13520:45,46"/></ngram>
+    </occurs>
+</cand>
+<cand candid="9">
+    <ngram><w lemma="top" pos="NN" ><freq name="ted" value="131" /></w> <w lemma="predator" pos="NN2" ><freq name="ted" value="10" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="top" lemma="top" pos="NN" /> <w surface="predators" lemma="predator" pos="NN2" /> <freq name="ted" value="1" /><sources ids="31:29,30"/></ngram>
+    </occurs>
+</cand>
+<cand candid="10">
+    <ngram><w lemma="chocolate" pos="NN1" ><freq name="ted" value="5" /></w> <w lemma="game" pos="NN1" ><freq name="ted" value="128" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="chocolate" lemma="chocolate" pos="NN1" /> <w surface="game" lemma="game" pos="NN1" /> <freq name="ted" value="1" /><sources ids="34:5,6"/></ngram>
+    </occurs>
+</cand>
+<cand candid="11">
+    <ngram><w lemma="food" pos="NN1" ><freq name="ted" value="204" /></w> <w lemma="pyramid" pos="NN1" ><freq name="ted" value="34" /></w> <freq name="ted" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="food" lemma="food" pos="NN1" /> <w surface="pyramid" lemma="pyramid" pos="NN1" /> <freq name="ted" value="2" /><sources ids="40:10,11;96:14,15"/></ngram>
+    </occurs>
+</cand>
+<cand candid="13">
+    <ngram><w lemma="death" pos="NN1" ><freq name="ted" value="64" /></w> <w lemma="rate" pos="NN1" ><freq name="ted" value="32" /></w> <freq name="ted" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="death" lemma="death" pos="NN1" /> <w surface="rate" lemma="rate" pos="NN1" /> <freq name="ted" value="2" /><sources ids="58:1,2;27586:29,30"/></ngram>
+    </occurs>
+</cand>
+<cand candid="14">
+    <ngram><w lemma="top" pos="NN" ><freq name="ted" value="131" /></w> <w lemma="predator" pos="NN1" ><freq name="ted" value="12" /></w> <freq name="ted" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="top" lemma="top" pos="NN" /> <w surface="predator" lemma="predator" pos="NN1" /> <freq name="ted" value="2" /><sources ids="61:3,4;62:1,2"/></ngram>
+    </occurs>
+</cand>
+<cand candid="15">
+    <ngram><w lemma="whale" pos="NN1" ><freq name="ted" value="17" /></w> <w lemma="meat" pos="NN1" ><freq name="ted" value="34" /></w> <freq name="ted" value="9" /></ngram>
+    <occurs>
+    <ngram><w surface="whale" lemma="whale" pos="NN1" /> <w surface="meat" lemma="meat" pos="NN1" /> <freq name="ted" value="9" /><sources ids="64:2,3;65:31,32;66:4,5;66:8,9;67:5,6;70:5,6;75:15,16;78:17,18;84:44,45"/></ngram>
+    </occurs>
+</cand>
+<cand candid="16">
+    <ngram><w lemma="grocery" pos="NN1" ><freq name="ted" value="4" /></w> <w lemma="store" pos="NN1" ><freq name="ted" value="21" /></w> <freq name="ted" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="grocery" lemma="grocery" pos="NN1" /> <w surface="store" lemma="store" pos="NN1" /> <freq name="ted" value="3" /><sources ids="64:9,10;3231:23,24;19057:26,27"/></ngram>
+    </occurs>
+</cand>
+<cand candid="17">
+    <ngram><w lemma="biology" pos="NN1" ><freq name="ted" value="49" /></w> <w lemma="lab" pos="NN1" ><freq name="ted" value="53" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="biology" lemma="biology" pos="NN1" /> <w surface="lab" lemma="lab" pos="NN1" /> <freq name="ted" value="1" /><sources ids="65:17,18"/></ngram>
+    </occurs>
+</cand>
+<cand candid="19">
+    <ngram><w lemma="meat" pos="NN1" ><freq name="ted" value="34" /></w> <w lemma="sample" pos="NN2" ><freq name="ted" value="17" /></w> <freq name="ted" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="meat" lemma="meat" pos="NN1" /> <w surface="samples" lemma="sample" pos="NN2" /> <freq name="ted" value="2" /><sources ids="65:32,33;66:5,6"/></ngram>
+    </occurs>
+</cand>
+<cand candid="22">
+    <ngram><w lemma="meat" pos="NN1" ><freq name="ted" value="34" /></w> <w lemma="market" pos="NN1" ><freq name="ted" value="70" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="meat" lemma="meat" pos="NN1" /> <w surface="market" lemma="market" pos="NN1" /> <freq name="ted" value="1" /><sources ids="75:16,17"/></ngram>
+    </occurs>
+</cand>
+<cand candid="23">
+    <ngram><w lemma="desk" pos="NN1" ><freq name="ted" value="14" /></w> <w lemma="thinking" pos="NN1" ><freq name="ted" value="60" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="desk" lemma="desk" pos="NN1" /> <w surface="thinking" lemma="thinking" pos="NN1" /> <freq name="ted" value="1" /><sources ids="80:7,8"/></ngram>
+    </occurs>
+</cand>
+<cand candid="26">
+    <ngram><w lemma="breast" pos="NN1" ><freq name="ted" value="6" /></w> <w lemma="milk" pos="NN1" ><freq name="ted" value="11" /></w> <freq name="ted" value="2" /></ngram>
+    <occurs>
+    <ngram><w surface="breast" lemma="breast" pos="NN1" /> <w surface="milk" lemma="milk" pos="NN1" /> <freq name="ted" value="2" /><sources ids="87:4,5;88:10,11"/></ngram>
+    </occurs>
+</cand>
+<cand candid="27">
+    <ngram><w lemma="ocean" pos="NNL1" ><freq name="ted" value="7" /></w> <w lemma="pyramid" pos="NN1" ><freq name="ted" value="34" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="ocean" lemma="ocean" pos="NNL1" /> <w surface="pyramid" lemma="pyramid" pos="NN1" /> <freq name="ted" value="1" /><sources ids="88:31,32"/></ngram>
+    </occurs>
+</cand>
+<cand candid="28">
+    <ngram><w lemma="pyramid" pos="NN1" ><freq name="ted" value="34" /></w> <w lemma="problem" pos="NN1" ><freq name="ted" value="274" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="pyramid" lemma="pyramid" pos="NN1" /> <w surface="problem" lemma="problem" pos="NN1" /> <freq name="ted" value="1" /><sources ids="93:18,19"/></ngram>
+    </occurs>
+</cand>
+<cand candid="29">
+    <ngram><w lemma="sewer" pos="NN1" ><freq name="ted" value="4" /></w> <w lemma="line" pos="NN1" ><freq name="ted" value="110" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="sewer" lemma="sewer" pos="NN1" /> <w surface="line" lemma="line" pos="NN1" /> <freq name="ted" value="1" /><sources ids="95:17,18"/></ngram>
+    </occurs>
+</cand>
+<cand candid="32">
+    <ngram><w lemma="genus" pos="NN1" ><freq name="ted" value="2" /></w> <w lemma="vibrio" pos="NN1" ><freq name="ted" value="1" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="genus" lemma="genus" pos="NN1" /> <w surface="vibrio" lemma="vibrio" pos="NN1" /> <freq name="ted" value="1" /><sources ids="99:17,18"/></ngram>
+    </occurs>
+</cand>
+<cand candid="33">
+    <ngram><w lemma="ocean" pos="NN1" ><freq name="ted" value="110" /></w> <w lemma="pyramid" pos="NN1" ><freq name="ted" value="34" /></w> <freq name="ted" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="ocean" lemma="ocean" pos="NN1" /> <w surface="pyramid" lemma="pyramid" pos="NN1" /> <freq name="ted" value="3" /><sources ids="102:14,15;148:22,23;148:27,28"/></ngram>
+    </occurs>
+</cand>
+<cand candid="34">
+    <ngram><w lemma="state" pos="NN1" ><freq name="ted" value="77" /></w> <w lemma="park" pos="NNL1" ><freq name="ted" value="15" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="state" lemma="state" pos="NN1" /> <w surface="park" lemma="park" pos="NNL1" /> <freq name="ted" value="1" /><sources ids="104:10,11"/></ngram>
+    </occurs>
+</cand>
+<cand candid="35">
+    <ngram><w lemma="front" pos="NN1" ><freq name="ted" value="83" /></w> <w lemma="saying" pos="NN1" ><freq name="ted" value="17" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="front" lemma="front" pos="NN1" /> <w surface="saying" lemma="saying" pos="NN1" /> <freq name="ted" value="1" /><sources ids="104:24,25"/></ngram>
+    </occurs>
+</cand>
+<cand candid="36">
+    <ngram><w lemma="park" pos="NNL2" ><freq name="ted" value="7" /></w> <w lemma="being" pos="NN1" ><freq name="ted" value="46" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="parks" lemma="park" pos="NNL2" /> <w surface="being" lemma="being" pos="NN1" /> <freq name="ted" value="1" /><sources ids="107:5,6"/></ngram>
+    </occurs>
+</cand>
+<cand candid="38">
+    <ngram><w lemma="skin" pos="NN1" ><freq name="ted" value="39" /></w> <w lemma="infection" pos="NN2" ><freq name="ted" value="10" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="skin" lemma="skin" pos="NN1" /> <w surface="infections" lemma="infection" pos="NN2" /> <freq name="ted" value="1" /><sources ids="111:8,9"/></ngram>
+    </occurs>
+</cand>
+<cand candid="39">
+    <ngram><w lemma="health" pos="NN1" ><freq name="ted" value="150" /></w> <w lemma="initiative" pos="NN1" ><freq name="ted" value="14" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="health" lemma="health" pos="NN1" /> <w surface="initiative" lemma="initiative" pos="NN1" /> <freq name="ted" value="1" /><sources ids="112:10,11"/></ngram>
+    </occurs>
+</cand>
+<cand candid="41">
+    <ngram><w lemma="surf" pos="NN1" ><freq name="ted" value="1" /></w> <w lemma="rider" pos="NN1" ><freq name="ted" value="7" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="surf" lemma="surf" pos="NN1" /> <w surface="rider" lemma="rider" pos="NN1" /> <freq name="ted" value="1" /><sources ids="114:33,34"/></ngram>
+    </occurs>
+</cand>
+<cand candid="42">
+    <ngram><w lemma="rider" pos="NN1" ><freq name="ted" value="7" /></w> <w lemma="site" pos="NN2" ><freq name="ted" value="20" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="rider" lemma="rider" pos="NN1" /> <w surface="sites" lemma="site" pos="NN2" /> <freq name="ted" value="1" /><sources ids="114:34,35"/></ngram>
+    </occurs>
+</cand>
+<cand candid="45">
+    <ngram><w lemma="antibiotic" pos="NN1" ><freq name="ted" value="12" /></w> <w lemma="resistance" pos="NN1" ><freq name="ted" value="17" /></w> <freq name="ted" value="8" /></ngram>
+    <occurs>
+    <ngram><w surface="antibiotic" lemma="antibiotic" pos="NN1" /> <w surface="resistance" lemma="resistance" pos="NN1" /> <freq name="ted" value="8" /><sources ids="116:7,8;20626:34,35;20629:8,9;20629:22,23;20630:5,6;20634:26,27;20636:6,7;20644:15,16"/></ngram>
+    </occurs>
+</cand>
+<cand candid="46">
+    <ngram><w lemma="resistance" pos="NN1" ><freq name="ted" value="17" /></w> <w lemma="gene" pos="NN2" ><freq name="ted" value="58" /></w> <freq name="ted" value="1" /></ngram>
+    <occurs>
+    <ngram><w surface="resistance" lemma="resistance" pos="NN1" /> <w surface="genes" lemma="gene" pos="NN2" /> <freq name="ted" value="1" /><sources ids="116:8,9"/></ngram>
+    </occurs>
+</cand>
+<cand candid="49">
+    <ngram><w lemma="shellfish" pos="NN1" ><freq name="ted" value="5" /></w> <w lemma="poisoning" pos="NN1" ><freq name="ted" value="4" /></w> <freq name="ted" value="3" /></ngram>
+    <occurs>
+    <ngram><w surface="shellfish" lemma="shellfish" pos="NN1" /> <w surface="poisoning" lemma="poisoning" pos="NN1" /> <freq name="ted" value="3" /><sources ids="119:27,28;119:40,41;119:44,45"/></ngram>
+    </occurs>
+</cand>
+</candidates>
