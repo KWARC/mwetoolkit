@@ -55,9 +55,11 @@ test_outputOnly() {
 
 # Create copy into $t_OUTDIR to simplify the code below
 ln -s "$t_LOCAL_INPUT"/* "$t_OUTDIR"/
+ln -s "$t_INPUT/tedNN.xml" "$t_OUTDIR/corpus.xml"
 
 
-##################################################
+###########################################################
+# Testing input/output files
 
 t_testname "Check CONLL format"
 test_bidir CONLL "corpus.conll"
@@ -77,16 +79,6 @@ test_bidir PlainCandidates "candidates.PlainCandidates"
 
 t_testname "Check TreeTagger format"
 test_bidir TreeTagger "corpus.treetagger"
-
-
-t_testname "Check CSV format"
-test_outputOnly CSV "candidates.xml" ".csv"
-
-t_testname "Check ARFF format"
-test_outputOnly ARFF "candidates.xml" ".arff"
-
-t_testname "Check HTML format"
-test_outputOnly HTML "corpus.xml" ".html"
 
 
 # (For XML, test_outputOnly will end up automatically testing
@@ -109,6 +101,27 @@ test_outputOnly  XML "patterns_deprecated2.xml" ".xml"
 
 
 ###########################################################
+# Testing output-only formats
+
+t_testname "Check ARFF format"
+test_outputOnly ARFF "candidates.xml" ".arff"
+
+t_testname "Check CSV format"
+test_outputOnly CSV "candidates.xml" ".csv"
+
+t_testname "Check HTML format"
+test_outputOnly HTML "corpus.xml" ".html"
+
+t_testname "Check TaggedPlainCorpus format"
+test_outputOnly TaggedPlainCorpus "corpus.xml" ".TaggedPlainCorpus"
+
+t_testname "Check UCS format"
+test_outputOnly UCS "candidates.xml" ".ucs"
+
+
+
+###########################################################
+# Testing compressed files
 
 t_testname "Check Gzip uncompression"
 t_run "$t_BIN/convert.py -v $t_LOCAL_INPUT/uncompress/corpus.gz >$t_OUTDIR/corpus.gz.PlainCorpus"

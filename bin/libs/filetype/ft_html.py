@@ -69,7 +69,7 @@ class HTMLPrinter(common.AbstractPrinter):
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>MWETOOLKIT annotated corpus: {corpusname}</title>
-    <!--<link rel="stylesheet" href="mwetk-corpus.css" type="text/css" media="screen"/>-->
+    <!--<link rel="stylesheet" href="mwetk-html-corpus.css" type="text/css" media="screen"/>-->
     <style>
     h1{{margin:0}}
     p.notice{{font-family:Arial;font-size:10pt;margin:0}}

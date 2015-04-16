@@ -15,7 +15,7 @@ as a tab-separated file. The first non-comment line should have a header.
 <tr><td><strong>Categories</strong></td><td>"candidates" (output only)</td></tr>
 <tr><td><strong>Encoding</strong></td><td>Text file, UTF-8</td></tr>
 <tr><td><strong>Source</strong></td><td>&mdash;</td></tr>
-<tr><td><strong>Automatic detection</strong></td><td>No (It's output only)</td></tr>
+<tr><td><strong>Automatic detection</strong></td><td>No (it's output only)</td></tr>
 </table>
 
 

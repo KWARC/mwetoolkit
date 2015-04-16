@@ -15,4 +15,3 @@ id	ngram	pos	corpus	occurs	sources	mle_corpus	pmi_corpus	t_corpus	dice_corpus	ll
 4	armonización adecuar	NC VLadj	1	armonización adecuada		3.26551938086e-05	9.58044702114	0.998693834902	0.153846153846	6.78729848938
 5	comisión de <unknown>	NC PREP NC	2	Comisión de Industria;Comisión de Presupuestos	;	6.53103876172e-05	3.55611295038	1.29398204398	0.0024620434961	0.0
 6	evaluación exhaustivo	NC ADJ	1	evaluación exhaustiva		3.26551938086e-05	11.902375116	0.99973876698	0.222222222222	8.95972421722
-6	evaluación exhaustivo	NC ADJ	1	evaluación exhaustiva		3.26551938086e-05	11.902375116	0.99973876698	0.222222222222	8.95972421722

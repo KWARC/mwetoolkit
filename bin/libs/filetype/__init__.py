@@ -226,13 +226,15 @@ from . import ft_pwac
 from . import ft_taggedplaincorpus
 from . import ft_treetagger
 from . import ft_xml
+from . import ft_ucs
 
 # Instantiate FiletypeInfo singletons
 INFOS = [ft_arff.INFO, ft_xml.INFO, ft_csv.INFO, ft_conll.ConllInfo(), 
          ft_pwac.PWaCInfo(), ft_plaincorpus.PlainCorpusInfo(), 
          ft_binaryindex.BinaryIndexInfo(), ft_moses.MosesInfo(), 
          ft_plaincandidates.PlainCandidatesInfo(), ft_html.HTMLInfo(), 
-         ft_taggedplaincorpus.TPCInfo(), ft_treetagger.TreeTaggerInfo()]
+         ft_taggedplaincorpus.TPCInfo(), ft_treetagger.TreeTaggerInfo(),
+         ft_ucs.INFO]
 
 # Map filetype_hint -> filetype_info
 HINT_TO_INFO = {}

@@ -76,7 +76,7 @@ class TPCPrinter(common.AbstractPrinter):
             if mwetag:
                 mwetag = (unicode(index) for index in mwetag)
                 surface_list[mwetag_i] = "<mwepart id=\"" + ",".join(mwetag) \
-                              + "\" >" + surface_list[mwetag_i] + "</mwepart>"
+                              + "\">" + surface_list[mwetag_i] + "</mwepart>"
         line = " ".join(surface_list)
         self.add_string(line, "\n")
 

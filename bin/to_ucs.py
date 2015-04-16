@@ -34,15 +34,6 @@
     usage instructions.
 """
 
-"""
-    This script converts a candidates file in XML (mwetoolkit-candidates.dtd)
-    into the UCS data set format. Since UCS works only with pairs (2-grams),
-    all ngrams with sizes other than 2 are discarded.
-    
-    For more information, call the script with no parameter and read the
-    usage instructions.
-"""
-
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -87,6 +78,7 @@ OPTIONS may be:
 surface_instead_lemmas = False  
 lemmapos = False
 freq_source = None
+input_filetype_ext = None
 
 ################################################################################
 

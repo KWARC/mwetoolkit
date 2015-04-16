@@ -189,7 +189,7 @@ class Ngram (object):
 
         if len(self.sources) > 0:
             sources_string = ';'.join(unicode(s) for s in self.sources)
-            output.append('<sources ids="%s"/>\n' % sources_string)
+            output.append('<sources ids="%s"/>' % sources_string)
         
 
 ################################################################################    

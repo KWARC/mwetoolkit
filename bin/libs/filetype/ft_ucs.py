@@ -109,13 +109,13 @@ class UCSPrinter(common.AbstractPrinter):
                 string_cand += w.surface + "\t"
         string_cand += "%f\t" % self.freq_value(entity.freqs)
 
-        try:
-            for w in entity:
+        for w in entity:
+            try:
                 string_cand += "%f\t" % self.freq_value(w.freqs)
-        except:
-            string_cand += "0\t"
-            util.warn("Word frequency information missing for"\
-                        " entity %d" % entity.id_number)
+            except:
+                string_cand += "0\t"
+                util.warn("Word frequency information missing for"\
+                            " entity %d" % entity.id_number)
         string_cand += unicode(self.corpus_size)
         self.add_string(string_cand, "\n")
 
