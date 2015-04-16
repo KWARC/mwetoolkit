@@ -1,8 +1,8 @@
-<h2>CSV file type</h2>
+<h2>UCS file type</h2>
 
 <!-- Short description -->
 <p>
-The "CSV" file type represents a list of MWE candidates
+The "UCS" file type represents a list of Word-Word collocation information
 as a tab-separated file. The first non-comment line should have a header.
 </p>
 
@@ -11,11 +11,11 @@ as a tab-separated file. The first non-comment line should have a header.
 <h3>Characteristics</h3>
 
 <table border="1">
-<tr><td><strong>String name<sup><a href="#fn1" id="ref1">1</a></sup></strong></td><td>"CSV"</td></tr>
-<tr><td><strong>Categories</strong></td><td>"candidates" (output only)</td></tr>
-<tr><td><strong>Encoding</strong></td><td>Text file, UTF-8</td></tr>
-<tr><td><strong>Source</strong></td><td>&mdash;</td></tr>
-<tr><td><strong>Automatic detection</strong></td><td>No (it's output only)</td></tr>
+<tr><td><strong>String name<sup><a href="#fn1" id="ref1">1</a></sup></strong></td>      <td>"UCS"</td></tr>
+<tr><td><strong>Categories</strong></td>                                                <td>"candidates" (output only)</td></tr>
+<tr><td><strong>Encoding</strong></td>                                                  <td>Text file, UTF-8</td></tr>
+<tr><td><strong>Source</strong></td>                                                    <td>Used by the <a href="http://www.collocations.de/software.html">UCS toolkit</a></td></tr>
+<tr><td><strong>Automatic detection</strong></td>                                       <td>No (it's output only)</td></tr>
 </table>
 
 
@@ -24,20 +24,20 @@ as a tab-separated file. The first non-comment line should have a header.
 
 The "CSV" file type is a text file of category "candidates",
 encoded in UTF-8. Each line should contain tab-separated
-columns. The possible column names are:
+columns, and the first line contains a tab-separated header.
+The column names are:
 
 <ul>
   <li>Column  "id": Word index (starts at 1).</li>
-  <li>Column  "ngram": Space-separated list of words.</li>
-  <li>Column  "pos": The POS-tag for each element of the n-gram.</li>
-  <li>Column  "occurs": Number of occurrences in the corpus.</li>
-  <li>Column  "corpus": [[Undocummented]].</li>
-  <li>Column  "sources": A ";"-separated list of n-grams for each occurrence of the MWE.</li>
+  <li>Column  "l1": Lemma of the first word in the collocation.</li>
+  <li>Column  "l2": Lemma of the second word in the collocation.</li>
+  <li>Column  "f": Frequency of the l1-l2 word pair in a corpus.</li>
+  <li>Column  "f1": Frequency of the word l1 in a corpus.</li>
+  <li>Column  "f2": Frequency of the word l2 in a corpus.</li>
+  <li>Column  "N": Total number of words in the corpus.</li>
 </ul>
 
-Other column names may then appear for each feature,
-as in "pmi_corpus" for PMI or "dice_corpus" for the Dice measure.
-
+The toolkit is also able to generate "lemma/POS-tag" entries for l1 and l2.
 
 
 
@@ -71,13 +71,7 @@ as in "pmi_corpus" for PMI or "dice_corpus" for the Dice measure.
     <tr>
       <td>" "</td>
       <td>"${space}"</td>
-      <td>It's used to separate words of an MWE.</td>
-    </tr>
-
-    <tr>
-      <td>";"</td>
-      <td>"${semicolon}"</td>
-      <td>It's used to separate MWEs in "sources" field.</td>
+      <td>[[Undocumented]]</td>
     </tr>
 
     <tr>
@@ -115,7 +109,7 @@ as in "pmi_corpus" for PMI or "dice_corpus" for the Dice measure.
 <h3>Example</h3>
 
 <p>You can have a look at a sample <a
-href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/output-only/candidates.csv">candidates</a>
+href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/output-only/candidates.ucs">candidates</a>
 file.</p>
 
 <hr/>

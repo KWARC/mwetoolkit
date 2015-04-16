@@ -15,7 +15,7 @@ the "CONLL" format but using XML tags.
 <tr><td><strong>Categories</strong></td>
         <td>"corpus" (input/output)</td></tr>
 <tr><td><strong>Encoding</strong></td>                                                  <td>Text file, UTF-8</td></tr>
-<tr><td><strong>Source</strong></td>                                                    <td>Corpus format used by pukWaC</a></td></tr>
+<tr><td><strong>Source</strong></td>                                                    <td>Corpus format used by <a href="http://wacky.sslmit.unibo.it/doku.php?id=corpora">pukWaC</a></td></tr>
 <tr><td><strong>Automatic detection</strong></td>                                       <td>Yes (detects <tt>&lt;text&gt;</tt> tag)</td></tr>
 </table>
 
