@@ -5,7 +5,7 @@
 
 <h3>Characteristics</h3>
 
-<p>See the generic <a href="PHITE.php?sitesig=MWE&page=MWE_060_File_types">XML description</a>.</p>
+<p>See the generic <a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_060_XML">XML description</a>.</p>
 
 
 <h3>Details</h3>
@@ -17,14 +17,23 @@ followed by a list of candidates delimited by tags <tt>&lt;cand&gt;</tt> and
 
 <h4>Meta element</h4>
 
-<p>Meta-data describing the candidates. Elements can be of two types:</p>
+<p>Contains a sequence of meta-data entries describing the candidates:
 <ul>
-  <li><tt>&gt;metafeat&lt;</tt>: SOON</li>
-  <li><tt>&gt;metatpclass&lt;</tt>: SOON</li>
-  <li><tt>&gt;corpussize&lt;</tt>: SOON</li>  
+  <li><tt>&lt;corpussize name="CorpusName" value="CorpusSize" /&gt;</tt>:
+  Indicates the size of the corpus from which the candidates were obtained.
+  More than one &lt;corpussize&gt; tag may be present if the candidates came
+  from multiple corpora.
+
+  <li><tt>&lt;metafeat name="FeatureName" type="FeatureType" /&gt;</tt>:
+  Pre-declares the features that can be seen in the candidates below.
+  The type can be "integer", "real", "string" or "{an,enumeration,of,values}".</li>
+
+  <li><tt>&lt;metatpclass&gt;</tt>: Similar to <tt>&lt;metafeat&gt;</tt>, but represents
+  the expected value of output features.</li>
 </ul>
 
-<h4>Cand element</h4>
+
+<h4>Cand elements</h4>
 
 Each candidate must have a unique numerical ID, indicated as 
 attribute <tt>candid="..."</tt>. A candidate contains several subparts:
@@ -46,27 +55,52 @@ A word and the n-gram may have several <tt>&lt;freq/&gt;</tt> elements which cor
 <li><tt>&lt;features&gt;</tt>: Contains a list of <tt>&lt;feat&gt;</tt> and <tt>&lt;tpclass&gt;</tt> elements. Features are name-value pairs, as frequency information, containing the name and the value of the feature. TP classes are the same as features, but they are interpreted as the expected output, in the sense of machine learning. Both should be coherent with the metadata.</li>
 </ul>
  
- <p>A candidate may contain other elements like <tt>&gt;bigrams&lt;</tt> and <tt>&gt;vars&lt;</tt>. These are not widely supported and can be ignored.</p>
-
-
-
+ <p>A candidate may contain other elements like <tt>&lt;bigrams&gt;</tt> and <tt>&lt;vars&gt;</tt>. These are not widely supported and can be ignored.</p>
 
 <p>
 Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be ommited, an attribute value should never be empty. 
 </p>
 
-<p>An example of corpus file would have the following structure:</p>
+
+
+<h4>Overall structure</h4>
+
+<p>A "candidates" file should have the following structure:</p>
 
 <pre>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd"&gt;
-&lt;corpus&gt;
-&lt;s s_id="1"&gt;
-  &lt;w surface="X" lemma="X" pos="X" syn="X:2" /&gt;
+&lt;candidates&gt;
+
+&lt;meta&gt;
+  &lt;corpussize name="corpus" value="2570000" /&gt;
+  &lt;metafeat name="featA" type="real" /&gt;
+  &lt;metafeat name="featB" type="{foo,bar,baz}" /&gt;
   ...
-&lt;/s&gt;
+  &lt;metafeat name="featN" type="integer" /&gt;
+&lt;/meta&gt;
+
+&lt;cand candid="1"&gt;
+  &lt;w surface="A" lemma="a" pos="Det" /&gt;
+  &lt;w surface="multiword" lemma="multiword" pos="Adj" /&gt;
+  &lt;w surface="expression" lemma="expression" pos="Noun" /&gt;
+  &lt;occurs&gt;
+    ...
+  &lt;/occurs&gt;
+  &lt;features&gt;
+    &lt;feat name="featA" value="3.14" /&gt;
+    &lt;feat name="featB" value="bar" /&gt;
+    ...
+  &lt;/features&gt;
+  ...
+&lt;/cand&gt;
+
+&lt;cand candid="2"&gt;
+  ...
+&lt;/cand&gt;
+
 ...
-&lt;/corpus&gt;
+&lt;/candidates&gt;
 </pre>
 
 <h3>Example</h3>

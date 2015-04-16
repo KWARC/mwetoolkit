@@ -52,7 +52,7 @@ class Feature(object) :
         aspect of the candidate, and is supposed to be an abstraction that
         allows a machine learning algorithm to create generalizations from
         instances.
-        
+
         @param xml_class String that identifies what kind of feature
         this is.  Subclasses MUST use a unique name.
 

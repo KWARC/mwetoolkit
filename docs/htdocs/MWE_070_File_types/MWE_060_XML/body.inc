@@ -33,10 +33,10 @@ For large annotated corpora, CONLL or MosesFactored are preferrable.</p>
 
 <p>The specific structure of a given XML category is described in the documents for each category:</p>
 <ul>
-<li><a href="PHITE.php?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_062_XML_corpus">XML corpus</a></li>
-<li><a href="PHITE.php?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_064_XML_candidates">XML candidates</a></li>
-<li><a href="PHITE.php?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_066_XML_patterns">XML patterns</a></li>
-<li><a href="PHITE.php?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_068_XML_dict">XML dict</a></li>
+<li><a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_062_XML_corpus">XML corpus</a></li>
+<li><a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_064_XML_candidates">XML candidates</a></li>
+<li><a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_066_XML_patterns">XML patterns</a></li>
+<li><a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_068_XML_dict">XML dict</a></li>
 </ul>
 
 
@@ -101,7 +101,7 @@ For large annotated corpora, CONLL or MosesFactored are preferrable.</p>
 
 <h3>Example</h3>
 
-<p>Check the specific XML categories for examples.</p>
+<p>Check the specific XML categories above for examples.</p>
 
 <hr/>
 

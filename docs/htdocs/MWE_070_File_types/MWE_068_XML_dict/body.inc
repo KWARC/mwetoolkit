@@ -6,14 +6,38 @@
 
 <h3>Characteristics</h3>
 
-<p>See the generic <a href="PHITE.php?sitesig=MWE&page=MWE_060_File_types">XML description</a>.</p>
+<p>See the generic <a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_060_XML">XML description</a>.</p>
 
 
 
 <h3>Details</h3>
 
-[[Incomplete]]
+<p>The root element of a dict XML file is called <tt>&lt;dict&gt;</tt>. 
+A dict file contains essentially a list of <tt>&lt;entry&gt;</tt> elements,
+where each entry represents an n-gram.
 
+<h4>Overall structure</h4>
+
+<p>A "dict" file should have the following structure:</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd"&gt;
+&lt;dict&gt;
+
+&lt;entry&gt;
+  &lt;w surface="A" lemma="a" pos="Det" /&gt;
+  &lt;w surface="multiword" lemma="multiword" pos="Adj" /&gt;
+  &lt;w surface="expression" lemma="expression" pos="Noun" /&gt;
+&lt;/entry&gt;
+
+&lt;entry&gt;
+  ...
+&lt;/entry&gt;
+
+...
+&lt;/dict&gt;
+</pre>
 
 
 <h3>Example</h3>

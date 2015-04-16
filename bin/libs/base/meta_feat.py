@@ -24,7 +24,7 @@
 ################################################################################
 """
     This module provides the `MetaFeat` class. This class represents the 
-    meta-information about a `Feature`, specially its type.
+    meta-information about a `Feature`, especially its type.
 """
 
 from __future__ import division
@@ -51,22 +51,28 @@ class MetaFeat(object) :
         arff file format.
     """
 
-    def __init__( self, name, feat_type ) :
+    def __init__( self, name, feat_type, xml_class="metafeat" ) :
         """
             @param name String that identifies the corresponding `Feature`.
 
             @param feat_type The type of the corresponding `Feature`'s
             `value`field.  This type can be an "integer", a "real" number,
             a "string" or an element of an enumeration (allowed types in WEKA).
+
+            @param xml_class String that identifies what kind of meta-feature
+            this is.  Subclasses MUST use a unique name.
         """
+        assert xml_class in ("metafeat", "metatpclass"), xml_class
         self.name = name
         self.feat_type = feat_type
+        self.xml_class = xml_class
 
 ################################################################################
 
     def merge_op( self, value1, value2 ):
         r"""Return a merge of the values of two features
         represented by this MetaFeat."""
+        # XXX not generic at all...
         return max(value1, value2)
 
 
@@ -85,8 +91,6 @@ class MetaFeat(object) :
         return "".join(ret)
 
     def _to_xml_into( self, output ) :
-        output.append("<metafeat name=")
-        output.append(quoteattr(self.name))
-        output.append(" type=")
-        output.append(quoteattr(unicode(self.feat_type)))
-        output.append(" />")
+        output.extend(("<", self.xml_class, " name=",
+                quoteattr(self.name), " type=",
+                quoteattr(unicode(self.feat_type)), " />"))

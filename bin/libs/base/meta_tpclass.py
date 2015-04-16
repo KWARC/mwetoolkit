@@ -33,18 +33,18 @@ from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import absolute_import
 
-from libs.base.feature import Feature
+from .meta_feat import MetaFeat
 
 ######################################################################
 
-class MetaTPClass( Feature ) :
+class MetaTPClass( MetaFeat ) :
     """
         A meta True Positive class is the meta-information about a TP class. 
         Meta-TP base are generally placed in the header of the XML file
         (in the `Meta` element) and contain the number of possible TP base in
-        the form of an enumeration. MetaTPClass extends `Feature`, so the name 
+        the form of an enumeration. MetaTPClass extends `MetaFeat`, so the name 
         corresponds to the name that uniquely identifies the `TPClass` while 
-        value corresponds to the type of the class, i.e. an enumeration of 
+        type corresponds to the type of the class, i.e. an enumeration of 
         possible base e.g. "{class1,class2,class3}". The evaluation can be
         2-base, in which case MetaTPClass will probably have the type
         "{True,False}", or multiclass, where a larger number of possible base
@@ -56,13 +56,15 @@ class MetaTPClass( Feature ) :
 
 ######################################################################
 
-    def to_xml( self ) :
+    def __init__( self, name, feat_type, xml_class="metatpclass" ) :
         """
-            Provides an XML string representation of the current object, 
-            including internal variables.
-            
-            @return A string containing the XML element <metatpclass> with its 
-            attributes, according to mwetoolkit-candidates.dtd.
+            @param name String that identifies the corresponding `Feature`.
+
+            @param feat_type The type of the corresponding `Feature`'s
+            `value`field.  This type can be an "integer", a "real" number,
+            a "string" or an element of an enumeration (allowed types in WEKA).
+
+            @param xml_class String that identifies what kind of meta-feature
+            this is.  Subclasses MUST use a unique name.
         """
-        return "<metatpclass name=\"" + self.name + \
-               "\" type=\"" + str(self.value) + "\" />"
+        super(MetaTPClass, self).__init__(name, feat_type, xml_class)

@@ -6,7 +6,7 @@
 
 <h3>Characteristics</h3>
 
-<p>See the generic <a href="PHITE.php?sitesig=MWE&page=MWE_060_File_types">XML description</a>.</p>
+<p>See the generic <a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_060_XML">XML description</a>.</p>
 
 
 

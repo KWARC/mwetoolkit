@@ -5,7 +5,7 @@
 
 <h3>Characteristics</h3>
 
-<p>See the generic <a href="PHITE.php?sitesig=MWE&page=MWE_060_File_types">XML description</a>.</p>
+<p>See the generic <a href="?sitesig=MWE&page=MWE_070_File_types&subpage=MWE_060_XML">XML description</a>.</p>
 
 
 <h3>Details</h3>
@@ -27,14 +27,19 @@ optional attributes: </p>
 Each word is implicitly numbered according to its position, starting at 1. The HEAD information in syn attribute uses this number to indicate the position of the head. REL names should not contain colons. An absent attribute should be ommited, an attribute value should never be empty. 
 </p>
 
-<p>An example of corpus file would have the following structure:</p>
+
+
+<h4>Overall structure</h4>
+
+<p>A corpus file should have the following structure:</p>
 
 <pre>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!DOCTYPE corpus SYSTEM "dtd/mwetoolkit-corpus.dtd"&gt;
 &lt;corpus&gt;
 &lt;s s_id="1"&gt;
-  &lt;w surface="X" lemma="X" pos="X" syn="X:2" /&gt;
+  &lt;w surface="Xed" lemma="X" pos="Verb" syn="ROOT:0" /&gt;
+  &lt;w surface="Ys" lemma="Y" pos="Noun" syn="OBJ:1" /&gt;
   ...
 &lt;/s&gt;
 ...
