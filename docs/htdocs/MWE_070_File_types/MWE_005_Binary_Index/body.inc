@@ -67,8 +67,7 @@ No escaping is performed.
 <h3>Example</h3>
 
 <p>You can have a look at a sample <a
-href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/corpus.BinaryIndex">corpus directory</a>
-file.</p>
+href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/corpus.BinaryIndex">corpus directory</a>.</p>
 
 <hr/>
 

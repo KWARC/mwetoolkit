@@ -109,7 +109,7 @@ The toolkit is also able to generate "lemma/POS-tag" entries for l1 and l2.
 <h3>Example</h3>
 
 <p>You can have a look at a sample <a
-href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/output-only/candidates.ucs">candidates</a>
+href="http://sourceforge.net/p/mwetoolkit/code/HEAD/tree/test/filetype-samples/candidates.ucs">candidates</a>
 file.</p>
 
 <hr/>
