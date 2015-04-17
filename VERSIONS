@@ -8,6 +8,19 @@
                   *****************************************
 
 ********************************************************************************
+  VERSION 1.0:
+  Released: April 16, 2015
+  Authors: Carlos Ramisch, Silvio Ricardo Cordeiro, Vitor de Araujo, Sandra 
+  Castellanos
+
+  Improvements over 0.6:
+    a) Full support to many file types - includes full documentation
+    b) Support to compressed file formats (.gz...)
+    c) Included many tests and corrected existing ones
+    d) General bug fixes, refactoring and improvements
+********************************************************************************
+
+********************************************************************************
   VERSION 0.6:
   Released: September 19, 2014
   Authors: Carlos Ramisch, Vitor de Araujo, Silvio Ricardo Cordeiro, Sandra 

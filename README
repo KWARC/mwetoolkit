@@ -7,9 +7,9 @@
                   >>>    mwetoolkit readme file         <<<
                   *****************************************
 
-Version 06
-Released: Sep 19, 2015
-Authors: Carlos Ramisch, Vitor de Araujo, Silvio Ricardo Cordeiro, Sandra 
+Version 1.0
+Released: April 16, 2015
+Authors: Carlos Ramisch, Silvio Ricardo Cordeiro, Vitor de Araujo, Sandra 
 Castellanos
 Contact: mwetoolkit AT gmail.com
 Website: http://mwetoolkit.sf.net 
@@ -42,35 +42,22 @@ OK for small corpora.
 
     2) SCRIPTS and PROGRAMS
 
-The "bin" folder contains a set of Python scripts that automatise part of the
+The "bin" folder contains a set of Python scripts that automate part of the
 MWE extraction process. Call each script with option -h and you will have
 a complete list of arguments and options to use.
-
-Alternatively, for simple MWE extraction tasks you can call bin/mweconsole.sh, 
-which contains a friendlier command-line interface to the scripts [DEPRECATED].
 
 The "src" folder cotains source code in C. Please do not bother about it unless
 you are a mwetoolkit developer.
 
 Please refer to the website for tutorials, quick start and more documentation.
 
-    3) DOCUMENT TYPE DEFINITIONS
-
-You will find three different DTD files that describe the format of the three
-inputs of the MWT toolkit scripts:
-
-* mwttoolkit-corpus.dtd
-* mwttoolkit-dict.dtd
-* mwttoolkit-candidates.dtd
-* mwetoolkit-patterns.dtd
-
-    4) EXAMPLES
+    3) EXAMPLES
 
 The "toy" folder contains a set of files for performing a toy experiment.
-You can try to run the whole pipeline by calling "./testAll.sh" The specific
-documentation about the examples is in a dedicated README file.
+You can try to run the whole pipeline by calling "./run-tutorial.sh" The 
+specific documentation about the examples is in the script itself, as comments.
 
-    5) REGRESSION TESTS
+    4) REGRESSION TESTS
     
 The "test" folder contains regression tests for most scripts. In order to test
 your installation of the mwetoolkit, navigate to this folder and then call the
