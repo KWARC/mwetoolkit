@@ -67,8 +67,13 @@ OPTIONS may be:
     (By default, keeps input in original format):
     {descriptions.output[ALL]}
 
+--only-matching
+    Output only the matching parts of input entities,
+    not the entities themselves.
+
 --annotate
-    Annotate matches as if they were MWEs.
+    Annotate input entities with matches as if they were MWEs.
+    (Ignored if `--only-matching` is present).
 
 -d <distance> OR --match-distance <distance>
     Select the distance through which patterns will match (default: "All"):
@@ -92,6 +97,7 @@ input_filetype_ext = None
 output_filetype_ext = None
 match_distance = "All"
 non_overlapping = False
+only_the_matching_subpart = False
 id_order = ["*"]
 annotate = False
 
@@ -108,32 +114,46 @@ class GrepHandler(filetype.ChainedInputHandler):
             self.candidate_factory = CandidateFactory()
             self.global_dict = {}
         self.chain.before_file(fileobj, info)
-        
+
+
     def handle_candidate(self, original_cand, info={}):
-        if list(self._iter_matches(original_cand)):
+        matched = False
+        for match_ngram, indexes in self._iter_matches(original_cand):
+            matched = True
+            # XXX not implementing global `annotate` for now
+            if only_the_matching_subpart:
+                cand = self.candidate_factory.make_uniq(match_ngram)
+                self.chain.handle(cand, info)
+
+        if matched and not only_the_matching_subpart:
             self.chain.handle(original_cand, info)
+
 
     def handle_sentence(self, sentence, info={}):
         matched = False
-        for match_ngram, wordnums in self._iter_matches(sentence):
+        for match_ngram, indexes in self._iter_matches(sentence):
             matched = True
-            if not annotate: break
             cand = self.candidate_factory.make_uniq(match_ngram)
             cand.add_sources("{}:{}".format(sentence.id_number,
-                    ",".join(unicode(wn+1) for wn in wordnums)))
-            mweo = MWEOccurrence(sentence, cand, wordnums)
-            sentence.mweoccurs.append(mweo)
+                    ",".join(unicode(wn+1) for wn in indexes)))
 
-        if matched:
+            if only_the_matching_subpart:
+                subsent = sentence.sub_sentence(indexes)
+                self.chain.handle(subsent, info)
+            elif annotate:
+                mweo = MWEOccurrence(sentence, cand, indexes)
+                sentence.mweoccurs.append(mweo)
+
+        if matched and not only_the_matching_subpart:
             self.chain.handle(sentence, info)
 
 
     def _iter_matches(self, entity):
         for pattern in input_patterns:
-            for (match_ngram, wordnums) in pattern.matches(entity,
+            for (match_ngram, indexes) in pattern.matches(entity,
                     match_distance=match_distance, id_order=id_order,
                     overlapping=not non_overlapping):
-                yield match_ngram, wordnums
+                yield match_ngram, indexes
 
 
 ################################################################################
@@ -151,6 +171,7 @@ def treat_options( opts, arg, n_arg, usage_string ) :
     global non_overlapping
     global id_order
     global annotate
+    global only_the_matching_subpart
 
     util.treat_options_simplest(opts, arg, n_arg, usage_string)
 
@@ -169,17 +190,23 @@ def treat_options( opts, arg, n_arg, usage_string ) :
             id_order = a.split(":")
         elif o == "--annotate":
             annotate = True
+        elif o == "--only-matching":
+            only_the_matching_subpart = True
         else:
             raise Exception("Bad arg " + o)
 
     if input_patterns is None:
         util.error("No patterns provided. Option --patterns is mandatory!")
 
+    if only_the_matching_subpart and annotate:
+        util.warn("Switch --only-matching disables --annotate")
+
 
 ################################################################################
 # MAIN SCRIPT
 
 longopts = ["input-from=", "to=", "patterns=",
-        "match-distance=", "non-overlapping=", "id-order=", "annotate"]
+        "match-distance=", "non-overlapping=", "id-order=", "annotate",
+        "only-matching"]
 args = util.read_options("p:d:N", longopts, treat_options, -1, usage_string)
 filetype.parse(args, GrepHandler(), input_filetype_ext)
