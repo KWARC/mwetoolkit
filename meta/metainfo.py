@@ -11,6 +11,7 @@ __all__ = [
 
 import argparse
 import os
+import itertools
 import json
 import re
 import sys
@@ -117,6 +118,9 @@ class ToolArgsParser(object):
                     continue
                 self.optional.append({"unknown": paragraph})
 
+        for obj in itertools.chain(self.required, self.optional):
+            parse_human_descr(obj)
+
         print_dict({"required": self.required,
                 "optional": self.optional})
 
@@ -146,12 +150,11 @@ class ToolArgsParser(object):
     RE_INPUT_HUMAN = re.compile(r"The (?P<inputname><\S+>).* must be.*")
 
     def try_input_human(self):
-        r"""Interpret paragraph "The BLABLA must be..."."""
+        r"""Interpret paragraph "The <BLABLA> must be..."."""
         m = self.RE_INPUT_HUMAN.match(self.current_p)
         if not m: return False
         self.req_arguments[m.group("inputname")]["human_descr"] = m.string
         return True
-
 
 
     RE_PARAGRAPH_HEADER_ARG = re.compile(
@@ -170,7 +173,6 @@ class ToolArgsParser(object):
                 self.parse_args(D["flag_arg"] or "")}
         if D["miniflag"]: ret["miniflag"] = D["miniflag"]
         ret["human_descr"] = dedent(tail)
-        extract_from_human(ret)
         return ret
 
 
@@ -227,6 +229,8 @@ def argument_description(argument):
         return {"argument_type": "file", "category": "candidates"}
     elif "dict" in argument:
         return {"argument_type": "file", "category": "dict"}
+    elif "input-file" in argument:
+        return {"argument_type": "file", "category": "*any*"}
     elif "min" in argument or "max" in argument:
         return {"argument_type": "int", "argument_name": argument}
     else:
@@ -234,14 +238,27 @@ def argument_description(argument):
 
 
 
-RE_HUMAN_CHOICE = re.compile('^\* .*?"([^"]*)"', re.MULTILINE)
+################# Post-processing #########################
 
-def extract_from_human(arg):
-    r"""Read `human_descr` field of `arg` and improve
-    its data if finding descriptions of choice, such as
-    the choice "Foo" in: '* "Foo": Bar bar baz'.
+RE_HUMAN_CHOICE = re.compile('^\* .*?"([^"]*)"', re.MULTILINE)
+RE_HUMAN_FT_SWITCHNAME = re.compile(r"filetype formats accepted by the " \
+        "`(?P<filetype_switchname>.*?)` switch".replace(" ", r"\s+"), re.DOTALL)
+
+def parse_human_descr(arg):
+    r"""Read `human_descr` field of `arg` and:
+    
+    1) Improve its data if finding descriptions of choice,
+    such as the choice "Foo" in: '* "Foo": Bar bar baz'.
+
+    2) Interpret `human_descr` field when it has the
+    paragraph "...by the `BLABLA` switch...".
     """
-    human = arg["human_descr"]
+    try:
+        human = arg["human_descr"]
+    except KeyError:
+        return  # nothing to parse
+
+    # 1)
     if arg.get("flag_arguments", None):
         D = arg["flag_arguments"][0]["description"]
         if D["argument_type"] == "unknown":
@@ -249,6 +266,12 @@ def extract_from_human(arg):
             if choice_strings:
                 D["argument_type"] = "choice_string"
                 D["choice_strings"] = RE_HUMAN_CHOICE.findall(human)
+
+    # 2)
+    m = RE_HUMAN_FT_SWITCHNAME.search(human)
+    if m is not None:
+        arg["filetype_switchname"] = m.group("filetype_switchname")
+
 
 
 ###########################################################

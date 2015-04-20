@@ -123,7 +123,10 @@ class FiletypeOperations(collections.namedtuple("FiletypeOperations",
     -- parser_class: Either None or a subclass of AbstractParser.
     -- printer_class: Either None or a subclass of AbstractPrinter.
     """
-    pass
+    def __new__(cls, checker_class, parser_class, printer_class):
+        assert issubclass(checker_class, AbstractChecker), checker_class
+        return super(FiletypeOperations, cls).__new__(cls,
+                checker_class, parser_class, printer_class)
 
 
 

@@ -51,11 +51,18 @@ class UCSInfo(common.FiletypeInfo):
             ("\t", "${tab}"), ("\n", "${newline}"), ("#", "${hash}")]
 
     def operations(self):
-        return common.FiletypeOperations(None, None, UCSPrinter)
+        return common.FiletypeOperations(UCSChecker, None, UCSPrinter)
 
 
 INFO = UCSInfo()
 r"""Singleton instance of UCSInfo."""
+
+
+class UCSChecker(common.AbstractChecker):
+    r"""Checks whether input is in UCS format."""
+    filetype_info = INFO
+    def matches_header(self, strict):
+        return not strict
 
 
 class UCSPrinter(common.AbstractPrinter):
