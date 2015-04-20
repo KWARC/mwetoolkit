@@ -67,6 +67,7 @@ def match_pattern(pattern, words):
 def build_generic_pattern(min, max):
     """Returns a pattern matching any ngram of size min~max."""
     # TODO make this implementation less hack-ish
+    assert min > 0, min  # We don't want empty matches
     p = ParsedPattern("???")
     p.pattern = p.WORD_SEPARATOR + "(?:[^%s]*" % p.WORD_SEPARATOR + \
               p.WORD_SEPARATOR + ")" + "{%d,%d}" % (min, max)
@@ -98,6 +99,9 @@ class ParsedPattern(object):
 
     def _post_parsing(self):
         self.compiled_pattern = re.compile(self.pattern)
+        if self.compiled_pattern.match(self.WORD_SEPARATOR):
+            util.warn("Pattern matches empty string (line {line})",
+                    line=self.source_line)
         self._strid_to_numid = {"id_*": 0}
         self._strid_to_numid.update(self.compiled_pattern.groupindex)
         self.ignored_numids = set(numid for (strid, numid) in
