@@ -122,7 +122,7 @@ class GrepHandler(filetype.ChainedInputHandler):
             matched = True
             # XXX not implementing global `annotate` for now
             if only_the_matching_subpart:
-                cand = self.candidate_factory.make_uniq(match_ngram)
+                cand = self.candidate_factory.make(match_ngram)
                 self.chain.handle(cand, info)
 
         if matched and not only_the_matching_subpart:
@@ -133,7 +133,7 @@ class GrepHandler(filetype.ChainedInputHandler):
         matched = False
         for match_ngram, indexes in self._iter_matches(sentence):
             matched = True
-            cand = self.candidate_factory.make_uniq(match_ngram)
+            cand = self.candidate_factory.make(match_ngram)
             cand.add_sources("{}:{}".format(sentence.id_number,
                     ",".join(unicode(wn+1) for wn in indexes)))
 

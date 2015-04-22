@@ -70,6 +70,9 @@ class CandidateFactory(object):
         r"""Return uniq'd version of this Candidate.
         Make sure that `candidate.word_list` elements
         will NOT be changed anymore.
+
+        Note that this interns the MWE candidate in a way that could
+        exhaust the user's memory. Only use it when necessary.
         """
         # TODO implement Word.freeze and call it here, to avoid bugs
         key = tuple(w.to_string() for w in candidate.word_list)
