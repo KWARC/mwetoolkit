@@ -6,19 +6,20 @@ class TreeControl(wx.TreeCtrl):
 		'''Create the TreeControl.'''
 		wx.TreeCtrl.__init__(self, *args, **kwargs)
 		self.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.OnShowPopup)
+		
 
 	def OnShowPopup(self, event):
-		selectedItem = self.GetItemText(event.GetItem())
-		options = []
-		
-		if selectedItem == 'word':
+		self.selectedItem = self.GetItemText(event.GetItem())
+		options = []		
+		if self.selectedItem == 'word':
 			options = ['Delete']
-		elif selectedItem == 'sequence':
+		elif self.selectedItem == 'sequence':
 			options = ['Add sequence pattern', 'Add either pattern', 'Add word pattern', 'Delete']
-		elif selectedItem == 'either':
+		elif self.selectedItem == 'either':
 			options = ['Add sequence pattern', 'Delete']
-		elif selectedItem == 'patterns':
-			options = ['Add sequence pattern']
+		elif self.selectedItem == 'patterns':
+			options = ['Add sequence']
+		
 
 		self.popupmenu = wx.Menu()
 		
@@ -30,7 +31,19 @@ class TreeControl(wx.TreeCtrl):
 		self.popupmenu.Destroy()
 
 	def OnSelectContext(self, event):
-		print event
+		 idselect = event.GetId()
+		 itemSelect = self.popupmenu.GetLabelText(idselect)
+		 if itemSelect == 'Add sequence':
+			self.AppendItem(self.GetSelection(),'sequence')
+			self.ExpandAll()
+		 elif itemSelect == 'Delete':
+			self.Delete(self.GetSelection())
+		 elif itemSelect == 'Add either pattern':
+			self.AppendItem(self.GetSelection(),'either')
+		 elif itemSelect == 'Add word pattern':
+			self.AppendItem(self.GetSelection(),'word')
+		 elif itemSelect == 'Add sequence pattern':
+			self.AppendItem(self.GetSelection(),'sequence')
 
 	def CreateContextMenu(self, menu):
 		item = self._menu.Append(wx.ID_ADD)
@@ -40,17 +53,20 @@ class TreeControl(wx.TreeCtrl):
 		item = self._menu.Append(wx.ID_EDIT)
 		self.Bind(wx.EVT_MENU, self.OnSelectContext, item)
 
+		
 class TreePanel(wx.Panel):
 	'''docstring for TreePanel'''
 	def __init__(self, *args, **kwargs):
 		'''Create the TreePanel.'''
 		wx.Panel.__init__(self, *args, **kwargs)
+		
 
 		# #####
 		# SIZER
 		# #####
 		sizer = wx.BoxSizer(wx.VERTICAL)
-
+		
+		
 		# ########
 		# CONTROLS
 		# ########
@@ -59,6 +75,7 @@ class TreePanel(wx.Panel):
 		sizer.Add(self.treeControl, proportion=1,flag=wx.EXPAND)
 
 		self.SetSizer(sizer)
+
 
 	def addRoot(self, text):
 		return self.treeControl.AddRoot(text)

@@ -26,7 +26,10 @@ class SequencePanel(wx.Panel):
 		# Id element
 		idTextControl = wx.TextCtrl(self)
 		# Repeat element (+, *, ? , custom)
-		repeatListBox = wx.ListBox(self)
+		#repeatListBox = wx.ListBox(self)
+		element  = ['*', '+', '?','']
+		self.listComboBox = wx.ComboBox(self,-1,"", (15, 30), wx.DefaultSize,element)
+
 		# Ignore element (radio button) yes/no
 		# Create a sizer for the radio buttons
 		ignoreRadioButtonSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -41,7 +44,7 @@ class SequencePanel(wx.Panel):
 		# Add widgets to the grid
 		flexGridSizer.AddMany([
 			(idLabel), (idTextControl, 1, wx.EXPAND),
-			(repeatLabel), (repeatListBox, 1, wx.EXPAND),
+			(repeatLabel), (self.listComboBox, 1, wx.EXPAND),
 			(ignoreLabel), (ignoreRadioButtonSizer, 1, wx.ALL|wx.EXPAND),
 			(emptyLabel), (okButton, 1, wx.ALL)
 		])
@@ -55,8 +58,23 @@ class SequencePanel(wx.Panel):
 		# EVENTS
 		# ######
 		okButton.Bind(wx.EVT_BUTTON, self.OnValid)
-
+		
+		self.listComboBox.Bind(wx.EVT_COMBOBOX, self.OnPhaseSelection)
 		self.SetSizer(sizer)
 
 	def OnValid(self, event):
 		print 'SequencePanel.OnValid'
+			
+	def OnPhaseSelection(self, event):
+		el = self.listComboBox.GetValue()
+		if el == '+':
+			self.listComboBox.SetEditable(False)
+		elif el == '*':
+			self.listComboBox.SetEditable(False)
+		elif el == '?':
+			self.listComboBox.SetEditable(False)
+		elif el == '':
+			self.listComboBox.SetEditable(True)
+			
+			
+			

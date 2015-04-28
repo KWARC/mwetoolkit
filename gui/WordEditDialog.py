@@ -1,5 +1,6 @@
 import wx
 
+
 class WordEditDialog(wx.Dialog):
 	'''docstring for WordEditDialog'''
 	def __init__(self, *args, **kwargs):
@@ -16,29 +17,29 @@ class WordEditDialog(wx.Dialog):
 		# ######
 		# LABELS
 		# ######
-		idLabel = wx.StaticText(self, label='id')
-		repeatLabel = wx.StaticText(self, label='repeat')
-		ignoreLabel = wx.StaticText(self, label='ignore')
+		idLabel = wx.StaticText(self, label='attribute')
+		repeatLabel = wx.StaticText(self, label='value')
+		emptyLabel = wx.StaticText(self, label='')
 
 		# ########
 		# CONTROLS
 		# ########
 		# List box (surface, lemma, part of speech, syn)
 		attributes = ['surface', 'lemma', 'pos', 'syn']
-		listBox = wx.ListBox(self, -1, choices=attributes, style=wx.LB_SINGLE)
-		listBox.SetSelection(0)
+		self.listBox = wx.ListBox(self, -1, choices=attributes, style=wx.LB_SINGLE)
+		self.listBox.SetSelection(0)
 		# Text control
-		textControl = wx.TextCtrl(self)
+		self.textControl = wx.TextCtrl(self)
 		# Check box (negative/positive)
-		checkBox = wx.CheckBox(self, label='Negative')
+		self.checkBox = wx.CheckBox(self, label='Negative')
 		# OK button
-		okButton = wx.Button(self, id=wx.ID_OK)
+		okButton = wx.Button(self,wx.ID_OK)
 
 		# Add widgets to the grid
 		flexGridSizer.AddMany([
-			(idLabel), (listBox, 1, wx.EXPAND),
-			(repeatLabel), (textControl, 1, wx.EXPAND),
-			(ignoreLabel, 1, wx.EXPAND), (checkBox, 1, wx.ALL)
+			(idLabel), (self.listBox, 1, wx.EXPAND),
+			(repeatLabel), (self.textControl, 1, wx.EXPAND),
+			(emptyLabel, 1, wx.EXPAND), (self.checkBox, 1, wx.ALL)
 		])
 
 		flexGridSizer.AddGrowableRow(2, 1)
@@ -51,12 +52,9 @@ class WordEditDialog(wx.Dialog):
 		# ######
 		# EVENTS
 		# ######
-		okButton.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
-
 		self.SetSizer(sizer)
-
-	def onOK(self, event):
-		self.Destroy()
-
+		
+		self.element = []		
+		
 	def onCancel(self, event):
 		self.Destroy()
