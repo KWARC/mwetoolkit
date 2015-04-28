@@ -37,6 +37,7 @@ from __future__ import absolute_import
 from collections import defaultdict
 
 from .ngram import Ngram
+from .__common import WILDCARD
 
 
 
@@ -110,8 +111,17 @@ class Sentence( Ngram ) :
         -- instances of `Word`, to be inserted directly.
         """
         old2new_i = {old:new for (new, old) in enumerate(indexes)}
-        ret = Sentence([self[x] if isinstance(x, int) else x
+        ret = Sentence([self[x].copy() if isinstance(x, int) else x
                 for x in indexes], self.id_number)
+
+        for w in ret:
+            syn_list = []
+            for synrel, synid in w.syn_iter():
+                # Correct synid in synrel:synid dependency
+                synid = old2new_i.get(synid, -1)
+                syn_list.append((synrel, synid))
+            w.syn = w.syn_encode(syn_list)
+
         for mweo in self.mweoccurs:
             from .mweoccur import MWEOccurrence
             try:

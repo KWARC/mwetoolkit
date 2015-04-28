@@ -35,6 +35,7 @@ from __future__ import absolute_import
 
 from xml.sax.saxutils import quoteattr
 
+from .. import util
 from .feature import FeatureSet
 from .__common import WILDCARD, SEPARATOR
 
@@ -413,3 +414,32 @@ class Word(object):
             if freq.name == freq_name :
                 return freq.value
         return 0     
+
+################################################################################      
+
+    def syn_iter(self):
+        r"""Yield pairs (synrel, index) based on `self.syn`."""
+        if self.syn != WILDCARD and self.syn != "":
+            for syn_pair in self.syn.split(";"):
+                try:
+                    a, b = syn_pair.split(":")
+                except ValueError:
+                    util.warn("Bad colon-separated syn pair: {pair!r}", pair=syn_pair)
+                else:
+                    try:
+                        b = int(b) - 1
+                    except ValueError:
+                        util.warn("Bad syn index reference: {index!r}", index=b)
+                    else:
+                        yield (a, b)
+
+################################################################################      
+
+    @staticmethod
+    def syn_encode(syn_pairs):
+        r"""Return a representation of the
+        list of (synrel, index) pairs `syn_pairs`.
+        The result can be assigned to a Word's `syn` attribute.
+        """
+        return ";".join("{}:{}".format(rel, index+1)
+                for (rel, index) in syn_pairs)
