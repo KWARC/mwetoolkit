@@ -1,5 +1,5 @@
 import wx
-
+import data
 
 class WordEditDialog(wx.Dialog):
 	'''docstring for WordEditDialog'''
@@ -24,8 +24,8 @@ class WordEditDialog(wx.Dialog):
 		# ########
 		# CONTROLS
 		# ########
-		# List box (surface, lemma, part of speech, syn)
-		attributes = ['surface', 'lemma', 'pos', 'syn']
+		# List box (surface, lemma, part of speech, syndep)
+		attributes = ['surface', 'lemma', 'pos', 'syndep']
 		self.listBox = wx.ListBox(self, -1, choices=attributes, style=wx.LB_SINGLE)
 		self.listBox.SetSelection(0)
 		# Text control
@@ -33,7 +33,7 @@ class WordEditDialog(wx.Dialog):
 		# Check box (negative/positive)
 		self.checkBox = wx.CheckBox(self, label='Negative')
 		# OK button
-		okButton = wx.Button(self,wx.ID_OK)
+		okButton = wx.Button(self, wx.ID_OK)
 
 		# Add widgets to the grid
 		flexGridSizer.AddMany([
@@ -49,12 +49,8 @@ class WordEditDialog(wx.Dialog):
 		sizer.Add(flexGridSizer, proportion=1, flag=wx.ALL|wx.EXPAND, border=border)
 		sizer.Add(okButton, 0, wx.ALL, border=border)
 
-		# ######
-		# EVENTS
-		# ######
 		self.SetSizer(sizer)
-		
-		self.element = []		
-		
-	def onCancel(self, event):
+
+	def OnCancel(self, event):
+		print 'WordEditDialog.OnCancel'
 		self.Destroy()

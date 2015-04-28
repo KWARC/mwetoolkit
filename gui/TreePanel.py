@@ -1,49 +1,57 @@
 import wx
 
+from libs.Patterns import *
+from libs.EitherPattern import *
+from libs.SequencePattern import *
+from libs.WordPattern import *
+
 class TreeControl(wx.TreeCtrl):
 	'''docstring for TreeControl'''
 	def __init__(self, *args, **kwargs):
 		'''Create the TreeControl.'''
 		wx.TreeCtrl.__init__(self, *args, **kwargs)
 		self.Bind(wx.EVT_TREE_ITEM_RIGHT_CLICK, self.OnShowPopup)
-		
 
 	def OnShowPopup(self, event):
-		self.selectedItem = self.GetItemText(event.GetItem())
-		options = []		
-		if self.selectedItem == 'word':
+		selectedItemData = self.GetItemData(event.GetItem())
+		obj = selectedItemData.GetData()
+		options = []
+
+		if isinstance(obj, WordPattern):
 			options = ['Delete']
-		elif self.selectedItem == 'sequence':
+		elif isinstance(obj, SequencePattern):
 			options = ['Add sequence pattern', 'Add either pattern', 'Add word pattern', 'Delete']
-		elif self.selectedItem == 'either':
+		elif isinstance(obj, EitherPattern):
 			options = ['Add sequence pattern', 'Delete']
+		elif isinstance(obj, Patterns):
+			options = ['Add sequence pattern']
 		elif self.selectedItem == 'patterns':
 			options = ['Add sequence']
-		
 
 		self.popupmenu = wx.Menu()
-		
+
 		for option in options:
 			item = self.popupmenu.Append(-1, option)
 			self.Bind(wx.EVT_MENU, self.OnSelectContext)
-		
+
 		self.PopupMenu(self.popupmenu, event.GetPoint())
 		self.popupmenu.Destroy()
 
 	def OnSelectContext(self, event):
 		 idselect = event.GetId()
 		 itemSelect = self.popupmenu.GetLabelText(idselect)
+		 selection = self.GetSelection()
+
 		 if itemSelect == 'Add sequence':
-			self.AppendItem(self.GetSelection(),'sequence')
-			self.ExpandAll()
+			self.AppendItem(selection, 'pattern', data=wx.TreeItemData(SequencePattern(1)))
 		 elif itemSelect == 'Delete':
-			self.Delete(self.GetSelection())
+			self.Delete(selection)
 		 elif itemSelect == 'Add either pattern':
-			self.AppendItem(self.GetSelection(),'either')
+			self.AppendItem(selection, 'either', data=wx.TreeItemData(EitherPattern()))
 		 elif itemSelect == 'Add word pattern':
-			self.AppendItem(self.GetSelection(),'word')
+			self.AppendItem(selection, 'word', data=wx.TreeItemData(WordPattern(1)))
 		 elif itemSelect == 'Add sequence pattern':
-			self.AppendItem(self.GetSelection(),'sequence')
+			self.AppendItem(selection, 'pattern', data=wx.TreeItemData(SequencePattern(1)))
 
 	def CreateContextMenu(self, menu):
 		item = self._menu.Append(wx.ID_ADD)
@@ -53,20 +61,17 @@ class TreeControl(wx.TreeCtrl):
 		item = self._menu.Append(wx.ID_EDIT)
 		self.Bind(wx.EVT_MENU, self.OnSelectContext, item)
 
-		
 class TreePanel(wx.Panel):
 	'''docstring for TreePanel'''
 	def __init__(self, *args, **kwargs):
 		'''Create the TreePanel.'''
 		wx.Panel.__init__(self, *args, **kwargs)
-		
 
 		# #####
 		# SIZER
 		# #####
 		sizer = wx.BoxSizer(wx.VERTICAL)
-		
-		
+
 		# ########
 		# CONTROLS
 		# ########
@@ -75,10 +80,3 @@ class TreePanel(wx.Panel):
 		sizer.Add(self.treeControl, proportion=1,flag=wx.EXPAND)
 
 		self.SetSizer(sizer)
-
-
-	def addRoot(self, text):
-		return self.treeControl.AddRoot(text)
-
-	def addItem(self, parent, text):
-		return self.treeControl.AppendItem(parent, text)

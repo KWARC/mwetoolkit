@@ -1,4 +1,5 @@
 import wx
+import data
 
 class SequencePanel(wx.Panel):
 	'''docstring for SequencePanel'''
@@ -24,27 +25,25 @@ class SequencePanel(wx.Panel):
 		# CONTROLS
 		# ########
 		# Id element
-		idTextControl = wx.TextCtrl(self)
+		self.idTextControl = wx.TextCtrl(self)
 		# Repeat element (+, *, ? , custom)
-		#repeatListBox = wx.ListBox(self)
 		element  = ['*', '+', '?','']
-		self.listComboBox = wx.ComboBox(self,-1,"", (15, 30), wx.DefaultSize,element)
-
+		self.repeatComboBox = wx.ComboBox(self,-1,"", (15, 30), wx.DefaultSize,element)
 		# Ignore element (radio button) yes/no
 		# Create a sizer for the radio buttons
 		ignoreRadioButtonSizer = wx.BoxSizer(wx.HORIZONTAL)
-		ignoreTrueRadioButton = wx.RadioButton(self, -1, 'True', (10, 10), style=wx.RB_GROUP)
-		ignoreFalseRadioButton = wx.RadioButton(self, -1, 'False', (10, 30))
+		self.ignoreFalseRadioButton = wx.RadioButton(self, -1, 'false', (10, 30), style=wx.RB_GROUP)
+		self.ignoreTrueRadioButton = wx.RadioButton(self, -1, 'true', (10, 10))
 		# Create the radio buttons to the sizer
-		ignoreRadioButtonSizer.Add(ignoreTrueRadioButton)
-		ignoreRadioButtonSizer.Add(ignoreFalseRadioButton)
+		ignoreRadioButtonSizer.Add(self.ignoreFalseRadioButton)
+		ignoreRadioButtonSizer.Add(self.ignoreTrueRadioButton)
 		# OK button
 		okButton = wx.Button(self, id=wx.ID_OK)
 
 		# Add widgets to the grid
 		flexGridSizer.AddMany([
-			(idLabel), (idTextControl, 1, wx.EXPAND),
-			(repeatLabel), (self.listComboBox, 1, wx.EXPAND),
+			(idLabel), (self.idTextControl, 1, wx.EXPAND),
+			(repeatLabel), (self.repeatComboBox, 1, wx.EXPAND),
 			(ignoreLabel), (ignoreRadioButtonSizer, 1, wx.ALL|wx.EXPAND),
 			(emptyLabel), (okButton, 1, wx.ALL)
 		])
@@ -59,22 +58,34 @@ class SequencePanel(wx.Panel):
 		# ######
 		okButton.Bind(wx.EVT_BUTTON, self.OnValid)
 		
-		self.listComboBox.Bind(wx.EVT_COMBOBOX, self.OnPhaseSelection)
+		self.repeatComboBox.Bind(wx.EVT_COMBOBOX, self.OnPhaseSelection)
 		self.SetSizer(sizer)
 
 	def OnValid(self, event):
 		print 'SequencePanel.OnValid'
+		selectedTreeItem = data.treePanel.treeControl.GetSelection()
+		itemData = data.treePanel.treeControl.GetItemData(selectedTreeItem)
+
+		# Set values to the object
+		obj = itemData.GetData()
+		obj.id = self.idTextControl.GetValue()
+		obj.repeat = self.repeatComboBox.GetValue()
+		if self.ignoreTrueRadioButton.GetValue():
+			obj.ignore = True
+		else:
+			obj.ignore = False
+
+		# Set the object back to the tree control
+		data.treePanel.treeControl.SetItemData(selectedTreeItem, wx.TreeItemData(obj))
 			
 	def OnPhaseSelection(self, event):
-		el = self.listComboBox.GetValue()
+		el = self.repeatComboBox.GetValue()
+
 		if el == '+':
-			self.listComboBox.SetEditable(False)
+			self.repeatComboBox.SetEditable(False)
 		elif el == '*':
-			self.listComboBox.SetEditable(False)
+			self.repeatComboBox.SetEditable(False)
 		elif el == '?':
-			self.listComboBox.SetEditable(False)
+			self.repeatComboBox.SetEditable(False)
 		elif el == '':
-			self.listComboBox.SetEditable(True)
-			
-			
-			
+			self.repeatComboBox.SetEditable(True)

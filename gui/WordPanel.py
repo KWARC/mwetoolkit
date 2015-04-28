@@ -1,4 +1,5 @@
 import wx
+import data
 import sys
 from WordEditDialog import *
 
@@ -55,9 +56,7 @@ class WordPanel(wx.Panel):
 
 		flexGridSizer.AddGrowableRow(2, 1)
 		flexGridSizer.AddGrowableCol(1, 1)
-		
-		
-		
+
 		sizer.Add(flexGridSizer, proportion=1, flag=wx.ALL|wx.EXPAND, border=15)
 
 		# ######
@@ -67,19 +66,18 @@ class WordPanel(wx.Panel):
 		okButton.Bind(wx.EVT_BUTTON, self.OnValid)
 
 		self.SetSizer(sizer)
-		
-		
-	def OnAdd(self, event):	
+
+	def OnAdd(self, event):
 		wordEditDialog = WordEditDialog(self)
 		res = wordEditDialog.ShowModal()
+
 		if res == wx.ID_OK:
-			a= wordEditDialog.listBox.GetString(wordEditDialog.listBox.GetSelection())
-			b= wordEditDialog.textControl.GetValue()
+			a = wordEditDialog.listBox.GetString(wordEditDialog.listBox.GetSelection())
+			b = wordEditDialog.textControl.GetValue()
 			index = self.listBox.InsertStringItem(sys.maxint,a)
 			self.listBox.SetStringItem(index, 1,b)
 			self.listBox.SetStringItem(index, 2,str(wordEditDialog.checkBox.GetValue()))
 		wordEditDialog.Destroy()
 
 	def OnValid(self, event):
-		print event
-
+		print 'WordPanel.OnValid'
